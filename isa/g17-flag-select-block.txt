@@ -1,0 +1,38 @@
+# SCHEDULING CLASS 413: SELECT ON A FLAG. Sixteen opcodes with a destination, named by execution.
+#
+# spike/accel/re/flagblock.py sets FLAGR 0 with op10379, runs the opcode with a known register and
+# the instruction's own immediate, reads the destination back through a store, and reads the flag
+# back through op14099 (flag.mov). Two flag states x two register values per opcode, in one
+# dispatch each, with the command-buffer status checked and a canary written last.
+#
+# The result is always ONE of the instruction's two value operands, never a function of both. Which
+# one depends on the flag; which operands are registers and which are immediates depends on the
+# offset in the block; and the immediate is read as an integer or as the eight-bit float immediate
+# depending on the opcode. Where the witness's immediate was zero - integer 0 and float 0.0 being
+# the same bits - the operand was written with 48, which spells 48 and 1.0.
+#
+# flag=2 is the flag file's TRUE (ledger/g17-the-flag-file-is-observable.toml).
+#
+#   opcode  dest    when flag=2         when flag=1         immediate read as
+    14080   GPR32   operand 3 imm       operand 4 reg       integer
+    14081   GPR32   operand 3 reg       operand 5 imm       integer
+    14083   GPR32   operand 3 reg       operand 5 imm       float
+    14087   GPR32   operand 4 reg       operand 3 imm       integer
+    14088   GPR32   operand 5 imm       operand 3 reg       integer
+    14090   GPR32   operand 5 imm       operand 3 reg       float
+    14093   GPR32   operand 4 reg       operand 3 imm       float
+    14096   GPR32   operand 3 imm       operand 4 reg       float
+    14100   GPR16   operand 3 imm       operand 4 reg       integer
+    14103   GPR16   operand 3 reg       operand 5 imm       integer
+    14105   GPR16   operand 3 reg       operand 5 imm       float
+    14107   GPR16   operand 4 reg       operand 3 imm       integer
+    14110   GPR16   operand 5 imm       operand 3 reg       integer
+    14112   GPR16   operand 5 imm       operand 3 reg       float
+    14114   GPR16   operand 4 reg       operand 3 imm       float
+    14117   GPR16   operand 3 imm       operand 4 reg       float
+#
+# Eight of the sixteen return their FIRST value operand when the flag is 2 and eight return their
+# second, so the polarity is carried by the opcode as well - a select and a select-if-not.
+#
+# NOT TESTED: the sixteen members of the same class with no destination operand (op14120-14141).
+# They take the same flag and value operands and write something this probe does not read.

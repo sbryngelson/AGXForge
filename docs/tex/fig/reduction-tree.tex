@@ -1,0 +1,54 @@
+% Figure 10.2: the measured reduction order of one output element of a 16x16x16 MMA
+% (MM 4, MM 0.6). Every node rounds to nearest-even fp32.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1mm, y=-1mm, font=\footnotesize,
+    prod/.style={draw=apple, fill=apple!10, rounded corners=1.5pt, inner sep=2pt, minimum width=15mm},
+    add/.style={draw=ours, fill=ours!8, rounded corners=1.5pt, inner sep=2.5pt, align=center},
+    acc/.style={draw=native, fill=native!8, rounded corners=1.5pt, inner sep=2.5pt, align=center},
+    e/.style={->, line width=0.55pt, color=ink!70}]
+  % stage headings
+  \node[font=\footnotesize\bfseries, text=ink] at (8,-8) {products};
+  \node[font=\footnotesize\bfseries, text=ours, align=center] at (42,-8) {stage 1\\adjacent pairs};
+  \node[font=\footnotesize\bfseries, text=ours, align=center] at (78,-8) {stage 2\\eight apart};
+  \node[font=\footnotesize\bfseries, text=native, align=center] at (118,-8) {stage 3\\accumulator first};
+  % sixteen exact products, two per stage-1 node
+  \foreach \i in {0,...,15} {
+    \pgfmathtruncatemacro\k{\i}
+    \node[prod] (x\i) at (8, 6*\i) {$a_{\k} b_{\k}$};
+  }
+  % stage 1: p_i = RNE(a_{2i}b_{2i} + a_{2i+1}b_{2i+1})
+  \foreach \i in {0,...,7} {
+    \pgfmathtruncatemacro\a{2*\i}\pgfmathtruncatemacro\b{2*\i+1}
+    \node[add] (p\i) at (42, 12*\i+3) {$p_{\i}$};
+    \draw[e] (x\a.east) -- (p\i.west);
+    \draw[e] (x\b.east) -- (p\i.west);
+  }
+  % stage 2: q_i = RNE(p_i + p_{i+4})
+  \foreach \i in {0,...,3} {
+    \pgfmathtruncatemacro\j{\i+4}
+    \node[add] (q\i) at (78, 12*\i+21) {$q_{\i}$};
+    \draw[e] (p\i.east) -- (q\i.west);
+    \draw[e] (p\j.east) -- (q\i.west);
+  }
+  % stage 3: C enters first, then q0..q3 in a chain
+  \node[acc] (C) at (118, 8) {$C$};
+  \node[acc] (s0) at (118, 25) {$+\,q_0$};
+  \node[acc] (s1) at (118, 42) {$+\,q_1$};
+  \node[acc] (s2) at (118, 59) {$+\,q_2$};
+  \node[acc, line width=1pt] (D) at (118, 76) {$D = {}+q_3$};
+  \draw[e] (C) -- (s0);
+  \draw[e] (s0) -- (s1); \draw[e] (s1) -- (s2); \draw[e] (s2) -- (D);
+  \foreach \i/\s in {0/s0, 1/s1, 2/s2, 3/D} \draw[e, ours] (q\i.east) -- (\s.west);
+  % rounding note
+  \node[font=\scriptsize\itshape, text=ink!70, align=left, anchor=north west] at (96, 86)
+    {every blue and red node\\rounds to nearest-even fp32};
+\end{tikzpicture}
+\caption{The measured reduction of one output element. One 16 × 16 × 16 MMA computes each output element from
+sixteen exact products. Stage 1 adds adjacent products, $p_i = \mathrm{RNE}_{32}(a_{2i}b_{2i} + a_{2i+1}b_{2i+1})$;
+stage 2 adds partial sums eight products apart, $q_i = \mathrm{RNE}_{32}(p_i + p_{i+4})$; stage 3 starts from the
+accumulator $C$ and adds $q_0, \dots, q_3$ in order, rounding at every step. The from-zero form, \op{5107}, has no
+$C$ and starts the chain from $q_0$. The diagram shows data dependence, not physical adders (MM~\mm{4},
+MM~\mm{0.6}).}
+\label{fig:reduction-tree}
+\end{figure}

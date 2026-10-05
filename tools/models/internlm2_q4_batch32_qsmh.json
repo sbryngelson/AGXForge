@@ -1,0 +1,1 @@
+{"name": "batch32_qsmh", "bits": 4, "cap": 272, "batch": 32, "qmv": {"head": {"ks": 2, "lean": true, "batch": 32, "pass": 4}}, "norm": {"out32": false, "seed": false, "batch": 32}, "final_norm": {"out32": false, "seed": false, "batch": 32}, "attn": {"widebf": true, "attn32": true, "batch": 32}, "gen": {"batch": 32}, "qsm": true, "qsm_head": true}

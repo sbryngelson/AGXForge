@@ -1,0 +1,165 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "halfvec.halfvec4",
+  "op": 17226,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17226,
+   "found": 18,
+   "cases": 3,
+   "encoded": [
+    "57040300610c10a7010000000000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    590,
+    684,
+    10288,
+    11842,
+    12682,
+    14059,
+    17226,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3993234945,
+   3993497093,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "halfvec.halfvec3",
+  "op": 17217,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17217,
+   "found": 15,
+   "cases": 3,
+   "encoded": [
+    "57040300410c10aa010000000000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    590,
+    684,
+    10288,
+    11842,
+    12682,
+    14059,
+    17217,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3993234945,
+   3735940613,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "halfvec.halfvec2",
+  "op": 17208,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17208,
+   "found": 12,
+   "cases": 2,
+   "encoded": [
+    "57040300210c10ac010000000000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    590,
+    684,
+    10288,
+    11842,
+    12682,
+    14059,
+    17208,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3993234945,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

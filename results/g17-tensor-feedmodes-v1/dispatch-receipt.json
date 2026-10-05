@@ -1,0 +1,93 @@
+{
+ "feed_At_float": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=305.1601791381836)",
+  "program_sha256_16": "21af3311262362d3",
+  "status": "FAILED"
+ },
+ "feed_At_half": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=305.33748626708984)",
+  "program_sha256_16": "65e6a961c4711fac",
+  "status": "FAILED"
+ },
+ "feed_B_float": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=289.7160949707031)",
+  "program_sha256_16": "f1ed5608eb35af87",
+  "status": "FAILED"
+ },
+ "feed_B_half": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=289.8166046142578)",
+  "program_sha256_16": "320ac87a0f876b6d",
+  "status": "FAILED"
+ },
+ "feed_Bt_float": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=476.9486389160156)",
+  "program_sha256_16": "ffa1549947e13990",
+  "status": "FAILED"
+ },
+ "feed_Bt_half": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=477.1545715332031)",
+  "program_sha256_16": "6d893d4498ce6904",
+  "status": "FAILED"
+ },
+ "neg_At_claims_A": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=380.21124267578125)",
+  "program_sha256_16": "65e6a961c4711fac",
+  "status": "FAILED"
+ },
+ "neg_At_identity": {
+  "program_sha256_16": "65e6a961c4711fac",
+  "status": "passed"
+ },
+ "neg_B_claims_A": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=367.5148010253906)",
+  "program_sha256_16": "320ac87a0f876b6d",
+  "status": "FAILED"
+ },
+ "neg_B_identity": {
+  "program_sha256_16": "320ac87a0f876b6d",
+  "status": "passed"
+ },
+ "neg_Bt_claims_A": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=343.69927978515625)",
+  "program_sha256_16": "6d893d4498ce6904",
+  "status": "FAILED"
+ },
+ "neg_Bt_identity": {
+  "program_sha256_16": "6d893d4498ce6904",
+  "status": "passed"
+ },
+ "neg_colsum_claims_colmax": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=188.47690200805664)",
+  "program_sha256_16": "c9cbda46b3d4e017",
+  "status": "FAILED"
+ },
+ "neg_colsum_exact": {
+  "error": "tensor query 1 differs from the independent reference (max_abs=9.5367431640625e-06)",
+  "program_sha256_16": "c9cbda46b3d4e017",
+  "status": "FAILED"
+ },
+ "reduce_colmax_M16N16": {
+  "program_sha256_16": "314a30a33a295f7e",
+  "status": "passed"
+ },
+ "reduce_colmax_M32N32": {
+  "program_sha256_16": "a3284ac6bc2f8c42",
+  "status": "passed"
+ },
+ "reduce_colmax_M64N32": {
+  "program_sha256_16": "997728a6401d5790",
+  "status": "passed"
+ },
+ "reduce_colsum_M16N16": {
+  "program_sha256_16": "f89913ced280d6cc",
+  "status": "passed"
+ },
+ "reduce_colsum_M32N32": {
+  "program_sha256_16": "c9cbda46b3d4e017",
+  "status": "passed"
+ },
+ "reduce_colsum_M64N32": {
+  "program_sha256_16": "1c28240f1446fd06",
+  "status": "passed"
+ }
+}

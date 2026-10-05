@@ -1,0 +1,128 @@
+{
+  "status": "predicted_not_compiled",
+  "gpu_dispatched": false,
+  "cases": {
+    "b-rows-4": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 128,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "sha256": "eecf1fb1457aff041bc9e8eb211e2c810db34a7aa39a08f60bc744d5f46cde38",
+      "bytes": 1276,
+      "advances": {
+        "286": "3700041a2d00a31aa0832500",
+        "726": "3700041a2d00a31a20831500"
+      },
+      "source_sha256": "a503532108af240a5284b31519b31cdedf5ac502b3f9e5d37e20cf572609c678"
+    },
+    "b-rows-5": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 160,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "sha256": "d11979879bdfb9395ccb2f687fce6b018466caad7e06f753915d226bb8e42ba0",
+      "bytes": 1276,
+      "advances": {
+        "286": "3702047a2900a31aa8832500",
+        "726": "3780047a2900a31a08831500"
+      },
+      "source_sha256": "2340427c240489255c4a93772efa60a644bb8206bcdf91e516d1a8ac1dfca000"
+    },
+    "b-rows-8": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 256,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "sha256": "3d424e46acb35004f8107c11df17caad4b2adefd37e43e359b97896a0ad0ed71",
+      "bytes": 1276,
+      "advances": {
+        "286": "3700041a2d00a31aa0832001",
+        "726": "3700041a2d00a31a20831001"
+      },
+      "source_sha256": "9ffae1fa3e56f603593c2cb4d51ca4c8b1bb2ed75c46e16cdd991d87fd725cea"
+    },
+    "c-rows-4": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 256
+      },
+      "predicted": "program",
+      "sha256": "fa44440499e29430a1991bb2a445339940ba55b9423d72df82d97f5766666dc4",
+      "bytes": 1276,
+      "advances": {
+        "1120": "3700041a2d00a302a0802500"
+      },
+      "source_sha256": "64ae9f537f8d59af3f92d39948560154460450263757b6e56a7aa888b232d45b"
+    },
+    "c-rows-5": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 320
+      },
+      "predicted": "program",
+      "sha256": "7bbee4a72a1d374d8c531eec6197b2100345c2311b9d154bdd16df4f1e9d9108",
+      "bytes": 1276,
+      "advances": {
+        "1120": "3702041a2900a302a8802500"
+      },
+      "source_sha256": "a95a947ab55426e005f03274383b1592073e152f1f4ea109dc2cb6e4780df313"
+    },
+    "c-rows-8": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 512
+      },
+      "predicted": "program",
+      "sha256": "279360fd894e75b3ae496f6ac36c4846095f77361428d9389600a93a340700fa",
+      "bytes": 1276,
+      "advances": {
+        "1120": "3700041a2d00a302a0802001"
+      },
+      "source_sha256": "808a81e8ae37742af6e47df755cda3b64eef0e6704a2d9e6ab463e77e4fc66e0"
+    },
+    "a-rows-9": {
+      "strides": {
+        "strideA": 288,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "sha256": "ccca85fc51b79d751ee61b01e7e8d2419987aa8e70f5d995b5e847c0dbcd2089",
+      "bytes": 1276,
+      "advances": {
+        "102": "3702041a2900a30a88800001"
+      },
+      "source_sha256": "4474d5c0214dde072a6dccb60fd4762c549e462a4dd3bd803bc3d48e33c7d048"
+    },
+    "a-rows-7": {
+      "strides": {
+        "strideA": 224,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideA of 224 bytes = 7 x 32: no generating rule - the witnesses cover m in {2,4,8,16} (one shifted add) and m in {3,5} (r + r<<k); Apple's program for m = 6 multiplies (op10822) and reallocates (tensor-a-stride-96) and is not generated",
+      "source_sha256": "ed39efb6e5366cd9708c2156a406e93e6f766af9ae43b50a67057f3db8ea0be7"
+    },
+    "a-rows-12": {
+      "strides": {
+        "strideA": 384,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideA of 384 bytes = 12 x 32: no generating rule - the witnesses cover m in {2,4,8,16} (one shifted add) and m in {3,5} (r + r<<k); Apple's program for m = 6 multiplies (op10822) and reallocates (tensor-a-stride-96) and is not generated",
+      "source_sha256": "3f04033e58bb73615d7061d549134cf1ce9bd65c3eec89f14d3718460edcce11"
+    }
+  },
+  "rule": "g17tensorlower.advance_bytes: power-of-two rows -> op10279 with the scale table; 1+2^k rows -> op10282 r + (r<<k); else refused"
+}

@@ -1,0 +1,157 @@
+# CONDITION CODES. One namespace for integer compare and select, a different one for float, and a
+# polarity operand that halves the number of codes either of them needs.
+title = "G17 condition codes: the integer and float tables, and the polarity operand"
+date = "2026-09-05"
+method = "one relational operator per kernel, twenty-four kernels, reading the code operand back"
+
+[why_it_matters]
+text = """
+Control flow is the thing a backend cannot fake. Every branch, every select and every predicated
+region needs a comparison, and until now this project had three opcodes called `cmp` and no idea
+what distinguished them or where the relation was written.
+
+The relation is not in the opcode. It is an operand, and the same operand appears in compare,
+in select and in the instruction that was being called `carry`.
+"""
+
+[integer]
+opcodes = "op11462 register form, op11452 immediate form"
+text = """
+    cc  9   unsigned less-than
+    cc 10   unsigned greater-than
+    cc 12   equal
+    cc 13   signed less-than
+    cc 14   signed greater-than
+
+FIVE CODES COVER TWELVE RELATIONS, through two mechanisms.
+
+A trailing POLARITY operand negates the result, so the compiler writes `le` as `not gt` and `ge`
+as `not lt` and `ne` as `not eq`:
+
+    u <  v   cc 9,  polarity 1        u >= v   cc 9,  polarity 0
+    u >  v   cc 10, polarity 1        u <= v   cc 10, polarity 0
+    s <  v   cc 13, polarity 1        s >= v   cc 13, polarity 0
+    s >  v   cc 14, polarity 1        s <= v   cc 14, polarity 0
+    == cc 12 polarity 1               != cc 12, polarity 0
+
+And in the IMMEDIATE form the compiler adjusts the constant instead, keeping polarity 1:
+
+    x <  5   cc 9, imm 5              x <= 5   cc 9,  imm 6
+    x >  5   cc 10, imm 5             x >= 5   cc 10, imm 4
+
+Both were measured, on unsigned and signed operands, register and immediate forms.
+"""
+
+[float]
+opcodes = "op9787"
+text = """
+A DIFFERENT NAMESPACE. The integer codes do not apply.
+
+    cc 0   equal
+    cc 1   less-than
+    cc 2   greater-than
+    cc 5   greater-or-equal
+    cc 6   less-or-equal
+
+Float keeps its own codes for le and ge rather than negating lt and gt, and that is not a
+redundancy: `not (a < b)` is not `a >= b` when either operand is NaN. `!=` is still eq with the
+polarity operand, which is correct for IEEE - unordered compares false either way.
+
+The float immediate forms do not exist: `f[x] < 5.0f` materialises the constant into a register
+first and then uses the register form.
+"""
+
+[the_same_codes_appear_in_select]
+text = """
+This is one namespace across the instruction set, not a property of the compare instructions.
+
+    op11365  select.cc  cc 13, signed less-than    abs(int) is `x < 0 ? -x : x`
+    op11375  select     cc 9,  unsigned less-than
+    op11373             cc 9
+
+So a composer that knows the table can read a select's condition without a separate model, and the
+`select.cc` naming is a statement about the operand rather than a guess about the operation.
+"""
+
+[a_name_this_corrects]
+text = """
+op11462 was called `carry`, from a 64-bit add where it sits between the low and high words and
+produces the carry-out. That reading was right about the use and wrong about the instruction: the
+carry of a 32-bit add is exactly "did the sum wrap", which is an unsigned less-than, and all six
+relational operators compile to op11462 with only the code and polarity changing.
+
+It is `cmp` now, and carry-out is cc 9 with the two addends.
+"""
+
+# THE CODES ARE NOT A LOOKUP TABLE. Both spaces decode structurally, and the decode fits every
+# value ever observed while predicting the ones that were never seen.
+[integer.decode]
+formula = "cc = 8 | (signed << 2) | (gt << 1) | lt ; equality is lt = gt = 0"
+text = """
+     8  1000  unsigned equal        12  1100  signed equal
+     9  1001  unsigned less         13  1101  signed less
+    10  1010  unsigned greater      14  1110  signed greater
+    11  1011  not equal             15  1111  not equal
+
+Bit 3 is always set. Bit 2 is the SIGNEDNESS. Bits 1 and 0 are greater and less, and equality is
+the absence of both - which is why 8 and 12 are the same relation at two signednesses, and why 11
+and 15 both mean not-equal: lt OR gt.
+
+Every value the corpus and the compilation sweep produced - 8, 9, 10, 12, 13, 14 - fits, and it is
+now CONFIRMED CAUSALLY: the encode session authored op11313 at each and read the flag back on four
+orderings.
+
+                       a<b      a>b      a==b     a=-5,b=3
+    cc  8  eq          false    false    TRUE     false
+    cc  9  ult         TRUE     false    false    false
+    cc 10  ugt         false    TRUE     false    TRUE
+    cc 12  eq          false    false    TRUE     false
+    cc 13  slt         TRUE     false    false    TRUE
+    cc 14  sgt         false    TRUE     false    false
+
+Six of six, including both greater-than codes and the signed/unsigned split on (-5, 3), which is
+the pair that makes bit 2 the signedness rather than a correlation.
+
+THE FLAG IS 2 FOR TRUE AND 1 FOR FALSE, and getting that backwards inverts every relation without
+contradicting anything. Two codes cannot settle it: with equality and one less-than in hand, both
+readings are self-consistent - swap the polarity and eq becomes ne and ult becomes uge, and no
+ordering objects. SEVEN codes settle it at once, because under 1-for-true none of the six match the
+decode and under 2-for-true all six do.
+
+CODES 11 AND 15 ARE NOT NOT-EQUAL, and this entry predicted they were. That prediction is refuted.
+Code 15 holds on a == b and on (-5, 3) and on neither of the other two orderings - which are exactly
+the cases where the operands are equal or where the signed and unsigned comparisons DISAGREE. That
+is the shape of an overflow or unordered condition, not a relation. Code 11 is absent from every
+seed in the authoring table.
+
+So the top of the integer space carries something other than lt/gt/signed, and the decode is exact
+for 8, 9, 10, 12, 13 and 14 and silent above them.
+"""
+
+[float.decode]
+formula = "cc = (negate << 2) | (gt << 1) | lt ; equality is lt = gt = 0"
+text = """
+     0  000  equal          4  100  not equal
+     1  001  less           5  101  greater-or-equal
+     2  010  greater        6  110  less-or-equal
+     3  011  not equal      7  111  equal or unordered
+
+Bit 2 NEGATES, which is why the float space keeps its own le and ge rather than borrowing the
+integer trick: 5 is not-less and 6 is not-greater, and under IEEE those are not the same as
+greater-or-equal and less-or-equal when an operand is NaN. The hardware spells the distinction and
+the compiler picks the right one.
+
+All five observed values - 0, 1, 2, 5, 6 - fit, and 3, 4 and 7 are predicted.
+"""
+
+[why_this_matters_beyond_the_table]
+text = """
+A composer can now COMPUTE a condition code instead of looking one up, which matters for the codes
+neither the corpus nor any compilation produced. And it is the second family found to encode its
+operation as a FUNCTION rather than an index - the first being the boolean operations, whose four
+selector bits are literally the truth table.
+
+That is worth treating as a hypothesis about the rest of the instruction set rather than two
+coincidences. A family whose code has arithmetic meaning can be read outright, with no execution
+and no isolation, and each one that turns out to be structured is a family named for free.
+"""

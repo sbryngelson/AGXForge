@@ -1,0 +1,196 @@
+# Machine-readable description of the recovered AGX tensor-path subset
+# (H17s / applegpu_g17s, M5 Pro). Consumed directly by tools/agxdis.py, so the
+# description cannot drift away from the tool.
+#
+# Confidence levels, increasing. Only "causal" counts as recovered hardware
+# semantics, and the distinction is not pedantic: "the second site holds N+4"
+# reached "observed", survived a day, and is false - that bit is inert.
+#   observed   bytes co-vary with a source change
+#   predicted  the encoding predicts compiler output not used to fit it
+#   causal     mutating the bits in native code changes hardware as predicted
+#
+# Delivery path and its constraints: ledger/mtl-archive-live-text.toml
+# Measurements and controls:         results/agx-mma-encodings-h17s.md
+# Harness: spike/accel/re/{prep,trial,bitmap,sweep1d,fit,verify_asm}.py
+
+[meta]
+chip = "H17s"
+arch = "applegpu_g17s"
+os_toolchain = "Metal 32023.883"
+probe = "mpp::tensor_ops::matmul2d, M=32 K=64, static slice<N,M>, execution_simdgroups<1>"
+unit_bytes = 12
+roundtrip = "1140 tensor instructions across 23 compiled shaders re-encode byte-exact"
+
+# Both families share ONE width field. This was NOT obvious: two separate ad-hoc
+# models fit their own sweeps and still produced 8 round-trip divergences, which is
+# how the error was caught. The unified field is exact on 256/256 for each.
+[field_encoding]
+W = "8 * byte8[5:3] + 2 * byte8[1]"
+O = "byte8[7:6] | (byte9[1:0] << 2)"
+end = "64 + W + O"
+inert = ["byte8[0]", "byte8[2]"]
+note = "byte8[2] is the bit once mis-read as a '+4' encoding; it does nothing."
+
+[[instruction]]
+name = "tensor.bound.a"
+opcode_byte0 = 0x37
+signature = "byte4=0x21 byte5=0x20 byte6=0xa1"
+example = "37 82 00 02 21 20 a1 1a 08 00 1c 18"
+region = "[64 + O, 64 + W + O)   clipped to the allocated tile"
+confidence = "causal"
+evidence = "256/256 exact over every value of byte 8, hardware-measured write sets"
+
+[[instruction]]
+name = "tensor.bound.b"
+opcode_byte0 = 0x27
+signature = "byte4=0x21 byte5=0x20 byte6=0xa1"
+example = "27 00 00 42 21 20 a1 12 0c 00 1c 18"
+region = "[80, 64 + W + O + 16*byte9[2])   start fixed, clipped to the tile"
+confidence = "causal"
+evidence = "256/256 exact over every value of byte 8, hardware-measured write sets"
+
+# ---------------------------------------------------------------------------
+# The MAC/issue family: 10 bytes, not 12, and the first recovered field that changes
+# WHAT the accelerator computes rather than how wide it writes.
+[[instruction]]
+name = "tensor.mac"
+unit_bytes = 10
+byte0_seen = [0x27, 0xa7, 0xaf]
+signature = "byte4 & 0xf7 == 0x22 ; byte6 & 0xfb == 0xa0 ; byte7 & 0x1f == 0x02 ; byte8 == 0x00"
+example = "a7 04 85 83 22 04 a4 42 00 00"
+confidence = "causal"
+
+  [[instruction.field]]
+  name = "a_dtype"
+  byte = 6
+  bits = "2"
+  formula = "1 = half, 0 = bfloat  (left operand)"
+  confidence = "causal"
+  evidence = """Three gates. (1) Compiler prediction, preregistered: Apple's own
+mixed-operand shader (A bfloat, B half) must differ from the half shader in exactly
+this bit at every site - measured as exact set equality over 48 bytes. (2) Hardware
+mutation: patching only this bit in the half shader turns 192 into 1.5, matching
+0.0078125*3.0*64, i.e. A read as bfloat. (3) Round trip byte-exact."""
+
+  [[instruction.field]]
+  name = "b_dtype"
+  byte = 7
+  bits = "6"
+  formula = "1 = half, 0 = bfloat  (right operand)"
+  confidence = "causal"
+  evidence = """Same three gates, independently: Apple's (A half, B bfloat) shader
+differs in exactly this bit over 48 bytes, and patching only it turns 192 into 2048,
+matching 1.0*32.0*64."""
+
+  [[instruction.field]]
+  name = "k_slice"
+  byte = 3
+  bits = "4"
+  formula = "1 = K slice {k : k mod 32 < 16}, 0 = {k : k mod 32 >= 16}"
+  confidence = "causal"
+  evidence = """Symmetric transplant: mac0.byte3 := mac1 moves issue 0 onto issue 1's
+slice and vice versa, and the per-block coverage vector is exactly (2,0,2,0),
+(0,2,0,2) or (1,1,1,1) as predicted for all four assignments over both issues. The
+other four differing bytes (0,1,4,9) do not move the slice."""
+
+  [[instruction.field]]
+  name = "enable"
+  byte = 3
+  bits = "5"
+  formula = "1 = issue contributes nothing"
+  confidence = "causal"
+  evidence = """Predicted then measured: disabling issue 1 leaves block coverage
+(1,0,1,0) = issue 0's set alone, disabling issue 0 leaves (0,1,0,1), disabling both
+leaves (0,0,0,0). This is also the isolation tool that makes issue coverage directly
+countable instead of differential."""
+
+  [[instruction.field]]
+  name = "acc"
+  byte = 1
+  bits = "7:0"
+  formula = "one-hot; values seen 0x00 0x04 0x08 0x10 0x20 0x40"
+  confidence = "observed"
+  evidence = "One-hot and varies per issue, so it looked like an accumulator select. It is NOT: transplanting byte1 between issues changes nothing measurable, and neither routing nor dtype nor coverage moves with it. Recorded as observed, role unresolved."
+
+# ---------------------------------------------------------------------------
+# Emission table for tensor.mac. These twelve byte patterns are what the assembler
+# emits from; with them it constructs all ten bytes without reading a donor
+# instruction. The four recovered semantic bits are cleared here and supplied by
+# the program text (byte3[5:4], byte6[2], byte7[6]).
+#
+# Provenance, stated so it is not overclaimed: the constants were LEARNED from
+# compiler output - the twelve forms are every distinct pattern across 112
+# instructions - but they are now data in this file, not bytes copied out of the
+# shader being patched. 44 of the 80 bits are measured inert, 24 more produce no
+# contribution when flipped singly, 5 are unstable, and 7 are semantic; only the
+# recovered ones are parameterised. The same twelve forms appear in both the
+# 3776-byte and 4956-byte layouts, which is why a table indexed by form is enough.
+[mac_emission]
+constant_bytes = { 6 = 0xa0, 8 = 0x00 }
+note = "byte6 = 0xa4 and byte8 = 0x00 in all 112 observed instructions; byte6 here has its dtype bit cleared."
+
+[[mac_form]]
+index = 0
+bytes = [0xaf, 0x00, 0x85, 0x83, 0x2a, 0x04, 0xa0, 0x02, 0x00, 0x02]
+
+[[mac_form]]
+index = 1
+bytes = [0xa7, 0x04, 0x85, 0x83, 0x22, 0x04, 0xa0, 0x02, 0x00, 0x00]
+
+[[mac_form]]
+index = 2
+bytes = [0xa7, 0x08, 0x05, 0x81, 0x2a, 0x06, 0xa0, 0x22, 0x00, 0x02]
+
+[[mac_form]]
+index = 3
+bytes = [0x27, 0x20, 0xa5, 0x83, 0x2a, 0x00, 0xa0, 0x02, 0x00, 0x18]
+
+[[mac_form]]
+index = 4
+bytes = [0xa7, 0x10, 0x05, 0x02, 0x22, 0x06, 0xa0, 0x22, 0x00, 0x00]
+
+[[mac_form]]
+index = 5
+bytes = [0x27, 0x40, 0xa5, 0x83, 0x22, 0x00, 0xa0, 0x02, 0x00, 0x04]
+
+[[mac_form]]
+index = 6
+bytes = [0x27, 0x00, 0x25, 0x81, 0x2a, 0x02, 0xa0, 0x22, 0x00, 0x18]
+
+[[mac_form]]
+index = 7
+bytes = [0x27, 0x00, 0x25, 0x02, 0x22, 0x02, 0xa0, 0x22, 0x00, 0x04]
+
+[[mac_form]]
+index = 8
+bytes = [0xa7, 0x10, 0x05, 0x01, 0x22, 0x06, 0xa0, 0x22, 0x00, 0x00]
+
+[[mac_form]]
+index = 9
+bytes = [0x27, 0x40, 0xa5, 0x83, 0x22, 0x00, 0xa0, 0x02, 0x00, 0x08]
+
+[[mac_form]]
+index = 10
+bytes = [0xa7, 0x00, 0x25, 0x81, 0x2a, 0x02, 0xa0, 0x02, 0x00, 0x18]
+
+[[mac_form]]
+index = 11
+bytes = [0xa7, 0x00, 0x25, 0x01, 0x22, 0x02, 0xa0, 0x02, 0x00, 0x08]
+
+[[open_question]]
+q = "The clip constants (80 and 96 in the 3776-byte layout, 112 and 128 in the 4956-byte one) are encoded by no bit in either instruction - identical for host N=72 and N=88 - so they come from the shader's allocation, located elsewhere."
+
+[[open_question]]
+q = "The width field has weights {32,16,8,2,2,1}: two bits share weight 2 and no bit carries weight 4, so W values congruent to 4 or 6 mod 8 are unrepresentable. Either the weight-4 bit lives in a byte not yet swept, or the field is genuinely sparse."
+
+[[open_question]]
+q = "Only the horizontal (N) extent is mapped. M, K, dtype, accumulate-vs-multiply, transpose, and simdgroup count have not been located in these 12-byte units. Six tensor-bound instructions appear per shader in the small layout and eight in the large one; only one pair varies with N, so the others bound earlier phases."
+
+[[open_question]]
+q = "transpose_left, transpose_right and mode::multiply_accumulate each change the __text SIZE, so they are structural - different instruction sequences, not flag bits. They are unrecovered. relaxed_precision changes nothing at all at this shape (0 differing bytes), which is itself a recorded negative."
+
+[[open_question]]
+q = "tensor.mac byte1 (one-hot), byte2, byte3, byte5 and byte9 are undecoded. byte9 varies (00 02 04 08 18) and is a plausible operand/stride selector, untested."
+
+[[open_question]]
+q = "No instruction has been synthesised from nothing: every mutation so far rewrites fields inside compiler-emitted instructions. Composing a novel instruction SEQUENCE remains undone."

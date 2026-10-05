@@ -1,0 +1,472 @@
+# THE ATOMIC FAMILY. Everything a backend needs to SELECT and AUTHOR an atomic on G17.
+#
+# The shape of the answer is the point: the atomic OPERATION is not the opcode. It is a four-bit
+# code in the same four bit positions in every member of the family, and the opcode encodes the
+# operand SHAPE - whether a result comes back, whether the address is device or threadgroup,
+# whether an index register is present, how wide the value is.
+#
+# Evidence is stated per table. Nothing here is inferred from frequency.
+title = "G17 atomics: the operation code table, the structural axes, and what the decoder will not admit"
+date = "2026-09-05"
+
+[family]
+text = """
+208 opcodes share (schedclass, tsflags) with op10094 in Apple's MCInstrDesc:
+
+    schedclass 286 or 287, tsflags 0x402002400     device-scope
+    schedclass 329,        tsflags 0x402002800     threadgroup-scope
+
+Their operand lists are one skeleton with parts present or absent:
+
+    [dest]  imm imm  [address]  imm  [index]  imm imm imm  [value]  imm
+
+Five occur in this corpus - op10023, op10094, op10095, op11701, op11765 - and 29 are reachable
+from a single op10094 encoding by flipping bits, which certifies them as encodable rather than
+merely declared.
+"""
+
+# ---------------------------------------------------------------------------------------------
+# THE OPERATION. Four bits, one table, identical in op10094, op10095, op10022 and op10023.
+[operation]
+bits = ["b4[5]", "b5[3]", "b6[3]", "b7[7]"]
+evidence = """
+Established by sweeping all sixteen combinations through Apple's decoder and reading operand 2,
+which the decoder prints as 0x40200 + code. The POSITIVE CONTROL is that the table reproduces all
+ten encodings Apple's own compiler emits, for atomic_fetch_{add,sub,and,or,min,max} on both
+signednesses, atomic_exchange and atomic_fetch_xor - ten of ten, no exceptions.
+
+Eleven of the sixteen combinations are op10094; one is op10095; four do not decode.
+"""
+# b4[5] b5[3] b6[3] b7[7] -> code, meaning, encoded length
+table = [
+  "0 0 0 0 ->  0  add        10 bytes",
+  "1 1 0 1 ->  1  sub        12 bytes",
+  "0 1 1 1 ->  2  exchange   12 bytes",
+  "0 1 0 0 ->  3  cmpxchg    10 bytes  SELECTS THE SIBLING OPCODE, op10094 -> op10095",
+  "1 0 1 1 ->  4  umin       12 bytes",
+  "1 0 1 0 ->  5  smin       10 bytes",
+  "0 0 1 1 ->  6  umax       12 bytes",
+  "0 0 1 0 ->  7  smax       10 bytes",
+  "1 0 0 0 ->  8  and        10 bytes",
+  "0 1 1 0 ->  9  or         10 bytes",
+  "1 1 1 1 -> 10  xor        12 bytes",
+  "1 1 0 0 -> 12  fadd32 (hardware-tested normal values)  10 bytes; not emitted by tested Metal builtins",
+  "1 1 1 0 -> BAD",
+  "0 0 0 1 -> BAD",
+  "1 0 0 1 -> BAD",
+  "0 1 0 1 -> BAD",
+]
+
+[operation.code_12_float_add_beyond_metal]
+text = """
+Code 12 decodes cleanly as op10094 and no Metal source construct in the tested corpus produces it.
+Pure IOGPU submissions execute the same 10-byte atomic with authored value bits 0x3F800000
+(1.0f): initial A[0]=1.0f yields returned old values 1.0f and 2.0f and final 3.0f; initial
+A[0]=-1.0f yields returned old values -1.0f and 0.0f and final 1.0f. Each case reproduced
+twice. This identifies floating-point atomic addition for these normal values. Earlier initial
+and value bit patterns 5, 37, 32, and 33 left zero, while a zero operand preserved normal
+values, consistent with subnormal flushing. One-ULP additions at 1.0f advanced exactly one
+ULP per group. Half-ULP ties from even and odd mantissas followed round-to-nearest-even for
+each update. Boundary trials show the tested largest subnormal shared input and value
+operand treated as zero during arithmetic, even though the raw old shared input is returned;
+cancellation of two normal inputs flushed a smallest-subnormal result to zero before the next
+atomic update. Each boundary case reproduced twice. Special-value controls with the existing
+zero/1.0f streams returned raw -0 then wrote +0; preserved +infinity and -infinity under
+addition of 1.0f; and returned quiet-NaN payload 0x7FC12345 before writing canonical
+0x7FC00000. Each reproduced twice. Other subnormal values, signaling NaNs, other NaN payloads,
+opposite-sign infinity cancellation, other signed-zero pairs, and other rounding regimes remain
+to be measured (docs/g17-first-dispatch-trials.md, uniform code-12 trial).
+"""
+
+[operation.per_lane_float_add_pure_execution]
+text = """
+The 12-byte op10090 per-lane form decodes operation operand 262668 from authored bytes
+2f000300210a04c010020020. With each lane adding 0x3F800000 (1.0f) to its own word,
+alternating +1.0f and -1.0f initial words became exactly 2.0f and +0.0f in A and in a
+dependent C load. Both fresh pure IOGPU Submits returned status zero, both callbacks,
+intact B and 192 output guards, unchanged recovery, and no new gpuEvent. This separates
+floating add from integer add on the same bit patterns and establishes the tested
+per-lane memory update. A later slot-7 trial below tested its returned
+old value on the same input profile.
+Later contended slot-7 trials below observed exact 1.0f additions and
+half-ULP tie returns; neither observation guarantees a lane schedule.
+See docs/g17-first-dispatch-trials.md, per-lane floating atomic add trial.
+"""
+
+[operation.per_lane_float_add_return_slot7_pure_execution]
+text = """
+The 12-byte op10090 floating ADD (operation value 262668) published its
+old result on slot 7. A 48-byte authored program replaced the prior
+dependent reload with a waiting copy of that atomic result. On alternating
++1.0f/-1.0f A inputs and a 1.0f operand, two fresh pure IOGPU Submits
+left A at 2.0f/+0.0f and stored the old +1.0f/-1.0f bit patterns in C.
+B, 192 guards, both callbacks, recovery, and gpuEvent checks passed.
+This trial did not exercise a compiler-generated floating-atomic-return
+path; it is scoped authored execution. See tools/g17purefaddreturnaudit.py and
+docs/g17-first-dispatch-trials.md, per-lane floating ADD return trial.
+"""
+
+[operation.per_lane_add_contention_pure_execution]
+text = """
+The 10-byte op10090 ADD form executed with all 64 lanes indexing one A cell while lane i
+contributed i+1. Two fresh pure IOGPU Submits left the cell at 2085 from initial 5,
+retaining all 64 contributions; the other 63 A words stayed unchanged and C held all
+64 distinct addends. Status, callbacks, B, output guards, recovery, and gpuEvent checks
+passed. This establishes the tested two-simdgroup shared-cell update, not the order of
+the 64 atomics or their returned old values. See docs/g17-first-dispatch-trials.md,
+contended per-lane atomic ADD trial.
+"""
+
+[operation.per_lane_float_add_contention_pure_execution]
+text = """
+The 12-byte op10090 floating-add form (operation operand 262668) also ran with all 64
+lanes indexing one A cell and adding 1.0f. From initial 1.0f, two fresh pure IOGPU
+Submits left exact 65.0f (0x42820000), kept the other 63 A words unchanged, and wrote
+all 64 distinct lane markers to C. Status, callbacks, B, output guards, recovery, and
+gpuEvent checks passed. These exactly representable values establish the tested
+shared-cell updates. A later slot-7 trial below exposes returned old
+values for the same exactly representable range; rounded behavior and
+general scheduling under contention remain open. See docs/g17-first-dispatch-trials.md,
+contended per-lane floating ADD trial.
+"""
+
+[operation.per_lane_float_add_contended_return_slot7_pure_execution]
+text = """
+The 12-byte op10090 floating ADD (operation 262668) ran with all 64
+lanes indexing A[0] and adding 1.0f while publishing its old value on
+slot 7. A waiting copy stored each result to C[lane]. Two fresh pure
+IOGPU Submits left A[0]=65.0f and returned each exact float old value
+1.0f..64.0f once. A[1..63], B, 192 C guards, both callbacks, recovery,
+and gpuEvent checks passed. Both C vectors matched each other and the
+retained integer contended-ADD return lane order after translating that
+trial's initial value. This observed order is not a scheduling rule;
+all tested values are exactly representable. See
+tools/g17purecontendfaddreturnaudit.py and docs/g17-first-dispatch-trials.md,
+contended per-lane floating ADD return trial.
+"""
+
+[operation.per_lane_float_add_contended_nan_return_pure_execution]
+text = """
+The 74-byte op10090 floating-ADD slot-7 return program used for 1.0f
+contention was run byte-identically with quiet NaN 0x7FC12345 seeded
+in A[0]. In two fresh pure IOGPU Submits, one C lane received the raw
+old NaN payload, the other 63 received canonical 0x7FC00000, and the
+final shared word was canonical. Both runs placed the raw return at
+C[0], an observation rather than a scheduling guarantee. The other
+A words, B, output guards, callbacks, recovery, and gpuEvent checks
+passed. This is the tested per-lane form's raw-old/canonical-new behavior
+for one quiet-NaN payload; other payloads, signs, and signaling NaNs
+remain unmeasured. See tools/g17purecontendfaddnanaudit.py and
+docs/g17-first-dispatch-trials.md, quiet-NaN contention trial.
+"""
+
+[operation.per_lane_float_add_half_ulp_contention_pure_execution]
+text = """
+The same 12-byte op10090 floating-add form ran with all 64 lanes indexing one A cell
+and adding the half-ULP operand 0x33800000. Byte-identical code from even 1.0f and odd
+1.0f+1ULP initial words ended at 0x3F800000 and 0x3F800002, respectively, in two
+fresh pure IOGPU Submits per case. All C markers, B, guards, callbacks, recovery, and
+gpuEvent checks passed. The paired final words match per-update nearest-even ties and
+exclude an exact accumulation of 64 half-ULPs followed by one final rounding for these
+inputs. The later slot-7 return trial below measures individual old values.
+See
+docs/g17-first-dispatch-trials.md, half-ULP contended per-lane floating ADD trial.
+"""
+
+[operation.per_lane_float_add_half_ulp_contended_return_slot7_pure_execution]
+text = """
+A 74-byte authored program used the same op10090 atomic and waiting slot-7
+consumer as the 1.0f contended return control, changing only one byte in
+the constant load to add half an ULP at 1.0f (0x33800000). Two fresh pure
+IOGPU Submits per seed returned 64 old values: from even 0x3F800000,
+all 64 remained 0x3F800000; from odd 0x3F800001, one return was the odd
+seed and 63 were its even successor 0x3F800002. Final A[0] was
+0x3F800000 or 0x3F800002, respectively. Other A words, B, C guards,
+callbacks, recovery, and gpuEvent checks passed. C[0] held the odd old
+value in both odd-seed runs; this observed lane order is not guaranteed.
+The per-lane returns expose the tested nearest-even tie sequence rather
+than only its final shared value. See tools/g17purecontendhalfreturnaudit.py
+and docs/g17-first-dispatch-trials.md, half-ULP contention trial.
+"""
+
+[operation.per_lane_add_return_slot7_pure_execution]
+text = """
+The 12-byte per-lane op10090 ADD returned its old value and updated memory together in two
+fresh pure IOGPU Submits when operand 1 was authored as 0x80800000, publishing to result
+slot 7. All 64 A words changed from 11*i+5 to 12*i+6 and all 64 C words held the old
+11*i+5. Byte-identical copy/store instructions with the atomic publishing on slot 0
+(operand 1 = 0x80100000) gave zero in every C word despite the correct memory update;
+64 independent intervening moves did not repair that control. Status, callbacks, B,
+guards, recovery, and gpuEvent checks passed. This was the scoped authored-program result;
+the compiler-generated ADD path was subsequently validated below. See docs/g17-first-dispatch-trials.md,
+per-lane atomic old-value return through slot 7 trial.
+"""
+
+[operation.per_lane_add_return_compiler_pure_execution]
+text = """
+The production compiler emits a 52-byte per-lane ADD program whose 12-byte op10090
+publishes its old result on slot 7. Its first ALU consumer waits on that slot. The
+atomic instruction is byte-identical to the hand-authored successful form for the
+tested R4/R5/R6 allocation; the complete program is compiled from IR without a
+machine-code patch. Two fresh pure IOGPU Submits stored all 64 old values while
+updating all 64 A cells. A paired compiler-generated old+1 consumer changes one
+ALU byte and passed two further Submits, returning 11*i+6 in C while leaving A at
+12*i+6. B, 192 C guards, callbacks, recovery, and gpuEvent checks passed. The
+compiler admits one direct indexed-store or ordinary-ADD consumer of the ADD
+return; it refuses other consumer shapes and other consumed per-lane fetch
+operations except the AND, OR, SUB and XOR paths below. See
+tools/g17purecompiledreturnaudit.py and docs/g17-first-dispatch-trials.md,
+compiler-generated per-lane ADD return trial.
+"""
+
+[operation.per_lane_xor_return_compiler_pure_execution]
+text = """
+The 12-byte per-lane op10090 XOR form (decoded operation operand 262666)
+published its old result on slot 7. An authored 52-byte control and its
+byte-identical compiler-generated program each passed two fresh pure IOGPU
+Submits. All 64 A cells changed from 11*i+5 to (11*i+5) XOR (i+1), and all
+64 C cells held the old 11*i+5. A compiler-generated waiting ALU consumer
+differed by one byte and passed two more fresh Submits with C=11*i+6.
+B, 192 guards, callbacks, recovery, and gpuEvent checks passed. This is a
+scoped consumed-return result; per-lane AND, OR and SUB are tested separately below, while other fetch operations still refuse
+in the compiler. See tools/g17purexorreturnaudit.py and the XOR return trial
+in docs/g17-first-dispatch-trials.md.
+"""
+
+[operation.per_lane_or_return_compiler_pure_execution]
+text = """
+The 12-byte op10090 OR form returned its old value through slot 7 and updated
+all 64 lane addresses in two authored and two compiler-generated pure IOGPU
+Submits. The compiler's 52-byte direct-store program is byte-identical to the
+authored success. An initial aop=6 encoding instead executed EXCHANGE: all
+A[i] became i+1 while C[i] held the old value. Clearing byte11[4] changed
+the decoded operation from 262658 to 262665 and produced the predicted OR
+vector A[i]=(11*i+5)|(i+1), with C[i]=11*i+5. The failed near miss and all
+four OR Submits had status zero, both callbacks, intact B and 192 guards,
+unchanged recovery, and no new gpuEvent. See tools/g17pureorreturnaudit.py
+and docs/g17-first-dispatch-trials.md, per-lane OR return trial.
+"""
+
+[operation.per_lane_sub_return_compiler_pure_execution]
+text = """
+The 12-byte op10090 SUB form (operation value 262657) published its old
+result on slot 7 and updated all 64 lane addresses. An authored 52-byte
+program and the byte-identical compiler-generated direct-store program
+each passed no-Submit staging and two fresh pure IOGPU Submits. All A[i]
+became 10*i+4 from 11*i+5 while C[i] held the old 11*i+5. The SUB atomic
+differs from the executed XOR return by one byte, byte6 0x1c to 0x14.
+B, 192 guards, callbacks, recovery, and gpuEvent checks passed. Other
+consumer shapes remain refused. See tools/g17puresubreturnaudit.py and
+docs/g17-first-dispatch-trials.md, per-lane SUB return trial.
+"""
+
+[operation.per_lane_and_return_compiler_pure_execution]
+text = """
+The 12-byte op10090 AND form (operation value 262664) published its old
+result on slot 7 and updated all 64 lane addresses. The three-bit
+assembler aop=1 encoding does not decode until byte11[4], the long
+form's fourth operation bit, is cleared. An authored 52-byte program
+and a byte-identical compiler-generated direct-store program each
+passed staging and two fresh pure IOGPU Submits. All A[i] became
+(11*i+5)&(i+1), while C[i] held the old 11*i+5. B, 192 guards,
+callbacks, recovery, and gpuEvent checks passed. Other consumer shapes
+remain refused. See tools/g17pureandreturnaudit.py and the AND return
+trial in docs/g17-first-dispatch-trials.md.
+"""
+
+[operation.per_lane_contended_add_return_slot7_pure_execution]
+text = """
+A 66-byte authored per-lane op10090 ADD program published its old result on slot 7 while
+all 64 lanes added 1 to the same A[0]. Two fresh pure IOGPU Submits left A[0]=69 from 5,
+preserved the other 63 A cells, and stored every old value 5..68 exactly once in 64
+lane-indexed C cells. The two observed C vectors were identical but not in lane order.
+B, 192 C guards, callbacks, recovery, and gpuEvent checks passed. This measures those
+two launch orders, not a general scheduling guarantee. The return copy and C store are
+byte-identical to the uncontented slot-7 arm; the address and addend are constant via
+an authored zero register. See tools/g17purelanecontendreturnaudit.py and
+docs/g17-first-dispatch-trials.md, contended per-lane ADD return trial.
+
+A paired variant changes only one addend-instruction byte, so lane i adds i+1 to the
+same A[0]. Two further fresh pure Submits returned 64 old values that form a unique
+chain using all lanes from initial 5 to final 2085. The inferred lane order matches
+the fixed-addend arm's observed order in all four Submits. The audit checks both
+programs, the one-byte delta, and all six stage/Submit receipts. No general issue-
+order guarantee is claimed from these runs.
+"""
+
+[operation.per_lane_compare_exchange_return_slot7_pure_execution]
+text = """
+The 12-byte per-lane op10091 compare-exchange returned its old value and updated memory
+together in two fresh pure IOGPU Submits when operand 1 published to result slot 7.
+With expected 5 and desired lane+1, only lane 0 matched: A[0] changed from 5 to 1;
+the other 63 A cells stayed unchanged. All 64 C cells held their old 11*i+5 values,
+including the old value from each failed compare. A paired slot-0 control made the
+same memory update but stored zero in every C cell. The two 66-byte programs differ
+only at two atomic operand-1 bytes; return-copy and store bytes are identical.
+Both callbacks, B, 192 C guards, recovery, and gpuEvent checks passed. This is a
+scoped hand-authored result; the compiler-generated path was validated later
+for this R0-R3 carrier and four shifted placements. See
+tools/g17purelanecmpxchgreturnaudit.py and docs/g17-first-dispatch-trials.md,
+per-lane compare-exchange old-value return through slot 7 trial.
+"""
+
+[operation.per_lane_compare_exchange_return_compiler_pure_execution]
+text = """
+The compiler emits a 60-byte per-lane op10091 compare-exchange program with
+index Rk, desired R(k+1), expected R(k+2), old result R(k+3), result slot 7,
+and a waiting first consumer. At k=0 the atomic is byte-identical to the
+authored slot-7 form. For k=0,1,5,7,12, no-Submit staging and two fresh pure
+IOGPU Submits per placement changed only A[0] from 5 to 1 (expected 5,
+desired lane+1) and stored all 64 old A words in C. B, 192 guards, callbacks,
+recovery and gpuEvent checks passed on ten Submits. The emitter writes three
+register fields through the assembler's narrow constant-operation map and
+decode-checks k=0..12; untested k values remain predictions, and k=13 refuses.
+Other operation values are not authorable by that map. See
+tools/g17purecompiledcmpxchgaudit.py and docs/g17-first-dispatch-trials.md,
+compiler-generated per-lane compare-exchange return trial.
+"""
+
+[operation.signed_extrema_pure_execution]
+text = """
+Operation code 5 (smin) and code 7 (smax) executed in pure IOGPU with the 10-byte op10094
+uniform form. Both kept the same authored program apart from the atomic operation bytes.
+With value 32 and initial word 37, smin returned old values 37 and 32 and left 32; smax
+returned 37 twice and left 37. With initial 0xFFFFFFFF (signed -1), smin kept -1, while
+smax returned -1 and 32 and left 32. These separate the signed operations from unsigned
+min/max and exchange in the tested cases. Each of the four cases ran twice with both
+callbacks, intact guards, and no new recovery or gpuEvent
+(docs/g17-first-dispatch-trials.md, signed uniform min/max trial).
+"""
+
+[operation.unsigned_extrema_pure_execution]
+text = """
+Operation code 4 (umin) and code 6 (umax) executed in pure IOGPU with the 12-byte op10094
+uniform form. Both kept the same authored 138-byte program apart from the atomic operation
+bytes. With value 32 and initial 0xFFFFFFFF, umin returned old values 0xFFFFFFFF and 32,
+ending at 32; umax returned 0xFFFFFFFF twice and left it unchanged. From initial 5, umin
+kept 5 while umax returned 5 and 32, ending at 32. These controls separate unsigned
+comparison from the signed siblings, exchange, and a no-op in the tested cases. Each case
+reproduced twice with both callbacks, intact guards, and no new recovery or gpuEvent
+(docs/g17-first-dispatch-trials.md, unsigned uniform min/max trial).
+"""
+
+[operation.cmpxchg_is_a_separate_opcode_for_a_reason]
+text = """
+Code 3 changes the opcode - op10094 to op10095, op10022 to op10023 - because compare-exchange
+needs a PAIR where the others need a single value: op10094's operand 8 is a GPR32 and op10095's is
+a GPR32tup2, the new value and the compared value together. LLVM cannot vary an operand class
+within one opcode, so it splits. The four operation bits are unchanged.
+"""
+
+# ---------------------------------------------------------------------------------------------
+[axes]
+evidence = """
+Each bit below was flipped on a compiled op10094 and the resulting opcode read from Apple's
+decoder, then confirmed by sweeping all 64 combinations of the six. 44 of 64 decode.
+"""
+"b4[0]" = "1 returns the old value (ndefs=1), 0 discards it. op10094 <-> op10022."
+"b4[1]" = "1 threadgroup address (GPR16), 0 device address (GPR32tup2). op10094 <-> op11769."
+"b4[6]" = "1 widens the value operand to GPR32tup2. In this corner it also forces the no-result form: with b4[6]=1, b4[0] has no effect."
+"b5[1]" = "forces the index-register form on, overriding b5[2]."
+"b5[2]" = "1 no index operand - address from the base alone. 0 adds an index register, GPR32 for device and GPR16 for threadgroup. op10094 <-> op10090."
+"b8[5]" = "1 selects the form with two extra leading immediates and no result. op10094 <-> op10070."
+"b6[2]" = "1 leaves the atomic family entirely - op10094 becomes op17235, an ordinary store."
+
+[axes.byte0_is_the_format_class]
+text = """
+byte0's low three bits select the instruction format, not the operation. Sweeping all 256 values
+on an op10094 base gives twelve distinct outcomes and only byte0 & 7 == 7 stays in the atomic
+family; the other values land on unrelated opcodes at 2, 4 or 8 bytes. The remaining bits of byte0
+carry destination register bits.
+"""
+
+# ---------------------------------------------------------------------------------------------
+[what_the_decoder_will_not_admit]
+status = "NEGATIVE, with the search that failed stated in full"
+text = """
+179 of the 208 declared opcodes were never produced by any of these:
+
+    single-bit walk to saturation from a 12-byte base       29 reached, then 0 new
+    the same from a 16-byte base, so longer forms fit       29 reached, then 0 new
+    132,240 two-bit mutations from all 29                   0 new
+    1,365,504 three-bit mutations from four bases           0 new
+    400,000 random 16-byte encodings, byte0 & 7 == 7        21 produced, all inside the 29
+    400,000 random encodings, byte0 UNRESTRICTED            12 produced, all inside the 29
+
+The boundary is exact and it is the WIDTH axis. Everything reached has a scalar destination -
+GPR32 or none - and a GPR32 or GPR32tup2 value. Everything unreached has a wider destination
+(GPR32tup2/3/4, plain or _shifted) or a wider value (GPR32tup3/4/6/8).
+
+The honest reading is that MCInstrDesc is shared across AGX3 subtargets and declares more than
+the g17s decoder admits, OR that the width axis needs a mode this project has not found. Either
+way it is a typed hole with a known shape rather than an unexplored region: a composer should not
+emit those opcodes, because nothing here can round-trip them.
+
+The random sweeps are not weak evidence. The unrestricted one decoded 40,897 of 400,000 draws
+into 1,492 distinct opcodes, so the instrument does explore; it simply never lands there.
+"""
+
+[selection_for_a_backend]
+text = """
+To author `atomic_fetch_OP(&p[i], v)`:
+
+  1. Pick the opcode from the shape - result wanted or not, device or threadgroup, index register
+     present or not, value width. The five corpus members and the 29 certified-encodable members
+     are in tools/g17slice.py and the reach table.
+  2. Write the four operation bits from the code table. They do not move between opcodes.
+  3. Everything else is the ordinary memory-operand model: the address is a GPR32tup2 for device
+     and a GPR16 for threadgroup, and it is the SAME operand index in both directions.
+
+Memory ORDER is not encoded. Metal rejects memory_order_seq_cst and memory_order_acq_rel on
+device atomics on this target, so relaxed is the only ordering the compiler can express and no
+field varies with it.
+
+atomic_load_explicit does not use this family at all - it lowers to an ordinary load, op12688.
+atomic_store_explicit lowers to op10022 carrying the EXCHANGE code with the result discarded.
+"""
+
+[operation.the_per_lane_form_op10090_has_its_own_eight_unassigned_codes]
+text = """
+CLASSIFIED 2026-09-23 (Set C item 4), decode-side, no dispatch. The table above is op10094's, the
+UNIFORM-address device atomic, whose operation field is b4[5] b5[3] b6[3] b7[7]. The PER-LANE device
+atomic op10090 (isa/g17-atomic-semantics.json, tools/g17atomicprobe.py) carries its operation in a
+DIFFERENT field - b4[5] b5[3] b6[3] b11[4] - and Apple's compiler reaches only EIGHT of its sixteen
+codes (0, 1, 6, 11, 12, 13, 14, 15). So op10094 and op10090 are not in disagreement about "how many
+codes"; they are two opcodes with two field placements. Sweeping op10090's eight UNASSIGNED codes
+(2, 3, 4, 5, 7, 8, 9, 10) through the decoder from an add witness classifies them, exactly as code
+12 was classified for op10094:
+
+    code 2       -> op10091, a SIBLING opcode      the per-lane compare-exchange, the same
+                                                   split cmpxchg forces on op10094 -> op10095
+    codes 3,4,5  -> op10090, 12 bytes, no builtin  three authorable TYPED HOLES; each is a valid
+                                                   encoding with no Metal source construct, and
+                                                   naming them needs execution, not this decoder
+    codes 7,8,9,10 -> do not decode                BAD, like op10094's four BAD combinations
+
+So the "eight unassigned operation codes" of the per-lane form are one sibling selector, three
+authorable-but-unnamed holes, and four invalid encodings - not eight unknown functions. The only
+open semantic question is what codes 3, 4 and 5 compute, which is an execution question.
+
+CORRECTED 2026-09-23: the "codes 3, 4, 5 are holes" line above is WRONG, and no execution is needed
+to see it. It was read off ONE witness's field convention - the 12-byte op10090 in
+isa/g17-atomic-semantics.json, whose fourth operation bit is b11[4]. But cc EMITS op10090 with the
+operation in b4[5] b5[3] b6[3] (three bits, the fourth appearing only for the wider forms), and
+decoding cc's own output gives add=0, and=1, sub=3, max=4, min=5, or=6, xor=7 (sub and xor are
+12-byte, add/and/max/min/or 10-byte), matching ir.Builder.ATOMIC_OPS. So in the encoding this
+backend actually uses, codes 3/4/5 are sub/max/min - ASSIGNED operations, not holes; dispatching
+them would only re-confirm sub/max/min. The two views disagree because the 12-byte witness's b11[4]
+numbering is a different field placement from cc's short-form 3-bit field, and this note conflated
+them. A genuine unassigned-code census for op10090 must be done PER FORM (10-byte vs 12-byte) with
+the field each form actually uses, and only then may a code be called a hole. Until that is done,
+the op10090 "holes" claim is retracted; the op10094 table at the top of this ledger (b7[7], the
+uniform-address form) is unaffected and stands.
+
+HARDWARE CONTROL 2026-09-27: the 12-byte assembler's aop=6 selected byte11[4]=1
+and executed EXCHANGE, updating A[i] to i+1 even as C[i] returned the old
+value. Clearing only byte11[4] decoded operation 262665 and executed OR,
+updating A[i] to (11*i+5)|(i+1), with the same correct old-value return.
+Two fresh pure Submits of the corrected authored program and two of the
+byte-identical compiler program agree. The long form's fourth bit is
+semantically active; the three-bit aop control alone does not name OR there.
+See tools/g17pureorreturnaudit.py.
+"""

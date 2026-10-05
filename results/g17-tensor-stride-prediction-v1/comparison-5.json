@@ -1,0 +1,31 @@
+{
+  "status": "compiled_and_compared",
+  "gpu_dispatched": false,
+  "round": 5,
+  "cases": {
+    "a9-c10": {
+      "object_sha256": "c4a2e6756923959959028949f6823c0a70c907a4d200f25ba1057def9ce7f7c5",
+      "main_sha256": "aaf3196593e0c5328dc0556e40a9f0f0ba30f3f5e79e4f58365ac3e3bdbc36db",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "b5-c11": {
+      "object_sha256": "6bd6817562b5141504fea86f7036b5f4b940f2460769ed8b58880c581d914a80",
+      "main_sha256": "3403873d12facac652c97dd119f8adc5fdaf955da93aeff1aec4713b6aaa0c9f",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a16-b9-c13": {
+      "object_sha256": "583a2212e1e75eea7378317872a52d2c46d1b07984255e3adc17e964148dd1a2",
+      "main_sha256": "9c70fcba054ee727863521caedff0f6712e4ce664ee9c1227967e1068c6ef582",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "status": "passed",
+  "source_commit": "7db93dd4492b8fe10aaf42e533e19643c15d790f",
+  "scope": "Compatibility of the measured 32-byte elided and 40-byte set ARCH layouts for the tested FP16 scan images, shapes, device and queries only. No conclusion about scheduling, performance or whether the flag is semantic.",
+  "gpu_queries": 24,
+  "pairs": [
+    {
+      "shape": [
+        1,
+        1
+      ],
+      "identical_input_bits": true,
+      "query_sequence": [
+        "x",
+        "x",
+        "-x",
+        "x"
+      ],
+      "variant_equality": "Each returned score in each variant matched the same sequential FP32 reference narrowed to FP16 bit for bit. Equality follows through that common reference.",
+      "matrix_sha256": "5420863e86905891bb120492e06629bc5d303ca2d402cdfc4fceb97209fea58a",
+      "query_sha256": "3c091e82df44fc32508fe0c1e8e43d5fe02dcc1a1f012e7715e60ce3e16eab1b",
+      "variants": [
+        {
+          "bundle": "results/g17-arch-1x1-elided",
+          "archive_sha256": "5c8aac72b66688a7f6085a8a0a6fa58d20adf3f83d281ffc350c770843d7ddc9",
+          "serialized_arch_flag": false,
+          "loader_passed": true,
+          "queries": 4,
+          "all_scores_bit_exact": true,
+          "boundary_guards": true,
+          "repeat_bit_exact": true,
+          "stable_persistent_resources": true,
+          "diagnostics": "Loader and NativeScan checked GPU/AGX/WindowServer event snapshots before and after; no change reported."
+        },
+        {
+          "bundle": "results/g17-arch-1x1-set",
+          "archive_sha256": "341ac6447af5f9239de09297201a45d22069c0a59c5c6ccb388049cb892b8a7d",
+          "serialized_arch_flag": true,
+          "loader_passed": true,
+          "queries": 4,
+          "all_scores_bit_exact": true,
+          "boundary_guards": true,
+          "repeat_bit_exact": true,
+          "stable_persistent_resources": true,
+          "diagnostics": "Loader and NativeScan checked GPU/AGX/WindowServer event snapshots before and after; no change reported."
+        }
+      ]
+    },
+    {
+      "shape": [
+        3,
+        7
+      ],
+      "identical_input_bits": true,
+      "query_sequence": [
+        "x",
+        "x",
+        "-x",
+        "x"
+      ],
+      "variant_equality": "Each returned score in each variant matched the same sequential FP32 reference narrowed to FP16 bit for bit. Equality follows through that common reference.",
+      "matrix_sha256": "0ef04cc1c03e36b75beae0b357ae1c34c211264522b3398f8965bbd26d0e0ad6",
+      "query_sha256": "78bf9f300507598b1aa5d315a2424f151b837ffd2f0e97acd2501bbe16ede1f2",
+      "variants": [
+        {
+          "bundle": "results/g17-arch-3x7-elided",
+          "archive_sha256": "579c6b9876af712fc409ec232a30209676282fb12c9a665cef59254137f7af69",
+          "serialized_arch_flag": false,
+          "loader_passed": true,
+          "queries": 4,
+          "all_scores_bit_exact": true,
+          "boundary_guards": true,
+          "repeat_bit_exact": true,
+          "stable_persistent_resources": true,
+          "diagnostics": "Loader and NativeScan checked GPU/AGX/WindowServer event snapshots before and after; no change reported."
+        },
+        {
+          "bundle": "results/g17-arch-3x7-set",
+          "archive_sha256": "c03fbd423417c01d32d768c4ebef89e5469fab62dd07dde6bdb3bef1efbb1c76",
+          "serialized_arch_flag": true,
+          "loader_passed": true,
+          "queries": 4,
+          "all_scores_bit_exact": true,
+          "boundary_guards": true,
+          "repeat_bit_exact": true,
+          "stable_persistent_resources": true,
+          "diagnostics": "Loader and NativeScan checked GPU/AGX/WindowServer event snapshots before and after; no change reported."
+        }
+      ]
+    },
+    {
+      "shape": [
+        33,
+        384
+      ],
+      "identical_input_bits": true,
+      "query_sequence": [
+        "x",
+        "x",
+        "-x",
+        "x"
+      ],
+      "variant_equality": "Each returned score in each variant matched the same sequential FP32 reference narrowed to FP16 bit for bit. Equality follows through that common reference.",
+      "matrix_sha256": "636fb8c54c28858f07f4bc28612b17b91d98105e8b3a912b9dce89dda6d9f47b",
+      "query_sha256": "a9ae78e3f3fd2161ef82a43fe3e2a56789f535a5296b5b1c6da094bd962edf3d",
+      "variants": [
+        {
+          "bundle": "results/g17-arch-33x384-elided",
+          "archive_sha256": "210191ff2af91109d0ad1991687c20c234afd77b23b4dd33446ec3f99506462b",
+          "serialized_arch_flag": false,
+          "loader_passed": true,
+          "queries": 4,
+          "all_scores_bit_exact": true,
+          "boundary_guards": true,
+          "repeat_bit_exact": true,
+          "stable_persistent_resources": true,
+          "diagnostics": "Loader and NativeScan checked GPU/AGX/WindowServer event snapshots before and after; no change reported."
+        },
+        {
+          "bundle": "results/g17-arch-33x384-set",
+          "archive_sha256": "7d9b625cf69a4f33c3c0ddb9edee5d695546230e91291e9b40df13cba1b50a96",
+          "serialized_arch_flag": true,
+          "loader_passed": true,
+          "queries": 4,
+          "all_scores_bit_exact": true,
+          "boundary_guards": true,
+          "repeat_bit_exact": true,
+          "stable_persistent_resources": true,
+          "diagnostics": "Loader and NativeScan checked GPU/AGX/WindowServer event snapshots before and after; no change reported."
+        }
+      ]
+    }
+  ],
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+  "display_device": {
+    "SPDisplaysDataType": [
+      {
+        "_name": "Apple M5 Pro",
+        "spdisplays_mtlgpufamilysupport": "spdisplays_metal4",
+        "spdisplays_ndrvs": [
+          {
+            "_name": "Color LCD",
+            "_spdisplays_display-product-id": "a05f",
+            "_spdisplays_display-serial-number": "fd626d62",
+            "_spdisplays_display-vendor-id": "610",
+            "_spdisplays_display-week": "0",
+            "_spdisplays_display-year": "0",
+            "_spdisplays_displayID": "1",
+            "_spdisplays_pixels": "3456 x 2234",
+            "_spdisplays_resolution": "1728 x 1117 @ 120.00Hz",
+            "spdisplays_ambient_brightness": "spdisplays_no",
+            "spdisplays_connection_type": "spdisplays_internal",
+            "spdisplays_display_type": "spdisplays_built-in-liquid-retina-xdr",
+            "spdisplays_main": "spdisplays_yes",
+            "spdisplays_mirror": "spdisplays_off",
+            "spdisplays_online": "spdisplays_yes",
+            "spdisplays_pixelresolution": "spdisplays_3456x2234Retina"
+          }
+        ],
+        "spdisplays_vendor": "sppci_vendor_Apple",
+        "sppci_bus": "spdisplays_builtin",
+        "sppci_cores": "20",
+        "sppci_device_type": "spdisplays_gpu",
+        "sppci_model": "Apple M5 Pro"
+      }
+    ]
+  }
+}

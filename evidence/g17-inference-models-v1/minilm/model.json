@@ -1,0 +1,33 @@
+{
+  "format": "g17-checkpoint-metadata-v1",
+  "repository": "sentence-transformers/all-MiniLM-L6-v2",
+  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "checkpoint_bytes": 90868376,
+  "expected_checkpoint_sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+  "weight_payload_verified": false,
+  "license": "apache-2.0",
+  "source_api": "https://huggingface.co/api/models/sentence-transformers/all-MiniLM-L6-v2/revision/1110a243fdf4706b3f48f1d95db1a4f5529b4d41?blobs=true",
+  "files": {
+    "config.json": {
+      "bytes": 612,
+      "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+    },
+    "safetensors-header.json": {
+      "bytes": 11408,
+      "sha256": "a1621c79b67c1aa27f5784108b97e010fa884e26b187ba5c351328d9125e10a7"
+    },
+    "modules.json": {
+      "bytes": 349,
+      "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+    },
+    "pooling.json": {
+      "bytes": 190,
+      "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+    },
+    "sentence-config.json": {
+      "bytes": 53,
+      "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+    }
+  },
+  "scope": "Configuration and safetensors metadata only; no weight payload downloaded, converted, compiled or dispatched"
+}

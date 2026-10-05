@@ -1,0 +1,133 @@
+G17 EXECUTION MASK AND CONTROL FLOW
+Measured 2026-09-05 by tools/g17cf.py. Shapes compiled from source in that file, so the control
+flow is known exactly; fields recovered by flipping one bit at a time and asking the decoder.
+Nothing here was executed - see DISPATCH SAFETY, learned the hard way
+  On 2026-09-05 six of the probe kernels in tools/g17cf.py were dispatched by a harness that
+  feeds every kernel the same synthetic buffers. The GPU firmware workloop wedged, WindowServer
+  watchdogged twice, and the machine rebooted. These kernels exist to make Apple's compiler EMIT
+  control flow so the encoding can be read; several have trip counts taken from buffer data, and
+  loop2 and loop3 nest that two and three deep. `python3 tools/g17cf.py --safety` says which.
+
+  THE STRUCTURAL GUARD is the loop-back edge: any branch with a NEGATIVE displacement. Measured
+  over the whole corpus, backward branches are op458 and only op458 - 581 of them across 401
+  programs - and every one of those programs also contains an op578/op579 `while`, so a guard on
+  either catches all of them today. Prefer the displacement test: it is what a loop IS, whereas
+  the `while` form is a compiler idiom that can change. op450 is in the encoding space and Apple
+  never emits it, so a denylist naming op450 is not doing the work it appears to do.
+
+  Killing the dispatching PROCESS does not help. The hang is in the firmware workloop, not in the
+  process, so the next submission piles onto a wedged context. Refuse before dispatch.
+
+UNPROVEN at the end.
+
+WHEN THE MASK IS USED AT ALL
+  A single-sided `if` emits NO control-flow instruction. The compiler predicates the store
+  (op17229 in place of op17235) or if-converts the region to a csel. Nesting two or three levels
+  with a single assignment each still if-converts. The mask machinery appears once a region has
+  two sides, side effects at more than one level, or a loop.
+
+THE FAMILY IS ONE ENCODING WORD
+  b0.4 = 0                        end     (op684); every other bit becomes its immediate
+  b0.4 = 1, b2.4 = 0              exec
+  b0.4 = 1, b2.4 = 1, kind != 0   branch
+  b0.5 + 2*b0.6 = kind            0 if / 1 pop / 2 else / 3 while
+
+  kind   b2.1=0   b2.1=1      branch (b2.4=1)
+  if     op582    op583       -            (kind 0 with b2.4=1 stays exec: op573 / op574)
+  pop    op577    op577       op462
+  else   op575    op576       op458
+  while  op578    op579       op450
+
+FIELDS, 4-byte exec form
+  count       b0.7 high, b2.3 low, and the pair is a CODE TABLE, not an integer:
+                  00 -> 1     01 -> 0     10 -> 2     11 -> 3
+              An encoder writing the count as a plain 2-bit integer emits `pop 0` when it means
+              `pop 1`. All-zeros is the commonest value, which is presumably why.
+  predicate   b1[4:6], an 8-entry LOOKUP TABLE: [74, 75, 76, 77, 78, 79, 3, 2].
+              Indices 0-5 are the six predicate registers; 6 and 7 cross into a different
+              register file, and those are exactly the two Apple uses to push a loop nesting
+              level unconditionally. A linear base+index*slope model is wrong for both.
+              b1[0:3] and b1.7 are dead.
+  invert      b2.1. `if (x == 0)` and `if (x != 0)` compile to the SAME compare - op10369 with
+              condition code 12 - and differ only in this bit. It inverts the predicate; it does
+              not select a comparison.
+  auxiliary   bits b1.0 b1.1 b2.5 b2.6 b2.7 b3.5 b3.7, and for branches b4.5 b4.6. This is
+              operand 0, and it is the one part of the family nobody understands. Across 14,195
+              real instructions it takes only a handful of values per kind - three for pop, three
+              for else - so it is a small witnessed enumeration, not the address it prints as.
+              Carried explicitly with a measured default. Hard-coding one value writes an
+              instruction Apple never emitted 4.6% of the time.
+
+FIELDS, 10-byte branch form
+  b2.0 is forced set - it is part of the 10-byte format.
+  displacement  signed two's complement, sign at b9.6, weights 2 through 2^47 scattered over
+                bytes 0-9 in this order:
+                  b0.7 b1.4 b1.5 b1.6 b2.1 b2.3 b2.5 b2.6 b2.7 b1.0 b1.1 b1.2 b1.3 b3.4
+                  b4.0 b4.1 b4.2 b4.3 b4.4 b6.0..b6.7 b7.0 b7.1 b7.2 b7.6 b7.7 b8.0..b8.7
+                  b9.0..b9.5 b9.6(sign)
+                No weight-1 bit, so displacements are even.
+  target        own offset + displacement. Verified on 65 of 65 branches. NOT the end of the
+                instruction - the branch's own address.
+
+WHAT THE COUNTS MEAN
+  Nesting depth 1 through 6 with a store at every level emits one `if count=1` per level, and the
+  pops sum to exactly the number of pushes: depth 6 emits pop 2, pop 2, pop 2. `else` and `while`
+  are net-neutral. This holds across all 18 probes whose source is known.
+
+  Apple never emits count 3, and never a single pop deeper than 2, though the field encodes both.
+  So 3 is mapped, not witnessed, and an assembler offering it is offering something unproven.
+
+  APPLE OVER-POPS ON EARLY-EXIT PATHS. In deep3, the branch at 0x92 leaves a region two levels
+  deep and targets 0xdc, which is `pop 2` followed by `pop 1` - three levels popped from a depth
+  of two. Apple's compiler is correct, so the hardware must tolerate popping more levels than were
+  pushed. That is an argument for a saturating per-lane counter rather than a stack that would
+  underflow. It is an inference from the correctness of Apple's codegen, not a measurement.
+
+CANONICAL ENCODER
+  tools/g17cf.py builds every one of these from the spec with no witness bits inherited.
+
+  Against the 25-probe corpus:  284 of 284 byte-exact.
+  Against every control-flow instruction Apple ships: 14,195 of 14,195 byte-exact.
+
+  The second number is the one that means anything, and it was 94.34% until the auxiliary field
+  was carried as a field instead of a constant. A corpus of probes I wrote myself cannot show a
+  form my probes never provoke, which is exactly what it failed to show.
+
+DISPATCH SAFETY, learned the hard way
+  On 2026-09-05 six of the probe kernels in tools/g17cf.py were dispatched by a harness that
+  feeds every kernel the same synthetic buffers. The GPU firmware workloop wedged, WindowServer
+  watchdogged twice, and the machine rebooted. These kernels exist to make Apple's compiler EMIT
+  control flow so the encoding can be read; several have trip counts taken from buffer data, and
+  loop2 and loop3 nest that two and three deep. `python3 tools/g17cf.py --safety` says which.
+
+  THE STRUCTURAL GUARD is the loop-back edge: any branch with a NEGATIVE displacement. Measured
+  over the whole corpus, backward branches are op458 and only op458 - 581 of them across 401
+  programs - and every one of those programs also contains an op578/op579 `while`, so a guard on
+  either catches all of them today. Prefer the displacement test: it is what a loop IS, whereas
+  the `while` form is a compiler idiom that can change. op450 is in the encoding space and Apple
+  never emits it, so a denylist naming op450 is not doing the work it appears to do.
+
+  Killing the dispatching PROCESS does not help. The hang is in the firmware workloop, not in the
+  process, so the next submission piles onto a wedged context. Refuse before dispatch.
+
+WHAT EXECUTION NOW COVERS, and exactly how far it reaches
+  29 of 29 of the probe kernels - deep1 through deep6, early_return, elsedeep2, if, if1,
+  if_uniform, loop_dyn, switch, switch4 and the rest - execute correctly through an image this
+  project generates end to end, computing the answers their source specifies.
+
+  That is NOT direct evidence for anything below, because those are Apple's compiled bytes rather
+  than instructions I authored. What it does support is narrower and still worth having: this
+  encoder reproduces all 14,195 control-flow instructions in the corpus BYTE-EXACT, so for every
+  form Apple emits, the bytes this encoder produces are the same bytes that just executed
+  correctly. The encoder's output is execution-validated by identity, on the forms Apple emits.
+
+  It reaches no further than that. A form Apple does not emit - count 3, an auxiliary value not
+  witnessed, a predicate register index Apple never selects - is byte-exact against nothing and
+  has been executed by no one.
+
+UNPROVEN
+  No instruction this encoder authored has been executed as a NOVEL form. The kind names (if / pop / else / while) and the branch
+  conditions (op462 taken when no lane is live, op458 when any lane is) are forced by the source
+  semantics I compiled plus the correctness of Apple's compiler, not by running an instruction and
+  observing which lanes wrote. The saturation argument above is inference. The operand-0 residue
+  on pop and else is reproduced without being understood.

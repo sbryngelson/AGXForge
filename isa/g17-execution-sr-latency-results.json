@@ -1,0 +1,1732 @@
+{
+ "generator": "tools/g17srlatency.py --run",
+ "programs": {
+  "d0": "e642dac819712a3ee4c5c9f20d004f70ea00ca569d708b6db2a8894bd24df0f4",
+  "d0_cc_fixed_no_copy": "0bc707b607c276a088593301399bc8cfbb250957a40f8dffb47a4c6446dbdaab",
+  "d0_wait": "3789f55118b456fe35bbe63bca9e4e3ee033ab975e3d154451c110c4aa073ed6",
+  "d1": "4fa1c528ee8db17bbafd39585cfdf2c93abfc272f4ddb906c5d1016c241508c9",
+  "d2": "a86aa79bbf30640d84bc0de25923994f79118ac133ed1a589867d031f11604a2",
+  "d3": "b67d2b76254f753174281bf3d11ad6b117e8f5f3aaf4187dc285d133d60bd189",
+  "d4": "ec127d5b87297c7a1c85c1111272aeab777d786b0e50a499154ef66f0bdb6817",
+  "highmov": "31713eb4effc76606937fb0460dbdad209712843829112cab3d8ebd9e3d2138f",
+  "lowmov": "a75ebc40b6043213e2242119a9ea19481064fec16386d7d89b33f2baee09be0f",
+  "mov4": "66507279a07c0503e63c42229c379db751b439a936ef08c4b0f59a9e2e28945c",
+  "same_cc_fixed": "60b1d3b7dbd2890385d346869ced825058b977b083de8a348d4beda4a33fc2d6",
+  "same_op1_cleared": "cd9c97c7399ccf97d8ed6f4f9c9284de0c724a3911f4792b007ef8a8695735b8",
+  "same_op6_cleared": "3be6c987054ca6ae2e13a5ae451e723368ff8c8ca48489e0d286683bc0f9207b",
+  "same_release": "f5665a93ed9545aff4cfe00e09c53a1f4fb89b4bc50eab22bf956876cc4e4312",
+  "sr5": "bfb586cb7c813c383523941f705b185bf5b59e2d6549e04cfc708ccce772f8b2"
+ },
+ "rows": [
+  {
+   "arm": "d0",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d1",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d2",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d3",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d4",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d0_wait",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "highmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "lowmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "sr5",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "mov4",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "same_release",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "same_op1_cleared",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "same_op6_cleared",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "same_cc_fixed",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "d0_cc_fixed_no_copy",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "d0",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d1",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d2",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d3",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d4",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d0_wait",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "highmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "lowmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "sr5",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "mov4",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "same_release",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "same_op1_cleared",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "same_op6_cleared",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "same_cc_fixed",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "d0_cc_fixed_no_copy",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 1,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "d0",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d1",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d2",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d3",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d4",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d0_wait",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "highmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "lowmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "sr5",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "mov4",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "same_release",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "same_op1_cleared",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "same_op6_cleared",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "same_cc_fixed",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "d0_cc_fixed_no_copy",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "d0",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d1",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d2",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d3",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d4",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d0_wait",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "highmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "lowmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "sr5",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "mov4",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "same_release",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "same_op1_cleared",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "same_op6_cleared",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "same_cc_fixed",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "d0_cc_fixed_no_copy",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 2,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "d0",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d1",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d2",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d3",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d4",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "d0_wait",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "highmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "lowmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "sr5",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "mov4",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "7",
+   "threads": 32
+  },
+  {
+   "arm": "same_release",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "same_op1_cleared",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 32
+  },
+  {
+   "arm": "same_op6_cleared",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "same_cc_fixed",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "d0_cc_fixed_no_copy",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "latency",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 32
+  },
+  {
+   "arm": "d0",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d1",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d2",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d3",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d4",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "d0_wait",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "highmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "lowmov",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "sr5",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "mov4",
+   "first_run": "7",
+   "first_values": [
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "7",
+   "threads": 262144
+  },
+  {
+   "arm": "same_release",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "same_op1_cleared",
+   "first_run": "0",
+   "first_values": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "0",
+   "threads": 262144
+  },
+  {
+   "arm": "same_op6_cleared",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "same_cc_fixed",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  },
+  {
+   "arm": "d0_cc_fixed_no_copy",
+   "first_run": "t",
+   "first_values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "mode": "issue",
+   "round": 3,
+   "status": 0,
+   "stored": "t",
+   "threads": 262144
+  }
+ ]
+}

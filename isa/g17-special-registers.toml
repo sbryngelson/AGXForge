@@ -1,0 +1,264 @@
+# Special registers: every non-general register Apple's MCRegisterInfo defines for AGX3,
+# and which of them this corpus actually reads. Names are Apple's own, recovered from the
+# register string table; they survived the strip that removed instruction names.
+#
+# For the codegen peer the load-bearing fact is that flags are an allocatable resource with
+# pressure, not a single condition code. CORRECTED 2026-09-04: this file first said there are
+# SEVEN, FLAG0..FLAG6, which was read off the registers this corpus USES. Apple's FLAGwritable
+# class lists FIFTEEN - FLAG0 through FLAG14 - and FLAGR adds FLAGTRUE and FLAGFALSE to them.
+# Only FLAG0..FLAG5 are read here, so seven was a property of the sample and the class member
+# list is the authority. tools/agx3meta members dumps it.
+#
+# FLAGTRUE and FLAGFALSE are constants rather than allocatable: they appear only as sources,
+# and op575 reading FLAGTRUE is how an unconditional region is expressed.
+#
+# THE ENCODING is a compact 3-bit index and NOT the class index: FLAGn encodes as n, and 6
+# encodes FLAGTRUE, which sits at class index 15. Eight opcodes carry it, in different bit
+# positions each - see ledger/g17-byte1-is-the-relocated-base-register.toml. Three bits is also
+# why only FLAG0..FLAG6 are reachable in these forms whatever the class declares.
+#
+# Reads are counted over decoded operands, so they are structural. Nothing here is executed.
+
+[meta]
+chip = "H17s"
+arch = "applegpu_g17s"
+objects_scanned = 679
+special_registers_defined = 200
+read_by_corpus = 26
+sr_registers_defined = 66
+
+[[register]]
+name = "FLAG0"
+mcregister = 74
+reads = 1168
+read_via = ["op10369", "op582", "op579", "op10372"]
+
+[[register]]
+name = "SR_TG_X"
+mcregister = 54
+reads = 543
+read_via = ["op14059"]
+
+[[register]]
+name = "SR_SIMD_ELEM"
+mcregister = 45
+reads = 183
+read_via = ["op14060"]
+
+[[register]]
+name = "FLAG1"
+mcregister = 75
+reads = 176
+read_via = ["op582", "op10370", "op10372", "op583"]
+
+[[register]]
+name = "FLAG2"
+mcregister = 76
+reads = 131
+read_via = ["op582", "op10370", "op10372", "op583"]
+
+[[register]]
+name = "FLAGTRUE"
+mcregister = 3
+reads = 118
+read_via = ["op575", "op582"]
+
+[[register]]
+name = "FLAG4"
+mcregister = 78
+reads = 108
+read_via = ["op582", "op10372", "op10370", "op10381"]
+
+[[register]]
+name = "SR_TP_IN_GRID_X"
+mcregister = 61
+reads = 73
+read_via = ["op14059"]
+
+[[register]]
+name = "SR_TP_IN_GRID_Z"
+mcregister = 63
+reads = 34
+read_via = ["op14059"]
+
+[[register]]
+name = "SR_TP_IN_GRID_Y"
+mcregister = 62
+reads = 32
+read_via = ["op14059"]
+
+[[register]]
+name = "FLAG5"
+mcregister = 79
+reads = 30
+read_via = ["op582", "op10370", "op10372", "op10378"]
+
+[[register]]
+name = "SR_PVSIMD"
+mcregister = 38
+reads = 15
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TVSIMD"
+mcregister = 66
+reads = 15
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_LIN_ID"
+mcregister = 25
+reads = 13
+read_via = ["op14060"]
+
+[[register]]
+name = "FLAG3"
+mcregister = 77
+reads = 12
+read_via = ["op10372", "op582"]
+
+[[register]]
+name = "SR_TG_Y_SIZE"
+mcregister = 57
+reads = 4
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_SIMD_GRP"
+mcregister = 46
+reads = 4
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TG_Z"
+mcregister = 58
+reads = 4
+read_via = ["op14059"]
+
+[[register]]
+name = "SR_TG_DISP_X_SIZE"
+mcregister = 51
+reads = 3
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TG_DISP_Y_SIZE"
+mcregister = 52
+reads = 3
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TG_DISP_Z_SIZE"
+mcregister = 53
+reads = 3
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TG_X_SIZE"
+mcregister = 55
+reads = 3
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TG_Z_SIZE"
+mcregister = 59
+reads = 3
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_TG_Y"
+mcregister = 56
+reads = 3
+read_via = ["op14059"]
+
+[[register]]
+name = "SR_LOCAL_X"
+mcregister = 26
+reads = 1
+read_via = ["op14060"]
+
+[[register]]
+name = "SR_LOCAL_Z"
+mcregister = 28
+reads = 1
+read_via = ["op14060"]
+
+[unread]
+count = 174
+names = ["CTLFLOWST", "FLAG10", "FLAG11", "FLAG12", "FLAG13", "FLAG14", "FLAG6", "FLAG7", "FLAG8", "FLAG9", "FLAGFALSE", "IR0", "IR0H", "IR0H_IR1L", "IR0H_IR1L_IR1H_IR2L", "IR0H_IR1L_IR1H_IR2L_IR2H_IR3L_IR3H_IR4L", "IR0H_IR1L_IR1H_IR2L_IR2H_IR3L_IR3H_IR4L_IR4H_IR5L_IR5H_IR6L_IR6H_IR7L_IR7H_IR8L", "IR0L", "IR0_IR1", "IR0_IR1_IR2_IR3", "IR0_IR1_IR2_IR3_IR4_IR5_IR6_IR7", "IR0_IR1_IR2_IR3_IR4_IR5_IR6_IR7_IR8_IR9_IR10_IR11_IR12_IR13_IR14_IR15", "IR1", "IR10", "IR10H", "IR10H_IR11L", "IR10H_IR11L_IR11H_IR12L", "IR10H_IR11L_IR11H_IR12L_IR12H_IR13L_IR13H_IR14L", "IR10L", "IR10_IR11", "IR11", "IR11H", "IR11H_IR12L", "IR11H_IR12L_IR12H_IR13L", "IR11H_IR12L_IR12H_IR13L_IR13H_IR14L_IR14H_IR15L", "IR11L", "IR12", "IR12H", "IR12H_IR13L", "IR12H_IR13L_IR13H_IR14L", "IR12L", "IR12_IR13", "IR12_IR13_IR14_IR15", "IR13", "IR13H", "IR13H_IR14L", "IR13H_IR14L_IR14H_IR15L", "IR13L", "IR14", "IR14H", "IR14H_IR15L", "IR14L", "IR14_IR15", "IR15", "IR15H", "IR15L", "IR1H", "IR1H_IR2L", "IR1H_IR2L_IR2H_IR3L", "IR1H_IR2L_IR2H_IR3L_IR3H_IR4L_IR4H_IR5L", "IR1H_IR2L_IR2H_IR3L_IR3H_IR4L_IR4H_IR5L_IR5H_IR6L_IR6H_IR7L_IR7H_IR8L_IR8H_IR9L", "IR1L", "IR2", "IR2H", "IR2H_IR3L", "IR2H_IR3L_IR3H_IR4L", "IR2H_IR3L_IR3H_IR4L_IR4H_IR5L_IR5H_IR6L", "IR2H_IR3L_IR3H_IR4L_IR4H_IR5L_IR5H_IR6L_IR6H_IR7L_IR7H_IR8L_IR8H_IR9L_IR9H_IR10L", "IR2L", "IR2_IR3", "IR3", "IR3H", "IR3H_IR4L", "IR3H_IR4L_IR4H_IR5L", "IR3H_IR4L_IR4H_IR5L_IR5H_IR6L_IR6H_IR7L", "IR3H_IR4L_IR4H_IR5L_IR5H_IR6L_IR6H_IR7L_IR7H_IR8L_IR8H_IR9L_IR9H_IR10L_IR10H_IR11L", "IR3L", "IR4", "IR4H", "IR4H_IR5L", "IR4H_IR5L_IR5H_IR6L", "IR4H_IR5L_IR5H_IR6L_IR6H_IR7L_IR7H_IR8L", "IR4H_IR5L_IR5H_IR6L_IR6H_IR7L_IR7H_IR8L_IR8H_IR9L_IR9H_IR10L_IR10H_IR11L_IR11H_IR12L", "IR4L", "IR4_IR5", "IR4_IR5_IR6_IR7", "IR5", "IR5H", "IR5H_IR6L", "IR5H_IR6L_IR6H_IR7L", "IR5H_IR6L_IR6H_IR7L_IR7H_IR8L_IR8H_IR9L", "IR5H_IR6L_IR6H_IR7L_IR7H_IR8L_IR8H_IR9L_IR9H_IR10L_IR10H_IR11L_IR11H_IR12L_IR12H_IR13L", "IR5L", "IR6", "IR6H", "IR6H_IR7L", "IR6H_IR7L_IR7H_IR8L", "IR6H_IR7L_IR7H_IR8L_IR8H_IR9L_IR9H_IR10L", "IR6H_IR7L_IR7H_IR8L_IR8H_IR9L_IR9H_IR10L_IR10H_IR11L_IR11H_IR12L_IR12H_IR13L_IR13H_IR14L", "IR6L", "IR6_IR7", "IR7", "IR7H", "IR7H_IR8L", "IR7H_IR8L_IR8H_IR9L", "IR7H_IR8L_IR8H_IR9L_IR9H_IR10L_IR10H_IR11L", "IR7H_IR8L_IR8H_IR9L_IR9H_IR10L_IR10H_IR11L_IR11H_IR12L_IR12H_IR13L_IR13H_IR14L_IR14H_IR15L", "IR7L", "IR8", "IR8H", "IR8H_IR9L", "IR8H_IR9L_IR9H_IR10L", "IR8H_IR9L_IR9H_IR10L_IR10H_IR11L_IR11H_IR12L", "IR8L", "IR8_IR9", "IR8_IR9_IR10_IR11", "IR8_IR9_IR10_IR11_IR12_IR13_IR14_IR15", "IR9", "IR9H", "IR9H_IR10L", "IR9H_IR10L_IR10H_IR11L", "IR9H_IR10L_IR10H_IR11L_IR11H_IR12L_IR12H_IR13L", "IR9L", "LR", "SMP_BATON", "SP", "SR_BACKFACE", "SR_CLUSTER", "SR_CVGINFO", "SR_CVGMSK", "SR_DBGLNKH", "SR_DBGLNKL", "SR_DEPTHSMPS", "SR_EMRTID", "SR_ESL2H", "SR_ESL2L", "SR_FIRST_DOS", "SR_FLAG", "SR_GOS", "SR_INSTID", "SR_INSTVAL", "SR_LAYER_ID", "SR_LIBDEPTH", "SR_LIBSMPS", "SR_LIBXDIM", "SR_LIBYDIM", "SR_LOCAL_Y", "SR_MSOUTADDRH", "SR_MSOUTADDRL", "SR_OSOUTADDRH", "SR_OSOUTADDRL", "SR_PASS", "SR_PATCHID", "SR_PIXELXY", "SR_PTYPE", "SR_PVQUAD", "SR_QUAD_ELEM", "SR_SAMPLEXY", "SR_SGID", "SR_SGTYPE", "SR_SMPMSKIN", "SR_TESSU", "SR_TESSV", "SR_TFVERTID", "SR_TOKENID", "SR_TRI", "SR_TVQUAD", "SR_UTILDATAH", "SR_UTILDATAL", "SR_UTILFUNC", "SR_VERTEXID", "SR_VRID_SET", "SR_ZERO", "VALID"]
+
+# THE SELECTOR FIELD. byte1[5:0] of op14059 and op14060 is a 6-bit code naming the special
+# register, and it is neither the MCRegister id nor the SIR32 class index. It is single-valued
+# per register in all 1858 instances of the two opcodes and consistent between them, with no
+# conflict. The numbering is systematic - the three grid-size registers are consecutive, so are
+# the three threadgroup-position ones, and so are the three thread-position-in-grid ones - which
+# is what an architectural encoding looks like and not what an allocation looks like.
+#
+# op14059 and op14060 are the ONLY opcodes in Apple's tables that declare a SIR32 operand, so
+# this is the whole read_sr surface as far as the corpus reaches. Codes not listed are not
+# assigned here: the corpus reads 15 of the 66 SR_* names and the rest have no observed code.
+
+[selector]
+field = "byte1[5:0]"
+opcodes = [14059, 14060]
+instances = 1858
+
+[[selector.code]]
+code = 2
+name = "SR_SIMD_ELEM"
+
+[[selector.code]]
+code = 5
+name = "SR_SIMD_GRP"
+
+[[selector.code]]
+code = 21
+name = "SR_PVSIMD"
+
+[[selector.code]]
+code = 23
+name = "SR_TVSIMD"
+
+[[selector.code]]
+code = 24
+name = "SR_TG_X_SIZE"
+
+[[selector.code]]
+code = 25
+name = "SR_TG_Y_SIZE"
+
+[[selector.code]]
+code = 26
+name = "SR_TG_Z_SIZE"
+
+[[selector.code]]
+code = 28
+name = "SR_TG_X"
+
+[[selector.code]]
+code = 29
+name = "SR_TG_Y"
+
+[[selector.code]]
+code = 30
+name = "SR_TG_Z"
+
+[[selector.code]]
+code = 32
+name = "SR_TP_IN_GRID_X"
+
+[[selector.code]]
+code = 33
+name = "SR_TP_IN_GRID_Y"
+
+[[selector.code]]
+code = 34
+name = "SR_TP_IN_GRID_Z"
+
+[[selector.code]]
+code = 39
+name = "SR_LIN_ID"
+
+[[selector.code]]
+code = 42
+name = "SR_TG_DISP_Z_SIZE"

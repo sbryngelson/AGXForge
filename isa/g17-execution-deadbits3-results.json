@@ -1,0 +1,207 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op998.dead-bits",
+  "op": 998,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 998,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0100041a0220a00206081a00",
+    "0100041a0220a00206081a00",
+    "0100041a0220a00206081a00",
+    "0100041a0220a00206081a00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    998,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1081081856,
+   1086324736,
+   3212836864,
+   1090650112
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op2190.dead-bits",
+  "op": 2190,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 2190,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0100071a2020a302b801a00008080080",
+    "0100071a2020a302b801a00008080080",
+    "0100071a2020a302b801a00008080080",
+    "0100071a2020a302b801a00008080080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    2190,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1080033280,
+   1088421888,
+   3221225472,
+   1056964608
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3290.dead-bits",
+  "op": 3290,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3290,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "210005300280a0029c0120000010",
+    "210005300280a0029c0120000010",
+    "210005300280a0029c0120000010",
+    "210005300280a0029c0120000010"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    3290,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1077936128,
+   1094713344,
+   3212836864,
+   1073741824
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op10826.dead-bits",
+  "op": 10826,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10826,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a0100a102a881e0000800",
+    "2700043a0100a102a881e0000800",
+    "2700043a0100a102a881e0000800",
+    "2700043a0100a102a881e0000800"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10826,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   17,
+   65,
+   6,
+   101
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

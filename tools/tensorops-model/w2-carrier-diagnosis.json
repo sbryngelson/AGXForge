@@ -1,0 +1,90 @@
+{
+  "question": "Why did op5100_regbase_test.py stop reproducing, and do the proposed scoreboard repairs fix it?",
+  "source": "results/g17-tensorops-recon-v1/op5100_regbase_test.py",
+  "date": "2026-09-19",
+  "hardware": "H17s",
+  "fixed_input_seed": 777,
+  "trials_per_arm": 4,
+  "baseline": {
+    "mma_bytes": "27002d032202a0421216",
+    "decoded_opcode": 5101,
+    "decoded_operand_1": 0,
+    "consumer_slot_bits": [],
+    "matching_trials": "0/4",
+    "max_abs_errors": [
+      16.536767959594727,
+      21.102676391601562,
+      16.145130157470703,
+      18.383705139160156
+    ]
+  },
+  "mask_0_1_2": {
+    "mma_bytes": "271c2d032202a0421216",
+    "decoded_opcode": 5101,
+    "decoded_operand_1": 117440512,
+    "consumer_slot_bits": [
+      0,
+      1,
+      2
+    ],
+    "byte_differences_from_baseline": [
+      {
+        "byte_index": 1,
+        "baseline": 0,
+        "mask_0_1_2": 28
+      }
+    ],
+    "matching_trials": "0/4",
+    "max_abs_errors": [
+      16.536767959594727,
+      21.102676391601562,
+      16.145130157470703,
+      18.383705139160156
+    ]
+  },
+  "result": "resolved",
+  "conclusion": "The carrier's fragment packing and load geometry were wrong. With scoreboard structure held equal to the failing same-slot arm, changing only to the production lowerer's 16-byte block-major packing and displacements changes 0/4 to 4/4 bit-exact. The mask-only and same-slot failures remain useful negative controls: neither was the cause.",
+  "limits": [
+    "This diagnoses the retained op5100 register-base-24 carrier and does not broaden op5100 beyond its separately measured domain.",
+    "It makes no timing claim."
+  ],
+  "same_slot_0_and_mask_0": {
+    "load_slots": [
+      0,
+      0,
+      0
+    ],
+    "mma_consumer_slot_bits": [
+      0
+    ],
+    "matching_trials": "0/4",
+    "max_abs_errors": [
+      16.536767959594727,
+      21.102676391601562,
+      16.145130157470703,
+      18.383705139160156
+    ],
+    "output_relation": "The four errors are identical to both the original and three-mask arms."
+  },
+  "corrected_fragment_geometry": {
+    "changes_held_against_same_slot_arm": [
+      "A is repacked as two 32-lane by 16-byte blocks rather than one 32-lane by 32-byte interleaved block",
+      "A loads use width 16 at displacements 0 and 512 rather than width 4 at displacements 0 and 16",
+      "B uses width 16 rather than width 8"
+    ],
+    "unchanged_from_same_slot_arm": [
+      "all loads use slot 0",
+      "the MMA consumer mask names slot 0",
+      "register bases",
+      "opcode",
+      "four fixed-seed inputs"
+    ],
+    "matching_trials": "4/4",
+    "max_abs_errors": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+}

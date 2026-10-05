@@ -1,0 +1,107 @@
+{
+ "stats": {
+  "old_opcodes": 17796,
+  "new_opcodes": 17905,
+  "old_registers": 3567,
+  "new_registers": 3685,
+  "corpus_instructions": 184349,
+  "witnessed_opcodes": 3244,
+  "from_corpus": 557,
+  "from_forms_only": 2687,
+  "anchors_whose_descriptor_changed": 0,
+  "aligned_by_descriptor": 11583,
+  "left_unmapped_as_ambiguous": 934,
+  "old_without_new": 2969,
+  "new_without_old": 3079,
+  "registers_without_old": 118,
+  "classes_without_old": 96,
+  "old_classes_absent": 11,
+  "sched_classes_without_old": 12,
+  "tag_entries": 114,
+  "flipped_immediates_matching_with_witness_fit": 35441,
+  "flipped_immediates_differing_with_witness_fit": 13,
+  "immediates_differing_after_full_fit": 0
+ },
+ "canaries": [
+  {
+   "old": 684,
+   "new": 706,
+   "hex": "0e000000"
+  },
+  {
+   "old": 10279,
+   "new": 11079,
+   "hex": "3704041a2d00a302a0802500"
+  },
+  {
+   "old": 554,
+   "new": 574,
+   "hex": "6b000000"
+  },
+  {
+   "old": 12674,
+   "new": 13547,
+   "hex": "470087300800780a10808008"
+  },
+  {
+   "old": 10282,
+   "new": 11082,
+   "hex": "2708041a2100a302a8802000"
+  },
+  {
+   "old": 12682,
+   "new": 13555,
+   "hex": "0f000300180210c0410080000000"
+  },
+  {
+   "old": 5106,
+   "new": 5697,
+   "hex": "2f0005902a02a4620016"
+  },
+  {
+   "old": 2190,
+   "new": 2212,
+   "hex": "69c3660bc12c0219"
+  }
+ ],
+ "unmapped_base": 1000000,
+ "confirmed_tags_from_retained_reports": [
+  [
+   17258,
+   2,
+   1
+  ],
+  [
+   17263,
+   2,
+   1
+  ],
+  [
+   12343,
+   2,
+   1
+  ]
+ ],
+ "suspected_tags_not_applied": [
+  [
+   10023,
+   1
+  ],
+  [
+   10095,
+   2
+  ],
+  [
+   9996,
+   1
+  ]
+ ],
+ "merged": {
+  "new": 466,
+  "high": 447,
+  "low": 14156,
+  "split": 4096
+ },
+ "header_sha256": "71d45de97aaf43cc78fadc76d758a215fccc063ca2fa4dc956f123302fdee989",
+ "platform": "26A434"
+}

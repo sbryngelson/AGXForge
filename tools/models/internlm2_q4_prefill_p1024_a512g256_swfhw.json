@@ -1,0 +1,49 @@
+{
+    "name": "internlm2_q4_prefill_p1024_a512g256_swfhw",
+    "bits": 4,
+    "cap": 2048,
+    "qmv": {
+        "qkv": {
+            "ks": 2
+        },
+        "wo_res1": {
+            "ks": 2
+        },
+        "ffn": {
+            "ks": 2
+        },
+        "w2_res2": {
+            "ks": 4
+        },
+        "head": {
+            "ks": 2,
+            "lean": true,
+            "ptr": true
+        }
+    },
+    "norm": {
+        "out32": true,
+        "seed": false
+    },
+    "final_norm": {
+        "out32": true,
+        "seed": false
+    },
+    "attn": {
+        "widebf": true,
+        "attn32": true
+    },
+    "prompt_len": 1024,
+    "prefill": {
+        "M": 512,
+        "persistent_w16": true,
+        "attn": "mma",
+        "rego": true,
+        "gemm_M": 256,
+        "swiglu_fused": true,
+        "hw_exp2": true
+    },
+    "gen": {
+        "batched": true
+    }
+}

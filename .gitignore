@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.DS_Store
+# built by `make native-tools`
+tools/agx3dis
+tools/agx3meta
+tools/libagx3dis.dylib
+tools/g17scanworker
+tools/g17decodegen
+tools/g17specgen
+tools/g17twinrun
+spike/accel/libaccel.dylib
+# workflow outputs and reproductions write here
+results/g17-inference-demo/
+results/g17-encoder-demo/

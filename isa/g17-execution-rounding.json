@@ -1,0 +1,102 @@
+[
+  {
+    "id": "CONTROL.op10279",
+    "op": 10279,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        4096
+      ],
+      [
+        4097
+      ],
+      [
+        4352
+      ],
+      [
+        8192
+      ]
+    ],
+    "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+    ],
+    "note": "MANDATORY POSITIVE CONTROL, proven src+4. The batch is void without it."
+  },
+  {
+    "id": "op3802.ceil",
+    "op": 3802,
+    "author": "fieldmap",
+    "cases": [
+      [
+        1075838976
+      ],
+      [
+        3197737370
+      ],
+      [
+        1081711002
+      ],
+      [
+        3217031168
+      ]
+    ],
+    "expect": [
+      1077936128,
+      2147483648,
+      1082130432,
+      3212836864
+    ],
+    "note": "op3802 ceil on 2.5, -0.3, 3.9, -1.5 -> 3.0, -0.0, 4.0, -1.0. NO WITNESS WAIVER: this opcode passes g17safe on its own, Apple witness included, so `witness_required` is left at its default. The four sources are chosen so that ceil, trunc and rint give DIFFERENT answers: 2.5 separates ceil (3.0) from trunc and rint (2.0), and 3.9 separates trunc (3.0) from ceil and rint (4.0). Every answer also differs from the input, so a form that ignores its operand and returns it unchanged is visible."
+  },
+  {
+    "id": "op3818.trunc",
+    "op": 3818,
+    "author": "fieldmap",
+    "cases": [
+      [
+        1075838976
+      ],
+      [
+        3197737370
+      ],
+      [
+        1081711002
+      ],
+      [
+        3217031168
+      ]
+    ],
+    "expect": [
+      1073741824,
+      2147483648,
+      1077936128,
+      3212836864
+    ],
+    "note": "op3818 trunc on the same four -> 2.0, -0.0, 3.0, -1.0. Case 1 is the one to read rather than assert: whether -0.3 truncates to -0.0 or to +0.0 is a sign-of-zero question the expect states one way, and a mismatch there is a finding about the opcode rather than a failure of the record."
+  },
+  {
+    "id": "op3770.rint",
+    "op": 3770,
+    "author": "fieldmap",
+    "cases": [
+      [
+        1075838976
+      ],
+      [
+        3197737370
+      ],
+      [
+        1081711002
+      ],
+      [
+        3217031168
+      ]
+    ],
+    "note": "op3770 rint on the same four. DELIBERATELY NO EXPECT. Cases 0 and 3 are exact halves - 2.5 and -1.5 - and which way they go IS the measurement: round-half-to-even gives 2.0 and -2.0, round-half-away-from-zero gives 3.0 and -2.0, and round-half-up gives 3.0 and -1.0. Writing an expect here would have hidden the rounding mode behind a pass or a fail. Cases 1 and 2 are unambiguous (-0.0 and 4.0) and carry the delivery proof on their own.",
+    "function": "round-half-to-EVEN - 2.5 -> 2.0 and -1.5 -> -2.0, two independent halves"
+  }
+]

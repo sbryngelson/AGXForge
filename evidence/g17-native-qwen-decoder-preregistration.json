@@ -1,0 +1,32 @@
+{
+  "format": "g17-native-qwen-decoder-preregistration-v1",
+  "gpu_dispatched": false,
+  "request_order": [
+    0,
+    1,
+    0
+  ],
+  "request_segments": "each complete prompt in successive 32-token prefill chunks, then two reference-selected one-token decode requests; reset at prompt start",
+  "local_rules": {
+    "gather_phase_pack_crop_bias_add_multiply_rotary_cache_update": "exact FP32 or half bit patterns against independent checkpoint data and actual GPU predecessors; cache updates compare entire state including untouched positions",
+    "MMA": "exact measured fresh-64-K fold on independently converted checkpoint weights",
+    "attention_scores_context": "exact sequential FP32 FMA model including scalar FTZ",
+    "rms_softmax_silu": "2e-5*(1+abs(reference)); FP64 RMS, defined lane-local plus XOR sum, measured scalar SiLU expansion",
+    "logits": "2e-5+2e-6*sum(abs(source_i*original_BF16_weight_i)); streamed FP64 dot using actual GPU final norm"
+  },
+  "quality_rules": {
+    "half_projection_policy": "all last-valid-row logits: error <= .025+.002*abs(reference)",
+    "original_checkpoint": "complete-prompt and decode last-valid-row logits: error <= .05+.003*abs(reference); incomplete-prefix comparison recorded but not admitted under this bound",
+    "finite": "all checked outputs/references finite",
+    "reset_repeat": "all per-stage hashes of repeated prompt and its decode steps must be identical",
+    "cache": "valid length equals request control; cache data untouched outside append positions"
+  },
+  "sources": {
+    "tools/g17decodercheck.py": "dd00bfd9aea8c494491e243afc856ef0cf8f62f496ce2f6084445976cdbe266a",
+    "tools/g17decodervalidate.py": "f9383f851cf42120f2ed776aa0cd3c364f979d03aaa0b735bc744151a9a9bfae"
+  },
+  "scope": "full decoder numerical admission protocol; registration alone grants no hardware result",
+  "reference_corrections": [
+    "decode pack padding follows native FP32 multiplication including signed zero; exact bit comparison is retained"
+  ]
+}

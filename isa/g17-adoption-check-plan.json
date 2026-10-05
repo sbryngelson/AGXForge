@@ -1,0 +1,784 @@
+{
+ "corpus": "corpus: 1893 forms, 5010028 instances - equal to the published index",
+ "drift_bits": 672,
+ "drift_forms": 108,
+ "forms": [
+  {
+   "apple_instances": 1,
+   "bits": [
+    [
+     "7.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 1,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 445,
+   "template": "230607003030a4520480",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": [
+    "MayStore"
+   ]
+  },
+  {
+   "apple_instances": 3,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ],
+    [
+     "9.7",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 3,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 2,
+   "op": 727,
+   "template": "2f8300022a20a202008658000204",
+   "template_bits": {
+    "7.1": 1,
+    "9.7": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 43,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 18,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 2,
+   "op": 3293,
+   "template": "298205102a80a002900710000010",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 12826,
+   "bits": [
+    [
+     "7.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 2199,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 5072,
+   "template": "0a832381060000000000",
+   "template_bits": {
+    "7.1": 0
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 1919,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 156,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 1,
+   "op": 9328,
+   "template": "b702803a3200ae22b003",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": [
+    "MayStore"
+   ]
+  },
+  {
+   "apple_instances": 2957,
+   "bits": [
+    [
+     "2.2",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 1643,
+   "fieldmap_width": 14,
+   "length": 8,
+   "nsrc": 4,
+   "op": 9700,
+   "template": "929d277585200002",
+   "template_bits": {
+    "2.2": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 76,
+   "bits": [
+    [
+     "2.2",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 47,
+   "fieldmap_width": 14,
+   "length": 8,
+   "nsrc": 4,
+   "op": 9710,
+   "template": "629d771a049c0202",
+   "template_bits": {
+    "2.2": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 164,
+   "bits": [
+    [
+     "3.0",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 34,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 9748,
+   "template": "62140781268080020002",
+   "template_bits": {
+    "3.0": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 156,
+   "bits": [
+    [
+     "3.0",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 29,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 9749,
+   "template": "52140781068280022080",
+   "template_bits": {
+    "3.0": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 961,
+   "bits": [
+    [
+     "3.0",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 53,
+   "fieldmap_width": 10,
+   "length": 8,
+   "nsrc": 2,
+   "op": 9808,
+   "template": "228d25c925800302",
+   "template_bits": {
+    "3.0": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 133,
+   "bits": [
+    [
+     "0.3",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 100,
+   "fieldmap_width": 12,
+   "length": 12,
+   "nsrc": 2,
+   "op": 10022,
+   "template": "0f280300000c0ca0103e0010",
+   "template_bits": {
+    "0.3": 1
+   },
+   "unsafe": [
+    "MayLoad",
+    "MayStore",
+    "atomic"
+   ]
+  },
+  {
+   "apple_instances": 149,
+   "bits": [
+    [
+     "8.4",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 66,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 3,
+   "op": 10090,
+   "template": "cf648354010204401016",
+   "template_bits": {
+    "8.4": 1
+   },
+   "unsafe": [
+    "MayLoad",
+    "MayStore",
+    "atomic"
+   ]
+  },
+  {
+   "apple_instances": 309,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 115,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 3,
+   "op": 11063,
+   "template": "2700043a2900a00a388402140600",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 87,
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 49,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 11322,
+   "template": "1a4a13fe860896022080",
+   "template_bits": {
+    "8.1": 0
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 2305,
+   "bits": [
+    [
+     "2.2",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 1263,
+   "fieldmap_width": 14,
+   "length": 8,
+   "nsrc": 4,
+   "op": 11375,
+   "template": "528127a101800500",
+   "template_bits": {
+    "2.2": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 1718,
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 485,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 1,
+   "op": 11392,
+   "template": "4208af80268007022280",
+   "template_bits": {
+    "8.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 556,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 26,
+   "fieldmap_width": 10,
+   "length": 14,
+   "nsrc": 1,
+   "op": 11392,
+   "template": "3200070a2f00a4020300464c2f15",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 2959,
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 1072,
+   "fieldmap_width": 14,
+   "length": 10,
+   "nsrc": 2,
+   "op": 11393,
+   "template": "321c078026800713c206",
+   "template_bits": {
+    "8.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 12,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 10,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 2,
+   "op": 11456,
+   "template": "a200452b4b00ac02230002080008",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 191,
+   "bits": [
+    [
+     "11.6",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 59,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 1,
+   "op": 11482,
+   "template": "228045eb4b00a5028100425c0108",
+   "template_bits": {
+    "11.6": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 3299,
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 1383,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 11483,
+   "template": "32000d80268007028204",
+   "template_bits": {
+    "8.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 6108,
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "distinct_encodings": 3484,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 3,
+   "op": 11487,
+   "template": "1a242d80860297028200",
+   "template_bits": {
+    "8.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 77,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 9,
+   "fieldmap_width": 12,
+   "length": 12,
+   "nsrc": 1,
+   "op": 11655,
+   "template": "a78204422100aa0248000a00",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 2,
+   "bits": [
+    [
+     "8.4",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 2,
+   "fieldmap_width": 12,
+   "length": 12,
+   "nsrc": 2,
+   "op": 11769,
+   "template": "0f042300030484a010004002",
+   "template_bits": {
+    "8.4": 1
+   },
+   "unsafe": [
+    "MayLoad",
+    "MayStore",
+    "atomic"
+   ]
+  },
+  {
+   "apple_instances": 5,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 5,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 1,
+   "op": 13511,
+   "template": "2701003a2500a80a4002",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 5,
+   "bits": [
+    [
+     "11.2",
+     0,
+     1
+    ],
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 4,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 2,
+   "op": 14393,
+   "template": "3702001a2e00a002680300340000",
+   "template_bits": {
+    "11.2": 1,
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 258,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ],
+    [
+     "9.7",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 71,
+   "fieldmap_width": 12,
+   "length": 12,
+   "nsrc": 1,
+   "op": 16817,
+   "template": "370300392e00a30a30824000",
+   "template_bits": {
+    "7.1": 1,
+    "9.7": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 57,
+   "bits": [
+    [
+     "11.2",
+     0,
+     1
+    ],
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 50,
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 2,
+   "op": 17015,
+   "template": "2700001a2e00a102d80a00340000",
+   "template_bits": {
+    "11.2": 1,
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 42,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 24,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 17774,
+   "template": "230106003af8a41a0483",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 5,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 2,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 17775,
+   "template": "230106003a38a4020400",
+   "template_bits": {
+    "7.1": 1
+   },
+   "unsafe": []
+  },
+  {
+   "apple_instances": 1083,
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ],
+    [
+     "9.7",
+     0,
+     1
+    ]
+   ],
+   "distinct_encodings": 171,
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 1,
+   "op": 17782,
+   "template": "330206003ae8a31a4480",
+   "template_bits": {
+    "7.1": 1,
+    "9.7": 1
+   },
+   "unsafe": []
+  }
+ ],
+ "knowngood_candidates": [
+  {
+   "apple_instances": 45067,
+   "bit": "2.2",
+   "fieldmap_width": 14,
+   "length": 6,
+   "nsrc": 4,
+   "op": 9700,
+   "template": "02012e110102"
+  },
+  {
+   "apple_instances": 29477,
+   "bit": "4.3",
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 1,
+   "op": 10372,
+   "template": "0a802382020017020200"
+  },
+  {
+   "apple_instances": 24411,
+   "bit": "2.2",
+   "fieldmap_width": 6,
+   "length": 6,
+   "nsrc": 4,
+   "op": 9832,
+   "template": "b2162c1e0000"
+  },
+  {
+   "apple_instances": 17346,
+   "bit": "6.2",
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 424,
+   "template": "330007803070a10a04c8"
+  },
+  {
+   "apple_instances": 16190,
+   "bit": "2.2",
+   "fieldmap_width": 14,
+   "length": 8,
+   "nsrc": 3,
+   "op": 11365,
+   "template": "22032b8295040602"
+  },
+  {
+   "apple_instances": 15938,
+   "bit": "11.6",
+   "fieldmap_width": 12,
+   "length": 12,
+   "nsrc": 2,
+   "op": 10790,
+   "template": "b70404122180a91228030208"
+  },
+  {
+   "apple_instances": 15148,
+   "bit": "6.2",
+   "fieldmap_width": 10,
+   "length": 10,
+   "nsrc": 2,
+   "op": 437,
+   "template": "230207003820a102040f"
+  },
+  {
+   "apple_instances": 12086,
+   "bit": "8.1",
+   "fieldmap_width": 14,
+   "length": 10,
+   "nsrc": 1,
+   "op": 11482,
+   "template": "42082d80268007022281"
+  },
+  {
+   "apple_instances": 8009,
+   "bit": "10.4",
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 4,
+   "op": 9700,
+   "template": "b282070b2b00a032920111500330"
+  },
+  {
+   "apple_instances": 7803,
+   "bit": "10.4",
+   "fieldmap_width": 12,
+   "length": 12,
+   "nsrc": 2,
+   "op": 10793,
+   "template": "378004022980a91a08840030"
+  },
+  {
+   "apple_instances": 6744,
+   "bit": "10.4",
+   "fieldmap_width": 16,
+   "length": 16,
+   "nsrc": 3,
+   "op": 9701,
+   "template": "2282430a2b00a00a923d830800900000"
+  },
+  {
+   "apple_instances": 6494,
+   "bit": "10.4",
+   "fieldmap_width": 14,
+   "length": 14,
+   "nsrc": 4,
+   "op": 9710,
+   "template": "2282070a2b00a00a92bc821d201d"
+  }
+ ],
+ "means": "Pairs for the free-bits adoption check (tools/g17adoptcheck.py). `bits` is [bit, emitted today, emitted after adoption] for every bit of the form whose EMITTED value adoption changes; `template` is the form's most frequent Apple encoding over both corpora. Derived from isa/g17-free-bits-known-drift.json."
+}

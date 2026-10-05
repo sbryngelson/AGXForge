@@ -1,0 +1,21 @@
+{
+  "format": "g17-checkpoint-metadata-v1",
+  "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "checkpoint_bytes": 988097824,
+  "expected_checkpoint_sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+  "weight_payload_verified": false,
+  "license": "apache-2.0",
+  "source_api": "https://huggingface.co/api/models/Qwen/Qwen2.5-0.5B-Instruct/revision/7ae557604adf67be50417f59c2c2f167def9a775?blobs=true",
+  "files": {
+    "config.json": {
+      "bytes": 659,
+      "sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45"
+    },
+    "safetensors-header.json": {
+      "bytes": 32280,
+      "sha256": "bd808652be103f0e4e29786b9aa8829e0f38607880486926c7246ee2de577a76"
+    }
+  },
+  "scope": "Configuration and safetensors metadata only; no weight payload downloaded, converted, compiled or dispatched"
+}

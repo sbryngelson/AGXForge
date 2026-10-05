@@ -1,0 +1,856 @@
+{
+ "section": "MM 25.211",
+ "instrument": "tools/g17twin.py e2e: tools/g17decodegen (one command buffer a token) on graph.json and on graph_twin_{all,attn,qmv}.json (tools/g17twin.py graph: the chosen kinds' bundles replaced by twin.json directories, nothing else changed), and mlx-lm 0.31 generate_step greedy on the same prompt ids, 128 tokens, tok/s from token 1 (mlx: the second of two in-process runs); 4 repetitions, the arm order reversed every repetition; twin_attn and twin_qmv in every repetition at 1,024 and 1,792 (pilot: repetitions 0-1); the load average recorded per run",
+ "prompts": "196: the code2 prompt of 25.203; 1,024 and 1,792: section 25.141 of this document under a summarize instruction, InternLM2 chat template",
+ "pilot_note": "the pilot ran the same arms with the scratch form of the same driver at load 3-7; the repo run's repetitions 2-3 ran at load 8-15 (a peer's push and merge), so their absolute rates are low and repetition 2 at 1,792 is an outlier (twin/ours 1.447)",
+ "pilot": {
+  "196": {
+   "ours": {
+    "median_tok_s": 216.8,
+    "tok_s": [
+     222.3,
+     214.6,
+     206.3,
+     219.0
+    ],
+    "load": [
+     7.31396484375,
+     4.93212890625,
+     2.96728515625,
+     3.2939453125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_all": {
+    "median_tok_s": 238.8,
+    "tok_s": [
+     239.1,
+     238.5,
+     230.8,
+     240.0
+    ],
+    "load": [
+     7.31396484375,
+     4.93212890625,
+     2.8896484375,
+     3.2939453125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "mlx": {
+    "median_tok_s": 225.09363313597268,
+    "tok_s": [
+     217.46220066425843,
+     223.22285155810744,
+     226.96441471383793,
+     227.05338020617327
+    ],
+    "load": [
+     7.36865234375,
+     4.83935546875,
+     2.8896484375,
+     3.05859375
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "per_rep": {
+    "ours_over_mlx": [
+     1.022,
+     0.961,
+     0.909,
+     0.965
+    ],
+    "twin_over_mlx": [
+     1.1,
+     1.068,
+     1.017,
+     1.057
+    ],
+    "twin_over_ours": [
+     1.076,
+     1.111,
+     1.119,
+     1.096
+    ],
+    "attn_twin_over_ours": [],
+    "qmv_twin_over_ours": []
+   }
+  },
+  "1024": {
+   "ours": {
+    "median_tok_s": 195.9,
+    "tok_s": [
+     195.8,
+     185.4,
+     197.4,
+     196.0
+    ],
+    "load": [
+     7.3388671875,
+     5.00830078125,
+     2.818359375,
+     3.3203125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_all": {
+    "median_tok_s": 217.65,
+    "tok_s": [
+     221.5,
+     213.8,
+     211.4,
+     223.5
+    ],
+    "load": [
+     7.0712890625,
+     4.92236328125,
+     2.59228515625,
+     3.17431640625
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "mlx": {
+    "median_tok_s": 182.89498019739676,
+    "tok_s": [
+     175.0219352413559,
+     184.41748488972806,
+     190.0935324244346,
+     181.37247550506544
+    ],
+    "load": [
+     6.5185546875,
+     4.916015625,
+     2.58056640625,
+     3.18994140625
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_attn": {
+    "median_tok_s": 209.7,
+    "tok_s": [
+     211.5,
+     207.9
+    ],
+    "load": [
+     6.5185546875,
+     5.0830078125
+    ],
+    "identical_to_ours": [
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null
+    ]
+   },
+   "twin_qmv": {
+    "median_tok_s": 210.05,
+    "tok_s": [
+     212.2,
+     207.9
+    ],
+    "load": [
+     6.11767578125,
+     5.177734375
+    ],
+    "identical_to_ours": [
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null
+    ]
+   },
+   "per_rep": {
+    "ours_over_mlx": [
+     1.119,
+     1.005,
+     1.038,
+     1.081
+    ],
+    "twin_over_mlx": [
+     1.266,
+     1.159,
+     1.112,
+     1.232
+    ],
+    "twin_over_ours": [
+     1.131,
+     1.153,
+     1.071,
+     1.14
+    ],
+    "attn_twin_over_ours": [
+     1.08,
+     1.121
+    ],
+    "qmv_twin_over_ours": [
+     1.084,
+     1.121
+    ]
+   }
+  },
+  "1792": {
+   "ours": {
+    "median_tok_s": 176.8,
+    "tok_s": [
+     183.0,
+     168.5,
+     170.6,
+     184.2
+    ],
+    "load": [
+     5.78759765625,
+     3.23779296875,
+     2.53369140625,
+     3.0458984375
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_all": {
+    "median_tok_s": 203.45,
+    "tok_s": [
+     204.9,
+     202.0,
+     201.8,
+     212.4
+    ],
+    "load": [
+     5.291015625,
+     3.54248046875,
+     2.611328125,
+     3.41796875
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "mlx": {
+    "median_tok_s": 162.29114669052672,
+    "tok_s": [
+     150.83978105881454,
+     163.98311102993728,
+     165.80124184986036,
+     160.59918235111618
+    ],
+    "load": [
+     5.2392578125,
+     3.6767578125,
+     3.15087890625,
+     3.45458984375
+    ],
+    "identical_to_ours": [
+     false,
+     false,
+     false,
+     false
+    ],
+    "first_mismatch": [
+     39,
+     39,
+     39,
+     39
+    ]
+   },
+   "twin_attn": {
+    "median_tok_s": 188.7,
+    "tok_s": [
+     197.1,
+     180.3
+    ],
+    "load": [
+     5.6201171875,
+     4.06884765625
+    ],
+    "identical_to_ours": [
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null
+    ]
+   },
+   "twin_qmv": {
+    "median_tok_s": 189.85,
+    "tok_s": [
+     195.5,
+     184.2
+    ],
+    "load": [
+     5.0947265625,
+     4.5322265625
+    ],
+    "identical_to_ours": [
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null
+    ]
+   },
+   "per_rep": {
+    "ours_over_mlx": [
+     1.213,
+     1.028,
+     1.029,
+     1.147
+    ],
+    "twin_over_mlx": [
+     1.358,
+     1.232,
+     1.217,
+     1.323
+    ],
+    "twin_over_ours": [
+     1.12,
+     1.199,
+     1.183,
+     1.153
+    ],
+    "attn_twin_over_ours": [
+     1.077,
+     1.07
+    ],
+    "qmv_twin_over_ours": [
+     1.068,
+     1.093
+    ]
+   }
+  }
+ },
+ "repo_run": {
+  "196": {
+   "ours": {
+    "median_tok_s": 202.2,
+    "tok_s": [
+     219.0,
+     212.6,
+     191.8,
+     187.0
+    ],
+    "load": [
+     5.8447265625,
+     4.20703125,
+     8.62548828125,
+     12.46240234375
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_all": {
+    "median_tok_s": 222.7,
+    "tok_s": [
+     244.3,
+     233.1,
+     208.9,
+     212.3
+    ],
+    "load": [
+     5.85693359375,
+     4.20703125,
+     8.6552734375,
+     12.46240234375
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "mlx": {
+    "median_tok_s": 208.71917322878997,
+    "tok_s": [
+     227.19129497307813,
+     211.50062422739458,
+     204.7648816842807,
+     205.93772223018536
+    ],
+    "load": [
+     5.85693359375,
+     4.05126953125,
+     8.6552734375,
+     12.15478515625
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "per_rep": {
+    "ours_over_mlx": [
+     0.964,
+     1.005,
+     0.937,
+     0.908
+    ],
+    "twin_over_mlx": [
+     1.075,
+     1.102,
+     1.02,
+     1.031
+    ],
+    "twin_over_ours": [
+     1.116,
+     1.096,
+     1.089,
+     1.135
+    ],
+    "attn_twin_over_ours": [],
+    "qmv_twin_over_ours": []
+   }
+  },
+  "1024": {
+   "ours": {
+    "median_tok_s": 184.95,
+    "tok_s": [
+     199.2,
+     194.4,
+     161.5,
+     175.5
+    ],
+    "load": [
+     5.4677734375,
+     4.14111328125,
+     8.92236328125,
+     10.16845703125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_all": {
+    "median_tok_s": 211.6,
+    "tok_s": [
+     230.4,
+     222.6,
+     181.8,
+     200.6
+    ],
+    "load": [
+     4.927734375,
+     4.443359375,
+     8.60791015625,
+     11.55859375
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "mlx": {
+    "median_tok_s": 186.56080909433678,
+    "tok_s": [
+     191.99945555676132,
+     189.64607114727178,
+     169.37857616123753,
+     183.47554704140177
+    ],
+    "load": [
+     4.53271484375,
+     4.443359375,
+     8.96240234375,
+     12.1298828125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_attn": {
+    "median_tok_s": 188.95,
+    "tok_s": [
+     212.3,
+     206.1,
+     166.4,
+     171.8
+    ],
+    "load": [
+     4.16943359375,
+     4.16845703125,
+     9.04541015625,
+     11.77587890625
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_qmv": {
+    "median_tok_s": 190.0,
+    "tok_s": [
+     214.2,
+     203.8,
+     173.4,
+     176.2
+    ],
+    "load": [
+     4.07568359375,
+     4.2705078125,
+     9.49267578125,
+     12.10498046875
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "per_rep": {
+    "ours_over_mlx": [
+     1.038,
+     1.025,
+     0.953,
+     0.957
+    ],
+    "twin_over_mlx": [
+     1.2,
+     1.174,
+     1.073,
+     1.093
+    ],
+    "twin_over_ours": [
+     1.157,
+     1.145,
+     1.126,
+     1.143
+    ],
+    "attn_twin_over_ours": [
+     1.066,
+     1.06,
+     1.03,
+     0.979
+    ],
+    "qmv_twin_over_ours": [
+     1.075,
+     1.048,
+     1.074,
+     1.004
+    ]
+   }
+  },
+  "1792": {
+   "ours": {
+    "median_tok_s": 160.15,
+    "tok_s": [
+     185.3,
+     146.0,
+     107.4,
+     174.3
+    ],
+    "load": [
+     4.0693359375,
+     8.25146484375,
+     9.73046875,
+     6.478515625
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_all": {
+    "median_tok_s": 194.65,
+    "tok_s": [
+     213.0,
+     176.8,
+     155.4,
+     212.5
+    ],
+    "load": [
+     3.39501953125,
+     7.5068359375,
+     11.4091796875,
+     7.14501953125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "mlx": {
+    "median_tok_s": 150.3930234020042,
+    "tok_s": [
+     142.99800957033838,
+     150.88676412590456,
+     149.89928267810382,
+     157.70795298208392
+    ],
+    "load": [
+     3.443359375,
+     6.68359375,
+     15.63623046875,
+     7.68017578125
+    ],
+    "identical_to_ours": [
+     false,
+     false,
+     false,
+     false
+    ],
+    "first_mismatch": [
+     39,
+     39,
+     39,
+     39
+    ]
+   },
+   "twin_attn": {
+    "median_tok_s": 173.3,
+    "tok_s": [
+     186.8,
+     158.7,
+     160.1,
+     186.5
+    ],
+    "load": [
+     3.615234375,
+     4.9091796875,
+     14.75634765625,
+     8.80712890625
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "twin_qmv": {
+    "median_tok_s": 171.85,
+    "tok_s": [
+     194.3,
+     163.7,
+     176.5,
+     167.2
+    ],
+    "load": [
+     3.9814453125,
+     3.96923828125,
+     13.93798828125,
+     9.59423828125
+    ],
+    "identical_to_ours": [
+     true,
+     true,
+     true,
+     true
+    ],
+    "first_mismatch": [
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "per_rep": {
+    "ours_over_mlx": [
+     1.296,
+     0.968,
+     0.716,
+     1.105
+    ],
+    "twin_over_mlx": [
+     1.49,
+     1.172,
+     1.037,
+     1.347
+    ],
+    "twin_over_ours": [
+     1.149,
+     1.211,
+     1.447,
+     1.219
+    ],
+    "attn_twin_over_ours": [
+     1.008,
+     1.087,
+     1.491,
+     1.07
+    ],
+    "qmv_twin_over_ours": [
+     1.049,
+     1.121,
+     1.643,
+     0.959
+    ]
+   }
+  }
+ }
+}

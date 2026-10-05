@@ -1,0 +1,574 @@
+{
+ "identity_counts": {
+  "changed_since_recording": 4,
+  "contradicted": 3,
+  "unproven": 29
+ },
+ "kernels": {
+  "addsatk": {
+   "compiled_now": {
+    "bytes": 62,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a312288821006c8002fe7c2cff0f3702045a2100a31a388320007f040308010610400e000000",
+    "code_sha256": "e112b08fb7560716b8477b9ba7da5a838d4e912da4a7d707ed91919e6ba553a9",
+    "instructions": 7
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "andreg": {
+   "compiled_now": {
+    "bytes": 84,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002701041a2500a322288201002f004320182210c04100800000002f00041a2500a322288921002ba352212f044308010610400e000000",
+    "code_sha256": "e90a1ca147046d9b70ac7f84584d099f3df58f34468a413754132ed1579884d9",
+    "instructions": 9
+   },
+   "identity": {
+    "executed_elsewhere": {
+     "equal": true,
+     "pinned": "e90a1ca147046d9b70ac7f84584d099f3df58f34468a413754132ed1579884d9",
+     "receipt": "results/g17-bitwise-runtime-v2/andreg/first-worker/execution.json"
+    },
+    "reason": "the compiler at 155a8452, which wrote the record, emits ab3d5c13b1c4... - not today's bytes",
+    "status": "changed_since_recording"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "atomicadd": {
+   "compiled_now": {
+    "bytes": 76,
+    "code_hex": "4ca010062700041a2500a322288201003701041a2500a312288821006f00030801020440100a0f004308182210c04100800000003f00041a2500a322288821001f044308010610400e000000",
+    "code_sha256": "6acdf0fb42ef2cdd63c612675b0a455a6b47d30077582666f502483957175725",
+    "instructions": 8
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "bitops": {
+   "compiled_now": {
+    "bytes": 116,
+    "code_hex": "4ca010060f004308182210c04100800000003f80001a2280a022f880003400002b0007883030a32ac0bf3f80041a2180a22a48010b002f00041a2180a132e8000a0001022700043a2180a322a88821003700045a2180a322a88921002702041a2180a32a288821002f044308010610400e000000",
+    "code_sha256": "d82adb821917250077705d91f05f87fb8472dca8ab3253995349c3dc7aba8909",
+    "instructions": 11
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "bitreg": {
+   "compiled_now": {
+    "bytes": 268,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002701041a2500a322288201002f004320182210c04100800000002f00041a2500a322288921002ba352212702041a2500a322288201001f004320182210c04100800000002f00041a2500a322a88821003703041a2500a322288201003f004322182210c04100800000003f00041a2500a322a88921003b217c232700043a2500a322288201001f004320182210c04100800000002f00041a2500a322a88821003701043a2500a322288201004f004322182210c04100800000003f00041a2500a322288a21004b217b232702043a2180a322288921003700041a2180a322288a21001f044308010610400e000000",
+    "code_sha256": "ce904488ab67bbf03b61a32be4d422cd3ae56b69bdc826a3d26d471a6036c2d6",
+    "instructions": 25
+   },
+   "identity": {
+    "executed_elsewhere": {
+     "equal": true,
+     "pinned": "ce904488ab67bbf03b61a32be4d422cd3ae56b69bdc826a3d26d471a6036c2d6",
+     "receipt": "results/g17-bitwise-runtime-v2/bitreg/first-worker/execution.json"
+    },
+    "reason": "the compiler at 155a8452, which wrote the record, emits 3a8b057eff95... - not today's bytes",
+    "status": "changed_since_recording"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "branch": {
+   "compiled_now": {
+    "bytes": 90,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002700043a2580a322a98801000f045308010210400a09228804021e00000e2702041a2180a122e8000a0001020f044308010610403e03400e0e000000",
+    "code_sha256": "dd9e19d5721256d526b0bd35b20871e12ee185d2f1f727ad36a519ca8071a61a",
+    "instructions": 11
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "divgemv": {
+   "compiled_now": {
+    "bytes": 160,
+    "code_hex": "4ca010063780045a2100a12208020a0001023700041a2500a312288201000c804200602000000a0b228805021e00000e6c800200602000000a0d2a8015021e00000e2702041a2180a32a888201003f004324182210c04100800000002f02043a2180a322288801003701041a2500a312a88201003e03400e0a0b228805021e00000e5e0ff91e1f00ffc7ff7f3e03400e3e03400e0f044308010610400e000000",
+    "code_sha256": "b260f2b5efe4028843f61534639ecc54234f8ab42bf5310cd27a791ba205e511",
+    "instructions": 21
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "recorded 142 bytes/18 instructions, today 160/21",
+    "status": "contradicted"
+   },
+   "loop_bounded_by_harness": true,
+   "loop_opcodes": [
+    458
+   ]
+  },
+  "dotloop": {
+   "compiled_now": {
+    "bytes": 172,
+    "code_hex": "4ca010063780045a2100a12208020a0001022cc84200622000000c804200602000005c800200602000003702041a2180a32a888201004f004326182210c04100800000003700043a2180a32a888201005f004326182210c04100800000003f00045a2180a12aa88a200001022702043a2180a322288801003701041a2500a312a88201003e03400e0a0b228805021e00000e5e6ff11e1f00ffc7ff7f3e03400e0f044308010610400e000000",
+    "code_sha256": "e1f818795c93ed373273ec8f13a0121973f767b1e4acfdc0053600398d3bf017",
+    "instructions": 19
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": true,
+   "loop_opcodes": [
+    458
+   ]
+  },
+  "floatmath": {
+   "compiled_now": {
+    "bytes": 72,
+    "code_hex": "4ca010060f004308182210c0410080000000398005100280a0221808100002100902044a0220a02a240412001900074a2020a3223808a000240800801f044308010610400e000000",
+    "code_sha256": "70c9518c470ffe8956b0754001ca381f7c8ce524085eae2261fac5492cafb121",
+    "instructions": 7
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "gemvloop": {
+   "compiled_now": {
+    "bytes": 124,
+    "code_hex": "4ca010063780045a2100a12208020a0001020c804200602000005c800200602000002702041a2180a32a888201003f004324182210c04100800000002f02043a2180a322288801003701041a2500a312a88201003e03400e0a0b228805021e00000e5e0ff91e1f00ffc7ff7f3e03400e0f044308010610400e000000",
+    "code_sha256": "350d8b2a627675489ca092630af5f88bc1292739311e75d2b3f7e307e6d552bf",
+    "instructions": 15
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": true,
+   "loop_opcodes": [
+    458
+   ]
+  },
+  "gemvreduce": {
+   "compiled_now": {
+    "bytes": 924,
+    "code_hex": "4ca010062700045a2500a3222b8201001f004308182210c04100800000002f00041a2500a32aa88821001f004320182210c04100800000002f00041a2500a322a88821003700043a2180a1222888200001022700041a2580a322288201002700045a2580a32a2b8201003f004320182210c04100800000002f00041a2500a322a88921003f004324182210c04100800000002f00041a2500a32aa88921003700041a2180a12a2889200001022702043a2180a322a88821001c804200602000000f225308030210c000202751000600000a09229005021e00000e0c804200602000001f2053081a0210c00100000000002f00041a2500a322a88821003700049a2500a322288201002c804200602000003f2443221a0610c00100000000003f00041a2500a322a88921002702041a2180a32a288821000c804200602000002f205308030210c000203e03400e2751000600000a09228805021e00000e0c804200602000001f2053081a0210c00100000000002f00041a2500a322a88821003700045a2500a322288201002c804200602000003f2443221a0610c00100000000003f00041a2500a322a88921002702041a2180a32a288821000c804200602000002f205308030210c000203e03400e2751000600000a09228405021e00000e0c804200602000001f2053081a0210c00100000000002f00041a2500a322a88821003700043a2500a322288201002c804200602000003f2443221a0610c00100000000003f00041a2500a322a88921002702041a2180a32a288821000c804200602000002f205308030210c000203e03400e2751000600000a09228205021e00000e0c804200602000001f2053081a0210c00100000000002f00041a2500a322a88821003702041a2500a322288201002c804200602000003f2443221a0610c00100000000003f00041a2500a322a88921002702041a2180a32a288821000c804200602000002f205308030210c000203e03400e2751000600000a09228015021e00000e0c804200602000001f2053081a0210c00100000000002f00041a2500a322a88821003701041a2500a322288201002c804200602000003f2443221a0610c00100000000003f00041a2500a322a88921002702041a2180a32a288821000c804200602000002f205308030210c000203e03400e2751000600000c804200602000001c804200602000002f2243201a0610c00100000000002f00041a2500a322288921003700041a2180a322288201001f044308010610400e000000",
+    "code_sha256": "108f989e4278aa3c2b34795eb37abdd1ed671e919122e2fbd784edbaed319bb9",
+    "instructions": 95
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "identity": {
+   "compiled_now": {
+    "bytes": 28,
+    "code_hex": "4ca010062700041a2500a322288201000f044308010610400e000000",
+    "code_sha256": "31e928f75cc53e2640242e868f43fe0aa29aabfce93cf4609b5fc75eae3a9eca",
+    "instructions": 4
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "ifelse": {
+   "compiled_now": {
+    "bytes": 160,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002701041a2500a322a88801000f045308010210400a09228804021e00000e2782041a2180a12248010a0001020f045308010210400a09229404021e00000e2782041a2180a122c8000a0001020f045308010210403e03400e3e03400e0a09228815021e00000e2700043a2580a322a98821000f044308010610403e03400e0e000000",
+    "code_sha256": "f1600b23f8c06b81ff104355324afdf4c1bf3f963118d417dcc329db27f1a773",
+    "instructions": 21
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "linear": {
+   "compiled_now": {
+    "bytes": 256,
+    "code_hex": "4ca010062780045a2100a12208010a0001021f004320182210c04100800000002f02041a2180a12ae8000a0001023701041a2500a322288801003f004322182210c04100800000003f02043a2180a12268010a0001023702041a2180a32a288921003702041a2500a322288801002f004322182210c04100800000003f00043a2180a122e8010a0001022702041a2180a32aa88921003703041a2500a322288821000f004322182210c04100800000003f00041a2180a122e8020a0001022702041a2180a322288921003700043a2580a322298821000c8842006e2800002c804200602000001202470a0780ac2a2088a80021083f044308010610400e000000",
+    "code_sha256": "1caab7be7ec4f71e6b14d438c37b6e8d3f8d38b1bf83795ddad59abf7ee66d05",
+    "instructions": 22
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "liveidx": {
+   "compiled_now": {
+    "bytes": 220,
+    "code_hex": "4ca010062701041a2500a32228820100330007883030a322c4872702041a2500a32228820100230007883030a32ac4872703041a2500a32228820100330007883030a32ac4870f004322182210c04100800000002f00041a2500a332288821000f004324182210c04100800000003f00041a2500a332288821000f004326182210c04100800000002f00041a2500a33a288821002702045a2180a322288a21002700041a2180a332288b21002700043a2180a322a88821003700041a2180a322a88921002702041a2180a322288a21000f044308010610400e000000",
+    "code_sha256": "8071ff0423ed4adc5c720639a753f10c15414f06ddbe79eae0b654afd0972e6c",
+    "instructions": 20
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "loadbranch": {
+   "compiled_now": {
+    "bytes": 122,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a32228882100330207883030a312c0811f045308010210400a0b2a8214021e00000e2703041a2500a32228820100330007883030a322c4870f004322182210c04100800000003f00045a2500a3222b8821001f044308010610403e03400e0e000000",
+    "code_sha256": "f8d8f5a6d445781abce17d5cb8abf8f3150fde05ab08954ca002fafecf7007f4",
+    "instructions": 14
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "narrow": {
+   "compiled_now": {
+    "bytes": 68,
+    "code_hex": "4ca010060f004308182210c04100800000003f0004182500a322288821002702001a2680a0227881003400003701041a2500a322280821001f044308010610400e000000",
+    "code_sha256": "cf0058146901e7325e7ebfbaac9f77f9caea2b1fa994f5ea5d87ee3be4a3dced",
+    "instructions": 7
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "orreg": {
+   "compiled_now": {
+    "bytes": 84,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002701041a2500a322288201002f004320182210c04100800000002f00041a2500a322288921002b237c212f044308010610400e000000",
+    "code_sha256": "bbe0813d764b100a7f7960f59771184657f0272d6826e3ae62c4af2f1d8c4216",
+    "instructions": 9
+   },
+   "identity": {
+    "executed_elsewhere": {
+     "equal": true,
+     "pinned": "bbe0813d764b100a7f7960f59771184657f0272d6826e3ae62c4af2f1d8c4216",
+     "receipt": "results/g17-bitwise-runtime-v2/orreg/first-worker/execution.json"
+    },
+    "reason": "the compiler at 155a8452, which wrote the record, emits e751a20d8ba5... - not today's bytes",
+    "status": "changed_since_recording"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "pressure": {
+   "compiled_now": {
+    "bytes": 964,
+    "code_hex": "4ca010062700041a2500a32228820100330007883030a322c4870f004322182210c04100800000003701041a2500a32228820100230207883030a32ac4871f004324182210c04100800000002702041a2500a32a28820100330007883070a32ac4872f004326182210c04100800000003703041a2500a32a28820100230207883070a332c4873f004328182210c04100800000002700043a2500a332288201003300078830b0a332c4874f00432a182210c04100800000003701043a2500a332288201002302078830b0a33ac4875f00432c182210c04100800000002702043a2500a33a288201003300078830f0a33ac4876f00432e182210c04100800000003703043a2500a33a28820100a302078830f0a322c4877f004330182210c0410080000000a700045a2500a32228820100b300078a3030a322c4878f004332182210c0410080000000b701045a2500a32228820100a302078a3030a32ac4879f004334182210c0410080000000a702045a2500a32a28820100b300078a3070a32ac487af004336182210c0410080000000b703045a2500a32a28820100a302078a3070a332c487bf004338182210c0410080000000a700047a2500a33228820100b300078a30b0a332c487cf00433a182210c0410080000000b701047a2500a33228820100a302078a30b0a33ac487df00433c182210c0410080000000a702047a2500a33a28820100b300078a30f0a33ac487ef00433e182210c0410080000000b703047a2500a33a288201002302878a30f0a302c487ff004340182210c04100800000002700849a2500a30228820100330087903030a302c4870f008342182210c04100800000003701849a2500a30228820100230287903030a30ac4871f008344182210c04100800000002702849a2500a30a28820100330087903070a30ac4872f008346182210c04100800000003703849a2500a30a28820100230287903070a312c4873f008348182210c04100800000002f02841a2180a312288821002f00045a2100a322298921003f00041a2180a322a88921002f02041a2180a322288a21003f00041a2180a322a88a21002f02041a2180a322288b21003f00041a2180a322a88b21002f02041a2180a322288c21003f00041a2180a322a88c21002f02041a2180a322288d21003f00041a2180a322a88d21002f02041a2180a322288e21003f00041a2180a322a88e21002f02041a2180a322288f21003f00041a2180a322a88f21002f02041a2180a322289021003f00041a2180a322a89021002f02041a2180a322289121003f00041a2180a322a89121001f044308010610400e000000",
+    "code_sha256": "4a427490740127279dd9d209c5528c3ca73c7c2905300ac4b393980e4c59d53e",
+    "instructions": 82
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "satops": {
+   "compiled_now": {
+    "bytes": 82,
+    "code_hex": "4ca010065f000308182210c04100800000006c8002fe7c2cff0f3f82045a2100a31a188320006ca002007e240000af02045a2500a202188320002700049a2100a322a88321000f044308010610400e000000",
+    "code_sha256": "48ea7464e4e67381f0d412a8669f10d48e0f971b54d8651f76309eb168c505bd",
+    "instructions": 9
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "shiftr": {
+   "compiled_now": {
+    "bytes": 56,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002702001a2680a122f880003400000f044308010610400e000000",
+    "code_sha256": "e9c7ce25b70ff0aa80fdf760397f50fe55c72cf16a34ebcfa8cdcb02a7c15cf0",
+    "instructions": 6
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "srconst": {
+   "compiled_now": {
+    "bytes": 24,
+    "code_hex": "4ca010060c874200602000000f044308010610400e000000",
+    "code_sha256": "31713eb4effc76606937fb0460dbdad209712843829112cab3d8ebd9e3d2138f",
+    "instructions": 4
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "srindex": {
+   "compiled_now": {
+    "bytes": 98,
+    "code_hex": "4c9c10065ca410062700045a2100a12228080a0001023700041a2180a322a88201000f004322182210c04100800000002f00041a2500a32a288821002700043a2180a122a8000a0001022700041a2180a32aa88221002f044322010610400e000000",
+    "code_sha256": "87b12fc8f14d2a0af66897d7434bdc5235e1d21f93f190cf4488122e9072bb0d",
+    "instructions": 10
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "subreg": {
+   "compiled_now": {
+    "bytes": 92,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002701041a2500a322288201002f004320182210c04100800000002f00041a2500a322288921002702041a2580a22a088821002f044308010610400e000000",
+    "code_sha256": "34cdc68df981da5092bf4782cea492ba227ce306c36a514821d6381e6647181b",
+    "instructions": 9
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "subsatk": {
+   "compiled_now": {
+    "bytes": 62,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a312288821006ca002007e2400003702045a2500a21a188320007f040308010610400e000000",
+    "code_sha256": "2efb6dca4d4b7745551539e4b5ca4c5bcf053f5702fbbaf692fc82d25b926b7e",
+    "instructions": 7
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "tgatomic": {
+   "compiled_now": {
+    "bytes": 162,
+    "code_hex": "4ca0100654951006549714062782005a2200a11a3884003400002702005a2600a0223884003400003700001a2680a11a3884003400000c804200602000006f203308030200c000202751000600000a0f228015021e00000e8f0023003b2d14a0100c40129f0023003b2d14a0100c40122f00049a2500a21a888421003e03400ea704217a2800a80238002700049a2100a322a88321000f044308010610400e000000",
+    "code_sha256": "8766697d503e088285fb9daae4d782c982c61031d146ae29c85f11684bb59ad4",
+    "instructions": 19
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "tgbarrier2": {
+   "compiled_now": {
+    "bytes": 210,
+    "code_hex": "4ca010060f004308182210c04100800000003f01041a2500a322288821000c804200602000001f205308030210c000202751000600002701041a2500a32228820100330007883030a322c4870c804200602000002f2043221a0610c00100000000002f00043a2180a122a8000a0001022751000600001c804200602000000f225308030210c000202751000600002702041a2500a32228820100330007883030a322c4870c804200602000002f2043221a0610c00100000000002f00041a2500a322288921000f044308010610400e000000",
+    "code_sha256": "6d0fa7631999016e99261debb2ffa440fe8b1fd3365909d78c2ce1cc7c6b0f20",
+    "instructions": 22
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "tgops": {
+   "compiled_now": {
+    "bytes": 340,
+    "code_hex": "4ca0100654951006549714062782005a2200a1223884003400003702005a2600a0223884003400002702001a2680a11a3884003400001c804200602000000f225308030210c000202751000600002300078030b0a32200803700041a2500a31a28880100a700045a2500a3022b880100b703043a2500a30228880100a700045a2500a30a2b880100b700043a2580a30a29880100a703041a2580a31229880100b703045a2500a31228880100a700041a2500a31a288821000a0d228015021e00000eff0023003b2514a0100e40027f0023001b2514a0101040028f0023001b2d1ca0101240027f0023003b2d1ca0101440128f0023001b251ca0101640127f0023003b251ca0101840128f0023003b2d14a0101a40127f0023001b2514a0101c40023e03400eaf00041a2500a302a88321003704219a2800a81a38002702047a2100a322288321000f044308010610400e000000",
+    "code_sha256": "4b5bd02ee7347320db72e529cc8074576d3f19eada3450ac63a89913d89e1179",
+    "instructions": 34
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "recorded 328 bytes/33 instructions, today 340/34",
+    "status": "contradicted"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "tgself": {
+   "compiled_now": {
+    "bytes": 100,
+    "code_hex": "4ca010060b8841001c804200602000004f222320030600c000202751000600002701041a2500a32228820100330007883030a322c4870c804200602000002f2043221a0610c00100000000002f00043a2580a322298921000f044308010610400e000000",
+    "code_sha256": "c1f07e24d39b6568de88b6067f9370c86433cf80ff72e8831eac6b2d19567ba8",
+    "instructions": 12
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "threadgroup": {
+   "compiled_now": {
+    "bytes": 124,
+    "code_hex": "4ca010060f004308182210c04100800000003f01041a2500a322288821000c804200602000001f205308030210c000202751000600002701041a2500a32228820100330007883030a322c4870c804200602000002f2043221a0610c00100000000002f00043a2180a122a8000a0001020f044308010610400e000000",
+    "code_sha256": "a5e1353e6665e4cdd0fb07c6d69d7b2fa3a8731200b6b669139bca76704385ea",
+    "instructions": 13
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "ushort16": {
+   "compiled_now": {
+    "bytes": 42,
+    "code_hex": "4ca010060f004308182210c04100800000003f0004182500a322288821001f044308010610400e000000",
+    "code_sha256": "aee3042488302dfeace82c3ac3afccfb19ecf1f6118ad19e07de3208e5c3dae9",
+    "instructions": 5
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "votepair": {
+   "compiled_now": {
+    "bytes": 24,
+    "code_hex": "4ca0100654951006549714065f040308010610400e000000",
+    "code_sha256": "8d67b9eaa9639ed7260965eb8074b45d6875059723a89554d50e20f06dea4f37",
+    "instructions": 5
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "waveagg": {
+   "compiled_now": {
+    "bytes": 130,
+    "code_hex": "4ca0100654951006549714062782005a2200a11a3884003400002702005a2600a0223884003400003700001a2680a11a3884003400000a0f228015021e00000e8f00030019241420900c3e03400e2780045a2100a12208000a0001021f004320182210c04100800000002f02041a2180a322a88321000f044308010610400e000000",
+    "code_sha256": "4209b775101b3e3edeca9cb8d36f51a4b8c490e175e5fc4ee01a34dc18f0b36f",
+    "instructions": 15
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "wavebcast": {
+   "compiled_now": {
+    "bytes": 138,
+    "code_hex": "4ca0100654951006549714062782005a2200a11a3884003400002702005a2600a0223884003400003700001a2680a11a3884003400000a0f228015021e00000eab8c01008f0003001924142090149f00030019241420900c3e03400e2f00041a2500a31aa8842100a704217a2800a80a3800270004ba2100a322a88321000f044308010610400e000000",
+    "code_sha256": "f6db95acfbc5cefd01609deb1031a526ffa16ca33ac3bd038462852654037cef",
+    "instructions": 17
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "recorded 122 bytes/15 instructions, today 138/17",
+    "status": "contradicted"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "wideindex": {
+   "compiled_now": {
+    "bytes": 80,
+    "code_hex": "4ca010062780005a2200a022b881003400003700043a2580a322298821000f004322182210c04100800000002f00041a2500a32a288821002700043a2180a322a88821000f044308010610400e000000",
+    "code_sha256": "b2aa03af7d023e78b415814d207500fcd57686a3390f09d513ec320f25531347",
+    "instructions": 8
+   },
+   "identity": {
+    "executed_elsewhere": null,
+    "reason": "no digest was retained; size and instruction count match the record and the compiler at 155a8452 emits the same bytes, which is consistent, not proof",
+    "status": "unproven"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  },
+  "xorreg": {
+   "compiled_now": {
+    "bytes": 84,
+    "code_hex": "4ca010060f004308182210c04100800000003f00041a2500a322288821002701041a2500a322288201002f004320182210c04100800000002f00041a2500a322288921002b237b212f044308010610400e000000",
+    "code_sha256": "fe8808a518e1e6d0371a673c765a3996af238aac1bee0f3fae878a82ae981b22",
+    "instructions": 9
+   },
+   "identity": {
+    "executed_elsewhere": {
+     "equal": true,
+     "pinned": "fe8808a518e1e6d0371a673c765a3996af238aac1bee0f3fae878a82ae981b22",
+     "receipt": "results/g17-bitwise-runtime-v2/xorreg/first-worker/execution.json"
+    },
+    "reason": "the compiler at 155a8452, which wrote the record, emits 6e5a15cf5a53... - not today's bytes",
+    "status": "changed_since_recording"
+   },
+   "loop_bounded_by_harness": false,
+   "loop_opcodes": []
+  }
+ },
+ "label": "compiled_now: bytes today's compiler emits for each recorded end-to-end kernel. These are NOT the executed bytes; the recorded run retained none.",
+ "recording_commit": "155a8452",
+ "source": "tools/g17endtoend.py --compiled-now"
+}

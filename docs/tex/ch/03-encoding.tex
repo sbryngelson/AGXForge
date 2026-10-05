@@ -1,0 +1,507 @@
+\chapter{Instruction encoding}\label{ch:instruction-encoding}
+
+A G17 program is a byte stream of variable-length instructions aligned only to two bytes. Apple's toolchain has no
+mnemonics for them. An operand's bits are spread across the instruction, often non-contiguous, sometimes inverted, and
+placed differently at each length an opcode takes. Apple ships a decoder for this stream inside its GPU compiler but
+withholds the printer. The project calls the decoder directly, and every structural statement in this reference comes
+from it; statements about execution come from dispatches.
+
+Three kinds of statement about an encoding are easily confused: \emph{what Apple's decoder recognises} (an opcode, a
+length, typed operands), \emph{what can be authored} (bytes this project's encoder can produce for a requested operand
+set, read back through the decoder) and \emph{what the hardware does with those bytes}.
+
+Errors in this project have come from each boundary between them. They include a decoder-clean back edge that was wrong in its
+whole second half, a "free" bit that changed a compare's result, a refused tensor bit that changed the product, an
+encoder that rounded an odd register silently, and a name inferred from a structural twin that was wrong 44 times in 44.
+Each rule below says which of the three it concerns, and \cref{sec:admission-decodes-executes} gives the guards that
+check authored bytes against each boundary.
+
+Terms:
+
+\begin{itemize}
+\item \emph{Form}: an (opcode, length) pair, written for example \op{12674}/16. Field maps are per form, never per opcode (\cref{sec:framing}).
+\item \emph{byteN{[}k{]}}: bit k (0 = least significant) of byte N of the instruction, byte 0 first in the stream. \emph{Bit n} (linear):
+  byte n // 8, bit n \% 8.
+\item \emph{Operand}: a position in the decoder's operand list (operand 0 first). Registers print as Rn (\cref{ch:register-file}); immediates as
+  integers; a base address as \code{expr:} (a pointer into the decoder's process, meaningless outside it).
+\item \emph{Operand 1}: in ALU, memory and tensor forms, the destination's raw operand, printed as one wide integer (older notes:
+  the "flags word" or "control word"). It packs the destination modifier (bits 4–5), a fill slot (bits 20–23) and a wait
+  mask (bits 24–31) (\cref{sec:scoreboard-publish-wait}).
+\item \emph{Witness}: an instance of a form in Apple's compiled code. \emph{Repair-walk witness}: bytes reached by mutating a
+  neighbour until the decoder accepts them, with no Apple instance.
+\item \emph{D1, D2, D3}: the three coverage counts (\cref{sec:opcode-identity-counts}).
+\item \emph{Corpora}: \code{isa/g17-corpus-programs.jsonl} (6,594 programs, 365,590 instructions) and the vendor corpus (9,556
+  functions, 4,644,438 instructions), union 1,893 forms (MM~\mm{25.51}, MM~\mm{25.68}, MM~\mm{25.78}).
+\end{itemize}
+
+\section{Instruction lengths and framing}\label{sec:framing}
+
+Lengths are even, from 2 to 22 bytes, and belong to the instance, not the opcode (decoder). Apple's decoder frames
+three populations as follows.
+
+\begin{itemize}
+\item \emph{Apple's two corpora} (5,010,028 instructions, 1,893 forms; \code{isa/g17-vendor-corpus-forms.json}): every even length
+  from 2 to 16, plus 18 bytes (4 forms, 31,458 instructions, among them \op{10909}) and 22 bytes (30 forms,
+  53,629 instructions, among them \op{14661}); no 20-byte instance. The 18- and 22-byte instances are
+  1.7 percent of the total.
+\item \emph{The 216-opcode census} (\code{isa/g17-opcodes.toml}, \code{docs/agx3-oracle.md} section 7) spans 2 to 16 bytes; none of
+  the 18- or 22-byte opcodes above is in it, so a range read from this census stops at 16.
+\item \emph{The decoder-admitted universe} (\val{admitted-opcodes} opcodes, \cref{sec:opcode-identity-counts}): the 6,000 opcodes with no Apple witness take their width
+  from decoding a repair-walk encoding, which gives 4 to 16, 18 and 22 bytes (7 opcodes at 18, 38 at 22) and again no
+  20 (\code{tools/g17isamap.py} \code{repair\_walk\_widths}). Such a width means the decoder accepts the form, not that anything
+  emits it. Whether a 20-byte length exists is not known; no source contains one and no source excludes it.
+\end{itemize}
+
+In the 216-opcode census, 64 opcodes occur at more than one length: \op{12674} at 12 or 16 bytes,
+\op{554} at 4 or 8, \op{11842} at 2, 8 or 10
+(\code{docs/agx3-oracle.md} section 7). Field positions move with the length: \op{2190}'s operand-1
+high code sits at $2^{24}$-$2^{28}$ in its 8-byte form, $2^{30}$-$2^{31}$ in the 16-byte form and $2^{32}$/$2^{36}$ in the 12-byte form (MM~\mm{25.53}); one byte
+offset can mean different fields in loads and stores of different lengths (MM~\mm{25.24}), so field maps must be per form.
+One map per opcode was the common defect behind five separate fixes: for 1,301 of 1,401 per-form specifications the
+opcode-wide authoring map had been probed on an instance of another length (\op{13575}'s 16-byte map reached
+byte 9 of its 4-byte form) (MM~\mm{25.88}).
+
+\Cref{tab:length-rules} collects the known length rules.
+
+\begin{xltabular}{\linewidth}{@{}X>{\hsize=1.18\hsize}X>{\hsize=0.85\hsize}X@{}}
+\caption{Known length rules by population, each a statement about Apple's decoder's framing.}\label{tab:length-rules}\\
+\toprule
+Population & Rule & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Population & Rule & Standing \\
+\midrule
+\endhead
+general & lengths are a base plus optional extensions; the length-bit cluster
+\{32, 63, 64, 79, 80\} is conserved from G13 & decoder, 895-opcode \code{length\_bits} work (MM~\mm{25}) \\
+class 7 (byte0 low nibble 7), byte1 = 0, byte6 in \{0x60, 0x68, 0x70,
+0x78\} & length = 12 + 4 × byte10{[}0{]} & decoder; 9,913 instances (MM~\mm{25}) \\
+class 7, byte1 = 0, byte6 in \{0x83, 0xa3, 0xa4, 0xa9, 0xaa, 0xab, 0xae,
+0xaf\} & constant per byte6 (12 or 10) & decoder; 13,571 instances (MM~\mm{25}, \code{agxforge/g17/dis.py}) \\
+class 7, byte1 = 0, byte6 = 0x10 / 0xa0 / 0xa2 & bit 63 / bit 18 / bit 18 selects the length & causal against the decoder, 60 of 60, 37 of 37, 15 of 15 decodable flips
+(MM~\mm{25}) \\
+class 7, byte1 = 0, byte6 = 0xa1 (lengths 10, 12, 14, 16) & open; bit 45 explained 81.5 percent correlationally and moved the length
+in 0 of 60 flips & bounded negative (MM~\mm{25}) \\
+\op{11842} & 2 bytes exactly when bit 15 = 0 (1,682 of 1,682); the 10-byte driver is
+not a function of the always-present bits & decoder (MM~\mm{25.62}) \\
+\op{17235}, \op{17244} & 8 bytes exactly when bit 63 = 0; 14 needs bit 63 = 1, not sufficient & decoder (MM~\mm{25.62}) \\
+\op{12709} & 14-byte form when it carries bit 37 or a displacement above 255 & decoder and Apple's compiler (MM~\mm{6}) \\
+\op{592} & 4-byte form's K field stops at 126; Apple uses the
+8-byte form for K 128–134 & Apple's compiler emits (MM~\mm{25.120}) \\
+every opcode & bits 0, 1, 2 never vary within an opcode & decoder (MM~\mm{25.62}) \\
+\bottomrule
+\end{xltabular}
+
+For class 7, \code{docs/agx-isa-status.md} states, from a tiling solution, that 16 bytes need \emph{both} byte10
+bit 7 and bit 0 (0x21 → 12, 0x80 → 12, 0x81 and 0xc1 → 16); MM~\mm{25} quotes \code{\_WIDE7\_EXT} as 12 + 4 × byte10{[}0{]}, which
+reads 0x21 as 16. They were derived from different populations. Checked against the lengths Apple's decoder assigned in the corpus's span
+index: in the \code{\_WIDE7\_EXT} population (byte6 in \{0x60, 0x68, 0x70, 0x78\}) byte10 takes only 0x80, 0x81, 0xc1 and once
+0xe1, bit 7 is always set, and 12 + 4 × byte10{[}0{]} holds on all 12,001 such class-7 spans (9,913 of them with byte1 = 0,
+MM~\mm{25}'s count); byte10 = 0x21 occurs only in other byte6 groups (0xa3, 0xa2, 0x83, 0xa8, 0xa0), where its instances are
+12 bytes except under 0xa8 (16) and 0xa0 (14). Each formula holds on its own population and the two agree where they
+overlap, but neither is a general class-7 rule: "both bits" fails for byte6 = 0xa8 (0x21, 16 bytes). Tiling alone cannot settle the question,
+because two disjoint length assignments satisfy all 364 tiling constraints (\code{docs/agx-isa-status.md}). The running
+example follows the \code{\_WIDE7\_EXT} rule: its tensor loads are 12 bytes with byte10 = 0x80 and 16 bytes with byte10 = 0x81, and in that
+listing the 16-byte ones are exactly those with a displacement of 256 bytes or more.
+
+Ground truth for framing is Apple's decoder (\cref{sec:decoder}); the project's own framer cannot replace it. The framer "landed" exactly on
+22,184 of 22,187 constant programs but framed them identically to Apple in only 1,725 (7.8 percent), because a wrong
+framing falls back into phase on the short fixed tail of end-of-program and two-byte fillers; it misframes 200 of 200
+current programs within their first instructions (MM~\mm{25.88}, MM~\mm{25.209}).
+
+\section{Opcode identity and coverage counts}\label{sec:opcode-identity-counts}
+
+Opcode numbers are indices into Apple's instruction table as built for macOS 26.6.2 (25G83). That MCInstrDesc table has
+17,796 entries (stride 48; the first halfword equals the index for all of them), of which 17,779 declare at least one
+operand (\code{isa/g17-agx3meta-instrs.txt}; sources quoting one or the other are reconciled in \cref{app:a}). The macOS 27
+build's table has \val{renumber-new-opcodes} entries in a different order; this reference keeps the 25G83 numbering
+(\cref{sec:decoder-renumbering}). Apple built its LLVM with instruction names disabled, so the name table holds
+"0", "1", "2" and there is no assembly-string table; every opcode name in this reference is a project name from measured
+function, recorded in \code{isa/g17-opcode-glossary.json}, not an Apple spelling (decoder, \code{docs/agx3-oracle.md} section 6).
+Mechanically available per opcode: operand count, number of definitions, register class and operand type per operand
+(type 4 = PC-relative), scheduling class, flag words; lengths are not a table property (\code{agxforge/g17/model.py}).
+
+The decoder admits \val{admitted-opcodes} opcode records (6,718 found by mutation and breadth-first walks
+from real encodings, plus \op{13754}, added from the vendor corpus) (MM~\mm{24.8}
+row T1, MM~\mm{25.58}). The declared set overstates the ISA: in the atomic family 208 opcodes are declared and 29 admitted
+(\code{tools/g17admit.py}).
+
+\Cref{tab:form-counts} gives the three form counts (generated, \code{docs/g17-isa-reference.md}); they are never summed.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.75\hsize}Xl>{\hsize=1.25\hsize}X@{}}
+\caption{The form counts D1, D2 and D3, with the dispatched forms outside the verified class.}\label{tab:form-counts}\\
+\toprule
+Count & Forms & What it requires \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Count & Forms & What it requires \\
+\midrule
+\endhead
+D1 structural & \val{d1} & the decoder can address the form (opcode, length); 7,549 with the 25G83 decoder
+(\cref{sec:decoder-renumbering}) \\*
+D2 encoded & \val{d2} & an encoding Apple wrote, with no unforced and no undetermined bits \\*
+D3 own instruments (any of nine) & \val{d3-any} & an own hardware instrument checked its semantics (D3 verified class, an
+isolated one-opcode probe returning the predicted value: \val{d3-verified}) \\*
+dispatched, not in the verified class & \val{dispatched-unverified} & it ran; no isolated probe confirmed the name (\val{dispatched-other-evidence} of these carry other
+semantic evidence) \\*
+dispatched, no semantic evidence of any kind & \val{dispatched-no-evidence} & it ran and nothing has read its output \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item D1 is known to undercount. Five tensor MMA forms (fp32 × fp32 and 16-bit A × fp32 B, each with and without
+  accumulator, and int8 widening without accumulator) are admitted by the decoder but missing from the admission walk:
+  a selector bit that also changes an operand's register class cannot be reached one flip at a time
+  (\code{docs/g17-isa-reference.md}). D1 counts what the contract records, not what the decoder accepts (MM~\mm{24.8} row T1).
+\item D2 counts forms fully specified by Apple-witnessed, bit-settled evidence, which is a different property from being
+  emitted by the compiler; 91.7 percent of D2 forms reconstruct their own witness and 57 do not (MM~\mm{25.87}). D2 is held back by missing per-form evidence:
+  6,579 of 6,858 non-D2 forms failed on absence, not on unknown bits. Its last gains came from hardware checks of
+  drifting bits (MM~\mm{25.87}, MM~\mm{25.58}; the successive counts are in \cref{app:a}).
+\item The nine D3 columns are instruments with different failure modes (a name an isolated probe confirmed; the one library
+  candidate surviving a form's cases; a family law), so only "any of the nine" is quoted (\code{docs/g17-isa-reference.md}).
+\item \emph{Correction:} \code{docs/g17-isa-cartography.md}'s D1 975, D2 690 and two-MMA admission are a superseded snapshot
+  (\cref{app:a}).
+\end{itemize}
+
+The counts do not give the number of independent semantic questions. The earlier "527" is retracted (21 of 25
+multi-member name-stem classes contain opcodes with different functions), and naming by structural twin was right 0
+times in 44 on the verified set (MM~\mm{25.81}, \code{docs/g17-isa-cartography.md}). Forms Apple's compiler never emits
+are absent from both corpora, so corpus reading cannot find them (MM~\mm{25.78}).
+
+\section{Field maps}\label{sec:field-maps}
+
+A field map is linear per form: \code{decoded operand = base + sum(bit\_is\_set[i] x weight[i])}, negative
+weights for inverted bits (MM~\mm{23.3}). Operand domains (\code{agxforge/g17/auth.py}): \emph{raw} (the value the decoder prints:
+immediates, modifier words), \emph{slot} (register x 2 + half, ordinary registers), \emph{index} (class-relative member index, for
+aligned tuple classes; \cref{sec:register-classes}). Each instruction bit is classified by flipping it and asking the decoder
+(\code{agxforge/g17/encode.py}): \emph{opcode} (the flip decodes as another opcode), \emph{forced} (the flip is undecodable; the recorded
+value is the only legal one), \emph{operand} (the flip moves a printed operand), \emph{invisible} (nothing printed changes).
+The classification has four complications.
+
+\begin{itemize}
+\item A value bit can have several carriers that are not interchangeable. \op{3290}'s operand 3 value bit 4 is carried by
+  byte6{[}3{]} inverted and by byte8{[}2{]}; byte6{[}3{]} also turns operand 2 into an expression. 1,031 of 9,282 sampled operands
+  have such a bit (\code{agxforge/g17/auth.py}).
+\item A bit's role can depend on other bits: 547 of 1,401 per-form specs carry an opcode- or forced-class bit that Apple's
+  own instances vary (1,132 bits; MM~\mm{25.87}, MM~\mm{25.88}).
+\item Some immediates are table codes rather than literal values (\op{13754}'s operand 2 prints 8, 224,776 and 183,494); the codec refuses to write them as numbers (MM~\mm{25.58}).
+\item An invisible bit can still change what executes (\cref{sec:admission-decodes-executes}).
+\end{itemize}
+
+A field map counts as established when it rebuilds Apple's instances. In the best case, a 38-bit map for \op{11462}/10, fitted on 1,637 instances, rebuilds 33,473 of 33,475 vendor instances with zero
+differences (decoder, MM~\mm{25.52}). Across the corpus the rates are lower: corpus-fitted maps re-author 92.0 percent of in-sample
+instructions byte-exactly but 55.4 percent of held-out vendor instructions (2026–09-06 snapshot,
+\code{docs/agx-isa-status.md}); the encoder's held-out re-authoring now stands at 80.8 percent (MM~\mm{25.88}).
+
+\textbf{Worked example: the operand fields of a tensor MMA} (compiled, decoded; executed in the running example). The first MMA of
+the running example (offset 0x29a), \op{5107}, is
+\code{a7 04 05 11 22 04 a4 62 02 02}. Apple's decoder prints
+\code{R24\_...\_R31 <- 16777216, 1, R20\_R21\_R22\_R23, 0, 2, R68\_R69\_R70\_R71, 0, 2}. The field map
+(\code{isa/g17-tensor-mma-fieldmap.json}, entry 5107, reference \hash{2f0005102200a4420200}) reproduces every operand from the
+bytes; it records each bit's effect as a flip from its reference, and this instance differs from the reference in seven
+bits (3, 7, 10, 24, 42, 61, 73). \Cref{tab:mma-operand-fields} lists each operand and its carriers.
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=0.44\hsize}X>{\hsize=1.35\hsize}X>{\hsize=1.21\hsize}X@{}}
+\caption{Operands of the running example's first tensor MMA and the bits that carry them in this instance.}\label{tab:mma-operand-fields}\\
+\toprule
+Operand & Value & Carried by (in this instance) & Meaning \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Operand & Value & Carried by (in this instance) & Meaning \\
+\midrule
+\endhead
+0, D & R24 & byte0{[}7{]} = 1 (+8), byte7{[}5{]} = 1 (+16); byte2{[}3{]},
+byte2{[}4{]}, byte2{[}7{]} = 0 & 8-register destination; field in units of 8 registers \\*
+1 & 16,777,216 = $2^{24}$ & byte1{[}2{]} = 1 ($2^{24}$); byte0{[}3{]} = 0 (no $2^{31}$); byte4{[}3{]}
+= 0 (no keep, weight 32) & wait on scoreboard slot 0 (the tile loads publish slot 0); not a keep,
+since the next MMA writes another tuple \\*
+2 & 1 & no variable bit in the map & a constant of this form \\*
+3, A & R20 & byte3{[}0{]} = 1 (+16 from the reference's R4) & 4-register tuple \\*
+4 & 0 & byte1{[}7{]} (32), byte2{[}5{]} (16), both 0 & A's modifier: neither keep nor release (
+\cref{sec:release-does}) \\*
+5 & 2 & byte6{[}2{]} = 1 (clear gives 3); byte8{[}2{]} = 0 (transpose adds 32) & A is half (3 would be bfloat) \\*
+6, B & R68 & byte5{[}2{]} = 1 (+64), byte9{[}1{]} = 1 (+4) & 4-register tuple \\*
+7 & 0 & byte5{[}1{]} (16), byte8{[}0{]} (32) & B's modifier \\*
+8 & 2 & byte7{[}6{]} = 1; byte8{[}3{]} = 0 (transpose) & B is half \\*
+\bottomrule
+\end{xltabular}
+
+The remaining bits are structural or inert: byte8{[}1{]} = 1 selects this no-accumulator form (clearing it decodes as
+\op{5106}); byte5{[}7{]}, byte8{[}4{]} and byte6{[}0{]} would select fp32-B, fp32-A and the
+int8 family (MM~\mm{0.4}, MM~\mm{2}); bits 0–2 are constant. Across the accumulate form's reference all 80 bits are accounted for:
+39 claimed by mapped fields, 25 structural, 16 decoder-inert, none unaccounted (MM~\mm{6}). Its hardware single-bit census ran
+80 of 80 flips with none refused by the pipeline and none faulting; every decoder-inert bit was hardware-inert (measured,
+MM~\mm{2}). The project's MMA encoder reproduces 800 of 800 compiled MMAs byte-exactly from decoded operands (MM~\mm{2}).
+
+\textbf{Worked example: a tensor load's operand 1} (compiled, decoded). The first tile load,
+\code{47 00 47 0a 08 00 60 2a 00 80 80 08}, is \op{12674}/12:
+\code{R20\_R21 <- 17825792, 241, expr, 0, R5, 0, 0, 2, 15}: destination pair (operand 0), operand 1, the base address pair
+(operand 3, printed as an expression), index R5 with modifier 0 (operands 5, 6), displacement 0 (operand 7), element code
+2 (operand 8) and mask 15 (operand 9); operands 2 and 4 are immediates not discussed here. Operand 1 is 17,825,792 = 0x01100000,
+exactly what \code{agxforge/g17/memenc.py} authors as \code{((slot + 1) << 20) | (wait\_mask << 24)} with slot 0 and wait mask
+0b00000001:
+
+\begin{itemize}
+\item bits 20–23 = 1: this load \emph{publishes} scoreboard slot 0 (the decoder prints slot + 1; 0 means none);
+\item bit 24: this load \emph{waits} on slot 0, where the special-register read that feeds its index R5 published.
+  Single-bit flips of this instance through Apple's decoder locate the carriers: clearing byte7{[}5{]} removes $2^{24}$ (the wait);
+  setting byte6{[}3{]} or byte6{[}4{]} changes the slot field (to 2 and 3); setting byte2{[}5{]} adds 32, the destination keep weight
+  (decoder only, this instance). The slot carriers differ between the tensor load's four field variants (12 and 16 bytes, with
+  and without a residue bit byte1{[}6{]}), so they must not be copied from one variant to another (MM~\mm{25.26}, MM~\mm{25.32}). The
+  element code (operand 8) is the access width in bytes, 1, 2, 4, 8 or 16 across the load family (MM~\mm{25.37}). The
+  index's modifier is 0 because the next load reads R5 again; a load releases its index with 16 (\code{memenc} \code{index\_last}).
+\end{itemize}
+
+\textbf{Worked example: the scalar tail} (compiled, decoded, executed). The running
+example's last five instructions compute \code{C[tg.x] = A'[tg.x] + 1.0} on a scalar path (\cref{tab:example-scalar-tail}).
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=0.57\hsize}XX>{\hsize=1.36\hsize}X@{}}
+\caption{The running example's scalar tail, five instructions from special-register read to store.}\label{tab:example-scalar-tail}\\
+\toprule
+Offset & Bytes & Decoded & Fields that matter \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Offset & Bytes & Decoded & Fields that matter \\
+\midrule
+\endhead
+0x49e & \code{9c9c1006} & \op{14059}: R9 ← 1048576, \code{SR\_TG\_X} & operand 1 = $2^{20}$: publishes slot 0. Destination R9 in byte0{[}7:4{]}
+(a four-bit field, \cref{sec:narrow-fields-narrow}); special
+register number in byte1 \\*
+0x4a2 & \hash{0f084312182210c0410080000000} & \op{12682}/14: R16 ← 137464119296, 2066,
+expr, 0, R9, 0, 0, 4 & operand 1 = $2^{37}$ + 8 × $2^{20}$ + $2^{24}$: publishes slot 7, waits on
+slot 0 (for R9); index R9 kept (read again by the store); element code 4 \\*
+0x4b0 & \code{1c80423e6020000c} & \op{11842}/8: R17 ←
+68736253952, 1065353216 & immediate 0x3F800000 = 1.0f, scattered (below) \\*
+0x4b8 & \hash{0900044a0220a02a24081a00} & \op{998}/12: R18 ← 148176371712, R16, 16, R17, 16 & operand 1 = 0x2280000000: bit 31 waits on slot 7 (the load); both
+sources released (last reads) \\*
+0x4c4 & \code{2f08431201061040} & \op{17229}/8: R18, 16, 2066, expr, 0, R9, 16, 0, 4 & value R18 and index R9 both released; distinct registers, so legal
+(\cref{sec:release-does}) \\*
+\bottomrule
+\end{xltabular}
+
+The move immediate's 32-bit value is scattered across six byte ranges, a layout predicted and confirmed byte-exactly on
+0xDEADBEEF and 0x12345678 in the scalar campaign (\code{docs/agx-isa-status.md}): value bits 6:0 in byte1{[}6:0{]}, 10:7 in
+byte4{[}4:1{]}, 12:11 in byte5{[}3:2{]}, 20:13 in byte6, 24:21 in byte7{[}3:0{]}, 31:25 in byte3{[}7:1{]}. Here byte3 = 0x3e gives bits
+25–29, byte7 = 0x0c gives bits 23–24, everything else is zero: 0x3F800000. Its destination R17 is seven bits: byte0{[}7:4{]}
+= 1 plus byte2{[}6{]} (+16); single flips of this instance through the decoder give byte2{[}7{]} = +32 and byte2{[}3{]} = +64 (decoder
+only). Operand 1's bits 33 and 37 in the load and the add are not explained here.
+
+\section{Scoreboard field encoding}\label{sec:scoreboard-publish-wait}
+
+Semantics (what a slot counts, when a wait is needed, which producers are late) are in \cref{sec:scoreboard}. A producer of a late value names the slot it fills, printed as slot + 1 in operand 1
+bits 20–23; a consumer names the slots it waits on in operand 1 bits 24–31, bit 24 + s for slot s; there is no separate
+wait instruction (measured, MM~\mm{6}, MM~\mm{0.8}). \Cref{fig:control-word} draws the layout, and \cref{tab:wait-fields} gives the carriers in each form.
+
+\input{fig/control-word}
+
+\begin{xltabular}{\linewidth}{@{}X>{\hsize=0.83\hsize}X>{\hsize=1.21\hsize}X@{}}
+\caption{Where each form encodes its scoreboard fill slot and wait mask. Sources follow the table.}\label{tab:wait-fields}\\
+\toprule
+Form & Fill slot & Wait mask \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Form & Fill slot & Wait mask \\
+\midrule
+\endhead
+general loads, atomics, \op{14059}, imageblock
+load & operand 1 bits 20–23 (slot + 1) & operand 1 bits 24–31 \\
+\op{12674} & operand 1 bits 20–23; carriers per field variant (
+\cref{sec:field-maps}) & operand 1 bits 24–31 (byte7{[}5{]} carries bit 24 in the 12-byte variant
+above) \\
+\op{12709} & byte4{[}3{]} + 2 × byte4{[}4{]} + 4 × byte6{[}4{]}, printed as slot + 1 & operand 1 bits 24–31 \\
+tensor MMA (same carriers in all ten field maps; causally measured on
+the 16-bit forms) & none & slots 0–4 at byte1{[}2..6{]}, slot 5 at byte7{[}7{]}, slot 6 at
+byte2{[}6{]}, slot 7 at byte0{[}3{]} \\
+12-byte ALU forms & none & byte0{[}3{]} = slot 7; byte1{[}2{]} = slot 0 on \op{10279} and \op{10282} \\
+14-byte stores & none & byte9{[}5{]} = slot 7 (the carrier this compiler's
+encoder writes) \\
+\op{17229}, 8-byte form & none & operand 1 bits 24–31 on 15 corpus instances, each matching its pending
+slots; this compiler's encoder has no carrier for them \\
+\op{17256} & none & operand 1 bits 24–31, every bit used (13,140 instances in a 314-object
+census, each one-hot value present) \\
+\op{17257}, \op{17258} & none & zero in all 876 and 118 compiled instances \\
+\op{592} & 0 into the uniform file; 1–8 (slot + 1) into the staging file; 8-byte
+form: field in byte5{[}0..2{]}, value + 1 & none \\
+\bottomrule
+\end{xltabular}
+
+Sources: MM~\mm{6} (MMA mask causal over 43 dispatches, then 20 of 20 preregistered; vector-load formula, correcting an
+inverted one; the vector store's full mask, refuting an earlier "three-bit store limit" that was an encoder-table
+artifact; the tensor stores' zero byte), MM~\mm{25.121} (ALU slot-0 bit), MM~\mm{25.120.1} (\op{592} over
+178,582 vendor instances: uniform writes always 0, staging writes 1 in the 4-byte form and 1–8 in the 8-byte form, none
+crossing), MM~\mm{25.146} and \code{isa/g17-wait-mask-census.json} (the 8-byte store), \code{agxforge/g17/memenc.py}, \code{agxforge/g17/cc.py}.
+The decoder census behind the table (every instance's wait bits equal the slots its sources are still pending on, 126
+forms, MM~\mm{25.96}) and what each mask means are \cref{sec:scoreboard}. A form whose wait bits are not located (for example \op{798}) gets a loaded source through a waited copy (MM~\mm{25.196}).
+
+byte4{[}3{]} has three unrelated meanings. It is the first term of the vector load's slot formula, an opcode selector
+in \op{12674} (flipping it gives \op{12673}, with 9 operands instead of 10), and the keep bit
+in the tensor MMA (MM~\mm{24.2} row R6, MM~\mm{25.1}), so a measurement of it in one of these forms does not carry
+over to the other two.
+
+Two earlier misreadings took a regularity in Apple's code for a hardware mechanism.
+
+\begin{itemize}
+\item \emph{The store "consumer token".} Early analysis found bits in stores that looked like a token with a wait counter, a
+  countdown rule and a loop rule. They are bits 5:4 of the store's source register number, on 632 of 632 stores; the
+  "rules" were Apple's compiler allocating registers in descending order (MM~\mm{19}).
+\item \emph{The MMA "result ring".} The MMA's high operand-1 bits appeared one-hot, rotating through eight positions, and were read
+  as tags of the accelerator's in-flight results. They are the eight-bit wait mask over load slots; they looked one-hot
+  because each MMA waited on exactly its own load group (MM~\mm{19}, MM~\mm{6}). The causal test that settled this is in
+  \cref{sec:scoreboard}.
+\end{itemize}
+
+\section{Program boundaries}\label{sec:program-boundaries}
+
+\begin{itemize}
+\item The delivered \code{\_\_text} is a 64-byte prologue, the main program, then filler, in 421 of 421
+  delivered archives; the prologue in the released class is \op{684} followed by thirty \op{13483}, \code{0e000000} then thirty \code{0600}, and the entry offset is 64 (this compiler and the ABI-v5 class, MM~\mm{23.2},
+  MM~\mm{25.148}). The scalar campaign stripped the same fixed 0x40-byte prologue from Apple's minimal kernels
+  (\code{docs/agx-isa-status.md}).
+\item \op{684} is 4 bytes, \code{0e 00 00 00}, identical in all 1,169 objects examined, and the last instruction
+  of every program; composed multi-GEMM programs remove intermediate ENDs (decoder; Apple's compiler emits; MM~\mm{15}).
+\item \op{13483}, \code{06 00}, is the compiler's nop and pads bodies; nearly every kernel contains it
+  (142,452 instances in one corpus) (MM~\mm{25.68}).
+\item Per-kernel metadata slot 32 is absent for main programs of 30 instructions or fewer
+  and present (valued by length and back edge) above, a law of Apple's compiler on this toolchain, not a device
+  guarantee (\cref{sec:gpu-metadata-slots}). While this compiler could author only the slot-present layout it padded bodies with two-byte
+  fillers to at least 31 instructions (MM~\mm{15}); both layouts are now generated (\code{agxforge/g17/mdgen.py} \code{slot32\_for}).
+\item Code is position-independent. An identical body is bit-exact at stream positions 1–12, after 0–4,096 bytes of padding and
+  at offsets 2–40,002 bytes: no setup or alignment sequence is needed (measured, MM~\mm{15}). Metal places the code at offset
+  +0x2740 of the dispatch's first mapped 64 KiB region (measured, MM~\mm{25.147}).
+\item A branch target is offset + displacement (decoder; \cref{sec:branches-back-edges} for semantics), landing on a real instruction
+  boundary for 1,867 of 1,867 corpus branches (offset plus size: 12.9 percent). \op{462} and
+  \op{458} are both 10 bytes; the skip's bytes 5–9 are constant \code{00 00 00 00 00}, the back
+  edge's \code{00 ff c7 ff 7f}. A back edge authored with a zeroed tail decoded cleanly but was wrong in its whole second half, and
+  the error showed up only on execution (\code{docs/agx3-oracle.md} sections 12–13). A G17 branch names no condition; the condition comes from
+  execution-mask state (\cref{ch:control-flow-execution}).
+\end{itemize}
+
+\section{Apple's decoder}\label{sec:decoder}
+
+The per-generation compiler plugins (\code{applegpu\_g13p} to \code{applegpu\_g18p} on macOS 26) implement 30 of
+32 plugin entry points; the two stubs are assembly emission and object emission, so \code{-S} is unreachable for every AGX
+target. \code{air-objdump} reports "no instruction printer" for agx2/agx3 (and "no disassembler" for agx1), which implies
+that the MCDisassembler exists. In \code{GPUCompiler.framework/Versions/32023/Libraries/libLLVM.dylib} the agx3 \code{llvm::Target} has its
+disassembler constructor (+0x80) set and its printer constructor (+0x88) null; Apple withheld only the printer
+(\code{docs/agx3-oracle.md} sections 1–3).
+
+The decoder is reached by writing a printer factory into +0x88; \code{LLVMCreateDisasm} then succeeds. \code{printInst} is vtable slot 4,
+found by pointing all 32 slots at recording stubs. The \code{MCInst} lives in \code{LLVMDisasmInstruction}'s frame, so operands must
+be copied inside \code{printInst}: reading them after return gave 69.13 percent invalid operand kinds; copying inside gave 0
+invalid over 89,645 operands in 290 objects. \code{tools/agx3meta.c} dumps the instruction,
+operand, register-class and register tables (strides 48, 6, 32 and 24). No privileges, entitlements or patched binaries
+are involved (\code{docs/agx3-oracle.md} sections 4–8). The in-process form is \code{tools/libagx3dis.dylib}, behind
+\code{agxforge.g17.model.decode}; both this compiler's read-back guards and the project's emulator decode through it, so neither
+runs on another machine (MM~\mm{25.209}).
+
+Several things break on an OS update (\code{docs/agx3-oracle.md} section 9). The library path contains \code{Versions/32023}; the
+\code{llvm::Target} field indices and every table stride are build properties (\code{agx3meta} re-validates strides and refuses;
+\code{agx3dis} checks the disassembler constructor is non-null); the vtable slot of \code{printInst} is not checked at run time,
+and a reorder would silently capture nothing ("opcode 0 on every line"). The register, class and instruction tables are
+committed snapshots held equal to the binary's output by test, so after an update the tests fail rather than the
+snapshots silently going stale. The update to macOS 27 moved the numbering and those tests failed
+(\cref{sec:decoder-renumbering}).
+
+MM~\mm{25.63} reports that "our decode" consumes 9,556 of 9,556 vendor bodies exactly and
+agrees with Apple's boundaries on 400 of 400 sampled bodies (67,787 instructions of the classes once disputed). That
+decode is \code{agxforge.g17.model.decode}, which calls Apple's decoder (MM~\mm{25.209}), so the result shows the wrapper reproduces
+Apple's framing; it is not an independent confirmation. Neither of the two independent attempts matches Apple's decoder. One is the framer
+(\cref{sec:framing}). The other, a decoder learned from Apple-decoded programs, framed and identified 99.98 percent of 746,000
+held-out instructions but matched only 83.2 percent of operand tokens, left 16.7 percent unlearned, and got 636 (0.085
+percent) wrong without any refusal, on bits that never varied in training; it is paused (MM~\mm{25.209}). An independent
+decoder would have to be derived from per-length field maps with an encode-then-compare self-check that turns every uncertain decode into a
+refusal (MM~\mm{25.209}).
+
+\section{Opcode renumbering in macOS 27}\label{sec:decoder-renumbering}
+
+macOS 27.0.1 (26A434) ships a rebuilt AGX3 LLVM at the same path. The decoder still runs, but TableGen re-sorted its
+tables: the instruction table grew from 17,796 to \val{renumber-new-opcodes} entries and the register table from \val{renumber-old-registers} to \val{renumber-new-registers} entries,
+so \op{684} decodes as 706. The encoding did not move. All \val{renumber-corpus-instructions} instructions of the 6,594 corpus
+programs decode at their recorded offsets and lengths, and each old opcode the corpus uses lands on exactly one new one.
+After the update 344 of the 722 test modules failed, among them the snapshot tests.
+
+\code{tools/g17renumber.py} generates a table through which \code{agx3dis}, \code{libagx3dis} and \code{agx3meta} print
+the 25G83 ids, so every opcode and register number in this reference refers to that build. Registers and register
+classes map by name, since their names survived Apple's name stripping. Opcodes map from \val{renumber-witnessed} encodings decoded under
+both builds: the corpus, the form record's witnesses and their opcode-bit flips, and the full decodes retained beside
+Apple-compiled programs. Between those anchors the two descriptor tables are aligned, keeping only the placements that
+every maximum alignment agrees on; \val{renumber-aligned} opcodes map that way and \val{renumber-ambiguous} are left unmapped as ambiguous. Built from the
+corpus anchors alone, the alignment placed 2,684 of 2,687 held-out witnessed opcodes correctly, none wrongly, and left
+three unmapped. The new build also writes a two-bit tag into bits 29--30 of some immediates, mostly in memory and
+tensor forms; \val{renumber-tags} fitted entries undo it per opcode and operand. At start-up each decoder decodes eight canary
+instructions and refuses a build whose canaries match neither numbering. With the translation the corpus decodes as
+recorded, every operand value in the form record reads back (41,246 immediates and 29,635 registers), and 1,603
+retained full decodes match token for token (\code{isa/g17-agx3-renumber.json}).
+
+The new decoder also differs in ways that are not numbering effects. It rejects the repair-walk witnesses of
+\op{9994} and \op{9995} (no glossary entry) and of \op{9996}, so D1 is \val{d1} on
+26A434 against 7,549 on 25G83; Apple's own encoding of \opn{9996}, compiled from a 64-bit \code{atomic\_max}, still
+decodes. Of the single-bit flips in the form record, it rejects 38 that the 25G83 decoder read as another opcode and
+reads 7 that it rejected as opcodes new in the 26A434 build; operand classes are unchanged. And three operand slots
+carry the bit-29 tag in every corpus instance with no record of their 25G83 values: \op{10023} operand 1, \op{10095} operand 2, and
+\opn{9996} operand 1. They are decoded without translation, and no statement in this reference rests on them.
+
+\section{Decoder admission and execution}\label{sec:admission-decodes-executes}
+
+Neither a decoder rejection nor an acceptance settles what executes (\code{docs/agx3-oracle.md} section 12):
+
+\begin{itemize}
+\item An authored subtraction the decoder rejected computed 0 - x on hardware (the rejection was correct).
+\item byte9{[}2{]} of the 14-byte load is rejected by the decoder yet executes as a narrow load: 0x12345678 with it clear,
+  0x00000078 with it set, both predicted (measured).
+\item Six decoder-refused one-bit variants of \op{5106} are no-ops on the accumulator and eight change the result; no encoding
+  property separates the two groups, and the decode side is exhausted (measured, MM~\mm{2}, MM~\mm{25.25}, MM~\mm{25.36}).
+\item Apple's compiler emits a decoder-refused encoding: int8 MMA streams contain \hash{a700a518220ea182c00a}; clearing structural
+  bit 71 alone gives a 10-byte \op{10384}. With bit 71 set, the other 79 single flips
+  never yield an MMA, and bit 71's meaning is open (MM~\mm{25}, MM~\mm{25.71}). The project's decoder wrapper names this variant
+  and resumes ten bytes on.
+\item Names R128–R143 decode and do not execute (\cref{sec:namespace}). A zeroed \op{458} tail decodes and is wrong (\cref{sec:program-boundaries}).
+\item MMA admission is gated on the CPU name passed to the decoder: g17s, g17g and g18 admit the same ten tensor MMA opcodes;
+  the 122 other table entries in scheduling classes 170–175 are unreachable within three flips of the seeds, a bounded
+  negative (decoder, MM~\mm{2}, MM~\mm{25.4/F4} "F4, narrowed", MM~\mm{25.13}).
+\item Metal's pipeline creation checks no instruction bytes: an undecodable \code{0xff} fill and a removed end-of-program both
+  build (\cref{sec:object-library-archive}).
+\end{itemize}
+
+A bit the decoder ignores and Apple's corpus writes both ways can still change the result, so free bits need an
+execution check. \op{11482}/14 bit 11.6 returns 1, 1, 1, 0 set and 1, 1, 1, 1 clear,
+three runs each (measured, MM~\mm{25.88}). Drifting free-bit verdicts were adopted only after a hardware check (13 forms, then
+two single-instance forms whose 28 and 11 bits were executed), 252 drift bits that change no emitted byte were
+deliberately left unadopted, and the compare-select's bit stays live (MM~\mm{25.58}). Nor does a clean decode show that a form
+works: forty repair-walk opcodes in one class ignore both inputs and return a constant of the encoding
+(\code{docs/g17-isa-cartography.md}).
+
+In the encode-then-decode-back guard, the encoder starts from a measured reference with its variable bits cleared,
+solves each requested operand, emits, decodes the result through Apple's decoder, and refuses unless opcode, length and
+every requested value round-trip (MM~\mm{23.3}). The guard was added after the encoder had relied on field arithmetic
+alone: the campaign's encoder accepted a byte sequence whose field arithmetic reached a zero residual for an \emph{odd} register
+base, and silently rounded it to the aligned tuple, because the tuple field cannot express the low bit (MM~\mm{2}, MM~\mm{23.3}).
+Later read-back gaps of the same kind were found and closed: \op{9749}/8 asked for
+register id 441 and wrote 425 until operands were read back; \op{1015}/4 accepted 2147483680
+and emitted 32 because operands with an opcode-level code table were skipped (MM~\mm{25.88}). Every memory entry point in
+\code{agxforge/g17/memenc.py} performs the same check (MM~\mm{23.3}). The guard checks only that encoder and decoder agree; it does not check
+arithmetic, layout, wait masks or hardware admission (MM~\mm{23.3}).
+
+The project's own dispatch gate refuses by Apple's instruction flags (may load, may store, branch, call, return,
+terminator; memory, atomic, texture) and refuses opcodes with no Apple witness unless explicitly overridden; 83 of the 86
+opcodes this compiler can emit carry an Apple witness (this compiler, MM~\mm{25.147}).
+
+\textbf{Not known.} Per-length field maps for most of D1 (D2 is \val{d2} of \val{d1}); the 0xa1 class-7 lengths; the meaning of
+int8-MMA bit 71; why 36 narrow-accumulator table rows are refused although structurally like admitted forms; the
+remaining meaning of \op{12674}'s residue bit byte1{[}6{]} (MM~\mm{25}, MM~\mm{25.6}, MM~\mm{25.32}, MM~\mm{25.58}, MM~\mm{25.71}).
+
+\textbf{Evidence.} MM~\mm{0.4}, MM~\mm{2}, MM~\mm{6}, MM~\mm{15}, MM~\mm{19}, MM~\mm{23.2}, MM~\mm{23.3}, MM~\mm{24.2} (row R6), 24.8 (row T1), 25 (introduction), 25.1, 25.4, 25.6, 25.13, 25.24,
+25.25, 25.26, 25.32, 25.36, 25.37, 25.51, 25.52, 25.53, 25.58, 25.62, 25.63, 25.68, 25.71, 25.78, 25.81, 25.87, 25.88,
+25.120, 25.120.1, 25.121, 25.147, 25.148, 25.196, 25.209; \code{docs/agx3-oracle.md}, \code{docs/agx-isa-status.md},
+\code{docs/g17-isa-reference.md}, \code{isa/g17-tensor-mma-fieldmap.json}, \code{isa/g17-agx3meta-instrs.txt}, \code{agxforge/g17/memenc.py},
+\code{agxforge/g17/mdgen.py}.

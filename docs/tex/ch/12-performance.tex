@@ -1,0 +1,896 @@
+\chapter{Performance}\label{ch:performance}
+
+The measured resource model of one G17 core has six resources, and a kernel's time is set by whichever it
+exhausts first:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item Instruction issue: one simdgroup issues a simple instruction about every 3.1~ns; there is no fp32/int32 dual
+  issue (\cref{sec:scalar-issue}).
+\item The tensor unit: about 4.96~ns per 16 × 16 × 16 MMA per core at saturation, 1,024 flop per cycle per core
+  (\cref{sec:tensor-issue-rate}).
+\item Dependent latency: a dependent MMA or a load-to-use chain in one simdgroup costs far more than the issue
+  interval (74~ns per MMA in one chain, 30.5~ns per L1 load, 405–415~ns per DRAM load); only independent work, from
+  the same simdgroup or from other resident simdgroups, hides it (\cref{sec:tensor-issue-rate,sec:memory-bandwidth-footprint}).
+\item Residency: how many simdgroups a core holds, which is what supplies that independent work (\cref{sec:residency-occupancy-measurements}).
+\item Memory bandwidth by footprint: on-core, SLC (520–528~GB/s) and DRAM (269.6–298.5~GB/s depending on the
+  instrument) (\cref{sec:memory-bandwidth-footprint}).
+\item Instruction fetch and dispatch: a hot loop body over 16 KiB loses the instruction cache at low occupancy; each
+  dependent dispatch costs microseconds (\cref{sec:memory-bandwidth-footprint,sec:dispatch-encoder-command-buffer}).
+\end{enumerate}
+
+In the kernels this project studied, the tensor unit's peak was rarely the limit. The fused attention and FFN kernels execute about 46 instructions per MMA, so the tensor pipe sits
+idle most of the time and they are issue- and ALU-bound at 35–57 percent of peak (\cref{sec:measured-bottlenecks-studied}). The other
+studied workloads are bound elsewhere: the one-token decode projections are DRAM-bound at q8 and
+issue-bound by counter at q4 (yet the q4 MLP did not speed up when a quarter of its instructions were removed);
+batched decode is bound first by occupancy and, after split-K, by the fp32 pipe; prefill attention by latency on a
+scratch round trip; and prefill GEMMs reach 80–89 percent of peak once measured in the graph (\cref{sec:bounds-real-workloads}).
+
+Rate and timing terms:
+
+\begin{itemize}
+\item \textbf{Per core} / \textbf{per simdgroup}: a rate quoted per core aggregates every simdgroup on it; a per-simdgroup rate is
+  one instruction stream. The device has 20 cores and four SIMD slots per core (\cref{ch:device-execution-model}).
+\item \textbf{Occupancy} or \textbf{simdgroups per core}: simdgroups launched divided by 20 (the launched figure) or resident at once
+  (the residency figure); the text says which.
+\item \textbf{Saturated}: enough simdgroups per core that adding more does not raise throughput.
+\item \textbf{Warm clock}: timed after a saturating dispatch long enough to raise the GPU to its top performance state
+  (\cref{sec:clocks-power-gpu}). Every absolute time in this chapter is at a warm clock unless stated.
+\item \textbf{Footprint}: unique bytes a kernel touches.
+\item MMA opcode names are those of \cref{ch:tensor-unit}; the tensor MMA used for rate measurements is \op{5106}.
+\end{itemize}
+
+Beyond the 0.4–1.3 percent in-process and 9–13 percent cross-process spread of \cref{sec:clocks-performance-states},
+one row differed by 18 percent between processes, and the rebuilt harness moved 25–44
+percent between its own processes; ratios timed together in one process reproduce to about 1.5 percent (measured,
+MM~\mm{16}, MM~\mm{25.124.2}), which is why the comparisons here are ratios. Under load the second run of a fixed A-then-B pair ran
+about 0.1~ms per token faster, so every A/B here is order-balanced (measured, MM~\mm{17} rule 43).
+
+\section{Tensor issue rate and latency}\label{sec:tensor-issue-rate}
+
+At saturation (measured, MM~\mm{8}), 16,384 threadgroups x 4 simdgroups x 1,400 issues of the 16-bit MMA, \op{5106}, is 91.75 M issues in
+22.44~ms: 4.09 × $10^{9}$ issues per second, 33.5 TFLOP/s dense fp16/bf16 into fp32 at 8,192 flop per issue, 1.67
+TFLOP/s per core, 128 MAC per cycle per SIMD (four times a 32-lane FMA) at an implied 1.63~GHz. int8 runs at exactly
+twice the rate: 13~ns per issue in a chain, 11.50~ms saturated, 8.1 × $10^{9}$ issues per second, 67 TOPS, 256 MAC per cycle
+per SIMD, using \op{10384}.
+
+An independent later harness gives 4.96–4.97~ns per MMA per core at 16 simdgroups per core, 8,192 flop in 8.0
+cycles at 1.62~GHz, 1,024 flop per cycle per core; int8 2.47~ns. About 5.5 simdgroups per core saturate the unit
+(measured, MM~\mm{8}, MM~\mm{0.1}). Percent-of-peak figures in the sources use 33.1 TFLOP/s, carried from that harness and not
+re-derived; 33.5 is the derived figure. They differ by 1.2 percent, inside harness spread (MM~\mm{8}). This chapter quotes
+percentages against 33.1, as the sources do.
+
+Each core has four tensor slots (measured, MM~\mm{8}): one, two or four simdgroups each running the chain take the same
+time (32.8~µs), 8 take 57.5 and 32 take 224.3, flat to four and linear beyond (the full row is in \cref{sec:core-logical-resource}). Each
+SIMD has one slot and holds it for the whole interval.
+
+The cost of one MMA depends on how much independent work surrounds it (\cref{tab:mma-latency-occupancy}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.12\hsize}X>{\hsize=1.25\hsize}X>{\hsize=0.62\hsize}X@{}}
+\caption{Cost per MMA by occupancy and by dependence between MMAs.}\label{tab:mma-latency-occupancy}\\
+\toprule
+Configuration & Cost per MMA & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Configuration & Cost per MMA & Source \\
+\midrule
+\endhead
+dependent chain at saturation & 22.2~ns; eight independent accumulators over the same 1,400 issues take
+the same 31.96~µs, so result latency is no longer than the issue
+interval & measured, MM~\mm{8} \\*
+one simdgroup, 8 independent accumulators & 20.5~ns & measured, MM~\mm{8} \\*
+one simdgroup, one dependent chain & 74~ns (3.6 times) & measured, MM~\mm{8} \\*
+one simdgroup per core: 8 dependent MMAs vs four independent chains of 2 & both 218.0~ns per iteration, so chaining adds nothing and the cost is that
+of a single chain & measured, MM~\mm{8} \\*
+fit over 321 kernel timings, bf16 class & 62.6~ns inside a dependent chain at 1 simdgroup per core; 5.8~ns at 64 & measured fit, MM~\mm{16} \\*
+same fit, fp8 and int8 & 68.2~ns at 1; 7.0~ns at 64 & measured fit, MM~\mm{16} \\*
+\op{5107} back-to-back
+into the same destination & 34~ns (a write-after-write stall), gone across 8 destinations or at
+saturation & measured, MM~\mm{8} \\*
+\bottomrule
+\end{xltabular}
+
+The same fit charges 1.6~ns per other instruction at one simdgroup and 0.21–0.34~ns at 64. Its six worst outliers are
+all independent-MMA ablations, so the large per-MMA figure measures dependence rather than the MMA itself (MM~\mm{16}). The
+fp32-operand forms (\cref{sec:instruction-family}) and a transposed A cost nothing extra (measured, MM~\mm{8}).
+
+At low occupancy a compiler should interleave independent accumulators (one simdgroup goes from 74 to 20.5~ns
+per MMA); at 12 or more simdgroups per core the forms converge and the interleave buys nothing (MM~\mm{8}, MM~\mm{11}). A
+255-trip one-slice K loop in one simdgroup averages 1.45~µs per trip (loads then four MMAs, nothing overlapping), the
+low-occupancy extreme (measured, MM~\mm{25.101}).
+
+The static model's tensor constants are fitted, not measured (\cref{sec:cost-models-their}; MM~\mm{25.144.12}).
+
+\textbf{Evidence.} MM~\mm{0.1}, MM~\mm{8}, MM~\mm{11}, MM~\mm{16}, MM~\mm{25.101}, MM~\mm{25.144.12}.
+
+\section{Bottlenecks in the studied kernels}\label{sec:measured-bottlenecks-studied}
+
+Fused attention and FFN are issue- and ALU-bound (measured, MM~\mm{8}, MM~\mm{0.12}, MM~\mm{16}). Fused attention reaches 35–42
+percent of 33.1 TFLOP/s (11.5–13.8 TFLOP/s) and the FFN 47–57 percent. A real attention chunk loop executes about
+46 instructions per MMA: 1,480 instructions for 32 MMAs is 356~ns of the 433~ns a key block costs per core, while
+the tensor pipe is busy for 158~ns. Attention throughput stays at 11.5–13.8 TFLOP/s from an 8 MiB working set to 128
+MiB, so it is issue-bound, not bound by the KV stream. One simdgroup's dependent chain costs
+5.35~µs per 32-key block; about 247 simdgroups saturate the GPU.
+
+In the attention kernels (measured, MM~\mm{16}, recon kernels), simdgroups per threadgroup from 1 to 16
+are within noise (keep at least 20 threadgroups so every core has one); transposed-B flags cost 1.3 percent; unrolling
+K by 2 or 4 gains nothing and adds 98–110 spill stores; two token tiles per task doubles the time (354 spill stores).
+The retained rebuild costs 1.25–1.29 times the recon per key block (6.9 against 5.35~µs for one simdgroup; 558 against
+433~ns per block and core) despite 1,033 instructions and no spills, against the recon's 1,925 with 42 (measured, MM
+25.126).
+
+Loop form and fusion were measured in MM~\mm{16}. The runtime K loop is 1.3–1.8 times faster than unrolling at 8
+blocks and 5.9–7.2 times at 32 (unrolled kernels spill 24–923 stores). A spill-free fused chain is 5–10 percent faster than any cut and 8–20
+percent faster than three kernels; at 15 or more spill stores the cuts win. Attention stays fused in all 27 measured
+shapes even while spilling 42 stores (cutting P costs 1.03–1.30 times, cutting both 1.14–2.03 times). For a gated FFN
+at d = 2048, Hh = 8192, one wave is 20 threadgroups at about 1.8~ms in fp8, and the fused form needs \code{nsg*mt*640}
+bytes of threadgroup memory (fp8, int8) or \code{nsg*mt*1,088} (bf16, fp16) against 32,768: \code{nsg*mt <= 51} and \code{<= 30}.
+
+\Cref{tab:gemm-vs-matmul2d} compares this compiler's GEMM with Apple's \code{matmul2d} (measured, interleaved medians, M × 128 × 256 half, MM~\mm{25.107}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.15\hsize}Xl>{\hsize=0.85\hsize}Xl@{}}
+\caption{GEMM time for M × 128 × 256 half: Apple's \code{matmul2d} against this compiler's K-loop and unrolled forms.}\label{tab:gemm-vs-matmul2d}\\
+\toprule
+Shape and grid & Apple & this compiler, K loop & unrolled \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Shape and grid & Apple & this compiler, K loop & unrolled \\
+\midrule
+\endhead
+M512, 8 threadgroups & 106.6~µs & 113.7~µs (1.07× behind) & 262.7~µs \\*
+M1024, 8 threadgroups & 183.6~µs & 244.7~µs (1.33×) & 376.0~µs \\*
+M4096, 256 threadgroups x 1 simdgroup (equal geometry) & 58.7~µs & 62.0~µs (1.06×) & 78.6~µs \\*
+\bottomrule
+\end{xltabular}
+
+Apple's own 64 × 4 geometry takes 69.4~µs for M4096; at 12.8 simdgroups per core the K loop reaches 4,330 GFLOP/s
+against Apple's 4,570. \emph{Correction:} MM~\mm{25.98}'s earlier ratios are superseded by MM~\mm{25.107} (\cref{app:a}).
+
+\begin{itemize}
+\item Occupancy mattered more than instruction scheduling. An occupancy sweep (one 16-row tile row per simdgroup, a 12.5
+  KB body) goes from 132 GFLOP/s at 8 simdgroups (0.4 per core) to 3,329 at 256 (12.8 per core) and 4,497 at 512 (25.6
+  per core, 124 registers); work grew 32 times and time 1.27 times (measured, MM~\mm{25.98.1}). Software pipelining
+  (rotating MMAs ahead of loads) gave 1.08 times at 8 simdgroups (113.8 to 105.6~µs, where at least 1.2 had been
+  preregistered) and 0.99 times at 12.8 per core (measured, MM~\mm{25.97}, MM~\mm{25.107}).
+\item In the K-loop body, one slice per trip waiting on its own loads paid a full round trip per step (about 417~ns against
+  Apple's about 245 at 8 threadgroups). Issuing two slices' loads before the first MMA (\code{kloop\_unroll=2}) gains 35–38
+  percent and closes to 3–4 percent of Apple at 4 and 8 threadgroups (about 337 to 210~ns per step against Apple's
+  202); an interleaved control gains 1–4 percent (measured, MM~\mm{25.124.6}).
+\item Unrolled bodies are fetch-bound, at about 518~ns per MMA (512 MMAs in 265~µs) against a 20–74~ns issue interval;
+  fully unrolled K=256 bodies are 61~KB and 116~KB against Apple's 5,142-byte looping kernel (measured, MM~\mm{25.97},
+  MM~\mm{25.98}).
+\item Grid-split threadgroups run concurrently: with 512 MMAs per threadgroup, time is flat from G = 1 to 8
+  (\code{t(8)/t(2) = 0.995}); the null control (2 MMAs) is 11.5 against 265.3~µs (measured, MM~\mm{25.89}).
+\end{itemize}
+
+For the bf16 layer kernels (measured, MM~\mm{25.43}), 16 simdgroups per threadgroup is fastest for the two- and
+three-kernel forms (2.856 and 3.103~ms); 32 is 1.46–1.86 times slower than 16 in every form, against a run spread of
+0.007–0.069~ms.
+
+A weight-stationary FFN is 3.7–4.4 times faster than a token-parallel one at 16 and 32 tokens (measured, MM~\mm{16},
+MM~\mm{25.126}); on the retained harness fp8 weight-stationary loses from 48 tokens (1.13 times the
+token-parallel time) and bf16 from 64 (1.15). \emph{Correction:} the recon model's "about 64 tokens" crossover is not the
+measured one for these kernels.
+
+A GELU register epilogue (x * sigmoid(1.702×), six instructions per slot, 4 registers)
+takes 15.6~µs at M16 against 52.2~µs for a memory stage (MM~\mm{25.109}). A full-tile one-dispatch attention takes 30.5~µs
+at 2 rows to 104.3~µs at 16 rows, because its softmax is straight-line (MM~\mm{25.110}).
+
+\textbf{Evidence.} MM~\mm{0.12}, MM~\mm{8}, MM~\mm{16}, MM~\mm{25.43}, MM~\mm{25.89}, MM~\mm{25.97}, MM~\mm{25.98}, MM~\mm{25.98.1}, MM~\mm{25.107}, MM~\mm{25.109},
+MM~\mm{25.110}, MM~\mm{25.124.6}, MM~\mm{25.126}.
+
+\section{Scalar issue}\label{sec:scalar-issue}
+
+\Cref{tab:scalar-issue-pairs} gives the issue model (measured, MM~\mm{25.142.6}, MM~\mm{0.15}; a counted 128-trip loop over eight
+independent chains, op counts checked from the decoded bytes, each dispatch in its own process).
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.53\hsize}Xlll>{\hsize=0.74\hsize}X>{\hsize=0.74\hsize}X@{}}
+\caption{Scalar issue cost per op in one simdgroup, each class alone and mixed, against the predictions of one shared port and of dual issue.}\label{tab:scalar-issue-pairs}\\
+\toprule
+One simdgroup, ns per op & alone A & alone B & mixed & one shared port predicts & dual issue predicts \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+One simdgroup, ns per op & alone A & alone B & mixed & one shared port predicts & dual issue predicts \\
+\midrule
+\endhead
+ffma + iadd & 4.18 & 3.09 & \textbf{3.61} & 3.64 & 2.09 \\*
+fadd + iadd & 3.11 & 3.09 & 3.11 & 3.10 & 1.55 \\*
+fmul + shl\_imm & 3.16 & 6.10 & 3.17 & 4.63 & 3.05 \\*
+fadd + fmul (control, one class) & 3.11 & 3.16 & 3.17 & 3.14 & 1.58 \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item A simple instruction costs about 3.1~ns per simdgroup whatever its class; this is the per-simdgroup issue floor.
+\item There is no fp32/int32 dual issue. The ffma + iadd pair separates the two models, and it lands on the shared-port value. The full grid
+  agrees: fadd 1,050, iadd 1,238, mixed 1,271~µs at B = 128.
+\item fp32 ffma at 4.18 shows its latency is not fully hidden by eight chains.
+\item \code{shl\_imm} costs 6.1 alone and 3.17 mixed with fmul: a stall that other instructions fill (the narrow register file's
+  constraint, \cref{ch:register-file}), not an issue slot.
+\item fp32 add throughput is about 4.1 × $10^{12}$ per second machine-wide, about 2.1 × $10^{11}$ per core, consistent with 128
+  fp32 lanes per core at about 1.6~GHz (the clock was not measured by this probe).
+\end{itemize}
+
+For a compiler, interleaving float and integer work gains nothing; independent chains do, and eight reach
+the floor (MM~\mm{17} rule 38). Apple's wait after every special-register read costs nothing measurable (\cref{sec:read-latency-whether},
+MM~\mm{25.121}). The static model's fitted issue constants (3.105~ns interval, 12.5 issue slots per interval per core, 3.43
+ns per fragment load, about 150~GB/s of fragments per core) are in \cref{sec:cost-models-their} (MM~\mm{25.144.12}).
+
+ALU numerics edges that affect cost are in \cref{ch:scalar-arithmetic}. The one relevant to scheduling is that \code{fdiv} costs 9 more instructions
+than a single-instruction operation such as \op{1272} (measured, MM~\mm{6}).
+
+\textbf{Evidence.} MM~\mm{0.15}, MM~\mm{6}, MM~\mm{17}, MM~\mm{25.121}, MM~\mm{25.142.6}, MM~\mm{25.144.12}.
+
+\section{Cost of registers and spills}\label{sec:registers-spills-occupancy}
+
+The register-file and capacity rules (the 126-register flat pool, the trade lines, the accumulator limits, the two
+spill opcodes, spill cliffs as scheduling outcomes) are in \cref{sec:capacity-budgets-spills}.
+
+A spill costs latency rather than saturated throughput (measured, MM~\mm{11}). Against a 14-accumulator kernel, 15
+accumulators (32 spill stores) cost 1.31 times, 16 cost 1.47, 18 cost 2.17 and 24 cost 2.30 at 1–4 simdgroups per
+core, but only 1.00–1.10 times at 64. Removing spills did not always help; with few stores the streaming order ran
+at 0.47–0.79 of the flat order's speed in several shapes.
+Spill counts here include both spill forms (\cref{sec:capacity-budgets-spills}; MM~\mm{11}, MM~\mm{13}, MM~\mm{19}).
+
+For this compiler's one-tile GEMM body (measured, MM~\mm{25.111}), a declared count
+of 44 against 124 (one metadata byte) is equal in time within 1.2 percent at 25.6 simdgroups per core (41.6 against
+42.1~µs) and 0.7 percent at 51.2 per core (69.9 against 69.4~µs). The result is specific to this body, and equal time
+past 32 simdgroups per core does not by itself show residency past 32.
+Register peaks of this compiler: 16×16×64 R42, 32×32×64 R82, 64×64×64 R122; M512 with GELU reaches R125; declared 44,
+60, 92 and 124 at N16, 32, 64 and 128 (this compiler, MM~\mm{25.98.1}, MM~\mm{25.109.1}).
+
+Registers did cost time in the decode kernels (measured, MM~\mm{25.144.4}). In the decode qmv kernel at 4 rows per simdgroup, the same
+loop at 81 registers instead of 114 is 4.1~µs faster (43.2 against 47.3~µs). The B~8 batched qkv kernel uses 109 (q4)
+and 108 (q8) registers and holds occupancy at 25–27 percent where its threadgroup memory (64–128 bytes) and
+threads per group would allow 96 simdgroups per core, so the register file sets the cap. Halving its accumulators moved the
+count only from 109 to 107 and did not lift occupancy: its registers are dominated by weight words, dequantized values,
+field temporaries and addresses. Instruments' "Register Pressure Influence" counter read 0 for every kernel recorded,
+including these, so that counter does not see this cap.
+
+Registers and residency are measured in \cref{sec:residency-occupancy-measurements}; the declared count is inert for execution and residency
+(rule 1 of \cref{sec:residency-occupancy-rules}; MM~\mm{10}, MM~\mm{25.115}).
+
+\textbf{Evidence.} MM~\mm{10}, MM~\mm{11}, MM~\mm{13}, MM~\mm{19}, MM~\mm{25.98.1}, MM~\mm{25.109.1}, MM~\mm{25.111}, MM~\mm{25.115}, MM~\mm{25.144.4}.
+
+\section{Residency and occupancy measurements}\label{sec:residency-occupancy-measurements}
+
+The residency rules (what the hardware guarantees, forward progress) are in \cref{ch:device-execution-model}. Each residency
+count here is given with its kernel and conditions, because the counts differ by kernel and must not be merged.
+
+Metal's public API has no occupancy counter; it offers only \code{GPUTimestamp} (measured, MM~\mm{25.48}; \cref{sec:dispatch-encoder-command-buffer}).
+\code{maxTotalThreadsPerThreadgroup} reads 1,024 for every pipeline,
+from 4 to 512 live scalars per thread and 64 to 32,768 bytes of threadgroup memory, so it does not respond to pressure;
+\code{staticThreadgroupMemoryLength} tracks the request (measured, MM~\mm{25.47}, MM~\mm{11}). Residency was therefore measured with probes
+built for the purpose, and later read through Instruments counters (\cref{sec:dispatch-encoder-command-buffer}).
+
+An early reading (recon section 167), since corrected, found time flat from 20 to 116
+registers per lane and concluded occupancy was "slot-limited, not register-limited". Above the ALU utilisation
+ceiling (prior art places it at about 24 simdgroups per core) occupancy can fall a long way with no change in time, so
+the flat curve said nothing about occupancy. A direct atomic counter (arrival add, peak max, fixed spin,
+exit decrement) then read occupancy falling 44.6 to 32.1 simdgroups per core over 22 to 126 registers. The timings
+stand; the occupancy claim was withdrawn (MM~\mm{19}, MM~\mm{20}, MM~\mm{25.48}, MM~\mm{25.49}).
+
+\Cref{tab:residency-counts} gives the counts, each with its kernel.
+
+\begin{xltabular}{\linewidth}{@{}X>{\hsize=0.65\hsize}X>{\hsize=1.77\hsize}X>{\hsize=0.61\hsize}X@{}}
+\caption{Resident simdgroups by kernel and probe, with the conditions of each count.}\label{tab:residency-counts}\\
+\toprule
+Kernel and probe & Conditions & Resident simdgroups & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Kernel and probe & Conditions & Resident simdgroups & Source \\
+\midrule
+\endhead
+Apple-compiled direct atomic counter (recon 170) & 22 to 126 registers & 44.6 falling to 32.1 per core (x1.39); about 40 at 44 registers (44.5 at
+30, 39.6 at 46); 32.0 at 98 & measured, MM~\mm{19}, MM~\mm{25.49}, MM~\mm{25.111.2} \\*
+Recon 134 kernel, 1,024-thread threadgroups & 40 threadgroups at 126 registers & peak exactly 640 resident, 32 per core; resident falls from about
+890–930 at 22 registers to 530–660 at 126 (25–30 percent, no step),
+worth 1.00 to 0.95 in throughput capacity & measured, MM~\mm{11} \\*
+This compiler's residency counter, straight-line, 12,800
+instructions, one simdgroup per threadgroup & warm clock, launched past capacity (S = 4,096), 3 rounds & 95.0 per core at 19 registers used; 71–74 at 33; 67–69 at 49; 66–69 at
+65; 65–66 at 81; 64–66 at 97; 68–69 at 113; 64–68 at 125 & measured, MM~\mm{25.121} \\*
+Same probe, declared against used & S = 1,024 and 2,048 & declaring 125 while using 19 peaks with using 19 (1,814–1,896 at S =
+2,048); warm, using 125 holds 1,024 of 1,024 in 5 of 5 & measured, MM~\mm{25.115} \\*
+Threadgroup-memory handle, 128-thread threadgroups, 4,096 threadgroups & 9 to 94 registers & at least 8 simdgroups per core at 94 registers (two threadgroups still
+co-resident) & measured, MM~\mm{25.49} \\*
+Forward-progress probe, single-simdgroup threadgroups & spinning residents & up to 1,200 threadgroups progress concurrently; first resident wave at
+2,000 launched about 1,690 (about 84 per core at that register count);
+1,024-thread threadgroups: 200 ran with no consumer starving; at 800,
+480 of 799 consumers spun to the poll cap, because the producer,
+dispatched last, was beyond residency. That run does not measure how
+many were resident at once, since waves can reach the cap one after
+another. These are the tested configurations, not a guarantee; the
+restriction they motivate (do not depend on preemption; size a waiting
+grid to residency) is 
+\cref{sec:forward-progress-in-order}'s & measured, MM~\mm{25.141.1} \\*
+Instruments, B~8 batched qkv decode kernel & 109 registers & occupancy 25–27 percent of a 96-simdgroup-per-core budget & measured counters, MM~\mm{25.144.4} \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item The Apple-compiled counter (32.1 at 126) and the recon-134 kernel (32 per core at 126) agree on the floor near 32
+  for Apple-compiled kernels at high register counts; MM~\mm{11}'s gradual 25–30 percent fall and the counter's 1.39-fold
+  fall describe the same shape on different kernels.
+\item This compiler's counter reads about twice as many (64–69 per core from 49 to 125 registers) on a different kernel
+  (straight-line code, its own allocator). Why the two kernels differ is open (MM~\mm{25.121}). A scheduler must use the
+  floor measured for its own kernel family; \code{agxforge/g17/tensorsched.py} carries both (64 per core from 49 to 125
+  registers for this compiler's kernels, 32.1 at 126 for Apple's).
+\item Residency follows the registers a program uses, not the count it declares (rule 1 of \cref{sec:residency-occupancy-rules}; MM~\mm{25.115}).
+\item \emph{Correction:} MM~\mm{25.115}'s provisional per-core figures are superseded by MM~\mm{25.121} (\cref{app:a}).
+\item A fixed-pool model predicts 7.8 simdgroups at 126 registers where 32.1 are measured, so residency is not one pool
+  divided by demand; the physical capacity and allocation granularity are open (\cref{sec:residency-occupancy-rules}; MM~\mm{25.49}, MM~\mm{20}).
+\end{itemize}
+
+Threadgroup memory also acts as a residency handle (measured, MM~\mm{25.49}). The 57,344-byte per-core budget (rule 4 of
+\cref{sec:residency-occupancy-rules}) shows as a step: 28,672 bytes per threadgroup runs 0.00304 s, 28,688 bytes 0.00382 s (+25 percent for 16
+bytes). The step persists at 94 registers (ratio 1.047), and its size tracks arithmetic intensity, not registers: a
+24-fma control at 10 registers gives 1.041. The 32,768-byte per-threadgroup limit is \cref{ch:memory}'s.
+
+\subsection*{Per-core simdgroup staircase}
+
+\Cref{tab:simdgroup-staircase} gives the median ns per iteration (8 legacy issues) of a retained Apple-compiled legacy
+\code{simdgroup\_multiply\_accumulate} loop with 8 independent accumulators and 2,048 trips, at a warm clock (a dispatch of
+at least 4.7 ms before every timed one, a fixed 4-simdgroup-per-core reference dispatch after each), grid = 20 ×
+simdgroups per core, threadgroup 32 (measured, MM~\mm{25.122}).
+
+\widetable
+\begin{longtable}{@{}rr@{}}
+\caption{Median time per iteration of the legacy MMA loop against simdgroups per core.}\label{tab:simdgroup-staircase}\\
+\toprule
+Simdgroups per core & ns per iteration \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+Simdgroups per core & ns per iteration \\
+\midrule
+\endhead
+1–8 & 24.5–24.6 \\*
+9–12 & 30.7–31.2 \\*
+13–17 & 54.6 \\*
+18–21 & 60.2–60.9 \\*
+22–30 & 83.6–84.3 \\*
+31–34 & 85–90.6 \\*
+35–42 & 113.4–114.5 \\*
+43–45 & 119.6–120.7 \\*
+46–48 & 143.0–143.6 \\
+\bottomrule
+\end{longtable}
+
+\begin{itemize}
+\item Rungs at 24.6 + 29.6k ns (k = 0..4: 24.6, 54.0–54.6, 83.7, 113.3, 142.9), each with a +6~ns half-step about 4
+  simdgroups before the next full rung (30.6, 60.2, 89.9, 119.5); a full rung spans about 11 simdgroups per core.
+\item Models: total work as a line, refuted (steps of 6–24~ns against a 0.5 percent floor); a threadgroup granule, refuted
+  (threadgroup sizes 32–128 equal within 1.5 percent at equal work); a residency or wave granule, consistent.
+\item The first two boundaries fall exactly per core, at 161 and 241 threadgroups (20 × 8 + 1, 20 × 12 + 1). Later
+  boundaries are windows (358–368, 442–460, 613–641, 675–686, 840–855, 891–923 threadgroups) inside which each dispatch
+  of the same grid lands on one of two adjacent rungs; the reference reads 24.54~ns either way, so it is not the clock;
+  outside the windows one grid repeats within 0.33 percent.
+\item The rung counts simdgroups rather than chains in flight. With 2, 4, 8 or 16 accumulators per simdgroup the boundaries
+  sit at the same simdgroups per core within one; ns per MMA at 1–8 simdgroups per core is 11.87, 5.99, 3.06 and 1.61,
+  a constant about 24~ns per iteration, so up to 16 independent chains hide behind one dependent-chain latency. Time =
+  (one simdgroup's iteration time) × f(simdgroups per core), with f about 1 up to 8, 1.25 at 9–12, 2.2 at 13–17, 2.5 at
+  18–21.
+\item The cause inside the core is open; it is not a residency cap, since the residency counter holds 64–95 per core
+  (MM~\mm{25.121}).
+\end{itemize}
+
+\emph{Resolution of U3.} A "bimodal legacy rate" that flipped from dispatch to dispatch was first read as a
+two-state per-issue rate with a constant 9/8 ratio (recon 158), then as a 79.4~ns quantum (recon 164, in fact the
+slope of a line). Both were measurement artefacts: the occupancy axis had been mislabelled by 32 times and
+oversubscribed (MM~\mm{25.85}, MM~\mm{25.86}), and runs shorter than about 1.5~ms ran at the idle clock (a v2 sweep with a 0.5~ms
+warm-up saw medians of 29.9 and 49.6~ns in the two halves of one run). On the corrected axis at a warm clock the
+bimodality is confined to the boundary windows above (MM~\mm{25.122}, MM~\mm{19}).
+
+In a related legacy measurement, one accumulator chained into itself measures latency rather than throughput: 1 chain 129.5
+GMAC/s, 2 give 259.1, 4 give 518.1, then 8 and 16 fall to 395.6 and 199.0 as accumulators outgrow the registers
+(measured, MM~\mm{25.56}).
+
+\textbf{Evidence.} MM~\mm{11}, MM~\mm{19}, MM~\mm{20}, MM~\mm{25.47}, MM~\mm{25.48}, MM~\mm{25.49}, MM~\mm{25.56}, MM~\mm{25.111.2}, MM~\mm{25.115}, MM~\mm{25.121},
+MM~\mm{25.122}, MM~\mm{25.141.1}, MM~\mm{25.144.4}.
+
+\section{Memory bandwidth, latency and instruction fetch}\label{sec:memory-bandwidth-footprint}
+
+Sustained read bandwidth by footprint (measured, MM~\mm{7}, streaming microbenchmark) is 1.3–4.8 TB/s up to 5 MiB
+(on-core, reported as a lower bound), 520–528~GB/s at 10–20 MiB (the SLC plateau) and 281–294~GB/s from 40 MiB
+(DRAM), with the step between 20 and 40 MiB; independent of threadgroup shape at 1, 8 and 32 simdgroups.
+
+DRAM bandwidth depends on the instrument; \cref{tab:dram-bandwidth} gives the figure the sources report for each.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.20\hsize}X>{\hsize=1.22\hsize}X>{\hsize=0.58\hsize}X@{}}
+\caption{DRAM read bandwidth by measuring instrument.}\label{tab:dram-bandwidth}\\
+\toprule
+Instrument & Read & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Instrument & Read & Source \\
+\midrule
+\endhead
+streaming microbenchmark by footprint, 40 MiB and above & 281–294~GB/s (row M7: 283–294) & MM~\mm{7}, MM~\mm{20} \\*
+1,024-thread threadgroups, 256~MB cold streams & 298.5~GB/s (peak; supersedes the 272~GB/s used before) & MM~\mm{0.15}, MM~\mm{25.141.13} \\*
+grid-stride float4, 1,048,576 threads, 256 MiB and 1 GiB, two rounds & 269.6–275.7~GB/s; write 241.0–252.9; copy 243.5–255.6 (read plus write
+counted); 64 MiB reads 218–264 & MM~\mm{25.121} \\*
+static performance model floor & 280~GB/s (a model constant) & MM~\mm{25.144.12} \\*
+\bottomrule
+\end{xltabular}
+
+The sources use 298.5~GB/s as the roofline peak, as this chapter does; a simple grid-stride kernel sees about 270. The third instrument agrees with M7 to within about 6 percent (MM
+25.121).
+
+\Cref{tab:load-to-use-latency} gives load-to-use latency by footprint (measured, MM~\mm{25.121}; 32 lanes each chasing a
+random cycle, warm clock, least-squares slope over five chain lengths).
+
+\begin{xltabular}{\linewidth}{@{}XX@{}}
+\caption{Load-to-use latency of a dependent load by footprint.}\label{tab:load-to-use-latency}\\
+\toprule
+Footprint & ns per dependent load \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+Footprint & ns per dependent load \\
+\midrule
+\endhead
+16 KiB (L1) & 30.5 (about 49 cycles) \\*
+4 MiB & 195 (192–238) \\*
+1 GiB, 16k-64k hops (DRAM) & 405–415 \\*
+\bottomrule
+\end{xltabular}
+
+The static model uses 30 / 96 / 195 / 313 / 422~ns at 16 KiB / 256 KiB / 4 MiB / 64 MiB / 256 MiB (MM~\mm{25.144.12}); the
+256 KiB and 64–256 MiB rows do not fit one line in the probe and are model inputs. Issuing a load costs 9.3~ns in an
+unwaited chain (measured, MM~\mm{25.97}). \emph{Correction:} MM~\mm{25.97}'s "about 121~ns" L1 latency was the L1 row at an idle clock
+(MM~\mm{25.121}).
+
+Measured cache effects in two real kernels:
+
+\begin{itemize}
+\item Decode attention keeps K and V resident in the last-level cache between dispatches up to about 4.2~MB (1,024 keys),
+  at 18–20~ns per key; past it about 29~ns per key, about 140~GB/s, under half the DRAM peak (MM~\mm{25.181}).
+\item Spare threadgroups warming the cache save up to 10~µs per small-to-big kernel pair (7 percent) when the warm set fits
+  the small kernel's duration (4~MB with 256 extra threadgroups: 143.2 to 133.3~µs); decoy loads save nothing; 8~MB
+  lengthens the small kernel (MM~\mm{25.141.5}).
+\end{itemize}
+
+\subsection*{Instruction fetch in hot loops}
+
+The coarse sweep and the step-location sweep in \cref{tab:instruction-fetch} measure different things.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.81\hsize}X>{\hsize=1.66\hsize}X>{\hsize=0.53\hsize}X@{}}
+\caption{Instruction-fetch cost against loop size, from two sweeps and two follow-up measurements.}\label{tab:instruction-fetch}\\
+\toprule
+Measurement & Result & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Measurement & Result & Source \\
+\midrule
+\endhead
+Per-instruction time against loop code size, coarse sweep & grows sixfold from 1~KB to 26~KB at one simdgroup per core (0.411 to
+2.49~ns), 1.85-fold at 64, then flattens & measured, MM~\mm{7} \\*
+Location of the step, seventeen-point sweep at fixed instruction mix & the variable is the loop body: 15,971 bytes fast, 16,595
+partial, 17,247 slow, bracketing 16 KiB (1,363 bytes of the
+kernel are prologue) & measured, MM~\mm{19} \\*
+Cost of crossing it & a loop body over 16 KiB costs 2.81 times on one simdgroup and 1.15 times
+at 64 simdgroups per core; cold straight-line code costs 1.91~ns per
+byte for one simdgroup & measured, MM~\mm{25.144.12} \\*
+At high occupancy & at 26–64 simdgroups of the same code per core fetch is shared and
+crossing costs nothing extra: register-O attention bodies of 21.6–22.5
+KB folded to 13.1~KB ran at exactly the instruction-count ratio (1,169
+against 739~µs = 1.58; 1,829 against 1,141 instructions = 1.60) & measured, MM~\mm{25.144.12} \\*
+\bottomrule
+\end{xltabular}
+
+The 16 KiB loop-body bracket is where the per-instruction cost steps; the 26~KB figure is where the
+coarse sweep stopped rising. The hot-loop guideline "about 26 KiB, roughly 2,800 instructions" (MM~\mm{0.1}, MM~\mm{7}) is
+superseded as a design rule: keep a hot loop body under 16 KiB (the fast point is 15,971 bytes). At 26 or more
+simdgroups per core the cliff costs nothing measurable; at intermediate occupancy fetch is unmeasured (open). Neither
+fetch form improved the static model (\cref{sec:cost-models-their}). An earlier whole-kernel bracket is superseded (\cref{app:a}).
+
+\textbf{Evidence.} MM~\mm{0.15}, MM~\mm{7}, MM~\mm{19}, MM~\mm{20}, MM~\mm{25.97}, MM~\mm{25.121}, MM~\mm{25.141.5}, MM~\mm{25.141.13}, MM~\mm{25.144.12}, MM~\mm{25.181}.
+
+\section{Dispatch costs and counters}\label{sec:dispatch-encoder-command-buffer}
+
+\Cref{tab:dispatch-costs} lists the costs (measured, MM~\mm{0.15}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.84\hsize}X>{\hsize=1.33\hsize}X>{\hsize=0.83\hsize}X@{}}
+\caption{Measured dispatch, encoder and command-buffer costs.}\label{tab:dispatch-costs}\\
+\toprule
+Item & Cost & Conditions \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Item & Cost & Conditions \\
+\midrule
+\endhead
+dependent tiny dispatch & 3.7~µs each in a serial encoder; 4.2~µs with a concurrent encoder plus
+scoped or resource barriers (MLX's pattern) & chain of one-thread dispatches each reading the previous word (MM
+\mm{25.141.10}, \mm{25.141.13}) \\*
+extra compute encoder in one command buffer & about 6.5~µs each & 172 encoders per token: 9.275 against 8.163~ms as one encoder (MM
+\mm{25.142.1}) \\*
+concurrent encoder with scoped buffer barriers & 0.03–0.07~ms per token slower than serial & pipelined q8 token, 196 dispatches (MM~\mm{25.142.1}) \\*
+tracked buffers in one serial encoder against untracked buffers ordered
+by \code{MTLSharedEvent} & tracked faster by 0.2–0.3~ms per token & ABBA, both precisions (MM~\mm{25.142.1}) \\*
+indirect command buffer & direct against indirect 4.82 against 5.83~µs per dispatch (64 × 1
+threadgroups), 4.66 against 5.81 (64 × 32); no gain for large dispatches
+(143.98 against 145.59~µs; 131.80 against 128.41 at 32~MB) & MM~\mm{25.141.7} \\*
+pipeline change & not measurable: one uber pipeline for FFN and w2 behind skip branches
+101.9~µs per dispatch shared, 101.8 separate, 99.9 same-pipeline floor & MM~\mm{25.141.2} \\*
+grid barrier instead of dispatch boundaries & 133.1 against 120.8~µs per 32~MB phase (fenced, capped barrier among
+resident threadgroups; no barrier reached its cap in these runs, 
+\cref{sec:forward-progress-in-order}) & MM~\mm{25.141.1} \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item Pipeline changes should not be counted as a cost (MM~\mm{17} rule 39). A constant-drain fusion model (6.54~µs per pipeline
+  change) was refuted: removing a change saved 0.6–2.5~µs, not 6.5; an in-chain difference alone is not a per-switch
+  cost, and a fusion saves about the work it removes (measured, MM~\mm{25.142.4}).
+\item An in-chain layer A/B predicted the graph at 0.75–1.07 times for changes of 8–22~µs per layer, and small savings
+  reached the graph only on the path every token waits for, so changes are judged in the whole graph (MM~\mm{17} rule 41).
+\item A prefill GEMM grid with row groups in the high bits of the threadgroup id ranked differently alone and in the graph: 9
+  percent faster alone with weights resident and 15 percent slower in the graph, because row groups reading one column
+  block were \code{grid\_n} threadgroups apart and each re-streamed it from DRAM (measured, MM~\mm{25.157}).
+\end{itemize}
+
+\subsection*{Counters by instrument}
+
+What the sources say about counters differs by instrument, and each statement is correct for the instrument it
+describes (\cref{tab:counter-instruments}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.81\hsize}X>{\hsize=1.63\hsize}X>{\hsize=0.56\hsize}X@{}}
+\caption{Performance counters available through each instrument.}\label{tab:counter-instruments}\\
+\toprule
+Instrument & What it gives & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Instrument & What it gives & Source \\
+\midrule
+\endhead
+Metal's public counter API & one counter set, \code{timestamp} (\code{GPUTimestamp}), sampled at
+stage (encoder) boundaries only: \code{supportsCounterSampling} stage 1,
+dispatch 0; sampling at a dispatch boundary asserts & measured, MM~\mm{25.48}, MM~\mm{25.141.6}, MM~\mm{0.15} \\*
+Metal System Trace & command buffers and encoders only; the only GPU counter is "RT Unit
+Active"; it records the GPU performance state (Minimum, Medium, Maximum)
+per interval & measured, MM~\mm{0.15}, MM~\mm{25.142.1} \\*
+Instruments \code{xctrace record} with a GUI-saved "Performance
+Limiters" template (\code{counterscounterprofile = 13},
+\code{g17-limiters.tracetemplate}) & 89 counters, including Kernel Occupancy, Compute SIMD Groups Inflight,
+Instruction Throughput Limiter and Utilization, ALU / F32 / F16 /
+Integer limiters, L1 Cache Limiter, Buffer L1 Read/Write Bandwidth, GPU
+Read/Write Bandwidth, Last Level Cache Bandwidth and Limiter, Memory
+Request Stalls Influence, Register Pressure Influence, Occupancy Manager
+Target, Neural Accelerator Limiter & measured, MM~\mm{25.144.4} \\*
+\bottomrule
+\end{xltabular}
+
+The private \code{GPURawCounter.framework} route fails: the sampler-source query (selector 261) returns
+kIOReturnNotPrivileged, and root does not help; it needs the entitlement \code{com.apple.private.agx.performance-spi}, and
+Apple's \code{MTLReplayer}, which carries it, is killed on launch by AMFI (measured, MM~\mm{25.144.4}). \emph{Correction:} the "M4
+status" paragraph inside MM~\mm{25.144.4} predates the template recording later in that section (\cref{app:a}).
+"Timestamps only" (MM~\mm{0.15}, MM~\mm{25.48}, MM~\mm{25.141.6}) remains true of Metal's public API.
+
+The Instruments counters are reduced as follows (MM~\mm{25.144.4}). Per-core counters are medians over busy samples (Kernel Occupancy
+at least half its own 90th percentile); bandwidths are 90th percentiles from a separate sampler. Absolute "GPU read
+bandwidth" is not a DRAM figure when a looped weight stays LLC-resident (MLX's about 500~GB/s exceeds the 298.5~GB/s
+DRAM peak). Register Pressure Influence read 0 for every kernel recorded (\cref{sec:registers-spills-occupancy}).
+
+No hardware clock is readable inside a kernel: none of the 67 special-register indices of
+\op{14059} is a clock, \code{llvm.readcyclecounter} crashes the compiler service, and a GPU-side
+ticker slows five-fold under load. The working clock is the CPU's \code{mach\_absolute\_time} (41.667~ns per tick) written
+into 512 lines of an untracked write-combined buffer, read by a one-thread stamp dispatch (about 1~µs each); the
+stamped span matches the command buffer to 0.14–0.5 percent (measured, MM~\mm{25.141.13}). One encoder per dispatch is not
+a faithful timeline (a layer read 276~µs that way against 330 in one encoder) (measured, MM~\mm{0.15}; MM~\mm{17} rule 42).
+
+Below Metal, the submission interface is \cref{ch:submission-below-metal}'s: a command queue is
+created through selectors 7, 16 and 28, and each Submit enters the kernel through \code{IOConnectTrap4} (one record) or
+\code{IOConnectCallMethod} selector 0x1d (several records) (\cref{sec:submit-record-call}). The resident runtime's warm Submit-to-callback
+split is in \cref{sec:completion-callbacks-their}.
+
+\textbf{Evidence.} MM~\mm{0.15}, MM~\mm{17}, MM~\mm{25.48}, MM~\mm{25.141.1}, MM~\mm{25.141.2}, MM~\mm{25.141.6}, MM~\mm{25.141.7}, MM~\mm{25.141.13},
+MM~\mm{25.142.1}, MM~\mm{25.142.4}, MM~\mm{25.144.4}, MM~\mm{25.157}.
+
+\section{GPU clock and power}\label{sec:clocks-power-gpu}
+
+The top clock and the governor are described in \cref{sec:clocks-performance-states}. Clock effects seen in these measurements:
+
+\begin{itemize}
+\item Cold runs are slow (the rule, the 1.5~ms idle-clock threshold and the warm-up are \cref{sec:clocks-performance-states}). For example,
+  a cold one-threadgroup pointer chase was linear in chain length (206, 405, 802, 1,640~µs at 4 MiB) and
+  then fell for longer chains (measured, MM~\mm{25.121}, MM~\mm{25.122}).
+\item Short command buffers drop the performance state: mlx-lm's seven per token spent 27–78 percent of decode in
+  "Medium" (\cref{sec:clocks-performance-states}; MM~\mm{0.15}).
+\item A clock reference does not detect contention for cores. Under another workload (Device Utilization 31 percent) the same FFN
+  projection timed 185–194~µs against 145–155 idle while the reference dispatch read 50.3–50.6~µs in both (measured,
+  MM~\mm{25.124.6}).
+\end{itemize}
+
+\Cref{tab:gpu-rail-power} gives measured power on the GPU rail. Its rows come from two instruments and two engines, so they do not form a like-for-like ratio.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.48\hsize}X>{\hsize=0.91\hsize}X>{\hsize=0.91\hsize}X>{\hsize=0.70\hsize}Xl@{}}
+\caption{GPU-rail power, work rate and efficiency for each arm.}\label{tab:gpu-rail-power}\\
+\toprule
+Arm & GPU rail & Work & Efficiency & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Arm & GPU rail & Work & Efficiency & Source \\
+\midrule
+\endhead
+idle & 32.3 mW & – & – & MM~\mm{25.56} \\*
+fp32 fma & 4,948 mW & 12.4 GMAC/s & 2.5 GMAC/J & MM~\mm{25.56} \\*
+legacy engine, \op{838}, four
+independent accumulators & 9,973 mW & 184.4 GMAC/s & 18.5 GMAC/J & MM~\mm{25.56} \\*
+legacy engine, \op{838}, one dependent
+chain & 19,001 mW & 129.6 GMAC/s & 6.8 GMAC/J & MM~\mm{25.56} \\*
+idle (second instrument) & 31.6 mW & – & – & MM~\mm{25.60} \\*
+fp32 FMA, serially dependent chain & 27,917.5 mW & 0.071 TFLOP/s (latency-bound) & – & MM~\mm{25.60} \\*
+TensorOps \code{matmul2d} 32×32×64 half to float & 62,768.4 mW (reproduced at 62,518.0, 0.40 percent) & 4.00 TFLOP/s, 12 percent of 33.5 & 2.06 uJ per 32×32×64 MMA & MM~\mm{25.60} \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item MM~\mm{25.56}: 5 s windows, three trials, grid $2^{20}$, GPU at 1,620~MHz and 100 percent active residency in every working
+  arm. The dependent chain draws 1.9 times the power of the four-chain kernel for less work (trials within 40 mW).
+  A kernel stalled on memory behaves differently: the repository README gives 5,607 mW computing against 1,681 mW
+  stalled on memory. Its "MMA" rows are the legacy engine, not the tensor unit.
+\item MM~\mm{25.60}: filled 6 s windows; liveness ratios (runtime against an eight-fold loop increase) tensor 8.05, ALU 7.82.
+  These are operating points, not peaks; "2.25 times" is not the accelerator's power ratio over a saturated ALU.
+\item \emph{A dead-code measurement.} The first tensor attempt stored its result under \code{if (lane == 1024)}, the
+  compiler deleted the loop, and it read 9.5~W; dispatch time did not move with the loop count (256 and 32,768
+  iterations both 0.010~ms), which showed that the loop was gone. Every power figure here carries a liveness ratio for that reason (MM~\mm{25.60}).
+\item Killing the host left the GPU at 1,620~MHz, 5,588 mW and 0 percent idle with every process reporting 0 GPU ms/s
+  (MM~\mm{17} rule 35).
+\end{itemize}
+
+\emph{Correction:} MM~\mm{20} ("Hardware identity") says "Power was not measured"; MM~\mm{25.56} and MM~\mm{25.60} measured it.
+
+\textbf{Evidence.} MM~\mm{0.15}, MM~\mm{8}, MM~\mm{17}, MM~\mm{20}, MM~\mm{25.56}, MM~\mm{25.60}, MM~\mm{25.121}, MM~\mm{25.122}, MM~\mm{25.124.6}.
+
+\section{Cost models}\label{sec:cost-models-their}
+
+The project has two cost models. \code{tensorsched} prices uniform work in measured kernel families and bounds
+non-uniform work from below; \code{g17perfmodel} prices any compiled program from its bytes, with a median error of
+15 percent, good for attention and poor for GEMM tile shapes and DRAM-bound kernels.
+
+\subsection*{Scheduler model (\code{agxforge/g17/tensorsched.py})}
+
+The model (MM~\mm{16}, MM~\mm{25.124}, and the module docstring) is:
+
+\begin{lstlisting}
+T_latency    = max over simdgroups of (steps of that simdgroup) x L_step
+T_throughput = (total steps) x C_step / cores
+T_memory     = unique bytes / BW(footprint)
+time         = max(T_latency, T_throughput, T_memory)
+\end{lstlisting}
+
+This is the standard makespan lower bound, tight only when every simdgroup does the same number of steps.
+
+\begin{itemize}
+\item \emph{Accuracy on uniform work} (measured, MM~\mm{16}, MM~\mm{25.124}): attention median 2.7 percent (20 of 23 rows within 10
+  percent; worst −16.5 percent at 128 × 2,048 keys fp8); weight-stationary stage 1, 5.1 percent stated, 3.3 percent on
+  the retained rows (worst −6.0); token-parallel FFN, 3.3 percent stated over 16 rows, of which 7 come from an
+  unretained log; the 9 retained rows give 4.7 percent (worst +11.9, bf16 at 10 threadgroups).
+\item \emph{Domain limit from a non-uniform workload} (measured, MM~\mm{16}). A causal attention gives query tiles triangular trip
+  counts; the model over-predicts the diagonal skip's benefit by 20.9 percent at 256 tasks and 37.1 percent at 1,024,
+  and refitting both constants on the same kernels' uniform runs leaves the error. For unequal work its predicted
+  speedup is a ceiling and its time a lower bound. The uniform two-regime shape is also too sharp (time rises
+  1.46 times for 8 times the tasks, then 3.14 times for the next 4 times; the best fit leaves ±12 percent).
+\item \emph{The scheduling term} (model and measured, MM~\mm{25.124.1}). \code{T\_schedule = list\_makespan\_ns}: tasks dealt in threadgroup
+  index order round-robin to 20 cores, then one per freed slot; a core with n resident tasks advances each one step per
+  \code{max(L\_step, n x C\_step)}. On the causal points (e4m3, head width 128, \code{L\_step} 2,868~ns, \code{C\_step} 327~ns) speedup
+  optimism falls from 20.9 to 7.5 percent at 256 tasks and from 37.1 to 26.5 percent at 1,024; it stays a lower bound,
+  and \code{speedup} refuses to form a ratio from it.
+\item \emph{Constants and domain checks} (model, MM~\mm{25.124}): attention step pairs 5.35~µs / 433~ns (fp8, int8) and 5.0~µs / 381
+  ns (bf16); a bandwidth ladder of 3 TB/s to 5 MiB, 0.52 TB/s to 20 MiB and 0.28 TB/s from 40 MiB; the chain fit 62.6 /
+  5.8~ns (bf16) and 68.2 / 7.0~ns (fp8, int8) with \code{chain\_ns} refusing any occupancy but 1 and 64 per core; residency
+  floors 64 per core from 49 to 125 registers (this compiler's kernels) and 32.1 at 126 (Apple's). Every prediction
+  carries checks (kernel family, dtype, head width or layer shape, registers 19–126 with the residency floor holding
+  the needed simdgroups, footprint on a measured plateau, token range, uniform work); a failed check yields no number,
+  and \code{choose} returns the known-safe schedule with \code{fallback=True}.
+\item \emph{Calibration across kernel families} (measured, MM~\mm{25.124.2}, MM~\mm{25.126}): the recon constants chose the wrong FFN
+  schedule at fp8 48 and bf16 64 tokens on the retained harness; the \code{layerbench} constants pick the measured-fastest
+  at all 11 points (blocked weight-stationary to token-parallel between 32 and 48 e4m3 tokens and between 48 and 64
+  bf16; one-pass weight-stationary wins at 48 e4m3, 1.119 against 1.254~ms). Head width scales by the MMA count
+  (\code{dh/128} for multiples of 32 from 96 to 256, 12 ratios at −6.4 to +2.3 percent; 144 costs 1.25, measured 1.26–1.32;
+  width 64 takes 0.355); the affine per-MMA extrapolation under-predicted width 256 by 16–32 percent and is retired.
+\item Simdgroups per threadgroup 1, 2, 4 and 8 predict the same attention time; the model keeps the measured default 8
+  (1.455~ms, 4.2 percent behind the best, 2 at 1.396) and excludes 16 (16 threadgroups leave 4 cores idle) (MM
+  25.124).
+\item It chooses schedules but does not lower them, and the production runtime cannot express most schedules it chooses between
+  (module docstring).
+\end{itemize}
+
+\subsection*{Static model from compiled bytes (\code{tools/g17perfmodel.py})}
+
+The figures in this subsection are model and measured values from MM~\mm{25.144.12}.
+
+\begin{itemize}
+\item \emph{Mechanics.} One simdgroup is simulated in order over decoded bytes: each instruction issues one 3.105~ns interval
+  after the last and not before its operands; loads publish scoreboard slots and consumers stall until they land
+  (tensor fragment loads, \op{12674} and \op{12709}, take the working-set
+  latency; \op{12682} the 16 KiB latency); a 16-bit MMA, \op{5106}, result is ready after a dependent-MMA latency;
+  loops are walked 4 trips and extrapolated (latches \code{cnt < imm} and \code{p > 0} only). Threadgroups are dealt to 20 cores
+  in index order; residency comes from the program's highest register (the MM~\mm{25.121} table) and 3,072 threads per
+  core; per-core rate is an exact mean-value analysis of three stations (issue slots, load path, tensor unit) fed into
+  the MM~\mm{25.124.1} list schedule; a 280~GB/s DRAM floor; a fixed per-dispatch cost per timing protocol.
+\item \emph{Nine fitted constants} (bounded least squares on log error; the tensor unit may not beat 4.95~ns per MMA per core):
+  12.5 issue slots per interval per core; 3.43~ns per fragment load; a scalar load at 0.43 fragment loads; 6.83~ns per
+  MMA (72 percent of peak); load latency x0.50 of the pointer chase; dependent MMA latency 31.6~ns; MMA issue 1.0
+  interval; per-dispatch cost 1.4 / 1.0 / 1.0~µs. The latency and issue constants sit at their lower bounds: they are
+  not identifiable from these timings.
+\item \emph{Accuracy} over 108 recorded timings (45 GEMM, 54 attention, 9 graph; 16 set aside as noisy): leave-one-table-out
+  median 14.8 percent (47 of 92 within ±15 percent); fixed split 15.5 percent; in-sample 9.6 percent; graph
+  attention 8.3 percent; hot attention at M ≥ 512 9.9 percent; warm GEMM 19.6 percent; noisy rows 35 percent. The
+  ±15 percent target is met in the median and for attention, not for GEMMs.
+\item \emph{Where it fails.} GEMM tile shapes do not extrapolate (a 2×2 tile up to 40 percent slow, tall tiles 16–37 percent
+  fast; operand sharing among a threadgroup's simdgroups is invisible to it); 1,024-token prefill projections predicted
+  144~ms against 113 measured (+27 percent); SwiGLU 9.0 against 7.2~ms (DRAM-bound, and the model has one 280~GB/s
+  plateau); per-simdgroup latency is not identifiable. It refuses to run without the opcode class table, because an
+  UNKNOWN fallback moved 81 of 108 predictions.
+\item \emph{Fetch.} Two fetch terms built from the recorded cliff (1.91~ns per byte cold, 2.81 times past 16 KiB on one
+  simdgroup, 1.15 times at 64) both worsened held-out error (23.2 and 17.5 percent against 14.8), so fetch is not in
+  the model of record.
+\item \emph{Predictions it made} (prediction, then built): SwiGLU fused into w3's GEMM 7.6~ms (built); hardware exp2 at 512-row
+  chunks 1.5~ms (built; 679 to 490 instructions a trip); K and V shared across 4 simdgroups through threadgroup memory
+  −2.8~ms (slower).
+\end{itemize}
+
+\textbf{Evidence.} MM~\mm{16}, MM~\mm{25.124}, MM~\mm{25.124.1}, MM~\mm{25.124.2}, MM~\mm{25.126}, MM~\mm{25.144.12}; \code{agxforge/g17/tensorsched.py}.
+
+\section{Limiting resources by workload}\label{sec:bounds-real-workloads}
+
+The workload is InternLM2.5-1.8B at 4 bits unless stated. Throughput against mlx-lm for each workload is in the
+machine model (MM~\mm{25.190}; the headline comparison is in \href{https://github.com/sbryngelson/AGXForge/blob/main/docs/showcase.md}{the showcase}, section 2); the evidence for which resource bounds
+each workload is kept here.
+
+\subsection*{Single-stream decode}
+
+Wide projections are memory-bound and narrow ones issue-bound.
+
+\begin{itemize}
+\item In the plan (model and measured, MM~\mm{25.124.5}), one bf16 decode step (d 2048, 16 heads x 128, KV 256, one query row)
+  has a memory floor of 0.487~ms (136.3~MB), 0.247~ms with fp8 weights.
+\item A one-token projection with too few threadgroups is bound by its K chain (measured, MM~\mm{25.124.6}): M 16, N 128, K
+  2048 times the same with cold and cache-resident weights (within 1 percent), at 6.5–9.9~GB/s ours and 7.5–16.7~GB/s
+  Apple's, against 270. With enough threadgroups the column grid reaches the floor: N 8192 × K 2048 (33.5~MB) on 64
+  threadgroups of 128 columns takes 143–145~µs = 231–234~GB/s, 1.2 times its 0.120~ms floor, equal to Apple's
+  \code{matmul2d} (142.8–145.2~µs). Split-K on N 2048, K 2048: G 1 84.2, 2 52.1, 4 41.1, 8 42.0, 16 43.3~µs; the plateau
+  (about 200~GB/s, cached equal to cold) is not DRAM.
+\item \Cref{tab:decode-time-breakdown} shows where 4.73~ms per token goes at a 1K context (measured, MM~\mm{25.181}).
+
+  \begin{xltabular}{\linewidth}{@{}>{\hsize=1.20\hsize}Xl>{\hsize=0.80\hsize}Xl@{}}
+\caption{Single-stream decode time per token at a 1K context by part, with bytes streamed and effective bandwidth.}\label{tab:decode-time-breakdown}\\
+\toprule
+Part & ms & Bytes per token & Effective GB/s \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Part & ms & Bytes per token & Effective GB/s \\
+\midrule
+\endhead
+  FFN (w1, w3, SwiGLU) & 1.76 & 453~MB & 257 \\*
+  w2 + residual & 0.90 & 227~MB & 252 \\*
+  qkv & 0.48 & 113~MB & 236 \\*
+  wo + residual & 0.30 & 57~MB & 188 \\*
+  head & 0.36 & 107~MB & 296 \\*
+  attention & 0.74 & 107~MB of KV & 144 \\*
+  norms and the rest & 0.18 &  &  \\*
+  \bottomrule
+\end{xltabular}
+
+  Only the head streams at the DRAM peak.
+\item Counters on the decode qmv kernels (measured, MM~\mm{25.144.4}): the q4 w2 kernel is issue-bound (instruction
+  throughput limiter 77.2 percent, zero memory-stall influence; pinned-weight floor 32.9~µs above the 29.8~µs DRAM
+  floor); q8 w2 is memory-bound (instruction limiter 46.7 percent, memory-stall influence 26.6 percent, LLC limiter
+  100; 89 percent of the 298.5~GB/s peak); MLX's qmv is latency- and memory-bound at 16.7 percent occupancy (64-thread
+  threadgroups), 37–59 percent memory-stall influence.
+\item In q4 w2, compute and stream barely overlap (measured, MM~\mm{25.141.15}, at the 4-rows-per-simdgroup shape): real 46.2~µs; x index cache-resident 40.9;
+  weight index resident 29.5; both 28.5~µs (the instruction floor); streaming 8.9~MB at 298.5~GB/s needs about 30~µs.
+  The real time is close to the sum.
+\item The single-stream q4 MLP is load-bound (measured, bounded negative, MM~\mm{25.200}): removing 26 percent of its
+  instructions (FFN 393 to 291 instructions, 10 loads either way) moves nothing (186.4–192.1 against 177.9–193.4 tok/s
+  at 1,792 tokens).
+\item Context costs about 20~ns per key-layer (measured, MM~\mm{25.199}); long-context attention variants (\code{keyblock},
+  \code{tgsplit}) do not help in the graph at 1,792 keys.
+\item Apple-compiled twins of this project's decode kernels, bit-identical in output, give 10–15 percent higher median
+  throughput, so this project's instruction-level code generation costs that much (measured, MM~\mm{25.211}; showcase
+  section 2).
+\end{itemize}
+
+\subsection*{Batched decode}
+
+The batched projections are occupancy-bound, then fp32-pipe-bound after split-K (all figures measured).
+
+\begin{itemize}
+\item The tensor-unit projection (\code{g17qsm}: $Y^{T} = W^{T} X^{T}$, W dequantized once into registers as A, 16 sequences as B)
+  costs 446~µs per layer for 16 tokens (27.9~µs a token) against batched qmv's 126 at B~8: 4.5 times per token; about
+  76~GB/s, latency-bound per simdgroup (about 700 dependent scalar instructions per trip before 8 MMAs) (MM~\mm{25.166}).
+\item Split-K to about 512 threadgroups is the knee at every role (qkv split 4: 39.8~µs at 512 threadgroups; wo split 8:
+  23.2; w1/w3 split 2: 76.4; w2 split 8: 75.8) (MM~\mm{25.185}).
+\item At B~16 the projections are fp32-pipe-bound, not memory-bound: F32 Limiter 100, F32 Utilization 99.9, instruction
+  throughput limiter 78 (p90 98), kernel occupancy 38 (p90 50), memory request stalls 0, GPU read bandwidth p90 122
+  GB/s, Neural Accelerator utilization p90 25, F16 utilization 0. Projections are 7.7~ms of a 10.98~ms step (70
+  percent) for 0.95~GB of q4, about 2.6 times the DRAM floor. Ablation on w1: base 76.3, no dequant 59.6, no weight
+  load 60.9, neither 35.1~µs (MM~\mm{25.194}).
+\item Moving the dequant to the fp16 pipe with \op{798}, two per weight, relieves the fp32 pipe:
+  w1/w3 74.6 to 65.7~µs (−12 percent), w2 73.9 to 66.6, qkv 39.6 to 35.4, wo 22.1 to 20.0 (MM~\mm{25.196}).
+\item At B~8 the w2 projection hits the LLC limiter (100 percent) for this compiler and for MLX's \code{affine\_qmv\_wide}
+  alike, so both are held by the same memory limit. The B~8 qkv is register-capped at 25–27 percent occupancy (\cref{sec:registers-spills-occupancy}) (MM~\mm{25.144.4}).
+\item MLX's own batched decode is compute-bound past B~2 (quantized) and B~8 (bf16); every precision converges on 19–21~ms
+  per step at B~16 (q4 841 tok/s, bf16 750): dequantization costs more than the bytes saved (MM~\mm{25.142.5}).
+\item Which mlx-lm batched path is the baseline depends on the model (MM~\mm{25.193}).
+\end{itemize}
+
+\subsection*{Prefill}
+
+Every figure in this subsection is measured.
+
+\begin{itemize}
+\item \emph{A corrected GEMM measurement.} An earlier comparison put this compiler's prefill GEMMs at 60–69 percent
+  of peak against MLX's 82–88. The per-dispatch profile used there did not close (181~ms of GPU time in a 150~ms
+  prefill), and the isolated GEMM bench runs about four times the in-graph per-call time. With a closure check
+  (dispatch-alone sum 135.8~ms against chained step spans 137.1 and in-process medians 139.6, within 1 percent) the
+  in-graph GEMMs are at 80–89 percent of 33.1 TFLOP/s: qkv 256 × 4096 × 2048 148~µs (88 percent), wo 81~µs (80), w1
+  290~µs (89), w2 292~µs (89). Pinning the weights cache-resident changed per-role time by 0 to ±5 percent, so weight
+  traffic is not the GEMM cost (MM~\mm{25.160}).
+\item Prefill attention is latency-bound on the per-block scratch round trip: 32-key blocks cut instructions per 16 keys
+  from 490 to about 390 (−20 percent) for −3 percent time (MM~\mm{25.162}). Keeping S and P in registers made attention 14.7
+  to 12.1~ms (exact) or 9.6~ms (hardware exp2) (MM~\mm{25.163}).
+\item The SwiGLU kernel was bandwidth-bound: 10 bytes an element over 201 M elements is 6.7~ms at 298.5~GB/s, exactly its
+  6.74~ms; an fp16 intermediate (6 bytes an element) made it 5.54~ms and arithmetic-bound (MM~\mm{25.183}).
+\end{itemize}
+
+\Cref{tab:binding-resources} summarizes what binds each workload.
+
+\begin{xltabular}{\linewidth}{@{}X>{\hsize=1.34\hsize}X>{\hsize=0.69\hsize}X@{}}
+\caption{Binding resource for each studied workload.}\label{tab:binding-resources}\\
+\toprule
+Workload & Binding resource in the studied kernels & Evidence \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Workload & Binding resource in the studied kernels & Evidence \\
+\midrule
+\endhead
+fused attention, FFN layer kernels & instruction issue and ALU (about 46 instructions per MMA) & MM~\mm{8}, MM~\mm{16} \\*
+single-stream decode, q8 projections and the head & DRAM bandwidth & MM~\mm{25.144.4}, MM~\mm{25.181} \\*
+single-stream decode, q4 w2 & instruction issue (counter) yet insensitive to removing dequant work
+(load-bound) & MM~\mm{25.144.4}, MM~\mm{25.200} \\*
+one-token projection with few threadgroups & one K chain's latency & MM~\mm{25.124.6} \\*
+decode attention past 4.2~MB of KV & LLC capacity, then about 140~GB/s & MM~\mm{25.181} \\*
+batched decode B~16 projections & occupancy first (about 256 one-simdgroup threadgroups a projection);
+after split-K to about 512, the fp32 pipe, relieved by moving the
+dequant to the fp16 pipe & MM~\mm{25.185}, MM~\mm{25.194}, MM~\mm{25.196} \\*
+batched decode B~8 w2 & LLC bandwidth (both stacks) & MM~\mm{25.144.4} \\*
+prefill GEMMs & tensor and issue, at 80–89 percent of peak & MM~\mm{25.160} \\*
+prefill attention & latency of a scratch round trip, until S and P stay in registers & MM~\mm{25.162}, MM~\mm{25.163} \\*
+\bottomrule
+\end{xltabular}
+
+\textbf{Not known.} The cause of the per-core staircase (MM~\mm{25.122}); why this compiler's residency counter reads
+about twice Apple's kernel's (MM~\mm{25.121}); fetch cost at intermediate occupancy (MM~\mm{25.144.12}); physical register
+capacity per core (MM~\mm{20}); why Apple-compiled twins are 10–15 percent faster (MM~\mm{25.211}). All figures are from one machine, and the
+Metal-path evidence files behind them do not record the OS build (\cref{sec:measured-part-software}).
+
+\textbf{Evidence.} MM~\mm{8}, MM~\mm{16}, MM~\mm{25.124.5}, MM~\mm{25.124.6}, MM~\mm{25.141.15}, MM~\mm{25.142.5}, MM~\mm{25.144.4}, MM~\mm{25.160}, MM~\mm{25.162},
+MM~\mm{25.163}, MM~\mm{25.166}, MM~\mm{25.181}, MM~\mm{25.183}, MM~\mm{25.185}, MM~\mm{25.190}, MM~\mm{25.193}, MM~\mm{25.194}, MM~\mm{25.196}, MM~\mm{25.199},
+MM~\mm{25.200}, MM~\mm{25.211}.

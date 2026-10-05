@@ -1,0 +1,113 @@
+{
+ "what": "MLX's routes for an int8 x int8 GEMM (MLX matmul refuses int8): cast A per call, B pre-cast once; 30 dependent steps per mx.eval, median of 9, scaffold-only chain subtracted; outputs compared with an int64 numpy reference",
+ "rows": [
+  {
+   "shape": "wo 256x2048x2048",
+   "route": "fp16",
+   "route_us": 118.7,
+   "scaffold_us": 12.8,
+   "net_us": 105.9,
+   "tops": 20.3,
+   "vs_int64_reference": "512148 of 524288 wrong"
+  },
+  {
+   "shape": "wo 256x2048x2048",
+   "route": "bf16",
+   "route_us": 117.1,
+   "scaffold_us": 9.9,
+   "net_us": 107.2,
+   "tops": 20.0,
+   "vs_int64_reference": "521698 of 524288 wrong"
+  },
+  {
+   "shape": "wo 256x2048x2048",
+   "route": "fp32",
+   "route_us": 146.2,
+   "scaffold_us": 10.1,
+   "net_us": 136.1,
+   "tops": 15.8,
+   "vs_int64_reference": "exact"
+  },
+  {
+   "shape": "qkv 256x4096x2048",
+   "route": "fp16",
+   "route_us": 173.9,
+   "scaffold_us": 11.4,
+   "net_us": 162.5,
+   "tops": 26.4,
+   "vs_int64_reference": "1024034 of 1048576 wrong"
+  },
+  {
+   "shape": "qkv 256x4096x2048",
+   "route": "bf16",
+   "route_us": 174.2,
+   "scaffold_us": 11.8,
+   "net_us": 162.4,
+   "tops": 26.4,
+   "vs_int64_reference": "1043389 of 1048576 wrong"
+  },
+  {
+   "shape": "qkv 256x4096x2048",
+   "route": "fp32",
+   "route_us": 280.2,
+   "scaffold_us": 10.3,
+   "net_us": 270.0,
+   "tops": 15.9,
+   "vs_int64_reference": "exact"
+  },
+  {
+   "shape": "w1 256x8192x2048",
+   "route": "fp16",
+   "route_us": 303.5,
+   "scaffold_us": 9.0,
+   "net_us": 294.5,
+   "tops": 29.2,
+   "vs_int64_reference": "2048620 of 2097152 wrong"
+  },
+  {
+   "shape": "w1 256x8192x2048",
+   "route": "bf16",
+   "route_us": 301.0,
+   "scaffold_us": 8.7,
+   "net_us": 292.3,
+   "tops": 29.4,
+   "vs_int64_reference": "2086785 of 2097152 wrong"
+  },
+  {
+   "shape": "w1 256x8192x2048",
+   "route": "fp32",
+   "route_us": 475.0,
+   "scaffold_us": 8.5,
+   "net_us": 466.5,
+   "tops": 18.4,
+   "vs_int64_reference": "exact"
+  },
+  {
+   "shape": "w2 256x2048x8192",
+   "route": "fp16",
+   "route_us": 426.1,
+   "scaffold_us": 8.4,
+   "net_us": 417.7,
+   "tops": 20.6,
+   "vs_int64_reference": "518197 of 524288 wrong"
+  },
+  {
+   "shape": "w2 256x2048x8192",
+   "route": "bf16",
+   "route_us": 431.6,
+   "scaffold_us": 8.4,
+   "net_us": 423.2,
+   "tops": 20.3,
+   "vs_int64_reference": "522870 of 524288 wrong"
+  },
+  {
+   "shape": "w2 256x2048x8192",
+   "route": "fp32",
+   "route_us": 743.3,
+   "scaffold_us": 8.1,
+   "net_us": 735.1,
+   "tops": 11.7,
+   "vs_int64_reference": "exact"
+  }
+ ]
+}

@@ -1,0 +1,1503 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    0
+   ],
+   [
+    1
+   ],
+   [
+    2
+   ],
+   [
+    4
+   ],
+   [
+    15
+   ],
+   [
+    16
+   ],
+   [
+    255
+   ],
+   [
+    32767
+   ],
+   [
+    32768
+   ],
+   [
+    65536
+   ],
+   [
+    2147483647
+   ],
+   [
+    2147483648
+   ],
+   [
+    2147483649
+   ],
+   [
+    180150001
+   ],
+   [
+    1515870810
+   ],
+   [
+    3217031168
+   ]
+  ],
+  "expect": [
+   4,
+   5,
+   6,
+   8,
+   19,
+   20,
+   259,
+   32771,
+   32772,
+   65540,
+   2147483651,
+   2147483652,
+   2147483653,
+   180150005,
+   1515870814,
+   3217031172
+  ],
+  "note": "MANDATORY POSITIVE CONTROL at all sixteen inputs of this batch. op10279 returns src + 4, execution-proven, and it is also outside every arity-1 candidate so it must read 'no candidate fits'. The batch is void without it."
+ },
+ {
+  "id": "A904.separate",
+  "op": 904,
+  "author": "fieldmap",
+  "cases": [
+   [
+    3735928559
+   ],
+   [
+    305419896
+   ],
+   [
+    2863311530
+   ],
+   [
+    2147483646
+   ],
+   [
+    2147483649
+   ],
+   [
+    1120403456
+   ],
+   [
+    1
+   ],
+   [
+    2147483648
+   ],
+   [
+    8388608
+   ],
+   [
+    4294967294
+   ],
+   [
+    1092616192
+   ],
+   [
+    1078530011
+   ],
+   [
+    1073741824
+   ],
+   [
+    2
+   ],
+   [
+    3212836864
+   ],
+   [
+    4294967295
+   ]
+  ],
+  "note": "op904 is named fadd.imm.sat.f32 and sits untouched because \"its only fit comes from a probe that could not have failed\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [32] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 65 functions this library offers at arity 1 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "float.frint": [
+    "float.frint",
+    "float.ftrunc"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A999.separate",
+  "op": 999,
+  "author": "fieldmap",
+  "cases": [
+   [
+    3735928559,
+    49153
+   ],
+   [
+    2,
+    16672
+   ],
+   [
+    2147483647,
+    32766
+   ],
+   [
+    4294967294,
+    16457
+   ],
+   [
+    1073741824,
+    4660
+   ],
+   [
+    2147483649,
+    32769
+   ],
+   [
+    32768,
+    16672
+   ],
+   [
+    3212836864,
+    1024
+   ],
+   [
+    1073741824,
+    16672
+   ],
+   [
+    1092616192,
+    1
+   ],
+   [
+    65535,
+    49152
+   ],
+   [
+    1073741824,
+    2
+   ],
+   [
+    1065353216,
+    32766
+   ],
+   [
+    8388608,
+    49153
+   ],
+   [
+    3221225472,
+    15360
+   ],
+   [
+    2863311530,
+    0
+   ]
+  ],
+  "note": "op999 is named fadd.f32.f16 and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [32, 16] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 69 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add": [
+    "integer.add",
+    "integer.add_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.bitwise_6": [
+    "integer.bitwise_6",
+    "integer.xor_b16"
+   ],
+   "integer.bitwise_E": [
+    "integer.bitwise_E",
+    "integer.or_b16"
+   ],
+   "integer.sub": [
+    "integer.sub",
+    "integer.sub_b16"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A1002.separate",
+  "op": 1002,
+  "author": "fieldmap",
+  "cases": [
+   [
+    49153,
+    3735928559
+   ],
+   [
+    32766,
+    32768
+   ],
+   [
+    32769,
+    2
+   ],
+   [
+    16256,
+    4294967294
+   ],
+   [
+    65535,
+    2147483647
+   ],
+   [
+    16457,
+    2147483648
+   ],
+   [
+    4660,
+    1073741824
+   ],
+   [
+    4660,
+    32768
+   ],
+   [
+    16672,
+    3212836864
+   ],
+   [
+    1024,
+    1073741824
+   ],
+   [
+    16672,
+    1092616192
+   ],
+   [
+    1,
+    65535
+   ],
+   [
+    49152,
+    1073741824
+   ],
+   [
+    2,
+    1065353216
+   ],
+   [
+    32766,
+    8388608
+   ],
+   [
+    49153,
+    3221225472
+   ]
+  ],
+  "note": "op1002 is named fadd.imm and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 32] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 70 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add_b16": [
+    "integer.add_b16",
+    "integer.add_widen_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.sar": [
+    "integer.sar",
+    "integer.shr"
+   ],
+   "integer.sar_wrap": [
+    "integer.sar_wrap",
+    "integer.shr_wrap"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A1058.separate",
+  "op": 1058,
+  "author": "fieldmap",
+  "cases": [
+   [
+    43981,
+    2863311530
+   ],
+   [
+    32766,
+    32768
+   ],
+   [
+    32769,
+    2
+   ],
+   [
+    16256,
+    4294967294
+   ],
+   [
+    32769,
+    2147483646
+   ],
+   [
+    16457,
+    2147483648
+   ],
+   [
+    4660,
+    1073741824
+   ],
+   [
+    4660,
+    32768
+   ],
+   [
+    16672,
+    3212836864
+   ],
+   [
+    1024,
+    1073741824
+   ],
+   [
+    16672,
+    1092616192
+   ],
+   [
+    1,
+    65535
+   ],
+   [
+    49152,
+    1073741824
+   ],
+   [
+    2,
+    1065353216
+   ],
+   [
+    32766,
+    8388608
+   ],
+   [
+    49153,
+    3221225472
+   ]
+  ],
+  "note": "op1058 is named fadd and sits untouched because \"every declared source was fed the SAME value at its own declared width, so no output could have varied\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 32] at a 16-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 64 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add": [
+    "integer.add",
+    "integer.add_b16",
+    "integer.add_b16_sext",
+    "integer.add_widen_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.bitwise_6": [
+    "integer.bitwise_6",
+    "integer.xor_b16"
+   ],
+   "integer.bitwise_E": [
+    "integer.bitwise_E",
+    "integer.or_b16"
+   ],
+   "integer.sar": [
+    "integer.sar",
+    "integer.shr"
+   ],
+   "integer.sar_wrap": [
+    "integer.sar_wrap",
+    "integer.shr_wrap"
+   ],
+   "integer.sub": [
+    "integer.sub",
+    "integer.sub_b16",
+    "integer.sub_b16_sext"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A2212.separate",
+  "op": 2212,
+  "author": "fieldmap",
+  "cases": [
+   [
+    16968,
+    49153
+   ],
+   [
+    65535,
+    32766
+   ],
+   [
+    49153,
+    43981
+   ],
+   [
+    16256,
+    18688
+   ],
+   [
+    48128,
+    32256
+   ],
+   [
+    65535,
+    18688
+   ],
+   [
+    14336,
+    256
+   ],
+   [
+    14336,
+    65535
+   ],
+   [
+    43981,
+    16457
+   ],
+   [
+    43690,
+    43981
+   ],
+   [
+    1,
+    13653
+   ],
+   [
+    65280,
+    48128
+   ],
+   [
+    16457,
+    32256
+   ],
+   [
+    43981,
+    1024
+   ],
+   [
+    256,
+    16384
+   ],
+   [
+    16968,
+    14336
+   ]
+  ],
+  "note": "op2212 is named fadd.imm and sits untouched because \"every declared source was fed the SAME value at its own declared width, so no output could have varied\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 16] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 52 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "float.fadd": [
+    "float.fadd",
+    "integer.add",
+    "integer.add_b16",
+    "integer.add_widen_b16",
+    "integer.addsat_s",
+    "integer.addsat_u"
+   ],
+   "float.fmax": [
+    "float.fmax",
+    "integer.smax",
+    "integer.umax"
+   ],
+   "float.fmin": [
+    "float.fmin",
+    "integer.smin",
+    "integer.umin"
+   ],
+   "float.fmul": [
+    "float.fmul",
+    "half.bf16_mul_of_f32_operands",
+    "half.hmul_f32_operands",
+    "integer.bitwise_0",
+    "integer.mulhi_s",
+    "integer.mulhi_u"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.bitwise_6": [
+    "integer.bitwise_6",
+    "integer.xor_b16"
+   ],
+   "integer.bitwise_E": [
+    "integer.bitwise_E",
+    "integer.or_b16"
+   ],
+   "integer.sar": [
+    "integer.sar",
+    "integer.shr"
+   ],
+   "integer.sar_wrap": [
+    "integer.sar_wrap",
+    "integer.shr_wrap"
+   ],
+   "integer.sub": [
+    "integer.sub",
+    "integer.sub_b16",
+    "integer.subsat_s"
+   ],
+   "integer.subsat_u": [
+    "integer.subsat_u",
+    "integer.subsat_u_b16"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A2214.separate",
+  "op": 2214,
+  "author": "fieldmap",
+  "cases": [
+   [
+    49153,
+    3735928559
+   ],
+   [
+    32766,
+    32768
+   ],
+   [
+    32769,
+    2
+   ],
+   [
+    16256,
+    4294967294
+   ],
+   [
+    65535,
+    2147483647
+   ],
+   [
+    16457,
+    2147483648
+   ],
+   [
+    4660,
+    1073741824
+   ],
+   [
+    4660,
+    32768
+   ],
+   [
+    16672,
+    3212836864
+   ],
+   [
+    1024,
+    1073741824
+   ],
+   [
+    16672,
+    1092616192
+   ],
+   [
+    1,
+    65535
+   ],
+   [
+    49152,
+    1073741824
+   ],
+   [
+    2,
+    1065353216
+   ],
+   [
+    32766,
+    8388608
+   ],
+   [
+    49153,
+    3221225472
+   ]
+  ],
+  "note": "op2214 is named fadd.imm and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 32] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 70 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add_b16": [
+    "integer.add_b16",
+    "integer.add_widen_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.sar": [
+    "integer.sar",
+    "integer.shr"
+   ],
+   "integer.sar_wrap": [
+    "integer.sar_wrap",
+    "integer.shr_wrap"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A2241.separate",
+  "op": 2241,
+  "author": "fieldmap",
+  "cases": [
+   [
+    32256,
+    1092616192,
+    32768
+   ],
+   [
+    48128,
+    2147483646,
+    65280
+   ],
+   [
+    16968,
+    1065353216,
+    32768
+   ],
+   [
+    32766,
+    1036831949,
+    13653
+   ],
+   [
+    16384,
+    1073741824,
+    13653
+   ],
+   [
+    32768,
+    305419896,
+    2
+   ],
+   [
+    43690,
+    4294901760,
+    43981
+   ],
+   [
+    16384,
+    3212836864,
+    31743
+   ],
+   [
+    15360,
+    4294901760,
+    2
+   ],
+   [
+    16384,
+    8388608,
+    4660
+   ],
+   [
+    43690,
+    1056964608,
+    15360
+   ],
+   [
+    49153,
+    1036831949,
+    31743
+   ],
+   [
+    2,
+    3221225472,
+    32768
+   ],
+   [
+    255,
+    1120403456,
+    1
+   ],
+   [
+    32769,
+    2143289344,
+    32769
+   ],
+   [
+    49153,
+    2147483646,
+    18688
+   ]
+  ],
+  "note": "op2241 is named ffma and sits untouched because \"every declared source was fed the SAME value at its own declared width, so no output could have varied\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 32, 16] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 6 functions this library offers at arity 3 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {},
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A2385.separate",
+  "op": 2385,
+  "author": "fieldmap",
+  "cases": [
+   [
+    65537,
+    3221225472,
+    32256
+   ],
+   [
+    4294967295,
+    4294967295,
+    32768
+   ],
+   [
+    3735928559,
+    2147483649,
+    18688
+   ],
+   [
+    1078530011,
+    3221225472,
+    255
+   ],
+   [
+    2139095039,
+    1092616192,
+    15360
+   ],
+   [
+    1065353216,
+    305419896,
+    16256
+   ],
+   [
+    1,
+    1065353216,
+    2
+   ],
+   [
+    2143289344,
+    4294967295,
+    49152
+   ],
+   [
+    8388608,
+    1078530011,
+    1
+   ],
+   [
+    1078530011,
+    4294967295,
+    49152
+   ],
+   [
+    1431655765,
+    1078530011,
+    4660
+   ],
+   [
+    0,
+    1056964608,
+    2
+   ],
+   [
+    1120403456,
+    32768,
+    65280
+   ],
+   [
+    65537,
+    8388608,
+    49153
+   ],
+   [
+    2139095039,
+    2139095040,
+    32768
+   ],
+   [
+    1120403456,
+    0,
+    49153
+   ]
+  ],
+  "note": "op2385 is named ffma and sits untouched because \"every no-fit record holds an operand CONSTANT, so no function of more than one argument is identifiable from them\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [32, 32, 16] at a 16-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 6 functions this library offers at arity 3 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {},
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A2442.separate",
+  "op": 2442,
+  "author": "fieldmap",
+  "cases": [
+   [
+    32256,
+    255,
+    2147483649
+   ],
+   [
+    65280,
+    32256,
+    1092616192
+   ],
+   [
+    32768,
+    16968,
+    1065353216
+   ],
+   [
+    32768,
+    32766,
+    1036831949
+   ],
+   [
+    13653,
+    16384,
+    1073741824
+   ],
+   [
+    13653,
+    32768,
+    305419896
+   ],
+   [
+    2,
+    43690,
+    4294901760
+   ],
+   [
+    43981,
+    16384,
+    3212836864
+   ],
+   [
+    31743,
+    15360,
+    4294901760
+   ],
+   [
+    2,
+    16384,
+    8388608
+   ],
+   [
+    4660,
+    43690,
+    1056964608
+   ],
+   [
+    15360,
+    49153,
+    1036831949
+   ],
+   [
+    31743,
+    2,
+    3221225472
+   ],
+   [
+    32768,
+    255,
+    1120403456
+   ],
+   [
+    1,
+    32769,
+    2143289344
+   ],
+   [
+    32769,
+    49153,
+    2147483646
+   ]
+  ],
+  "note": "op2442 is named ffma and sits untouched because \"every declared source was fed the SAME value at its own declared width, so no output could have varied\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 16, 32] at a 16-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 5 functions this library offers at arity 3 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "float.ffma": [
+    "float.ffma",
+    "float.ffms"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A2445.separate",
+  "op": 2445,
+  "author": "fieldmap",
+  "cases": [
+   [
+    43690,
+    256,
+    4660
+   ],
+   [
+    16968,
+    32766,
+    16256
+   ],
+   [
+    256,
+    16672,
+    255
+   ],
+   [
+    0,
+    32766,
+    65535
+   ],
+   [
+    16457,
+    21845,
+    32256
+   ],
+   [
+    49152,
+    32769,
+    65535
+   ],
+   [
+    65535,
+    16384,
+    0
+   ],
+   [
+    16384,
+    2,
+    43690
+   ],
+   [
+    32256,
+    16457,
+    48128
+   ],
+   [
+    1,
+    16256,
+    49153
+   ],
+   [
+    21845,
+    1024,
+    16457
+   ],
+   [
+    14336,
+    65280,
+    32767
+   ],
+   [
+    16256,
+    32768,
+    43690
+   ],
+   [
+    0,
+    16384,
+    13653
+   ],
+   [
+    16968,
+    31743,
+    16384
+   ],
+   [
+    256,
+    32766,
+    49153
+   ]
+  ],
+  "note": "op2445 is named ffma and sits untouched because \"every declared source was fed the SAME value at its own declared width, so no output could have varied\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 16, 16] at a 16-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 4 functions this library offers at arity 3 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "float.fadd3": [
+    "float.fadd3",
+    "integer.add3"
+   ],
+   "float.ffma": [
+    "float.ffma",
+    "float.ffms"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A3290.separate",
+  "op": 3290,
+  "author": "fieldmap",
+  "cases": [
+   [
+    3226013659,
+    1431655765
+   ],
+   [
+    65535,
+    32768
+   ],
+   [
+    2863311530,
+    3226013659
+   ],
+   [
+    1078530011,
+    65537
+   ],
+   [
+    1078530011,
+    4294967294
+   ],
+   [
+    4294967295,
+    1120403456
+   ],
+   [
+    1073741824,
+    2143289344
+   ],
+   [
+    32768,
+    2147483648
+   ],
+   [
+    3212836864,
+    3735928559
+   ],
+   [
+    65535,
+    3212836864
+   ],
+   [
+    4294901760,
+    65535
+   ],
+   [
+    2139095040,
+    1431655765
+   ],
+   [
+    4294967295,
+    1051372203
+   ],
+   [
+    1056964608,
+    1056964608
+   ],
+   [
+    2863311530,
+    8388608
+   ],
+   [
+    3212836864,
+    2139095040
+   ]
+  ],
+  "note": "op3290 is named fmul and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [32, 32] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 74 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {},
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A3291.separate",
+  "op": 3291,
+  "author": "fieldmap",
+  "cases": [
+   [
+    3735928559,
+    49153
+   ],
+   [
+    2,
+    16672
+   ],
+   [
+    2147483647,
+    32766
+   ],
+   [
+    4294967294,
+    16457
+   ],
+   [
+    1073741824,
+    4660
+   ],
+   [
+    2147483649,
+    32769
+   ],
+   [
+    32768,
+    16672
+   ],
+   [
+    3212836864,
+    1024
+   ],
+   [
+    1073741824,
+    16672
+   ],
+   [
+    1092616192,
+    1
+   ],
+   [
+    65535,
+    49152
+   ],
+   [
+    1073741824,
+    2
+   ],
+   [
+    1065353216,
+    32766
+   ],
+   [
+    8388608,
+    49153
+   ],
+   [
+    3221225472,
+    15360
+   ],
+   [
+    2863311530,
+    0
+   ]
+  ],
+  "note": "op3291 is named fmul.f32.f16 and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [32, 16] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 69 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add": [
+    "integer.add",
+    "integer.add_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.bitwise_6": [
+    "integer.bitwise_6",
+    "integer.xor_b16"
+   ],
+   "integer.bitwise_E": [
+    "integer.bitwise_E",
+    "integer.or_b16"
+   ],
+   "integer.sub": [
+    "integer.sub",
+    "integer.sub_b16"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A3293.separate",
+  "op": 3293,
+  "author": "fieldmap",
+  "cases": [
+   [
+    3735928559,
+    49153
+   ],
+   [
+    2,
+    16672
+   ],
+   [
+    2147483647,
+    32766
+   ],
+   [
+    4294967294,
+    16457
+   ],
+   [
+    1073741824,
+    4660
+   ],
+   [
+    2147483649,
+    32769
+   ],
+   [
+    32768,
+    16672
+   ],
+   [
+    3212836864,
+    1024
+   ],
+   [
+    1073741824,
+    16672
+   ],
+   [
+    1092616192,
+    1
+   ],
+   [
+    65535,
+    49152
+   ],
+   [
+    1073741824,
+    2
+   ],
+   [
+    1065353216,
+    32766
+   ],
+   [
+    8388608,
+    49153
+   ],
+   [
+    3221225472,
+    15360
+   ],
+   [
+    2863311530,
+    0
+   ]
+  ],
+  "note": "op3293 is named fmul and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [32, 16] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 69 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add": [
+    "integer.add",
+    "integer.add_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.bitwise_6": [
+    "integer.bitwise_6",
+    "integer.xor_b16"
+   ],
+   "integer.bitwise_E": [
+    "integer.bitwise_E",
+    "integer.or_b16"
+   ],
+   "integer.sub": [
+    "integer.sub",
+    "integer.sub_b16"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A3302.separate",
+  "op": 3302,
+  "author": "fieldmap",
+  "cases": [
+   [
+    49153,
+    3735928559
+   ],
+   [
+    32766,
+    32768
+   ],
+   [
+    32769,
+    2
+   ],
+   [
+    16256,
+    4294967294
+   ],
+   [
+    65535,
+    2147483647
+   ],
+   [
+    16457,
+    2147483648
+   ],
+   [
+    4660,
+    1073741824
+   ],
+   [
+    4660,
+    32768
+   ],
+   [
+    16672,
+    3212836864
+   ],
+   [
+    1024,
+    1073741824
+   ],
+   [
+    16672,
+    1092616192
+   ],
+   [
+    1,
+    65535
+   ],
+   [
+    49152,
+    1073741824
+   ],
+   [
+    2,
+    1065353216
+   ],
+   [
+    32766,
+    8388608
+   ],
+   [
+    49153,
+    3221225472
+   ]
+  ],
+  "note": "op3302 is named fmul and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 32] at a 32-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 70 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add_b16": [
+    "integer.add_b16",
+    "integer.add_widen_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.sar": [
+    "integer.sar",
+    "integer.shr"
+   ],
+   "integer.sar_wrap": [
+    "integer.sar_wrap",
+    "integer.shr_wrap"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ },
+ {
+  "id": "A3350.separate",
+  "op": 3350,
+  "author": "fieldmap",
+  "cases": [
+   [
+    43981,
+    2863311530
+   ],
+   [
+    32766,
+    32768
+   ],
+   [
+    32769,
+    2
+   ],
+   [
+    16256,
+    4294967294
+   ],
+   [
+    32769,
+    2147483646
+   ],
+   [
+    16457,
+    2147483648
+   ],
+   [
+    4660,
+    1073741824
+   ],
+   [
+    4660,
+    32768
+   ],
+   [
+    16672,
+    3212836864
+   ],
+   [
+    1024,
+    1073741824
+   ],
+   [
+    16672,
+    1092616192
+   ],
+   [
+    1,
+    65535
+   ],
+   [
+    49152,
+    1073741824
+   ],
+   [
+    2,
+    1065353216
+   ],
+   [
+    32766,
+    8388608
+   ],
+   [
+    49153,
+    3221225472
+   ]
+  ],
+  "note": "op3350 is named fmul and sits untouched because \"every ambiguous record of it is DEGENERATE, so nothing was measured to split and the survivors are an artefact of the probe\". Its sources were fed the same value at their own declared widths, so the survivors are an artefact of the probe rather than a set of hypotheses. This batch supplies 16 cases over source widths [16, 32] at a 16-bit destination.",
+  "prediction": "PREREGISTERED SEPARATION, not a predicted value. Every one of the 64 functions this library offers at arity 2 was evaluated on these exact cases at the destination width, and no two of them agree on all of them - so whatever the hardware returns, at most one candidate can survive. A batch that cannot do this cannot reduce the survivor set however many cases it carries, which is what every existing record of this form failed to do.",
+  "candidate_groups": {
+   "integer.add": [
+    "integer.add",
+    "integer.add_b16",
+    "integer.add_b16_sext",
+    "integer.add_widen_b16"
+   ],
+   "integer.and_b16": [
+    "integer.and_b16",
+    "integer.bitwise_8"
+   ],
+   "integer.bitwise_6": [
+    "integer.bitwise_6",
+    "integer.xor_b16"
+   ],
+   "integer.bitwise_E": [
+    "integer.bitwise_E",
+    "integer.or_b16"
+   ],
+   "integer.sar": [
+    "integer.sar",
+    "integer.shr"
+   ],
+   "integer.sar_wrap": [
+    "integer.sar_wrap",
+    "integer.shr_wrap"
+   ],
+   "integer.sub": [
+    "integer.sub",
+    "integer.sub_b16",
+    "integer.sub_b16_sext"
+   ]
+  },
+  "candidate_groups_means": "candidates listed together agree on every input this form's DECLARED WIDTHS admit, at its destination width - so they are one hypothesis here and no batch can separate them. `add` and `add_b16` differ only in the high sixteen bits of a source this form declares as sixteen bits wide. The separation proved above is between groups, which is the only separation there is."
+ }
+]

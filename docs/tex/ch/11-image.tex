@@ -1,0 +1,451 @@
+\chapter{Kernel metadata and the image}\label{ch:kernel-metadata-image}
+
+A compute kernel reaches the GPU as a binary archive whose machine code is accompanied by metadata
+sections the driver reads when it builds a pipeline: which special registers the kernel reads, how its buffers are
+bound, whether it uses the tensor unit, what its constant program writes, how much threadgroup memory it declares.
+Apple documents none of these sections.
+
+The GPU executes the project's machine code, and a change made to Metal's copy of it after pipeline creation reaches
+execution. Pipeline creation validates only the container's format: undecodable code, a missing end of program and
+impossible metadata values all build a pipeline (\cref{sec:object-library-archive}). Mutating one field at a time,
+against a control that could fail, separated the fields the driver reads and acts on (the tensor-unit enable, the
+system-register vector, the binding records) from those it reads only for their presence and those it ignores.
+Damaged structure is not refused: it crashes the driver inside pipeline creation, and an earlier pointer-slot defect
+hung the GPU. For these reasons the compiler computes metadata from the program it emitted instead of copying it from a
+neighbouring kernel, and it refuses layouts it has not witnessed.
+
+Names used for the image and its parts:
+
+\begin{itemize}
+\item \emph{Image}: the delivered \code{scan.arc.metallib}. \emph{Object}: the \code{applegpu} Mach-O inside it. \emph{Section}: a Mach-O section
+  such as \code{\_\_GPU\_METADATA,\_\_compute}.
+\item \emph{Per-kernel slot N}: field N of the per-kernel FlatBuffers table in \code{\_\_GPU\_METADATA} (\cref{sec:gpu-metadata-slots}). Not to be
+  confused with scoreboard slots (\cref{sec:scoreboard}).
+\item \emph{Constant program}: Apple's per-dispatch program \code{agc.main.constant\_program} (\cref{sec:constant-program-record}). \emph{Uniform} uK: the
+  uniform register file (\cref{sec:register-classes}).
+\item \emph{Kind-3 record}, \emph{kind-6 record}, \emph{argument map}: records of the constant-program description (\cref{sec:constant-program-record}).
+\item \emph{Class}: a measured metadata layout (which vtable sits where, which slots exist) that this project can author
+  (\cref{sec:abi-classes}).
+\item \emph{Contract}: the compiler's statement of a program (\code{program.contract()}: code identity, entry, bindings, instruction
+  inventory) and of its emission choices (\code{program.abi()}: register count, forms, system-register set, metadata class,
+  launch) (MM~\mm{23.5}).
+\end{itemize}
+
+\section{\code{\_\_GPU\_METADATA} slots}\label{sec:gpu-metadata-slots}
+
+\code{\_\_GPU\_METADATA} is a FlatBuffers document: a root table pointing at a per-kernel table with a vtable,
+binding-record vectors, and further vectors and records (MM~\mm{25.143}, \code{agxforge/g17/mdgen.py}). Over 6,000 cached sections,
+per-kernel slots 2, 4, 6, 8, 10, 12, 13, 26, 27 and 29 are pointers to length-prefixed vectors; 6, 8, 10 and 12 are empty
+in 2,828 of 2,828; 2, 4 and 26 are built from the binding list (\code{agxforge/g17/authorobj.py}). Writing an integer into a
+pointer slot creates a dangling pointer in a section the loader walks; that failure class hung this GPU on 2026–09-08,
+and the author now refuses it. The per-kernel table declares 60 bytes, and every corpus object leaves at least 68
+bytes before the next structure: packed to its 52 bytes of fields the loader segfaults, and a slack sweep put the
+boundary between 8 and 12 bytes (\code{agxforge/g17/mdgen.py}). Binding records come in six measured shapes (long, short,
+elided for buffer 0, written, mid, elided-written); across 9,207 records every slot set lies within \{0, 1, 2, 3\}, field 3
+is the written flag, and no record carries a type: a buffer's element type never reaches \code{\_\_GPU\_METADATA}
+(\code{agxforge/g17/mdgen.py}, \code{agxforge/g17/authorobj.py}).
+
+The loader does not reach the binding records through the FlatBuffers root. In the measured scalar class the root's slot 3, the
+only pointer that could reach the two binding vectors, is zero, yet the records are read: swapping two buffer indices
+moved the store off its buffer and left the sentinel untouched. Whatever walks the section finds those records another
+way (measured, \code{agxforge/g17/mdgen.py}). One field found inert on early kernels mattered on a later one: the
+first two classes were built from blobs whose zeroing sweep had erased a whole single-record vector; that was harmless
+while a kernel stored to a device buffer and fatal (a loader segfault) once a third binding record made slot 26 point at
+the wrong vector (\code{agxforge/g17/mdgen.py}).
+
+\Cref{tab:metadata-slots} lists the per-kernel slots whose meaning is established.
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=1.20\hsize}X>{\hsize=0.80\hsize}X@{}}
+\caption{Per-kernel \code{\_\_GPU\_METADATA} slots with established meaning, with content and standing.}\label{tab:metadata-slots}\\
+\toprule
+Slot & Content & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Slot & Content & Standing \\
+\midrule
+\endhead
+0 & declared register count = highest 32-bit register named in the main
+program + 1 (2,022 of 2,022 corpus objects; 247 of 247 delivered
+bundles) & Apple's compiler emits; inert for execution and
+residency (\cref{sec:residency-occupancy-rules}; MM~\mm{10}, MM
+\mm{25.115}); a corrupted slot-0 \emph{offset} crashes the driver (MM
+\mm{25.147}) \\
+1 & kind-6 field 2 + field 3 (\cref{sec:constant-program-record}) & Apple's compiler emits, law S1 (MM~\mm{25.120}) \\
+2, 3, 4 & built from the bindings; in the scalar class slot 3 = 8 × bindings, slot
+4 = Q - 4, slot 2 = Q - 4 + 4 × bindings, where Q is a per-kernel
+multiple of 4 correlating with no readable field & measured: only the right slot-4 value executes
+(\code{agxforge/g17/mdgen.py}) \\
+13 & the constant pool, a vector whose count is a byte length (region 4 +
+count + 16 bytes): loop trip counts, offsets, division-magic constants
+(0xAAAAAAAB for /3, 0xCCCCCCCD for /5); changing one literal in the
+source moves slot-13 bytes while \code{\_\_TEXT} is byte-identical & Apple's compiler emits (MM~\mm{25.118}, MM~\mm{25.120});
+the uniform-halfword pool read by ordinary forms (
+\cref{sec:constants-uniforms}) \\
+15, 16, 17 & one byte each, value 1 whenever present; slot 16 = writes a device
+buffer, 17 = writes a texture, 15 = 16 or 17: over 21,131 sections
+exactly four combinations (none 286, texture only 70, buffer 20,757,
+both 18). Threadgroup and imageblock stores set none & Apple's compiler emits (\code{agxforge/g17/cc.py}) \\
+18 & threadgroup memory used (static or dynamic), value 1 when present (2,020
+of 2,020) & Apple's compiler emits (\code{agxforge/g17/cc.py},
+\code{agxforge/g17/mdgen.py}) \\
+19 & the explicit imageblock declaration (with \code{\_\_GPU\_LD\_MD} slot 23
+and an imageblock form of \code{\_\_GPU\_ARCH\_LD\_MD} carrying the
+element size); in the tensor class slot 19 sits at 55 and slot 44 moves
+to 54 & Apple's compiler emits (MM~\mm{25.89}, MM~\mm{25.104});
+an undeclared image reads 0 (measured, 
+\cref{sec:imageblock-per-core-tile}) \\
+27 & binding-index words, a word count: 0, 1, 2 name buffers A, B, C & Apple's compiler emits (MM~\mm{25.118}, MM~\mm{25.120}) \\
+28 & statically declared threadgroup bytes; Metal's
+\code{staticThreadgroupMemoryLength} reports exactly this (0, 16, 64,
+128, 16,896 over eight kernels) & measured (MM~\mm{25.147}) \\
+29 & the system-register vector: 4 + 4n bytes, one entry per special register
+read, ordered by entry value and keyed by register, not position; the
+numbering is 
+\cref{sec:slot-29-metadata-numbering}'s (for example
+SR130, the lane index, is entry 52; SR156, threadgroup position x, is 0) & measured for the active classes (MM~\mm{0.8}, MM~\mm{15}) \\
+31 & present iff the constant program writes at least one uniform (726 of 726
+MMA programs; 22,299 of 22,305 objects); value 16 + 16 × ceil(buffers /
+2) & Apple's compiler emits, laws L4 and S31 (MM~\mm{25.120}) \\
+32 & instruction-count class: absent at 30 main-program instructions or
+fewer, 3 with a back edge, otherwise 1 up to 300 and 2 from 301 (43
+witnesses) & Apple's compiler emits (\code{agxforge/g17/mdgen.py}) \\
+33 & present for programs with a runtime loop & Apple's compiler emits (MM~\mm{25.100},
+\code{agxforge/g17/mdgen.py}) \\
+38, 42 & the texture-state byte count, in a texture kernel & Apple's compiler emits (\code{agxforge/g17/mdgen.py}) \\
+44 & the tensor-unit enable, one byte, value 1; present exactly when the code
+contains an accelerator MMA (50 of 50 such kernels, no legacy-engine
+kernel) & measured, causal over 14 pipelines (MM~\mm{6}; 
+\cref{sec:ordering-enable}) \\
+\bottomrule
+\end{xltabular}
+
+Clearing slot 44's low byte tests whether it is a validity flag, which the driver would check and refuse or fault on,
+or an enable for the unit. The pipeline still builds and the dispatch completes without error, every tensor MMA
+writes zeros, and the MMAs run fast: a 1,400-MMA chain takes 14.75~µs instead of 32.0 (8.4~ns per issue instead of 22), a
+saturated dispatch 0.587~ms instead of 22.7. The MMAs still issue, at roughly ALU cost, but the unit does no work. Any
+nonzero low byte, with the other three bytes arbitrary, is bit-identical to 1 (measured, MM~\mm{6}). The timing fits a
+power or clock gate on the unit better than a validity check, though the mechanism was not measured
+(\cref{sec:ordering-enable}). Since neither pipeline creation nor the dispatch rejects a cleared value, a missing enable
+shows up only as zeros, and a compiler has to derive the slot from the presence of an accelerator MMA in the emitted code. Its
+byte position in the per-kernel table depends on the class (an imageblock declaration moves it to 54, MM~\mm{25.89}; the
+constant-program re-layout places it at 55, \cref{sec:constant-program-record}); "slot 44" in this document means the field, wherever the class puts it.
+
+For slot 32, MM~\mm{10} calls the low byte inert, while MM~\mm{15} and \code{agxforge/g17/mdgen.py} treat slot 32 as an instruction-count property a body must satisfy;
+the first concerns the value and the second its presence. The \emph{value's} low byte was mutated without
+changing execution in the measured kernels (MM~\mm{10}). \emph{Presence} changes the table's layout: the tail's byte slots (33,
+32, 16, 15) are right-aligned and the slots after them move, so a layout with the wrong presence places other fields,
+among them slot 0 and slot 44, at the wrong offsets (\code{agxforge/g17/mdgen.py}, MM~\mm{25.120}). This compiler therefore emits
+both presence and value by Apple's law (\cref{sec:program-boundaries} records the earlier padding to 31 instructions; MM~\mm{15}). Not established: whether a wrong value with the right presence matters for any kernel shape
+beyond those tested.
+
+\textbf{Worked example: the running example's contract and the metadata it implies} (compiled; delivered image executed
+below Metal). Each row of \cref{tab:example-contract} gives a field of the contract this compiler records for the running example
+(\code{example-listing.txt}, the line after the listing) and the metadata that field implies:
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.69\hsize}X>{\hsize=0.83\hsize}X>{\hsize=1.48\hsize}X@{}}
+\caption{Contract fields this compiler records for the running example, with the metadata each implies.}\label{tab:example-contract}\\
+\toprule
+Contract field & Value & Metadata consequence \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Contract field & Value & Metadata consequence \\
+\midrule
+\endhead
+\code{register\_count} & 76 & slot 0 = 76: the highest register named is R75 (top of the B tile
+R72\_R75) \\*
+\code{main\_instruction\_count}, back edge & 101, none & slot 32 = 1 \\*
+\code{system\_registers} & 130, 156 & slot 29 = {[}0, 52{]}: \op{14060} of
+\code{SR\_SIMD\_ELEM} (the lane index) and \op{14059}
+of \code{SR\_TG\_X} (threadgroup x) \\*
+\code{execution.tensor} & true (four tensor MMAs) & slot 44 present, value 1 \\*
+bindings & A (index 1, offset 0), B (2, offset 2), C (3, offset 4, written) & binding records, C in the written shape; descriptor bytes 0, 4, 8 (rank
+x 4) in the code (MM~\mm{23.2}) \\*
+\code{pk\_values} & slots 15 and 16 = 1 & writes a device buffer, no texture \\*
+\code{constant\_pool}, \code{prologue} & empty; \code{0e000000} + thirty \code{0600} & no slot 31, no constant-program record; the 64 bytes before entry 64 are
+the constant-program position, holding only \op{684}
+and \op{13483} \\*
+\code{launch} & exact grid required, not bounds-checked & runtime policy of the released class, not metadata \\*
+\bottomrule
+\end{xltabular}
+
+\code{register\_count}, \code{main\_instruction\_count}, \code{forms}, the system-register vector and the launch facts come from the
+emitted program and are never copied from a nearby kernel; \code{tensormetadata.layout} refuses an unwitnessed tail or
+system-register set (this compiler, MM~\mm{23.2}). The contract's \code{register\_count} and \code{main\_instruction\_count} count
+\code{\_agc.main} only (MM~\mm{25.146}).
+
+Below Metal, the register count also travels in the launch state: the USC Registers packet (tag 0x8d) carries it in
+bits 8–12 in groups of eight, plus a spill size (measured by capture; \cref{ch:submission-below-metal}).
+
+\section{Constant program and record}\label{sec:constant-program-record}
+
+Every Apple MMA program carries a second program, \code{agc.main.constant\_program} (with a \code{.cfg} suffix when
+it branches), which runs once per dispatch, as one thread, before the main program, and computes thread-invariant values
+into uniform registers that main reads (Apple's compiler emits; modelled and checked against Apple's GPU, MM~\mm{25.120},
+MM~\mm{25.179}). Its inputs are binding entries read by \op{14061}: for the k-th buffer,
+halfwords 8 + 4k and 10 + 4k hold its 64-bit pointer, low word then high word, in all 21 constant programs examined
+(MM~\mm{25.59}, MM~\mm{25.179}; the two sections' notations agree, \cref{app:a}). \emph{Correction:} MM~\mm{25.113} read this metadata as a
+register-spill description; it describes the constant program (MM~\mm{25.120}).
+
+A constant-program instruction writes a uniform exactly when Apple's decoder
+prints its first operand as \code{bin(op0, K, S)} (\opn{0} being the \op{0}); it writes uniform
+K // 2 (the uniform file itself is \cref{sec:register-classes}). Writers are \op{592} in both forms and ALU forms
+with a uniform destination, among them \op{10298}, \op{11185}, \op{1038} and \op{2318}; \cref{app:c} lists the rest (MM~\mm{25.120}). Three pair exactly with main-program forms
+plus one extra mode operand: the integer-to-float writer with \op{11179}, the uniform / staging
+write with \op{586}, and the fp32 add writer with \op{1006}
+(MM~\mm{25.179}). K is 2 × ((byte0 >{}> 4) \textbar{} ((byte2 >{}> 6) \& 3) <{}< 4) in the 4-byte uniform / staging write, reaching 126 (\cref{sec:framing}), and a nine-bit field in the 8-byte and longer forms (MM~\mm{25.120}). The
+worked bytes \code{8b040924}
+write u8 (K 16) from R2 and wait on slot 0; \code{b308070256a0a402} writes u9 (K 18) from R0 and waits on slot 1 (decoder,
+MM~\mm{25.120.1}).
+
+\Cref{tab:constant-program-laws} gives the laws of the constant program's metadata (Apple's compiler emits; each checked on
+every MMA program it applies to with zero misses, and predicted before compiling held-out variants, MM~\mm{25.120}).
+
+\begin{xltabular}{\linewidth}{@{}lX@{}}
+\caption{Laws relating the constant program to its metadata records and per-kernel slots.}\label{tab:constant-program-laws}\\
+\toprule
+Law & Statement \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+Law & Statement \\
+\midrule
+\endhead
+L4, S31 & per-kernel slot 31 present iff the constant program writes a uniform;
+value 16 + 16 × ceil(buffers / 2), buffers = len(argument map) / 4 (32
+or 48 in the corpus; 64 at 5 buffers, held out) \\*
+L1 & kind-3 record field 0 = 8 + 4 × len(argument map) \\*
+L2 & kind-3 field 2 = the constant program's register count
+(1 if it writes no uniform) \\*
+L5 & the argument map (count at record + 20) is {[}4b, 4b+1, 4b+2, 4b+3{]}
+per buffer b whose binding entry the constant program reads \\*
+L3 & kind-6 field 3 = 1 + max(K // 2) over every uniform write \\*
+S1 & per-kernel slot 1 = kind-6 field 2 (the main program's
+uniform count) + field 3 \\*
+\bottomrule
+\end{xltabular}
+
+L3 was reached by refutation: "6 + the number of writes" failed on a variant that skipped u6-u7; "1 + the highest
+uniform written by \op{592}" failed where a 32-bit add immediate into the uniform/staging file
+wrote the top uniform; four compile rounds with committed predictions converged on "every writer counts" (MM~\mm{25.120}). Over the wider corpus L3 fits 2,650 of 2,720 programs with a constant-program write;
+all 70 misses are non-MMA and under-predict, and in 50 of them the main program reads uniforms up to Apple's value, a
+rule not pinned. (The u0-u5 reservation in MMA programs is \cref{sec:register-classes}.)
+
+With a constant program the serializer re-lays the per-kernel tail: slot 44 moves to byte 55, slot 31 (a 32-bit
+value) goes at 56, byte slots 33, 32, 16 and 15 are right-aligned to end at 63, and slot 0 goes at 64; the argument map
+follows the kind-3 body; every later position moves (\code{relocate\_layout}), and Q is recomputed. All 726 Apple MMA programs
+re-serialize byte-identically after the change (this compiler, MM~\mm{25.120}).
+
+Of 726 Apple MMA programs, 265 have metadata sections this compiler reproduces byte for byte from recovered facts alone,
+286 more reproduce only when Apple's slot-13 and slot-27 values are supplied, 72 differ and 103 are
+refused as class limits (bindings beyond the class, unmeasured system-register sets, missing records) (MM~\mm{25.120}). The
+section's size is fully determined by table shapes, the lengths of the per-kernel vectors (slots 13, 14, 26, 27, 29, 41)
+and the constant-program record's length (56 classes, none ambiguous; MM~\mm{25.113}). The two blocking inputs, the slot-13
+prefix values and the argument map, are facts about the kernel \emph{source}: one program reads 301/400/500 where its sibling
+reads 300/400/500; only 631 of 1,824 nonzero prefix words appear anywhere in the code; two programs with byte-identical
+argument reads list different buffers. They cannot be recovered from Apple's code, and for a program this compiler builds
+they are known by construction (MM~\mm{25.120}).
+
+The project's emulator, running the constant program first as one thread over the same buffers and handing
+its uniform writes to main, equals Apple's GPU byte for byte on 6 of 6 sources with full-width random data, and every
+deformed model (all published uniforms 0; the argument read naming the next binding; halfwords swapped) differs on all 6
+(measured against Apple's GPU, MM~\mm{25.179}).
+
+\textbf{Not known.} Whether a uniform write wider or narrower than 32 bits occupies exactly one uniform (the variants built to
+test it emitted no such write); the main-program rule behind the 70 L3 misses; 442 constant-program uniform writes no
+main program reads (MM~\mm{25.120}, MM~\mm{25.120.1}).
+
+\section{ABI classes}\label{sec:abi-classes}
+
+A class is a measured layout plus the free values inside it. This project authors only classes it has witnessed and
+refuses the rest (this compiler, \code{agxforge/g17/mdgen.py}, \code{tensormetadata.layout}).
+
+The released tensor class is ABI version 5 (this compiler's platform contract, MM~\mm{23.2}):
+
+\begin{lstlisting}
+ABI version                 5
+entry                       64
+execution                   {simd_width: 32, tensor: true}
+public buffers              A=1, B=2, C=3
+binding ranks in code       A=0, B=1, C=2  -> descriptor bytes 0, 4, 8
+pointer-block offsets       0, 2, 4
+system-register sets        (130,) or the measured composed class (130, 156)
+constant pool               explicitly empty
+pk_extra / pk_values        (15, 16) / both 1
+prologue                    0e000000 followed by thirty 0600 fillers
+grid / threadgroup          (32,1,1) / (32,1,1)
+\end{lstlisting}
+
+Three of its properties are machine rules (MM~\mm{23.2}). SR130 must be read in a tensor kernel. Descriptor byte values
+are 4 × binding rank, where the rank is the position in the compiler's ordered binding contract and differs from the
+public Metal buffer index. And without the tensor enable (slot 44) every MMA writes zeros (MM~\mm{6}). The single-simdgroup, exact-grid launch is runtime policy: research lowerings ran 2 and 4
+simdgroups and up to 8 threadgroups bit-exactly (MM~\mm{0.13}, MM~\mm{25.89}).
+
+Other classes have also been measured:
+
+\begin{itemize}
+\item The scalar object class (500-byte section, nine per-kernel slots, Q carried by class) and the tensor class (412 bytes,
+  slot 44 at 55) are the two base layouts; further classes add binding shapes (the written-buffer class; reproduction counts are in
+  \cref{sec:constant-program-record}), the composed system-register sets (130, 156), (130, 133, 156) and the imageblock set (130,
+  164, 165), the constant-program re-layout, and loop tails without slot 32 (\code{agxforge/g17/mdgen.py}, MM~\mm{25.104}, MM~\mm{25.108},
+  MM~\mm{25.120}).
+\item The system-register class is keyed on the full set. \code{(SR130, SR156)} authors and runs as a measured class; it is not
+  a universal rule for every form whose decoder byte 1 is 130 (13 of 385 such forms cannot inherit entry 52 from the
+  coarse key) (MM~\mm{0.13}, MM~\mm{0.14}).
+\item An empty system-register set must be refused: 7 real programs declaring one crashed the driver inside pipeline
+  creation (measured, MM~\mm{25.147}).
+\end{itemize}
+
+The delivered manifest (\code{manifest.json}, format \code{g17-common-pipeline-v3}) records the ABI version, system registers,
+per-binding index, offset, written flag and element type, the entry, and the (opcode, length) forms. 222 of 247 manifests
+carry a template's \code{register\_count} and \code{code\_size}; the true values are in the container, and a tool reading the
+manifest's count is misled (MM~\mm{25.147}).
+
+The other metadata sections were measured by one-at-a-time mutation (\code{agxforge/g17/authorobj.py}):
+
+\begin{itemize}
+\item \code{\_\_GPU\_LD\_MD}: format known and entry PC named causally, but its slot set is a compiler input. A foreign but
+  structurally valid \code{\_\_GPU\_LD\_MD} (a buffer kernel's in a texture kernel) builds a pipeline without complaint, which is
+  why this section is never defaulted. It carries a per-process build counter that reads like a field (MM~\mm{25.91}).
+\item \code{\_\_GPU\_ARCH\_LD\_MD}: one boolean, set in 6,234 of 21,001 objects; no contract fact and no opcode determines it (the
+  best of seven tested predictors left 3,144 exceptions), so it is a compiler input.
+\item \code{\_\_GPU\_STATS\_MD}: 96 bytes with 20,999 distinct patterns in 20,999 objects, not read by the loader: zeros, 0xFF,
+  another kernel's bytes or removal all left an authored texture read exact.
+\item Damaging \code{\_\_GPU\_METADATA}, \code{\_\_GPU\_LD\_MD} or \code{\_\_GPU\_ARCH\_LD\_MD} kills Apple's driver inside pipeline creation.
+\end{itemize}
+
+\section{Object, library and archive bytes}\label{sec:object-library-archive}
+
+A bundle's \code{scan.arc.metallib} is a fat container holding an \code{air64} MetalLib and an \code{applegpu} Mach-O
+GPU executable. It is loaded with \code{newBinaryArchiveWithDescriptor} and \code{newComputePipelineStateWithDescriptor} under
+\code{MTLPipelineOptionFailOnBinaryArchiveMiss}, which makes Metal use the precompiled code rather than compile the AIR
+(MM~\mm{25.143}). The project's tools author each layer: \code{g17mtlb.py} (the MetalLib), \code{g17container.py} (the Mach-O head and
+AIR tables), \code{g17arc.py} (the archive's \code{\_\_reflection}, \code{\_\_compute}, \code{\_\_descriptor}, \code{\_\_metallib}), \code{g17authorobj.py}
+(the object), \code{g17mdgen.py} (\code{\_\_GPU\_METADATA}), \code{g17ldmd.py} (\code{\_\_GPU\_LD\_MD}) (MM~\mm{25.143}). Metal caches pipelines by AIR
+function hash, so a patched archive must be built in one process and dispatched in another, with a positive control;
+without one, a "no change" result cannot distinguish an inert bit from a cached pipeline (measured, MM~\mm{17} rule 36).
+
+A census (\code{tools/g17imagecensus.py}, MM~\mm{25.148}) assigns every byte of 421 distinct delivered archives (12,770,955
+bytes, 1,253 index entries over ten delivery roots) to exactly one kind (\cref{tab:image-census}), and the tool refuses to
+finish if a byte is left over.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.17\hsize}Xl>{\hsize=0.83\hsize}X@{}}
+\caption{Bytes of 421 delivered archives by kind, with each kind's share and how it is checked (MM~\mm{25.148}).}\label{tab:image-census}\\
+\toprule
+Kind & Share & What is checked \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Kind & Share & What is checked \\
+\midrule
+\endhead
+authored: \code{\_\_text} program bytes and prologue,
+\code{\_\_GPU\_METADATA} & 85.6\% & program bytes equal the bundle's \code{program.bin} \\*
+generated: fat header, both MetalLibs, container head, object header and
+symbols, \code{\_\_GPU\_LD\_MD}, \code{\_\_GPU\_ARCH\_LD\_MD},
+\code{\_\_text} filler & 10.6\% & the whole envelope is re-emitted and compared \\*
+class: constants execution shows are read & 0.2\% & each compared at its offset (72 bytes) \\*
+inert: constants nothing reads & 0.3\% & each is zero (76 bytes) \\*
+tail: the descriptor's (392, 16) & 0.1\% & its value; inert, and not one of the 148 \\*
+zeroed: \code{\_\_reflection}, \code{\_\_descriptor},
+\code{\_\_GPU\_STATS\_MD}, \code{\_\_GPU\_REMARKS\_MD} & 3.2\% & all zero \\*
+unexplained & 0 &  \\*
+\bottomrule
+\end{xltabular}
+
+The envelope is a function of the object and the entry name: the module hash is sha256(object + name), both MetalLibs are
+built from (name, hash), and the archive is re-emitted byte for byte in 421 of 421. \code{\_\_text} is prologue + \code{program.bin}
++ filler in 421 of 421. Rebuilding from recorded recipes reproduces 1,249 of 1,253 entries byte for byte; the other four
+are stale roots whose recipe now compiles a different program, not authoring failures (MM~\mm{25.148}).
+
+Apple's own reader (\code{xcrun metal-objdump --macho --private-headers}) names the load commands, which identifies most of the
+148 class constants: what the project had called LC\_TABLE (0x31) is LC\_NOTE, whose \code{data\_owner} is the AIR name; 0x32 is
+LC\_BUILD\_VERSION. With the TOOL\_* values from \code{<mach-o/loader.h>} most constants are toolchain identifiers
+(\cref{tab:class-constants}; MM~\mm{25.148}).
+
+\begin{xltabular}{\linewidth}{@{}llllX@{}}
+\caption{Class constants by byte offset in slice 1 of the archive, with whether execution reads them, their value and
+meaning (MM~\mm{25.148}).}\label{tab:class-constants}\\
+\toprule
+Offset & Bytes & Kind & Value & Meaning \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Offset & Bytes & Kind & Value & Meaning \\
+\midrule
+\endhead
+824 & 4 & read & 1 & LC\_BUILD\_VERSION platform = PLATFORM\_MACOS \\
+828, 832 & 8 & inert & 0 & minos, sdk (Apple writes 0x1A0600 = 26.6 as minos) \\
+836 & 4 & read & 2 & ntools \\
+840, 844 & 8 & inert & 0 & tools{[}0{]} (Apple writes TOOL\_GPUARCHIVER 0x407, version 0x7D17FF00 =
+32023.255) \\
+848, 852 & 8 & read & 0x403, 0x20001 & tools{[}1{]}: TOOL\_AIRNT\_PLUGIN, 2.0.1 \\
+1088 & 32 & inert & 0 & the AIR\_DESCRIPTOR key (Apple's varies) \\
+1260 & 32 & read & e3b0c442\dots{} & SHA-256 of the empty string, checked by value \\
+1296, 1300 & 8 & read & 0x402, 0x403 & TOOL\_AIRNT, TOOL\_AIRNT\_PLUGIN \\
+1304 & 4 & read & 0xC0000000 & open: required, meaning unknown \\
+1324 & 4 & read & 1 & open: required, meaning unknown \\
+1428 & 4 & read & 0x408 & TOOL\_METAL\_FRAMEWORK \\
+1440 & 4 & read & 0x40000004 & open: required, meaning unknown \\
+\bottomrule
+\end{xltabular}
+
+60 of the 72 read bytes are named; 12 are open. They belong to a record with a position rule, not to fixed slots: over
+22,721 Apple archives the eight-word record starting with TOOL\_AIRNT sits at 1296 in 22,625, one word later in 58, and is
+absent in 38, and the word at 1440 is missing in exactly the 96 archives where the record moved (MM~\mm{25.148}).
+\emph{Correction:} an older "76 inert" list and an older one-kernel "image is ours" census are superseded by this census
+(\cref{app:a}).
+
+The GPU executes the machine code the project authored, from the copy Metal places in its heap. Two things were
+tested: whether Metal recompiles the kernel from the archive's AIR (or serves a pipeline cached by AIR hash), and
+whether a change to that heap copy after pipeline creation reaches the program that runs.
+
+\begin{itemize}
+\item \code{program.bin} appears byte for byte in the archive's \code{applegpu} slice. 1,620 operand-byte flips, each checked to
+  leave the opcode stream unchanged on decode, were written into that region (no rebuild, AIR and its hash unchanged) and
+  dispatched in a fresh process; all 2,048 output floats and the kernel's time changed (MM~\mm{25.143}). The executed code
+  is the archive's machine code, not a recompilation of its AIR.
+\item For 10 delivered kernels of six kinds, the program's exact bytes appear at offset +0x2740 of the dispatch's first
+  mapped 64 KiB region. The causal test patched that heap copy after \code{newComputePipelineState} and before the dispatch,
+  on \code{C[i] = 3*i + 1}, changing the add constant (program byte 19) from 1 to 2 only if the bytes occurred exactly once.
+  Unlike the operand flips above, this flip is in a byte adjacent to an opcode.
+  The unpatched control read \code{3i + 1}; the heap patch read \code{3i + 2}, the same result as the flip authored in the
+  container; and a patch asking for absent bytes wrote nothing and read \code{3i + 1}, so the patcher alters nothing else
+  (measured, MM~\mm{25.147}). This establishes that the executed program incorporates the patched bytes; it does not determine
+  whether subsequent copying or validation occurs.
+\end{itemize}
+
+Metal reports \code{maxTotalThreadsPerThreadgroup} 1,024 and \code{threadExecutionWidth} 32 for every kernel and
+\code{staticThreadgroupMemoryLength} equal to slot 28; the declared register count it reports is the container's own
+(measured, MM~\mm{25.147}). Where the driver takes the thread limit from is \cref{sec:threads-simdgroups-threadgroups} (MM~\mm{25.141.20}).
+
+What pipeline creation validates was mapped by handing it the known-answer container with one change at a time
+(\code{spike/agxsub/g17validprobe.py}; nothing dispatched; MM~\mm{25.147}). Two of the inputs are negative controls that
+pipeline creation should reject. The outcomes:
+
+\begin{itemize}
+\item \emph{Rejected} ("invalid format"): a corrupted archive header, an archive truncated to half. These controls show that
+  pipeline creation does check its input, so the acceptances below are not explained by an absent check.
+\item \emph{Accepted}: code replaced by undecodable \code{0xff}, the end of program removed, declared register count 0, 1, 200 or 256,
+  static threadgroup memory declared at 1 MiB (reported back as 1,048,576, far past the 32 KiB a threadgroup can have).
+\item \emph{Crashed the driver} (a CPU fault inside \code{newComputePipelineState}): a corrupted per-kernel slot-0 offset, and the 7
+  programs with an empty system-register set.
+\end{itemize}
+
+Since pipeline creation checks neither the instruction bytes nor the metadata values, and a bad metadata layout faults
+the driver, errors inside the format have to be caught when the image is authored. This project's guards (
+\cref{sec:admission-decodes-executes}) and refusals run before the image is written for that reason.
+
+Code generation and the whole container are this project's; no Apple compiler process
+runs to produce them, and Apple's decoder is read in-process only as a check. Turning Metal source into AIR still runs
+Apple's front end, and the knowledge of which forms exist was learned from Apple's compiler output (MM~\mm{25.147}).
+
+\textbf{Evidence.} MM~\mm{0.8}, MM~\mm{0.13}, MM~\mm{0.14}, MM~\mm{6}, MM~\mm{10}, MM~\mm{15}, MM~\mm{17} (rule 36), 23.2, 23.5, 25.59, 25.89, 25.91, 25.100, 25.104, 25.108,
+25.113, 25.118, 25.120, 25.120.1, 25.141.20, 25.143, 25.146, 25.147, 25.148, 25.179; \code{agxforge/g17/mdgen.py},
+\code{agxforge/g17/authorobj.py}, \code{agxforge/g17/cc.py}.

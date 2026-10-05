@@ -1,0 +1,24 @@
+{
+ "bears_on": {
+  "chip": "everything",
+  "clang": "the native tools only, not the GPU claims",
+  "gpu_cores": "peak throughput, occupancy and every per-core figure",
+  "machine_model": "everything: a different part may have different core counts and limits",
+  "metal_compiler": "lowering, scheduling, spill counts and every 'the compiler emits' claim",
+  "os_build": "driver behaviour, loader variants, dispatch and completion semantics",
+  "os_product": "as os_build, coarser",
+  "xcode": "the libTensorOps archive the accelerator forms resolve out of"
+ },
+ "note": "T9 is blocked, not open: it asks about hardware this campaign does not have. This file exists so a reader on a different platform is told which claims were never measured there.",
+ "platform": {
+  "chip": "Apple M5 Pro",
+  "clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "cpu_cores": "18",
+  "gpu_cores": "20 (from the campaign's own record; not readable from sysctl)",
+  "machine_model": "Mac17,8",
+  "metal_compiler": "Apple metal version 32023.921 (metalfe-32023.921.6)",
+  "os_build": "25G83",
+  "os_product": "26.6.2",
+  "xcode": "Xcode 27.0 / Build version 27A266a"
+ }
+}

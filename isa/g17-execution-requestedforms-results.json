@@ -1,0 +1,222 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "movimm.op11842.l2",
+  "op": 11842,
+  "length": 2,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11842,
+   "found": 6,
+   "cases": 2,
+   "encoded": [
+    "6455"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   85,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "movimm.op11842.l8",
+  "op": 11842,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11842,
+   "found": 6,
+   "cases": 2,
+   "encoded": [
+    "6ce802127020b90a"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "fadd.op998.l6",
+  "op": 998,
+  "length": 6,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 998,
+   "found": 8,
+   "cases": 2,
+   "encoded": [
+    "890d3c0f0000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    998,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1081081856,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "fadd.op998.l4",
+  "op": 998,
+  "length": 4,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 998,
+   "found": 8,
+   "cases": 2,
+   "encoded": [
+    "890d380f"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    998,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1081081856,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "fma.op2190.l6",
+  "op": 2190,
+  "length": 6,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 2190,
+   "found": 9,
+   "cases": 2,
+   "encoded": [
+    "990d3e0f8010"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    2190,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1081606144,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

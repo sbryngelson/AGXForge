@@ -1,0 +1,294 @@
+{
+ "entry": 64,
+ "slot": 24,
+ "cases": [
+  {
+   "exec_before": "op579",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -58,
+   "branch_at": 90,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op579",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -68,
+   "branch_at": 100,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op579",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -58,
+   "branch_at": 90,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op579",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -68,
+   "branch_at": 100,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op578",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -58,
+   "branch_at": 90,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op578",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -68,
+   "branch_at": 100,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op578",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -58,
+   "branch_at": 90,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op578",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -68,
+   "branch_at": 100,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op582",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -58,
+   "branch_at": 90,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op582",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -68,
+   "branch_at": 100,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "op582",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -58,
+   "branch_at": 90,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 53406,
+   "taken": false,
+   "fell_through": true
+  },
+  {
+   "exec_before": "op582",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -68,
+   "branch_at": 100,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 53406,
+   "taken": false,
+   "fell_through": true
+  },
+  {
+   "exec_before": "none",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -54,
+   "branch_at": 86,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "none",
+   "imm": 200,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -64,
+   "branch_at": 96,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "none",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": false,
+   "disp": -54,
+   "branch_at": 86,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  },
+  {
+   "exec_before": "none",
+   "imm": 1,
+   "rel": "lt",
+   "preheader": true,
+   "disp": -64,
+   "branch_at": 96,
+   "cycle_check": {
+    "terminate": 29,
+    "undecodable": 1,
+    "reach_entry": 0
+   },
+   "status": "ok",
+   "cb_status": 0,
+   "marker": 3735928559,
+   "taken": true,
+   "fell_through": false
+  }
+ ]
+}

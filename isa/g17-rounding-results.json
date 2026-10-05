@@ -1,0 +1,104 @@
+{
+ "generator": "tools/g17roundingprobe.py",
+ "grid": [
+  [
+   128,
+   1,
+   1
+  ],
+  [
+   32,
+   1,
+   1
+  ]
+ ],
+ "rows": [
+  {
+   "agreeing_model": [
+    "once (fused)"
+   ],
+   "agreeing_models_identical": true,
+   "code_sha256": "8e36d144ef459384a2c5373352c72fa2e732e15fd9f002fed782b4b2c90da889",
+   "gpu_outputs_sha256": "f1b03ae7341006f04dbf6399a9eba387e9bd71f73b926650021c8a24adbf4f75",
+   "inputs_sha256": "7f2ea5d72b7fa992c2715dee6d5096f34343e05fb2e5a838d997bcd47c463b10",
+   "lanes": 4096,
+   "lanes_where_models_disagree": 3186,
+   "models": {
+    "once (fused)": 0,
+    "twice (product rounded first)": 3186
+   },
+   "opcode": 2192,
+   "opcode_forms": [
+    "reg:105 imm:16"
+   ],
+   "probe": "op2192",
+   "status": "ok"
+  },
+  {
+   "agreeing_model": [
+    "RNE, overflow to inf",
+    "through fp32, overflow to inf"
+   ],
+   "agreeing_models_identical": true,
+   "code_sha256": "cdc761a96ea87b0019730013ffd6470ade2724faae2770352a8dc9a27e58edf8",
+   "gpu_outputs_sha256": "9b7451562a994c76a7bd43d81ca8361d529d2834d60e0db256f6fb85355e880e",
+   "inputs_sha256": "3dbf4e9ceb5c0a5f24bdf312bd7a8e9116b6928cfebc45261a512af5f7625bdd",
+   "lanes": 4096,
+   "lanes_where_models_disagree": 2992,
+   "models": {
+    "RNE, overflow clamped to 65504": 2992,
+    "RNE, overflow to inf": 0,
+    "through fp32, overflow to inf": 0
+   },
+   "opcode": 11182,
+   "opcode_forms": [
+    "imm:4 imm:0"
+   ],
+   "probe": "op11182",
+   "status": "ok"
+  },
+  {
+   "agreeing_model": [
+    "truncate, saturate to [0, 2^32-1], NaN -> 0"
+   ],
+   "agreeing_models_identical": true,
+   "code_sha256": "584641aa980a131e0bd3b78a3abe4459d4ee8e32a69a2c7e4d732603b2f94862",
+   "gpu_outputs_sha256": "e186511ed54d8243ea90c36295b6965119d4acf83bd5abe278918318b16b9373",
+   "inputs_sha256": "03e32999b71210c9ce9dedac00fdde364710f043251ccf59a3acb8728ce33a37",
+   "lanes": 4096,
+   "lanes_where_models_disagree": 2300,
+   "models": {
+    "round to nearest even, saturate, NaN -> 0": 326,
+    "truncate, saturate to [0, 2^32-1], NaN -> 0": 0,
+    "truncate, wrap modulo 2^32": 1974
+   },
+   "opcode": 9320,
+   "opcode_forms": [
+    "imm:4 imm:1"
+   ],
+   "probe": "op9320u",
+   "status": "ok"
+  },
+  {
+   "agreeing_model": [
+    "truncate, saturate to int32, NaN -> 0"
+   ],
+   "agreeing_models_identical": true,
+   "code_sha256": "ec321eed189e0f5bbcc43bf0ad25984d6d1986a46b40912e71a689e6f8d97c77",
+   "gpu_outputs_sha256": "ee05cc0776ebb8a492efd984b552d5379c2d1b6d4b1f4fcf94a2388e8c08eafe",
+   "inputs_sha256": "b634d787d42fdc97cad641842463d9ba4928ddf67eeaa485df69d67ff76ecb2b",
+   "lanes": 4096,
+   "lanes_where_models_disagree": 653,
+   "models": {
+    "round to nearest even, saturate, NaN -> 0": 653,
+    "truncate, saturate to int32, NaN -> 0": 0
+   },
+   "opcode": 9320,
+   "opcode_forms": [
+    "imm:5 imm:1"
+   ],
+   "probe": "op9320s",
+   "status": "ok"
+  }
+ ]
+}

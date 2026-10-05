@@ -1,0 +1,131 @@
+[
+  {
+    "id": "CONTROL.op10279",
+    "op": 10279,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        4096
+      ],
+      [
+        4097
+      ],
+      [
+        4352
+      ],
+      [
+        8192
+      ]
+    ],
+    "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+    ],
+    "note": "MANDATORY POSITIVE CONTROL, proven src+4. The batch is void without it."
+  },
+  {
+    "id": "op16806.sarv",
+    "op": 16806,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        2147483648,
+        1
+      ],
+      [
+        2147483648,
+        4
+      ],
+      [
+        4026531840,
+        8
+      ],
+      [
+        256,
+        4
+      ]
+    ],
+    "expect": [
+      3221225472,
+      4160749568,
+      4278190080,
+      16
+    ],
+    "note": "THE WAIVER, STATED RATHER THAN TAKEN. op16806 has ZERO instances in Apple's corpus, so isa/g17-contract.jsonl's runnable=False is CORRECT and is not being edited - its witness comes from a repair walk. The gate exists because such an instruction can ignore its operands entirely and return a constant. That is a failure mode a test can DETECT rather than assume away: four sources chosen so an arithmetic right shift gives four different answers, three of them with distinct high bits. Constant output across the four says the walk is bad and the record proves nothing; matching 0xC0000000, 0xF8000000, 0xFF000000 and 16 says both operands reach it. That is why the flag is waived here and was not waived for ceil, trunc and rint, which did not need it.",
+    "function": "a >>arith b - matched arithmetic shift right on all four, including one case where the record's own expect was wrong"
+  },
+  {
+    "id": "op13488.nandn",
+    "op": 13488,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        4042322160,
+        4278255360
+      ],
+      [
+        16711935,
+        252645135
+      ],
+      [
+        4294967295,
+        0
+      ],
+      [
+        305419896,
+        2018915346
+      ]
+    ],
+    "note": "op13488, a two-source bitwise negated form the table does not name. NO EXPECT - which function of (a,b) it computes is what this measures, and asserting one would turn a measurement into a pass or a fail. The four pairs are chosen so that every candidate in the family separates: nand, nandn, nor, orn and xnor give different answers on (0xF0F0F0F0, 0xFF00FF00) and on (0xFFFFFFFF, 0x00000000). Four identical outputs mean the walked witness ignores its operands and the record proves nothing.",
+    "function": "~a & b   (andn2) - one of sixteen candidates fitted to four input pairs"
+  },
+  {
+    "id": "op1000.fadd.imm",
+    "op": 1000,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        1065353216
+      ],
+      [
+        1073741824
+      ],
+      [
+        1082130432
+      ],
+      [
+        1090519040
+      ]
+    ],
+    "note": "op1000, the f32 member of the one-source float add family: x + imm, where the immediate is the WITNESS's and the witness is walked. NO EXPECT, because the immediate is unknown and the test is a relation rather than a value: output minus input must be the SAME constant across 1.0, 2.0, 4.0 and 8.0. A walked witness that ignores its operand returns four equal outputs and fails that; a working one both proves delivery and MEASURES the immediate in the same four points. The ledger records this opcode as measured before (g17-the-one-source-float-form.toml) but not in a results file the scorecard reads, so this is bookkeeping catching up with knowledge.",
+    "function": "x + 1/16 - output minus input constant across 1.0, 2.0, 4.0, 8.0"
+  },
+  {
+    "id": "op1062.fsat",
+    "op": 1062,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        3196059648
+      ],
+      [
+        3204448256
+      ],
+      [
+        3208642560
+      ],
+      [
+        1073741824
+      ]
+    ],
+    "note": "op1062 saturate, on -0.25, -0.5, -0.75 and 2.0. NO EXPECT because the source MODIFIER is the witness's: with the negate bit clear the ledger measured clamp(-x, 0, 1), which gives 0.25, 0.5, 0.75, 0.0, and with it set clamp(x, 0, 1) gives 0.0, 0.0, 0.0, 1.0. Both are readable from these four points and they are not confusable, so the record measures which mode the walked witness carries instead of assuming one. Three distinct non-trivial outputs in the first case also make operand-ignoring visible.",
+    "function": "clamp(-x, 0, 1) - and not clamp(x,0,1), which the same four inputs separate"
+  }
+]

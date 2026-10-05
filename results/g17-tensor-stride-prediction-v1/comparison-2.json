@@ -1,0 +1,71 @@
+{
+  "status": "compiled_and_compared",
+  "gpu_dispatched": false,
+  "round": 2,
+  "cases": {
+    "a-rows-10": {
+      "object_sha256": "293b9f42a60f90014c082885ab1b669b3c35d91f2b7240023cc73688999a751b",
+      "main_sha256": "4bc2cb3e1361794221dfcd62243c4a25e27ee5f73024a0169e31c3d9320b4436",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a-rows-11": {
+      "object_sha256": "10f33d7b98fe934a7c79279320f4eb2c1e2b2518c52987ccc4460a5953f1e50c",
+      "main_sha256": "fc63ff08b6ee693c6a9439a20868f0c97e261c45239466c93f07af4a1a34e293",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a-rows-13": {
+      "object_sha256": "3e90e989555da849bc3b4208c5e84a77f9b97163982a512969e0adeb94f0478d",
+      "main_sha256": "7a9fb10557467cf1e6f95ffb5ac0cdc4d930d4696a280272d732d944cef72a8e",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a-rows-14": {
+      "object_sha256": "cafc0757b8cd3b789c705d6a0c438ba9e084abe4ceaf38f0ca099cc9ba4595e3",
+      "main_sha256": "374217719ae121a91e5cb181c9742b4af3ba613e7200a541a0fa5709a9c032c4",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a-rows-15": {
+      "object_sha256": "e1953d812e1f2f5b1041083252ec334abb1a4bcf93671689a407bbe743a5b37b",
+      "main_sha256": "f7f13c24e8a85ea9fb0c6b2a1a7d8afc97a77fa80aa764e568518c8396e98239",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a-rows-17": {
+      "object_sha256": "246d199f85e817b5935a1483c9ad46d1db303db38d19cb8d815c4d2ab93b49d5",
+      "main_sha256": "810bf3dab55f30970d1c9fc92bad1e92983132ae9a83814924f84ecde99307b8",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "b-rows-16": {
+      "object_sha256": "58c98a167e64ad9dfbe5b82fb99b6add834aa5fcb88b931f79351c28fad016d7",
+      "main_sha256": "f58ae0cd152c9b328f8511e7cdc238277c7908a215c731d1d5a0d63f6c5a37af",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-16": {
+      "object_sha256": "c19356cfc6ba59daf9a4ceba9fb93e1c757f8d0b5d6c6a54e706f8d847a40097",
+      "main_sha256": "adf9137ffc073fac2114e982f0dedabd444752359bdc5fe246edc4a194506a94",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    }
+  }
+}

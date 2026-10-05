@@ -1,0 +1,111 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.fmax.f16.samebase",
+  "op": 16860,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16860,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f0204482780af020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    16860,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15391
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.fmin.f16.samebase",
+  "op": 16868,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16868,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f0204482780ab020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    16868,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15360
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ }
+]

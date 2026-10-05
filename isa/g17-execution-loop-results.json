@@ -1,0 +1,245 @@
+{
+ "slot": 4,
+ "cases": [
+  {
+   "preflight": {
+    "trip": 1,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 1
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 1,
+   "written": {
+    "3": 0,
+    "4": 1
+   },
+   "result": 1,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 3,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 3
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 3,
+   "written": {
+    "3": 0,
+    "4": 3
+   },
+   "result": 3,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 4,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 4
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 4,
+   "written": {
+    "3": 0,
+    "4": 4
+   },
+   "result": 4,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 5,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 5
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 5,
+   "written": {
+    "3": 0,
+    "4": 5
+   },
+   "result": 5,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 8,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 8
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 8,
+   "written": {
+    "3": 0,
+    "4": 8
+   },
+   "result": 8,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 17,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 17
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 17,
+   "written": {
+    "3": 0,
+    "4": 17
+   },
+   "result": 17,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 40,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 40
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 40,
+   "written": {
+    "3": 0,
+    "4": 40
+   },
+   "result": 40,
+   "found": true
+  },
+  {
+   "preflight": {
+    "trip": 64,
+    "depth_ok": true,
+    "triple": [
+     582,
+     458,
+     577
+    ],
+    "gated_by_582": true,
+    "disp": -26,
+    "target": 72,
+    "target_is_boundary": true,
+    "target_before_branch": true,
+    "target_after_entry": true,
+    "self_referencing_update": true,
+    "compare_keeps_source": true,
+    "compare_imm": 64
+   },
+   "static_ok": true,
+   "status": "ok",
+   "cb_status": 0,
+   "expected": 64,
+   "written": {
+    "3": 0,
+    "4": 64
+   },
+   "result": 64,
+   "found": true
+  }
+ ]
+}

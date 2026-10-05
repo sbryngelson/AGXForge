@@ -1,0 +1,51 @@
+{
+ "name": "qwen3_q4_fq",
+ "arch": "qwen3",
+ "bits": 4,
+ "cap": 2048,
+ "qmv": {
+  "qkv": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "wo_res1": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "ffn": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "w2_res2": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "head": {
+   "xvec": true
+  }
+ },
+ "norm": {
+  "out32": true,
+  "seed": false
+ },
+ "final_norm": {
+  "out32": true,
+  "seed": false
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true,
+  "kvvec": true,
+  "hwexp2": true,
+  "qknorm": true
+ },
+ "gen": {}
+}

@@ -1,0 +1,20 @@
+{
+  "format": "g17-native-encoder-validation-contract-v1",
+  "status": "preregistered_before_complete_model_gpu_dispatch",
+  "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "policy": "half_transport_fp32_accumulate_v1",
+  "tokens": 32,
+  "cases": [
+    "A dog is running through the grass.",
+    "A puppy runs across a green field.",
+    "The spacecraft entered orbit around Mars."
+  ],
+  "input_policy": "Pinned tokenizer, no truncation, right padding to 32, zero segment IDs, positions 0 through 31, 0/1 padding mask with at least one valid token",
+  "exact_checks": ["embedding table gathers", "FP32 to FP16 transports", "checkpoint/program identities", "guards", "readonly parameters and inputs"],
+  "local_numerical_bound": "2e-5 * (1 + abs(independent reference using actual GPU predecessors)); transport checks remain exact",
+  "complete_policy_reference_bound": "2e-4 * (1 + abs(independent half-transport FP64 graph reference)) on final normalized embedding",
+  "original_model_quality": {"max_absolute_embedding_error": 0.005, "minimum_cosine_similarity": 0.999},
+  "repeat_requirement": "Three different text inputs in one prepared native process, followed by a repeat of the first; no host model activation reconstruction",
+  "framework_control": "Original graph FP64 result versus independent eager Transformers BertModel in FP64",
+  "scope": "No GPU result exists when this contract is written; failures remain failures and bounds must not be widened retrospectively"
+}

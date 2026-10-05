@@ -1,0 +1,65 @@
+% Figure 0.1: the two execution paths. Blue: the project's components. Red: the
+% project's native runtime. Grey: Apple's components.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=6mm and 8mm]
+  \node[ours, minimum width=46mm] (ir) {The project's IR and kernel builders};
+  \node[ours, minimum width=46mm, below=of ir] (cc) {The project's compiler};
+  \node[ours, minimum width=46mm, below=of cc] (code) {The project's native G17 instruction bytes};
+  \draw[flow] (ir) -- (cc);
+  \draw[flow] (cc) -- (code);
+
+  \node[ours, text width=52mm, below left=9mm and -14mm of code] (img)
+    {The project's \mbox{Metal-compatible} image\\[-1pt]{\footnotesize object, metadata, library, archive}};
+  \node[ours, text width=52mm, below=of img] (exec)
+    {The project's Metal-path executor\\[-1pt]{\footnotesize \code{decodegen}}};
+  \node[apple, text width=52mm, below=of exec] (metal)
+    {Apple Metal\\[-1pt]{\footnotesize pipeline creation and submission}};
+
+  \node[nat, text width=52mm, below right=9mm and -14mm of code] (rt)
+    {The project's native runtime\\[-1pt]{\footnotesize allocation, resource and launch state,}\\[-2pt]
+     {\footnotesize submission records, completion handling}};
+
+  \draw[flow] (code.south) -- ++(0,-4mm) -| (img.north);
+  \draw[flow] (code.south) -- ++(0,-4mm) -| (rt.north);
+  \draw[flow] (img) -- (exec);
+  \draw[flow] (exec) -- (metal);
+
+  \path (metal.south) ++(0,-9mm) coordinate (iogpuTop);
+  \node[band, below=9mm of metal.south -| code, minimum width=118mm] (iogpu)
+    {Apple private IOGPU framework and IOKit interfaces};
+  \node[band, below=5mm of iogpu, minimum width=118mm] (drv) {Apple AGX kernel driver};
+  \node[band, below=5mm of drv, minimum width=118mm] (fw) {Apple GPU firmware};
+  \node[box, draw=ink, fill=white, below=5mm of fw, minimum width=118mm] (gpu)
+    {M5 GPU: scalar and tensor execution};
+
+  \draw[flow] (metal.south) -- (metal.south |- iogpu.north);
+  \draw[->, line width=1.4pt, color=native] (rt.south) -- (rt.south |- iogpu.north)
+    node[pos=0.13, right=1mm, tag, text=native, text width=26mm, align=left]
+      {direct submission:\\bypasses Metal};
+  \draw[flow] (iogpu) -- (drv);
+  \draw[flow] (drv) -- (fw);
+  \draw[flow] (fw) -- (gpu);
+
+  % Path labels
+  \node[font=\small\bfseries, text=ours, anchor=base west, inner sep=1pt] at ([yshift=2mm]img.north west) {Through Metal};
+  \node[font=\small\bfseries, text=native, anchor=base east, inner sep=1pt] at ([yshift=2mm]rt.north east) {Below Metal};
+
+  % The Metal layer, which the native path does not enter
+  \begin{scope}[on background layer]
+    \node[draw=apple, dashed, rounded corners=3pt, fill=apple!4, inner sep=3mm,
+          fit=(metal) (metal -| rt.east)] (mlayer) {};
+  \end{scope}
+  \node[tag, text width=44mm] at ($(metal.east)!0.5!(metal.east -| rt.south)$) {Metal is not loaded in\\the native runtime's process};
+
+  % Brace over the shared Apple layers
+  \draw[decorate, decoration={brace, amplitude=5pt}, line width=0.6pt, color=apple]
+    ([xshift=3mm]iogpu.north east) -- ([xshift=3mm]fw.south east)
+    node[midway, right=6pt, tag, text width=18mm, align=left] {below both\\paths};
+\end{tikzpicture}
+\caption{The two execution paths. Both execute the project's own native GPU code. The native runtime bypasses Metal's
+pipeline creation and submission, builds the measured resource and launch state itself, and submits through Apple's
+private IOGPU interfaces. Apple's kernel driver and firmware remain in use. Blue: the project's components; red: the
+project's native runtime; grey: Apple's.}
+\label{fig:bypass}
+\end{figure}

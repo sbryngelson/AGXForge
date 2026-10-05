@@ -1,0 +1,7304 @@
+{
+ "means": "every Apple-witnessed form isa/g17-form-spec.jsonl lacked, classified by tools/g17formspecgen.py and scored by the corpus PROGRAMS it gates",
+ "not_recovered_by_reason": {
+  "no held-out instance reconstructs": 34,
+  "opcode not in the contract": 1,
+  "operand map takes a bit this spec calls opcode": 3,
+  "undetermined invisible bits": 19,
+  "witness does not reconstruct": 435
+ },
+ "ranked": {
+  "not recovered": [
+   {
+    "compiler_authors_width": 14,
+    "form": "11564/14",
+    "instances": 17212,
+    "programs": 3048,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3666/10",
+    "instances": 2948,
+    "programs": 1572,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11472/10",
+    "instances": 2139,
+    "programs": 1554,
+    "reason": "operand map takes a bit this spec calls opcode",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11321/10",
+    "instances": 2429,
+    "programs": 999,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": null,
+    "form": "10913/18",
+    "instances": 3567,
+    "programs": 735,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "5080/10",
+    "instances": 4028,
+    "programs": 695,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12673/10",
+    "instances": 1569,
+    "programs": 692,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12691/10",
+    "instances": 1264,
+    "programs": 600,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13784/14",
+    "instances": 970,
+    "programs": 560,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11490/10",
+    "instances": 2133,
+    "programs": 534,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12400/8",
+    "instances": 2236,
+    "programs": 524,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11186/10",
+    "instances": 1499,
+    "programs": 471,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13276/10",
+    "instances": 1414,
+    "programs": 467,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2210/6",
+    "instances": 7592,
+    "programs": 437,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17508/14",
+    "instances": 568,
+    "programs": 424,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12085/8",
+    "instances": 2399,
+    "programs": 416,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11466/14",
+    "instances": 467,
+    "programs": 397,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17577/14",
+    "instances": 397,
+    "programs": 355,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9791/10",
+    "instances": 826,
+    "programs": 346,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14501/22",
+    "instances": 6199,
+    "programs": 345,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "11905/16",
+    "instances": 408,
+    "programs": 336,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14693/22",
+    "instances": 5711,
+    "programs": 317,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11461/16",
+    "instances": 313,
+    "programs": 313,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13276/8",
+    "instances": 899,
+    "programs": 303,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9788/10",
+    "instances": 358,
+    "programs": 300,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3323/14",
+    "instances": 295,
+    "programs": 295,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17519/14",
+    "instances": 276,
+    "programs": 276,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "10374/10",
+    "instances": 691,
+    "programs": 275,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12091/8",
+    "instances": 330,
+    "programs": 272,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2318/10",
+    "instances": 2663,
+    "programs": 264,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17490/14",
+    "instances": 248,
+    "programs": 248,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2210/8",
+    "instances": 3521,
+    "programs": 217,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9788/8",
+    "instances": 266,
+    "programs": 217,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17592/8",
+    "instances": 427,
+    "programs": 214,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "3295/14",
+    "instances": 237,
+    "programs": 213,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2210/16",
+    "instances": 581,
+    "programs": 196,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9843/10",
+    "instances": 673,
+    "programs": 164,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17256/10",
+    "instances": 387,
+    "programs": 152,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11396/10",
+    "instances": 688,
+    "programs": 142,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12670/8",
+    "instances": 211,
+    "programs": 140,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13324/10",
+    "instances": 257,
+    "programs": 140,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3794/10",
+    "instances": 445,
+    "programs": 140,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12316/14",
+    "instances": 491,
+    "programs": 131,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11506/10",
+    "instances": 496,
+    "programs": 119,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17238/10",
+    "instances": 167,
+    "programs": 115,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2250/10",
+    "instances": 1614,
+    "programs": 113,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11363/14",
+    "instances": 112,
+    "programs": 110,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11330/12",
+    "instances": 108,
+    "programs": 107,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13276/14",
+    "instances": 130,
+    "programs": 105,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3330/14",
+    "instances": 103,
+    "programs": 103,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9682/10",
+    "instances": 184,
+    "programs": 103,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11321/12",
+    "instances": 104,
+    "programs": 101,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12397/14",
+    "instances": 104,
+    "programs": 101,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12397/8",
+    "instances": 102,
+    "programs": 99,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11683/12",
+    "instances": 166,
+    "programs": 97,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12352/14",
+    "instances": 805,
+    "programs": 96,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9941/10",
+    "instances": 339,
+    "programs": 89,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "5078/10",
+    "instances": 263,
+    "programs": 87,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11684/12",
+    "instances": 85,
+    "programs": 85,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17070/14",
+    "instances": 78,
+    "programs": 77,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14099/12",
+    "instances": 98,
+    "programs": 75,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9791/8",
+    "instances": 278,
+    "programs": 75,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11329/10",
+    "instances": 92,
+    "programs": 74,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11415/10",
+    "instances": 328,
+    "programs": 73,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11491/16",
+    "instances": 78,
+    "programs": 73,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10903/12",
+    "instances": 100,
+    "programs": 70,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17202/10",
+    "instances": 777,
+    "programs": 69,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11693/12",
+    "instances": 104,
+    "programs": 68,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10890/14",
+    "instances": 67,
+    "programs": 67,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12070/14",
+    "instances": 214,
+    "programs": 63,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14565/14",
+    "instances": 267,
+    "programs": 63,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1003/12",
+    "instances": 70,
+    "programs": 62,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12328/14",
+    "instances": 1542,
+    "programs": 61,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11323/10",
+    "instances": 153,
+    "programs": 60,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3667/10",
+    "instances": 101,
+    "programs": 58,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13285/10",
+    "instances": 63,
+    "programs": 57,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11473/10",
+    "instances": 56,
+    "programs": 56,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9792/10",
+    "instances": 256,
+    "programs": 56,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9747/10",
+    "instances": 196,
+    "programs": 52,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9827/10",
+    "instances": 507,
+    "programs": 52,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9841/8",
+    "instances": 502,
+    "programs": 52,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12685/14",
+    "instances": 151,
+    "programs": 51,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9841/10",
+    "instances": 484,
+    "programs": 51,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10899/14",
+    "instances": 52,
+    "programs": 50,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12012/16",
+    "instances": 50,
+    "programs": 50,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9697/10",
+    "instances": 72,
+    "programs": 50,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9886/16",
+    "instances": 50,
+    "programs": 50,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12655/10",
+    "instances": 414,
+    "programs": 48,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12685/8",
+    "instances": 229,
+    "programs": 48,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1018/12",
+    "instances": 155,
+    "programs": 47,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "16823/12",
+    "instances": 90,
+    "programs": 47,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "11576/14",
+    "instances": 90,
+    "programs": 46,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12328/10",
+    "instances": 802,
+    "programs": 46,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "5077/6",
+    "instances": 69,
+    "programs": 46,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13300/10",
+    "instances": 176,
+    "programs": 45,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11703/16",
+    "instances": 126,
+    "programs": 43,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12676/14",
+    "instances": 43,
+    "programs": 43,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11311/12",
+    "instances": 42,
+    "programs": 42,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13300/14",
+    "instances": 83,
+    "programs": 42,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "556/8",
+    "instances": 55,
+    "programs": 42,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9838/10",
+    "instances": 58,
+    "programs": 42,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17193/8",
+    "instances": 9963,
+    "programs": 40,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17202/8",
+    "instances": 59,
+    "programs": 38,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11415/8",
+    "instances": 71,
+    "programs": 36,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11483/14",
+    "instances": 150,
+    "programs": 36,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12712/14",
+    "instances": 92,
+    "programs": 35,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13824/14",
+    "instances": 40,
+    "programs": 35,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9942/10",
+    "instances": 34,
+    "programs": 34,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11552/14",
+    "instances": 47,
+    "programs": 31,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9792/8",
+    "instances": 74,
+    "programs": 31,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10020/10",
+    "instances": 175,
+    "programs": 30,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12070/10",
+    "instances": 715,
+    "programs": 30,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17577/10",
+    "instances": 483,
+    "programs": 30,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "5083/10",
+    "instances": 31,
+    "programs": 30,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11585/14",
+    "instances": 54,
+    "programs": 29,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": null,
+    "form": "13754/14",
+    "instances": 50,
+    "programs": 29,
+    "reason": "opcode not in the contract",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15813/10",
+    "instances": 77,
+    "programs": 29,
+    "reason": "operand map takes a bit this spec calls opcode",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9798/8",
+    "instances": 33,
+    "programs": 29,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13291/8",
+    "instances": 28,
+    "programs": 28,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2255/8",
+    "instances": 89,
+    "programs": 28,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12073/10",
+    "instances": 75,
+    "programs": 27,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1002/12",
+    "instances": 60,
+    "programs": 26,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11476/8",
+    "instances": 42,
+    "programs": 26,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12388/14",
+    "instances": 117,
+    "programs": 26,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9754/10",
+    "instances": 71,
+    "programs": 25,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12364/10",
+    "instances": 35,
+    "programs": 24,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11588/14",
+    "instances": 25,
+    "programs": 23,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12685/10",
+    "instances": 126,
+    "programs": 22,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12712/8",
+    "instances": 165,
+    "programs": 22,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13789/14",
+    "instances": 25,
+    "programs": 22,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17196/10",
+    "instances": 79,
+    "programs": 22,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9754/8",
+    "instances": 25,
+    "programs": 22,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11584/14",
+    "instances": 21,
+    "programs": 21,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12649/14",
+    "instances": 37,
+    "programs": 21,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13240/8",
+    "instances": 21,
+    "programs": 21,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13252/10",
+    "instances": 55,
+    "programs": 21,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9719/10",
+    "instances": 409,
+    "programs": 21,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9831/8",
+    "instances": 131,
+    "programs": 21,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12337/8",
+    "instances": 142,
+    "programs": 20,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12340/14",
+    "instances": 95,
+    "programs": 20,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13252/8",
+    "instances": 60,
+    "programs": 20,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13273/8",
+    "instances": 142,
+    "programs": 20,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2207/8",
+    "instances": 100,
+    "programs": 19,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9740/10",
+    "instances": 682,
+    "programs": 19,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9740/8",
+    "instances": 327,
+    "programs": 19,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9751/10",
+    "instances": 53,
+    "programs": 19,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9751/8",
+    "instances": 26,
+    "programs": 19,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1034/8",
+    "instances": 38,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11503/14",
+    "instances": 44,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12403/14",
+    "instances": 47,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14466/14",
+    "instances": 18,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "776/10",
+    "instances": 34,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "864/10",
+    "instances": 65,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9671/10",
+    "instances": 26,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9717/10",
+    "instances": 83,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9797/10",
+    "instances": 159,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9838/8",
+    "instances": 76,
+    "programs": 18,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10094/16",
+    "instances": 28,
+    "programs": 17,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "580/8",
+    "instances": 23,
+    "programs": 17,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11472/14",
+    "instances": 16,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12085/10",
+    "instances": 16,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12091/14",
+    "instances": 342,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12337/14",
+    "instances": 136,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12379/8",
+    "instances": 22,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13273/14",
+    "instances": 136,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17232/8",
+    "instances": 53,
+    "programs": 16,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10308/12",
+    "instances": 54,
+    "programs": 15,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11487/14",
+    "instances": 29,
+    "programs": 15,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11696/12",
+    "instances": 17,
+    "programs": 15,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15817/10",
+    "instances": 61,
+    "programs": 15,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11692/12",
+    "instances": 24,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12088/14",
+    "instances": 28,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12340/8",
+    "instances": 173,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12352/8",
+    "instances": 78,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17586/14",
+    "instances": 78,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "5082/10",
+    "instances": 26,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9833/10",
+    "instances": 28,
+    "programs": 14,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11701/16",
+    "instances": 65,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12091/10",
+    "instances": 13,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12379/14",
+    "instances": 23,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13051/14",
+    "instances": 15,
+    "programs": 13,
+    "reason": "operand map takes a bit this spec calls opcode",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13264/8",
+    "instances": 44,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15621/14",
+    "instances": 24,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17211/8",
+    "instances": 30,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17586/8",
+    "instances": 22,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9822/8",
+    "instances": 44,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9828/10",
+    "instances": 23,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9828/8",
+    "instances": 60,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9833/8",
+    "instances": 17,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9837/16",
+    "instances": 17,
+    "programs": 13,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11453/14",
+    "instances": 18,
+    "programs": 12,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11575/14",
+    "instances": 15,
+    "programs": 12,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "11969/16",
+    "instances": 12,
+    "programs": 12,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3118/8",
+    "instances": 39,
+    "programs": 12,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9822/10",
+    "instances": 91,
+    "programs": 12,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11457/14",
+    "instances": 17,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12085/14",
+    "instances": 45,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13291/14",
+    "instances": 13,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13773/14",
+    "instances": 18,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2208/8",
+    "instances": 37,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2254/12",
+    "instances": 21,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9843/16",
+    "instances": 12,
+    "programs": 11,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11317/10",
+    "instances": 10,
+    "programs": 10,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11563/14",
+    "instances": 17,
+    "programs": 10,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17044/14",
+    "instances": 10,
+    "programs": 10,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17238/14",
+    "instances": 100,
+    "programs": 10,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2214/8",
+    "instances": 17,
+    "programs": 10,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "800/12",
+    "instances": 61,
+    "programs": 10,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11394/14",
+    "instances": 12,
+    "programs": 9,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11468/10",
+    "instances": 40,
+    "programs": 9,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12319/14",
+    "instances": 26,
+    "programs": 9,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17217/10",
+    "instances": 16,
+    "programs": 9,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17592/10",
+    "instances": 72,
+    "programs": 9,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9828/16",
+    "instances": 66,
+    "programs": 9,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10018/16",
+    "instances": 50,
+    "programs": 8,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10901/14",
+    "instances": 8,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11313/12",
+    "instances": 13,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11326/12",
+    "instances": 20,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11510/10",
+    "instances": 24,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11701/10",
+    "instances": 24,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12088/8",
+    "instances": 13,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12319/10",
+    "instances": 39,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12391/8",
+    "instances": 19,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12400/10",
+    "instances": 8,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12715/10",
+    "instances": 8,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15653/10",
+    "instances": 10,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2216/8",
+    "instances": 44,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "920/8",
+    "instances": 13,
+    "programs": 8,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12072/10",
+    "instances": 30,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12391/14",
+    "instances": 14,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12403/8",
+    "instances": 61,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "14731/22",
+    "instances": 27,
+    "programs": 7,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17232/10",
+    "instances": 21,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17592/14",
+    "instances": 59,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17595/8",
+    "instances": 24,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2210/12",
+    "instances": 56,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9838/16",
+    "instances": 19,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9905/10",
+    "instances": 21,
+    "programs": 7,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17226/10",
+    "instances": 6,
+    "programs": 6,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2210/10",
+    "instances": 13,
+    "programs": 6,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2252/10",
+    "instances": 10,
+    "programs": 6,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3492/14",
+    "instances": 19,
+    "programs": 6,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9719/14",
+    "instances": 6,
+    "programs": 6,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9803/16",
+    "instances": 6,
+    "programs": 6,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10020/16",
+    "instances": 5,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11385/14",
+    "instances": 30,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11486/14",
+    "instances": 11,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12074/14",
+    "instances": 11,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12328/8",
+    "instances": 35,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12373/14",
+    "instances": 5,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14485/22",
+    "instances": 43,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15817/8",
+    "instances": 20,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2215/8",
+    "instances": 39,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2338/10",
+    "instances": 10,
+    "programs": 5,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3327/14",
+    "instances": 5,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "814/8",
+    "instances": 37,
+    "programs": 5,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9730/8",
+    "instances": 16,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9792/16",
+    "instances": 32,
+    "programs": 5,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1034/12",
+    "instances": 4,
+    "programs": 4,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10379/6",
+    "instances": 4,
+    "programs": 4,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10902/14",
+    "instances": 4,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10904/12",
+    "instances": 12,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11473/8",
+    "instances": 9,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12316/8",
+    "instances": 10,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13327/8",
+    "instances": 18,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1438/10",
+    "instances": 14,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14445/14",
+    "instances": 4,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15653/22",
+    "instances": 21,
+    "programs": 4,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17217/8",
+    "instances": 11,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17232/14",
+    "instances": 8,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2319/8",
+    "instances": 6,
+    "programs": 4,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9667/10",
+    "instances": 15,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9679/10",
+    "instances": 5,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9811/16",
+    "instances": 10,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9841/16",
+    "instances": 7,
+    "programs": 4,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1022/12",
+    "instances": 3,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11323/12",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11366/14",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11458/16",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11471/16",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11488/16",
+    "instances": 5,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12079/10",
+    "instances": 6,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12388/10",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12694/10",
+    "instances": 7,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13321/10",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13321/8",
+    "instances": 22,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13776/14",
+    "instances": 5,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13785/14",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13812/14",
+    "instances": 13,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14018/10",
+    "instances": 7,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14773/22",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1502/12",
+    "instances": 29,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15845/22",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15877/14",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17041/14",
+    "instances": 7,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2194/12",
+    "instances": 10,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2214/10",
+    "instances": 4,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2255/12",
+    "instances": 4,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2270/12",
+    "instances": 7,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2328/12",
+    "instances": 3,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2445/12",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "2860/14",
+    "instances": 3,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "2892/14",
+    "instances": 3,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3099/8",
+    "instances": 3,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3327/6",
+    "instances": 7,
+    "programs": 3,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "799/12",
+    "instances": 3,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9730/10",
+    "instances": 9,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9802/10",
+    "instances": 4,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9823/10",
+    "instances": 8,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9882/16",
+    "instances": 6,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9946/10",
+    "instances": 7,
+    "programs": 3,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10278/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11318/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11344/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11399/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11416/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11468/16",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11506/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11612/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12331/14",
+    "instances": 4,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12331/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12343/14",
+    "instances": 8,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12355/14",
+    "instances": 4,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12355/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12373/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12694/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12694/8",
+    "instances": 5,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13243/10",
+    "instances": 8,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13252/14",
+    "instances": 4,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13312/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13327/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13520/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1440/10",
+    "instances": 27,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1448/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14697/22",
+    "instances": 4,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14741/22",
+    "instances": 5,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14773/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14777/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15817/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15845/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17069/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "17209/12",
+    "instances": 4,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17223/8",
+    "instances": 3,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17247/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17250/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17579/10",
+    "instances": 27,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17583/8",
+    "instances": 10,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17791/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2208/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2260/8",
+    "instances": 17,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2262/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2271/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2320/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2322/16",
+    "instances": 8,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2326/16",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2335/10",
+    "instances": 5,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2340/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2340/16",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "3311/6",
+    "instances": 10,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3326/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "471/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "5076/10",
+    "instances": 10,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "778/8",
+    "instances": 14,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "814/6",
+    "instances": 2,
+    "programs": 2,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9675/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9682/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9746/10",
+    "instances": 5,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9823/8",
+    "instances": 4,
+    "programs": 2,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1002/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10020/12",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10090/16",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10091/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1031/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1032/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10367/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10379/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10796/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11310/12",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11322/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11325/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11329/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11369/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11383/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11386/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11396/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11403/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11413/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11415/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11416/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11467/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11490/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11501/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11549/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11549/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11550/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11561/14",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11767/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11843/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12071/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12071/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12074/10",
+    "instances": 4,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12313/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12319/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "12349/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12658/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12676/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12703/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12703/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13237/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13264/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13264/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13297/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13315/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13315/8",
+    "instances": 3,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13321/14",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13471/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13578/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13758/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13777/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1422/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1427/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1428/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1440/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14493/22",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14569/22",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14761/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "14763/22",
+    "instances": 4,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1487/10",
+    "instances": 4,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15625/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15653/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15733/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "16876/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "16884/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "16910/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17042/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17217/14",
+    "instances": 6,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17578/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17581/14",
+    "instances": 4,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17582/10",
+    "instances": 6,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17774/4",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2199/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2207/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2208/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2211/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2222/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2254/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2255/4",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2258/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2259/16",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2271/4",
+    "instances": 1,
+    "programs": 1,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2274/12",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2278/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2334/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2458/16",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3099/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "3107/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "3107/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "3122/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3131/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "3295/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3494/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3530/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3614/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "394/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "5078/6",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "5087/6",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "574/8",
+    "instances": 2,
+    "programs": 1,
+    "reason": "no held-out instance reconstructs",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "903/8",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "911/8",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "920/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "9342/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "9351/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9664/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9664/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9679/12",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9684/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9699/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9708/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9710/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9730/14",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9746/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9793/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9802/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9803/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9805/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9812/16",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9813/16",
+    "instances": 2,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9893/14",
+    "instances": 4,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9901/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9906/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "undetermined invisible bits",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9906/16",
+    "instances": 4,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9929/10",
+    "instances": 1,
+    "programs": 1,
+    "reason": "witness does not reconstruct",
+    "split": "not recovered"
+   }
+  ],
+  "specified and lowered": [
+   {
+    "compiler_authors_width": 10,
+    "form": "11318/10",
+    "instances": 2093,
+    "programs": 1191,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10827/14",
+    "instances": 2998,
+    "programs": 1063,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9787/10",
+    "instances": 1970,
+    "programs": 614,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9698/14",
+    "instances": 609,
+    "programs": 566,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11330/10",
+    "instances": 700,
+    "programs": 559,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9812/10",
+    "instances": 872,
+    "programs": 520,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10839/14",
+    "instances": 902,
+    "programs": 438,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11660/12",
+    "instances": 756,
+    "programs": 378,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3323/6",
+    "instances": 983,
+    "programs": 373,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1030/12",
+    "instances": 355,
+    "programs": 295,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17580/10",
+    "instances": 416,
+    "programs": 282,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13802/14",
+    "instances": 322,
+    "programs": 257,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17040/14",
+    "instances": 233,
+    "programs": 218,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2210/4",
+    "instances": 1203,
+    "programs": 204,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15717/8",
+    "instances": 710,
+    "programs": 203,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10806/12",
+    "instances": 357,
+    "programs": 195,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11311/10",
+    "instances": 746,
+    "programs": 194,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3322/14",
+    "instances": 301,
+    "programs": 193,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9845/16",
+    "instances": 192,
+    "programs": 160,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10833/14",
+    "instances": 304,
+    "programs": 155,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10802/12",
+    "instances": 334,
+    "programs": 139,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10268/12",
+    "instances": 988,
+    "programs": 126,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13766/14",
+    "instances": 147,
+    "programs": 119,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14395/14",
+    "instances": 370,
+    "programs": 105,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11671/12",
+    "instances": 313,
+    "programs": 101,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2250/16",
+    "instances": 333,
+    "programs": 95,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17017/14",
+    "instances": 266,
+    "programs": 92,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11369/10",
+    "instances": 174,
+    "programs": 86,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9662/10",
+    "instances": 133,
+    "programs": 84,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1003/4",
+    "instances": 114,
+    "programs": 79,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15685/8",
+    "instances": 213,
+    "programs": 76,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2194/16",
+    "instances": 420,
+    "programs": 74,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13772/14",
+    "instances": 103,
+    "programs": 68,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11481/10",
+    "instances": 177,
+    "programs": 66,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15877/8",
+    "instances": 145,
+    "programs": 66,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13547/10",
+    "instances": 148,
+    "programs": 64,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9806/16",
+    "instances": 135,
+    "programs": 64,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11383/10",
+    "instances": 62,
+    "programs": 62,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10891/14",
+    "instances": 77,
+    "programs": 61,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2318/16",
+    "instances": 318,
+    "programs": 59,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11366/10",
+    "instances": 173,
+    "programs": 53,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9663/10",
+    "instances": 108,
+    "programs": 47,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "573/8",
+    "instances": 43,
+    "programs": 43,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "5076/6",
+    "instances": 78,
+    "programs": 42,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9724/16",
+    "instances": 366,
+    "programs": 41,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10794/12",
+    "instances": 40,
+    "programs": 40,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "16779/12",
+    "instances": 449,
+    "programs": 40,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13240/14",
+    "instances": 1172,
+    "programs": 39,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "16875/10",
+    "instances": 2227,
+    "programs": 38,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1422/16",
+    "instances": 272,
+    "programs": 37,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13577/10",
+    "instances": 97,
+    "programs": 33,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9721/16",
+    "instances": 53,
+    "programs": 31,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2334/10",
+    "instances": 82,
+    "programs": 30,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3118/14",
+    "instances": 166,
+    "programs": 30,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "16815/12",
+    "instances": 390,
+    "programs": 28,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2339/8",
+    "instances": 52,
+    "programs": 28,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11382/10",
+    "instances": 152,
+    "programs": 27,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13586/10",
+    "instances": 65,
+    "programs": 25,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "16806/12",
+    "instances": 151,
+    "programs": 25,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "3106/8",
+    "instances": 35,
+    "programs": 23,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "9346/12",
+    "instances": 155,
+    "programs": 23,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12388/8",
+    "instances": 103,
+    "programs": 21,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3305/14",
+    "instances": 44,
+    "programs": 21,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9827/16",
+    "instances": 96,
+    "programs": 21,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13312/8",
+    "instances": 96,
+    "programs": 20,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "450/10",
+    "instances": 123,
+    "programs": 19,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10801/12",
+    "instances": 25,
+    "programs": 18,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9670/10",
+    "instances": 44,
+    "programs": 18,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11191/8",
+    "instances": 44,
+    "programs": 16,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17247/8",
+    "instances": 23,
+    "programs": 16,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "2846/14",
+    "instances": 536,
+    "programs": 16,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11389/10",
+    "instances": 29,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2323/8",
+    "instances": 15,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "2854/14",
+    "instances": 520,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "414/10",
+    "instances": 15,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14284/10",
+    "instances": 45,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14285/10",
+    "instances": 76,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2196/16",
+    "instances": 14,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2204/16",
+    "instances": 14,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2272/10",
+    "instances": 16,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "415/10",
+    "instances": 51,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17211/10",
+    "instances": 13,
+    "programs": 13,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2340/10",
+    "instances": 40,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3498/14",
+    "instances": 18,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11326/10",
+    "instances": 30,
+    "programs": 11,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17648/10",
+    "instances": 22,
+    "programs": 11,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9797/16",
+    "instances": 15,
+    "programs": 11,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11140/8",
+    "instances": 140,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11575/10",
+    "instances": 13,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2202/16",
+    "instances": 20,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3514/14",
+    "instances": 22,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3522/14",
+    "instances": 38,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "466/10",
+    "instances": 10,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "856/10",
+    "instances": 10,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9740/14",
+    "instances": 63,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10810/12",
+    "instances": 25,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11103/14",
+    "instances": 9,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "14241/12",
+    "instances": 166,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3810/10",
+    "instances": 14,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11496/10",
+    "instances": 14,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13099/14",
+    "instances": 9,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3948/10",
+    "instances": 24,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9678/10",
+    "instances": 11,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1018/4",
+    "instances": 23,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14390/14",
+    "instances": 22,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9798/10",
+    "instances": 11,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9905/14",
+    "instances": 91,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1001/12",
+    "instances": 21,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1010/12",
+    "instances": 28,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11072/14",
+    "instances": 12,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "2848/14",
+    "instances": 51,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "2856/14",
+    "instances": 51,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "3103/8",
+    "instances": 12,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3341/14",
+    "instances": 30,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "783/10",
+    "instances": 20,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "785/10",
+    "instances": 23,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14398/14",
+    "instances": 6,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17011/14",
+    "instances": 6,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17259/8",
+    "instances": 10,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "806/10",
+    "instances": 43,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "1035/6",
+    "instances": 8,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11376/14",
+    "instances": 10,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11468/8",
+    "instances": 8,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "1273/10",
+    "instances": 17,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1550/16",
+    "instances": 10,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "1566/10",
+    "instances": 12,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "16814/12",
+    "instances": 96,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17510/14",
+    "instances": 4,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2252/16",
+    "instances": 6,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3338/14",
+    "instances": 4,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3486/14",
+    "instances": 7,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3806/10",
+    "instances": 12,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9731/16",
+    "instances": 10,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11557/10",
+    "instances": 10,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13049/14",
+    "instances": 53,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15637/14",
+    "instances": 5,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15829/14",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2211/16",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2222/8",
+    "instances": 10,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2259/4",
+    "instances": 5,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2278/6",
+    "instances": 8,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2322/10",
+    "instances": 17,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3490/14",
+    "instances": 28,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "910/12",
+    "instances": 9,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9821/10",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1009/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1015/12",
+    "instances": 6,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10798/12",
+    "instances": 23,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11062/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11066/14",
+    "instances": 4,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11476/14",
+    "instances": 15,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11492/14",
+    "instances": 8,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11565/14",
+    "instances": 12,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11569/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "11649/12",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "1260/10",
+    "instances": 4,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "13559/10",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14024/10",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14296/10",
+    "instances": 24,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "1512/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "15657/10",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15925/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2195/16",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2274/6",
+    "instances": 16,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2574/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3500/14",
+    "instances": 9,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3526/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3532/14",
+    "instances": 8,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3834/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "3854/10",
+    "instances": 5,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "432/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "768/10",
+    "instances": 4,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "778/10",
+    "instances": 26,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9674/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9726/16",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9793/8",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9818/10",
+    "instances": 19,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9825/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10709/14",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10809/12",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "10886/14",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11101/14",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11508/8",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12175/14",
+    "instances": 5,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "1439/10",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14396/14",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14418/14",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "16862/10",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "16870/10",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2191/16",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2264/16",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3102/14",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3354/14",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3516/14",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified and lowered"
+   }
+  ],
+  "specified, not lowered": [
+   {
+    "compiler_authors_width": 16,
+    "form": "9721/6",
+    "instances": 15732,
+    "programs": 2113,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14565/22",
+    "instances": 6932,
+    "programs": 1064,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "3295/6",
+    "instances": 3280,
+    "programs": 886,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1038/8",
+    "instances": 2366,
+    "programs": 872,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2194/6",
+    "instances": 8173,
+    "programs": 703,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11399/10",
+    "instances": 5420,
+    "programs": 585,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12697/10",
+    "instances": 648,
+    "programs": 532,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3098/8",
+    "instances": 2551,
+    "programs": 529,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12661/10",
+    "instances": 511,
+    "programs": 488,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "574/4",
+    "instances": 656,
+    "programs": 426,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17193/10",
+    "instances": 1239,
+    "programs": 423,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11564/10",
+    "instances": 572,
+    "programs": 380,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11585/10",
+    "instances": 372,
+    "programs": 372,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9886/10",
+    "instances": 359,
+    "programs": 356,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1030/8",
+    "instances": 1739,
+    "programs": 328,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2328/8",
+    "instances": 636,
+    "programs": 328,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14533/22",
+    "instances": 1966,
+    "programs": 224,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2194/4",
+    "instances": 1031,
+    "programs": 220,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "11576/10",
+    "instances": 228,
+    "programs": 204,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1422/10",
+    "instances": 2533,
+    "programs": 202,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9812/8",
+    "instances": 198,
+    "programs": 185,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14725/22",
+    "instances": 2251,
+    "programs": 178,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "428/4",
+    "instances": 174,
+    "programs": 173,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9843/6",
+    "instances": 3235,
+    "programs": 167,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15621/8",
+    "instances": 299,
+    "programs": 147,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "13240/10",
+    "instances": 983,
+    "programs": 144,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15717/10",
+    "instances": 218,
+    "programs": 143,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9791/16",
+    "instances": 3681,
+    "programs": 136,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "1003/6",
+    "instances": 644,
+    "programs": 117,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15909/10",
+    "instances": 189,
+    "programs": 115,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11487/8",
+    "instances": 655,
+    "programs": 113,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11376/8",
+    "instances": 360,
+    "programs": 87,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11588/10",
+    "instances": 203,
+    "programs": 87,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2196/8",
+    "instances": 583,
+    "programs": 77,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "573/4",
+    "instances": 104,
+    "programs": 75,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9701/10",
+    "instances": 172,
+    "programs": 70,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15653/8",
+    "instances": 198,
+    "programs": 68,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9701/8",
+    "instances": 155,
+    "programs": 68,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "13324/14",
+    "instances": 145,
+    "programs": 66,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12316/10",
+    "instances": 507,
+    "programs": 61,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "1036/8",
+    "instances": 315,
+    "programs": 60,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9941/14",
+    "instances": 568,
+    "programs": 57,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10022/10",
+    "instances": 246,
+    "programs": 55,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11369/8",
+    "instances": 91,
+    "programs": 55,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9699/10",
+    "instances": 106,
+    "programs": 54,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1502/10",
+    "instances": 329,
+    "programs": 51,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "801/8",
+    "instances": 340,
+    "programs": 49,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9749/8",
+    "instances": 49,
+    "programs": 49,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9748/8",
+    "instances": 50,
+    "programs": 48,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3330/8",
+    "instances": 104,
+    "programs": 45,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15845/8",
+    "instances": 83,
+    "programs": 43,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12700/10",
+    "instances": 90,
+    "programs": 40,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17247/10",
+    "instances": 54,
+    "programs": 39,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17253/10",
+    "instances": 46,
+    "programs": 39,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11309/12",
+    "instances": 50,
+    "programs": 38,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "14071/8",
+    "instances": 1150,
+    "programs": 38,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9711/8",
+    "instances": 68,
+    "programs": 37,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12676/10",
+    "instances": 315,
+    "programs": 35,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11476/10",
+    "instances": 118,
+    "programs": 33,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17208/8",
+    "instances": 195,
+    "programs": 33,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3323/8",
+    "instances": 132,
+    "programs": 33,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2430/10",
+    "instances": 160,
+    "programs": 32,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9726/10",
+    "instances": 36,
+    "programs": 32,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11366/8",
+    "instances": 49,
+    "programs": 31,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11314/12",
+    "instances": 205,
+    "programs": 30,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "10022/16",
+    "instances": 66,
+    "programs": 29,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1031/8",
+    "instances": 38,
+    "programs": 29,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9942/16",
+    "instances": 100,
+    "programs": 29,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11458/8",
+    "instances": 30,
+    "programs": 28,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2323/10",
+    "instances": 64,
+    "programs": 27,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9881/14",
+    "instances": 70,
+    "programs": 27,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "10367/6",
+    "instances": 64,
+    "programs": 26,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2339/10",
+    "instances": 62,
+    "programs": 26,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9798/16",
+    "instances": 26,
+    "programs": 26,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11383/8",
+    "instances": 25,
+    "programs": 25,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11483/8",
+    "instances": 27,
+    "programs": 25,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15621/10",
+    "instances": 34,
+    "programs": 25,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "1036/12",
+    "instances": 44,
+    "programs": 24,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": null,
+    "form": "10912/18",
+    "instances": 114,
+    "programs": 23,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11486/8",
+    "instances": 93,
+    "programs": 23,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2198/12",
+    "instances": 44,
+    "programs": 22,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12649/10",
+    "instances": 85,
+    "programs": 21,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2334/8",
+    "instances": 45,
+    "programs": 21,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9831/10",
+    "instances": 269,
+    "programs": 21,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11506/8",
+    "instances": 30,
+    "programs": 20,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11552/10",
+    "instances": 43,
+    "programs": 20,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12664/10",
+    "instances": 54,
+    "programs": 20,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11415/6",
+    "instances": 32,
+    "programs": 18,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11486/6",
+    "instances": 31,
+    "programs": 18,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "2323/16",
+    "instances": 17,
+    "programs": 17,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2394/10",
+    "instances": 88,
+    "programs": 17,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11563/10",
+    "instances": 16,
+    "programs": 16,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12352/10",
+    "instances": 46,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12367/8",
+    "instances": 22,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15717/22",
+    "instances": 102,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9843/8",
+    "instances": 70,
+    "programs": 15,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12079/14",
+    "instances": 150,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2328/10",
+    "instances": 31,
+    "programs": 14,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9710/10",
+    "instances": 15,
+    "programs": 13,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9711/10",
+    "instances": 14,
+    "programs": 13,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1001/8",
+    "instances": 61,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2196/12",
+    "instances": 12,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2199/8",
+    "instances": 25,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2206/10",
+    "instances": 41,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2272/8",
+    "instances": 33,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2326/10",
+    "instances": 47,
+    "programs": 12,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2322/8",
+    "instances": 20,
+    "programs": 11,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11389/8",
+    "instances": 10,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15877/10",
+    "instances": 18,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "17208/10",
+    "instances": 15,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2206/12",
+    "instances": 17,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "908/8",
+    "instances": 13,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9881/10",
+    "instances": 29,
+    "programs": 10,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11386/8",
+    "instances": 11,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15685/10",
+    "instances": 19,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "2259/8",
+    "instances": 27,
+    "programs": 9,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11496/8",
+    "instances": 14,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14581/22",
+    "instances": 36,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14761/22",
+    "instances": 19,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15621/22",
+    "instances": 71,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2336/8",
+    "instances": 12,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3327/8",
+    "instances": 20,
+    "programs": 8,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15717/14",
+    "instances": 20,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15913/10",
+    "instances": 10,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2324/8",
+    "instances": 8,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "814/10",
+    "instances": 149,
+    "programs": 7,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1010/8",
+    "instances": 20,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": null,
+    "form": "10910/18",
+    "instances": 6,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11463/14",
+    "instances": 7,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12079/8",
+    "instances": 7,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3314/14",
+    "instances": 7,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "806/12",
+    "instances": 28,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "910/8",
+    "instances": 9,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9748/14",
+    "instances": 6,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9793/16",
+    "instances": 6,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9817/10",
+    "instances": 33,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "9883/16",
+    "instances": 6,
+    "programs": 6,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "1004/8",
+    "instances": 9,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11561/10",
+    "instances": 5,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12340/10",
+    "instances": 10,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "12712/10",
+    "instances": 47,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15819/10",
+    "instances": 7,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15845/10",
+    "instances": 6,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15909/22",
+    "instances": 9,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2270/16",
+    "instances": 24,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2280/8",
+    "instances": 5,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "3106/14",
+    "instances": 5,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9663/12",
+    "instances": 9,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9671/12",
+    "instances": 7,
+    "programs": 5,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1009/8",
+    "instances": 6,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11413/10",
+    "instances": 6,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11565/10",
+    "instances": 4,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "14667/22",
+    "instances": 20,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14677/22",
+    "instances": 4,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "15685/22",
+    "instances": 11,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15883/10",
+    "instances": 6,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2190/10",
+    "instances": 5,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2204/10",
+    "instances": 8,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "902/8",
+    "instances": 5,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9698/10",
+    "instances": 16,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9802/8",
+    "instances": 7,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9821/8",
+    "instances": 6,
+    "programs": 4,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "11403/10",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "11508/10",
+    "instances": 10,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11510/8",
+    "instances": 4,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1424/10",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14473/22",
+    "instances": 4,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "14549/22",
+    "instances": 10,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15813/22",
+    "instances": 4,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17256/14",
+    "instances": 14,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2191/12",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2258/4",
+    "instances": 4,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2264/8",
+    "instances": 6,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2338/16",
+    "instances": 3,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3131/8",
+    "instances": 19,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "806/8",
+    "instances": 45,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9720/16",
+    "instances": 4,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9741/10",
+    "instances": 11,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9741/8",
+    "instances": 27,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9912/10",
+    "instances": 6,
+    "programs": 3,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1013/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "11396/8",
+    "instances": 5,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12076/8",
+    "instances": 12,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12343/8",
+    "instances": 6,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "12658/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1426/10",
+    "instances": 6,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1430/10",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1432/10",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15721/10",
+    "instances": 18,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15721/8",
+    "instances": 14,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15723/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "15915/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "17239/10",
+    "instances": 32,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17259/10",
+    "instances": 36,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "17598/10",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2207/10",
+    "instances": 7,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "2263/8",
+    "instances": 4,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "3102/8",
+    "instances": 3,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "3326/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9699/8",
+    "instances": 6,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9749/14",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9795/8",
+    "instances": 2,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9818/16",
+    "instances": 20,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9826/16",
+    "instances": 4,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9910/10",
+    "instances": 5,
+    "programs": 2,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "1032/8",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "12080/10",
+    "instances": 10,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "1424/12",
+    "instances": 40,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 8,
+    "form": "17259/14",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "17578/14",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2208/12",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "2320/10",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "2458/10",
+    "instances": 14,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 4,
+    "form": "3310/8",
+    "instances": 12,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "427/4",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 12,
+    "form": "936/8",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9708/10",
+    "instances": 2,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9708/8",
+    "instances": 5,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9737/10",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 10,
+    "form": "9818/8",
+    "instances": 33,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 16,
+    "form": "9882/10",
+    "instances": 4,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 14,
+    "form": "9905/16",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   },
+   {
+    "compiler_authors_width": 6,
+    "form": "9929/14",
+    "instances": 3,
+    "programs": 1,
+    "reason": "admit",
+    "split": "specified, not lowered"
+   }
+  ]
+ },
+ "summary": {
+  "not recovered": {
+   "forms": 492,
+   "programs": 27210
+  },
+  "specified and lowered": {
+   "forms": 194,
+   "programs": 11287
+  },
+  "specified, not lowered": {
+   "forms": 223,
+   "programs": 15851
+  }
+ }
+}

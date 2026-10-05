@@ -1,0 +1,95 @@
+{
+  "date": "2026-09-19",
+  "decoder": "agxforge.g17.model.decode",
+  "operand": "decoded operand 1 bits 24..31",
+  "scope": {
+    "source": "results/g17-tensorops-recon-v1/*/code.bin",
+    "selection_globs": [
+      "mm_*/code.bin",
+      "orm_*/code.bin",
+      "pa_*/code.bin",
+      "mf1_*/code.bin",
+      "mtc_*/code.bin",
+      "mxp_*/code.bin"
+    ],
+    "unique_objects": 314
+  },
+  "stores": {
+    "17256": {
+      "instances": 13140,
+      "wait_byte_histogram": {
+        "0x00": 12924,
+        "0x01": 24,
+        "0x02": 46,
+        "0x04": 20,
+        "0x08": 36,
+        "0x10": 18,
+        "0x20": 27,
+        "0x40": 15,
+        "0x80": 30
+      }
+    },
+    "17257": {
+      "instances": 876,
+      "wait_byte_histogram": {
+        "0x00": 876
+      }
+    },
+    "17258": {
+      "instances": 118,
+      "wait_byte_histogram": {
+        "0x00": 118
+      }
+    }
+  },
+  "discriminating_examples": [
+    {
+      "object": "mtc_A_h_5525",
+      "producer_opcode": 14061,
+      "producer_operand1": "0x400000",
+      "producer_slot": 3,
+      "store_opcode": 17256,
+      "store_wait_byte": "0x08"
+    },
+    {
+      "object": "mtc_A_h_5525",
+      "producer_opcode": 14061,
+      "producer_operand1": "0x100000",
+      "producer_slot": 0,
+      "store_opcode": 17256,
+      "store_wait_byte": "0x01"
+    },
+    {
+      "object": "mm_base",
+      "producer": "MMA result",
+      "store_opcode": 17257,
+      "store_instances": 8,
+      "store_wait_byte": "0x00"
+    }
+  ],
+  "slot_reuse": {
+    "lowering": "agxforge/g17/tlower.py uses slot = k % 7",
+    "k_slices": 16,
+    "reuse_counts": {
+      "slot0": 3,
+      "slot1": 3,
+      "slot2": 2,
+      "slot3": 2,
+      "slot4": 2,
+      "slot5": 2,
+      "slot6": 2
+    },
+    "cases": [
+      {
+        "case": "16x16x256_tA_tB_int8.int8",
+        "matmul2d": "3/3",
+        "reference": "3/3"
+      },
+      {
+        "case": "32x32x256_half.half",
+        "matmul2d": "3/3",
+        "reference": "3/3"
+      }
+    ]
+  }
+}

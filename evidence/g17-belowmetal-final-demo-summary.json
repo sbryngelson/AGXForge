@@ -1,0 +1,157 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "action": "validate",
+  "attention_schedule": "fused11",
+  "scope": "M5 GPU TensorOps, not the separate Apple Neural Engine; measured half-transport MiniLM geometry; host application timing only",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "source_root": "/private/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-final-cold-l_40j8rw/source",
+  "workloads": {
+    "ffn": {
+      "status": "validated_measured_half_schedule",
+      "gpu_dispatched": true,
+      "requests": 3,
+      "submissions": 21,
+      "submissions_per_request": 7,
+      "prediction_seconds": 7.682029999967199,
+      "native_build_seconds": 4.26570437499322,
+      "driver_prepare_seconds": 0.16295441600959748,
+      "warm": {
+        "samples": 2,
+        "median_client_roundtrip_ms": 4.04175,
+        "median_submit_to_completion_sum_ms": 2.515,
+        "median_host_submit_sum_ms": 0.4045,
+        "tokens_per_second": 7917.362528607657
+      },
+      "immutable_weights_programs_uploaded_once": true,
+      "independent_quantized_reference_passed": true,
+      "original_fp32_application_reference_passed": false,
+      "gpu_health_unchanged": true,
+      "output_sha256": [
+        "134b071ce373b41a0accdc34c28e522c824b5440f0f6fbbae30eb1464b4fc8f3",
+        "9940a04bc9e8d6ae97a4929a6f9755b423ad51fbb64aab9269a9fa52950026dd",
+        "7fa7077f41bacfa5e461c630c260d6bb1ff2b4705f1c90097e72daf6fa61da02"
+      ],
+      "programs": {
+        "pack": {
+          "bytes": 48,
+          "sha256": "cc77a8442317cc80f3927fbb1bb09f56468ff150b50eff1b9f7951d2c1401e3b"
+        },
+        "expand": {
+          "bytes": 5370,
+          "sha256": "8fe00ea533d2374b96a0c11492a35ce83241f480936d94a97a137173d0fb28e0"
+        },
+        "activation": {
+          "bytes": 600,
+          "sha256": "34adbf8f2c4d59a98376df6c8399ca02994bb5710a1cd1a129e62701d7a64354"
+        },
+        "pack_hidden": {
+          "bytes": 48,
+          "sha256": "cc77a8442317cc80f3927fbb1bb09f56468ff150b50eff1b9f7951d2c1401e3b"
+        },
+        "contract": {
+          "bytes": 4762,
+          "sha256": "7b3442b72272a2e0b99efc2109a64954cc505fad737dd919ef927f291c0cb238"
+        },
+        "residual": {
+          "bytes": 120,
+          "sha256": "f55c6486e0b363a329050f7d9606a530e14dec3f2996a5282a33a24c59148f48"
+        },
+        "layernorm": {
+          "bytes": 5316,
+          "sha256": "b96939d4637436afa3672d94911dcda4b1558b61320840a9f0246921faae03b3"
+        }
+      },
+      "report": "/private/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-final-cold-l_40j8rw/source/results/demo/ffn-execution.json",
+      "prediction": "/private/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-final-cold-l_40j8rw/source/results/demo/ffn-prediction.json"
+    },
+    "attention": {
+      "status": "validated_measured_half_schedule",
+      "gpu_dispatched": true,
+      "requests": 3,
+      "submissions": 33,
+      "submissions_per_request": 11,
+      "prediction_seconds": 6.221662416006438,
+      "native_build_seconds": 4.233645999978762,
+      "driver_prepare_seconds": 0.13760741596342996,
+      "warm": {
+        "samples": 2,
+        "median_client_roundtrip_ms": 6.984146,
+        "median_submit_to_completion_sum_ms": 4.9905,
+        "median_host_submit_sum_ms": 0.663,
+        "tokens_per_second": 4581.8057068108255
+      },
+      "immutable_weights_programs_uploaded_once": true,
+      "independent_quantized_reference_passed": true,
+      "original_fp32_application_reference_passed": false,
+      "gpu_health_unchanged": true,
+      "output_sha256": [
+        "6cf8c20b8d8fda4a8f0fe5c13bea1e37818a9169bca5bcb308583884a9855e3a",
+        "60851ed0b411572ef42c958ffbad2705b3873e5bb263b21d1d05eadff9c7bb3c",
+        "04c505df56a05ee33336ebb7a32fca8328598d8c879468c02c72382f81ae9fa2"
+      ],
+      "programs": {
+        "pack": {
+          "bytes": 48,
+          "sha256": "cc77a8442317cc80f3927fbb1bb09f56468ff150b50eff1b9f7951d2c1401e3b"
+        },
+        "q_bias": {
+          "bytes": 3802,
+          "sha256": "9c99cf35b79a34223a431cb3ec3f1d17e15b49e6006c222f9bb4f98431e9cf45"
+        },
+        "k_bias": {
+          "bytes": 3802,
+          "sha256": "9c99cf35b79a34223a431cb3ec3f1d17e15b49e6006c222f9bb4f98431e9cf45"
+        },
+        "v_bias": {
+          "bytes": 3802,
+          "sha256": "9c99cf35b79a34223a431cb3ec3f1d17e15b49e6006c222f9bb4f98431e9cf45"
+        },
+        "scores": {
+          "bytes": 2374,
+          "sha256": "8ae36c2fe551a19ac4524a4c91d9c97e484cfbb0917b674058d68cfcdab61e87"
+        },
+        "softmax": {
+          "bytes": 3960,
+          "sha256": "789bc7b4e67f605643bf1fb28f4f65f7617c3f479190442c94372c073a4e19ca"
+        },
+        "context": {
+          "bytes": 2548,
+          "sha256": "4b5ebcfb6ddfa5652538ed2ae7e7ed2b58eba28a58767195ca7948d7a4dbf26f"
+        },
+        "context_pack": {
+          "bytes": 48,
+          "sha256": "cc77a8442317cc80f3927fbb1bb09f56468ff150b50eff1b9f7951d2c1401e3b"
+        },
+        "out_projection": {
+          "bytes": 3642,
+          "sha256": "9103cdab0c645963a8a6eb9e73a2822eab824859f1d99a0055a6b8e3bb1af6b3"
+        },
+        "residual": {
+          "bytes": 120,
+          "sha256": "f55c6486e0b363a329050f7d9606a530e14dec3f2996a5282a33a24c59148f48"
+        },
+        "layernorm": {
+          "bytes": 5316,
+          "sha256": "b96939d4637436afa3672d94911dcda4b1558b61320840a9f0246921faae03b3"
+        }
+      },
+      "report": "/private/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-final-cold-l_40j8rw/source/results/demo/attention-execution.json",
+      "prediction": "/private/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-final-cold-l_40j8rw/source/results/demo/attention-prediction.json"
+    }
+  },
+  "fixtures": {
+    "status": "verified_materialized",
+    "gpu_dispatched": false,
+    "files": {
+      "results/g17-minilm-ffn-fixture-v1/fixture.npz": {
+        "bytes": 4780410,
+        "sha256": "3c76dcee68ef5464c33c8a55df1dff54ac807de89d3abd18d8565fb71cb91fea"
+      },
+      "results/g17-attention-delivery-v1/fixture.npz": {
+        "bytes": 2424754,
+        "sha256": "8585dbd53da9aa8e16f14fe502641c412d832d9bbfb818b74e3e0ef3c3fdbbeb"
+      }
+    }
+  }
+}

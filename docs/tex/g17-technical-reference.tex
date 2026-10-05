@@ -1,0 +1,99 @@
+% The G17 technical reference.
+% Build: latexmk -lualatex g17-technical-reference.tex   (from docs/tex)
+\documentclass[11pt, letterpaper, oneside, open=any, numbers=noenddot]{scrreprt}
+\input{preamble}
+
+% Revision stamp: the Makefile writes revision.tex from git before each build.
+\InputIfFileExists{revision}{}{\newcommand{\docrevision}{unversioned build}\newcommand{\docrevdate}{}}
+\hypersetup{pdfauthor={Spencer Bryngelson}, pdfsubject={An independently recovered model of the Apple M5 GPU
+  (G17) and its tensor unit, and the compiler and runtime built on it}}
+
+\title{\Huge The G17 technical reference}
+\subtitle{An independently recovered model of the Apple M5 GPU and its tensor unit,\\
+and the compiler and runtime built on it}
+\author{Spencer Bryngelson}
+\date{Manuscript\\[2pt]\small AGXForge revision \code{\docrevision}\ifx\docrevdate\empty\else, \docrevdate\fi}
+\publishers{\small The AGXForge project: a native compiler for the Apple M5 GPU\\
+\url{https://github.com/sbryngelson/AGXForge}}
+
+\begin{document}
+\maketitle
+
+\addchap*{For the expert reader}
+
+The model of the G17 GPU and its in-core tensor unit given here was recovered independently of Apple. Each rule is
+stated with the evidence that established it, what it predicts about a program, and how the project's compiler and
+runtime use it. The
+\href{https://github.com/sbryngelson/AGXForge/blob/main/docs/showcase.md}{showcase} reports application results. The
+\href{https://github.com/sbryngelson/AGXForge/blob/main/docs/g17-tensorops-machine-model.md}{machine model} (MM) is the
+evidence record; a citation such as MM~\mm{25.91} links to the section that establishes a claim, and an opcode, as in
+\op{5107}, links to its entry in \cref{app:c}. \Cref{sec:read-this-document} gives the kinds of statement used.
+
+To judge the model quickly, start with these parts of the document.
+
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+\item \textbf{One checked program, two execution paths} (\cref{sec:project-authors-two,sec:one-program-ir},
+  p.~\pageref{sec:project-authors-two}). A program the project compiled, traced from IR to instruction bytes, runs through
+  Metal and below it, where the project's runtime submits through Apple's private IOGPU interfaces, and gives the same
+  exact output on both.
+\item \textbf{Tensor layouts and arithmetic} (\crefrange{sec:fragment-layouts}{sec:arithmetic-semantics-supported},
+  p.~\pageref{sec:fragment-layouts}). The lane-to-element map was measured with one-hot probes, and a kernel has to keep
+  three coordinate systems apart. The reduction tree was fixed with stimuli on which rival models predict different bits.
+  A hand calculation shows that the accumulator enters first; Apple's library adds C last and so differs by one
+  rounding.
+\item \textbf{Register chaining} (\cref{sec:chaining-feed-modes}, p.~\pageref{sec:chaining-feed-modes}). A D tile
+  feeds the next MMA with no shuffle in this compiler's kernels and with a row rotation in canonically packed ones; both
+  cases were measured. The compiler allows a feed only where a measurement covers it.
+\item \textbf{The compiler on one program} (\cref{ch:running-example-through}, p.~\pageref{ch:running-example-through}).
+  Selection, tensor lowering, register allocation under lifetime and reservation rules, and scoreboard waits, shown on
+  the same program as item 1.
+\item \textbf{Native execution and its validation} (\cref{ch:below-metal-native,ch:image-result-validated},
+  p.~\pageref{ch:below-metal-native}). These chapters separate what the native runtime builds from what stays Apple's,
+  report each level of validation on its own, and state where the evidence stops.
+\end{enumerate}
+
+Four other experiments changed the reading of earlier results. A sentinel test showed that the register namespace ends
+at R125 (\cref{sec:namespace}); a release destroys a value as it is read (\cref{sec:release-does}); in a control with one
+wait left out, the consumer read zeros (\cref{sec:scoreboard}); and removing one metadata byte makes every MMA return zero
+(\cref{sec:ordering-enable}). \Cref{sec:where-evidence-stops} lists the limits; \cref{ch:not-known-index} indexes what is open.
+
+\tableofcontents
+
+\setcounter{chapter}{-1}
+\include{ch/00-brief}
+\part{The machine}\label{part:i}
+\include{ch/01-device}
+\include{ch/02-registers}
+\include{ch/03-encoding}
+\include{ch/04-scalar}
+\include{ch/05-control}
+\include{ch/06-special-registers}
+\include{ch/07-memory}
+\include{ch/08-cross-lane}
+\include{ch/09-synchronization}
+\include{ch/10-tensor-unit}
+\include{ch/11-image}
+\include{ch/12-performance}
+\include{ch/13-submission}
+\include{ch/14-open-questions}
+\part{Compilation and delivery}\label{part:ii}
+\include{ch/15-compiling}
+\include{ch/16-delivering}
+\part{Execution}\label{part:iii}
+\include{ch/17-executing}
+\appendix
+\crefalias{chapter}{appendix}
+\include{ch/a-corrections}
+\include{ch/b-scalar}
+\include{ch/c-opcodes}
+\include{ch/d-code-locations}
+
+\addchap*{Colophon}
+
+Built from AGXForge revision \code{\docrevision}\ifx\docrevdate\empty\else{} (\docrevdate)\fi. The \LaTeX{} source is in
+\code{docs/tex}, one file per chapter; \code{make -C docs/tex} writes the revision stamp and rebuilds this PDF with
+Lua\LaTeX{}. \code{tools/g17docs.py --check} verifies that every machine-model citation names a real section, every
+cross-reference has a target and every opcode is named beside its number. Text set in Libertinus and Inconsolata;
+figures drawn in TikZ, the fragment map generated from the measured formula.
+
+\end{document}

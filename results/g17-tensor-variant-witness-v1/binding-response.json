@@ -1,0 +1,383 @@
+{
+  "op17016_byte_and_operand_equal": [
+    true,
+    true
+  ],
+  "memory_families": {
+    "12674": [
+      {
+        "before_offset": 310,
+        "after_offset": 322,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 322,
+        "after_offset": 334,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 338,
+        "after_offset": 350,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 350,
+        "after_offset": 362,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 366,
+        "after_offset": 378,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 378,
+        "after_offset": 390,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 394,
+        "after_offset": 406,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 410,
+        "after_offset": 422,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 426,
+        "after_offset": 438,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 442,
+        "after_offset": 454,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 458,
+        "after_offset": 470,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 474,
+        "after_offset": 486,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 490,
+        "after_offset": 502,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 502,
+        "after_offset": 514,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 518,
+        "after_offset": 530,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 534,
+        "after_offset": 546,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 812,
+        "after_offset": 824,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 880,
+        "after_offset": 892,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 896,
+        "after_offset": 908,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 988,
+        "after_offset": 1000,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1004,
+        "after_offset": 1016,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1020,
+        "after_offset": 1032,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      }
+    ],
+    "12675": [
+      {
+        "before_offset": 772,
+        "after_offset": 784,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 784,
+        "after_offset": 796,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 800,
+        "after_offset": 812,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 852,
+        "after_offset": 864,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 864,
+        "after_offset": 876,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 912,
+        "after_offset": 924,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 928,
+        "after_offset": 940,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 944,
+        "after_offset": 956,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 960,
+        "after_offset": 972,
+        "before_base": 0,
+        "after_base": 4,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 976,
+        "after_offset": 988,
+        "before_base": 4,
+        "after_base": 8,
+        "delta": 4,
+        "other_changed_fields": []
+      }
+    ],
+    "17257": [
+      {
+        "before_offset": 1156,
+        "after_offset": 1168,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1166,
+        "after_offset": 1178,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1182,
+        "after_offset": 1194,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1192,
+        "after_offset": 1204,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1208,
+        "after_offset": 1220,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1224,
+        "after_offset": 1236,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1240,
+        "after_offset": 1252,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      },
+      {
+        "before_offset": 1256,
+        "after_offset": 1268,
+        "before_base": 8,
+        "after_base": 12,
+        "delta": 4,
+        "other_changed_fields": []
+      }
+    ]
+  },
+  "status": "compiler_emission_measurement",
+  "gpu_dispatched": false,
+  "baseline": {
+    "object_sha256": "c79433216cec09df2092065b38008ff96793f8710ddd075cf3fc7881c2bff44e",
+    "bindings": [
+      [
+        1,
+        0,
+        false
+      ],
+      [
+        2,
+        2,
+        false
+      ],
+      [
+        3,
+        4,
+        true
+      ]
+    ]
+  },
+  "leading": {
+    "object_sha256": "516f3ead61b7e7f2a8f92b671f15562316c2c509045912db974320f063a8ad02",
+    "bindings": [
+      [
+        1,
+        0,
+        false
+      ],
+      [
+        2,
+        2,
+        false
+      ],
+      [
+        3,
+        4,
+        false
+      ],
+      [
+        4,
+        6,
+        true
+      ]
+    ]
+  },
+  "conclusion": "Both op17016 instructions are byte-identical. All 32 tensor loads and eight tensor stores shift their field-3 constant base by four.",
+  "limits": "The leading-buffer variant adds a scalar store and changes allocation pressure. Only the listed equalities/deltas are asserted; this does not identify op17016 semantics or prove hardware address behavior."
+}

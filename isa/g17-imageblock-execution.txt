@@ -1,0 +1,50 @@
+# THE IMAGEBLOCK HOLDS DATA, IT IS INDEXED BY THE THREAD POSITION, AND APPLE EMITS NO BARRIER.
+# All three measured with tools/g17ibrun on an unpatched, xcrun-metal-compiled kernel.
+#
+#   struct IBS { half4 c; float d; uint k; ushort s; uchar b; };
+#   kernel void k(imageblock<IBS, imageblock_layout_explicit> ib, device uint *u [[buffer(0)]],
+#                 ..., ushort2 tp [[thread_position_in_threadgroup]],
+#                 uint tid [[thread_index_in_threadgroup]]) {
+#     ib.data(tp)->k = 0x5a5a0000u + tid;
+#     simdgroup_barrier(mem_flags::mem_threadgroup);
+#     u[tid]      = ib.data(tp)->k;
+#     u[64 + tid] = ib.data(ushort2(0, 0))->k;
+#   }
+#
+# 32 distinct values in the own-slot column and lane 0's value from every lane reading (0,0): the
+# tile is a real shared addressable store indexed by thread position. The device buffer was filled
+# with 0xdeadbeef first, so unwritten and written-zero are both distinguishable and neither appears.
+#
+# THE BARRIER IN THE SOURCE IS NOT IN THE PROGRAM. Apple's compiler elided it - the store is
+# followed by a movimm and then the load, nothing between them. Within a simdgroup the accesses are
+# already ordered, so a fence is not what makes the round trip work.
+#
+# THE API DETAIL: the pipeline must come from newComputePipelineStateWithDescriptor: on an
+# MTLComputePipelineDescriptor. A pipeline obtained by function-name lookup does not carry what the
+# driver needs to size the tile, and imageblockMemoryLengthForDimensions: then reports 768 bytes at
+# 32x1. setImageblockWidth:height: on the encoder must match the threadgroup.
+
+# THE PROGRAM THAT RAN, with bytes. IB marks an opcode whose MCInstrDesc declares an
+# implicit use of SR_LOCAL_X and SR_LOCAL_Y at +24.
+
+       read_sr        op14060  c463   14a71006                       reg:426 imm:1048576 reg:25 imm:0
+       read_sr        op14060  c463   24a41026                       reg:427 imm:2097152 reg:26 imm:0
+       read_sr        op14060  c463   24a51426                       reg:283 imm:2097152 reg:27 imm:0
+       mov.16         op590    c27    03022120                       reg:425 imm:16777248 reg:426 imm:0
+       movimm         op11843  c23    04da2600080c0200               reg:281 imm:32 imm:23130
+   IB  store.ib.32    op13075  c329   27090502a100ad020a0061180000   reg:105 imm:33554448 imm:18 imm:12 imm:1 reg:107 imm:0 i
+       movimm         op554    c23    0b000000                       reg:105 imm:0
+   IB  load.ib.32     op12151  c331   27010502a107ac0a0a0040182000   reg:107 imm:8388608 imm:18 imm:12 imm:1 reg:107 imm:0 im
+   IB  load.ib.32     op12151  c331   270105020100ac020a0040182000   reg:105 imm:137440002048 imm:18 imm:12 imm:1 reg:105 imm
+       movimm         op555    c23    13000001                       reg:282 imm:0
+       store          op17229  c286   2f000302010210c00020           reg:107 imm:2147483664 imm:2066 expr:46888243232 imm:0 r
+       store          op17229  c286   0f000302012610c0010000000001   reg:105 imm:16777232 imm:2066 expr:46888243304 imm:0 reg
+       end            op684    c3     0e000000                       imm:0
+
+
+  29   0x5a5a001d   0x5a5a0000
+  30   0x5a5a001e   0x5a5a0000
+  31   0x5a5a001f   0x5a5a0000
+
+distinct values across 32 lanes in the own-slot column: 32
+PER-LANE: each lane read back something different, so the tile is indexed by thread

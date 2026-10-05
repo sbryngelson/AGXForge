@@ -1,0 +1,31 @@
+{
+  "format": "g17-native-callback-ownership-interpretation-v1",
+  "capture_sha256": "ba2d60510ada0f9cb5aa010c0ae4f16494ddae0eb26f179d9516577165710446",
+  "interpretation": {
+    "reclaimed_after_callback_return_ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "incomplete_lifetime_ids": [],
+    "all_observed_blocks_reclaimed": true,
+    "scope": "Observed allocations only; not a stable ABI or proof about failed submissions"
+  },
+  "capture_path": "evidence/g17-native-callback-ownership.json",
+  "interpretation_source_sha256": "92717e582cb2c99159c590dd3ae34260ff31f2cfca1bd35c9203940dd676687a",
+  "attempts": [
+    {
+      "attempt": "v1",
+      "gpu_dispatched": false,
+      "disposition": "offline code-window reader stopped on undecodable bytes; no submission"
+    },
+    {
+      "attempt": "v2",
+      "gpu_dispatched": true,
+      "disposition": "superseded accounting instrument: retained a mutable Frida retval pointer, causing invalid state reads; initial passed flag insufficient. v3 clones pointer values and retains all allocation generations."
+    }
+  ]
+}

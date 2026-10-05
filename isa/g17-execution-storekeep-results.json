@@ -1,0 +1,202 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "keep.reread_word_8",
+  "op": 17235,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17235,
+   "found": 9,
+   "cases": 3,
+   "encoded": [
+    "6f0423000104002a"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559,
+   324478057
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "keep.reread_word_14",
+  "op": 17235,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17235,
+   "found": 9,
+   "cases": 3,
+   "encoded": [
+    "6f042300010400a3010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559,
+   324478057
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "keep.reread_half_8",
+  "op": 17199,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17199,
+   "found": 11,
+   "cases": 3,
+   "encoded": [
+    "770423000104002a"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10280,
+    10288,
+    11842,
+    12682,
+    14059,
+    17199,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735940609,
+   3735928559,
+   60930
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "keep.reread_half_14",
+  "op": 17199,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17199,
+   "found": 11,
+   "cases": 3,
+   "encoded": [
+    "77042300010400b2010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10280,
+    10288,
+    11842,
+    12682,
+    14059,
+    17199,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735940609,
+   3735928559,
+   60930
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

@@ -1,0 +1,512 @@
+\chapter{Memory}\label{ch:memory}
+
+A G17 program reaches memory through ordinary per-lane loads and stores. Each instruction names a
+base (a device binding, threadgroup memory, the imageblock, or a register-held pointer), an index (a register or an
+immediate), a byte displacement and an element width; the width of the access is fixed by the \emph{opcode}, with no width field.
+The tensor unit's "tensor loads" are per-lane gathers of the same kind, at addresses that ordinary ALU instructions
+compute, through the same load and store machinery and the same eight-slot scoreboard (MM~\mm{7};
+\cref{sec:tensor-memory-path}).
+
+Every memory access has an \emph{address
+contract} (which bytes are touched) and an \emph{arrival contract} (when the value exists in a register or in memory),
+and the hardware checks neither. A wrong binding rank stores nothing and returns the fill value; a load far past its
+buffer returned 0 at every tested offset; a consumer that does not wait on a load's scoreboard slot reads the register's previous contents; a
+released imageblock coordinate collapses every lane to element 0; an undeclared imageblock reads 0; a mis-encoded
+texture coordinate reads texel (0, 0). All of these completed with status 0 and no fault. This chapter calls a rule
+safe only where a control could have failed it, and such controls showed that several fields first read as address
+fields are arrival (scoreboard) fields. The
+arrival contract is \cref{ch:synchronization}'s subject (\cref{sec:scoreboard}); this chapter covers the address side and the storage kinds.
+
+Terms used below:
+
+\begin{itemize}
+\item \emph{Rn}: 32-bit general register n, named here by role ("R32, the per-lane index register"). Register-file rules,
+  including the destructive \emph{release} lifetime (modifier value 16), are \cref{ch:register-file}.
+\item \emph{\opn{0}} and \emph{\opn{4}}: the decoder's tags for the uniform register file and for the message staging file that texture
+  messages read. A \emph{binding expression} is how the decoder prints a base: \code{bin(op0, const(K), 8)} for a device base,
+  \code{bin(op0, const(K), 2)} for a threadgroup base; K is the binding constant and the last number the base's scale.
+\item \emph{Binding rank}: a buffer's position in the binding list the program image declares (\cref{sec:address-computation}).
+\item \emph{Operand 1}: the control word after a memory instruction's first operand. Bits 20–23 name the slot a producer fills
+  (as slot + 1); bits 24–31 are the instruction's own wait mask (\cref{sec:scoreboard}).
+\item \emph{Element code}: the access-width field of tensor and vector loads: 1, 2, 4, 8 or 16 bytes (MM~\mm{7}, MM~\mm{25.37}).
+\item \emph{Immediate-address form}: a load or store whose index and displacement are both immediates (\cref{sec:immediate-address-vector-forms}).
+\item "Below Metal" means a pure IOGPU submission with no AGXMetal driver loaded
+  (\code{docs/g17-first-dispatch-trials.md}; the interface is \cref{ch:submission-below-metal}).
+\item Encoding and field maps are \cref{ch:instruction-encoding}; metadata and the constant-program format \cref{ch:kernel-metadata-image}; bandwidth, latency and
+  instruction-fetch numbers \cref{ch:performance}.
+\end{itemize}
+
+\section{Address computation}\label{sec:address-computation}
+
+A register-indexed access forms its address as follows (measured on the 128-bit vector load and through the emulator's
+byte-for-byte agreement with shipped dispatches; the other source shapes below are what Apple's compiler emits):
+
+\begin{lstlisting}
+address = base + index_register x element_width + displacement        (width and displacement in bytes)
+\end{lstlisting}
+
+Element width scales only the index; the displacement is unscaled. A constant address has no index register, width 1 and a byte
+displacement. The immediate-address family (\cref{sec:immediate-address-vector-forms}) uses a different formula, and tensor addresses are this
+formula applied to an index register that ordinary arithmetic computes (below).
+
+Two project files give conflicting answers on whether the displacement exists and what it counts.
+\code{isa/g17-addressing-rules.json} compiled \code{C[tid] = A[tid + k]} with \code{uint tid} for six element types and found that no operand of the load moved with k: Apple's compiler instead added k to the index with \op{10279}, and k = 1, 2, 4, 8 encoded as immediate 1, 2, 4, 8 for char through long. Its conclusion was "the
+load carries NO displacement field" and \code{address = base + (index + displacement) x sizeof}. \code{isa/g17-address-formula.txt}
+compiled \code{f[i + 7]}, \code{w[i + 7]} and \code{L[i + 7]} and found a displacement operand carrying 28, 14 and 56: bytes, not
+elements. Both observations are correct for the source shapes they compiled. On hardware, setting the 128-bit vector load's displacement to 4, 8, 12 and 20 moved the access by exactly that many bytes in 10 of
+10 runs (MM~\mm{25.141.18}), and the repository's emulator, which models every register-indexed access as
+\code{index x element + displacement} in bytes, agrees byte for byte with the GPU on 316 of 316 and 172 of 172 shipped
+dispatches (MM~\mm{25.197}).
+
+Compile-side and decoder facts about the same operands:
+
+\begin{itemize}
+\item A constant address: \code{u[1]} is 4, \code{u[7]} 28, \code{u[64]} 256 for uint (Apple's compiler emits,
+  \code{isa/g17-address-formula.txt}).
+\item For \code{A[tid + k]} with an unsigned 32-bit index, Apple's compiler puts k into the index with the add immediate (1 to
+  255) or, at 256 and above, \op{10282} or \op{10283}, and leaves the
+  displacement 0 (Apple's compiler emits, \code{isa/g17-addressing-rules.json}). The file does not record why; a reader may
+  not assume the displacement can replace that add when an unsigned index sum may wrap.
+\item The add immediate's 8-bit immediate is scattered across the word (value bits 0–1 at byte1{[}0:2{]}, 2–4 at byte3{[}5:8{]}, 5 at
+  byte5{[}7{]}, 6–7 at byte8{[}0:2{]}); the map predicted 15 never-compiled values byte for byte (decoder, same file).
+\end{itemize}
+
+\emph{Correction:} "the load carries no displacement field" (\code{isa/g17-addressing-rules.json}) holds only for its unsigned
+\code{tid + k} sweep. The field exists and counts bytes (MM~\mm{7}, MM~\mm{25.141.18}, \code{isa/g17-address-formula.txt}).
+
+Rules a compiler has to follow (Apple's compiler emits, \code{isa/g17-address-formula.txt},
+\code{isa/g17-addressing-rules.json}):
+
+\begin{itemize}
+\item \emph{No index-scale field.} \code{u[i * 4]} emits the same load as \code{u[i]}, with the multiply in a separate ALU instruction.
+\item \emph{Width is the opcode.} char, short and half use \op{12646} and \op{17193}; int and float use
+  \op{12682} and \op{17229}; long uses \op{12691} and the store
+  \op{17238} (no glossary entry); int4 uses \op{12709} and \op{17256}.
+\item \emph{Index width is the opcode too.} A ulong index selects \op{12688}, preceded by a
+  64-bit shift pair that scales the index.
+\item \emph{A runtime base plus index} (\code{A[j + tid]}, j loaded) is a load of j, a 32-bit add, then the indexed load.
+\item \emph{Misalignment} does not select a form: an int at byte offset 1 through a char-pointer cast compiles to the same
+  plain 32-bit load and store; whether hardware permits it for scalars is open. A vector load displaced by 4 bytes (not
+  16-byte aligned) "lands whole" (measured, MM~\mm{25.141.18}).
+\item No negative displacement was ever emitted (the compiler folds negative offsets elsewhere); the field's signedness is
+  open.
+\end{itemize}
+
+The address is formed in 64 bits (measured, \code{isa/g17-predication.json}). A load of \code{A[1073741824 + tid]}, $2^{32}$
+bytes past a 256-word buffer, was chosen so that a 32-bit byte wrap would land back inside the buffer; it returned 0, not the
+wrapped word (\cref{sec:out-of-range-accesses-observed}).
+
+A device base's binding constant is K = 4 × the binding rank, and the rank is the buffer's
+position in the list the image declares, not the Metal slot number: a kernel binding only buffer C makes C rank 0
+(measured, \code{agxforge/g17/cc.py}; MM~\mm{0.8}). The list order is internal bindings ascending, then user bindings ascending;
+reconstructed from the declaration it reproduces Apple's list in 10,964 of 12,044 corpus kernels (91.0\%), never
+differing by order alone (Apple's compiler emits, \code{agxforge/g17/resource.py}). A wrong rank makes a store return its fill
+value at status 0 (measured, same file). Below Metal, declaring one unused buffer between A and C changed exactly one
+code byte, the store's descriptor operand, from 0x04 to 0x08; swapping two 64-bit entries of the argument block
+swapped which buffer a load read; and an entry pointed at an unviewed offset of an allocation, or at a different
+registered allocation, was followed by loads and stores alike (measured, \code{docs/g17-first-dispatch-trials.md},
+"Authored device atomic below Metal" and "Input descriptor address selection" onward). Arbitrary addresses and other
+allocation classes are untested.
+
+The 128-bit vector load takes its 14-byte form when it carries bit 37 or a
+displacement above 255 (decoder, MM~\mm{6}). Tensor loads carry up to 255 bytes in the 12-byte form and 32,767 in the
+16-byte form; past 32,767 the offset is folded into a per-tile base register (Apple's compiler emits, MM~\mm{25.114.3}).
+This compiler does the same, visible as a kernel growing from 74 to 80 instructions, with no failure out to 1 MiB of
+leading dimension (measured, MM~\mm{15}). An identical offset-bearing body was bit-exact at stream positions 1 to 12,
+after 0 to 4,096 bytes of padding and at offsets 2 to 40,002 bytes straddling the boundary; within that range there is no
+stream-position constraint (233 + 193 dispatches, MM~\mm{15}). Tensor B offsets are measured from 2 to 47,104
+bytes; beyond is outside the measured domain (MM~\mm{25.114.3}).
+
+Tensor addresses are ordinary arithmetic (measured, MM~\mm{7}). Apple's library computes one per-lane index register,
+R32, the element offset of the lane's first element in a row-major tile, and its eight tensor loads read
+\code{[R32*2 + disp]} at byte displacements \{0, 2048, 32, 4096, 6144\} (eight rows, sixteen columns), each moving an 8-row
+by 16-column sub-tile. This arithmetic is what produces the fragment layout; the index formula and the fragments are
+\cref{sec:fragment-layouts}. The row stride has no field either: a non-default stride changes the mode immediate from 241 to 2289
+and moves into the index (decoder, MM~\mm{7}); a stride built as \code{K*2} regardless of element size was wrong, with no
+error reported, on 1,024 of 1,024 elements of a 32×32×64 int8 product (measured, MM~\mm{17} rule 6; \cref{sec:tensor-memory-path}).
+
+\section{Load and store forms by width}\label{sec:load-store-forms}
+
+\Cref{tab:memory-forms} lists, by width, the forms this chapter uses; \cref{app:c} lists every memory opcode. Lengths are those observed in Apple's 6,594-program
+corpus (\code{isa/g17-wait-mask-census.json}), with lengths the cited section adds. Operand orders are given where the forms
+are explained: the plain 32-bit store's are value 0, operand 1 at 1, index 5 and index lifetime 6 (\cref{sec:scoreboard}), the
+threadgroup forms' in \cref{sec:threadgroup-memory} and the imageblock forms' in \cref{sec:imageblock-per-core-tile}.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.88\hsize}Xll>{\hsize=1.18\hsize}XX@{}}
+\caption{Load and store forms used in this chapter, by width, with observed lengths in bytes and standing.}\label{tab:memory-forms}\\
+\toprule
+Glossary name & Opcode & Lengths & Width and notes & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Glossary name & Opcode & Lengths & Width and notes & Standing \\
+\midrule
+\endhead
+plain 32-bit load & \opn{12682} & 8, 10, 14 & 4 bytes, element code 4 & measured (MM~\mm{25.197}; below Metal) \\
+16-bit load & \opn{12646} & 8, 10, 14 & 2 bytes (half, bf16, short, char); optional high-half destination & measured (MM~\mm{25.141.3}) \\
+plain 64-bit load & \opn{12691} & 8, 14 & 8 bytes into a pair, element code 8 & measured (glossary) \\
+three-component vector load & \opn{12700} & 8, 14 & 12 bytes into a 3-register tuple; the access steps 16 & measured (MM~\mm{25.90}) \\
+128-bit vector load & \opn{12709} & 8, 10, 14 & 16 bytes into a 4-register tuple, element code 16; byte displacement & measured (MM~\mm{25.141.18}) \\
+immediate-address one-word load & \opn{12688} & 8, 10, 14 & word at (index + displacement) × element; mask 2066 & measured (MM~\mm{25.177}) \\
+tensor load, half/bf16 & \opn{12674} & 12, 16 & two words (four half/bf16), element code 2; immediate element mask & measured (MM~\mm{7}) \\
+masked tensor load, half/bf16 & \opn{12675} & 12, 16 & as \opn{12674}, with a 16-bit mask register & measured (MM~\mm{7}) \\
+int8 tensor load, one word & \opn{12656} & 12, 16 & one word (four int8), element code 1 & measured (MM~\mm{7}) \\
+plain 32-bit store & \opn{17229} & 8, 10, 14 & 4 bytes (sub-form 00) & measured (MM~\mm{25.117}, MM~\mm{25.145.4}) \\
+128-bit vector store & \opn{17256} & 8 (corpus) & 16 bytes from a 4-register tuple; uses every wait bit 24–31 & measured (MM~\mm{6}) \\
+store, sub-form 01, texel/word-slot & \opn{17235} & 8, 10, 14 & one word at an immediate address; reads a texture fetch; mask 2066 & measured (MM~\mm{25.62}) \\
+two-component store & \opn{17244} & 8, 10, 14 & words k and k+1 from a pair; mask 2098 & measured jointly with \op{17262} (MM
+\mm{25.177}) \\
+tensor store & \opn{17257} & 10, 12, 16 & four words; immediate mask & measured (MM~\mm{6}, MM~\mm{7}) \\
+masked tensor store & \opn{17258} & 10, 12, 16 & four words; mask register, bit j enables word j & measured (MM~\mm{7}) \\
+threadgroup-memory load & \opn{12364} & 8, 14 & 2 or 4 bytes & measured (\cref{sec:threadgroup-memory}) \\
+threadgroup-memory store & \opn{13288} & 8, 10, 14 & 2 or 4 bytes & measured (\cref{sec:threadgroup-memory}) \\
+imageblock load, 32-bit & \opn{12151} & 14 & one 32-bit member & measured (\cref{sec:imageblock-per-core-tile}) \\
+imageblock store, 32-bit & \opn{13075} & 14 & one 32-bit member & measured (MM~\mm{25.96}) \\
+\bottomrule
+\end{xltabular}
+
+Also used, outside \cref{tab:memory-forms}: \op{12673}, which Apple's compiler emits to load pointer +
+immediate from a register-pair base; \op{12073}, a runtime 32-bit address for
+thread-private arrays (Apple's compiler emits, MM~\mm{25.39.2}); \op{12692}, element code 4 (measured,
+MM~\mm{25.37}), and the masked twins of the int8 and fp32 tensor loads; 16-bit store (\opn{17193}, lengths 10 and 14, measured,
+glossary) and the 64-bit store \op{17238} (no glossary entry; lengths 8 and 10; Apple's compiler emits); \op{17202}, measured in the packed int8 epilogue (MM~\mm{25.105}); the rest of the immediate-address family (section
+7.3); the spill stores (\cref{ch:register-file}). Two forms seen only in MLX's quantized matmul have an open address space: \op{12352} and \op{13276} (MM~\mm{25.144.1}). Decoder-only
+and unmodelled forms are in MM~\mm{25.88} and MM~\mm{25.192}. The repository's encoders round-trip 1,145 of 1,190 and 3,419 of 3,793 loads
+and stores; the unclaimed sub-forms are named in MM~\mm{15}. 132 memory opcodes declare implicit uses of \code{SR\_LOCAL\_X} and
+\code{SR\_LOCAL\_Y} (\op{12118} to \op{12135} among them, no glossary entry for either); none occurs in the shipped corpus (decoder,
+\code{isa/g17-local-indexed-memory.txt}).
+
+\section{Immediate-address and vector forms}\label{sec:immediate-address-vector-forms}
+
+The immediate-address family is measured in MM~\mm{25.177}. Its operands, in the order of \op{17235}, are value or destination, operand 1,
+mask, binding, 0, index, displacement, element; the address is the word at \code{(index + displacement) x element} of the
+binding, with index and displacement both immediates. The mask field is a component mask in bits 4–7 above 0x802:
+2066 one word, 2098 two, 2162 three, 2290 four (bits 4–7 = 1, 3, 7, 15), filled from the tuple's lowest register up;
+2065 is the halfword form (MM~\mm{25.195}). Members: \op{12688}, immediate-address two-word
+load (\opn{12697}, MM~\mm{25.184}), \op{12706}, \op{12715}, \op{17244}, \op{17253}, \op{17262}, \op{17199}. \code{isa/g17-addressing-rules.json} proposed the same
+\code{(index + displacement) x element} equation for the register-indexed form; it holds for this family and not for that one.
+
+\emph{Worked example: a wrong-width model of this family} (emulated, then executed on hardware; MM~\mm{25.177}). The first model of
+this family loaded each word with element size 1, keeping only its low byte, and still matched Apple's kept GPU hash on
+9 of 10 census sources, because the census inputs are small integers, (7i + 3) mod 61. Only the one source with
+float data failed; it read as zero (5.0 is 0x40a00000). Rerun with full-width random buffers (full-mantissa floats with
+exponents to $2^{\pm20}$, uints over all 32 bits), all 10 sources match Apple's GPU byte for byte, and each deformed model is
+refuted per form (sources agreeing, then sources where a low-byte load, a reversed load and a first-only store differ):
+one-word load 5 / 5, 3, 3; four-word load 6 / 6, 6, 6; four-word store 8 / 6, 6, 8; two-component store 2 / 1, 1, 2,
+receipted only jointly with the four-word store. The same protocol later receipted the three-word store (6 of 6,
+MM~\mm{25.192}) and the 16-bit store at an immediate address (3 of 3, MM~\mm{25.195}). A memory form is marked
+measured in this reference only if its test data could have exposed a wrong width.
+
+In constant programs the base is a register pair holding a binding pointer that \op{14061} fetched; the address is pointer plus byte offset (measured, MM~\mm{25.179}; \cref{sec:constants-uniforms}).
+
+The vector forms:
+
+\begin{itemize}
+\item \op{12709}: byte displacement (\cref{sec:address-computation}). Apple's compile of MLX's qmv carries 16, 32, 48 for
+  \code{x[k+4]}, \code{x[k+8]}, \code{x[k+12]}. \emph{Correction:} \code{asm.encode\_vec4} calls the field "units of eight bytes"; for loads it is
+  bytes (MM~\mm{25.141.18}). The store's units, witnessed only at 0, 16 and 32, are open.
+\item Tensor loads and stores move popcount(mask) consecutive elements into the tuple, lowest address in the lowest half
+  (measured, \code{tools/g17emu.py} EVIDENCE{[}12674{]}). int8 operands need \op{12656}, not the
+  generic four-word load (measured, MM~\mm{7}).
+\item This compiler, measured: vectors placed past a 32,767-byte displacement have their base folded into the index
+  register once, and two per-channel vectors must lie within one field of each other (MM~\mm{25.165}); with loop-carried
+  addresses (\code{ptr\_addr}), later loads read one carried index at displacements 16, 32, 48 and instructions per trip fall
+  121 to 109, 184 to 171, 69 to 59 and 309 to 295 in four qmv loops, bit-exact against a 0x7f sentinel (MM~\mm{25.141.18}).
+\end{itemize}
+
+\section{Masked and predicated access}\label{sec:masks-predicated-memory}
+
+\begin{itemize}
+\item \op{612}: \code{bit j of dst = [lo <= src + j < lo + w]} for j in 0..3, unsigned. The second
+  immediate is a \emph{width}. It was first read as an upper bound because nearly every witness had lo = 0, where the two
+  readings coincide; two cases that separate the readings falsified the bound (measured, MM~\mm{7}). lo and w are 8-bit, so lowerings compute
+  tile-relative predicates.
+\item \op{621}: dst is a mask of \code{min(max(W - src, 0), 4)} low ones, W = operand 5, measured at
+  W = 16, 32, 48 and 64 (src W-3..W gives 7, 3, 1, 0); the cap of four did not move with operand 3 at 8, 16, 32, 56
+  (\code{isa/g17-address-formula.txt}). \emph{Correction:} the earlier fit \code{(0xFFFFFFFF >> src) \& 0xF} is the W = 32 case
+  only. Every dispatch behind it had been authored on one witness whose operand 5 was 32, which coincides with the fitted
+  saturation point. The source of the cap of four is open; there is no four-bit field.
+\item \op{12675} and \op{17258}: mask bit j enables word j of the lane's
+  four-word access; bits above 3 are ignored; unwritten words keep their contents; only the declared M × N region is
+  written and poisoned padding never leaks (measured, six patterns across 32 lanes, MM~\mm{7}).
+\item Ordinary predicated access (measured, \code{isa/g17-predication.json}): a masked-off load suppresses the \emph{value} (inactive
+  lanes keep their sentinel); a masked-off store suppresses the \emph{access} (seven masks); effects are per lane and nested
+  masks intersect. Whether a masked-off load still issues its access is unknown: the intended observable was a fault,
+  and no out-of-range load faulted (\cref{sec:out-of-range-accesses-observed}). Apple's compiler emits predicated
+  memory branchlessly between exec-mask instructions, with a skip branch for two-armed effects (\cref{ch:control-flow-execution}).
+\end{itemize}
+
+\section{Out-of-range accesses}\label{sec:out-of-range-accesses-observed}
+
+The masking experiment needed a load that faults, to separate a suppressed access from a suppressed value (measured,
+\code{isa/g17-predication.json} \code{wild\_address}). Unconditional \op{12682} reads at
+4,194,304, 67,108,864, 268,435,456 and 1,073,741,824 words past a 256-word buffer (16 MiB to 4 GiB) ran through Metal,
+each in a fresh process so that a device loss would cost only that process. All completed with status 0 and returned 0.
+An in-bounds control returned its data; at the $2^{32}$-byte offset the load returned 0, not the in-buffer word a 32-bit
+wrap would select. No fault occurred, so the masking question is still open.
+
+Out-of-range store behaviour has not been measured. A timing driver once read and wrote up to 2.78~MB
+outside its buffers, with uncharacterised effect (MM~\mm{17} rule 34). The emulator refuses a store outside a buffer, a model
+bound (\code{tools/g17emu.py}).
+
+Observed faults:
+
+\begin{itemize}
+\item Through Metal, one BIF0 read page fault came from a \code{regprobe\_multi} tensor-kernel probe whose configuration was not
+  recorded; a different process, sized from a sibling kernel's layout, hung the GPU for about 320 s and the machine
+  rebooted (MM~\mm{17} rule 34, as corrected; \cref{app:a}).
+\item Below Metal, malformed launch state produced BIF0 read page faults at unmapped addresses while Submit still returned
+  0, both callbacks ran and the recovery counter advanced: a guessed 2,048-byte threadgroup resource word (fault at
+  address 0; the matched word then ran), an all-zero allocation 0 (fault at 0x10000010000, its end), an oversized
+  allocation layout (0x100000d0000, 0x100000d8000) and a malformed code-placement packet (0x80) (measured,
+  \code{docs/g17-first-dispatch-trials.md}). The requester of those reads was not identified.
+\end{itemize}
+
+\emph{Correction:} MM~\mm{17} rule 34's "only the accelerator's own reads have faulted" is scoped to work submitted through
+Metal; below Metal, launch-state errors fault too.
+
+Two silent failures resemble range errors. Undersizing a host dispatch's completion scope (\code{dim\textasciicircum{}2 * esz})
+returns wrong or zero data past that offset with no error (measured, MM~\mm{17} rule 5). A dead load landing late can
+overwrite a reused address register so that the next load reads out of range and returns 0 (\cref{sec:dependences-issue-scalar}, MM~\mm{25.114}).
+
+Through Metal, a stray plain 32-bit load inside the tested range returns 0 without
+faulting. A reader may not assume: that other load forms, resource kinds or offsets behave the same; that an
+out-of-range store is dropped; that reading an unmapped address is harmless below Metal; or that a 0 means "out of
+range", since an unwaited load commonly reads 0 too (\cref{sec:scoreboard}). Keeping accesses in bounds is left to the program. Threadgroup accesses
+past 32,768 bytes and imageblock coordinates outside the tile are refused by the emulator only as a model bound; one
+imageblock read at x = 32, outside a 32-wide tile, completed and was not scored (MM~\mm{25.104.2}).
+
+\section{Threadgroup memory}\label{sec:threadgroup-memory}
+
+Size limits:
+
+\begin{itemize}
+\item 32,768 bytes per threadgroup is Apple's compiler's hard refusal; 48, 60 and 64 KiB are refused and 96 KiB drops the
+  compiler connection (measured, MM~\mm{7}). Metal itself does not check it for an authored container: a container
+  declaring 1 MiB of static threadgroup memory built a pipeline that reports \code{staticThreadgroupMemoryLength = 1048576}
+  (measured, MM~\mm{25.147}, nothing dispatched). What the hardware does with an oversize declaration is unmeasured.
+\item 57,344 bytes (56 KiB) per core, inferred from a residency step: with 128 threads per threadgroup and 4,096
+  threadgroups, a static request of 28,672 bytes ran in 0.00304 s and 28,688 bytes in 0.00382 s, so two threadgroups
+  fit at exactly half the budget and one above it (measured step, MM~\mm{25.49}). Residency rules are \cref{ch:device-execution-model}.
+\item \code{maxTotalThreadsPerThreadgroup} stays 1,024 across threadgroup memory from 64 B to 32,768 B (measured, MM~\mm{25.47});
+  \code{staticThreadgroupMemoryLength} is the value the kernel's metadata declares (MM~\mm{25.147}).
+\end{itemize}
+
+The forms are \op{13288} and \op{12364}, plus a constant-index threadgroup
+load \op{12367} (no glossary entry) (Apple's compiler emits, \code{isa/g17-threadgroup-pair.txt}). Their operands are value or
+destination, operand 1, width, base, 0, index, index lifetime, displacement, element. The base's binding expression
+has scale 2 where device forms use 8 (notation list), with 0 exceptions in 25,553 corpus memory instructions
+(decoder, \code{isa/g17-address-formula.txt}). The address is base + index x element + displacement (the emulator's model,
+measured on its receipts, \code{tools/g17emu.py} EVIDENCE{[}13288{]}).
+
+\emph{Worked example (compiled by Apple, decoded; the same shape executed below Metal).} From one kernel, so the two
+addresses agree by construction (\code{isa/g17-threadgroup-pair.txt}, \code{a6-tgidx}):
+
+\begin{lstlisting}
+threadgroup-memory store (op13288), 10 bytes  0f040302030611c00020
+    operands: R105 (the stored value), operand 1 = 0x80000010, 2066, bin(op0,const(4),2), 0,
+              index register, 16, 0, 4      (op0: uniform register file)
+threadgroup-memory load (op12364), 14 bytes   0f0403021a2610c0410080000000
+\end{lstlisting}
+
+The store's operand 1 is 0x80000010: bit 31 set, a wait on slot 7, the slot this kernel's loads fill (\cref{sec:scoreboard}); the
+trailing 4 is the element width. Below Metal, a program of this shape, each lane storing \code{A[i]} to scratch, a
+threadgroup barrier, then lane i reading slot \code{i XOR 32}, produced 64 of 64 values \code{11 * (i XOR 32) + 5} across two
+simdgroups, and a 2,048-byte allocation held 512 separately addressable words with every written value recovered
+(measured, \code{docs/g17-first-dispatch-trials.md}, "Parallel static-threadgroup launch mapping"). The static size is a
+launch resource word, not an instruction field (\cref{ch:submission-below-metal}): a guessed value for 2,048 bytes faulted, and the matched
+value Metal writes (\code{0f00080c00000000}) does not follow the simple size/8 pattern of the smaller sizes.
+
+Further measurements:
+
+\begin{itemize}
+\item The threadgroup region is provisioned by an ordinary threadgroup load or store: removing the one threadgroup store
+  made a threadgroup atomic write nothing (measured, ledger \code{g17-the-threadgroup-atomic-subtracts-and-needs-a-region}).
+\item The threadgroup load's bit sensitivity: clearing byte4{[}3{]}, byte4{[}4{]} or byte6{[}4{]} made the read return 0;
+  byte5{[}5{]}, byte8{[}6{]} and byte10{[}7{]} are inert; of the three-bit variants, 000 read correctly and 010, 100 and 110 read 0
+  (measured, \code{isa/g17-execution-tgbits-results.json}, \code{-tgtrio-results.json}). These are the positions of the 128-bit
+  vector load's fill-slot field (MM~\mm{6}); that they are a slot field here fits, but is not established.
+\item A cross-simdgroup combine (word \code{sg} per simdgroup, one threadgroup barrier, an ascending fold) is exact for S = 2 and
+  4, sum and max (measured, MM~\mm{25.90}). Ordering between simdgroups needs the barrier (\cref{sec:barriers-fences}); hand-off costs are
+  \cref{ch:performance}.
+\end{itemize}
+
+\section{Imageblock (per-core tile memory)}\label{sec:imageblock-per-core-tile}
+
+The imageblock is a per-threadgroup tile indexed by thread position and shared within the threadgroup (measured,
+\code{isa/g17-imageblock-execution.txt}): 32 lanes wrote 32 distinct values to their own pixels, and every lane that read pixel
+(0, 0) wrote lane 0's value into a buffer prefilled with 0xdeadbeef.
+
+The forms are \op{13075} and \op{12151}, with operands
+\code{[value, operand 1, width 18, member byte offset, 1, coordinate register, coordinate lifetime, dx, dy]} (measured,
+MM~\mm{25.145.2}). The coordinate register packs x in its low 16 bits and y in its high 16; Apple's compiler builds it with
+\op{10286}. The declared pipeline allocated 128 bytes for 32 lanes of one 32-bit member
+(MM~\mm{25.104.1}).
+
+\textbf{Worked example: the imageblock store's wait bit} (eleven rounds; compiled, decoded and executed on hardware;
+MM~\mm{25.96}, MM~\mm{25.104}). The target was a tensor GEMM, every byte from this compiler, that stages its output through
+the imageblock. Three defects gave the same symptom, a neighbour read returning the reader's own value or 0.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item \emph{The released coordinate.} The store released its coordinate register (operand 6 = 16) while the following read
+  reused it. Release is destructive (\cref{ch:register-file}): a one-bit same-run control, keep (0) against release (16), collapsed
+  all 32 lanes to element 0 (measured, MM~\mm{6}; \code{isa/g17-imageblock-dseries-receipt.json}). Fix: operand 6 from liveness.
+\item \emph{The dx operand.} With the coordinate kept, the x offset (operand 7 = 1) still had no visible effect in a tensor
+  program. Apple's compiler never uses it for a neighbour: it computes \code{(tid.x + 1) \& 31} with \op{10289} and \op{435} and reads with operand 7 = 0. This compiler now addresses the
+  neighbour by an explicit column (measured, MM~\mm{25.104.2}).
+\item \emph{Operand 1.} Apple's own tensor kernel then read its neighbour on all 32 lanes and this compiler's did not. The only
+  field-level difference was the store's operand 1: Apple's 0x80000010 against this compiler's 0x01000010. Swapping it
+  alone moved the result both ways, and bit 31 decided: 0x80000010 and 0x81000010 passed, 0x00000010 and 0x01000010
+  failed. The reading recorded at the time was that bit 31 selects storage other lanes can read.
+\end{enumerate}
+
+A later experiment refuted that reading. Bits 24–31 of the imageblock store's operand 1 are its \emph{wait mask}
+(bit 24 + s waits on slot s), the same field general stores and MMAs carry (\cref{sec:scoreboard}). In a census of all 57 corpus
+imageblock-store instances the bits equal exactly the slots the store's sources are pending on: 47 need none and carry none, 8 carry bit
+24 for the coordinate's special-register reads, 2 carry bit 25. A prediction made before compiling, that an Apple kernel
+storing a freshly loaded value (its load fills slot 7) would carry bit 31, was confirmed. \Cref{tab:imageblock-wait-arms} gives
+the hardware runs of that kernel (\code{h[t] = 5t + 3}, a device barrier, \code{v = h[t \textasciicircum{} 1]}, an own-pixel store of v, read back), three per arm.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.19\hsize}X>{\hsize=0.81\hsize}X@{}}
+\caption{Imageblock store operand 1 against lanes that read their neighbour's value correctly, in Apple's kernel that stores a
+freshly loaded value. Three runs per arm.}\label{tab:imageblock-wait-arms}\\
+\toprule
+store operand 1 & lanes correct \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+store operand 1 & lanes correct \\
+\midrule
+\endhead
+0x80000010, as compiled (waits slot 7) & 32 / 32 \\*
+0x10, wait cleared & 0 / 32, every lane 0 \\*
+0x2000010, waits slot 1, which nothing fills & 0 / 32, every lane 0 \\*
+\bottomrule
+\end{xltabular}
+
+Without the right slot the store takes its value register before the load writes it; the failure is in the store,
+not in the neighbour read. Earlier deformations of operand 1 in Apple kernels had found the bits inert because those kernels stored
+ALU results, which need no wait. Round 11 routed the stored value through a waiting copy and kept the slot-0 wait for
+the coordinate (0x01000010); every arm was bit-exact (MM~\mm{25.104.4}). A store's bits 24–31 must name every slot its
+value and coordinate registers are pending on.
+
+\emph{Correction:} the "bit 31 selects coordinate-addressed staging" wording in MM~\mm{25.89}'s round-9 entry, in MM~\mm{25.145.2}
+and in the \code{tools/g17emu.py} comments on the imageblock store and load is the superseded reading; bit 31 is the wait on slot 7 (MM~\mm{25.96},
+MM~\mm{25.104.3}). There is no per-thread versus shared distinction in the evidence. The emulator's admission of cross-lane
+reads only for words stored with bit 31 is a conservative restriction of the model; no hardware result calls for it.
+
+Declaration and API requirements (measured): an undeclared image reads 0 even when the tile is sized at encode time with
+\code{setImageblockWidth}: C{[}0, 0..31{]} were all 1.0, the read having returned 0, in three queries (MM~\mm{25.104}). The pipeline
+must come from \code{newComputePipelineStateWithDescriptor:}; a function-name pipeline reports
+\code{imageblockMemoryLengthForDimensions:} as 768 bytes at 32×1; \code{setImageblockWidth:height:} must match the threadgroup
+(\code{isa/g17-imageblock-execution.txt}). The declaring metadata is \cref{ch:kernel-metadata-image}'s.
+
+The imageblock barrier is \op{447} at scope 532, bytes \code{475100060000}
+(\code{threadgroup\_barrier(mem\_threadgroup\_imageblock)}), which Apple's own-element kernel carries; Apple's compiler elided a
+source \code{simdgroup\_barrier(mem\_threadgroup)} between a one-simdgroup imageblock store and load (Apple's compiler emits,
+\code{isa/g17-barrier-scopes.txt}, \code{isa/g17-imageblock-execution.txt}).
+
+\textbf{Not known.} Use by more than one simdgroup or threadgroup (never witnessed, MM~\mm{25.145.2}); the bit-4 flag (0x10)
+every store's operand 1 carries (MM~\mm{25.96}); the read's operand-1 word Apple emits, 0x2000800000 (MM~\mm{25.104.2}). Staging a
+fragment through the imageblock is bit-exact but frees no registers; its cost is in \cref{sec:chaining-feed-modes} (MM~\mm{25.106}).
+
+\section{Constants and uniforms}\label{sec:constants-uniforms}
+
+A constant is an immediate inside the instruction, an entry in the \emph{constant pool}
+(compile-time data in metadata slot 13 of the container; Apple's compiler emits, \code{agxforge/g17/cooperativemetadata.py}), or a
+\emph{published uniform}, a value Apple's compiler computes per dispatch in a separate \emph{constant program} that runs once before the main
+program and writes the uniform register file. Main reads pool entries and published uniforms through the same operand
+syntax, \code{bin(op0, const(K), W)}, so the operand alone does not say which one it is. Treating a published uniform as a
+pool entry gave 6 silent wrong answers (measured, MM~\mm{25.179}).
+
+The constant program was measured in MM~\mm{25.179}:
+
+\begin{itemize}
+\item The emulator reproduces Apple's GPU output by running the constant program first, as one thread over the same buffers,
+  and handing its uniform writes to main: 6 of 6 sources byte-identical on full-width random buffers; three deformed
+  models (every published uniform reads 0; the pointer names the next binding; a 32-bit uniform lands with halfwords
+  swapped) each differ on all 6.
+\item Binding pointers: in all 21 constant programs studied, \op{14061} at halfwords 8 + K
+  and 10 + K reads binding K's 64-bit pointer, low word then high. With K = 4 × rank (\cref{sec:address-computation}) this is the same rule
+  as MM~\mm{25.59}'s "slots 8 + 4k and 10 + 4k for the k-th buffer". The pointer is then the register-pair base for the
+  immediate-address loads (\cref{sec:immediate-address-vector-forms}).
+\item Uniform destinations are main-program operations with one extra mode operand: \op{11185} is \op{11179}; \op{592} is \op{586}; \op{1038} is \op{1006}.
+  A uniform destination must be written with one value across the active lanes.
+\item Of 15,256 corpus constant-program uniform writes, 14,814 are read by main; the 442 never-read writes are all uniform /
+  staging writes and unexplained (decoder, MM~\mm{25.120}).
+\end{itemize}
+
+In main, \op{428} takes its mask from a pool operand (\cref{sec:integer-arithmetic}), and the
+shipped decode replay refused until the pool was loaded, at 768 uses (measured, MM~\mm{25.197}). \op{435} takes an 8-bit immediate; a wider mask such as 0xFF0 goes to the
+uniform-operand \op{437} (Apple's compiler emits, MM~\mm{25.192}).
+
+In the uniform / staging write (decoder, MM~\mm{25.120.1}), the value the decoder printed as a
+"publish index" is a scoreboard slot + 1. With a uniform destination it is 0 (47,269 of 47,269); with a destination in the message staging file
+(\opn{4}) it is 1–8 (131,313 of 131,313). The reader of a staging write is a message instruction (\op{14661}, \op{10909}, \op{15813}), and it waits on slot index - 1: of 189,898 staging writes,
+174,909 are waited on by the reader and 14,989 by an intervening instruction; none by neither. A staging write is a
+late value, like a load (\cref{sec:scoreboard}).
+
+The binary format of the constant program and pool is \cref{ch:kernel-metadata-image}'s.
+
+\section{Textures}\label{sec:textures}
+
+The texture forms are \op{15813}, \op{14661}, \op{10909} and \op{11564} (glossary). No operand carries the coordinate. Two reads at different coordinates are byte-identical, and the
+coordinate is published into the message staging file (\opn{4}) at \code{[op4+0*4]} and \code{[op4+2*4]} before the message (measured,
+\code{tools/g17texrun.py}).
+
+An authored read, \code{A[400] = TX.read(x, y).x}, was executed (\code{tools/g17texrun.py},
+\code{isa/g17-execution-texture-results.json}) on a texture holding y*1000 + x + 7, chosen so a wrong texel, a wrong row, a broadcast coordinate and an unbound texture
+give four different wrong answers: coordinate (5, 1) gave 1012, (2, 3) 3009, and lane 31 alone at (7, 3) 3014; all 32
+lanes racing for one word gave an ambiguous 3007. The same runs showed that the texture operand is a dense index over
+the textures the function uses, not the Metal binding index (five constructed kernels); and publishing a register
+coordinate with a uniform / staging write needs operand 2 = 1048576; with 16777216 every lane silently reads texel (0, 0).
+
+Which store reads a texture fetch is unresolved. \op{17235} reads a texture fetch (measured,
+MM~\mm{25.62}), and two-component store (\opn{17244}, 14 bytes) read one once (texel 201 at (1, 2), one 4×4 R32Uint texture, one
+thread; MM~\mm{25.146}). For \op{17229}:
+
+\begin{itemize}
+\item A dispatched bisection of Apple's reading program found that swapping only its store for this compiler's 8-byte
+  plain store stopped the read; that store, and a 12-byte ALU copy placed after the fetch, saw the destination register's
+  previous contents, at zero and at six intervening instructions. The ledger concluded "not timing" (ledger
+  \code{g17-only-one-consumer-can-read-a-texture-fetch}).
+\item Apple's own \code{tex2d-read} stores the texture read's result with an 8-byte plain store whose operand 1 is 16777232
+  (0x1000010, a wait on slot 0), and that read publishes on slot 0 (Apple's compiler emits, MM~\mm{25.146},
+  \code{tools/g17applestorefetch.py}). This compiler's encoder writes no wait on the 8-byte plain store, and the ALU copy in the
+  bisection waited on slot 7, not slot 0.
+\item The bisection's arms are consistent with a missing wait on the fetch's slot; "not timing" does not
+  rule out a wait, since unwaited late values stayed wrong after 64 intervening instructions elsewhere (\cref{sec:scoreboard}). The settling
+  dispatch, Apple's \code{tex2d-read} run and read back, has not been made.
+\end{itemize}
+
+A fetch result can safely be treated as a late value whose consumer waits on the fetch's slot, and the sub-form 01
+store can be relied on to read it. Do not assume that the plain 32-bit store cannot read a fetch, or that distance
+substitutes for the wait.
+
+Pixel format is descriptor-side (Apple's compiler emits, \code{isa/g17-texture-sampler-surface.json}):
+\code{texture2d<uint>} and \code{texture2d<float>} (R32Uint, R32Float) compile to identical code and metadata; R16Float changes
+only the half-flavoured instructions. A sampler adds one register and a 4-byte sampler-state descriptor and swaps the
+texture read for the texture sample. Texture metadata slots are \cref{ch:kernel-metadata-image}'s. Sampled and write texture
+classes have no dispatched receipt (open).
+
+\textbf{Safe assumptions.} The register-indexed law with unscaled byte displacements for the forms of
+\cref{sec:address-computation}; the immediate-address law for its eight measured members; width and index width as
+opcode choices; materialised strides; 64-bit address formation; and that every late value (load, imageblock read,
+staging write, texture fetch) needs its consumer's wait.
+
+\textbf{Not known.} Out-of-range stores; negative displacements; misaligned scalar access; the vector store's
+displacement units; whether a masked-off load issues its access; what the threadgroup load's sensitive bits are;
+multi-simdgroup imageblock use; the imageblock store's bit-4 flag; the address space of the two MLX-only forms
+(\cref{sec:load-store-forms}); the texture-fetch consumer; sampled and write textures; the origin of range mask, 16-bit
+source's cap of four; hardware behaviour for an oversize threadgroup declaration.
+
+\textbf{Evidence.} MM~\mm{0.8}, MM~\mm{6}, MM~\mm{7}, MM~\mm{15}, MM~\mm{16}, MM~\mm{17} rules 5, 6 and 34, MM~\mm{25.47}, MM~\mm{25.49}, MM~\mm{25.62}, MM~\mm{25.89}, MM~\mm{25.90},
+MM~\mm{25.96}, MM~\mm{25.104} (25.104.1 to 25.104.4), MM~\mm{25.105}, MM~\mm{25.106}, MM~\mm{25.114}, MM~\mm{25.114.3}, MM~\mm{25.120}, MM~\mm{25.120.1},
+MM~\mm{25.141.18}, MM~\mm{25.144.1}, MM~\mm{25.145.2}, MM~\mm{25.146}, MM~\mm{25.147}, MM~\mm{25.165}, MM~\mm{25.177}, MM~\mm{25.179}, MM~\mm{25.184}, MM~\mm{25.192},
+MM~\mm{25.195}, MM~\mm{25.197}; \code{isa/g17-address-formula.txt}, \code{isa/g17-addressing-rules.json}, \code{isa/g17-predication.json},
+\code{isa/g17-threadgroup-pair.txt}, \code{isa/g17-imageblock-execution.txt}, \code{isa/g17-barrier-scopes.txt},
+\code{isa/g17-wait-mask-census.json}, \code{isa/g17-texture-sampler-surface.json}, \code{docs/g17-first-dispatch-trials.md},
+\code{tools/g17emu.py}, \code{tools/g17texrun.py}, \code{tools/g17applestorefetch.py}.

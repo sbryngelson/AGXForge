@@ -1,0 +1,9 @@
+{
+  "format": "g17-checkpoint-payload-verification-v1",
+  "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "bytes": 988097824,
+  "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+  "weight_payload_verified": true,
+  "gpu_admitted": false
+}

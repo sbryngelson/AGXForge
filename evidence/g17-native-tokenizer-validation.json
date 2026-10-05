@@ -1,0 +1,211 @@
+{
+  "format": "g17-tokenizer-input-validation-v1",
+  "cases": [
+    {
+      "model": "minilm",
+      "text": "Apple GPU native inference.",
+      "tokens": [
+        101,
+        6207,
+        14246,
+        2226,
+        3128,
+        28937,
+        1012,
+        102
+      ],
+      "comparison": "serialized tokenizer exact"
+    },
+    {
+      "model": "minilm",
+      "text": "Caf\u00e9 \u2014 \u6771\u4eac\n  repeated spaces!",
+      "tokens": [
+        101,
+        7668,
+        1517,
+        1879,
+        1755,
+        5567,
+        7258,
+        999,
+        102
+      ],
+      "comparison": "serialized tokenizer exact"
+    },
+    {
+      "model": "minilm",
+      "text": "Numbers: 12345; punctuation!?",
+      "tokens": [
+        101,
+        3616,
+        1024,
+        13138,
+        19961,
+        1025,
+        26136,
+        6593,
+        14505,
+        999,
+        1029,
+        102
+      ],
+      "comparison": "serialized tokenizer exact"
+    },
+    {
+      "model": "qwen",
+      "text": "Apple GPU native inference.",
+      "tokens": [
+        26567,
+        22670,
+        9867,
+        44378,
+        13
+      ],
+      "comparison": "serialized tokenizer exact"
+    },
+    {
+      "model": "qwen",
+      "text": "Caf\u00e9 \u2014 \u6771\u4eac\n  repeated spaces!",
+      "tokens": [
+        34,
+        2577,
+        963,
+        1959,
+        60596,
+        109,
+        46553,
+        198,
+        220,
+        11504,
+        12621,
+        0
+      ],
+      "comparison": "serialized tokenizer exact"
+    },
+    {
+      "model": "qwen",
+      "text": "Numbers: 12345; punctuation!?",
+      "tokens": [
+        27237,
+        25,
+        220,
+        16,
+        17,
+        18,
+        19,
+        20,
+        26,
+        61503,
+        57390
+      ],
+      "comparison": "serialized tokenizer exact"
+    },
+    {
+      "model": "qwen",
+      "chat": true,
+      "tokens": [
+        151644,
+        8948,
+        198,
+        2610,
+        525,
+        1207,
+        16948,
+        11,
+        3465,
+        553,
+        54364,
+        14817,
+        13,
+        1446,
+        525,
+        264,
+        10950,
+        17847,
+        13,
+        151645,
+        198,
+        151644,
+        872,
+        198,
+        840,
+        20772,
+        3170,
+        279,
+        12884,
+        374,
+        6303,
+        304,
+        825,
+        11652,
+        13,
+        151645,
+        198,
+        151644,
+        77091,
+        198
+      ],
+      "rendered": "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nExplain why the sky is blue in one sentence.<|im_end|>\n<|im_start|>assistant\n",
+      "comparison": "rendered chat plus serialized tokenizer exact"
+    }
+  ],
+  "gpu_dispatched": false,
+  "minilm_identity": {
+    "format": "g17-pinned-tokenizer-v1",
+    "repository": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "files": {
+      "tokenizer.json": {
+        "bytes": 466247,
+        "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+      },
+      "tokenizer_config.json": {
+        "bytes": 350,
+        "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+        "git_blob": "c79f2b6a0cea6f4b564fed1938984bace9d30ff0"
+      },
+      "special_tokens_map.json": {
+        "bytes": 112,
+        "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+        "git_blob": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5"
+      },
+      "vocab.txt": {
+        "bytes": 231508,
+        "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+        "git_blob": "fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+      }
+    }
+  },
+  "engine": {
+    "transformers": "5.16.1",
+    "tokenizers": "0.23.1"
+  },
+  "qwen_identity": {
+    "format": "g17-pinned-tokenizer-v1",
+    "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "files": {
+      "tokenizer.json": {
+        "bytes": 7031645,
+        "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "git_blob": "443909a61d429dff23010e5bddd28ff530edda00"
+      },
+      "tokenizer_config.json": {
+        "bytes": 7305,
+        "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+        "git_blob": "07bfe0640cb5a0037f9322287fbfc682806cf672"
+      },
+      "vocab.json": {
+        "bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+        "git_blob": "4783fe10ac3adce15ac8f358ef5462739852c569"
+      },
+      "merges.txt": {
+        "bytes": 1671839,
+        "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "git_blob": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+      }
+    }
+  }
+}

@@ -1,0 +1,1992 @@
+{
+ "by_verdict": {
+  "in D2 at this width": [
+   "10022/10",
+   "10090/12",
+   "10280/12",
+   "10306/12",
+   "10369/6",
+   "10370/10",
+   "11365/10",
+   "11669/12",
+   "11767/12",
+   "12364/14",
+   "12673/14",
+   "12682/14",
+   "12691/14",
+   "12700/14",
+   "12709/14",
+   "12715/14",
+   "12715/8",
+   "13288/10",
+   "14059/4",
+   "17193/10",
+   "17211/10",
+   "17247/10",
+   "17771/4",
+   "2190/8",
+   "2192/8",
+   "3290/4",
+   "3290/6",
+   "3298/6",
+   "3850/10",
+   "396/10",
+   "3978/10",
+   "458/10",
+   "462/10",
+   "554/4",
+   "575/4",
+   "577/4",
+   "578/4",
+   "579/4",
+   "582/4",
+   "583/4",
+   "586/4",
+   "590/8",
+   "684/4",
+   "697/14",
+   "9700/10",
+   "9740/14"
+  ],
+  "in the structural spec, NOT admissible at this width": [
+   "10018/12",
+   "10090/10",
+   "10091/10",
+   "10094/10",
+   "10279/12",
+   "10282/12",
+   "10285/12",
+   "10369/10",
+   "10793/12",
+   "10825/14",
+   "11068/14",
+   "11362/14",
+   "11364/10",
+   "11365/14",
+   "11373/14",
+   "11374/14",
+   "11375/14",
+   "11385/14",
+   "11666/12",
+   "11769/12",
+   "12646/14",
+   "12655/14",
+   "12664/14",
+   "12682/8",
+   "14061/4",
+   "14061/8",
+   "17202/10",
+   "17220/10",
+   "17229/10",
+   "17229/8",
+   "17238/10",
+   "17256/10",
+   "2190/4",
+   "3290/14",
+   "423/10",
+   "447/6",
+   "9700/14",
+   "9720/8"
+  ]
+ },
+ "counts": {
+  "in D2 at this width": 46,
+  "in the structural spec, NOT admissible at this width": 38
+ },
+ "emitted_with_no_stored_witness_at_all": [
+  "11068/14",
+  "17202/10",
+  "17211/10",
+  "17247/10"
+ ],
+ "forms": {
+  "10018/12": {
+   "apple_names": [
+    "atomic.idx"
+   ],
+   "bytes": [
+    "0f000302000a0cc090000010"
+   ],
+   "contract_name": "atomic.idx",
+   "form": "10018/12",
+   "length": 12,
+   "opcode": 10018,
+   "sources": [
+    "g17-atomic-semantics",
+    "g17-predication"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    10,
+    12,
+    16
+   ]
+  },
+  "10022/10": {
+   "apple_names": [
+    "atomic.noret"
+   ],
+   "bytes": [],
+   "contract_name": "atomic.noret",
+   "form": "10022/10",
+   "length": 10,
+   "opcode": 10022,
+   "sources": [
+    "g17-predication"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10,
+    12,
+    16
+   ]
+  },
+  "10090/10": {
+   "apple_names": [
+    "atomic.idx"
+   ],
+   "bytes": [
+    "0f000302012204401000"
+   ],
+   "contract_name": "atomic.idx",
+   "form": "10090/10",
+   "length": 10,
+   "opcode": 10090,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    10,
+    12,
+    16
+   ]
+  },
+  "10090/12": {
+   "apple_names": [
+    "atomic.idx"
+   ],
+   "bytes": [
+    "0f000302010204c010000020",
+    "0f00030201020cc010000030",
+    "0f000302010a0cc010000020",
+    "0f000302010a0cc010000030",
+    "0f00030201220cc010000010",
+    "0f000302210204c010000020",
+    "0f00030221020cc010000030",
+    "0f000302210a04c010000030",
+    "0f000302210a0cc010000030",
+    "0f00030221220cc010000010"
+   ],
+   "contract_name": "atomic.idx",
+   "form": "10090/12",
+   "length": 12,
+   "opcode": 10090,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10,
+    12,
+    16
+   ]
+  },
+  "10091/10": {
+   "apple_names": [
+    "atomic.idx"
+   ],
+   "bytes": [
+    "0f000304010a04401000",
+    "0f000304012a04401000"
+   ],
+   "contract_name": "atomic.idx",
+   "form": "10091/10",
+   "length": 10,
+   "opcode": 10091,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    10,
+    12
+   ]
+  },
+  "10094/10": {
+   "apple_names": [
+    "atomic"
+   ],
+   "bytes": [
+    "1f000300012404209000"
+   ],
+   "contract_name": "atomic",
+   "form": "10094/10",
+   "length": 10,
+   "opcode": 10094,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    10,
+    12,
+    16
+   ]
+  },
+  "10279/12": {
+   "apple_names": [
+    "add"
+   ],
+   "bytes": [
+    "2703043a2d00a30a20812100",
+    "2703045a2d00a312a0812100"
+   ],
+   "contract_name": "add",
+   "form": "10279/12",
+   "length": 12,
+   "opcode": 10279,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "10280/12": {
+   "apple_names": [
+    "add"
+   ],
+   "bytes": [
+    "2700041a2d00a30220022400",
+    "2700041a2d00a312a0011001"
+   ],
+   "contract_name": "add",
+   "form": "10280/12",
+   "length": 12,
+   "opcode": 10280,
+   "sources": [
+    "g17-condition-codes"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "10282/12": {
+   "apple_names": [
+    "add"
+   ],
+   "bytes": [
+    "0700043a0900830a28812400",
+    "2700043a2100a30aa8801100",
+    "2702043a2900a30a28812100",
+    "2f80041a2900a30a08801400",
+    "3700041a2900a302a8802100",
+    "3780041a2900a30a08801500"
+   ],
+   "contract_name": "add",
+   "form": "10282/12",
+   "length": 12,
+   "opcode": 10282,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "10285/12": {
+   "apple_names": [
+    "add"
+   ],
+   "bytes": [
+    "2782043a2900a30a00820300"
+   ],
+   "contract_name": "add",
+   "form": "10285/12",
+   "length": 12,
+   "opcode": 10285,
+   "sources": [
+    "g17-condition-codes"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "10306/12": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "add.a",
+   "form": "10306/12",
+   "length": 12,
+   "opcode": 10306,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "10369/10": {
+   "apple_names": [
+    "cmp"
+   ],
+   "bytes": [
+    "0a032380060007020000",
+    "0a832380060007020000",
+    "2a0233042380a50a0000",
+    "2a8233042380a50a0000"
+   ],
+   "contract_name": "cmp",
+   "form": "10369/10",
+   "length": 10,
+   "opcode": 10369,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    6,
+    10
+   ]
+  },
+  "10369/6": {
+   "apple_names": [
+    "cmp"
+   ],
+   "bytes": [
+    "0a8322801402"
+   ],
+   "contract_name": "cmp",
+   "form": "10369/6",
+   "length": 6,
+   "opcode": 10369,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    6,
+    10
+   ]
+  },
+  "10370/10": {
+   "apple_names": [
+    "cmp"
+   ],
+   "bytes": [
+    "0a072303060007000000"
+   ],
+   "contract_name": "cmp",
+   "form": "10370/10",
+   "length": 10,
+   "opcode": 10370,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    6,
+    10
+   ]
+  },
+  "10793/12": {
+   "apple_names": [
+    "mulhi"
+   ],
+   "bytes": [
+    "270004022900a902a8802030"
+   ],
+   "contract_name": "mulhi",
+   "form": "10793/12",
+   "length": 12,
+   "opcode": 10793,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "10825/14": {
+   "apple_names": [
+    "mul"
+   ],
+   "bytes": [
+    "2700045a2900a10a288120000102"
+   ],
+   "contract_name": "mul",
+   "form": "10825/14",
+   "length": 14,
+   "opcode": 10825,
+   "sources": [
+    "g17-condition-codes"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    14
+   ]
+  },
+  "11068/14": {
+   "apple_names": [
+    "madd"
+   ],
+   "bytes": [
+    "3702043a2900a00ab0050a300000"
+   ],
+   "contract_name": "madd",
+   "form": "11068/14",
+   "length": 14,
+   "opcode": 11068,
+   "sources": [
+    "g17-condition-codes"
+   ],
+   "stored_witness_width": null,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    14
+   ]
+  },
+  "11362/14": {
+   "apple_names": [
+    "csel.imm"
+   ],
+   "bytes": [
+    "2200070b2700ac027b004f092110",
+    "2200470a2700ac0241004a0c0110"
+   ],
+   "contract_name": "csel.imm",
+   "form": "11362/14",
+   "length": 14,
+   "opcode": 11362,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    10,
+    14
+   ]
+  },
+  "11364/10": {
+   "apple_names": [
+    "clamp"
+   ],
+   "bytes": [
+    "02010f86860416022080",
+    "02070f9e860216022080"
+   ],
+   "contract_name": "clamp",
+   "form": "11364/10",
+   "length": 10,
+   "opcode": 11364,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    6,
+    8,
+    10,
+    14
+   ]
+  },
+  "11365/10": {
+   "apple_names": [
+    "select.cc"
+   ],
+   "bytes": [
+    "02010f80860416028008"
+   ],
+   "contract_name": "select.cc",
+   "form": "11365/10",
+   "length": 10,
+   "opcode": 11365,
+   "sources": [
+    "g17-condition-codes",
+    "g17-predication"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "11365/14": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "select.cc",
+   "form": "11365/14",
+   "length": 14,
+   "opcode": 11365,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "11373/14": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "csel.reg.imm",
+   "form": "11373/14",
+   "length": 14,
+   "opcode": 11373,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "11374/14": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "csel",
+   "form": "11374/14",
+   "length": 14,
+   "opcode": 11374,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "11375/14": {
+   "apple_names": [
+    "select"
+   ],
+   "bytes": [
+    "2200070b2700ac020881681c6430",
+    "2200070b2700ac020a81601c6430",
+    "2200470b2700ac02088168186410",
+    "2200470b2700ac02088168186430",
+    "2200470b2700ac020881681c6410",
+    "2200470b2700ac020a8160186410",
+    "2200470b2700ac020a8160186430",
+    "2200470b2700ac020a81601c6410"
+   ],
+   "contract_name": "select",
+   "form": "11375/14",
+   "length": 14,
+   "opcode": 11375,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    6,
+    8,
+    10,
+    14
+   ]
+  },
+  "11385/14": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "select",
+   "form": "11385/14",
+   "length": 14,
+   "opcode": 11385,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "11666/12": {
+   "apple_names": [
+    "sub"
+   ],
+   "bytes": [
+    "2700041a2d00a20248000b00",
+    "2700045a2d00a21208040b00",
+    "3702041a2d00a20248000b00"
+   ],
+   "contract_name": "sub",
+   "form": "11666/12",
+   "length": 12,
+   "opcode": 11666,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "11669/12": {
+   "apple_names": [
+    "sub"
+   ],
+   "bytes": [
+    "2780045a2900a20240000b00",
+    "3780045a2900a20280000b00"
+   ],
+   "contract_name": "sub",
+   "form": "11669/12",
+   "length": 12,
+   "opcode": 11669,
+   "sources": [
+    "g17-condition-codes"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "11767/12": {
+   "apple_names": [
+    "atomic.tg.idx"
+   ],
+   "bytes": [
+    "0f082302030204c010004002"
+   ],
+   "contract_name": "atomic.tg.idx",
+   "form": "11767/12",
+   "length": 12,
+   "opcode": 11767,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10,
+    12
+   ]
+  },
+  "11769/12": {
+   "apple_names": [
+    "atomic.tg.idx"
+   ],
+   "bytes": [
+    "2f082300032404a090024002"
+   ],
+   "contract_name": "atomic.tg.idx",
+   "form": "11769/12",
+   "length": 12,
+   "opcode": 11769,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 12,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    12
+   ]
+  },
+  "12364/14": {
+   "apple_names": [
+    "load.tg"
+   ],
+   "bytes": [
+    "0f0803021a0210c2410080000000",
+    "0f0803021a0290c2410080000000"
+   ],
+   "contract_name": "load.tg",
+   "form": "12364/14",
+   "length": 14,
+   "opcode": 12364,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12646/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "07000302182210a0410480000000",
+    "07000302182230c0410480000000",
+    "07000302182270c0410480000000",
+    "1700030018221080c10080000000",
+    "17002300182230c0410480000000",
+    "1700230218021080c10080000000"
+   ],
+   "contract_name": "load",
+   "form": "12646/14",
+   "length": 14,
+   "opcode": 12646,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12655/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "07000300380a10c0410080000000",
+    "07000302382a10c0410080000000",
+    "17000300382a10c0410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12655/14",
+   "length": 14,
+   "opcode": 12655,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12664/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "07000300580a10e0410080000000",
+    "07000304582a10e0410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12664/14",
+   "length": 14,
+   "opcode": 12664,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12673/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "07000300780a10e0410080000000",
+    "07000304782a10e0410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12673/14",
+   "length": 14,
+   "opcode": 12673,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12682/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "0f000300180210c0410080000000",
+    "0f000302182210c0410080000000",
+    "1f000300182210c0410080000000",
+    "3f000304182210c0410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12682/14",
+   "length": 14,
+   "opcode": 12682,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-memory-semantics",
+    "g17-predication",
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12682/8": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "0f00030218221040"
+   ],
+   "contract_name": "load",
+   "form": "12682/8",
+   "length": 8,
+   "opcode": 12682,
+   "sources": [
+    "g17-control-flow",
+    "g17-memory-semantics",
+    "g17-predication"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12691/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "0f000300380a10e0410080000000",
+    "0f000304382a10e0410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12691/14",
+   "length": 14,
+   "opcode": 12691,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12700/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "0f000300580a1080410080000000",
+    "0f000306582a1080410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12700/14",
+   "length": 14,
+   "opcode": 12700,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12709/14": {
+   "apple_names": [
+    "load"
+   ],
+   "bytes": [
+    "0f000300780a1080410080000000",
+    "0f000308782a1080410080000000"
+   ],
+   "contract_name": "load",
+   "form": "12709/14",
+   "length": 14,
+   "opcode": 12709,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12715/14": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "load",
+   "form": "12715/14",
+   "length": 14,
+   "opcode": 12715,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "12715/8": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "load",
+   "form": "12715/8",
+   "length": 8,
+   "opcode": 12715,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "13288/10": {
+   "apple_names": [
+    "store.tg"
+   ],
+   "bytes": [
+    "0f080302030210c00020",
+    "0f080302030210c20020"
+   ],
+   "contract_name": "store.tg",
+   "form": "13288/10",
+   "length": 10,
+   "opcode": 13288,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "14059/4": {
+   "apple_names": [
+    "read_sr"
+   ],
+   "bytes": [
+    "0ca01006",
+    "1ca01006",
+    "2ca01006"
+   ],
+   "contract_name": "read_sr",
+   "form": "14059/4",
+   "length": 4,
+   "opcode": 14059,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    8
+   ]
+  },
+  "14061/4": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "base.wide",
+   "form": "14061/4",
+   "length": 4,
+   "opcode": 14061,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    4,
+    8
+   ]
+  },
+  "14061/8": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "base.wide",
+   "form": "14061/8",
+   "length": 8,
+   "opcode": 14061,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    4,
+    8
+   ]
+  },
+  "17193/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "17040300010610808020"
+   ],
+   "contract_name": "store",
+   "form": "17193/10",
+   "length": 10,
+   "opcode": 17193,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "17202/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "07040302210e10c00020",
+    "17040300210e10c00020"
+   ],
+   "contract_name": "store",
+   "form": "17202/10",
+   "length": 10,
+   "opcode": 17202,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": null,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10
+   ]
+  },
+  "17211/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "07040304410e10e00020"
+   ],
+   "contract_name": "store",
+   "form": "17211/10",
+   "length": 10,
+   "opcode": 17211,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": null,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10
+   ]
+  },
+  "17220/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "07040304610e10e00020"
+   ],
+   "contract_name": "store",
+   "form": "17220/10",
+   "length": 10,
+   "opcode": 17220,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10
+   ]
+  },
+  "17229/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "0f040302010610c00020",
+    "0f040304010610c00020",
+    "1f040300010610c00020"
+   ],
+   "contract_name": "store",
+   "form": "17229/10",
+   "length": 10,
+   "opcode": 17229,
+   "sources": [
+    "g17-memory-semantics",
+    "g17-predication",
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "17229/8": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "0f04030201061040",
+    "0f04030401061040",
+    "2f04030001061040"
+   ],
+   "contract_name": "store",
+   "form": "17229/8",
+   "length": 8,
+   "opcode": 17229,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-memory-semantics",
+    "g17-predication",
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "17238/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "0f040304210e10e00020"
+   ],
+   "contract_name": "store",
+   "form": "17238/10",
+   "length": 10,
+   "opcode": 17238,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "17247/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "0f040306410e10800020"
+   ],
+   "contract_name": "store",
+   "form": "17247/10",
+   "length": 10,
+   "opcode": 17247,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": null,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "17256/10": {
+   "apple_names": [
+    "store"
+   ],
+   "bytes": [
+    "0f040308610e10800020"
+   ],
+   "contract_name": "store",
+   "form": "17256/10",
+   "length": 10,
+   "opcode": 17256,
+   "sources": [
+    "g17-memory-semantics"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14
+   ]
+  },
+  "17771/4": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "xor",
+   "form": "17771/4",
+   "length": 4,
+   "opcode": 17771,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    10
+   ]
+  },
+  "2190/4": {
+   "apple_names": [
+    "ffma"
+   ],
+   "bytes": [],
+   "contract_name": "ffma",
+   "form": "2190/4",
+   "length": 4,
+   "opcode": 2190,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    4,
+    6,
+    8,
+    10,
+    12,
+    16
+   ]
+  },
+  "2190/8": {
+   "apple_names": [
+    "ffma"
+   ],
+   "bytes": [],
+   "contract_name": "ffma",
+   "form": "2190/8",
+   "length": 8,
+   "opcode": 2190,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6,
+    8,
+    10,
+    12,
+    16
+   ]
+  },
+  "2192/8": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "",
+   "form": "2192/8",
+   "length": 8,
+   "opcode": 2192,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    12,
+    16
+   ]
+  },
+  "3290/14": {
+   "apple_names": [
+    "fmul"
+   ],
+   "bytes": [],
+   "contract_name": "fmul",
+   "form": "3290/14",
+   "length": 14,
+   "opcode": 3290,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    4,
+    6,
+    14
+   ]
+  },
+  "3290/4": {
+   "apple_names": [
+    "fmul"
+   ],
+   "bytes": [],
+   "contract_name": "fmul",
+   "form": "3290/4",
+   "length": 4,
+   "opcode": 3290,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6,
+    14
+   ]
+  },
+  "3290/6": {
+   "apple_names": [
+    "fmul"
+   ],
+   "bytes": [],
+   "contract_name": "fmul",
+   "form": "3290/6",
+   "length": 6,
+   "opcode": 3290,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6,
+    14
+   ]
+  },
+  "3298/6": {
+   "apple_names": [
+    "fadd.imm"
+   ],
+   "bytes": [],
+   "contract_name": "fadd.imm",
+   "form": "3298/6",
+   "length": 6,
+   "opcode": 3298,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    6,
+    14
+   ]
+  },
+  "3850/10": {
+   "apple_names": [
+    "rsqrt"
+   ],
+   "bytes": [],
+   "contract_name": "rsqrt",
+   "form": "3850/10",
+   "length": 10,
+   "opcode": 3850,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10
+   ]
+  },
+  "396/10": {
+   "apple_names": [
+    "andn"
+   ],
+   "bytes": [
+    "230006803a70a30ac483"
+   ],
+   "contract_name": "andn",
+   "form": "396/10",
+   "length": 10,
+   "opcode": 396,
+   "sources": [
+    "g17-condition-codes"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10
+   ]
+  },
+  "3978/10": {
+   "apple_names": [
+    "rsqrt"
+   ],
+   "bytes": [],
+   "contract_name": "rsqrt",
+   "form": "3978/10",
+   "length": 10,
+   "opcode": 3978,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10
+   ]
+  },
+  "423/10": {
+   "apple_names": [
+    "and"
+   ],
+   "bytes": [
+    "2b0207803870a312c287",
+    "330207803830a3024480",
+    "3b0007803830a30ac281",
+    "3b0207803830a302c487"
+   ],
+   "contract_name": "and",
+   "form": "423/10",
+   "length": 10,
+   "opcode": 423,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    10
+   ]
+  },
+  "447/6": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "barrier",
+   "form": "447/6",
+   "length": 6,
+   "opcode": 447,
+   "sources": [
+    "g17-atomic-semantics"
+   ],
+   "stored_witness_width": 6,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    6
+   ]
+  },
+  "458/10": {
+   "apple_names": [
+    "branch"
+   ],
+   "bytes": [
+    "5e1ff91e1f00ffc7ff7f",
+    "de0ff91e1f00ffc7ff7f",
+    "de1ff91e1f00ffc7ff7f",
+    "de3ff91e1f00ffc7ff7f"
+   ],
+   "contract_name": "branch",
+   "form": "458/10",
+   "length": 10,
+   "opcode": 458,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10
+   ]
+  },
+  "462/10": {
+   "apple_names": [
+    "branch"
+   ],
+   "bytes": [
+    "3e20190e000000000000",
+    "be30190e000000000000",
+    "be50190e000000000000",
+    "be60330e000000000000",
+    "be70190e000000000000"
+   ],
+   "contract_name": "branch",
+   "form": "462/10",
+   "length": 10,
+   "opcode": 462,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-predication"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    10
+   ]
+  },
+  "554/4": {
+   "apple_names": [
+    "movimm"
+   ],
+   "bytes": [
+    "2b002000"
+   ],
+   "contract_name": "movimm",
+   "form": "554/4",
+   "length": 4,
+   "opcode": 554,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    8
+   ]
+  },
+  "575/4": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "exec",
+   "form": "575/4",
+   "length": 4,
+   "opcode": 575,
+   "sources": [
+    "g17-predication"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4
+   ]
+  },
+  "577/4": {
+   "apple_names": [
+    "exec"
+   ],
+   "bytes": [
+    "3e03400e",
+    "be03400e"
+   ],
+   "contract_name": "exec",
+   "form": "577/4",
+   "length": 4,
+   "opcode": 577,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-predication"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4
+   ]
+  },
+  "578/4": {
+   "apple_names": [
+    "exec"
+   ],
+   "bytes": [
+    "fe00000e"
+   ],
+   "contract_name": "exec",
+   "form": "578/4",
+   "length": 4,
+   "opcode": 578,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6
+   ]
+  },
+  "579/4": {
+   "apple_names": [
+    "exec"
+   ],
+   "bytes": [
+    "fe00020e"
+   ],
+   "contract_name": "exec",
+   "form": "579/4",
+   "length": 4,
+   "opcode": 579,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6
+   ]
+  },
+  "582/4": {
+   "apple_names": [
+    "exec"
+   ],
+   "bytes": [
+    "1e00000e",
+    "9e60000e"
+   ],
+   "contract_name": "exec",
+   "form": "582/4",
+   "length": 4,
+   "opcode": 582,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-predication"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6
+   ]
+  },
+  "583/4": {
+   "apple_names": [
+    "exec"
+   ],
+   "bytes": [
+    "1e00020e"
+   ],
+   "contract_name": "exec",
+   "form": "583/4",
+   "length": 4,
+   "opcode": 583,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-predication"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    6
+   ]
+  },
+  "586/4": {
+   "apple_names": [],
+   "bytes": [],
+   "contract_name": "mov",
+   "form": "586/4",
+   "length": 4,
+   "opcode": 586,
+   "sources": [
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    8
+   ]
+  },
+  "590/8": {
+   "apple_names": [
+    "mov.16"
+   ],
+   "bytes": [
+    "230007024220a002"
+   ],
+   "contract_name": "mov.16",
+   "form": "590/8",
+   "length": 8,
+   "opcode": 590,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 8,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4,
+    8
+   ]
+  },
+  "684/4": {
+   "apple_names": [
+    "end"
+   ],
+   "bytes": [
+    "0e000000"
+   ],
+   "contract_name": "end",
+   "form": "684/4",
+   "length": 4,
+   "opcode": 684,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow",
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 4,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    4
+   ]
+  },
+  "697/14": {
+   "apple_names": [
+    "funnel.shr"
+   ],
+   "bytes": [
+    "370200022aa0a20244805c000008"
+   ],
+   "contract_name": "funnel.shr",
+   "form": "697/14",
+   "length": 14,
+   "opcode": 697,
+   "sources": [
+    "g17-condition-codes",
+    "g17-control-flow"
+   ],
+   "stored_witness_width": 14,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    14
+   ]
+  },
+  "9700/10": {
+   "apple_names": [
+    "fselect"
+   ],
+   "bytes": [],
+   "contract_name": "fselect",
+   "form": "9700/10",
+   "length": 10,
+   "opcode": 9700,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    6,
+    8,
+    10,
+    14,
+    16
+   ]
+  },
+  "9700/14": {
+   "apple_names": [
+    "fselect"
+   ],
+   "bytes": [
+    "2200070a2300a002160161182f40",
+    "2200070b2300a002160161182d40",
+    "2200070b2300a0021601611c2d40",
+    "2200070b2300a002160161582d40",
+    "2200470b2300a002160161182d40",
+    "2200470b2300a0021601611c2d40"
+   ],
+   "contract_name": "fselect",
+   "form": "9700/14",
+   "length": 14,
+   "opcode": 9700,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    6,
+    8,
+    10,
+    14,
+    16
+   ]
+  },
+  "9720/8": {
+   "apple_names": [
+    "fselect"
+   ],
+   "bytes": [],
+   "contract_name": "fselect",
+   "form": "9720/8",
+   "length": 8,
+   "opcode": 9720,
+   "sources": [
+    "g17-sqrt-lowering"
+   ],
+   "stored_witness_width": 10,
+   "verdict": "in the structural spec, NOT admissible at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14,
+    16
+   ]
+  },
+  "9740/14": {
+   "apple_names": [
+    "select"
+   ],
+   "bytes": [
+    "2200070a2300a002460060182f40",
+    "2200070a2300a0024e8060182f40",
+    "2200070b2300a002460060182d40",
+    "2200070b2300a0024600601c2d40",
+    "2200070b2300a002460060582d40",
+    "2200070b2300a0024e8060182d40",
+    "2200070b2300a0024e80601c2d40",
+    "2200070b2300a0024e8060582d40",
+    "2200470b2300a002460060182d40",
+    "2200470b2300a0024600601c2d40",
+    "2200470b2300a0024e8060182d40",
+    "2200470b2300a0024e80601c2d40"
+   ],
+   "contract_name": "select",
+   "form": "9740/14",
+   "length": 14,
+   "opcode": 9740,
+   "sources": [
+    "g17-comparison-semantics"
+   ],
+   "stored_witness_width": 16,
+   "verdict": "in D2 at this width",
+   "widths_in_the_spec": [
+    8,
+    10,
+    14,
+    16
+   ]
+  }
+ },
+ "forms_outside_d2_at_the_width_they_were_emitted_at": [
+  "10018/12",
+  "10090/10",
+  "10091/10",
+  "10094/10",
+  "10279/12",
+  "10282/12",
+  "10285/12",
+  "10369/10",
+  "10793/12",
+  "10825/14",
+  "11068/14",
+  "11362/14",
+  "11364/10",
+  "11365/14",
+  "11373/14",
+  "11374/14",
+  "11375/14",
+  "11385/14",
+  "11666/12",
+  "11769/12",
+  "12646/14",
+  "12655/14",
+  "12664/14",
+  "12682/8",
+  "14061/4",
+  "14061/8",
+  "17202/10",
+  "17220/10",
+  "17229/10",
+  "17229/8",
+  "17238/10",
+  "17256/10",
+  "2190/4",
+  "3290/14",
+  "423/10",
+  "447/6",
+  "9700/14",
+  "9720/8"
+ ],
+ "means": "every form appearing in a program this lane compiled with Apple's own compiler, checked against the width D2 admits for its opcode",
+ "prefix_relationships": [],
+ "the_mechanism": "the contract stores ONE `apple_witness` per opcode and D2 takes its width from that exemplar's byte count. An opcode Apple emits at more than one width is therefore admissible at one of them only, and which one is a property of the harvest rather than of the evidence. 38 of the 84 forms seen here fall outside D2 on that basis. Every one of them DOES have a structural record at the width it was emitted at, so the population a width-enumerating builder cannot reach is now empty; what remains is an admissibility gap, not a coverage hole.",
+ "what_this_does_NOT_do": "it does not move anything into D2. The denominator's basis is published and cited by another lane; widening it from this side would leave two lanes quoting the same name for different populations. What is published here is the population and its evidence, so the decision is visible rather than made silently.",
+ "what_would_make_this_WRONG": "if `g17ref.walk` assigned a different length to these bytes than the harvest does to the stored witness, the disagreement would be an instrument defect rather than a second width. The bytes are recorded for every form that has them, so the claim is checkable rather than asserted: an opcode whose local bytes are a PREFIX of the stored witness, or vice versa, would be the signature of that defect."
+}

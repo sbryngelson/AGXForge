@@ -1,0 +1,187 @@
+[
+  {
+    "id": "CONTROL.op10279",
+    "op": 10279,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        4096
+      ],
+      [
+        4097
+      ],
+      [
+        4352
+      ],
+      [
+        8192
+      ]
+    ],
+    "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+    ],
+    "note": "MANDATORY POSITIVE CONTROL. The batch is void without it."
+  },
+  {
+    "id": "op998.fadd",
+    "op": 998,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        1069547520,
+        1074790400
+      ],
+      [
+        1073741824,
+        1082130432
+      ],
+      [
+        3217031168,
+        1056964608
+      ],
+      [
+        1090519040,
+        1040187392
+      ]
+    ],
+    "expect": [
+      1081081856,
+      1086324736,
+      3212836864,
+      1090650112
+    ],
+    "note": "op998 is delivery-proven and its FUNCTION has never been measured - which are different claims, as op13488 showed by computing ~a & b under a name meaning ~(a & ~b). Every operand pair here is exactly representable in f32, so the prediction is exact rather than approximate, and the four sums are all distinct from both their addends: a form returning either operand unchanged is visible."
+  },
+  {
+    "id": "op3290.fmul",
+    "op": 3290,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        1069547520,
+        1073741824
+      ],
+      [
+        1077936128,
+        1082130432
+      ],
+      [
+        3221225472,
+        1056964608
+      ],
+      [
+        1048576000,
+        1090519040
+      ]
+    ],
+    "expect": [
+      1077936128,
+      1094713344,
+      3212836864,
+      1073741824
+    ],
+    "note": "op3290 fmul, same discipline. Case 2 has a negative operand and case 3 a product smaller than one of its factors, so neither an add nor a pass-through fits the four."
+  },
+  {
+    "id": "op2190.ffma",
+    "op": 2190,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        1069547520,
+        1073741824,
+        1056964608
+      ],
+      [
+        1073741824,
+        1077936128,
+        1065353216
+      ],
+      [
+        3212836864,
+        1082130432,
+        1073741824
+      ],
+      [
+        1056964608,
+        1056964608,
+        1048576000
+      ]
+    ],
+    "expect": [
+      1080033280,
+      1088421888,
+      3221225472,
+      1056964608
+    ],
+    "note": "op2190 ffma, three sources: a*b + c. Three sources is where 'it returned something plausible' stops being an answer - two of the three can keep the witness's registers and the sum still looks like arithmetic. Case 3 is 0.5*0.5+0.25 = 0.5, which equals its own third operand, so it is the case that would hide a dropped multiply; the other three do not, and all four must hold."
+  },
+  {
+    "id": "op10826.madd",
+    "op": 10826,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        3,
+        4,
+        5
+      ],
+      [
+        7,
+        8,
+        9
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        10,
+        10,
+        1
+      ]
+    ],
+    "expect": [
+      17,
+      65,
+      6,
+      101
+    ],
+    "note": "op10826 madd, the integer three-source: a*b + c. Distinct answers for every case, and none equals any of its operands."
+  },
+  {
+    "id": "op11372.icmp",
+    "op": 11372,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        10,
+        20
+      ],
+      [
+        20,
+        10
+      ],
+      [
+        10,
+        10
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "note": "op11372, the comparison that yields a VALUE. NO EXPECT: the condition code is operand 2 and this record does not write it, so which relation the witness carries is what the four cases measure - three orderings, and exactly one relation is consistent with all of them. That is the same method that read op11375's condition code as greater-than, applied to the opcode g17cc actually uses for icmp.",
+    "function": "(a == b) ? 1 : 0 - the witness's condition code is EQUALITY, and the four cases cover all three orderings: 10<20 and 20>10 both return 0, 10==10 and 5==5 both return 1. Exactly one relation fits all four."
+  }
+]

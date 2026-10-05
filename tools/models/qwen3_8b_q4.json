@@ -1,0 +1,53 @@
+{
+ "name": "qwen3_8b_q4",
+ "arch": "qwen3",
+ "bits": 4,
+ "cap": 2048,
+ "qmv": {
+  "qkv": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "wo_res1": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "ffn": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "w2_res2": {
+   "ks": 4,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "head": {
+   "xvec": true
+  }
+ },
+ "norm": {
+  "out32": true,
+  "seed": false
+ },
+ "final_norm": {
+  "out32": true,
+  "seed": false
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true,
+  "kvvec": true,
+  "hwexp2": true,
+  "qknorm": true
+ },
+ "gen": {},
+ "model": "qwen3-8b",
+ "notes": "Qwen3-8B q4 (mlx-community/Qwen3-8B-4bit): 36 layers, d_model 4,096, 32 query heads against 8 KV heads, untied head; QK-norm fused into the attention (25.188); root: g17deliver build --arch qwen3_8b --cap 2048 --attn-variants kvvec+hwexp2,kvvec+hwexp2+qknorm"
+}

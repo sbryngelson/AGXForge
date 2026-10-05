@@ -1,0 +1,27 @@
+# PREREGISTERED, before spike/accel/re/srnumbers.py exists.
+#
+# CLAIM UNDER TEST. The peer recovered a hardware numbering for read_sr's special-register operand
+# (isa/g17-special-register-numbers.txt): SR_SIMD_ELEM 2, SR_SIMD_GRP 5, SR_TG_X_SIZE 24 with Y and
+# Z at 25 and 26, SR_LOCAL_X 36 and Y 37, SR_LIN_ID 39. This backend's own table holds three values
+# for the same field - 0x9c, 0xa0, 0xa4 - and 0xa4 & 0x7f is 36, which is SR_LOCAL_X, the register
+# whose per-lane behaviour this project measured yesterday. So the two agree where they overlap and
+# the field is byte1 bits 0-6 with bit 7 set in every witness either of us has.
+#
+# THE DISPATCH. 32 lanes on tb-host3wide, each lane writing four special registers to its own slot
+# through op17229, the indexed store.
+#
+# PREDICTIONS, one per register, stated before the probe runs
+#   SR_LOCAL_X   36   lane k reads k        the register already measured, so this is the control
+#   SR_SIMD_ELEM  2   lane k reads k        a SIMD of 32 and a threadgroup of 32 coincide here
+#   SR_TG_X_SIZE 24   every lane reads 32   the threadgroup size, identical in every lane
+#   SR_LIN_ID    39   unpredicted           recorded, not predicted: nothing establishes what a
+#                                           linear id is linear in, and guessing it would be the
+#                                           construct-name error in a new place
+#
+# FALSIFIERS
+#   the control disagrees      SR_LOCAL_X not reading k refutes the whole reading, including this
+#                              backend's existing 0xa4, and nothing else in the run is interpretable
+#   TG_X_SIZE varies by lane   it is not a size
+#   any register reads 0 in every lane   INCONCLUSIVE for that register, not a refutation: an
+#                              unpopulated special register reads zero exactly as an unallocated
+#                              space does, which has been the answer three times this session

@@ -1,0 +1,14 @@
+# THE BARRIER'S MEMORY SCOPE IS AN IMMEDIATE OPERAND, and the imageblock has its own.
+# Every one of these is op447, scheduling class 3, MayStore + NotDuplicable + side effects.
+# The only thing that changes is operand 1. Bytes are the whole instruction as encoded.
+
+#  Metal barrier                      bytes          imm      note
+   threadgroup_barrier(mem_none)                  075100060000   20       imm:0 imm:20
+   threadgroup_barrier(mem_device)                0f6900060000   154      imm:0 imm:154
+   threadgroup_barrier(mem_threadgroup)           275100060000   276      imm:0 imm:276
+   threadgroup_barrier(mem_texture)               876700060000   1144     imm:0 imm:1144
+   simdgroup_barrier(mem_none)                    (not built)
+   simdgroup_barrier(mem_device)                  (not built)
+   simdgroup_barrier(mem_threadgroup)             (not built)
+   simdgroup_barrier(mem_texture)                 (not built)
+   threadgroup_barrier(mem_threadgroup_imageblock) 475100060000   532      imm:0 imm:532

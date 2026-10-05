@@ -1,0 +1,206 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "compiled.op1062",
+  "op": 1062,
+  "length": 10,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 1062,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "0700004a03200a005010",
+    "0700004a03200a005010",
+    "0700004a03200a005010",
+    "0700004a03200a005010",
+    "0700004a03200a005010",
+    "0700004a03200a005010",
+    "0700004a03200a005010",
+    "0700004a03200a005010"
+   ],
+   "operands": null,
+   "from_template": true,
+   "opcodes": [
+    684,
+    1062,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   1048576000,
+   1056964608,
+   1065353216,
+   1065353216,
+   0,
+   1061158912
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "compiled.op2570",
+  "op": 2570,
+  "length": 10,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 2570,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000",
+    "2f00044a2a20a4023000"
+   ],
+   "operands": null,
+   "from_template": true,
+   "opcodes": [
+    684,
+    2570,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   1065353216,
+   1073741824,
+   3212836864,
+   3221225472,
+   1092616192,
+   3240099840,
+   1077936128
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "compiled.op3978",
+  "op": 3978,
+  "length": 10,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3978,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "270004182aa0a2023000",
+    "270004182aa0a2023000",
+    "270004182aa0a2023000",
+    "270004182aa0a2023000",
+    "270004182aa0a2023000",
+    "270004182aa0a2023000",
+    "270004182aa0a2023000",
+    "270004182aa0a2023000"
+   ],
+   "operands": null,
+   "from_template": true,
+   "opcodes": [
+    684,
+    3978,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065353216,
+   1056964608,
+   1048576000,
+   1073741824,
+   1082130432,
+   1040187392,
+   1090519040,
+   1031798784
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

@@ -1,0 +1,8773 @@
+{
+ "means": "Execution of the undetermined bits of T1's single-instance forms (docs 25.58), by tools/g17singletonbits.py --run. Each pair differs at one bit; the prediction, committed before dispatch, is that both arms agree.",
+ "controls_ok": true,
+ "dispatched_pairs": 33,
+ "not_dispatched": [
+  {
+   "id": "single.op17257.l12.b2.3",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b4.0",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b4.1",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b4.4",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b4.7",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b5.4",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b5.5",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b5.6",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b5.7",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b6.3",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  },
+  {
+   "id": "single.op17257.l12.b6.4",
+   "why": "a store (MayStore, memory): the safety gate refuses it, and the oracle's one-instruction scaffold cannot author an instruction with no destination; probed instead as a whole Apple program by tools/g17tilestoreprobe.py"
+  }
+ ],
+ "rows": [
+  {
+   "id": "ctl.op10279.mandatory",
+   "control": true,
+   "op": 10279,
+   "length": null,
+   "bit": null,
+   "apple_value": null,
+   "author": null,
+   "predict": "values 4100, 4101, 4356, 8196 (src + 4)",
+   "records": [
+    {
+     "id": "ctl.op10279.mandatory",
+     "op": 10279,
+     "author": "fieldmap",
+     "witness_required": false,
+     "cases": [
+      [
+       4096
+      ],
+      [
+       4097
+      ],
+      [
+       4352
+      ],
+      [
+       8192
+      ]
+     ],
+     "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.op10279.mandatory",
+     "op": 10279,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 10279,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       684,
+       10279,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c432b885a3f020e19bf57b37325383db9c3df925babf50b0452491231566867c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4100,
+      4101,
+      4356,
+      8196
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "verdict": "as-predicted",
+   "values": [
+    4100,
+    4101,
+    4356,
+    8196
+   ]
+  },
+  {
+   "id": "ctl.null.op10279",
+   "control": true,
+   "op": 10279,
+   "length": null,
+   "bit": null,
+   "apple_value": null,
+   "author": null,
+   "predict": "agree",
+   "records": [
+    {
+     "id": "ctl.null.op10279.A",
+     "op": 10279,
+     "author": "fieldmap",
+     "witness_required": false,
+     "cases": [
+      [
+       4096
+      ],
+      [
+       4097
+      ],
+      [
+       4352
+      ],
+      [
+       8192
+      ]
+     ],
+     "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+     ]
+    },
+    {
+     "id": "ctl.null.op10279.B",
+     "op": 10279,
+     "author": "fieldmap",
+     "witness_required": false,
+     "cases": [
+      [
+       4096
+      ],
+      [
+       4097
+      ],
+      [
+       4352
+      ],
+      [
+       8192
+      ]
+     ],
+     "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.null.op10279.A",
+     "op": 10279,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 10279,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       684,
+       10279,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c432b885a3f020e19bf57b37325383db9c3df925babf50b0452491231566867c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4100,
+      4101,
+      4356,
+      8196
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    },
+    {
+     "id": "ctl.null.op10279.B",
+     "op": 10279,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 10279,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       684,
+       10279,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c432b885a3f020e19bf57b37325383db9c3df925babf50b0452491231566867c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4100,
+      4101,
+      4356,
+      8196
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4100,
+     4101,
+     4356,
+     8196
+    ],
+    "B": [
+     4100,
+     4101,
+     4356,
+     8196
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "ctl.positive.op612",
+   "control": true,
+   "op": 612,
+   "length": null,
+   "bit": null,
+   "apple_value": null,
+   "author": null,
+   "predict": "differ",
+   "records": [
+    {
+     "id": "ctl.positive.op612.A",
+     "op": 612,
+     "author": "fieldmap",
+     "witness_required": false,
+     "imms": {
+      "4": 16,
+      "5": 8
+     },
+     "cases": [
+      [
+       21
+      ],
+      [
+       24
+      ],
+      [
+       16
+      ],
+      [
+       13
+      ]
+     ],
+     "expect": [
+      7,
+      0,
+      15,
+      8
+     ]
+    },
+    {
+     "id": "ctl.positive.op612.B",
+     "op": 612,
+     "author": "fieldmap",
+     "witness_required": false,
+     "imms": {
+      "4": 0,
+      "5": 8
+     },
+     "cases": [
+      [
+       21
+      ],
+      [
+       24
+      ],
+      [
+       16
+      ],
+      [
+       13
+      ]
+     ],
+     "expect": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.positive.op612.A",
+     "op": 612,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 612,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270000422120a1020c041c18",
+       "270000422120a1020c041c18",
+       "270000422120a1020c041c18",
+       "270000422120a1020c041c18"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       612,
+       684,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c38cc84e3ed5e1f91296e69d4cdfe6c88f05142a6f810312cc895ef9d6f59628"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      7,
+      0,
+      15,
+      8
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    },
+    {
+     "id": "ctl.positive.op612.B",
+     "op": 612,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 612,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270000422120a1020c001c18",
+       "270000422120a1020c001c18",
+       "270000422120a1020c001c18",
+       "270000422120a1020c001c18"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       612,
+       684,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "3fe0afa13364224e62eb2057655140952bc14a4d03d5967aef3485146140f202"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     7,
+     0,
+     15,
+     8
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": false,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "ctl.knowngood.op9832.l6",
+   "control": true,
+   "op": 9832,
+   "length": 6,
+   "bit": null,
+   "apple_value": null,
+   "author": "fieldmap",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "ctl.knowngood.op9832.l6.A",
+     "op": 9832,
+     "length": 6,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "b2162c1e0000",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757,
+       1065369088
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088,
+       1073758720
+      ]
+     ]
+    },
+    {
+     "id": "ctl.knowngood.op9832.l6.B",
+     "op": 9832,
+     "length": 6,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "b216281e0000",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757,
+       1065369088
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088,
+       1073758720
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.knowngood.op9832.l6.A",
+     "op": 9832,
+     "length": 6,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9832,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02243c260000",
+       "02243c260000",
+       "02243c260000",
+       "02243c260000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9832,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "a5dc1ecb245e6f5dae1892f85da600715e7846fc98937bc0ad955b4e4dbb0c0b"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      17664,
+      5,
+      15872,
+      16896
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "ctl.knowngood.op9832.l6.B",
+     "op": 9832,
+     "length": 6,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9832,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "022438260000",
+       "022438260000",
+       "022438260000",
+       "022438260000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9832,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "01a249cb59cc5af5378635d9770daf129860219de216f75a1acb1d7bccea96b1"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      17664,
+      5,
+      15872,
+      16896
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     17664,
+     5,
+     15872,
+     16896
+    ],
+    "B": [
+     17664,
+     5,
+     15872,
+     16896
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "ctl.form.op16778.l12.input",
+   "control": true,
+   "op": 16778,
+   "length": 12,
+   "bit": null,
+   "apple_value": null,
+   "author": null,
+   "predict": "differ",
+   "records": [
+    {
+     "id": "ctl.form.op16778.l12.input.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ],
+     "expect": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ]
+    },
+    {
+     "id": "ctl.form.op16778.l12.input.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       2147483678
+      ],
+      [
+       2452903544
+      ],
+      [
+       2147483650
+      ],
+      [
+       4294967271
+      ]
+     ],
+     "expect": [
+      4026531840,
+      3221225472,
+      268435456,
+      939524096
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.form.op16778.l12.input.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    },
+    {
+     "id": "ctl.form.op16778.l12.input.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "ac573a263e8340cd4a6ec7493c7db0872b7e7700323204579283f5012d835ccf"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4026531840,
+      3221225472,
+      268435456,
+      939524096
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4026531840,
+     3221225472,
+     268435456,
+     939524096
+    ]
+   },
+   "outputs_agree": false,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": [
+    true,
+    true
+   ]
+  },
+  {
+   "id": "single.op16778.l12.b10.0",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.0",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.0.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.0.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810100",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.0.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.0.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810100",
+       "2f80001a2a80a70278810100",
+       "2f80001a2a80a70278810100",
+       "2f80001a2a80a70278810100"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "1b978cf7e8818da21e8791cab0a36358d0cd80c33a2ce9b8ac063289a1835a40"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b10.1",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.1",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.1.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.1.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810200",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.1.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.1.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810200",
+       "2f80001a2a80a70278810200",
+       "2f80001a2a80a70278810200",
+       "2f80001a2a80a70278810200"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "fb1d6ce96a46d1bc1957bcba5ec5d5e436422c5fcc383f47c0d9812c1373a42d"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b10.2",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.2",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.2.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.2.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810400",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.2.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.2.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810400",
+       "2f80001a2a80a70278810400",
+       "2f80001a2a80a70278810400",
+       "2f80001a2a80a70278810400"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "70718e369cf9755b24b8c2e8abeff7ada1d3b0e9b3b140c3a6d018e84747025c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b10.3",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.3",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.3.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.3.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810800",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.3.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.3.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810800",
+       "2f80001a2a80a70278810800",
+       "2f80001a2a80a70278810800",
+       "2f80001a2a80a70278810800"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "e76314bca226efe584643a14207ca41e7c9627bab512cc02d7341bdc2b48331d"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b10.4",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.4",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.4.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.4.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78811000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.4.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.4.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278811000",
+       "2f80001a2a80a70278811000",
+       "2f80001a2a80a70278811000",
+       "2f80001a2a80a70278811000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "959a6c127f06e4b9ebe11b889f3ac3b1abc0f8c4b97c9b51d07faa912893e03c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b10.5",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.5",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.5.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.5.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78812000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.5.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.5.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278812000",
+       "2f80001a2a80a70278812000",
+       "2f80001a2a80a70278812000",
+       "2f80001a2a80a70278812000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c7fbd0d6331eccba2cdf04f77897f0d35f45e2e0f0f7ab5da17f7b58767fdc42"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b10.7",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "10.7",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b10.7.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b10.7.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78818000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b10.7.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b10.7.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278818000",
+       "2f80001a2a80a70278818000",
+       "2f80001a2a80a70278818000",
+       "2f80001a2a80a70278818000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "db35f4a503e5ae9229006e71567d20ca3b248f5a1bca00b5d9d2ec1e9098c704"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.0",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.0",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.0.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.0.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810001",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.0.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.0.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810001",
+       "2f80001a2a80a70278810001",
+       "2f80001a2a80a70278810001",
+       "2f80001a2a80a70278810001"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "71aa47e7340ad327448e444384d455d680263f0b3d9fd49b483fff6c3cb8414c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.1",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.1",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.1.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.1.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810002",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.1.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.1.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810002",
+       "2f80001a2a80a70278810002",
+       "2f80001a2a80a70278810002",
+       "2f80001a2a80a70278810002"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "e9fe913dbe43e6e47053d5abf42a41fad6ca1dd9b3845e3bed4748393c325bda"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.2",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.2",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.2.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.2.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810004",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.2.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.2.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810004",
+       "2f80001a2a80a70278810004",
+       "2f80001a2a80a70278810004",
+       "2f80001a2a80a70278810004"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "bb21a6b05423fc0b3c8cc287c392d3decd128777a3ae96ce62e99ec12467daf7"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.3",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.3",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.3.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.3.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810008",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.3.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.3.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810008",
+       "2f80001a2a80a70278810008",
+       "2f80001a2a80a70278810008",
+       "2f80001a2a80a70278810008"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "ab25cf59f3a049cd0d2ba9ab6f3e93cebd4cd9efa420d45c27f8976e6b039430"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.4",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.4",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.4.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.4.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810010",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.4.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.4.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810010",
+       "2f80001a2a80a70278810010",
+       "2f80001a2a80a70278810010",
+       "2f80001a2a80a70278810010"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "b0245f3973c6c2745992bbb9fdc82f8dbbc56fb8e77c71ee593bb11c146cbdbd"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.5",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.5",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.5.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.5.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810020",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.5.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.5.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810020",
+       "2f80001a2a80a70278810020",
+       "2f80001a2a80a70278810020",
+       "2f80001a2a80a70278810020"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "14ab0ffa7b772cda07d341fa98158de153c8cb54efd92a7dca3eb31bbd5d2d3c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.6",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.6",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.6.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.6.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810040",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.6.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.6.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810040",
+       "2f80001a2a80a70278810040",
+       "2f80001a2a80a70278810040",
+       "2f80001a2a80a70278810040"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "bd1e0da2f1a9ab7673c7ca43eb3e1d844c0000340c9684009ae363c80567c091"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b11.7",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "11.7",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b11.7.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b11.7.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810080",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b11.7.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b11.7.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810080",
+       "2f80001a2a80a70278810080",
+       "2f80001a2a80a70278810080",
+       "2f80001a2a80a70278810080"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "f9f614145437f20b7aa0ede8140f3416352f246bf2b356ac7ac0ceb26c537b3f"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b3.2",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "3.2",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b3.2.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b3.2.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001e2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b3.2.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b3.2.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001e2a80a70278810000",
+       "2f80001e2a80a70278810000",
+       "2f80001e2a80a70278810000",
+       "2f80001e2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "da98f32941e8a4f7200cf7cbe42fb88cc71363981746d8684330f3f54e7b5bee"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b4.7",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "4.7",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b4.7.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b4.7.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001aaa00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b4.7.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b4.7.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001aaa80a70278810000",
+       "2f80001aaa80a70278810000",
+       "2f80001aaa80a70278810000",
+       "2f80001aaa80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "47c84d40b4ed49121017cc6ff6c057cb54875c385eb579863a8ad668c7ef3cac"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.0",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.0",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.0.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.0.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a01a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.0.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.0.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a81a70278810000",
+       "2f80001a2a81a70278810000",
+       "2f80001a2a81a70278810000",
+       "2f80001a2a81a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "8c3e6638d34b3deeeaf11a9d64382786aaa79d9ccf3ac0df4b4c3b3bf5402d45"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.1",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.1",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.1.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.1.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a02a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.1.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.1.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a82a70278810000",
+       "2f80001a2a82a70278810000",
+       "2f80001a2a82a70278810000",
+       "2f80001a2a82a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "1f5fadc7b56d375bf08190a1a2ffd43d323d632484ffcc643784f199f422350d"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.2",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.2",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.2.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.2.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a04a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.2.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.2.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a84a70278810000",
+       "2f80001a2a84a70278810000",
+       "2f80001a2a84a70278810000",
+       "2f80001a2a84a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "48940444e623d17809388e5a85fa1703b1f0e9aed4cb8bc2f1ce2163142d9ab0"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.3",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.3",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.3.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.3.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a08a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.3.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.3.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a88a70278810000",
+       "2f80001a2a88a70278810000",
+       "2f80001a2a88a70278810000",
+       "2f80001a2a88a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "446aa8e7d159d2b5497156ac02d9590d34f870837738d0c96449e10a84f8cf18"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.4",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.4",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.4.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.4.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a10a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.4.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.4.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a90a70278810000",
+       "2f80001a2a90a70278810000",
+       "2f80001a2a90a70278810000",
+       "2f80001a2a90a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "861e40fcc4cf1e3230ed58bb4014d3aafd0e6fbf79fdea72f28414c8b2776d25"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.5",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.5",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.5.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.5.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a20a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.5.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.5.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2aa0a70278810000",
+       "2f80001a2aa0a70278810000",
+       "2f80001a2aa0a70278810000",
+       "2f80001a2aa0a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "b1967b78110f3001599b75a24e69a3ef69fced290631e5556ec0d8f31f8882f8"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b5.6",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "5.6",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b5.6.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b5.6.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a40a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b5.6.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b5.6.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2ac0a70278810000",
+       "2f80001a2ac0a70278810000",
+       "2f80001a2ac0a70278810000",
+       "2f80001a2ac0a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "627711a6821f0047150bdad5f82e37cf32aae69c8d87eea735af7f1566188dc8"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b7.1",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "7.1",
+   "apple_value": 1,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b7.1.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b7.1.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70878810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b7.1.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b7.1.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70078810000",
+       "2f80001a2a80a70078810000",
+       "2f80001a2a80a70078810000",
+       "2f80001a2a80a70078810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "142eafcef29199ffd7589b860aca89c79f6244a90d5b2d738a9c211e90591271"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b7.6",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "7.6",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b7.6.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b7.6.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a74a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b7.6.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b7.6.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a74278810000",
+       "2f80001a2a80a74278810000",
+       "2f80001a2a80a74278810000",
+       "2f80001a2a80a74278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c7645ed3ba7a9cf74acfeec6a069f37948aa90995148b341a292983fdb1ca276"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b9.6",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "9.6",
+   "apple_value": 0,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b9.6.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b9.6.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78c10000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b9.6.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b9.6.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278c10000",
+       "2f80001a2a80a70278c10000",
+       "2f80001a2a80a70278c10000",
+       "2f80001a2a80a70278c10000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "76c27e4ac117ab97ee3fdf5f14493400dde53b72f1359dcaac3164581403094f"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  },
+  {
+   "id": "single.op16778.l12.b9.7",
+   "control": false,
+   "op": 16778,
+   "length": 12,
+   "bit": "9.7",
+   "apple_value": 1,
+   "author": "assembler",
+   "predict": "agree",
+   "records": [
+    {
+     "id": "single.op16778.l12.b9.7.A",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78810000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    },
+    {
+     "id": "single.op16778.l12.b9.7.B",
+     "op": 16778,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f82001a2a00a70a78010000",
+     "cases": [
+      [
+       31
+      ],
+      [
+       305419897
+      ],
+      [
+       3
+      ],
+      [
+       2147483622
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "single.op16778.l12.b9.7.A",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000",
+       "2f80001a2a80a70278810000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "13a1fba74453d4a95a48941613d10454e5058869da3a488cc11c4d8df268e322"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "single.op16778.l12.b9.7.B",
+     "op": 16778,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16778,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f80001a2a80a70278010000",
+       "2f80001a2a80a70278010000",
+       "2f80001a2a80a70278010000",
+       "2f80001a2a80a70278010000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16778,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "f6e54acf9ab3075136c3643475f61a07b58690ab03e20c5a2213ddcd0d2733d3"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4160749568,
+      3355443200,
+      402653184,
+      805306368
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ],
+    "B": [
+     4160749568,
+     3355443200,
+     402653184,
+     805306368
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted",
+   "matches_hypothesis": true,
+   "reading": "FREE at these inputs"
+  }
+ ]
+}

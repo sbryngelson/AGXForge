@@ -1,0 +1,40 @@
+{
+ "11395/14": {
+  "carrier": 2,
+  "cases_that_changed": [
+   1,
+   2,
+   3,
+   7
+  ],
+  "question": "which operand chooses the arm this form returns",
+  "refused_encodings": [
+   "T11395.cond2",
+   "T11395.cond3"
+  ],
+  "settled": true,
+  "swept_values": [
+   0,
+   1
+  ],
+  "verdict": "OPERAND 2 CARRIES THE SELECTION. Holding both value operands distinct on every case and writing operand 2 with `imms`, the returned arm changes on 4 of 8 cases between operand 2 = 0 and = 1 - and on those cases the two sweeps return the OPPOSITE arms, which a constant or a move cannot do. This is the same carrier as `11375/14 select`, whose operand 2 is 1 for `>`/`>=` and 0 for `<`/`<=`. Operand 2 = 2 and = 3 would not ENCODE (T11395.cond2, T11395.cond3), so the field is one bit wide. What is NOT settled is which relation each value names: a select cannot separate `>` from `>=` structurally, and the library holds no three-operand select of this shape - GPR16 predicate source with two GPR32 arms - so the exact-match census still reports no candidate."
+ },
+ "1287/10": {
+  "cases": 16,
+  "distinct_outputs": 16,
+  "matches": {
+   "bfloat": 16,
+   "half": 0
+  },
+  "question": "is its sixteen-bit source a half or a bfloat",
+  "settled": true,
+  "verdict": "the source is a BFLOAT16: 16 of 16 cases match the bfloat column and 0 match the half column, with 16 distinct outputs - so no constant could have produced this agreement. The first attempt at this batch chose cases on which the bfloat column was the single value 0x3F80, and a constant output matched it perfectly while identifying nothing."
+ },
+ "3290/6": {
+  "asked_for_width": 6,
+  "decoded_width": 14,
+  "question": "does the six-byte form share the flushing NaN convention of the fourteen-byte one",
+  "settled": false,
+  "verdict": "NOT ANSWERED, and the reason is a capability rather than a result. The field map authored FOURTEEN bytes for this opcode on both attempts - sixteen cases, then six chosen to match the shape of the existing six-byte record - so the dispatch determined `3290/14` again and said nothing about `3290/6`. A form is (opcode, width). The six-byte encoding has to be supplied as bytes."
+ }
+}

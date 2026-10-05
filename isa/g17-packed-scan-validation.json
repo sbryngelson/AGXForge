@@ -1,0 +1,64 @@
+{
+  "profile": "scalar-buffer-two-bindings-measured-v2",
+  "recorded_at": "2026-09-09T02:14:40.571685+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "status": "passed",
+  "total_dispatches": 9,
+  "scope": "Only these small fixtures; no full-size performance or direct half-storage claim. Each archive passed a loader-only check before three isolated dispatches.",
+  "cases": [
+    {
+      "rows": 1,
+      "columns": 1,
+      "archive_sha256": "e9998d03eddd6ade84413281a0eddc8ade6b58ec0e2d937d400a98ce97a60dd0",
+      "code_sha256": "9495341a6aed3b2b074f9a18df330e9c45da08883cf6d4e1db50b9a308c6cbdb",
+      "loader_status": "passed",
+      "gpu_status": "passed",
+      "runs": 3,
+      "fp32_matches_sequential_cpu_bit_for_bit": true,
+      "all_completion_markers": true,
+      "all_boundary_guards": true,
+      "gpu_seconds": [
+        8.667e-06,
+        1.075e-05,
+        0.000188625
+      ],
+      "max_half_output_absolute_error": 8.735805749893188e-07
+    },
+    {
+      "rows": 3,
+      "columns": 7,
+      "archive_sha256": "b9de10bf8647b66eb346287279d3c892820a2055a1873760dcc0f55949c687b7",
+      "code_sha256": "caf36504e92e6dddb586088acebc485c0530af42f6dc22a2d41f19e7dd89fb77",
+      "loader_status": "passed",
+      "gpu_status": "passed",
+      "runs": 3,
+      "fp32_matches_sequential_cpu_bit_for_bit": true,
+      "all_completion_markers": true,
+      "all_boundary_guards": true,
+      "gpu_seconds": [
+        1.025e-05,
+        1.0208e-05,
+        1e-05
+      ],
+      "max_half_output_absolute_error": 3.4332275390625e-05
+    },
+    {
+      "rows": 33,
+      "columns": 384,
+      "archive_sha256": "df600fc52f066ab9c7d516ecedb02b7daee25b7ab7a76f811ab48f9b3ec2a627",
+      "code_sha256": "726d6493dc438c6dfd3670e7b30058927cad742cef37b3d4c7bb15e0947dd5b9",
+      "loader_status": "passed",
+      "gpu_status": "passed",
+      "runs": 3,
+      "fp32_matches_sequential_cpu_bit_for_bit": true,
+      "all_completion_markers": true,
+      "all_boundary_guards": true,
+      "gpu_seconds": [
+        0.000119667,
+        0.000117792,
+        0.000116875
+      ],
+      "max_half_output_absolute_error": 0.00040186825208365917
+    }
+  ]
+}

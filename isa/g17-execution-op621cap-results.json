@@ -1,0 +1,248 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op621.op3_8",
+  "op": 621,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 621,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700000a2120a10224001858",
+    "2700000a2120a10224001858",
+    "2700000a2120a10224001858",
+    "2700000a2120a10224001858"
+   ],
+   "from_template": false,
+   "opcodes": [
+    621,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   false,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op621.op3_16",
+  "op": 621,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 621,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700000a2120a10224001818",
+    "2700000a2120a10224001818",
+    "2700000a2120a10224001818",
+    "2700000a2120a10224001818"
+   ],
+   "from_template": false,
+   "opcodes": [
+    621,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op621.op3_32",
+  "op": 621,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 621,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700000a2120a10224001818",
+    "2700000a2120a10224001818",
+    "2700000a2120a10224001818",
+    "2700000a2120a10224001818"
+   ],
+   "from_template": false,
+   "opcodes": [
+    621,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op621.op3_56",
+  "op": 621,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 621,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700000a2120a10224001858",
+    "2700000a2120a10224001858",
+    "2700000a2120a10224001858",
+    "2700000a2120a10224001858"
+   ],
+   "from_template": false,
+   "opcodes": [
+    621,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op621.op3_56_w64",
+  "op": 621,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 621,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700000a2120a10204009858",
+    "2700000a2120a10204009858",
+    "2700000a2120a10204009858",
+    "2700000a2120a10204009858"
+   ],
+   "from_template": false,
+   "opcodes": [
+    621,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

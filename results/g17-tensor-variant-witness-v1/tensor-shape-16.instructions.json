@@ -1,0 +1,1265 @@
+[
+  {
+    "offset": 0,
+    "length": 4,
+    "opcode": 14060,
+    "fields": [
+      "reg:428",
+      "imm:1048576",
+      "reg:45",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 4,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:131",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 8,
+    "length": 14,
+    "opcode": 17016,
+    "fields": [
+      "reg:107",
+      "imm:16777248",
+      "imm:0",
+      "reg:428",
+      "imm:32",
+      "imm:2",
+      "imm:32"
+    ]
+  },
+  {
+    "offset": 22,
+    "length": 14,
+    "opcode": 17016,
+    "fields": [
+      "reg:106",
+      "imm:32",
+      "imm:0",
+      "reg:428",
+      "imm:32",
+      "imm:1",
+      "imm:2"
+    ]
+  },
+  {
+    "offset": 36,
+    "length": 10,
+    "opcode": 423,
+    "fields": [
+      "reg:105",
+      "imm:32",
+      "reg:107",
+      "imm:32",
+      "imm:2"
+    ]
+  },
+  {
+    "offset": 46,
+    "length": 10,
+    "opcode": 426,
+    "fields": [
+      "reg:110",
+      "imm:0",
+      "reg:428",
+      "imm:16",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 56,
+    "length": 10,
+    "opcode": 423,
+    "fields": [
+      "reg:107",
+      "imm:32",
+      "reg:107",
+      "imm:16",
+      "imm:4"
+    ]
+  },
+  {
+    "offset": 66,
+    "length": 12,
+    "opcode": 10286,
+    "fields": [
+      "reg:105",
+      "imm:32",
+      "reg:425",
+      "imm:16",
+      "reg:430",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 78,
+    "length": 12,
+    "opcode": 10283,
+    "fields": [
+      "reg:106",
+      "imm:32",
+      "reg:106",
+      "imm:16",
+      "reg:427",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 90,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:105",
+      "imm:32",
+      "imm:0",
+      "reg:105",
+      "imm:528"
+    ]
+  },
+  {
+    "offset": 102,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:107",
+      "imm:32",
+      "imm:0",
+      "reg:106",
+      "imm:512"
+    ]
+  },
+  {
+    "offset": 114,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:113",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 118,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:108",
+      "imm:0",
+      "reg:105",
+      "imm:32",
+      "reg:107",
+      "imm:1024"
+    ]
+  },
+  {
+    "offset": 130,
+    "length": 12,
+    "opcode": 612,
+    "fields": [
+      "reg:429",
+      "imm:0",
+      "reg:105",
+      "imm:0",
+      "imm:0",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 142,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:114",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 146,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:115",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 150,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:116",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 154,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:117",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 158,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:118",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 162,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:119",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 166,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:120",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 170,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:128",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 174,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:127",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 178,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:126",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 182,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:125",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 186,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:124",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 190,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:123",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 194,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:122",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 198,
+    "length": 4,
+    "opcode": 554,
+    "fields": [
+      "reg:121",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 202,
+    "length": 8,
+    "opcode": 11842,
+    "fields": [
+      "reg:110",
+      "imm:68719476736",
+      "imm:32"
+    ]
+  },
+  {
+    "offset": 210,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:112",
+      "imm:2276332666912",
+      "reg:131",
+      "imm:32",
+      "reg:106",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 222,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:111",
+      "imm:0",
+      "reg:108",
+      "imm:0",
+      "reg:131",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 234,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:112",
+      "imm:32",
+      "imm:0",
+      "reg:112",
+      "imm:272"
+    ]
+  },
+  {
+    "offset": 246,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:129",
+      "imm:0",
+      "reg:105",
+      "imm:0",
+      "reg:112",
+      "imm:1040"
+    ]
+  },
+  {
+    "offset": 258,
+    "length": 12,
+    "opcode": 12674,
+    "fields": [
+      "reg:2495",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:0",
+      "imm:2",
+      "imm:15"
+    ]
+  },
+  {
+    "offset": 270,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2497",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:1024",
+      "imm:2",
+      "imm:15"
+    ]
+  },
+  {
+    "offset": 286,
+    "length": 12,
+    "opcode": 12675,
+    "fields": [
+      "reg:2487",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:129",
+      "imm:0",
+      "imm:0",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 298,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2489",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:129",
+      "imm:0",
+      "imm:512",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 314,
+    "length": 12,
+    "opcode": 12674,
+    "fields": [
+      "reg:2491",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:32",
+      "imm:2",
+      "imm:15"
+    ]
+  },
+  {
+    "offset": 326,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2493",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:1056",
+      "imm:2",
+      "imm:15"
+    ]
+  },
+  {
+    "offset": 342,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2479",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:129",
+      "imm:0",
+      "imm:1024",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 358,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2481",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:129",
+      "imm:16",
+      "imm:1536",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 374,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2483",
+      "imm:2097152",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:2048",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 390,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2485",
+      "imm:2097152",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:3072",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 406,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2475",
+      "imm:3145728",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:0",
+      "imm:2080",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 422,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2477",
+      "imm:137442099200",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:111",
+      "imm:16",
+      "imm:3104",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 438,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3310",
+      "imm:2147483680",
+      "imm:1",
+      "reg:2780",
+      "imm:16",
+      "imm:2",
+      "reg:2772",
+      "imm:0",
+      "imm:2",
+      "reg:3310",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 448,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3310",
+      "imm:16777216",
+      "imm:1",
+      "reg:2776",
+      "imm:16",
+      "imm:2",
+      "reg:2764",
+      "imm:0",
+      "imm:2",
+      "reg:3310",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 458,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3302",
+      "imm:33554464",
+      "imm:1",
+      "reg:2768",
+      "imm:16",
+      "imm:2",
+      "reg:2772",
+      "imm:16",
+      "imm:2",
+      "reg:3302",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 468,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3302",
+      "imm:67108864",
+      "imm:1",
+      "reg:2760",
+      "imm:16",
+      "imm:2",
+      "reg:2764",
+      "imm:16",
+      "imm:2",
+      "reg:3302",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 478,
+    "length": 4,
+    "opcode": 586,
+    "fields": [
+      "reg:131",
+      "imm:32",
+      "reg:110",
+      "imm:32"
+    ]
+  },
+  {
+    "offset": 482,
+    "length": 6,
+    "opcode": 10369,
+    "fields": [
+      "reg:74",
+      "imm:0",
+      "imm:10",
+      "reg:110",
+      "imm:32",
+      "imm:32"
+    ]
+  },
+  {
+    "offset": 488,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:110",
+      "imm:32",
+      "imm:32",
+      "reg:110",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 500,
+    "length": 4,
+    "opcode": 579,
+    "fields": [
+      "imm:0",
+      "reg:74",
+      "imm:2"
+    ]
+  },
+  {
+    "offset": 504,
+    "length": 10,
+    "opcode": 458,
+    "fields": [
+      "imm:0",
+      "imm:-294"
+    ]
+  },
+  {
+    "offset": 514,
+    "length": 4,
+    "opcode": 577,
+    "fields": [
+      "imm:2345052143616",
+      "imm:2"
+    ]
+  },
+  {
+    "offset": 518,
+    "length": 6,
+    "opcode": 10369,
+    "fields": [
+      "reg:74",
+      "imm:0",
+      "imm:9",
+      "reg:131",
+      "imm:32",
+      "imm:64"
+    ]
+  },
+  {
+    "offset": 524,
+    "length": 4,
+    "opcode": 582,
+    "fields": [
+      "imm:0",
+      "reg:74",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 528,
+    "length": 10,
+    "opcode": 462,
+    "fields": [
+      "imm:0",
+      "imm:336"
+    ]
+  },
+  {
+    "offset": 538,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:111",
+      "imm:32",
+      "reg:131",
+      "imm:32",
+      "reg:105",
+      "imm:32"
+    ]
+  },
+  {
+    "offset": 550,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:110",
+      "imm:32",
+      "reg:131",
+      "imm:16",
+      "reg:106",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 562,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:107",
+      "imm:68719476736",
+      "reg:111",
+      "imm:32",
+      "reg:107",
+      "imm:1040"
+    ]
+  },
+  {
+    "offset": 574,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:112",
+      "imm:32",
+      "imm:0",
+      "reg:110",
+      "imm:288"
+    ]
+  },
+  {
+    "offset": 586,
+    "length": 12,
+    "opcode": 612,
+    "fields": [
+      "reg:449",
+      "imm:0",
+      "reg:111",
+      "imm:32",
+      "imm:0",
+      "imm:64"
+    ]
+  },
+  {
+    "offset": 598,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:108",
+      "imm:0",
+      "reg:105",
+      "imm:0",
+      "reg:112",
+      "imm:1040"
+    ]
+  },
+  {
+    "offset": 610,
+    "length": 10,
+    "opcode": 11456,
+    "fields": [
+      "reg:430",
+      "imm:32",
+      "imm:9",
+      "reg:110",
+      "imm:16",
+      "imm:64",
+      "reg:429",
+      "imm:0",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 620,
+    "length": 12,
+    "opcode": 12675,
+    "fields": [
+      "reg:2495",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:0",
+      "imm:2",
+      "reg:449",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 632,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2497",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:1024",
+      "imm:2",
+      "reg:449",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 648,
+    "length": 12,
+    "opcode": 12675,
+    "fields": [
+      "reg:2487",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:108",
+      "imm:0",
+      "imm:0",
+      "imm:2",
+      "reg:430",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 660,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2489",
+      "imm:8388608",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:108",
+      "imm:0",
+      "imm:512",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 676,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:110",
+      "imm:32",
+      "imm:16",
+      "reg:111",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 688,
+    "length": 12,
+    "opcode": 612,
+    "fields": [
+      "reg:431",
+      "imm:0",
+      "reg:110",
+      "imm:16",
+      "imm:0",
+      "imm:64"
+    ]
+  },
+  {
+    "offset": 700,
+    "length": 12,
+    "opcode": 12675,
+    "fields": [
+      "reg:2491",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:32",
+      "imm:2",
+      "reg:431",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 712,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2493",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:1056",
+      "imm:2",
+      "reg:431",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 728,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2479",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:108",
+      "imm:0",
+      "imm:1024",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 744,
+    "length": 16,
+    "opcode": 12675,
+    "fields": [
+      "reg:2481",
+      "imm:1048576",
+      "imm:241",
+      "expr:bin(op0,const(4),8)",
+      "imm:0",
+      "reg:108",
+      "imm:16",
+      "imm:1536",
+      "imm:2",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 760,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2483",
+      "imm:2097152",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:2048",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 776,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2485",
+      "imm:2097152",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:3072",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 792,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2475",
+      "imm:3145728",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:0",
+      "imm:2080",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 808,
+    "length": 16,
+    "opcode": 12674,
+    "fields": [
+      "reg:2477",
+      "imm:137442099200",
+      "imm:241",
+      "expr:bin(op0,const(0),8)",
+      "imm:0",
+      "reg:107",
+      "imm:16",
+      "imm:3104",
+      "imm:2",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 824,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3310",
+      "imm:2147483680",
+      "imm:1",
+      "reg:2780",
+      "imm:16",
+      "imm:2",
+      "reg:2772",
+      "imm:0",
+      "imm:2",
+      "reg:3310",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 834,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3310",
+      "imm:16777216",
+      "imm:1",
+      "reg:2776",
+      "imm:16",
+      "imm:2",
+      "reg:2764",
+      "imm:0",
+      "imm:2",
+      "reg:3310",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 844,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3302",
+      "imm:33554464",
+      "imm:1",
+      "reg:2768",
+      "imm:16",
+      "imm:2",
+      "reg:2772",
+      "imm:16",
+      "imm:2",
+      "reg:3302",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 854,
+    "length": 10,
+    "opcode": 5106,
+    "fields": [
+      "reg:3302",
+      "imm:67108864",
+      "imm:1",
+      "reg:2760",
+      "imm:16",
+      "imm:2",
+      "reg:2764",
+      "imm:16",
+      "imm:2",
+      "reg:3302",
+      "imm:0",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 864,
+    "length": 4,
+    "opcode": 577,
+    "fields": [
+      "imm:2345052143616",
+      "imm:1"
+    ]
+  },
+  {
+    "offset": 868,
+    "length": 12,
+    "opcode": 10279,
+    "fields": [
+      "reg:106",
+      "imm:32",
+      "imm:0",
+      "reg:106",
+      "imm:272"
+    ]
+  },
+  {
+    "offset": 880,
+    "length": 12,
+    "opcode": 10282,
+    "fields": [
+      "reg:105",
+      "imm:0",
+      "reg:105",
+      "imm:16",
+      "reg:106",
+      "imm:1040"
+    ]
+  },
+  {
+    "offset": 892,
+    "length": 10,
+    "opcode": 17258,
+    "fields": [
+      "reg:2752",
+      "imm:4398046511120",
+      "imm:2290",
+      "expr:bin(op0,const(8),8)",
+      "imm:0",
+      "reg:105",
+      "imm:0",
+      "imm:0",
+      "imm:4",
+      "reg:429",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 902,
+    "length": 16,
+    "opcode": 17258,
+    "fields": [
+      "reg:2756",
+      "imm:4398046511120",
+      "imm:2290",
+      "expr:bin(op0,const(8),8)",
+      "imm:0",
+      "reg:105",
+      "imm:0",
+      "imm:1024",
+      "imm:4",
+      "reg:429",
+      "imm:16"
+    ]
+  },
+  {
+    "offset": 918,
+    "length": 16,
+    "opcode": 17257,
+    "fields": [
+      "reg:2744",
+      "imm:4398046511120",
+      "imm:2290",
+      "expr:bin(op0,const(8),8)",
+      "imm:0",
+      "reg:105",
+      "imm:0",
+      "imm:2048",
+      "imm:4",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 934,
+    "length": 16,
+    "opcode": 17257,
+    "fields": [
+      "reg:2748",
+      "imm:4398046511120",
+      "imm:2290",
+      "expr:bin(op0,const(8),8)",
+      "imm:0",
+      "reg:105",
+      "imm:16",
+      "imm:3072",
+      "imm:4",
+      "imm:0"
+    ]
+  },
+  {
+    "offset": 950,
+    "length": 4,
+    "opcode": 684,
+    "fields": [
+      "imm:0"
+    ]
+  }
+]

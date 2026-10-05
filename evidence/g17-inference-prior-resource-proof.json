@@ -1,0 +1,57 @@
+{
+  "format": "g17-inference-prior-resource-proof-v1",
+  "status": "retained_hardware_outputs_recounted",
+  "gpu_dispatched_this_check": false,
+  "rows": [
+    {
+      "receipt": "tensor-32640unique-b128m-fire-20260928.json.zst",
+      "decompressed_sha256": "badde3dbb686f342922549cc9f48e4a7a7830aaf47825fbb5cf6fe21fd22e4e8",
+      "mib": 128,
+      "submits": 1,
+      "callbacks": 2,
+      "hardware_output_sha256": [
+        "47240417702761c4426aaf2f8dd2676350aee5ed08bb581eefd95332765d4d9a"
+      ],
+      "recovery": [
+        31
+      ],
+      "new_events": [],
+      "graph_requests_sha256": "ee69f6606bb4779aaa29800c63eb0948c44075059ec0adc4de3af2edff29eec4",
+      "graph_pages_sha256": "8e52f1ff70271dd4137e87f5222ac411f671c33488348c5b5bcfceebc263f334"
+    },
+    {
+      "receipt": "tensor-b1g-alloc25-lowmirror-fire-20260928.json.zst",
+      "decompressed_sha256": "ba9a2a55ade0ac0e6c0a29e66566e607e7d997fabc978a557a506b6bea79ee4a",
+      "mib": 1024,
+      "submits": 1,
+      "callbacks": 2,
+      "hardware_output_sha256": [
+        "cf73118376c27c9e7d4f381fecbfd5292d82fe2398adc55aac2c88c274beb50a"
+      ],
+      "recovery": [
+        32
+      ],
+      "new_events": [],
+      "graph_requests_sha256": "5b2ea16cfc14a3edf43cdc62b8730f3069e497b8c23775e529c858ddfb42f921",
+      "graph_pages_sha256": "35849195510a45c987cff8b5c3787ceac7016453ee069b40d83fe7906c16b6f0"
+    },
+    {
+      "receipt": "tensor-b1g-taildual-sameprocess-ready-reset-fire-20260929.json.zst",
+      "decompressed_sha256": "477c9a8ba3c08f73a135364ebdcad82f5de7b18c2c6e8722982be4853b67657b",
+      "mib": 1024,
+      "submits": 2,
+      "callbacks": 4,
+      "hardware_output_sha256": [
+        "cf73118376c27c9e7d4f381fecbfd5292d82fe2398adc55aac2c88c274beb50a",
+        "cc7439198fdcf16f6ef9136c7b2d94e3f46382346b914d575f90e675ed19dbd7"
+      ],
+      "recovery": [
+        33
+      ],
+      "new_events": [],
+      "graph_requests_sha256": "5b2ea16cfc14a3edf43cdc62b8730f3069e497b8c23775e529c858ddfb42f921",
+      "graph_pages_sha256": "35849195510a45c987cff8b5c3787ceac7016453ee069b40d83fe7906c16b6f0"
+    }
+  ],
+  "scope": "Prior published allocation classes and explicit lookup carriers; new model code, bindings, grids, writable regions and schedules still need validation"
+}

@@ -1,0 +1,61 @@
+{
+ "name": "internlm2_q4_prefill_p1792_a512g256_chainall",
+ "bits": 4,
+ "cap": 2048,
+ "qmv": {
+  "qkv": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "wo_res1": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "ffn": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "w2_res2": {
+   "ks": 4,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "head": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true
+  }
+ },
+ "norm": {
+  "out32": true,
+  "seed": true
+ },
+ "final_norm": {
+  "out32": true,
+  "seed": true
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true,
+  "kvvec": true,
+  "hwexp2": true
+ },
+ "prompt_len": 1792,
+ "prefill": {
+  "M": 512,
+  "persistent_w16": true,
+  "attn": "mma",
+  "rego": true,
+  "gemm_M": 256
+ },
+ "gen": {
+  "batched": true
+ }
+}

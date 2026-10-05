@@ -1,0 +1,315 @@
+{
+ "constant_across_every_variant": [],
+ "field_table": {
+  "1": {
+   "base.one_varying": 755,
+   "centroid": 755,
+   "discard": 754,
+   "eight_varyings": 755,
+   "flat": 755,
+   "four_varyings": 755,
+   "front_facing": 755,
+   "half_output": 755,
+   "no_perspective": 755,
+   "no_varying_read": 755,
+   "reads_position": 755,
+   "two_color_outputs": 755,
+   "two_varyings": 755
+  }
+ },
+ "generated_by": "tools/g17fragmd2.py --write",
+ "means": "Fields of the fragment __GPU_METADATA_2 root table across 13 fragment variants compiled by Apple. A field in moves_against_base changed only in the variants listed; that is a correlation with those source features, not a decoded meaning.",
+ "moves_against_base": {
+  "1": [
+   "discard"
+  ]
+ },
+ "reading": "CORRELATIONS ACROSS THESE VARIANTS, NOT DECODED MEANINGS. (1) The root table has one field, slot 1, a u16: 755 in every variant but `discard`, which clears bit 0 (754). (2) A second table follows the root; its field 2 is a vector with one record per interpolated input. A fragment that reads no varying has an EMPTY vector. (3) Every perspective-interpolated fragment has a leading record {2: 1} before its varyings, and a flat or no_perspective one does not - the shape of a 1/w interpolant, which is what form 3642/10 was attributed as. (4) A varying's record carries field 2 = its component count (1 for float, 4 for float4) and field 3 = its starting interpolant index, cumulative (1, then 2; 1, then 5), absent (zero) when no 1/w record precedes it. (5) flat and no_perspective are IDENTICAL here, and centroid is identical to the default: the interpolation mode is not in this section.",
+ "variants": {
+  "base.one_varying": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "centroid": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "depth_output": {
+   "metadata2": null,
+   "status": "ac_archive_render failed"
+  },
+  "discard": {
+   "bytes": 104,
+   "fields": {
+    "1": 754
+   },
+   "hex": "0c00000008000a000000040008000000f202000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "eight_varyings": {
+   "bytes": 140,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000009000000030000005000000034000000100000000c00140013000c00080004000c000000050000000400000001000000000000010c000e000d000000080004000c000000010000000400000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 4,
+      "3": 1
+     },
+     {
+      "0": 1,
+      "1": 1,
+      "2": 4,
+      "3": 5
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "flat": {
+   "bytes": 80,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000001000000010000001000000000000a000c000b00000004000a0000000100000000000001",
+   "interpolants": {
+    "entries": [
+     {
+      "0": 1,
+      "2": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "four_varyings": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000005000000020000002c000000100000000c000e000d000000080004000c000000010000000400000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 4,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "front_facing": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "half_output": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "no_perspective": {
+   "bytes": 80,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000001000000010000001000000000000a000c000b00000004000a0000000100000000000001",
+   "interpolants": {
+    "entries": [
+     {
+      "0": 1,
+      "2": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "no_varying_read": {
+   "bytes": 48,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a000c000400000008000a000000010000000400000000000000",
+   "interpolants": {
+    "entries": [],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "reads_position": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "two_color_outputs": {
+   "bytes": 104,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000002000000020000002c000000100000000c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  },
+  "two_varyings": {
+   "bytes": 140,
+   "fields": {
+    "1": 755
+   },
+   "hex": "0c00000008000a000000040008000000f302000000000a00100004000c0008000a000000010000000800000003000000030000005000000034000000100000000c00140013000c00080004000c000000020000000100000001000000000000010c000e000d000000080004000c000000010000000100000000010a0008000000000004000a00000001000000",
+   "interpolants": {
+    "entries": [
+     {
+      "2": 1
+     },
+     {
+      "0": 1,
+      "2": 1,
+      "3": 1
+     },
+     {
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 2
+     }
+    ],
+    "second_table_field0": 1
+   },
+   "status": "ok",
+   "vtable_slots": 2
+  }
+ }
+}

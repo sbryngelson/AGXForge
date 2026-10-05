@@ -1,0 +1,393 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "quad.sum.op13889.baseA5A50001",
+  "op": 13889,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13889,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02004a2780a3020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    13889,
+    14059,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   2526281774
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "quad.sum.op13889.base12345001",
+  "op": 13889,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13889,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02004a2780a3020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    13889,
+    14059,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1221672982
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.sum.op16874.baseA5A50001",
+  "op": 16874,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16874,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a3020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16874,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3030388144
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.sum.op16874.base12345001",
+  "op": 16874,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16874,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a3020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16874,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1183450608
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.and.op16830.baseA5A50001",
+  "op": 16830,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16830,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a0020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16830,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   2779054080
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.and.op16830.base12345001",
+  "op": 16830,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16830,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a0020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16830,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   305418240
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.or.op16882.baseA5A50001",
+  "op": 16882,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16882,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a1020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16882,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   2779054335
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.or.op16882.base12345001",
+  "op": 16882,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16882,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a1020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16882,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   305418367
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.xor.op16922.baseA5A50001",
+  "op": 16922,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16922,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a2020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16922,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   128
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.xor.op16922.base12345001",
+  "op": 16922,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16922,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02044a2780a2020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    16922,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   64
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ }
+]

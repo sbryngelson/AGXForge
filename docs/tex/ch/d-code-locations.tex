@@ -1,0 +1,34 @@
+\chapter{Source code locations}\label{app:d}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.76\hsize}X>{\hsize=1.24\hsize}X@{}}
+\caption{Source modules and data files for each part of the compiler and the two execution paths.}\label{tab:code-locations}\\
+\toprule
+Concern & Module \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+Concern & Module \\
+\midrule
+\endhead
+IR & \code{agxforge/g17/ir.py} \\
+selection, allocation, emission & \code{agxforge/g17/cc.py} \\
+tensor lowering & \code{agxforge/g17/tlower.py}, \code{tensorgemm.py}, \code{tensor.py} \\
+field maps and encoders & \code{isa/g17-tensor-mma-fieldmap.json}, \code{agxforge/g17/mmaenc.py},
+\code{memenc.py}, \code{auth.py}, \code{encode.py} \\
+register domain & \code{agxforge/g17/registerdomain.py} \\
+released-register check & \code{agxforge/g17/releasecheck.py} \\
+metadata and object & \code{agxforge/g17/mdgen.py}, \code{authorobj.py}, \code{scanlink.py},
+\code{verify.py} \\
+decoder (Apple's) & \code{agxforge/g17/model.py}, \code{tools/agx3dis} \\
+Metal front end & \code{tools/g17front.py} \\
+CPU emulator & \code{tools/g17emu.py}, \code{tools/g17shippedcheck.py} \\
+model kernels and graphs & \code{tools/g17deliver.py}, \code{g17q4graph.py},
+\code{g17prefillgraph.py}, \code{g17qmv.py}, \code{g17attn.py},
+\code{g17qsm.py} \\
+Metal executor & \code{tools/g17decodegen.m} \\
+native runtime & \code{agxforge/g17/inferencegraph.py}, \code{tools/g17inferencelower.py},
+\code{tools/g17inferencebundle.py},
+\code{spike/agxsub/g17workload\_inference.h} \\
+\bottomrule
+\end{xltabular}

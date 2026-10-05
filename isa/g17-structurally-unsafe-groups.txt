@@ -1,0 +1,386 @@
+# GROUPS WHERE STRUCTURE PROVABLY CANNOT NAME AN OPCODE.
+# Each group is one scheduling class, one definition count and one list of operand register
+# classes - opcodes that are identical in every structural respect this project can see.
+# In each group listed here, two or more members are reached by a Metal construct and they
+# have DIFFERENT names. So within the group, nothing structural distinguishes an opcode
+# whose meaning differs, and any name given to the remaining members by propagation is a
+# guess with a measured error rate rather than an inference.
+#
+# MEASURED ERROR RATE, leave-one-out over the 504 opcodes that a construct reaches and that
+# carry a name - ground truth the rule never saw:
+#     predict the full name from the nearest structurally identical opcode   22.6%
+#     predict only the first token of the name (the family)                  53.2%
+#     predict the full name from the group majority                          19.9%
+# and only 40.7% of these groups are even family-pure.
+#
+# Columns: class, ndefs, operand classes | the ground-truth members and their names |
+# how many members of the group are NOT reached by any construct and so cannot be checked.
+
+c54   ndefs=1 GPR16 GPR16                       
+      measured: op959=fadd.imm.sat.f16.to.bf16, op3155=fmul.imm.sat.f16.to.bf16
+      unreachable members that share every structural property: 40  op876 op879 op892 op895 op924 op927 op956 op972 op975 op1020 op1023 op1512
+
+c51   ndefs=1 GPR16 GPR16                       
+      measured: op961=fadd.imm.sat.bf16, op964=fadd.imm.sat.bf16, op3157=fmul.imm.sat.bf16
+      unreachable members that share every structural property: 39  op881 op884 op897 op900 op929 op932 op977 op980 op1025 op1028 op1529 op1532
+
+c51   ndefs=1 GPR16 GPR32                       
+      measured: op926=fadd.imm.sat.f32.to.f16, op958=fadd.imm.sat.f32.to.bf16, op1016=cvt.f32.f16, op1022=fadd.imm.f32.to.f16, op3122=fmul.imm.sat.f32.to.f16, op3154=fmul.imm.sat.f32.to.bf16, op3314=fmul.imm.f32.to.f16
+      unreachable members that share every structural property: 35  op872 op878 op888 op894 op920 op952 op968 op974 op1496 op1520 op1526 op1624
+
+c49   ndefs=1 GPR16 GPR16 GPR32                 
+      measured: op962=fadd.sat.bf16.f32.to.bf16, op3158=fmul.sat.bf16.f32.to.bf16
+      unreachable members that share every structural property: 28  op882 op898 op930 op978 op1026 op1530 op1536 op1542 op1658 op1664 op1670 op1786
+
+c50   ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op963=fadd.sat.bf16, op3159=fmul.sat.bf16
+      unreachable members that share every structural property: 28  op883 op899 op931 op979 op1027 op1531 op1540 op1543 op1659 op1668 op1671 op1787
+
+c5    ndefs=0 GPR32                             
+      measured: op441=and, op10298=add
+      unreachable members that share every structural property: 26  op412 op414 op439 op10254 op10256 op10304 op11639 op11641 op11683 op11689 op13448 op13450
+
+c5    ndefs=0 GPR16                             
+      measured: op10299=add, op13595=or
+      unreachable members that share every structural property: 26  op413 op417 op440 op444 op10255 op10259 op10308 op11640 op11644 op11684 op11693 op13449
+
+c50   ndefs=1 GPR16 GPR32 GPR16                 
+      measured: op919=fadd.sat.f32.f16.to.f16, op1015=fadd.f32.f16.to.f16, op3115=fmul.sat.f32.f16.to.f16, op3307=fmul.f32.f16.to.f16
+      unreachable members that share every structural property: 26  op871 op887 op951 op967 op1492 op1495 op1519 op1620 op1623 op1647 op1748 op1751
+
+c52   ndefs=1 GPR16 GPR16 GPR32                 
+      measured: op922=fadd.sat.f16.f32.to.f16, op954=fadd.sat.f16.f32.to.bf16, op1018=fadd.f16.f32.to.f16, op3150=fmul.sat.f16.f32.to.bf16, op3310=fmul.f16.f32.to.f16
+      unreachable members that share every structural property: 25  op874 op890 op970 op1504 op1510 op1522 op1632 op1638 op1650 op1760 op1766 op1778
+
+c73   ndefs=1 GPR16 GPR32                       
+      measured: op1276=exp2, op1284=exp2, op3662=recip
+      unreachable members that share every structural property: 25  op1260 op1268 op2558 op2566 op2574 op2582 op3614 op3622 op3630 op3638 op3646 op3654
+
+c5    ndefs=1 GPR16 GPR16                       
+      measured: op435=and, op10289=add, op11674=sub.rev, op11678=sub
+      unreachable members that share every structural property: 24  op404 op408 op431 op10246 op10250 op10293 op11631 op11635 op13440 op13444 op13467 op13471
+
+c74   ndefs=1 GPR16 GPR16                       
+      measured: op1277=exp2.f16, op2575=log2.f16, op3663=recip.f16, op3855=rsqrt.f16
+      unreachable members that share every structural property: 24  op1261 op1269 op1285 op2559 op2567 op2583 op3615 op3623 op3631 op3639 op3647 op3655
+
+c73   ndefs=1 GPR16 GPR16                       
+      measured: op1287=exp2, op2585=log2, op3673=recip, op3865=rsqrt
+      unreachable members that share every structural property: 24  op1263 op1271 op1279 op2561 op2569 op2577 op3617 op3625 op3633 op3641 op3649 op3657
+
+c5    ndefs=1 IRGPR32 GPR32                     
+      measured: op396=andn, op423=and, op10279=add, op11664=sub, op11666=sub, op13574=or
+      unreachable members that share every structural property: 22  op394 op421 op10236 op10238 op10281 op11621 op11623 op13430 op13432 op13457 op13459 op13485
+
+c5    ndefs=1 IRGPR32 GPR16                     
+      measured: op426=and, op10280=add, op10284=add, op11665=sub.rev, op11669=sub, op17773=xor
+      unreachable members that share every structural property: 22  op395 op399 op422 op10237 op10241 op11622 op11626 op13431 op13435 op13458 op13462 op13486
+
+c49   ndefs=1 GPR16 GPR32 GPR32                 
+      measured: op918=fadd.sat.f32.f32.to.f16, op950=fadd.sat.f32.f32.to.bf16, op1014=fadd.f32.f32.to.f16, op2256=ffma.imm2.f32.f32.to.f16, op2262=ffma.imm0.f32.f32.to.f16, op3114=fmul.sat.f32.f32.to.f16, op3146=fmul.sat.f32.f32.to.bf16, op3306=fmul.f32.f32.to.f16
+      unreachable members that share every structural property: 22  op870 op886 op966 op1488 op1494 op1518 op1616 op1622 op1646 op1744 op1750 op1774
+
+c7    ndefs=1 GPR16 GPR16                       
+      measured: op469=popcount, op9990=msb, op14421=shl
+      unreachable members that share every structural property: 21  op714 op718 op730 op14051 op14149 op14150 op14336 op14340 op14352 op14417 op14433 op16786
+
+c7    ndefs=1 IRGPR32 GPR16                     
+      measured: op14048=reverse, op16808=asr, op17016=shr
+      unreachable members that share every structural property: 19  op466 op691 op9987 op14145 op14146 op14309 op14313 op14325 op14390 op14394 op14406 op16777
+
+c7    ndefs=0 GPR32 GPR32                       
+      measured: op14446=funnel.shl, op17068=shr
+      unreachable members that share every structural property: 15  op743 op749 op751 op14365 op14371 op14373 op14452 op14454 op16797 op16824 op16987 op16993
+
+c7    ndefs=0 GPR16 GPR32                       
+      measured: op14449=funnel.shl, op17071=shr
+      unreachable members that share every structural property: 15  op746 op758 op760 op14368 op14380 op14382 op14461 op14463 op16800 op16827 op16990 op17002
+
+c5    ndefs=1 IRGPR32 GPR16 GPR32               
+      measured: op10285=add, op11670=sub
+      unreachable members that share every structural property: 14  op400 op427 op10242 op11627 op13436 op13463 op13491 op13524 op13551 op13578 op17665 op17666
+
+c7    ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op14423=shl, op14439=funnel.shl, op16819=asr, op17045=shr
+      unreachable members that share every structural property: 14  op720 op732 op736 op14151 op14342 op14354 op14358 op14435 op16792 op16964 op16976 op16980
+
+c14   ndefs=1 GPR16 GPR16                       
+      measured: op9846=fcmp, op11482=csel.imm.16
+      unreachable members that share every structural property: 14  op9837 op9857 op9866 op11442 op11451 op11491 op13970 op13972 op13994 op13998 op14195 op14197
+
+c7    ndefs=1 IRGPR32 GPR32 GPR32               
+      measured: op697=funnel.shr, op14392=shl, op14400=funnel.shl, op17014=shr
+      unreachable members that share every structural property: 13  op689 op695 op14311 op14317 op14319 op14398 op16779 op16806 op16933 op16939 op16941 op17020
+
+c74   ndefs=1 IRGPR32 GPR16                     
+      measured: op2571=log2, op3659=recip, op3979=rsqrt
+      unreachable members that share every structural property: 13  op1257 op1273 op1289 op1290 op2555 op3611 op3627 op3643 op3835 op3851 op3931 op3947
+
+c5    ndefs=1 IRGPR32 GPR32 GPR16               
+      measured: op10283=add, op11668=sub
+      unreachable members that share every structural property: 12  op398 op425 op10240 op11625 op13434 op13461 op13489 op13522 op13549 op13576 op17745 op17772
+
+c5    ndefs=0 GPR16 GPR16                       
+      measured: op446=and, op10311=add
+      unreachable members that share every structural property: 12  op419 op10261 op11646 op11696 op13455 op13482 op13510 op13543 op13570 op13597 op17766 op17793
+
+c7    ndefs=1 IRGPR32 GPR32                     
+      measured: op465=popcount, op9986=msb, op14047=reverse, op14310=shl.hi, op14389=shl, op14391=shl, op16805=asr, op17013=shr
+      unreachable members that share every structural property: 12  op688 op14308 op14316 op14397 op16776 op16778 op16803 op16930 op16932 op16938 op17011 op17019
+
+c73   ndefs=0 GPR32                             
+      measured: op1280=exp2, op2578=log2, op3858=rsqrt
+      unreachable members that share every structural property: 12  op1264 op1291 op2562 op3618 op3634 op3650 op3666 op3842 op3938 op3954 op3970 op3986
+
+c282  ndefs=1 IRGPR32 GPR16 GPR32               
+      measured: op9751=csel, op9754=csel, op11393=csel.mixed, op11394=clamp
+      unreachable members that share every structural property: 12  op9748 op9749 op9768 op9769 op9771 op9774 op11353 op11354 op11356 op11359 op11396 op11399
+
+c73   ndefs=1 IRGPR32 GPR16                     
+      measured: op2573=log2, op3661=recip, op3981=rsqrt
+      unreachable members that share every structural property: 11  op1259 op1275 op2557 op3613 op3629 op3645 op3837 op3853 op3933 op3949 op3965
+
+c282  ndefs=1 IRGPR32 GPR32 GPR32               
+      measured: op9718=fselect, op9721=csel, op9724=csel, op11363=csel.mixed, op11364=clamp
+      unreachable members that share every structural property: 11  op9719 op9758 op9759 op9761 op9764 op11343 op11344 op11346 op11349 op11366 op11369
+
+c14   ndefs=1 GPR16 GPR32                       
+      measured: op9816=fcmp, op11432=cmp, op11452=cmp.imm
+      unreachable members that share every structural property: 11  op9807 op9847 op9856 op11441 op11461 op13967 op13993 op13995 op14192 op14218 op14220
+
+c282  ndefs=1 GPR16 GPR32 GPR16                 
+      measured: op9808=fselect, op9811=csel, op9813=csel, op9815=csel, op11453=csel.mixed
+      unreachable members that share every structural property: 11  op9848 op9851 op9853 op9855 op11433 op11436 op11438 op11440 op11456 op11458 op11460
+
+c5    ndefs=0 GPR32 GPR16                       
+      measured: op443=and, op10307=add, op13594=or, op17790=xor
+      unreachable members that share every structural property: 10  op416 op10258 op11643 op11692 op13452 op13479 op13507 op13540 op13567 op17763
+
+c51   ndefs=0 GPR32                             
+      measured: op942=fadd.imm.sat.f32.a, op3138=fmul.imm.sat.f32.a
+      unreachable members that share every structural property: 10  op936 op1560 op1584 op1590 op1816 op1840 op1846 op3132 op3196 op3202
+
+c54   ndefs=0 GPR16                             
+      measured: op943=fadd.imm.sat.f16.a, op3139=fmul.imm.sat.f16.a
+      unreachable members that share every structural property: 10  op940 op1576 op1588 op1591 op1832 op1844 op1847 op3136 op3200 op3203
+
+c51   ndefs=0 GPR16                             
+      measured: op945=fadd.imm.sat.bf16.a, op3141=fmul.imm.sat.bf16.a
+      unreachable members that share every structural property: 10  op948 op1593 op1596 op1608 op1849 op1852 op1864 op3144 op3205 op3208
+
+c58   ndefs=0 GPR32                             
+      measured: op1038=fadd.imm.a, op3330=fmul.imm.a
+      unreachable members that share every structural property: 10  op1032 op2072 op2096 op2102 op2328 op2352 op2358 op3260 op3266 op3324
+
+c73   ndefs=1 IRGPR32 GPR32                     
+      measured: op1272=exp2, op2570=log2, op3658=recip, op3850=rsqrt, op3946=trig, op3978=rsqrt
+      unreachable members that share every structural property: 9  op1256 op1288 op2554 op3610 op3626 op3642 op3834 op3930 op3962
+
+c5    ndefs=0 GPR32 GPR32                       
+      measured: op442=and, op10257=addsat, op10306=add, op11642=subsat, op11691=sub, op13593=or, op17789=xor
+      unreachable members that share every structural property: 8  op415 op13451 op13478 op13506 op13539 op13566 op17671 op17762
+
+c56   ndefs=1 GPR16 GPR16 GPR32                 
+      measured: op1058=fadd, op3350=fmul
+      unreachable members that share every structural property: 8  op994 op2170 op2176 op2182 op2426 op2432 op2438 op3286
+
+c57   ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op1059=fadd.bf16, op3351=fmul.bf16
+      unreachable members that share every structural property: 8  op995 op2171 op2180 op2183 op2427 op2436 op2439 op3287
+
+c142  ndefs=1 GPR16 GPR16                       
+      measured: op3775=rint.f16, op3791=floor.f16, op3807=ceil.f16, op3823=trunc.f16
+      unreachable members that share every structural property: 8  op3695 op3703 op3711 op3719 op3727 op3735 op3743 op3751
+
+c446  ndefs=1 GPR16 GPR16                       
+      measured: op13875=quad.fmax.f16, op13883=quad.fmin.f16
+      unreachable members that share every structural property: 8  op13847 op13891 op13899 op13907 op13915 op13923 op13931 op13939
+
+c448  ndefs=1 GPR16 GPR16                       
+      measured: op16860=simd.fmax.f16, op16868=simd.fmin.f16
+      unreachable members that share every structural property: 8  op16832 op16876 op16884 op16892 op16900 op16908 op16916 op16924
+
+c52   ndefs=0 GPR16 GPR32                       
+      measured: op938=fadd.sat.f16.f32.a, op3134=fmul.sat.f16.f32.a
+      unreachable members that share every structural property: 7  op1568 op1574 op1586 op1824 op1830 op1842 op3198
+
+c49   ndefs=0 GPR16 GPR32                       
+      measured: op946=fadd.sat.bf16.f32.a, op3142=fmul.sat.bf16.f32.a
+      unreachable members that share every structural property: 7  op1594 op1600 op1606 op1850 op1856 op1862 op3206
+
+c57   ndefs=1 IRGPR32 GPR32 GPR16               
+      measured: op999=fadd.f32.f16, op3291=fmul.f32.f16
+      unreachable members that share every structural property: 7  op1940 op1943 op1967 op2196 op2199 op2223 op3227
+
+c56   ndefs=0 GPR16 GPR32                       
+      measured: op1042=fadd, op3334=fmul
+      unreachable members that share every structural property: 7  op2106 op2112 op2118 op2362 op2368 op2374 op3270
+
+c56   ndefs=0 GPR16 GPR16                       
+      measured: op2377=ffma.imm0.bf16.a, op2380=ffma.imm2.bf16.a
+      unreachable members that share every structural property: 7  op1045 op2109 op2121 op2124 op2365 op3273 op3337
+
+c49   ndefs=0 GPR32 GPR32                       
+      measured: op934=fadd.sat.f32.f32.a, op3130=fmul.sat.f32.f32.a
+      unreachable members that share every structural property: 6  op1558 op1582 op1808 op1814 op1838 op3194
+
+c56   ndefs=1 GPR16 GPR32 GPR32                 
+      measured: op1046=fadd, op2384=ffma.imm2.f32.f32.to.bf16, op2390=ffma.imm0.f32.f32.to.bf16, op3338=fmul
+      unreachable members that share every structural property: 6  op982 op2128 op2134 op2158 op2414 op3274
+
+c56   ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op1061=fadd, op2441=ffma.imm0.bf16, op2444=ffma.imm2.bf16, op3353=fmul
+      unreachable members that share every structural property: 6  op997 op2173 op2185 op2188 op2429 op3289
+
+c168  ndefs=1 FLAGR GPR32                       
+      measured: op5074=fcmp, op10369=cmp
+      unreachable members that share every structural property: 6  op5080 op5084 op5087 op10367 op10376 op10378
+
+c408  ndefs=1 IRGPR32 GPR32 GPR16               
+      measured: op14011=quad.shuffle, op14158=simd.shuffle
+      unreachable members that share every structural property: 6  op13945 op14023 op14035 op14170 op14284 op14296
+
+c56   ndefs=1 IRGPR32 GPR32 GPR32               
+      measured: op998=fadd, op3290=fmul
+      unreachable members that share every structural property: 5  op1936 op1942 op1966 op2222 op3226
+
+c56   ndefs=0 GPR32 GPR32                       
+      measured: op1030=fadd.a, op2320=ffma.imm2.a, op2326=ffma.imm0.a, op3322=fmul.a
+      unreachable members that share every structural property: 5  op2064 op2070 op2094 op2350 op3258
+
+c168  ndefs=1 FLAGR GPR16                       
+      measured: op5077=fcmp, op10372=cmp, op10381=cmp
+      unreachable members that share every structural property: 5  op5083 op5085 op5088 op10368 op10377
+
+c442  ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op799=ffma.imm2.f16, op800=ffma.imm0.f16
+      unreachable members that share every structural property: 4  op783 op784 op786 op802
+
+c79   ndefs=1 GPR16 GPR32 GPR32 GPR32           
+      measured: op1486=ffma.sat.f32.f32.f32.to.f16, op2254=ffma.f32.f32.f32.to.f16
+      unreachable members that share every structural property: 4  op1614 op1742 op1870 op1998
+
+c81   ndefs=1 GPR16 GPR32 GPR16 GPR32           
+      measured: op1490=ffma.sat.f32.f16.f32.to.f16, op2258=ffma.f32.f16.f32.to.f16
+      unreachable members that share every structural property: 4  op1618 op1746 op1874 op2002
+
+c84   ndefs=1 GPR16 GPR16 GPR32 GPR16           
+      measured: op1503=ffma.sat.f16.f32.f16.to.f16, op2271=ffma.f16.f32.f16.to.f16
+      unreachable members that share every structural property: 4  op1631 op1759 op1887 op2015
+
+c5    ndefs=1 IRGPR32 GPR32 GPR32               
+      measured: op397=andn, op424=and, op10239=addsat, op10282=add, op11624=subsat, op11667=sub, op13460=nand, op13521=nor, op13548=orn, op13575=or, op17744=xnor, op17771=xor
+      unreachable members that share every structural property: 3  op13433 op13488 op17663
+
+c7    ndefs=1 IRGPR32 GPR32 GPR32 GPR32         
+      measured: op698=funnel.shr, op14401=funnel.shl
+      unreachable members that share every structural property: 3  op14320 op16942 op17023
+
+c278  ndefs=1 IRGPR32 GPR32 GPR32 GPR32         
+      measured: op11373=csel.reg.imm, op11374=csel, op11379=csel.reg.imm
+      unreachable members that share every structural property: 3  op9698 op9699 op11376
+
+c446  ndefs=1 IRGPR32 GPR32                     
+      measured: op13873=quad.fmax.f32, op13881=quad.fmin.f32, op13889=quad.sum, op13905=quad.smax, op13913=quad.smin, op13921=quad.umax, op13929=quad.umin
+      unreachable members that share every structural property: 3  op13845 op13897 op13937
+
+c5    ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op410=andn, op437=andn, op10252=addsat, op10295=add, op11637=subsat, op11680=sub, op13473=nand, op13561=orn, op13588=andn, op17757=xnor, op17784=and
+      unreachable members that share every structural property: 2  op13446 op13501
+
+c439  ndefs=1 GPR16 GPR16                       
+      measured: op767=fadd.imm.sat.f16, op768=fadd.imm.sat.f16, op775=fadd.imm.f16, op776=fadd.imm.f16, op856=fmul.imm.sat.f16, op864=fmul.imm.f16
+      unreachable members that share every structural property: 2  op855 op863
+
+c118  ndefs=1 GPR32tup2 GPR32 GPR32 GPR32tup2   
+      measured: op2862=simdgroup.mma.f16.f32, op2902=simdgroup.mma.bf16
+      unreachable members that share every structural property: 2  op2870 op2894
+
+c166  ndefs=1 FLAGR GPR32 GPR32                 
+      measured: op5072=csel, op10370=cmp
+      unreachable members that share every structural property: 2  op5078 op10379
+
+c283  ndefs=1 IRGPR32 GPR32 GPR32 GPR32         
+      measured: op9720=fselect, op11365=select.cc
+      unreachable members that share every structural property: 2  op9760 op11345
+
+c283  ndefs=1 IRGPR32 GPR16 GPR32 GPR32         
+      measured: op9750=fselect, op11395=select.cc
+      unreachable members that share every structural property: 2  op9770 op11355
+
+c289  ndefs=1 GPR32tup2 GPR32tup2               
+      measured: op11648=sub.64, op11651=sub.wide
+      unreachable members that share every structural property: 2  op10263 op10266
+
+c320  ndefs=1 GPR32 GPR32tup2 GPR32tup2         
+      measured: op14661=texture.sample, op15813=texture.read
+      unreachable members that share every structural property: 2  op14501 op15653
+
+c320  ndefs=1 GPR32tup4 GPR32tup2 GPR32tup2     
+      measured: op14757=texture.gather, op15909=texture.read.v4
+      unreachable members that share every structural property: 1  op14726
+
+c27   ndefs=1 GPR16 GPR16                       
+      measured: op590=base, op11194=not
+      unreachable members that share every structural property: 0
+
+c438  ndefs=1 GPR16 GPR16 GPR16                 
+      measured: op766=fadd.sat.f16, op774=fadd.f16, op854=fmul.sat.f16, op862=fmul.f16
+      unreachable members that share every structural property: 0
+
+c144  ndefs=1 IRGPR32 GPR32                     
+      measured: op3770=rint, op3786=floor, op3802=ceil, op3818=trunc
+      unreachable members that share every structural property: 0
+
+c144  ndefs=1 GPR16 GPR16                       
+      measured: op3785=rint, op3801=floor, op3817=ceil, op3833=trunc
+      unreachable members that share every structural property: 0
+
+c258  ndefs=1 IRGPR32 GPR32                     
+      measured: op9320=cvt.f2i, op11179=cvt.i2f
+      unreachable members that share every structural property: 0
+
+c279  ndefs=1 IRGPR32 GPR32 GPR32 GPR32 GPR32   
+      measured: op9700=fselect, op11375=select
+      unreachable members that share every structural property: 0
+
+c289  ndefs=1 GPR32tup2 GPR32 GPR32             
+      measured: op10272=add.wide.u, op11657=sub.wide.s
+      unreachable members that share every structural property: 0
+
+c450  ndefs=1 GPR16 GPR16                       
+      measured: op13853=quad.sum.f16, op13855=quad.product.f16
+      unreachable members that share every structural property: 0
+
+c454  ndefs=1 IRGPR32 GPR32                     
+      measured: op13857=quad.sum.f32, op13865=quad.product.f32
+      unreachable members that share every structural property: 0
+
+c408  ndefs=1 IRGPR32 GPR32                     
+      measured: op13944=quad.shuffle_xor, op14010=quad.shuffle, op14022=quad.shuffle_down1, op14034=quad.shuffle_up, op14157=simd.shuffle, op14169=simd.shuffle_xor, op14283=simd.shuffle_down, op14295=simd.shuffle_up
+      unreachable members that share every structural property: 0
+
+c408  ndefs=1 GPR16 GPR16                       
+      measured: op13950=simd.shuffle_xor1, op14016=quad.shuffle, op14028=quad.shuffle_down1, op14040=quad.shuffle_up1, op14163=simd.shuffle, op14175=simd.shuffle_xor1, op14289=simd.shuffle_down1, op14301=simd.shuffle_up1
+      unreachable members that share every structural property: 0
+
+c415  ndefs=1 IRGPR32 GPR32 GPR32               
+      measured: op14235=simd.shuffle_rotate_down, op14259=simd.rotate_up1_16
+      unreachable members that share every structural property: 0
+
+c448  ndefs=1 IRGPR32 GPR32                     
+      measured: op16830=simd.and, op16858=simd.fmax.f32, op16866=simd.fmin.f32, op16874=simd.sum, op16882=simd.or, op16890=simd.smax, op16898=simd.smin, op16906=simd.umax, op16914=simd.umin, op16922=simd.xor
+      unreachable members that share every structural property: 0
+
+c452  ndefs=1 GPR16 GPR16                       
+      measured: op16838=simd.sum.f16, op16840=simd.product.f16
+      unreachable members that share every structural property: 0
+
+c455  ndefs=1 IRGPR32 GPR32                     
+      measured: op16841=simd.prefix_sum.f32, op16849=simd.prefix_product.f32
+      unreachable members that share every structural property: 0
+
+c456  ndefs=1 IRGPR32 GPR32                     
+      measured: op16842=simd.sum.f32, op16850=simd.product.f32
+      unreachable members that share every structural property: 0
+

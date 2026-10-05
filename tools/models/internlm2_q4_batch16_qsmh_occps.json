@@ -1,0 +1,36 @@
+{
+ "name": "batch16_qsmh_occps",
+ "bits": 4,
+ "cap": 272,
+ "batch": 16,
+ "qmv": {
+  "head": {
+   "ks": 2,
+   "lean": true,
+   "batch": 16,
+   "pass": 4
+  }
+ },
+ "norm": {
+  "out32": false,
+  "seed": false,
+  "batch": 16
+ },
+ "final_norm": {
+  "out32": false,
+  "seed": false,
+  "batch": 16
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true,
+  "batch": 16
+ },
+ "gen": {
+  "batch": 16
+ },
+ "qsm": true,
+ "qsm_head": true,
+ "qsm_occ": true,
+ "psum_swiglu": true
+}

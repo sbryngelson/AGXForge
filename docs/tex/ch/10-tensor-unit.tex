@@ -1,0 +1,1347 @@
+\chapter{The tensor unit}\label{ch:tensor-unit}
+
+The tensor unit (Apple's "neural accelerator") performs one 16 × 16 × 16 matrix multiply-accumulate
+per instruction, \code{D = C + A.B} or \code{D = A.B}: 4,096 multiply-accumulates and 8,192 floating-point operations per issue,
+with one tensor-issue slot per SIMD and four per core (measured, MM~\mm{0.1}, MM~\mm{8}; a logical resource model, not a
+floorplan). It is distinct from the older 8 × 8 simdgroup-matrix engine (\cref{sec:legacy-simdgroup-matrix-engine}) and from the Apple Neural
+Engine, which this reference does not cover.
+
+The instruction's operands are register tuples spread across the 32 lanes of one simdgroup, and no unit between
+memory and those registers handles them as a matrix. Most of the rules summarised here follow from that.
+
+\begin{itemize}
+\item A 16 × 16 tile has 256 elements; each lane holds 8 of them in fixed slots. The map is
+  closed-form (\cref{sec:fragment-layouts}), and it is produced only by per-lane address arithmetic in ordinary ALU code; a "tensor
+  load" is a gather, and there is no tile-layout unit (\cref{sec:tensor-memory-path}).
+\item A lane's 8 elements occupy an aligned tuple: 2 registers for int8, 4 for 16-bit
+  types, 8 for fp32 operands and for every accumulator. The 10-byte instruction names each tuple in units of its width,
+  attaches a type code to A and B (a transpose adds 32 to it) and a lifetime modifier to every register (\cref{sec:instruction-family,sec:modifiers-keep-flag}). A transpose changes how the registers are read and moves no data.
+\item For half inputs, the case the rule was fitted on, the sixteen products of each output are exact
+  and are reduced by a fixed tree with an fp32 rounding at every node, the accumulator entering first
+  (\cref{sec:arithmetic-semantics-supported}); bfloat and truncated-fp32 inputs are recorded only at single points. fp32
+  operands are truncated to 10 fraction bits on the way in; int8 sums wrap or, with one bit, saturate once per issue.
+\item The MMA waits for its operand loads only through an 8-bit mask naming the scoreboard slots those loads
+  fill; a slot it does not name is not waited on, and in every measured case the MMA then read zeros, with no error
+  (\cref{sec:ordering-enable}).
+\item Because D is eight ordinary registers per lane in the same lane map, it can be the next MMA's C, A or B with
+  no store (\cref{sec:chaining-feed-modes}). What the next MMA then computes depends on how the producing kernel labeled its rows, not on
+  the instruction: the same hand-off computes the logical \code{A2 . D} in this compiler's measured kernels and a row-rotated product
+  in Apple-compiled \code{simdgroup\_matrix} code (\cref{sec:coordinate-systems}).
+\item None of the ten admitted forms takes an fp8, int4 or fp4 operand, applies a
+  block scale or accumulates in 16 bits, and no cross-simdgroup register path was found; in every route tested these
+  are built from ordinary instructions around the ten forms (\cref{sec:across-simdgroups,sec:quantized-formats}).
+  int8 and uint8 are native.
+\end{itemize}
+
+Four of these replace earlier readings; the corrections are recorded where each is measured. The "two layouts" are
+one map and a row rotation (\cref{sec:fragment-layouts}); the reduction tree is now fixed by 1,680 discriminating stimuli
+(\cref{sec:arithmetic-semantics-supported}); the "result ring" is a wait mask (\cref{sec:ordering-enable}); and the feed
+relabelings come from the way Apple's kernels pack their tiles (\cref{sec:chaining-feed-modes}).
+
+\leadhead{Notation.}
+
+\begin{itemize}
+\item \textbf{MMA}: one tensor multiply-accumulate instruction. "With-C" forms read an accumulator C; "no-C" (from-zero) forms
+  do not.
+\item \textbf{The 16-bit MMA}: \op{5106}, the form most measurements use; the other
+  nine forms are named in full (\cref{sec:instruction-family}).
+\item \textbf{Tile}: a 16 × 16 matrix. A is M × K (16 × 16), B is K × N, C and D are M × N. Larger GEMMs are grids of tiles.
+\item \textbf{Fragment}: the part of one tile held by one lane. Every lane holds 8 logical elements of a tile, numbered by a
+  \textbf{slot} \code{j} in 0..7; lane \code{l} is 0..31 (SR130, the lane index within the simdgroup, \cref{ch:special-registers}).
+\item \textbf{Tuple}: the aligned group of consecutive registers holding a fragment: 2 registers for int8, 4 for half or
+  bfloat, 8 for fp32 operands and for every accumulator. A tuple's base register must be a multiple of its width.
+\item \textbf{Accumulator group}: an 8-register fp32 or int32 tuple (C and D). Legal bases are R0, R8, \dots{}, R112 (15 groups).
+\item \textbf{Modifier}: the immediate that follows every register operand in the decoded form, carrying the operand's
+  lifetime bits (release and keep). The general rule is in \cref{ch:register-file}, the tensor-specific use in \cref{sec:modifiers-keep-flag}.
+\item \textbf{Feed}: using one MMA's D as a later MMA's A, B or C without a store.
+\item \textbf{Memory bridge}: storing D to row-major memory with a tensor store and reloading it with a tensor load.
+\item \code{rotl1(x)} / \code{rotr1(x)}: rotate a four-bit row index left or right by one bit.
+\item \code{RNE32(x)}: round x to fp32, nearest-even.
+\item "pos" layout and "pos\_b" layout: the two (lane, slot) maps of \cref{sec:fragment-layouts}.
+\item \textbf{Silent}: a violation produces wrong or zero results with no error from compiler, driver or API.
+\item The statement kinds are those of \cref{sec:read-this-document}, with \emph{decoder} written \emph{decoder only}.
+\end{itemize}
+
+Every result in the chapter is from one M5 Pro (H17s, 20 cores) and one toolchain; the Metal-path evidence files behind
+most of it do not record the OS build (\cref{sec:measured-part-software}; MM~\mm{0.1}, MM~\mm{20}).
+
+\section{Access through Metal}\label{sec:it-reached}
+
+Metal 4's TensorOps API reaches the unit through four layers, and only the last is a matrix instruction (Apple's
+compiler emits, MM~\mm{1}):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item \code{mpp::tensor\_ops::matmul2d<descriptor, execution\_simdgroups<N>>::run} is header code. It calls \code{extern "C"} symbols
+  named \code{\_\_tensorops\_impl\_matmul2d\_op\_run\_<left>\_<right>\_<dest>[\_v2]}, declared in the \code{air.externally\_defined}
+  section, so a TensorOps kernel's AIR holds only a call to one of these symbols.
+\item The symbols resolve at native compile time from
+  \code{MetalPerformancePrimitives.framework/Resources/libTensorOps.rtlib}, an ar archive of 1,970 air64\_v28 bitcode
+  members, 1,475 of them \code{matmul2d\_op\_run\_*}.
+\item Inside the library, \code{air.supports\_family(i32 1010)} (\code{MTLGPUFamilyApple10}: M5 and A19 Pro) selects
+  \code{air.simdgroup\_matrix\_16x16x16\_multiply\_accumulate}; family 1009 selects the older
+  \code{air.simdgroup\_matrix\_8x8\_multiply\_accumulate}. Which engine a TensorOps kernel uses is decided by this
+  predicate in Apple's library.
+\item The 16 × 16 × 16 intrinsic lowers to one native instruction, \op{5106}, or
+  a sibling from \cref{sec:instruction-family}.
+\end{enumerate}
+
+The AIR intrinsic surface is
+\code{16x16x16\_multiply\_accumulate.f.f.v8f32.\{v8f16|v8bf16|v8f32\}.\{v8f16|v8bf16|v8f32\}.v8f32} (nine A/B combinations, fp32
+accumulator only) plus the integer widening form \code{.\{s|u\}.\{s|u\}.v8i32.v8i8.v8i8.v8i32}. A fragment is a per-lane
+\code{<8 x T>} value (Apple's compiler emits, MM~\mm{1}). Hand-written AIR reaches the intrinsic directly, which is how the
+saturating int8 form, fp8 and the scaled spelling were reached (\cref{sec:instruction-family,sec:quantized-formats}).
+
+\code{relaxed\_precision} selects the mixed float forms. Without it, the mixed float intrinsics fall to the legacy
+datapath with a different layout; with it they reach \op{5098}, \op{5100} and \op{5104}. It is inert for forms already
+native (Apple's compiler emits, measured, MM~\mm{17} rule 29). \emph{Correction:} the reading that the fp32-A forms, with and
+without an accumulator (the latter \op{5101}), are never compiler-emitted
+(MM~\mm{19}) is withdrawn; they are emitted under \code{relaxed\_precision}.
+
+Apple's library body changes with the simdgroup count (Apple's compiler emits, MM~\mm{25.93}). At \code{execution\_simdgroups<1>} the slot-29
+system-register vector is \code{[52]} and the body reads only SR130; at \code{<2>} and \code{<4>} it is \code{[52, 53]} and the body also
+reads SR133 (the simdgroup index within the threadgroup). The N > 1 body is a per-simdgroup partition: no barrier, no
+threadgroup memory, only the 16-bit MMA for the matrix work, plus offset arithmetic (\op{17016}; \op{426}; \op{10286}; \op{10285}). How many MMAs each simdgroup runs is a library tiling choice: for 32×32×64, \code{<2>} halves 32 to
+16 and \code{<4>} stays at 16; for 64×64×64, \code{<2>} keeps 64 and \code{<4>} halves to 32.
+
+The API imposes rules of its own that the hardware does not (measured unless marked):
+
+\begin{itemize}
+\item \code{execution\_simdgroups<N>} must equal the simdgroups launched. A narrower scope returns zero with no error (MM~\mm{14},
+  MM~\mm{17} rule 8). \textbf{Silent.}
+\item \code{reduce\_rows} and \code{reduce\_columns} refuse to compile at \code{execution\_simdgroups<2>} or above; an input cooperative
+  tensor must be single-simdgroup and cannot be transposed, although the hardware transposes a fed operand (Apple's
+  compiler, MM~\mm{12}, MM~\mm{0.9}).
+\item Apple's header \code{MPPTensorOpsMatMul2dImpl.h} (macOS 26.4 SDK, lines 3763–3765) asserts that M and N are multiples of
+  8 and at least one is a multiple of 16. Per-lane capacity \code{M*N/32} is therefore always a multiple of 4 (4, 8, 12,
+  16, 20, 24 \dots{}); \code{24x24} fails the assert (Apple's compiler, MM~\mm{12}).
+\item The Metal 4.1 fp8 path is blocked at four points on this OS: the frontend needs \code{-std=metal4.1}, the loader refuses the
+  4.1 language tag and the AIR 2.9 target, the OS \code{libTensorOps.rtlib} has no fp8 or scale symbols, and the OS tensor
+  library lacks the builtins. Hand-written AIR still reaches fp8 (MM~\mm{11}).
+\end{itemize}
+
+\textbf{Evidence.} MM~\mm{1}, MM~\mm{12}, MM~\mm{14}, MM~\mm{17}, MM~\mm{19}, MM~\mm{25.93}.
+
+\section{MMA instruction forms}\label{sec:instruction-family}
+
+Every admitted tensor MMA is 10 bytes, scheduling class 172 for the 16-bit MMA, and writes an 8-register fp32 or int32
+destination (decoder and measured, MM~\mm{0.3}, MM~\mm{2}). In every Apple-emitted with-C instance D and C are the same tuple
+(481 of 481), so that census contains only in-place accumulation (MM~\mm{2}). The sections this chapter draws on report no
+execution of an out-of-place form (D a different tuple from C); treat it as untested. \Cref{tab:mma-forms} lists the ten
+admitted forms.
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=0.69\hsize}X>{\hsize=0.69\hsize}Xl>{\hsize=1.20\hsize}X>{\hsize=1.26\hsize}X>{\hsize=1.18\hsize}X@{}}
+\caption{The ten admitted tensor MMA forms, with operand types and tuple widths, opcodes with and without C, and
+arithmetic.}\label{tab:mma-forms}\\
+\toprule
+Form & A: type, tuple & B: type, tuple & D & With C & No C (from zero) & Arithmetic \\
+\midrule
+\endfirsthead
+\tablecontinued{7}
+\toprule
+Form & A: type, tuple & B: type, tuple & D & With C & No C (from zero) & Arithmetic \\
+\midrule
+\endhead
+16 × 16 & half or bfloat, 4 & half or bfloat, 4 & fp32, 8 & \op{5106} & \op{5107} & exact products, the tree of 
+\cref{sec:arithmetic-semantics-supported} \\*
+16 × fp32 & half or bfloat, 4 & fp32, 8 & fp32, 8 & \op{5104} & \op{5105} & fp32 operand truncated to 10 fraction bits \\*
+fp32 × 16 & fp32, 8 & half or bfloat, 4 & fp32, 8 & \op{5100} & \op{5101} & fp32 operand truncated \\*
+fp32 × fp32 & fp32, 8 & fp32, 8 & fp32, 8 & \op{5098} & \op{5099} & both operands truncated \\*
+int8 & signed or unsigned int8, 2 & signed or unsigned int8, 2 & int32, 8 & \op{10384} & \op{10385} & exact products, mod $2^{32}$ by default; saturating variant below \\*
+\bottomrule
+\end{xltabular}
+
+All ten execute as tabulated (measured, MM~\mm{2}, MM~\mm{5}, MM~\mm{11}). The no-C form "starts from the first reduced group rather
+than an encoded zero tuple" (MM~\mm{0.3}).
+
+Decoded, the 16-bit MMA's operands are (decoder only, MM~\mm{2})
+\code{D:GPR32tup8, imm, imm, A:GPR32tup4, imm, imm, B:GPR32tup4, imm, imm, C:GPR32tup8, imm, imm}; its no-C sibling drops the
+C triple; the running example's first MMA (\cref{sec:one-program-ir}) is this no-C form decoded and annotated. Operands are
+numbered from 0 (D). Each register is followed by two immediates: the first is its modifier
+(\cref{sec:modifiers-keep-flag}; operands 1, 4, 7 and 10), and the second after A and after B carries that operand's type code
+(operands 5 and 8); the second after D (operand 2) carries the saturation flag on the int8 form. Register fields are encoded in units of the tuple width, so a tuple must be
+aligned. An encoder must refuse an unaligned base and must decode its output back to the same opcode, length and
+operands; this project's encoder once rounded an odd index silently (MM~\mm{0.4}, MM~\mm{2}).
+
+\Cref{tab:mma-type-codes} gives the operand type codes (decoder and measured, MM~\mm{0.3}, MM~\mm{2}).
+
+\begin{xltabular}{\linewidth}{@{}llX@{}}
+\caption{Operand type codes of the tensor MMA. The first row gives the field's position for A and for B.}\label{tab:mma-type-codes}\\
+\toprule
+Type & Code & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Type & Code & Where \\
+\midrule
+\endhead
+float (fp32) & 1 & A at byte6{[}2{]}, B at byte7{[}6{]} \\*
+half & 2 &  \\*
+bfloat & 3 &  \\*
+unsigned int8 & 11 &  \\*
+signed int8 & 75 &  \\*
+\bottomrule
+\end{xltabular}
+
+A transpose flag adds 32 to the corresponding operand's type code (byte8{[}2{]} for A, byte8{[}3{]} for B). The signedness of
+an int8 operand is selected independently for A and B. A transpose changes only how a fragment is read:
+all four flag combinations compute exactly \code{D = C + A.B}, a transposed operand's loads keep the same index register
+and displacements, and transposition has no measured issue cost (measured, MM~\mm{3}, MM~\mm{8}).
+
+The 10-byte MMA's structural selector bits are these (decoder and measured, MM~\mm{0.4}, MM~\mm{2}): byte8{[}1{]} selects the no-C
+sibling; byte5{[}7{]} makes B fp32; byte8{[}4{]} makes A fp32 on the float forms; byte6{[}0{]} selects the int8 family; byte0{[}7{]}
+is bit 0 of the destination tuple index (40 of 40 instructions in six objects match \code{byte0[7] == N \& 1}), not a flag;
+flags bits 24–31 are the scoreboard wait mask (\cref{sec:ordering-enable}; carriers in \cref{sec:scoreboard-publish-wait}). Use the JSON field map in the repository, not this list,
+to construct bytes; the field map classifies all 80 bits of the 16-bit MMA (39 in mapped fields, 25 structural, 16 inert) and
+\code{mmaenc.py} round-trips 800 of 800 compiler-emitted MMAs byte for byte (MM~\mm{2}, MM~\mm{6}).
+
+A single-bit census (measured, MM~\mm{2}) dispatched all 80 one-bit variants of the 16-bit MMA: none was
+refused by the driver or faulted, every decoder-inert bit was hardware-inert, and every flags-word bit was inert on a
+single MMA except byte0{[}3{]} (the slot-7 wait bit). Of the decoder-refused one-bit variants, six left the accumulator
+unchanged (D == C) and eight changed the result, so decoder refusal does not predict what the hardware executes. No encoding property
+separates the eight from the six (decoder only, MM~\mm{25.36}). Authored forms Apple's compiler never emits (swapped A/B
+tuples, both transposes, A reinterpreted as bfloat) execute as layout and arithmetic predict (measured, MM~\mm{2}, MM~\mm{15}).
+
+The int8 form has a saturating variant (measured, MM~\mm{11}, MM~\mm{25.42}). byte8 bit 4 on the int8 MMA, \op{10384}, or its no-C form, \op{10385}, selects saturation; on
+the int8 form byte8 carries three independent executed features: bit 2 transposes A, bit 3 transposes B, bit 4
+saturates. Apple's compiler bytes are 0x40 untransposed and 0x44 with A transposed; with saturation 0x50 and 0x54. In
+the decode, transposing A moves operand 5 only, transposing B moves operand 8 only, and saturation moves operand 2
+(immediate 9 to 41) identically under all four transpose combinations; both int8 forms accept the bit (decoder only,
+MM~\mm{25.11}).
+
+\begin{itemize}
+\item \emph{AIR route.} \code{widening\_multiply\_accumulate\_saturate} in hand-written AIR lowers to the int8 MMA with the bit set.
+  \code{libTensorOps.rtlib} contains no string containing \code{saturate}, so Apple's library never emits it (Apple's compiler,
+  MM~\mm{11}). The public matrix interfaces declare no saturating operation either: the MPP headers of the macOS 27.0 SDK
+  (where \code{matmul2d\_descriptor::mode} is \code{multiply} or \code{multiply\_accumulate}) and the
+  \code{metal\_simdgroup\_matrix}, \code{metal\_tensor} and \code{metal\_cooperative\_tensor} headers of the Metal 32023
+  toolchain contain no string \code{saturat} (header search, 2026-10-04).
+\item \emph{AIR suffix.} In the four-letter suffix A's signedness is letter 2 and B's letter 3; in the two-letter form A is
+  always signed, so unsigned A cannot be spelled. The outer letters are parser-dead, not hardware fields (MM~\mm{11}, MM
+  20).
+\item \emph{Cost.} Same issue rate as the wrapping form to three places, identical register classes (measured, MM~\mm{11}).
+\item \emph{Encoder coverage.} This project's MMA encoder emits the saturating form with C (\code{mmaenc.mma(saturate=True)},
+  byte-exact against Apple's \code{\_saturate} spelling) and refuses the no-C saturating form, whose bytes 6 and 7 differ; the
+  eight no-C saturating MMAs are the ones a coverage count of 405 of 413 MMAs across 152 kernels misses (this compiler,
+  MM~\mm{15}, MM~\mm{25.11}). Its saturating chains run on hardware and clip once per issue (MM~\mm{25.89}).
+\end{itemize}
+
+The arithmetic is in \cref{sec:arithmetic-semantics-supported}.
+
+Apple's tables declare many more matrix forms than the ten, and only the ten above are
+decoder-admitted, all of them 32-bit-accumulator forms (decoder only, MM~\mm{2}, MM~\mm{0.3}, MM~\mm{25.6}). The two declaration
+counts in the sources (132 by scheduling class, 535 by opcode range) count different things; \cref{app:a} reconciles
+them.
+
+\begin{itemize}
+\item Admission is gated on the CPU name passed to the decoder: g17s, g17g and g18 admit the same ten; g17, g16, g16s,
+  g16g, g15 and g15s decode the same bytes as unrelated instructions (exhaustive three-flip sweep). The other declared
+  forms are a bounded negative: none was reached within three flips of the ten seeds, nor from 1.1 million flip
+  candidates plus a five-deep search (decoder only, MM~\mm{2}, MM~\mm{25.4/F4} "F4, narrowed").
+\item Three operand classes are exclusive to the accelerator across all declared accelerator opcodes: class 335 (the
+  8-word tuple, D of every 32-bit-accumulator form, 18 of 18), class 159 (the 4-word tuple, D of every
+  16-bit-accumulator form, 36 of 36) and class 41 (the 2-word tuple). There is no fourth (decoder only, MM~\mm{25.6}).
+\item The 36 narrow-accumulator rows, \op{5108} through \op{5143}, use the same operand classes and counts as forms that decode,
+  yet none was admitted from 1.1 million mutations plus a five-deep frontier, under any CPU name, and no witness emits
+  one. Do not select or synthesize them (bounded negative, MM~\mm{25.13}).
+\item The 475 \code{\_shifted} declarations use none of the three accelerator classes; they are a structurally different family
+  that shares scheduling classes 174 and 175 (decoder only, MM~\mm{25.6}).
+\item No admitted form accumulates in 16 bits. Hand-written AIR with a half accumulator lowers to the 16-bit MMA with
+  eight \op{1004} before and eight \op{1016} after (the code section grows
+  from 42 to 52 instructions); a bfloat accumulator uses the 16-bit MMA with bit operations and eight \op{1048} (62 instructions) (Apple's compiler emits, MM~\mm{25.13}).
+\item No declared MMA form has a scale operand in Apple's tables (decoder only, MM~\mm{11}).
+\end{itemize}
+
+\textbf{Not known.} A structural bit-71 variant of the int8 widening MMA that Apple's decoder \code{agx3dis} does not
+admit runs bit-exact in all three kernels that carry it; its 10-byte boundary is settled, its field meaning and decoder
+identity are open (MM~\mm{20}, T11).
+
+\textbf{Evidence.} MM~\mm{0.3}, MM~\mm{0.4}, MM~\mm{2}, MM~\mm{11}, MM~\mm{15}, MM~\mm{25.4/F4} "F4, narrowed", MM~\mm{25.6}, MM~\mm{25.11}, MM~\mm{25.13}, MM~\mm{25.36},
+MM~\mm{25.42}.
+
+\section{MMA operand modifiers}\label{sec:modifiers-keep-flag}
+
+The modifier enum \{0, 16, 32, 48\} (weight 16 \textbf{release}, weight 32 \textbf{keep}; decoder only, MM~\mm{6}) and the destructive
+release semantics are defined in \cref{ch:register-file} (\cref{sec:release-does}; measured, MM~\mm{6}, MM~\mm{0.4}, MM~\mm{17} rule 37).
+
+The modifier after A or B is 16 exactly when that tuple is not read again (Apple's compiler
+emits, MM~\mm{6}). The running example (\cref{sec:one-program-ir}) shows the pattern: each fragment is read by two MMAs,
+the first keeps it (0) and the second releases it (16). Because the release is destructive, a misplaced one changes
+results. A released register read zero in every controlled run, but what it reads is not established in
+general (\cref{sec:release-does}): a later reader may assume neither zero nor the old value. A release set while any later
+consumer remains loses the fragment, with no error in any measured case. The release acts per lane, and nothing
+reclaimed a released register within the measured bound (\cref{sec:release-does}, MM~\mm{25.95}); reclamation beyond that
+bound is not excluded.
+
+Whether a release point is safe depends on where the fragment came from; this project's lowering got it wrong on
+hardware (this compiler, measured, MM~\mm{25.89}). With three accumulators free, \code{tlower} ran a 2×2 stage as two accumulator groups and released A
+at its last read within each group. That is correct for an A loaded from memory, which each group reloads, and wrong
+for a register-fed A, which has no memory copy: the second group read released registers and its tile came back all
+zero. The fix releases a register-fed A at the last group that reads the row. \code{agxforge/g17/tensorlife.py}
+(\code{released\_reads}) decodes every emitted body and refuses any MMA read of a released, unrewritten register; it fires on
+the faulty program at exactly the two faulty issues and passes all 720 Apple corpus programs that contain MMAs. A
+lowering that splits a stage into accumulator groups has to count the fragment's reads in every group before placing
+the release, and the decoded-body check is what catches it when it does not.
+
+The destination keep flag (\code{0x20}, \code{mmaenc} keyword \code{more}) is the keep bit of operand 1, the modifier after
+D: byte4 bit 3, instruction bit 35 (\code{auth.carriers(5106, 1)[5] = [(4, 3, 0)]}) (decoder only, MM~\mm{6}, MM~\mm{25.22}). The
+destination modifier carries keep and never release (\code{carriers(5106, 1)} has no bit-4 entry).
+
+\begin{itemize}
+\item \emph{Rule (Apple's compiler emits, MM~\mm{25.22}):} set implies that the next MMA writes the same destination tuple. In a
+  run of n MMAs accumulating into one tuple, the first n-1 carry it and the last does not. It is not a chain-boundary
+  marker.
+\item \emph{Hardware effect:} none observed. Flipping it is inert on a single MMA and on a two-step chain (measured, MM~\mm{2});
+  of keep and release it is the conservative bit, since it only asserts reuse (MM~\mm{6}).
+\item \emph{Emitter rule:} set it exactly when the next MMA reuses the tuple, as Apple does. Clearing it where
+  Apple sets it was not shown to cost anything; setting it where the next MMA does not reuse the tuple has no witness
+  and was not tested.
+\end{itemize}
+
+\textbf{Evidence for the one-way rule.} No population that tested it contains a counterexample. Over 2,192 MMAs in 140 programs
+(1,093 carry the flag), "the next MMA reuses the tuple" has precision 100 percent (1,093 of 1,093) and recall 99.7
+percent (1,093 of 1,096), while "some later MMA reuses it" has recall only 69.0 percent (MM~\mm{25.22}). A larger census
+has zero counterexamples among 540,396 flag-set instances and 155,963 counterexamples to the converse (MM~\mm{6}). The three
+misses in the 2,192-MMA census are one pattern: kernel \code{conv-c64k1}, destination D=3382, with the same 16 intervening
+\op{595} instructions (MM~\mm{25.22}). A reader may take a set flag to mean "the next MMA reuses the
+tuple" but should infer nothing from a clear one. (The population sizes quoted in the sources, including MM~\mm{0.4}'s, are reconciled in
+\cref{app:a}.)
+
+\emph{Correction:} MM~\mm{20} ("Hardware identity") still lists this flag's meaning (H5) as open; it is resolved (MM~\mm{25.22},
+MM~\mm{6}; ledger row H5, MM~\mm{24}).
+
+The accumulator's own modifier is operand 10 (the accumulator itself is operand 9). No field maps to it: the field
+map's single-bit census classifies all 80 bits of the 16-bit MMA and none reaches operand 10, the decoder prints 0, and
+\code{auth.carriers(5106, 10)} raises (decoder only, MM~\mm{6}). An author cannot set it; a release of C therefore cannot be
+encoded in one bit. A multi-bit encoding is not excluded, because the census is single-bit (open).
+
+\textbf{Evidence.} MM~\mm{0.4}, MM~\mm{2}, MM~\mm{6}, MM~\mm{17} rule 37, MM~\mm{25.22}, MM~\mm{25.89}, MM~\mm{25.95}.
+
+\section{Fragment layouts}\label{sec:fragment-layouts}
+
+A tile has 256 elements and a simdgroup 32 lanes, so each lane holds 8 elements in slots \code{j} = 0..7. The map between
+matrix coordinates and (lane, slot) is closed-form, measured with one-hot probes, five preregistered predictions,
+6,651 dispatches and no findings against (measured, MM~\mm{3}). With lane \code{l} in 0..31:
+
+\begin{lstlisting}
+A (transA = 0) and D:   row = 8*(l>>4) + 2*((l>>1)&3) + (j>>2)
+                        col = 8*((l>>3)&1) + 4*(l&1)  + (j&3)
+
+B (either flag):        k   = 4*(l>>4) + ((l>>1)&3) + 8*(j>>2)
+                        col = 8*((l>>3)&1) + 4*(l&1)  + (j&3)
+
+A (transA = 1):         k   = 4*(l>>4) + ((l>>1)&3) + 8*(j>>2)
+                        row = 2*(j&3) + 8*(l&1) + ((l>>3)&1)
+\end{lstlisting}
+
+An A or D lane holds a 2 × 4 block: slots 0–3 are row \code{2m}, four consecutive columns; slots 4–7 are row \code{2m+1}, the
+same columns. A B lane holds K rows \code{k0} and \code{k0+8} of four consecutive columns. A transposed A uses the B formula for
+its K index. "transB" does not change the B map (MM~\mm{3}).
+
+\Cref{fig:fragment-map} draws the A/D map.
+
+\input{fig/fragment-map}
+
+Lanes 0–7 hold rows 0–7 and columns 0–7, lanes 8–15 hold columns 8–15 of the same rows, and lanes 16–23 and 24–31 do the
+same for rows 8–15. Within a quadrant each lane holds a 2 × 4 block of two adjacent rows and four adjacent columns,
+slots 0–3 in the upper row and slots 4–7 in the lower. Because a lane's four slots in a row are consecutive columns, one
+8-byte access per row loads them. Rows r and r + 8 sit in the two halves of the same lane group, which matches how the
+tensor loads move an 8-row by 16-column sub-tile (\cref{sec:tensor-memory-path}).
+
+The same map, by lane quadrant (MM~\mm{0.5}), is in \cref{tab:lane-quadrants}.
+
+\begin{xltabular}{\linewidth}{@{}lllX@{}}
+\caption{A/D fragment map by lane quadrant, with the rows and columns each eight-lane group holds.}\label{tab:lane-quadrants}\\
+\toprule
+Lanes & Rows & Columns & Within the eight-lane group, local lane q \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Lanes & Rows & Columns & Within the eight-lane group, local lane q \\
+\midrule
+\endhead
+0–7 & 0–7 & 0–7 & rows \code{2*(q>>1)} and \code{+1}, columns \code{4*(q\&1)} to \code{+3} \\*
+8–15 & 0–7 & 8–15 & same, column base +8 \\*
+16–23 & 8–15 & 0–7 & same, row base +8 \\*
+24–31 & 8–15 & 8–15 & same, both bases +8 \\*
+\bottomrule
+\end{xltabular}
+
+A packer needs the inverse maps. Both are bijections onto the 256 (lane, slot) positions (re-verified, MM~\mm{3}):
+
+\begin{lstlisting}
+pos(r, c)   = (16*(r>>3) + 8*(c>>3) + 2*((r>>1)&3) + ((c>>2)&1),   4*(r&1) + (c&3))      A and D
+pos_b(k, c) = (16*((k>>2)&1) + 8*(c>>3) + 2*(k&3) + ((c>>2)&1),     4*(k>>3) + (c&3))      B
+\end{lstlisting}
+
+Each returns (lane, slot).
+
+\textbf{Worked example: four sample lanes} (derived from the formulas above). \Cref{tab:fragment-examples} gives the fragments of four
+lanes.
+
+\begin{longtable}{@{}rllll@{}}
+\caption{A/D and B fragment contents of four sample lanes, derived from the layout formulas.}\label{tab:fragment-examples}\\
+\toprule
+Lane & A/D: slots 0–3 & A/D: slots 4–7 & B: slots 0–3 & B: slots 4–7 \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Lane & A/D: slots 0–3 & A/D: slots 4–7 & B: slots 0–3 & B: slots 4–7 \\
+\midrule
+\endhead
+0 & D(0, 0..3) & D(1, 0..3) & B(0, 0..3) & B(8, 0..3) \\
+9 & D(0, 12..15) & D(1, 12..15) & B(0, 12..15) & B(8, 12..15) \\
+17 & D(8, 4..7) & D(9, 4..7) & B(4, 4..7) & B(12, 4..7) \\
+22 & D(14, 0..3) & D(15, 0..3) & B(7, 0..3) & B(15, 0..3) \\
+\bottomrule
+\end{longtable}
+
+Lane 22 step by step: \code{l>>4 = 1}, \code{(l>>1)\&3 = 11\&3 = 3}, \code{(l>>3)\&1 = 0}, \code{l\&1 = 0}. For A/D, \code{row = 8 + 6 + (j>>2)}
+and \code{col = 0 + 0 + (j\&3)}, so slot 6 is D(15, 2). Inverse: \code{pos(15, 2) = (16*1 + 8*0 + 2*(7\&3) + ((2>>2)\&1), 4*(15\&1) + 2) = (22, 6)}. For B, \code{k = 4 + 3 + 8*(j>>2)}, so slot 6 is B(15, 2), and \code{pos\_b(15, 2) = (16*1 + 0 + 2*3 + 0, 4*1 + 2) = (22, 6)}. With transA = 1, lane 22 slot j holds A(row \code{2*(j\&3)}, k \code{7 + 8*(j>>2)}): slot 6 is
+A(4, 15).
+
+One fragment map serves all opcodes: \code{pos\_b(k, c) = pos(rotl1(k), c)} at 256 of 256 positions (measured,
+re-verified, MM~\mm{3}). The B map is the A/D map with rows relabeled by a one-bit rotation. Check on lane 22: \code{rotl1(7) = 14} and \code{pos(14, 2) = (22, 2) = pos\_b(7, 2)}. Whether a destination "reads as pos or as pos\_b" depends only on the
+row labeling used by the kernel that produced it (derived in \cref{sec:coordinate-systems}).
+
+\emph{Withdrawn: two destination layouts.} The record once stated that the destination of the 16-bit MMA, \op{5106}, and its no-C sibling used a different layout from the fp32 × fp32 MMA, \op{5098},
+because measured destinations of different kernels disagreed (recon section 100). A check for a fixed relabeling
+between the two maps found that they differ exactly by \code{rotl1} on the row index at all 256 positions, the same
+rotation Apple's cooperative-tensor coordinates carry. The difference came from the producing kernel's row labeling,
+and the opcode claim was withdrawn (MM~\mm{3}, MM~\mm{19}). The same check later scoped the feed-mode
+relabelings (\cref{sec:chaining-feed-modes}).
+
+For other operand types (measured, MM~\mm{3}, MM~\mm{19}):
+
+\begin{itemize}
+\item fp32 and int8 operands use the same A, B and D maps as half.
+\item \op{10384} is among 23 forms whose destination is \code{pos\_b} inside every 16 × 16
+  tile with row-major tile blocks, 1,024 of 1,024 lane and slot (MM~\mm{3}). This describes Apple-compiled multi-tile
+  destinations, consistent with the one-map rule above.
+\item In the fp32 × fp32 MMA the fp32 A operand and the fp32 D/C share one layout (\code{A\_row == D\_row}, \code{A\_k == D\_col}, 256 of 256), so a D
+  can feed the next A with no store and no permutation (MM~\mm{19}).
+\item Apple's cooperative-tensor coordinates for a 16 × 16 single-simdgroup destination equal the B map with index 0 as
+  column and index 1 as row; relative to the D map, rows are rotated by \code{y = ((r\&7)<<1) | (r>>3)} (Apple's compiler,
+  MM~\mm{3}).
+\end{itemize}
+
+\Cref{tab:fragment-registers} gives register widths and legal bases (measured, MM~\mm{0.7}, MM~\mm{0.1}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.39\hsize}X>{\hsize=0.63\hsize}XlX@{}}
+\caption{Registers per lane, alignment and highest legal base register for scalars, fragments and accumulators.}\label{tab:fragment-registers}\\
+\toprule
+Value & Registers per lane & Alignment & Highest base \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Value & Registers per lane & Alignment & Highest base \\
+\midrule
+\endhead
+scalar & 1 & 1 & R125 \\*
+int8 or uint8 fragment & 2 & 2 & R124 \\*
+half or bfloat fragment & 4 & 4 & R120 \\*
+fp32 A or B fragment & 8 & 8 & R112 \\*
+fp32 or int32 accumulator & 8 & 8 & R112 (15 groups: R0, R8, \dots{}, R112) \\*
+\bottomrule
+\end{xltabular}
+
+R120–R127 cannot hold an 8-register group, because any instruction naming R126 or above is squashed whole
+(\cref{sec:namespace}). MM~\mm{0.7} describes the int8 pair as "four byte elements per lane packed across the pair"; how the eight byte
+elements of a lane are ordered within the pair is not stated in the sections this chapter draws on (open).
+
+There is no tile-layout unit: a tensor load is a per-lane gather at an
+ALU-computed address, and that arithmetic produces the layout (measured, MM~\mm{7}, MM~\mm{19}). Apple's library computes, once
+per kernel, the index register \code{R32 = m(l)*128 + col(l)} with \code{m(l) = 4*(l>>4) + ((l>>1)\&3)} and
+\code{col(l) = 8*((l>>3)\&1) + 4*(l\&1)}: element (m, col) of a row-major tile at leading dimension 128. Its loads read
+\code{[R32*2 + disp]} with displacements \{0, 2048, 32, 4096, 6144\} (2048 steps eight rows, 32 steps sixteen columns). Each
+access moves an 8-row by 16-column sub-tile, which is why rows r and r+8 sit in the two slot halves (Apple's compiler
+emits, MM~\mm{7}). \emph{Correction:} "the hardware performs the matrix-to-fragment transposition" is refuted (MM~\mm{7}, MM~\mm{19}).
+
+\textbf{Evidence.} MM~\mm{0.5}, MM~\mm{0.7}, MM~\mm{3}, MM~\mm{7}, MM~\mm{19}.
+
+\section{Coordinate systems and packing}\label{sec:coordinate-systems}
+
+Tensor code involves three kinds of coordinate, which have to be kept apart.
+
+\begin{enumerate}
+\item \emph{Canonical instruction coordinates}: the map from (lane, slot) to a matrix position that the MMA itself
+  uses, \code{pos} for A and D and \code{pos\_b} for B (\cref{sec:fragment-layouts}). The MMA computes D = A B + C in
+  these coordinates.
+\item \emph{A kernel's packing convention}: which memory element its loads place in each (lane, slot), and where its stores
+  write each slot. This is software: a tensor load is a per-lane gather at an address the kernel computes.
+\item \emph{Application coordinates}: element (i, j) of the row-major matrix in memory.
+\end{enumerate}
+
+A kernel is correct when its packing convention, carried through the canonical arithmetic, produces the right product in
+application coordinates. Two conventions are in use.
+
+\begin{itemize}
+\item \emph{Canonical packing.} Apple-compiled \code{simdgroup\_matrix} code packs A and D canonically (application row
+  equals canonical row) and B canonically; the chaining relabelings were measured on such kernels (MM~\mm{3},
+  MM~\mm{13}).
+\item \emph{B-row packing.} This compiler packs every tile the same way, A, B and the C/D tile it loads and stores: lane l, slot j holds
+  application row \code{m(l) + 8*(j>>2)} and column \code{col(l) + (j\&3)}, with \code{m(l) = 4*(l>>4) + ((l>>1)\&3)} and
+  \code{col(l) = (l\&8) + 4*(l\&1)} (\code{agxforge/g17/indexgen.py}; \code{agxforge/g17/tlower.py}: "A rows m and m+8 of the tile, B rows k
+  and k+8", stores "rows m and m+8"). This is the B map applied to every tile. Apple's tensor-ops library computes the same
+  per-lane index for its tensor loads, and Apple-compiled multi-tile destinations read as \code{pos\_b}
+  (\cref{sec:fragment-layouts}; MM~\mm{3}, MM~\mm{7}).
+\end{itemize}
+
+For B the two conventions agree. For A and D they differ by a one-bit rotation of the row index: because
+\code{pos\_b(r, c) = pos(rotl1(r), c)}, this compiler puts application row r of A in canonical row \code{rotl1(r)}. The
+rotation does not change the result. Rows of A are the free M index, so canonical row \code{rotl1(r)} of D holds application row r of
+the product, and the store, which uses the same convention, writes canonical row \code{rotl1(r)} back to application row
+r. Neither the columns nor the K index are permuted, so the reduction over K runs in canonical order and the result is
+the one the arithmetic rule of \cref{sec:arithmetic-semantics-supported} predicts in application coordinates.
+
+\textbf{Lane 5 of the running example.} In canonical coordinates its first MMA's D holds elements (4, 4)–(4, 7) in
+slots 0–3 and (5, 4)–(5, 7) in slots 4–7 (\cref{fig:fragment-map}). This compiler computes \code{m(5) = 2} and
+\code{col(5) = 4}, so its store writes slots 0–3 to application row 2 and slots 4–7 to row 10, columns 4–7. The two
+descriptions name the same registers: \code{rotl1(2) = 4} and \code{rotl1(10) = 5}.
+
+\textbf{D fed as B.} A feed hands D's registers unchanged to the next
+MMA as its B operand. The MMA reads lane l, slot j as canonical B row \code{k = 4*(l>>4) + ((l>>1)\&3) + 8*(j>>2)}, and
+that register holds canonical D row \code{rotl1(k)}.
+
+\begin{itemize}
+\item Under B-row packing (this compiler), canonical D row \code{rotl1(k)} is application row k of the product, so the
+  consumer reads \code{B\_eff[k][c] = D[k][c]}: the logical operand, with no instruction in between.
+\item Under canonical packing, canonical D row \code{rotl1(k)} is application row \code{rotl1(k)}, so the consumer reads
+  \code{B\_eff[k][c] = D[rotl1(k)][c]}: the row-rotated operand that \cref{sec:chaining-feed-modes} measures, which the other
+  operand's K index must then be permuted to undo.
+\end{itemize}
+
+\Cref{tab:coordinate-example} follows three slots through both conventions. For lane 0, slot 4, canonical D row 1 is
+read as B row 8; this compiler's producer placed application row \code{m(0) + 8 = 8} of D in that slot, so the consumer
+receives D row 8 as B row 8. With canonical packing the same register carries D row 1, and \code{rotl1(8) = 1}. A D fed
+as A needs no relabeling in either convention, because the consumer's A is packed the way the producer packed D.
+
+\begin{longtable}{@{}lllll@{}}
+\caption{Three slots in canonical coordinates and in the two packing conventions, for a D tile fed as the next B.}\label{tab:coordinate-example}\\
+\toprule
+Lane, slot & Canonical D & Read as B & D row, B-row packing & D row, canonical packing \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Lane, slot & Canonical D & Read as B & D row, B-row packing & D row, canonical packing \\
+\midrule
+\endhead
+0, 4 & (1, 0) & (8, 0) & 8 & 1 \\*
+5, 0 & (4, 4) & (2, 4) & 2 & 4 \\*
+5, 4 & (5, 4) & (10, 4) & 10 & 5 \\*
+\bottomrule
+\end{longtable}
+
+So the relabeling a feed needs is set by the producer's packing alone. The two measurements agree with this derivation (\cref{sec:chaining-feed-modes}): in this compiler's kernels
+the B, At and Bt feeds read the logical operand bit for bit and a reference that applied the relabelings failed, in the
+one square 32 × 32 stage measured (MM~\mm{25.103}); in canonically packed kernels the feeds follow the fixed relabelings,
+the identity for A (MM~\mm{13}).
+
+\section{Arithmetic by input type}\label{sec:arithmetic-semantics-supported}
+
+Each result below is labelled an \textbf{exact rule} (a closed form that reproduces every measured output) or a
+\textbf{measured case} (single points or edge values); unresolved behaviour is marked open.
+
+\textbf{Half inputs, fp32 accumulator: exact rule} (measured, MM~\mm{4}, MM~\mm{0.6}; fitted on half × half, 1,680 of 1,680
+eps-triples and every stimulus). For one output element, with \code{k} the A-column index of \cref{sec:fragment-layouts}:
+
+\begin{lstlisting}
+p_i = RNE32(a[2i]*b[2i] + a[2i+1]*b[2i+1])      i = 0..7    adjacent pairs; products exact
+q_j = RNE32(p_j + p_(j+4))                       j = 0..3    pairs eight apart
+acc = C
+acc = RNE32(acc + q_0); acc = RNE32(acc + q_1); acc = RNE32(acc + q_2); acc = RNE32(acc + q_3)
+D   = acc
+\end{lstlisting}
+
+\Cref{fig:reduction-tree} shows the measured order.
+
+\input{fig/reduction-tree}
+
+The tree is neither balanced nor sequential. The first stage adds adjacent products, which is why \code{(-0) * 1}, with every
+other product zero, gives \code{+0} (the signed-zero case below). The second stage pairs partial sums eight apart. The
+accumulator then enters before the four partial sums, within one issue. The from-zero form, \op{5107}, follows the same tree without C and starts the chain from q0 ("starts from the first reduced
+group", MM~\mm{0.3}).
+
+\textbf{How the tree was identified.} The candidates were a sequential chain, a balanced tree over the natural K order, a
+balanced tree over K interleaved by eight and an exactly rounded sum, and, for the accumulator, adding C first or last.
+They differ only in the order of additions and where rounding happens, so the stimuli were placed on single output elements
+with half inputs, whose products are always exact in fp32 (an 11-bit by 11-bit significand product fits in 24 bits, and
+every such product lies between $2^{-48}$ and about $4.3 \times 10^{9}$, inside fp32's normal range). A single-element
+stimulus then isolates the order of additions and the rounding. The main probe was the \textbf{eps-triple}: one product
+equal to 1 at a K position i and products equal to a small eps at two other positions j and k, over every placement
+(16 × 105 = 1,680 stimuli). Whether the two eps terms are added to each other before either meets the 1 changes the
+rounded result, so each triple answers one question about the tree's shape (MM~\mm{4}; the triple design is from the
+record's section 4, which MM~\mm{4} cites).
+
+\begin{itemize}
+\item Rival fits on the 1,680 triples: balanced tree on natural order 976, interleave-by-8 balanced tree 1,392, the rule
+  above 1,680. The triples fixed the pair and interleave stages.
+\item Round-to-nearest-even applies at every intermediate; round-toward-zero is rejected on every stimulus.
+\item Over a whole tile: 5,120 of 5,120 exact, against sequential 2,493, balanced 2,764, exact sum rounded
+  once 2,742. Re-confirmed later with no correction (MM~\mm{4}).
+\item Stimuli built for the purpose placed C; the worked example below shows how one separates C-first from C-last.
+\end{itemize}
+
+\textbf{Worked example: why C enters first} (executed on hardware for the measured value; the arithmetic below is the rule
+applied by hand). Let eps = $2^{-24}$, half an fp32 ulp at 1.0. Take C = 1.0 and choose products so that the first two
+quad sums are q\_0 = q\_1 = 3 eps and q\_2 = q\_3 = 0 (for example products eps at K positions 0, 1 and 8 give
+p\_0 = 2 eps, p\_4 = eps, so q\_0 = 3 eps exactly; positions 2, 3 and 10 do the same for q\_1; eps = $2^{-12}$ × $2^{-12}$, both
+normal half values).
+
+\begin{lstlisting}
+C first (the measured rule):
+  acc = RNE32(1 + 3 eps)       = 1 + 4 eps     1.5 ulp is a tie; RNE picks the even neighbour, 2 ulp
+  acc = RNE32(1 + 4 eps + 3 eps) = 1 + 8 eps   3.5 ulp is a tie; RNE picks the even neighbour, 4 ulp
+C last (any order that sums the q terms first):
+  q_0 + q_1 = 6 eps exactly;  RNE32(1 + 6 eps) = 1 + 6 eps   3 ulp, representable
+\end{lstlisting}
+
+Adding C first exposes each small partial sum to a tie against 1.0; summing the q terms first keeps them exact and
+rounds once. The hardware returns \code{1 + 8 eps} on the discriminating stimuli (measured, MM~\mm{4}), which rules out every
+model that adds C at the end, including an exactly rounded sum.
+
+\textbf{Checks against independent code.} The repository's
+bit-exact model \code{tools/tensorops-model/tensorops\_model.py}, which was not used to fit the rule, reproduces Apple's 32×32×64 library kernel on 6,144 of 6,144
+elements (exact-sum-rounded-once: 1,948) and a previously failed tile on 1,024 of 1,024; Apple's \code{matmul2d} is
+bit-exact to it on all eight shapes of the speed comparison (measured, MM~\mm{4}, MM~\mm{25.98}). The converse failure was
+also seen: this project's tensor runtime once used a reference MMA that added C after the products, and the released
+\code{multigemm} class had been failing its own exact check on 417 of 1,024 elements for that reason (MM~\mm{25.89}).
+
+\textbf{Accumulate-mode composition in Apple's library: exact rule} (measured, MM~\mm{4}, MM~\mm{0.6},
+MM~\mm{15}). The library's own accumulate mode orders C the other way. With a nonzero C, \code{matmul2d}'s
+multiply-accumulate mode runs the MMA chain from zero and then loads C and adds it with ordinary fp32 adds (product
+first, C last), one extra rounding compared with putting C in the first MMA. The one-rounding difference between that
+mode and a single MMA with C has the same cause as the worked example. This describes how the library composes calls;
+inside one issue C still enters first, so a reference that models \code{matmul2d} needs both orders, and a compiler that
+puts C in the first MMA will differ from the library's accumulate mode by that rounding.
+
+\textbf{Longer K: exact rule} (measured, MM~\mm{4}). Issues compose through the rounded fp32 accumulator: two-issue chains
+reproduce the rule applied twice on 17 of 17 stimuli, three-issue chains 17 of 17; an unrounded inter-issue
+accumulator is rejected (8 of 17, 12 of 17). K order is ascending in memory whether the library unrolls or loops: for
+K=64, chunk orders 3210, 0213 and 1032 are each rejected by at least one stimulus; a K=128 runtime loop gives
+\code{1 + 6eps} on seven asymmetric probes where descending gives \code{1 + 8eps}.
+
+\textbf{Other input types: measured cases.} The machine model states that bfloat and truncated-fp32
+operands follow the same tree (MM~\mm{0.6}, MM~\mm{5}), but the discriminating fit above was made on half inputs only.
+Their products are exact only while fp32 can hold them, and unlike half products they can leave fp32's range. The
+record has single points at the extremes, not a rule: a bfloat product at $2^{-133}$ or $2^{-140}$ (fp32 subnormals) is
+kept, a bfloat product of 3e38 × 3e38 gives Inf, a truncated-fp32 product $2^{100} \times 2^{-100}$ is exactly 1, and
+truncated-fp32 subnormal operands keep their surviving bits (recon section 33; MM~\mm{5}).
+
+\textbf{fp32 operands: exact rule} (measured, MM~\mm{5}). An fp32 A or B is masked, not rounded: the low 13 bits of the raw
+pattern are cleared, keeping sign, 8 exponent bits and 10 fraction bits, for normals and subnormals alike (TF32-shaped
+truncation toward zero). \code{1 + 2\textasciicircum{}-10 + 2\textasciicircum{}-11} becomes \code{1 + 2\textasciicircum{}-10}; \code{2 - 2\textasciicircum{}-23} becomes \code{2 - 2\textasciicircum{}-10}; the full exponent
+range survives (\code{2\textasciicircum{}100 * 2\textasciicircum{}-100 = 1} exactly). The truncated operands then follow the same tree. The fp32-operand forms
+cost no issue rate over the half forms (measured, MM~\mm{8}; \cref{ch:performance}).
+
+\begin{itemize}
+\item \emph{Correction:} "fp32 operand subnormals flush to zero" (recon section 5; MM~\mm{19}) is withdrawn: only the low 13 bits are
+  cleared. The module docstring of \code{tools/tensorops-model/tensorops\_model.py} (line 12, "subnormals flushed") still
+  carries the old reading; its \code{to\_f32\_operand} docstring and code (\code{\& 0xffffe000}) keep subnormals, matching MM~\mm{5}.
+\end{itemize}
+
+\textbf{Subnormals: measured cases} (measured, MM~\mm{5}). In the recorded cases nothing in the half or bfloat path or the accumulator flushes: half
+\code{2\textasciicircum{}-24 * 1} gives \code{2\textasciicircum{}-24}; a bfloat product at \code{2\textasciicircum{}-140} is kept; an fp32 accumulator subnormal passes through. fp32
+ALU operations flush subnormal inputs and results (MM~\mm{5}, MM~\mm{17} rule 22; \cref{ch:scalar-arithmetic}), so a subnormal
+the MMA produces is flushed to zero by the next fp32 ALU instruction that reads it.
+
+\textbf{Special values: measured cases} (measured, MM~\mm{5}).
+
+\begin{itemize}
+\item The 51 recorded edge cases (recon section 33; MM~\mm{5}) give, case by case: NaN × 1, NaN × 0, Inf × 0, Inf + (−Inf)
+  inside the sum, and a NaN in C each yield the fp32 quiet NaN \code{0x7fc00000}; Inf × 1 yields Inf; a bfloat product past
+  fp32's maximum (3e38 × 3e38) yields Inf; C = fp32 max plus 1 stays fp32 max.
+\item half \code{65504 * 65504 = 4.29e9} exactly, and sixteen such products sum exactly.
+\item A NaN in an A column poisons the result even where the matching B row is zero, so K padding must be zeros
+  (MM~\mm{17} rule 14).
+\item Whether Inf − Inf gives the canonical NaN at every position of the tree, and which NaN payloads survive, is not
+  recorded beyond these cases (open).
+\end{itemize}
+
+\textbf{Signed zero: measured case} (measured, MM~\mm{5}). \code{(-0) * 1} with every other term zero gives \code{+0}, because the pair
+stage adds a neighbouring \code{+0} first under RNE; a model with \code{(-0) + (-0) = -0} mispredicts.
+
+\textbf{int8 inputs, int32 accumulator: exact rule} (measured, MM~\mm{5}, MM~\mm{11}). Products are exact, with signedness selected
+independently for A and B. The default form accumulates modulo $2^{32}$ with no saturation, including inside one MMA:
+\code{C + 2\textasciicircum{}31} gives \code{-2\textasciicircum{}31}, and \code{16*127*127 + INT\_MAX} wraps to −2147225585. 608 accumulators were exact modulo $2^{32}$ out
+to a million iterations in all four sign combinations, 429 of them after leaving the int32 range. One K=16 tile cannot
+overflow on its own (16 × 16,384 = 262,144).
+
+\textbf{Saturating int8: exact rule} (measured, MM~\mm{11}, MM~\mm{25.42}, MM~\mm{25.89}).
+
+\begin{itemize}
+\item One MMA computes \code{D = clip(C + A.B, -2\textasciicircum{}31, 2\textasciicircum{}31 - 1)}: one signed clip of the exact sixteen-term sum, also for
+  unsigned operands, which saturate at the signed limit. The rule scored 2,400 of 2,400 tiles in every sign
+  combination; wrapping scored 1,746, 1,759, 1,742 and 2,129, staged saturation 1,975, 1,886, 1,897 and 2,400. The
+  unsigned-by-unsigned column (the last) cannot discriminate, because every product is non-negative; the signed cases
+  carry the result. Saturation is not sticky.
+\item Under transpose, with D seeded to \code{INT32\_MAX - 32} and all-ones int8 operands (exact sum 2147483679), wrap
+  predicts −2147483617 and saturation 2147483647. With A transposed, Apple's bytes (byte8 0x44) give −2147483617 on all
+  1,024 outputs; with byte8 bit 4 set on all sixteen \op{10384} instances (0x54), 2147483647 on all 1,024; an in-range sum
+  (64) is unchanged by the bit (MM~\mm{25.42}). The untransposed pair (0x40, 0x50) behaves the same.
+\item A chain of saturating MMAs clips once per issue: on inputs near both rails, wrap, clip after every
+  product, clip after every issue and clip once at the end differ pairwise on 21 to 56 of 1,024 elements, and the
+  hardware matched clip-per-issue (MM~\mm{25.89}).
+\item \emph{Correction:} MM~\mm{20} ("Correctness hazards left open") says saturation with transposes, chains and high registers
+  "was not run"; its own inline note marks this stale. Transposes were run in MM~\mm{25.42} and chains in MM~\mm{25.89}: saturation
+  applies per issue and is independent of the transpose bits.
+\end{itemize}
+
+\textbf{Destination conversions: exact rules} (measured, MM~\mm{5}, MM~\mm{6}, MM~\mm{0.6}, MM~\mm{17} rule 21). These are the conversion
+instructions a kernel applies to the fp32 accumulator, not part of the MMA. Over 1,510,400 fp32 patterns:
+
+\begin{itemize}
+\item fp32 to half is IEEE round-to-nearest-even with zero mismatches, subnormal results included (\code{65520} goes to
+  infinity, \code{2\textasciicircum{}-25} to zero).
+\item fp32 to bfloat is RNE except that an fp32 subnormal input returns a zero carrying the input's sign (5,879 of
+  5,912 subnormal patterns).
+\item Every NaN input maps to one canonical NaN per type: half \code{0x7e00}, bfloat \code{0x7fc0}.
+\item Denormal and fast-math settings change none of this.
+\end{itemize}
+
+\textbf{16-bit destinations across calls: measured case} (measured, MM~\mm{12}, MM~\mm{17} rule 18). A 16-bit destination rounds
+after every accumulating library call: four contributions to a half destination give 2054 where one rounding gives
+2052; the same contributions inside one call with K=64 give 2052, because internal K slices stay fp32. Use a float
+destination across calls.
+
+In every tested route, fp8, int4 and scaled inputs are reached through conversions in front of these forms; see \cref{sec:quantized-formats}.
+
+To match the hardware bit for bit, a reference model has to add C first inside an issue (the rule fitted on half
+inputs), truncate fp32 operands rather than round them, carry subnormals through the MMA (in the measured cases) and
+wrap int32 accumulation by default; an ordinary dot product gets the bits wrong, as do the sequential and exactly
+rounded rivals above.
+
+\textbf{Evidence.} MM~\mm{0.6}, MM~\mm{4}, MM~\mm{5}, MM~\mm{6}, MM~\mm{11}, MM~\mm{12}, MM~\mm{15}, MM~\mm{17}, MM~\mm{19}, MM~\mm{25.42}, MM~\mm{25.89}, MM~\mm{25.98}.
+
+\section{Ordering and the tensor enable}\label{sec:ordering-enable}
+
+\subsection*{Ordering}
+
+The scoreboard's semantics (slots, wait masks, slot choice and reuse, what an unwaited consumer reads) are
+\cref{sec:scoreboard}'s, and the carriers of every field are \cref{sec:scoreboard-publish-wait}'s. What is specific to the tensor unit:
+
+\begin{itemize}
+\item A tensor MMA carries an 8-bit wait mask at flags bits 24–31: for a load filling slot \code{s}, the consuming MMA must
+  set bit \code{24 + s} (measured, MM~\mm{6}, MM~\mm{0.8}). The bits are physically scattered (slot 7 is
+  byte0{[}3{]}; \cref{sec:scoreboard-publish-wait}). In the running example (\cref{sec:one-program-ir}) all eight tile loads fill slot 0 and each MMA's
+  flags word is 0x01000000, bit 24.
+\item \emph{Earlier reading as a result ring.} The same bits were first read as an eight-slot
+  "result ring" of in-flight results: in Apple's code each compiled MMA waited on exactly its own load group, so the bits
+  looked one-hot and positional (MM~\mm{6}, MM~\mm{19}; the correction is told in \cref{sec:scoreboard-publish-wait,sec:scoreboard}).
+  The wait-mask reading ties each bit to the slot a load fills, and predicting each consumer's bit from its load's slot
+  was confirmed 20 of 20 (preregistered, MM~\mm{6}). In the removal control, clearing byte0{[}3{]} on an
+  MMA whose operands come from slot 7 makes it read fragments before the loads land; it produces zeros
+  deterministically (50 of 50 dispatches across five processes for tensor loads) (measured, MM~\mm{6}, MM~\mm{17} rule 4).
+  An unmasked slot is not waited on, and nothing reports it. \textbf{Silent.} An emitter must set the wait bit of every
+  slot that an operand's load fills; this can be checked from the decoded bytes alone.
+\item The tensor load names the slot it fills in operand 1 bits 20–23, as slot + 1, a different carrier from the ordinary
+  \op{12709} (measured, MM~\mm{6}, MM~\mm{25.4/R6} "R6 closed and B2 decoded"; \cref{sec:scoreboard-publish-wait}).
+\item On the result side, an ALU instruction placed directly after an MMA, with no wait, read the MMA's result correctly;
+  whether the hardware interlocks MMA-to-ALU or the consuming form waits implicitly is open (MM~\mm{6}, MM~\mm{25.90}). In
+  this compiler's kernels an ALU read right after the last MMA needed no extra wait and was bit-exact (this compiler, measured,
+  MM~\mm{25.105.1}). Assume the pattern holds for the measured kernels and no further; it is not a proven interlock.
+\item Feeding D as the next MMA's C, A or B in the same simdgroup needs no wait in the measured forms, and no
+  instruction when the consumer takes fp32; a 16-bit consumer needs eight narrowings (\cref{sec:chaining-feed-modes}; measured,
+  MM~\mm{0.9}, MM~\mm{13}).
+\item Tensor store (\opn{17257}, 876 instances) and masked tensor store (\opn{17258}, 118 instances) carry a
+  zero wait byte in every compiled instance, yet immediate MMA-to-store paths are exact (measured and decoder, MM~\mm{6}; \cref{sec:scoreboard}).
+\item \emph{Hazards caused by the host harness.} Two apparent MMA hazards (a stored result feeding a register-resident consumer;
+  independent back-to-back MMAs) were the harness's \code{dim} parameter, which bounds how many output bytes are complete
+  and host-visible on return; both kernels pass when it covers the output (\code{dim\textasciicircum{}2 * esz}) (MM~\mm{19}, MM~\mm{17} rule 5).
+\item Slot assignment past eight load groups and slot reuse follow \cref{sec:scoreboard}; this compiler's K=256 half and int8
+  lowerings (16 K slices, slots reused two to three times) match Apple and the reference in all three trials (measured,
+  MM~\mm{6}, MM~\mm{20}).
+\end{itemize}
+
+\subsection*{Per-kernel metadata slot 44}
+
+The enable's effect was measured by patching 14 pipelines (MM~\mm{6}, MM~\mm{0.1}). The metadata format is in
+\cref{ch:kernel-metadata-image}.
+
+\begin{itemize}
+\item Slot 44 is present exactly when the code contains a tensor MMA: in all 50 such kernels and in no legacy-engine
+  kernel. That correlation alone could be bookkeeping that follows from the code; the patches below show it is required.
+\item If its low byte is zero, every tensor MMA produces zeros, the pipeline still builds and the dispatch completes
+  without error. In the tested patches any nonzero low byte, with the other three bytes arbitrary, is bit-identical
+  to the original, so the low byte acts as an on/off switch.
+\item A disabled unit produces zeros quickly and neither faults nor stalls: a 1,400-MMA chain runs in 14.75~µs
+  instead of 32.0 (8.4~ns per issue instead of 22), a saturated dispatch in 0.587~ms instead of 22.7 (a factor of 39).
+  The MMAs still issue, at roughly ALU cost, while writing zeros. The timing fits a power or clock gate better than a
+  validity check; the mechanism itself was not measured.
+\item An image author must give every kernel that contains a tensor MMA the enable with a nonzero low byte. A zero low byte is not refused at pipeline build and shows up only as zero results.
+  \textbf{Silent.}
+\item With an explicit imageblock in the same kernel, per-kernel slot 19 sits at 55 and the tensor enable moves to slot 54;
+  the slot-29 vector is {[}48, 49, 52{]} (Apple's compiler emits, MM~\mm{25.89}). "Slot 44" is the position in the
+  tensor-only layout, not a fixed index in every kernel.
+\end{itemize}
+
+Metal caches pipelines by AIR function hash, so a pipeline built earlier in the same process is
+reused and every byte patched into the archive afterwards silently does nothing. Build the archive in one process, and
+patch and dispatch in another, with a positive control that shows a predictable bit moving the output (measured,
+MM~\mm{17} rule 36, MM~\mm{25.42}).
+
+\textbf{Evidence.} MM~\mm{0.1}, MM~\mm{0.8}, MM~\mm{6}, MM~\mm{13}, MM~\mm{17}, MM~\mm{20}, MM~\mm{25.4/R6} "R6 closed and B2 decoded", MM~\mm{25.42}, MM~\mm{25.89},
+MM~\mm{25.90}, MM~\mm{25.105.1}.
+
+\section{Tensor loads and stores}\label{sec:tensor-memory-path}
+
+The tensor unit has no memory port of its own. Fragments are filled and drained by per-lane loads and stores at
+addresses ordinary ALU code computes; partial tiles are handled by masks, not by the MMA (measured, MM~\mm{7}). The general
+memory mechanisms (addressing, displacement folding, threadgroup memory) live in \cref{ch:memory}; bandwidth and latency
+figures in \cref{ch:performance}.
+
+\Cref{tab:tensor-load-store} lists the tensor load and store forms (measured, MM~\mm{0.8}, MM~\mm{7}).
+
+\begin{xltabular}{\linewidth}{@{}XXX@{}}
+\caption{Tensor load and store forms, with per-lane payload and mask kind.}\label{tab:tensor-load-store}\\
+\toprule
+Form & Per-lane payload & Mask \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Form & Per-lane payload & Mask \\
+\midrule
+\endhead
+\op{12674} & two 32-bit words, four 16-bit elements; 12- or 16-byte encoding & immediate (15 or 0) \\*
+\op{12675} & two words & 16-bit register \\*
+\op{12656} & one word, four int8 elements, byte-addressed & immediate \\*
+\op{12657} & one word & 16-bit register \\*
+\op{12692} & fp32 elements (element width 4) & not stated in the sources \\*
+\op{17257} & four 32-bit words & immediate \\*
+\op{17258} & four words & 16-bit register: bit j enables word j (j = 0..3); bits above 3 ignored;
+unwritten words keep their prior contents \\*
+\bottomrule
+\end{xltabular}
+
+An int8 operand needs the byte-addressed one-word form, not the generic four-word load (measured, MM~\mm{7}).
+
+The operand list of the tensor load and the tensor store is (decoder only, MM~\mm{7})
+\code{dst, mode imm, flag imm, base (a relocation expression naming the buffer), imm, index:GPR32, last-use imm, byte-offset imm, element code, mask}.
+
+\begin{itemize}
+\item The element code is the access width in bytes: 1 for the int8 one-word load, 2 for half (all 7,853 half/bf16 tensor-load
+  instances carry 2), 4 for float (the fp32 tensor load and plain float accesses), and 8 and 16 for wider accesses (16
+  witnessed on \op{12709} and \op{17256}) (measured and decoder, MM~\mm{7}, MM~\mm{25.37}).
+  \emph{Correction:} MM~\mm{25.5/R7}
+  "R7 narrowed" is superseded by MM~\mm{25.37} on code 4 (\cref{app:a}).
+\item In Apple's code the mask is only 15 or 0 and last-use only 0 or 16 (Apple's compiler emits, MM~\mm{7}). The last-use
+  immediate follows the index register and takes the release modifier's values (\cref{sec:modifiers-keep-flag}); a reader should treat 16
+  as releasing the index register.
+\item Field positions from a single-bit census: the mode field's variable content is byte11{[}3{]}; the index register is a
+  7-bit selector at byte3{[}1..7{]}; the byte offset is byte8{[}5..7{]} plus byte9{[}0..4{]} (decoder only, MM~\mm{7}).
+\item The slot the load fills is operand 1 bits 20–23, as slot + 1 (\cref{sec:ordering-enable}). A load can also carry a wait mask, used so the
+  first tile loads wait on the index register's own load (measured, MM~\mm{6}).
+\end{itemize}
+
+The row stride is not an instruction field. A non-default stride changes the mode immediate from 241 to
+2289 (bit 11 of the mode word), switches to a per-lane computed index register and adds ALU code; the stride lives in
+the register's precomputed value (decoder and Apple's compiler, MM~\mm{7}). Default strides must come from the operand's
+element size: a lowering that used \code{K*2} for every type was twice too small for float and twice too large for int8,
+and the 32×32×64 int8 case was wrong on 1,024 of 1,024 elements (measured, MM~\mm{17} rule 6). \textbf{Silent.}
+
+Partial tiles are masked with \op{612}, whose 8-bit \code{lo} and width immediates
+make masks tile-relative (measured, MM~\mm{7}, MM~\mm{19}; semantics in \cref{sec:masks-predicated-memory}). Multi-simdgroup sub-tile ownership is
+expressed as per-simdgroup store masks (Apple's compiler emits, MM~\mm{7}).
+
+A tensor load is a per-lane gather whose addressing is \cref{sec:fragment-layouts}'s; displacements are bytes
+(\cref{sec:address-computation}; MM~\mm{25.141.18}). \code{air.simdgroup\_async\_copy\_2d} lowers to a synchronous load/store loop and its wait to
+nothing; latency hiding is the scoreboard (Apple's compiler emits, MM~\mm{25.89}).
+
+Through Metal, the one fault seen (\cref{sec:out-of-range-accesses-observed}) came from a \code{regprobe\_multi} tensor-kernel
+probe whose configuration was not recorded (measured, MM~\mm{17} rule 34, as corrected there); size every buffer from the
+kernel's own layout. A dead load's destination is still in flight, and reusing it lets the late load overwrite it
+(measured, MM~\mm{25.114}).
+
+\textbf{Evidence.} MM~\mm{0.8}, MM~\mm{6}, MM~\mm{7}, MM~\mm{17}, MM~\mm{19}, MM~\mm{25.37}, MM~\mm{25.89}, MM~\mm{25.114}, MM~\mm{25.141.18}.
+
+\section{Chaining and the memory bridge}\label{sec:chaining-feed-modes}
+
+A feed hands one MMA's destination D (8 fp32 registers per lane) to a later MMA in the same simdgroup without a
+store. There are four modes: D as A, as B, as A with transA ("At") and as B with transB ("Bt"); D can
+also be the next C (the ordinary K chain).
+
+An fp32 D fed into an fp32 operand needs no instruction (measured, MM~\mm{13}); a 16-bit consumer needs
+exactly eight conversions, \op{1016}, per D tile. The direct chain is bit-identical to the
+memory bridge on 200 of 200 random matrices (204,800 elements).
+
+The measured relabelings admit two readings: a property of the MMA's operand ports, which every compiler must apply,
+or a consequence of how the producing kernel packed its tiles. \Cref{sec:coordinate-systems} derives the second, which
+predicts different feeds for the two packings in use. One measurement per packing separates the two:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item In kernels that pack A and D canonically (Apple-compiled \code{simdgroup\_matrix} code), register-direct chaining is
+  exact in all four modes with fixed relabelings: 1,596 of 1,596 random chained pairs over four modes, five operand
+  forms and grids from 1×1 to 4×4, extended to 304 of 304 over eight grids and five transpose combinations (measured,
+  MM~\mm{13}, MM~\mm{0.10}):
+
+  \begin{lstlisting}
+  fed as A            A_eff[r][k] = D[r][k]
+  fed as B            B_eff[k][c] = D[rotl1(k)][c]
+  fed as A, transA    A_eff[r][k] = D[rotl1(k)][rotr1(r)]
+  fed as B, transB    B_eff[k][c] = D[rotl1(c)][k]
+  \end{lstlisting}
+
+  A logical \code{A2 . D1} through the B feed then needs A2 loaded with its k index permuted by \code{rotl1} (wrong in 20 of 20
+  trials without it), and matches the unpermuted product to rounding, not bit for bit, because the permutation changes
+  the association order. In the transposed feeds the accumulator C must carry the same relabeling (MM~\mm{17} rules 9–11).
+\item In kernels that use B-row packing for every tile (this compiler's \code{tlower} emission), every feed reads the
+  logical operand bit for bit (measured, MM~\mm{25.103}): B computes \code{A2 . D}, At computes \code{D\textasciicircum{}T . B2}, Bt computes
+  \code{A2 . D\textasciicircum{}T}. The test was preregistered with the relabeled product as the prediction and the logical
+  product as the control expected to fail. The relabeled reference failed in every arm, with maximum errors of 290 (B), 305 (At) and 477 (Bt), and the logical product was bit-exact. The two references differ on
+  1,024, 1,024 and 896 of 1,024 elements (Bt's remaining 128 are columns where \code{rotl1(c) = c}), so the test could
+  separate them. Decoded, At differs from A only in operand 5 (the type field with the transpose bit) and, off the
+  diagonal, the fed register. The domain is one square stage (M = N = 32, K = 64), one simdgroup, no accumulate, with
+  the fed operand in fp32 or narrowed to half; mode A was measured separately in this compiler's chains (MM~\mm{25.89}).
+\end{enumerate}
+
+Both measurements place the relabelings in the producer's packing. A compiler applies them only when the producer packed D
+canonically; under B-row packing of every tile, D included, it applies none (MM~\mm{17} rule 9 as scoped by MM~\mm{25.103}),
+and B, At and Bt feeds outside the measured stage remain unmeasured. \emph{Correction:} the relabeling table read as an instruction property (MM~\mm{0.10},
+MM~\mm{13} before their scope notes) is scoped by MM~\mm{25.103}.
+
+Other feed cases have been measured:
+
+\begin{itemize}
+\item \emph{Accumulator (C) feed} (this compiler, measured, MM~\mm{25.125.2}): the register C feed is bit-identical to the memory
+  bridge (M32 and M16, 3 of 3 each; swapped-tile and claims-no-C controls fail on 1,024 of 1,024). At M32 it removes
+  eight fp32 C loads and the producer's eight stores but splits the consumer into two accumulator groups; the
+  instruction count is unchanged (192).
+\item \emph{int8 chains}: in hand-authored AIR (Apple's labeling), int8 accumulators, including register-resident requantized
+  chains, chain through all four modes with the half chain's rotations, 272 of 272 runs (measured, MM~\mm{3}, MM~\mm{11}).
+\item \emph{Transposed consumers across a quantize boundary} inside a hidden-chunk loop: nn reads \code{Pt.W}, tn \code{P.W}, nt
+  \code{Pt.Wt}, tt \code{P.Wt}, 12 runs exact (measured, MM~\mm{25.45}).
+\item \emph{S and P kept in registers} for prefill attention (a register-fed A from a named accumulator): exact (measured,
+  MM~\mm{25.163}; the time saved is in \cref{sec:bounds-real-workloads}).
+\item \emph{Staging D through the imageblock} is bit-exact but frees no registers and is slower: register feed 13.4 / 20.3~µs,
+  memory bridge 14.6 / 23.3~µs, imageblock 14.4 / 27.3~µs at M16 / M64; staging adds 254 instructions at M64
+  (measured, MM~\mm{25.106}).
+\end{itemize}
+
+Two earlier readings were host errors (MM~\mm{19}). That \code{matmul2d} allows one \code{run()} per kernel and that a
+chain must cross a kernel boundary was a misreading of slice offsets, which are (column, row); read correctly, both
+calls are bit-exact in one kernel. And certain operand ranges once excluded from register-direct chaining were errors
+of the host model, which rounded each product where the hardware forms products exactly; no operand-range condition
+remains.
+
+This compiler emits a feed only for a receipted key
+(producer and consumer form with every modifier, role A/B/C, transpose, tile grid, locality), all one simdgroup and
+one threadgroup (this compiler, MM~\mm{25.125.3}, MM~\mm{0.10}); any absent key stays on the memory bridge. A decoded chain containing any stack store is not
+register-resident (MM~\mm{17} rule 12).
+
+Apple's library has a chaining hazard (measured, MM~\mm{13}, MM~\mm{17} rule 13). Its cooperative input tensor exposes only the
+first \code{min(\#D1 tiles, \#D2 tiles)} blocks of the producer in row-major block order; a narrower consumer silently reads
+zeros or wrong elements for the rest. The rule predicts all 27 configurations measured per side (M and both widths in 16, 32
+and 64, one simdgroup), of which the nine narrower consumers per side fail; \code{is\_compatible\_as\_*\_input}, a run-time
+member function of \code{matmul2d}, returns true in every one, so it cannot serve as a guard. Pad the consumer to the producer's tile count or use the memory bridge. \textbf{Silent.}
+
+The memory bridge, a tensor store to row-major memory followed by a tensor load, worked in every measured case
+(measured, MM~\mm{13}): two separately generated bodies joined at a buffer offset are bit-exact, including a
+cross-lane stress and a K remainder. In one kernel and one simdgroup it needs no fence, because the second body's
+loads follow the first body's stores in program order on the same scoreboard. It is the correctness baseline and the
+default outside the receipted feed domain. Streaming the free tile axis runs grids up to 12×8 producing 12×12 (1,344
+MMAs, 4,807 instructions) with zero stack stores; spill edges are not a closed-form function of shape (two
+preregistered rules failed at 6 of 12 and 82 of 144).
+
+\textbf{Evidence.} MM~\mm{0.10}, MM~\mm{3}, MM~\mm{11}, MM~\mm{13}, MM~\mm{17}, MM~\mm{25.45}, MM~\mm{25.103}, MM~\mm{25.106}, MM~\mm{25.125.2}, MM~\mm{25.125.3},
+MM~\mm{25.163}.
+
+\section{Data movement across simdgroups}\label{sec:across-simdgroups}
+
+Registers did not cross a simdgroup in any measured case. A cross-simdgroup \code{simd\_shuffle} returns the caller's own simdgroup's value in
+256 of 256 cases. Only the accumulator role can stay register-resident across simdgroups, and only inside one library
+cooperative scope where both simdgroups take part in both calls; no register state crosses a simdgroup boundary there
+either (measured, MM~\mm{14}).
+
+A hand-off between simdgroups takes three steps (measured, MM~\mm{14}, MM~\mm{17} rule 7):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item a fragment-order store (16 bytes per lane for a converted A or B tile, 32 for an fp32 accumulator);
+\item a workgroup barrier: with no barrier, or with \code{air.simdgroup.barrier} alone, the hand-off is wrong in 12 of 12
+  trials; every workgroup barrier variant (execution-only, threadgroup memory, device memory, both) is correct in 12
+  of 12. Without one the consumer reads exactly zero, the buffer's pre-write state. That an execution-only barrier
+  sufficed is an observation about this chip, not a memory-model guarantee; \cref{sec:barriers-fences} says what each barrier
+  orders. \textbf{Silent} when omitted;
+\item a fragment-order load, which returns the producer's register bits in the same lane and slot: no relayout exists.
+\end{enumerate}
+
+The round costs roughly a quarter of a microsecond including both barriers (measured, MM~\mm{14}). Store + barrier + load
+per round: 38.0~ns at one simdgroup and one threadgroup per core, 81.9~ns at 32 simdgroups, 100–131~ns at 64 per core
+through threadgroup memory; through device memory 58–83~ns and 151–161~ns (1 percent above threadgroup memory at low
+occupancy, 17 percent at high) (measured, MM~\mm{7}). Threadgroup and device memory are within 8 percent in the scheduling
+study (MM~\mm{14}).
+
+Three scheduling rules follow from the measurements (216 of 216 exact, MM~\mm{14}, MM~\mm{17} rule 32):
+
+\begin{itemize}
+\item never recompute a shared stage per simdgroup (1.16 to 6.66 times the shared time);
+\item share at low occupancy (1.7 to 10 times faster than one simdgroup holding all tiles), and when one simdgroup would
+  hold 16 fp8 output tiles and spill 134–138 stores;
+\item otherwise keep the tiles in one simdgroup (sharing costs 3 to 22 percent).
+\end{itemize}
+
+Shared fused stages are exact through 16 simdgroups (measured, MM~\mm{0.14}, MM~\mm{20}); at 32 the recompute form
+stays exact but both shared forms exceed the 32 KiB threadgroup-memory limit. Sharing between threadgroups needs a
+dispatch boundary; a threadgroup that waits on another inside one dispatch depends on both being resident, which is
+the restriction of \cref{sec:forward-progress-in-order}.
+
+At \code{execution\_simdgroups<2>} and \code{<4>} the library partitions output tiles per simdgroup with no barrier and no
+threadgroup memory (Apple's compiler emits, MM~\mm{25.93}; \cref{sec:it-reached}). This
+compiler's \code{gemm\_generic} admits 2 and 4 simdgroups and up to 8 threadgroups, bit-exact on hardware (this compiler,
+MM~\mm{0.13}, MM~\mm{25.89}).
+
+\textbf{Evidence.} MM~\mm{0.14}, MM~\mm{7}, MM~\mm{14}, MM~\mm{17}, MM~\mm{20}, MM~\mm{25.89}, MM~\mm{25.93}.
+
+\section{Quantized formats}\label{sec:quantized-formats}
+
+Of the ten admitted forms, none takes an fp8 or sub-8-bit operand and none applies a block scale. In every route
+tested (Apple's compiler, Apple's library, hand-written AIR), low-precision formats reach the unit by conversion into
+an int8, half or bfloat fragment with ordinary instructions, and scales are applied in software. This describes the
+recovered forms and the routes tried, not a complete inventory of the hardware.
+
+int8 and uint8 are native (measured, MM~\mm{0.11}, MM~\mm{8}, MM~\mm{11}): \op{10384} and its
+no-C form, at exactly twice the fp16 issue rate (\cref{sec:tensor-issue-rate}). Arithmetic in \cref{sec:arithmetic-semantics-supported}.
+
+Requantization from int32 to int8 has no instruction; it is a scalar sequence (load, integer to float, multiply,
+round, float to integer, clamp, store) (measured, MM~\mm{11}). Rounding is round-half-to-even (±0.5, 1.5, 2.5, 3.5 give
+0, 2, 2, 4); the clamp saturates (32768 gives 127, not −128; −25600 gives 0, not 156). This compiler's requant
+epilogue computes \code{b = acc + bias[col]} (int32, wrapping), \code{f = float32(b)} (RNE), \code{y = float32(f*scale)} (RNE),
+\code{r = rint(y)} (half-even), \code{q = clamp(r + zp, lo, hi)}, lowered as \op{10282}, \op{11179}, \op{3290}, \op{3770}, a clamp to \code{[lo-zp, hi-zp]} with \op{9700} before narrowing, \op{9320}, and a second 32-bit add for the zero point
+(this compiler, measured, MM~\mm{25.130.1}).
+
+\begin{itemize}
+\item The float-to-int conversion saturates at both widths, signed and unsigned, and sends NaN to 0; a prior
+  \code{maxnum}/\code{minnum} clamp is harmful (it maps a NaN block to −127). Guard with \code{isnan(x)} or
+  \code{(as\_type<uint>(x) \& 0x7fffffff) > 0x7f800000}; under default fast math \code{x != x} folds to false (measured, MM~\mm{6},
+  MM~\mm{17} rule 17). \textbf{Silent.}
+\end{itemize}
+
+For fp8 (e4m3fn and e5m2), eight \op{17642} instructions, each
+taking two fp8 values in a 16-bit register to two bf16 values in a 32-bit register (format immediate 97 for e4m3fn, 98
+for e5m2), feed one ordinary bf16 use of the 16-bit MMA (measured, MM~\mm{11}). Decode is exact for all 254 finite e4m3fn codes and 248
+finite e5m2 codes; arithmetic is bit-identical to the bf16 rule on 96 of 96 tiles across four format pairs;
+transposes exact on 36 of 36. Cost: bf16's when the unpack is hoisted (4.96~ns per MMA per core, 14 accumulators); 5.3
+ns at four unpacked fragments per MMA and 8.4~ns at eight. Keep unpacked fragments per MMA at four or fewer (MM~\mm{17} rule
+28).
+
+For packing, \op{13618} (AIR \code{air.convert}) rounds to nearest even with no
+saturation (measured, MM~\mm{11}, MM~\mm{25.105}, MM~\mm{25.105.1}), verified over all $2^{32}$ fp32 patterns and all 65,536
+bf16 and fp16 patterns. Largest finite values are 448 (e4m3fn) and 57,344 (e5m2). Signed zeros are kept. \Cref{tab:fp8-pack-limits} gives the
+results at and beyond the range limits and for NaN.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.58\hsize}X>{\hsize=0.74\hsize}X>{\hsize=0.68\hsize}X@{}}
+\caption{fp8 pack results for large magnitudes and NaN inputs, by target format.}\label{tab:fp8-pack-limits}\\
+\toprule
+Input & e4m3fn result & e5m2 result \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Input & e4m3fn result & e5m2 result \\
+\midrule
+\endhead
+magnitude rounds to 448 or less (464 itself rounds to 448) & RNE code & – \\*
+magnitude above 464, positive & 0x7f (NaN) & – \\*
+magnitude above 464, negative & 0xff (NaN, sign kept) & – \\*
+magnitude 61,440 or above, positive & – & 0x7c (+infinity) \\*
+magnitude 61,440 or above, negative & – & 0xfc (−infinity) \\*
+NaN input, either sign & 0x7f & 0x7e \\*
+\bottomrule
+\end{xltabular}
+
+An fp8 overflow keeps its sign; only NaN inputs become the positive canonical NaN. Two e4m3fn overflow arms whose
+reference sent every overflow to 0x7f failed in exactly the negative overflows (174 of 372, 297 of 575); with the
+sign kept, both arms match word for word, and e5m2's 963 overflows were signed infinities (measured, MM~\mm{25.105}). The
+quantize-out epilogue of this compiler and the pack measured in MM~\mm{11} are the same instruction, the fp8 pack, so the
+rule covers both. \emph{Correction:} MM~\mm{0.11}'s quantizer table ("Above 464 → canonical NaN") is superseded for negative
+overflows by MM~\mm{25.105} (corrected at MM~\mm{25.105.1}); MM~\mm{11}'s "Every NaN input maps to the positive canonical NaN" is about
+NaN inputs only and stands.
+
+Apple's fp8 store encoding (Apple's compiler emits, MM~\mm{25.105.1}): per eight floats, four packs of the 12-byte form of
+fp8 pack, vector, from fp32/half/bf16 (\code{op13618/12}), each
+writing one 16-bit half from two fp32 registers in place (\code{R4L <- R4, R5}, then \code{R4H <- R6, R7}, where R4–R7 are four
+accumulator registers), then one \op{17202} per packed register (width 4, index \code{lane*5}).
+
+int4 and uint4 likewise reach no admitted form directly (measured and Apple's compiler, MM~\mm{5}, MM~\mm{25.6},
+MM~\mm{25.28}). Nibbles
+are unpacked by ordinary ALU instructions, for example \op{435}, \op{437} and
+\op{11183} with the integer-to-float conversions, into a supported fragment, then the 16-bit MMA,
+\op{5106}, or the int8 MMA. int2 needs no new mechanism; its refusal is at the
+\code{tensor\_inline} constructor, an API limit (MM~\mm{25.6}). \emph{Correction:} the two AND forms were once read as shifts.
+
+No tested route reaches fp4 (e2m1) or fp6 (e2m3, e3m2) in hardware (bounded negative and Apple's compiler, MM~\mm{0.11}, MM~\mm{20},
+MM~\mm{25.94}): no vendor route tested produced a hardware unpack, pack or MMA for them. After a software decode the ordinary fp16 or
+bf16 use of the 16-bit MMA applies; the decode costs about 24 instructions per value in Apple's newer backend and about 4 in MLX's bit
+trick. Packed fp4 and fp6 tokens crash \code{buildConvert}; \code{air.pack} and \code{air.unpack} crash \code{buildPack};
+\code{air.quantize\_pack} crashes \code{NumericPackUnpackPass}. This compiler has not built the software operand unpack (MM~\mm{0.14}).
+
+No tested route applies a block scale in hardware (measured, MM~\mm{11}, MM~\mm{17} rule 26). The scaled \code{matmul2d} form is MX-style: a \code{ue8m0}
+scale per 32 elements along K, one plane per row of A and per column of the transposed B, no bias, no zero point. The
+eleven-operand scaled intrinsic compiles but has no effect: across 36 configurations with scale exponents from $2^{-30}$
+to $2^{+30}$, every output equals the unscaled result and the emitted 16-bit MMA bytes are identical; per-lane scale operands
+are dropped silently. Never emit the scaled spelling expecting scaling. \textbf{Silent.} The scaled int8 form with fp32
+accumulate aborts at \code{Failed to encode.} (Apple's compiler, MM~\mm{20}).
+
+Scaling in software was measured for placement and cost (MM~\mm{11}, MM~\mm{25.105.2}):
+
+\begin{itemize}
+\item \emph{Cheapest placement:} per 32-element K block, two MMAs into a zeroed temporary (the first is \op{5107}), then one
+  fp32 multiply-add of the block sum by the product of the two scales: 8 instructions per MMA, 1.03 to 1.08 times the
+  unscaled MMA time on 2×2 to 4×2 grids; 477 byte-table plus 128 predecoded comparisons bit-identical.
+\item \emph{Latency hiding:} the block's MMAs do not depend on the accumulator, so the multiply-add's round trip hides behind
+  the next block's MMAs. Against a chained form it costs 8~ns per step (15 percent), where a multiply-add inside the
+  dependent path costs about 27~ns per step at low occupancy; the forms converge at 12 or more simdgroups per core.
+\item \emph{Operand-side scaling:} 5.7 to 10.1~ns against 5.0~ns per MMA, 74 percent of elements exact for one block;
+  the integer exponent add is wrong for zeros and subnormals.
+\item \emph{This compiler's MX step} (\code{mx32}) uses the post-MMA placement with \code{T = (T * SA) * SB} then \code{D += T} (two fp32
+  multiplies and an fp32 add). The multiplies are exact while the result stays in fp32's normal range, because the
+  factors are powers of two; a result below $2^{-126}$ is flushed by the ALU (\cref{sec:fp32-arithmetic}), and the add
+  into D rounds as any fp32 add does. The step is bit-exact for e4m3 × e5m2, e5m2 ×
+  e4m3 and bf16 at K = 64 to 128, refused with transposes, accumulate, more than one simdgroup, the K loop and
+  register-fed B, and untuned (29.4~µs against 17.6~µs unscaled at K = 64) (this compiler, measured, MM~\mm{25.105},
+  MM~\mm{25.105.2}).
+\item \emph{Where scaling time goes in fused kernels:} block scaling is 25–27 percent of fused fp8 time and 44–49 percent of
+  int8 (measured, MM~\mm{16}).
+\end{itemize}
+
+The ceil quantizer rule (measured, MM~\mm{11}, MM~\mm{17} rule 27) flushes fp32 subnormals, takes the block's integer maximum
+of absolute bit patterns, reduces across lanes with two \code{simd\_shuffle\_xor} steps, and then computes
+
+\begin{lstlisting}
+code   = clamp(((amax_bits + BIAS) >> 23) - EMAX, 0, 254)
+BIAS   = 0x1fffff, EMAX = 8   (e4m3fn)
+BIAS   = 0x1fffff, EMAX = 15  (e5m2)
+BIAS   = 0x1ffff,  EMAX = 6   (int8)
+factor = 2^(127 - code), built as (254 - code) << 23
+\end{lstlisting}
+
+It costs 127 instructions and 15.0~ns per 16×32 block, never needs a clamp, and is 12 to 31 percent more accurate on
+e4m3fn. The OCP floor rule costs 157 instructions and 19.4~ns and needs a software clamp (without it 202 of 1,024
+gaussian blocks produce NaN in e4m3fn). Both are exact on 112 adversarial cases. Because the pack does not saturate,
+only the scale rule keeps values in range.
+
+\begin{itemize}
+\item Scale codes run 1 to 254. Code 0 (\code{2\textasciicircum{}-127}, an fp32 subnormal) is flushed by the ALU, so it is unusable (this
+  compiler refuses it by name); code 255 yields NaN for the block. In-kernel E8M0 decode
+  \code{(e << 23) + (((e + 1) >> 8) << 22)} gives \code{2\textasciicircum{}(e-127)} for codes 1–254 and \code{0x7fc00000} for 255 (measured, MM~\mm{11},
+  MM~\mm{25.128}).
+\item \emph{Accuracy} (relative Frobenius error against fp64, 64×512×64 gaussian): int8 block-32 with fp32 scale 0.0076,
+  power-of-two ceil scale 0.0112; e4m3fn block-32 ceil 0.0376; e5m2 0.0757. fp32 accumulation contributes 1.4e-8 to
+  5.1e-8, never the limit. int8 is 1.2 to 1.4 times faster block for block (measured, MM~\mm{11}).
+\item \emph{Format choice by working set:} bf16 and fp16 are fastest in cache (5.4–6.7~ns per MMA per core), then block-scaled
+  int8, then fp8; int8 overtakes bf16 between 21 and 42 MiB of working set, fp8 between 84 and 169 MiB. fp8 is the
+  choice for capacity and bandwidth; in cache it is the slowest of the three (measured, MM~\mm{16}).
+\item \code{air.rint} builds and rounds half to even; \code{llvm.roundeven} and \code{llvm.nearbyint} crash Apple's compiler (MM~\mm{20}).
+\end{itemize}
+
+\textbf{Evidence.} MM~\mm{0.11}, MM~\mm{5}, MM~\mm{6}, MM~\mm{8}, MM~\mm{11}, MM~\mm{16}, MM~\mm{17}, MM~\mm{20}, MM~\mm{25.6}, MM~\mm{25.28}, MM~\mm{25.94}, MM~\mm{25.105},
+MM~\mm{25.105.1}, MM~\mm{25.105.2}, MM~\mm{25.128}, MM~\mm{25.130.1}.
+
+\section{Reductions}\label{sec:reductions}
+
+A reduction here means summing (or taking max/min of) a tile's elements along rows or columns, either inside Apple's
+library (\code{reduce\_rows}, \code{reduce\_columns}) or in code a compiler emits from cross-lane primitives (\cref{ch:cross-lane-operations}).
+
+The library's FP32 reductions follow one rule (measured, MM~\mm{12}; 215,040 of 215,040 outputs in one census and
+184,320 of 184,320 over seven shapes in another, no disagreement among replica lanes):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item each lane sums its own elements of the tile in slot order, sequentially with RNE32;
+\item a butterfly of lane exchanges then runs over the lane bits along the reduction axis, in ascending lane-bit order: a
+  row reduction over lane bits 0 and 3, a column reduction over lane bits 1, 2 and 4.
+\end{enumerate}
+
+These are the lane bits the axis runs along, which is why they read transposed against the layout formulas of
+\cref{sec:fragment-layouts}. \emph{Correction:} "the two reduction axes follow structurally different orders" (recon section 120; MM~\mm{19}) is
+withdrawn: one rule on two axes.
+
+Summation direction is fixed per compiled object (Apple's compiler, MM~\mm{12}, MM~\mm{25.35}, MM~\mm{25.39}). The per-lane
+chain may run ascending or descending. Of 20 objects, 4 ascend and 16 descend. Under strict math an explicit reduction
+runs as written; under default fast math an ascending source is normalized to descending unless every leaf has another
+use (partial extra uses still normalize). The direction is readable from the compiled object without a dispatch
+(\code{tools/g17reduxdir.py}). N congruent to 8 modulo 16 makes the sum ascending on its own (7 of 7, against 20 of 20
+descending where N is a multiple of 16). The read-all flip needs the destination tile spilled and per-lane capacity
+of at least 12 (no exceptions on 45 fitted pairs; held out 106 of 109, the three misses at shapes whose baseline already
+spills); the reduction tree itself is never rebuilt (46 of 46). When M is 16 one object can contain both directions (a long
+chain family and twelve short chains disagree in 10 of 33 objects). The library's order cannot be relied on; a compiler that
+needs bit-stable sums emits its own chain under strict math (MM~\mm{17} rule 24).
+
+Among the hardware primitives (measured, MM~\mm{12}, MM~\mm{25.141.16}, MM~\mm{17} rule 25; \cref{ch:cross-lane-operations} is their home), \code{simd\_sum} and
+\op{16842} are a balanced adjacent-lane tree, an xor butterfly in mask order 1, 2, 4, 8, 16, rounded to
+the element type at every step (\cref{sec:native-reductions}); \op{14169} returns 0.0 for a mask of 32
+or more, and \op{14170} needs a lane-uniform mask (\cref{sec:shuffle-xor-bounded-masks}). A compiler emitting its
+own reduction builds it from these.
+
+The library's semantics depend on the destination type (\cref{tab:library-reductions}; measured, MM~\mm{12}, MM~\mm{17} rules 19–20).
+
+\begin{xltabular}{\linewidth}{@{}lXX@{}}
+\caption{Library reduction semantics by destination type, for sum and for max and min.}\label{tab:library-reductions}\\
+\toprule
+Destination & Sum & Max / min \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Destination & Sum & Max / min \\
+\midrule
+\endhead
+FP32 & per-lane sequential RNE32 chain, then the axis butterfly & exact; the identity participates; NaN ignored \\*
+half & every addition rounds to half & exact at half precision, finite extrema as identities \\*
+bfloat & adds in fp32, one final bfloat rounding & exact at bfloat precision, finite extrema as identities \\*
+int32 & exact over the measured domain & exact, integer extrema as identities \\*
+\bottomrule
+\end{xltabular}
+
+\code{max} and \code{min} fold in the identity, not the extremum, and ignore NaN like \code{fmax}: an all −inf row returns −FLT\_MAX
+(float), −65504 (half), −3.3895e38 (bfloat). A masked-softmax lowering expecting −inf from a fully masked row will not
+get it.
+
+Only the FP32 reduction is lowered by this compiler (this compiler, measured); it emits an
+explicit fp32 local chain plus a shuffle-xor butterfly rather than calling \code{reduce\_rows}, and refuses other precisions,
+shapes and multi-simdgroup reductions by name (MM~\mm{12}, MM~\mm{15}). The register-resident column reduction folds
+accumulators over row tiles, then runs an xor butterfly over lane masks 2, 4 and 16 with the immediate-mask shuffle-xor: six arms bit-exact;
+an exactly rounded control fails by up to 9.5e-6 (MM~\mm{25.103}). A KV-split attention changes values, not only
+association, and needs a KV-split reference (MM~\mm{17} rule 23).
+
+\textbf{Evidence.} MM~\mm{12}, MM~\mm{15}, MM~\mm{17}, MM~\mm{19}, MM~\mm{25.35}, MM~\mm{25.39}, MM~\mm{25.39.1}, MM~\mm{25.103}, MM~\mm{25.141.16}.
+
+\section{Legacy simdgroup-matrix engine}\label{sec:legacy-simdgroup-matrix-engine}
+
+The older \code{simdgroup\_matrix} path is a separate engine: 8 × 8 tiles, 14-byte instructions, different scheduling
+classes, no shared bytes with the tensor MMA, and a different reduction order (measured and decoder, MM~\mm{2}, MM~\mm{9}).
+
+Legacy opcode selection is by accumulator type (\cref{tab:legacy-forms}; Apple's compiler emits, MM~\mm{9}, MM~\mm{0.3}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.34\hsize}X>{\hsize=0.68\hsize}Xl>{\hsize=0.91\hsize}XX@{}}
+\caption{Legacy simdgroup-matrix MMA forms by input and accumulator type, with scheduling class, accumulator registers and
+arithmetic.}\label{tab:legacy-forms}\\
+\toprule
+Form & Inputs, accumulator & Class & Accumulator registers & Arithmetic \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Form & Inputs, accumulator & Class & Accumulator registers & Arithmetic \\
+\midrule
+\endhead
+\op{838} & fp16, fp16 & 43 & one 32-bit register & lower-precision accumulator \\*
+\op{2862} & fp16, fp32 & 118 & two-register tuple & sequential fp32 chain \\*
+\op{2842} & fp32, fp32 & 118 & two-register tuple & sequential fused fp32 FMA chain \\*
+\op{2902} & bf16, fp32 & 118 & two-register tuple & fp32-accumulate class \\*
+\bottomrule
+\end{xltabular}
+
+The rest of this section calls them the f16, f16-in-fp32-out, fp32 and bf16 legacy forms. \op{839}
+(\code{simdgroup\_multiply}, class 44) issues at the cost of the f16 legacy MMA: slope 3.435e-05
+against 3.436e-05 seconds per op, ratio 0.9998, null arm flat (measured, MM~\mm{25.55} as corrected by MM~\mm{25.56}, which fixed
+the unit from milliseconds to seconds).
+
+As measured (MM~\mm{4}), the f16-in-fp32-out form is \code{acc = C; for k in 0..7: acc = RNE32(acc + a\_k*b\_k)} (168
+of 168 eps-triples; pairs-first 144, balanced 112). The fp32 form is a sequential fused fp32 FMA chain at full precision: \code{1 + 2\textasciicircum{}-23}
+survives and \code{(1+u)(1+u) - (1+2u)} returns \code{2\textasciicircum{}-46}, which is why Apple routes exact fp32 there rather than to the
+tensor unit's truncating fp32 forms. The two engines' results differ bit for bit, so an output tile stays on one
+engine (MM~\mm{9}, MM~\mm{17} rule 31).
+
+Beside the tensor unit (measured, MM~\mm{9}), at 16 and 32 simdgroups per core the legacy stream is hidden under
+the tensor stream completely (overlap 1.00 for every legacy form); 0.91–1.00 at 8. A dependent hand-off between the
+engines is free at 8 or more simdgroups per core; at 2 per core tensor-to-legacy runs 9.7–13.5 percent above control
+and legacy-to-tensor 1.1–6.2~ns above. The partial overlap at one or two simdgroups is in-order issue, not a shared
+resource. \emph{Correction:} "legacy MMA and accelerator share one issue slot" (recon section 31; MM~\mm{19}) is withdrawn.
+
+Beside the fp32 ALU (measured, MM~\mm{9}), the f16 form overlaps fp32 fma by 0.66–0.95 (mostly different
+resources); the class-118 forms overlap it by 0.37 or less (0.07–0.37 for the f16-in-fp32-out and bf16 forms), so the
+pair costs 89–97 percent of the plain sum. \emph{Correction:} "the legacy MMA overlaps fp32 fma by 81–86 percent" is true of
+the f16 form only (MM~\mm{19}).
+
+The legacy engine's rates and joint budget were measured (MM~\mm{9}):
+
+\begin{itemize}
+\item Legacy: 183–205 MAC per ns per core against 122–133 for the fma stream; issue 2.79–2.80~ns at 32 simdgroups per
+  core and 2.48–2.58 at 8 and 16, which is 226–253 FLOP per cycle, 4.0–4.5 times less per FLOP than the tensor MMA.
+  What the legacy engine shares with fp32 fma is not identified; "about 8 fma of budget per legacy issue" is a measured
+  exchange rate, not a mechanism (open).
+\item Beside a saturated tensor stream: free up to 8 fma per MMA, or 8 legacy issues per 8 tensor MMAs; both together about
+  64 fma-equivalents per 8 tensor MMAs. Free legacy issues per 8 bf16 tensor MMAs: 8 with no fma, 4 at 4 fma per MMA,
+  1 at 8. Past the budget each legacy issue costs about 5 percent. Arithmetic gain is at most 12.5, 6.3 and 1.6
+  percent; 7 tensor plus 8 legacy issues run 1.142 times the throughput of 8 tensor issues.
+\item Do not schedule legacy MMAs in layer kernels; at about 46 instructions per tensor MMA they are already past
+  the joint budget (MM~\mm{17} rule 31).
+\end{itemize}
+
+The two engines can share one tile through memory (measured, MM~\mm{9}, MM~\mm{25.33}). A 16×24 by 24×16 product split by K
+(tensor 16, legacy 8) through a row-major memory bridge was exact on 32 of 32. \code{air.simdgroup\_matrix\_8x8\_load} and \code{\_store} take origin and
+strides as \code{<2 x i64>} in (column, row) order, so for a row width W, \code{strides = \{1, W\}}. The cross-engine register map
+is measured but the in-register bridge is unbuilt: the legacy 8×8 spreads 64 elements over 32 lanes at 2 each, the
+tensor layout packs them into 8 lanes at 8 each, both elements of a legacy lane travel together, and tensor lane =
+\code{L >> 2} with bits 0 and 1 swapped (tensor lanes 0..7 receive quads 0, 2, 1, 3, 4, 6, 5, 7).
+
+\textbf{Evidence.} MM~\mm{0.3}, MM~\mm{2}, MM~\mm{4}, MM~\mm{9}, MM~\mm{17}, MM~\mm{19}, MM~\mm{25.33}, MM~\mm{25.55}, MM~\mm{25.56}.
+
+\section{Compiler rules for tensor code}\label{sec:compiler-rules-for}
+
+MM~\mm{17} states the consequences of this chapter as numbered compiler rules. \Cref{tab:tensor-rule-index} gives, for
+each rule, the section that explains it together with its mechanism.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.17\hsize}X>{\hsize=0.83\hsize}X@{}}
+\caption{MM~\mm{17} compiler rules for tensor code, with the section that explains each.}\label{tab:tensor-rule-index}\\
+\toprule
+MM~\mm{17} rules & Where explained \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+MM~\mm{17} rules & Where explained \\
+\midrule
+\endhead
+1 (never name R126 or above, the MMA's tuples included;
+silent, MM~\mm{10}) & \cref{sec:fragment-layouts} and \cref{sec:namespace} \\
+2 (at most 15 live accumulator groups straight-line, 14 in a loop;
+\code{8N + K <= 115}, \code{8N + 4M <= 108}, MM~\mm{11}) & \cref{sec:capacity-budgets-spills} \\
+3 (Apple's spill counts are not hardware limits, MM
+\mm{13}) & \cref{sec:registers-spills-occupancy} \\
+4, 5, 36 (wait masks; host completion scope; build and patch in separate
+processes) & \cref{sec:ordering-enable} \\
+6, 34 (strides from element size; buffer sizing) & \cref{sec:tensor-memory-path} \\
+7, 32 (workgroup barrier for hand-off; never recompute a shared stage) & \cref{sec:across-simdgroups} \\
+8, 29 (\code{execution\_simdgroups<N>}; \code{relaxed\_precision}) & \cref{sec:it-reached} \\
+9–13 (feed relabelings, scoped by MM~\mm{25.103}; forwarding domain; the
+compatibility oracle) & \cref{sec:chaining-feed-modes} \\
+14–16, 18, 21–22 (zero K padding; fp32 truncation; int32 wrap and
+saturation; destinations and conversions) & \cref{sec:arithmetic-semantics-supported} \\
+17, 26–28 (float-to-int saturation and NaN, MM~\mm{25.50}; no hardware
+scaling; the ceil quantizer; fp8 unpack) & \cref{sec:quantized-formats} \\
+19–20, 23–25 (library reductions; KV-split reference; summation order;
+runtime shuffle masks) & \cref{sec:reductions} \\
+30, 33 (never unroll the K loop; fusion boundaries, MM~\mm{16}) & \cref{sec:measured-bottlenecks-studied} \\
+31 (no legacy MMAs in layer kernels; one engine per output tile) & \cref{sec:legacy-simdgroup-matrix-engine} \\
+37 (keep a loop phi's entry value live) & \cref{sec:modifiers-keep-flag} and 
+\cref{sec:loops-loop-variable-rule} \\
+\bottomrule
+\end{xltabular}
+
+\textbf{Not known.} Each item gives the safe course where there is one; \cref{ch:not-known-index} indexes them.
+
+\begin{itemize}
+\item MMA-to-ALU ordering is observed to work with no wait in the measured kernels; the mechanism is open, and no
+  scoreboard slot for an MMA result has been identified (MM~\mm{6}, MM~\mm{25.90}). Assume nothing beyond the measured
+  patterns.
+\item The meaning of the destination keep flag on hardware: inert as observed; set it as Apple does (MM~\mm{25.22}).
+\item A multi-bit encoding of the accumulator's modifier: not excluded (MM~\mm{6}).
+\item The 36 narrow-accumulator and 475 \code{\_shifted} declarations: not admitted; do not emit (MM~\mm{25.13}, MM~\mm{25.6}).
+\item Fragment shapes other than 16 × 16 × 16: not measured (MM~\mm{0.14}).
+\item The bit-71 int8 variant: runs, meaning unknown (MM~\mm{20}).
+\item The software fp4/fp6 operand unpack: not built; its fp16-subnormal behaviour unmeasured (MM~\mm{0.14}).
+\item What a released register reads: zero in every controlled run, not established in general; read one only where zero
+  and the old value give the same answer (\cref{sec:release-does}). Reclamation beyond the measured bound: not excluded (MM~\mm{25.95}).
+\end{itemize}
+
+\textbf{Evidence.} MM~\mm{0.14}, MM~\mm{17}, MM~\mm{20}, MM~\mm{25.95}, MM~\mm{25.103}.

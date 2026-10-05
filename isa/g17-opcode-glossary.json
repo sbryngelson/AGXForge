@@ -1,0 +1,3123 @@
+{
+ "schema": 1,
+ "scope": "A plain-English name for every opcode docs/g17-tensorops-machine-model.md cites; rendered as its section 0.16 by tools/g17opglossary.py",
+ "warning": "Names are this project's, chosen by measured function; they are not Apple's spellings. `mnemonic` is agxforge.g17.slice's key (EXECUTED_NAMES where it corrects KNOWN_OPS) and is never renamed.",
+ "opcodes": [
+  {
+   "op": 0,
+   "name": "uniform register file, decoder tag",
+   "mnemonic": null,
+   "what": "Not an instruction: Apple's decoder writes the uniform register file as op0 inside operands such as bin(op0,const(K),4).",
+   "confidence": "static",
+   "sections": [
+    "24.2",
+    "24.5",
+    "25.4",
+    "25.57",
+    "25.67",
+    "25.120.1"
+   ]
+  },
+  {
+   "op": 4,
+   "name": "message staging file, decoder tag",
+   "mnemonic": null,
+   "what": "Not an instruction: Apple's decoder writes the message staging register file as op4; a message instruction waits on the scoreboard slot of a write into it.",
+   "confidence": "static",
+   "sections": [
+    "20",
+    "24.2",
+    "24.5",
+    "24.6",
+    "25.27",
+    "25.57"
+   ]
+  },
+  {
+   "op": 423,
+   "name": "32-bit AND with immediate",
+   "mnemonic": "and",
+   "what": "d = a32 & imm; the register-immediate member of the and-width matrix.",
+   "confidence": "compiled",
+   "sections": [
+    "24.5"
+   ]
+  },
+  {
+   "op": 424,
+   "name": "32-bit AND",
+   "mnemonic": "and",
+   "what": "d = a32 & b32, two 32-bit registers.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "name audit"
+   ]
+  },
+  {
+   "op": 426,
+   "name": "16-bit AND with immediate, 32-bit result",
+   "mnemonic": "and",
+   "what": "d32 = a16 & imm; used for masks such as t & (S-1) and SR_TG_X & 255.",
+   "confidence": "compiled",
+   "sections": [
+    "25.114",
+    "25.141"
+   ]
+  },
+  {
+   "op": 428,
+   "name": "16-bit AND, 32-bit result",
+   "mnemonic": "and",
+   "what": "d32 = a16 & b16 with the mask taken from a constant-pool operand (a register mask returned zero for every lane).",
+   "confidence": "executed",
+   "sections": [
+    "25.141",
+    "name audit"
+   ]
+  },
+  {
+   "op": 435,
+   "name": "16-bit AND with immediate",
+   "mnemonic": "and",
+   "what": "d16 = a16 & imm; emitted by `a & 0xf` on ushort, used to mask nibbles in the fp4 unpack (not a shift). Executed on Apple's GPU over 4,096 lanes at immediates 15, 63, 255 (25.192).",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "25.28",
+    "25.192"
+   ]
+  },
+  {
+   "op": 437,
+   "name": "16-bit AND",
+   "mnemonic": "and",
+   "what": "d16 = a16 & b16, emitted by `a & b` on ushort.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "name audit"
+   ]
+  },
+  {
+   "op": 441,
+   "name": "32-bit AND with immediate into the uniform/staging file",
+   "mnemonic": "and.a",
+   "what": "The `.a` AND: a32 & imm written to the uniform/staging file rather than a register.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120"
+   ]
+  },
+  {
+   "op": 447,
+   "name": "threadgroup barrier",
+   "mnemonic": "barrier",
+   "what": "threadgroup_barrier with a memory-scope operand (also the imageblock barrier); NOT a device fence: another core's stores stay invisible.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "25.75",
+    "25.104.1",
+    "25.104.2",
+    "25.106.1",
+    "25.140.5"
+   ]
+  },
+  {
+   "op": 450,
+   "name": "call",
+   "mnemonic": "branch",
+   "what": "Apple's subroutine call; Apple's own program using it runs 32/32 in our image path, cc still inlines calls.",
+   "confidence": "executed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 458,
+   "name": "conditional back-edge branch",
+   "mnemonic": "branch",
+   "what": "the loop back edge; taken per the exec mask that op582 establishes (op579 does not gate it).",
+   "confidence": "executed",
+   "sections": [
+    "23.10",
+    "25.101.1",
+    "25.142.1"
+   ]
+  },
+  {
+   "op": 462,
+   "name": "skip branch, no active lanes",
+   "mnemonic": "branch",
+   "what": "forward branch placed after a region's op582, taken when no lane of the simdgroup is active, landing on the region's exec restore.",
+   "confidence": "executed",
+   "sections": [
+    "25.141.2",
+    "25.141.12"
+   ]
+  },
+  {
+   "op": 465,
+   "name": "population count",
+   "mnemonic": "popcount",
+   "what": "d = number of set bits in a32.",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 554,
+   "name": "move immediate, two-operand form",
+   "mnemonic": "movimm",
+   "what": "writes an immediate into a register; Apple's matmul uses it to zero the accumulators.",
+   "confidence": "compiled",
+   "sections": [
+    "25.101.1"
+   ]
+  },
+  {
+   "op": 555,
+   "name": "16-bit move immediate into a half",
+   "mnemonic": "movimm",
+   "what": "dst16 = imm (byte 2 of the 4-byte form); main writes 0 to clear a half before the register is read as a 32-bit index. Modelled for immediate 0; a nonzero immediate is written as unknown bits (25.184).",
+   "confidence": "executed",
+   "sections": [
+    "25.177",
+    "25.184"
+   ]
+  },
+  {
+   "op": 577,
+   "name": "exec pop, restore mask",
+   "mnemonic": "exec",
+   "what": "pops the exec-mask stack, restoring the mask from before the enclosing if/loop region.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.89",
+    "25.101.1",
+    "25.104.2",
+    "25.124.6"
+   ]
+  },
+  {
+   "op": 579,
+   "name": "while-exec, set mask in place",
+   "mnemonic": "exec",
+   "what": "sets the exec mask absolutely from a predicate and overwrites the top stack entry; Apple's loop latch uses it but it does not gate op458.",
+   "confidence": "executed",
+   "sections": [
+    "25.101.1",
+    "25.124.6"
+   ]
+  },
+  {
+   "op": 580,
+   "name": "return",
+   "mnemonic": "branch",
+   "what": "Apple's subroutine return (terminator).",
+   "confidence": "executed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 582,
+   "name": "exec push, if, from flag",
+   "mnemonic": "exec",
+   "what": "pushes the exec mask and narrows it by the flag a compare (op10369) wrote; opens a guarded region closed by op577; gates op458.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.89",
+    "25.101.1",
+    "25.104.2",
+    "25.114.5",
+    "25.124.6"
+   ]
+  },
+  {
+   "op": 586,
+   "name": "32-bit register move",
+   "mnemonic": "mov",
+   "what": "copies one 32-bit register to another; also moves a constant-program-published uniform into place.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.73",
+    "25.101.1"
+   ]
+  },
+  {
+   "op": 590,
+   "name": "16-bit register move",
+   "mnemonic": "mov.16",
+   "what": "copies one 16-bit half register; Apple uses it to clear a low half once.",
+   "confidence": "executed",
+   "sections": [
+    "25.82",
+    "25.133",
+    "25.141.3",
+    "25.141.17"
+   ]
+  },
+  {
+   "op": 592,
+   "name": "uniform / staging write",
+   "mnemonic": "publish",
+   "what": "in the constant program writes a uniform register (slot field 0); in a main program writes the op4 message staging file with scoreboard slot 1-8 that the consumer waits on.",
+   "confidence": "executed",
+   "sections": [
+    "20",
+    "24.2",
+    "24.5",
+    "24.6",
+    "25.4",
+    "25.27",
+    "25.179"
+   ]
+  },
+  {
+   "op": 593,
+   "name": "publish sibling, function unknown",
+   "mnemonic": "publish",
+   "what": "the opcode op592 becomes when b0[3] flips; 0 instances in either corpus, function unknown.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "20",
+    "24.5",
+    "25.120.1"
+   ]
+  },
+  {
+   "op": 595,
+   "name": "fragment spill store",
+   "mnemonic": "mov.a",
+   "what": "stores a register to a stack slot (slot index steps 2 per 32-bit register); the fragment spill, beside op17789 scalar spills.",
+   "confidence": "compiled",
+   "sections": [
+    "0.7",
+    "11",
+    "24.2",
+    "24.5",
+    "24.8",
+    "25.8"
+   ]
+  },
+  {
+   "op": 612,
+   "name": "range mask, immediate width",
+   "mnemonic": "addr16",
+   "what": "range4: bit j of a 4-bit result is set iff lo <= src + j < lo + w, lo and w 8-bit immediates; feeds a masked load's operand 9.",
+   "confidence": "executed",
+   "sections": [
+    "7",
+    "19",
+    "23.4",
+    "24.5",
+    "24.8",
+    "25.58"
+   ]
+  },
+  {
+   "op": 615,
+   "name": "range mask, register width",
+   "mnemonic": "addr16",
+   "what": "range4 with the width w read from a 32-bit register instead of an immediate; the window wraps modulo 2^32.",
+   "confidence": "executed",
+   "sections": [
+    "24.8",
+    "25.59",
+    "25.72"
+   ]
+  },
+  {
+   "op": 621,
+   "name": "range mask, 16-bit source",
+   "mnemonic": "addr16",
+   "what": "range4 from a 16-bit source register.",
+   "confidence": "executed",
+   "sections": [
+    "24.8",
+    "25.59",
+    "25.72"
+   ]
+  },
+  {
+   "op": 684,
+   "name": "end of program",
+   "mnemonic": "end",
+   "what": "END terminator, one per program.",
+   "confidence": "executed",
+   "sections": [
+    "25.68",
+    "25.73",
+    "25.82"
+   ]
+  },
+  {
+   "op": 776,
+   "name": "half add with float immediate",
+   "mnemonic": "fadd.imm.f16",
+   "what": "half(a + K), rounded once (through fp32 is the same function on every half), subnormals kept, NaN -> the canonical quiet NaN; executed on Apple's GPU (25.195).",
+   "confidence": "executed",
+   "sections": [
+    "25.184",
+    "25.195"
+   ]
+  },
+  {
+   "op": 798,
+   "name": "fp16 fma, register form",
+   "mnemonic": "ffma.f16",
+   "what": "binary16 a*b + c rounded once (0 of 196,608 triples off the exact rounding on hardware, subnormals and overflow included); sources are low (425+n) or high (281+n) halves; emitted by cc as fma16 / tensor_acc_fma16 (25.196).",
+   "confidence": "executed",
+   "sections": [
+    "25.194",
+    "25.196"
+   ]
+  },
+  {
+   "op": 838,
+   "name": "legacy 8x8 simdgroup MMA, f16",
+   "mnemonic": "simdgroup.mma.f16",
+   "what": "The pre-tensor-unit simdgroup_matrix 8x8 multiply-accumulate with half operands and half accumulate; 42 vendor instances, all 14 bytes.",
+   "confidence": "compiled",
+   "sections": [
+    "24.4",
+    "25.12"
+   ]
+  },
+  {
+   "op": 839,
+   "name": "legacy 8x8 simdgroup multiply, f16",
+   "mnemonic": "simdgroup.mul.f16",
+   "what": "The legacy simdgroup_matrix 8x8 multiply without an accumulator, half precision.",
+   "confidence": "compiled",
+   "sections": [
+    "24.4"
+   ]
+  },
+  {
+   "op": 904,
+   "name": "fp32 saturate",
+   "mnemonic": "fadd.imm.sat.f32",
+   "what": "Clamps an fp32 value to [0, 1] (Metal `saturate`); the true fsat, not op1062.",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "25.90"
+   ]
+  },
+  {
+   "op": 998,
+   "name": "fp32 add",
+   "mnemonic": "fadd",
+   "what": "d = a + b in fp32; the accumulate step of Apple's reductions.",
+   "confidence": "executed",
+   "sections": [
+    "24.5"
+   ]
+  },
+  {
+   "op": 1001,
+   "name": "fp32 add, rare alternate encoding",
+   "mnemonic": "fadd",
+   "what": "d = a + b in fp32, a distinct byte encoding from op998/op1061 (same measured-family semantics); table-only evidence (68 corpus instances) so the encoding difference from op998 is not decoded. Seen in MLX's compiled affine_qmv_fast dequant loop.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.142.1"
+   ]
+  },
+  {
+   "op": 1004,
+   "name": "half to fp32 widening",
+   "mnemonic": "cvt.f16.f32",
+   "what": "Converts a 16-bit half to fp32; the map's `fadd.imm` is wrong (EXECUTED_NAMES cvt.f16.f32).",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "25.90",
+    "name audit"
+   ]
+  },
+  {
+   "op": 1006,
+   "name": "fp32 add with float immediate",
+   "mnemonic": "fadd.imm",
+   "what": "d = a + imm with an 8-bit float-coded immediate (D1006.l12: +1.0 on four inputs; the formwidths receipt).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1",
+    "25.88"
+   ]
+  },
+  {
+   "op": 1014,
+   "name": "fp32 add, half result",
+   "mnemonic": "fadd.f32.f32.to.f16",
+   "what": "d16 = a32 + b32, rounded once to half (nearest even), overflow to inf (D1014, z1014, t1014).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 1015,
+   "name": "fp32 plus half, half result",
+   "mnemonic": "fadd.f32.f16.to.f16",
+   "what": "d16 = a32 + b16, rounded to half.",
+   "confidence": "executed",
+   "sections": [
+    "name audit"
+   ]
+  },
+  {
+   "op": 1016,
+   "name": "fp32 to half narrowing",
+   "mnemonic": "cvt.f32.f16",
+   "what": "Converts fp32 to half; Apple's recipe wraps eight of these around a half-output accumulator.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "name audit"
+   ]
+  },
+  {
+   "op": 1038,
+   "name": "fp32 add with immediate into the uniform/staging file",
+   "mnemonic": "fadd.imm.a",
+   "what": "The `.a` fadd.imm: result written to the uniform/staging file; a 6-byte constant-program ALU form.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120",
+    "25.179"
+   ]
+  },
+  {
+   "op": 1048,
+   "name": "fp32 to bfloat16 narrowing, unconfirmed",
+   "mnemonic": "fadd.imm.f16",
+   "what": "Writes a 16-bit value from an fp32 source; the map calls it a half add-immediate, but section 25.13 counts it as the narrowing around the bfloat accumulator and its constructs are all bfloat. Unresolved.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "24.5",
+    "25.13"
+   ]
+  },
+  {
+   "op": 1061,
+   "name": "fp32 add, common alternate encoding",
+   "mnemonic": "fadd",
+   "what": "d = a + b in fp32, a distinct byte encoding from op998/op1001 (same measured-family semantics, 511 corpus instances); the encoding difference from op998 is not decoded. Seen alongside op998 in MLX's compiled affine_qmv_fast dequant loop.",
+   "confidence": "executed",
+   "sections": [
+    "25.142.1"
+   ]
+  },
+  {
+   "op": 1062,
+   "name": "fine x-derivative, saturated",
+   "mnemonic": "dfdx.fine.sat",
+   "what": "Cross-lane `dfdx` (fine) with saturation; not fsat (that is op904).",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 1272,
+   "name": "hardware exp2",
+   "mnemonic": "exp2",
+   "what": "2^x in one instruction; within 1 ulp, correctly rounded on 632 of 1,024 probes.",
+   "confidence": "executed",
+   "sections": [
+    "6",
+    "24.5",
+    "25.136"
+   ]
+  },
+  {
+   "op": 2190,
+   "name": "fp32 fused multiply-add",
+   "mnemonic": "ffma",
+   "what": "d = a * b + c in fp32, all three from registers.",
+   "confidence": "executed",
+   "sections": [
+    "25.53",
+    "25.84"
+   ]
+  },
+  {
+   "op": 2192,
+   "name": "fp32 FMA, literal addend",
+   "mnemonic": null,
+   "what": "d = a * b + literal; `fma(a, b, 1.0f)` reaches it and computes a*b + 1.0 exactly.",
+   "confidence": "executed",
+   "sections": [
+    "24.4",
+    "25.84",
+    "25.184"
+   ]
+  },
+  {
+   "op": 2198,
+   "name": "fp32 FMA, literal multiplicand",
+   "mnemonic": null,
+   "what": "The FMA form a literal operand selects (`mix(a, b, 0.25f)`, `sinpi`); beyond that route its semantics are unmeasured.",
+   "confidence": "compiled",
+   "sections": [
+    "24.4",
+    "25.82"
+   ]
+  },
+  {
+   "op": 2200,
+   "name": "fp32 FMA with two float immediates",
+   "mnemonic": "fadd.imm",
+   "what": "d = a * K1 + K2, both 8-bit float immediates (u2200, 31 cases; the formwidths receipt a*6 + 4); the map's fadd.imm name is the adjacency guess.",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 2238,
+   "name": "fp32 fused multiply-add, alternate encoding",
+   "mnemonic": "ffma",
+   "what": "d = a * b + c in fp32, a distinct byte encoding from op2190 (same measured-family semantics, 288 corpus instances); the encoding difference from op2190 is not decoded (not the literal-addend or literal-multiplicand forms of op2192/op2198). The FMA that follows the op2240 candidate in MLX's compiled affine_qmv_fast dequant loop.",
+   "confidence": "executed",
+   "sections": [
+    "25.142.1"
+   ]
+  },
+  {
+   "op": 2240,
+   "name": "FMA-family variant, narrow operand, unconfirmed",
+   "mnemonic": null,
+   "what": "Schedclass 56 like op2190/op2192/op2198, zero corpus instances; appears in MLX's compiled affine_qmv_fast dequant loop. unconfirmed: likely another FMA-family variant with a narrow operand; its operand fields are not decoded.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "24.4",
+    "25.142.1"
+   ]
+  },
+  {
+   "op": 2241,
+   "name": "fused multiply-add, schedclass-87 base form",
+   "mnemonic": "ffma",
+   "what": "The contract's ffma at schedclass 87 (8 operands, 1 definition), cited as the base form that op2433 narrows; not emitted or measured by this project.",
+   "confidence": "static",
+   "sections": [
+    "25.144.1"
+   ]
+  },
+  {
+   "op": 2318,
+   "name": "fp32 FMA into the uniform/staging file",
+   "mnemonic": "ffma.a",
+   "what": "The `.a` ffma: a*b + c written to the uniform/staging file; 8-byte constant-program form.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120"
+   ]
+  },
+  {
+   "op": 2433,
+   "name": "fused multiply-add, narrowed form",
+   "mnemonic": "ffma",
+   "what": "A narrowed form of op2241; in MLX's quantized-matmul dequant it computes q*s + b. Seen only in MLX's binary, never emitted by us.",
+   "confidence": "compiled",
+   "sections": [
+    "25.144.1"
+   ]
+  },
+  {
+   "op": 2570,
+   "name": "hardware log2",
+   "mnemonic": "log2",
+   "what": "log2(x) in one instruction.",
+   "confidence": "compiled",
+   "sections": [
+    "6",
+    "24.5"
+   ]
+  },
+  {
+   "op": 2842,
+   "name": "legacy 8x8 simdgroup MMA, fp32",
+   "mnemonic": "simdgroup.mma.f32",
+   "what": "Legacy simdgroup_matrix 8x8 multiply-accumulate in fp32; what matmul2d float falls to without relaxed_precision (no tensor-unit MMA emitted).",
+   "confidence": "compiled",
+   "sections": [
+    "17 rule 29",
+    "24.4"
+   ]
+  },
+  {
+   "op": 2844,
+   "name": "legacy 8x8 simdgroup multiply, fp32",
+   "mnemonic": "simdgroup.mul.f32",
+   "what": "Legacy simdgroup_matrix 8x8 multiply without accumulator in fp32; emitted beside op2842 by fp32 matmul2d.",
+   "confidence": "compiled",
+   "sections": [
+    "17 rule 29"
+   ]
+  },
+  {
+   "op": 2862,
+   "name": "legacy 8x8 simdgroup MMA, f16 in fp32 out",
+   "mnemonic": "simdgroup.mma.f16.f32",
+   "what": "Legacy simdgroup_matrix 8x8 multiply-accumulate taking half operands and an fp32 accumulator.",
+   "confidence": "compiled",
+   "sections": [
+    "24.4"
+   ]
+  },
+  {
+   "op": 2902,
+   "name": "legacy 8x8 simdgroup MMA, bf16",
+   "mnemonic": "simdgroup.mma.bf16",
+   "what": "Legacy simdgroup_matrix 8x8 multiply-accumulate with bfloat16 operands.",
+   "confidence": "compiled",
+   "sections": [
+    "24.4"
+   ]
+  },
+  {
+   "op": 3290,
+   "name": "fp32 multiply",
+   "mnemonic": "fmul",
+   "what": "d = a * b in fp32, both from registers.",
+   "confidence": "executed",
+   "sections": [
+    "25.53",
+    "25.84"
+   ]
+  },
+  {
+   "op": 3291,
+   "name": "fp32 times half multiply",
+   "mnemonic": "fmul.f32.f16",
+   "what": "d32 = a32 * b16 (mixed-precision multiply).",
+   "confidence": "static",
+   "sections": [
+    "25.88"
+   ]
+  },
+  {
+   "op": 3298,
+   "name": "fp32 op with float immediate, unconfirmed",
+   "mnemonic": "fadd.imm",
+   "what": "Mapped as `fadd.imm`; section 25.84 pairs it with op3290 the way op2192 pairs with op2190, suggesting a literal-operand multiply. Which one it is has not been separated.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.84"
+   ]
+  },
+  {
+   "op": 3306,
+   "name": "fp32 multiply, half result",
+   "mnemonic": "fmul.f32.f32.to.f16",
+   "what": "d16 = a32 * b32, rounded to half (m3306; the width receipt's 0x3e00 rules out bf16).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 3322,
+   "name": "fp32 multiply into the uniform/staging file",
+   "mnemonic": "fmul.a",
+   "what": "The `.a` fmul: a*b written to the uniform/staging file (also an op4 staging writer).",
+   "confidence": "compiled",
+   "sections": [
+    "25.120"
+   ]
+  },
+  {
+   "op": 3653,
+   "name": "16-bit reciprocal into the uniform/staging file",
+   "mnemonic": "recip.a",
+   "what": "Table-only `.a` reciprocal from a 16-bit source; seen only as a decode of a flipped MMA bit.",
+   "confidence": "static",
+   "sections": [
+    "24.8",
+    "25.71"
+   ]
+  },
+  {
+   "op": 3658,
+   "name": "hardware reciprocal",
+   "mnemonic": "recip",
+   "what": "1/x in one instruction; within 1 ulp, correctly rounded on 931 of 1,024 probes.",
+   "confidence": "executed",
+   "sections": [
+    "25.136",
+    "name audit"
+   ]
+  },
+  {
+   "op": 3770,
+   "name": "round to nearest even",
+   "mnemonic": "rint",
+   "what": "Metal `rint`: rounds fp32 to the nearest integer, ties to even.",
+   "confidence": "executed",
+   "sections": [
+    "25.130",
+    "name audit"
+   ]
+  },
+  {
+   "op": 3786,
+   "name": "floor",
+   "mnemonic": "floor",
+   "what": "Rounds fp32 down to an integer (denormals to zero).",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 3818,
+   "name": "fp32 truncate toward zero",
+   "mnemonic": "trunc",
+   "what": "d = trunc(a); the sign of a zero result is kept (op3818.trunc, q3818).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 3850,
+   "name": "rsqrt seed",
+   "mnemonic": "rsqrt",
+   "what": "Hardware 1/sqrt(x); an exact function tabulated in isa/g17-rsqrt-seed.npz, 1 ulp off on 50 of 1,024 probes; returns +inf at 0.",
+   "confidence": "executed",
+   "sections": [
+    "6",
+    "24.4",
+    "25.136",
+    "25.141"
+   ]
+  },
+  {
+   "op": 3946,
+   "name": "trig-family op, function unmeasured",
+   "mnemonic": "trig",
+   "what": "Emitted by cos/sin/cospi; deliberately left without an invented function in 24.4.",
+   "confidence": "static",
+   "sections": [
+    "24.4"
+   ]
+  },
+  {
+   "op": 3978,
+   "name": "sqrt-safe rsqrt",
+   "mnemonic": "rsqrt",
+   "what": "The rsqrt Apple uses for `fast_sqrt` (then a multiply): returns 1.0 at 0, where op3850 returns +inf, so x * rsqrt(x) is 0 rather than NaN.",
+   "confidence": "executed",
+   "sections": [
+    "6",
+    "24.4"
+   ]
+  },
+  {
+   "op": 5098,
+   "name": "tensor MMA, fp32 x fp32, accumulate",
+   "mnemonic": "tensor.mac.f32.f32",
+   "what": "16x16x16 tensor-unit MMA with fp32 A and fp32 B into an fp32 accumulator; fp32 operands have their low 13 mantissa bits cleared, and it costs the same as half x half.",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "13",
+    "15",
+    "33"
+   ]
+  },
+  {
+   "op": 5099,
+   "name": "tensor MMA, fp32 x fp32, no accumulator",
+   "mnemonic": "tensor.mac.f32.f32.init",
+   "what": "The zero-C sibling of op5098: fp32 x fp32 16x16x16 MMA that ignores the accumulator.",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "15"
+   ]
+  },
+  {
+   "op": 5100,
+   "name": "tensor MMA, fp32 A x 16-bit B, accumulate",
+   "mnemonic": "tensor.mac.f32.f16bf16",
+   "what": "16x16x16 tensor-unit MMA with fp32 A and half-or-bfloat B into fp32; emitted under relaxed_precision for mixed float forms.",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "13",
+    "15",
+    "125"
+   ]
+  },
+  {
+   "op": 5101,
+   "name": "tensor MMA, fp32 A x 16-bit B, no accumulator",
+   "mnemonic": "tensor.mac.f32.f16bf16.init",
+   "what": "The zero-C sibling of op5100.",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "15",
+    "125"
+   ]
+  },
+  {
+   "op": 5104,
+   "name": "tensor MMA, 16-bit A x fp32 B, accumulate",
+   "mnemonic": "tensor.mac.f16bf16.f32",
+   "what": "16x16x16 tensor-unit MMA with half-or-bfloat A and fp32 B into fp32.",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "13",
+    "15"
+   ]
+  },
+  {
+   "op": 5105,
+   "name": "tensor MMA, 16-bit A x fp32 B, no accumulator",
+   "mnemonic": "tensor.mac.f16bf16.f32.init",
+   "what": "The zero-C sibling of op5104.",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "15"
+   ]
+  },
+  {
+   "op": 5106,
+   "name": "tensor MMA, 16-bit x 16-bit, accumulate",
+   "mnemonic": "tensor.mac",
+   "what": "The main 16x16x16 tensor-unit multiply-accumulate: half or bfloat A and B into an fp32 accumulator tuple; the workhorse of every prefill GEMM and attention kernel.",
+   "confidence": "executed",
+   "sections": [
+    "2",
+    "5",
+    "25",
+    "27",
+    "33"
+   ]
+  },
+  {
+   "op": 5107,
+   "name": "tensor MMA, 16-bit x 16-bit, no accumulator",
+   "mnemonic": "tensor.mac.init",
+   "what": "The zero-C sibling of op5106, starting a fresh accumulator; back-to-back issue into the same destination stalls about 34 ns (write-after-write).",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "25",
+    "33"
+   ]
+  },
+  {
+   "op": 5108,
+   "name": "table-only narrow-accumulator MMA, first",
+   "mnemonic": "tensor.mac.narrow.table-first",
+   "what": "First of the 36 table-only declarations op5108-op5143 (16-bit accumulator forms with a four-word destination); no known CPU admits them and Apple emits none, so their subtypes are unrecovered.",
+   "confidence": "static",
+   "sections": [
+    "25.4",
+    "25.6",
+    "25.13"
+   ]
+  },
+  {
+   "op": 5143,
+   "name": "table-only narrow-accumulator MMA, last, no accumulator",
+   "mnemonic": "tensor.mac.narrow.table-last.init",
+   "what": "Last declaration of the op5108-op5143 table-only range, the no-accumulator variant; never emitted or admitted, subtype unrecovered.",
+   "confidence": "static",
+   "sections": [
+    "25.4",
+    "25.6",
+    "25.13"
+   ]
+  },
+  {
+   "op": 9320,
+   "name": "fp32 to 32-bit integer",
+   "mnemonic": "cvt.f2i",
+   "what": "Converts fp32 to int/uint (both signednesses), register destination.",
+   "confidence": "executed",
+   "sections": [
+    "25.130",
+    "25.186"
+   ]
+  },
+  {
+   "op": 9321,
+   "name": "half to 32-bit integer",
+   "mnemonic": "cvt.f2i",
+   "what": "Converts a 16-bit half to a 32-bit integer, register destination.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 9325,
+   "name": "half to 16-bit integer",
+   "mnemonic": "cvt.f2i.f16",
+   "what": "Converts half to ushort/short, 16-bit register destination.",
+   "confidence": "compiled",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 9328,
+   "name": "fp32 to u32 into the uniform/staging file",
+   "mnemonic": "cvt.f2i.a",
+   "what": "The `.a` cvt: fp32 to 32-bit integer written to the uniform/staging file.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 9329,
+   "name": "half to 32-bit integer into the uniform/staging file",
+   "mnemonic": "cvt.f2i.f16.a",
+   "what": "The `.a` cvt from half; operand 3 is 4 unsigned, 5 signed; truncates toward zero.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 9683,
+   "name": "half compare, chained into a flag",
+   "mnemonic": "fcmp",
+   "what": "flag = (half(x) REL 0.0) ? flag_in : 0; -0.0 compares as zero and NaN false.",
+   "confidence": "executed",
+   "sections": [
+    "25.59 (last six)"
+   ]
+  },
+  {
+   "op": 9700,
+   "name": "fp32 compare-select, fmax/fmin",
+   "mnemonic": "fselect",
+   "what": "Four-register float select whose operation field gives fmax or fmin (Metal float max/min); used for clamps.",
+   "confidence": "executed",
+   "sections": [
+    "25.117",
+    "25.130"
+   ]
+  },
+  {
+   "op": 9721,
+   "name": "32-bit compare-select, immediate arms",
+   "mnemonic": "csel",
+   "what": "Compare-select on a 32-bit source with immediate results (the `csel` sibling); function only partly separated.",
+   "confidence": "compiled",
+   "sections": [
+    "25.88"
+   ]
+  },
+  {
+   "op": 9748,
+   "name": "float compare-select, fselect form",
+   "mnemonic": "fselect",
+   "what": "Float compare-select from a 16-bit and a 32-bit source, cc 0 (==).",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 9749,
+   "name": "float compare-select, csel form",
+   "mnemonic": "csel",
+   "what": "Float compare-select from a 16-bit and a 32-bit source, cc 0 (==); the csel-named sibling of op9748.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 9832,
+   "name": "half compare-select",
+   "mnemonic": "fcsel.f16",
+   "what": "Four-register 16-bit float select (half clamp, min, max).",
+   "confidence": "compiled",
+   "sections": [
+    "25.58"
+   ]
+  },
+  {
+   "op": 9842,
+   "name": "half compare-select against minifloat",
+   "mnemonic": null,
+   "what": "d16 = (x16 cc K) ? a16 : b16 with a minifloat comparand K; source modifier 20 is abs(x).",
+   "confidence": "executed",
+   "sections": [
+    "24.4",
+    "25.59"
+   ]
+  },
+  {
+   "op": 9986,
+   "name": "find most significant bit",
+   "mnemonic": "msb",
+   "what": "Index of the highest set bit (clz is derived from it).",
+   "confidence": "executed",
+   "sections": [
+    "name audit"
+   ]
+  },
+  {
+   "op": 9989,
+   "name": "msb bit scan, 16-bit result",
+   "mnemonic": "msb",
+   "what": "Most-significant-bit scan (the op9986 form) with its destination narrowed to a 16-bit register.",
+   "confidence": "compiled",
+   "sections": [
+    "25.144.6"
+   ]
+  },
+  {
+   "op": 9996,
+   "name": "64-bit no-return atomic, max/min",
+   "mnemonic": "atomic.exchange.noret",
+   "what": "no-return atomic that 64-bit atomic_max/atomic_min select; the map name says exchange.",
+   "confidence": "compiled",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10019,
+   "name": "per-lane-address no-return atomic",
+   "mnemonic": "atomic.idx",
+   "what": "device atomic RMW at a per-lane address whose result is unused.",
+   "confidence": "compiled",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10022,
+   "name": "uniform-address no-return atomic, 32-bit",
+   "mnemonic": "atomic.noret",
+   "what": "device 32-bit atomic RMW at a uniform address whose result is unused.",
+   "confidence": "compiled",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10023,
+   "name": "uniform-address no-return compare-exchange",
+   "mnemonic": "atomic.noret.64",
+   "what": "no-return compare-and-exchange at a uniform address (operation code 262659); the register pair (expected, desired) is the '64' in its map name.",
+   "confidence": "compiled",
+   "sections": [
+    "24.8",
+    "25.59"
+   ]
+  },
+  {
+   "op": 10090,
+   "name": "per-lane-address atomic, returning",
+   "mnemonic": "atomic.idx",
+   "what": "device atomic RMW at a per-lane address; compiler-generated 12-byte ADD, AND, OR, SUB and XOR publishing on slot 7 updated and returned all 64 old values below Metal (two Submits per direct-store shape). ADD and XOR old+1 ALU consumers also passed. Authored floating ADD returned old +1.0f/-1.0f words while updating independent cells to 2.0f/+0.0f. A separate authored contention trial updated one word to 65.0f and returned all 64 old values 1.0f..64.0f exactly once in two pure Submits. An OR near miss executed exchange until byte11[4] was cleared; the same bit enables the 12-byte AND form to decode. Other consumed fetch operations remain refused by the compiler.",
+   "confidence": "executed",
+   "sections": [
+    "25.115.1; `docs/g17-first-dispatch-trials.md` compiler-generated integer and authored floating ADD return trials"
+   ]
+  },
+  {
+   "op": 10091,
+   "name": "per-lane-address compare-exchange, returning",
+   "mnemonic": "atomic.idx",
+   "what": "device compare-and-exchange at a per-lane address; a hand-authored 12-byte form publishing on slot 7 returned all 64 old values in two pure below-Metal Submits, covering one successful and 63 failed compares. Compiler-generated 60-byte whole programs then passed ten more pure Submits over index registers R0, R1, R5, R7 and R12; the other R0..R12 placements decode-check but are not individually executed.",
+   "confidence": "executed",
+   "sections": [
+    "25.59; `docs/g17-first-dispatch-trials.md` authored and compiler-generated compare-exchange return trials"
+   ]
+  },
+  {
+   "op": 10094,
+   "name": "uniform-address atomic, returning old",
+   "mnemonic": "atomic",
+   "what": "device atomic RMW at a uniform address returning the old value; the return fills scoreboard slot 7.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.115",
+    "25.115.1",
+    "25.119",
+    "25.112",
+    "25.140.3"
+   ]
+  },
+  {
+   "op": 10095,
+   "name": "uniform-address compare-exchange, returning",
+   "mnemonic": "atomic.cmpxchg",
+   "what": "device compare-and-exchange at a uniform address whose result is used.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10239,
+   "name": "32-bit saturating add",
+   "mnemonic": "addsat",
+   "what": "d = a + b clamped; signedness is a source modifier (16/32 unsigned, 24/40 signed).",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "name audit"
+   ]
+  },
+  {
+   "op": 10267,
+   "name": "64-bit add",
+   "mnemonic": null,
+   "what": "d64 = a64 + b64; forms buffer base + offset addresses.",
+   "confidence": "executed",
+   "sections": [
+    "24.4",
+    "25.59"
+   ]
+  },
+  {
+   "op": 10279,
+   "name": "32-bit add immediate",
+   "mnemonic": "add",
+   "what": "d = a32 + imm (8-bit); the loop-carried pointer advance when it fits.",
+   "confidence": "executed",
+   "sections": [
+    "25.114"
+   ]
+  },
+  {
+   "op": 10282,
+   "name": "32-bit add",
+   "mnemonic": "add",
+   "what": "d = a32 + b32, two registers.",
+   "confidence": "executed",
+   "sections": [
+    "25.114",
+    "name audit"
+   ]
+  },
+  {
+   "op": 10283,
+   "name": "add, 32-bit plus zero-extended 16-bit",
+   "mnemonic": "add",
+   "what": "d = a32 + low16(b), mod 2^32; with a = 0 it is cc's u16_to_u32 widening (t10283, g10283).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 10285,
+   "name": "add 16-bit to 32-bit",
+   "mnemonic": "add",
+   "what": "d32 = zext16(a) + b32; executed on Apple's GPU, with a full-width a that separates zero- from sign-extension (25.195).",
+   "confidence": "executed",
+   "sections": [
+    "25.93",
+    "25.195"
+   ]
+  },
+  {
+   "op": 10286,
+   "name": "16-bit plus 16-bit, 32-bit result",
+   "mnemonic": "add",
+   "what": "d32 = a16 + b16, widening.",
+   "confidence": "executed",
+   "sections": [
+    "name audit"
+   ]
+  },
+  {
+   "op": 10289,
+   "name": "16-bit add immediate",
+   "mnemonic": "add",
+   "what": "d16 = a16 + imm, wrapping at 16 bits; executed on Apple's GPU over 4,096 lanes (25.195).",
+   "confidence": "executed",
+   "sections": [
+    "25.104",
+    "25.192",
+    "25.195"
+   ]
+  },
+  {
+   "op": 10298,
+   "name": "32-bit add immediate into the uniform/staging file",
+   "mnemonic": "add.a",
+   "what": "The `.a` add: a32 + imm to the uniform/staging file; a constant-program uniform writer.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120"
+   ]
+  },
+  {
+   "op": 10306,
+   "name": "32-bit add into the uniform/staging file",
+   "mnemonic": "add.a",
+   "what": "The `.a` add of two registers to the uniform/staging file.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120"
+   ]
+  },
+  {
+   "op": 10369,
+   "name": "32-bit compare with immediate into a flag",
+   "mnemonic": "cmp",
+   "what": "flag = (a32 cc imm), the loop-exit compare (10-byte form; uint counter; int gives the 6-byte width).",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.73"
+   ]
+  },
+  {
+   "op": 10372,
+   "name": "16-bit compare into a flag",
+   "mnemonic": "cmp",
+   "what": "flag = (a16 cc ...), the per-simdgroup bound compare.",
+   "confidence": "compiled",
+   "sections": [
+    "25.93"
+   ]
+  },
+  {
+   "op": 10374,
+   "name": "16-bit register compare into a flag",
+   "mnemonic": "csel",
+   "what": "flag = (a16 cc b16); not a select despite the `csel` name.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10378,
+   "name": "32-bit compare with immediate into a flag, short form",
+   "mnemonic": "cmp",
+   "what": "The 6-byte sibling of op10369; signed test against 0 in loop breaks.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10384,
+   "name": "tensor MMA, int8 widening to int32",
+   "mnemonic": "tensor.mac.widening",
+   "what": "16x16x16 int8/uint8 MMA into int32 at twice the fp16 issue rate; wraps by default, and byte8 bit 4 selects a measured saturating variant (one signed clip of C + A.B).",
+   "confidence": "executed",
+   "sections": [
+    "5",
+    "15",
+    "27",
+    "136"
+   ]
+  },
+  {
+   "op": 10385,
+   "name": "tensor MMA, int8 widening, no accumulator",
+   "mnemonic": "tensor.mac.widening.init",
+   "what": "The zero-C sibling of op10384.",
+   "confidence": "executed",
+   "sections": [
+    "27",
+    "136"
+   ]
+  },
+  {
+   "op": 10789,
+   "name": "32 x immediate to 64-bit product",
+   "mnemonic": "mulhi",
+   "what": "d64 = a32 * imm; the map's `mulhi` is wrong.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10790,
+   "name": "64-bit address multiply-add",
+   "mnemonic": "mulhi",
+   "what": "d64 = a64 + b32 * imm; forms 64-bit addresses. The map's `mulhi` is wrong.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10793,
+   "name": "32 x 32 to 64-bit product",
+   "mnemonic": "mulhi",
+   "what": "d64 = a32 * b32 (the low word is the low product); shares the `mulhi` name with op10790.",
+   "confidence": "executed",
+   "sections": [
+    "25.80",
+    "name audit"
+   ]
+  },
+  {
+   "op": 10795,
+   "name": "32 x 32 + 32 to 64-bit multiply-add",
+   "mnemonic": "madd.wide",
+   "what": "d64 = a*b + c, unsigned.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10823,
+   "name": "multiply by immediate, 32-bit addend",
+   "mnemonic": "mul",
+   "what": "d = a32 * imm + b32.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10824,
+   "name": "multiply by immediate, 16-bit addend",
+   "mnemonic": "mul",
+   "what": "d = a * imm + zext16(b); the map's `mul` omits the addend.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10825,
+   "name": "32-bit multiply",
+   "mnemonic": "mul",
+   "what": "d = a32 * b32, low 32 bits.",
+   "confidence": "executed",
+   "sections": [
+    "25.141",
+    "name audit"
+   ]
+  },
+  {
+   "op": 10826,
+   "name": "32-bit multiply-add",
+   "mnemonic": "madd",
+   "what": "d = a32 * b32 + c32, low 32 bits (the lanes receipt's fit, 32/32 lanes).",
+   "confidence": "executed",
+   "sections": [
+    "25.145"
+   ]
+  },
+  {
+   "op": 10829,
+   "name": "multiply-add, 16-bit multiplier",
+   "mnemonic": "madd",
+   "what": "d = a32 * zext16(b) + c32.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10830,
+   "name": "multiply-add, 16-bit multiplier and addend",
+   "mnemonic": "madd",
+   "what": "d = a32 * zext16(b) + zext16(c).",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10831,
+   "name": "16-bit multiply by immediate plus immediate",
+   "mnemonic": "mul",
+   "what": "d32 = zext16(a) * imm + imm.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10835,
+   "name": "multiply-add, 16-bit multiplicand",
+   "mnemonic": "madd",
+   "what": "d = zext16(a) * b32 + c32.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "name audit"
+   ]
+  },
+  {
+   "op": 10836,
+   "name": "multiply-add, 16-bit multiplicand and addend",
+   "mnemonic": "madd",
+   "what": "d = zext16(a) * b32 + zext16(c).",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "name audit"
+   ]
+  },
+  {
+   "op": 10838,
+   "name": "signed-by-unsigned 16-bit multiply-add",
+   "mnemonic": "madd",
+   "what": "d = sext16(a) * zext16(b) + c32.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10858,
+   "name": "16-bit multiply by immediate plus immediate, 16-bit result",
+   "mnemonic": "mul",
+   "what": "d16 = a16 * imm + imm.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10860,
+   "name": "16-bit multiply by immediate plus register",
+   "mnemonic": "mul",
+   "what": "d16 = a16 * imm + b16.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10879,
+   "name": "multiply by immediate plus immediate into the uniform/staging file",
+   "mnemonic": "madd.a",
+   "what": "The `.a` madd: a * imm + imm to the uniform/staging file.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 10883,
+   "name": "32-bit multiply into the uniform/staging file",
+   "mnemonic": "madd.a",
+   "what": "The `.a` multiply of two registers to the uniform/staging file; a constant-program writer.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120"
+   ]
+  },
+  {
+   "op": 10904,
+   "name": "MMA bit-flip mutation artifact",
+   "mnemonic": null,
+   "what": "A 12-byte form reached only by flipping op5106's structural bit 1; decodable but no role established or claimed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.25"
+   ]
+  },
+  {
+   "op": 10909,
+   "name": "texture write",
+   "mnemonic": "texture.write",
+   "what": "image write; reads its staged operands from the op4 staging file.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120.1"
+   ]
+  },
+  {
+   "op": 11059,
+   "name": "multiply by immediate minus immediate",
+   "mnemonic": "madd",
+   "what": "d = a * imm - imm; the map's `madd` has the wrong sign.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11060,
+   "name": "multiply by immediate minus register",
+   "mnemonic": "madd",
+   "what": "d = a * imm - b32; the map's `madd` has the wrong sign.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11063,
+   "name": "multiply-subtract",
+   "mnemonic": "msub",
+   "what": "d = a * b - c; the map's `madd` is wrong (EXECUTED_NAMES msub).",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "name audit"
+   ]
+  },
+  {
+   "op": 11120,
+   "name": "multiply-add into the uniform/staging file",
+   "mnemonic": "madd.a",
+   "what": "The `.a` madd of two registers to the uniform/staging file (threadgroup address computation).",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11179,
+   "name": "32-bit integer to fp32",
+   "mnemonic": "cvt.i2f",
+   "what": "Converts int32/uint32 to fp32, round to nearest even; operand 2 is signedness (4 unsigned, 5 signed).",
+   "confidence": "executed",
+   "sections": [
+    "25.90",
+    "25.130"
+   ]
+  },
+  {
+   "op": 11180,
+   "name": "16-bit integer to fp32",
+   "mnemonic": "cvt.i2f",
+   "what": "converts an unsigned (code 2) or signed (code 3) 16-bit integer to fp32, exactly; executed on Apple's GPU (25.195).",
+   "confidence": "executed",
+   "sections": [
+    "25.144.1",
+    "25.195"
+   ]
+  },
+  {
+   "op": 11182,
+   "name": "u32 to half",
+   "mnemonic": "cvt.i2f",
+   "what": "converts a 32-bit unsigned integer to half, round to nearest even, past half's range to inf (unsigned code 4); measured over 4,096 lanes of Apple's code (25.184).",
+   "confidence": "executed",
+   "sections": [
+    "25.179",
+    "25.184"
+   ]
+  },
+  {
+   "op": 11183,
+   "name": "16-bit integer to half",
+   "mnemonic": "cvt.i2f",
+   "what": "Converts ushort/short to half; operand 2 is 2 unsigned, 3 signed.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.195"
+   ]
+  },
+  {
+   "op": 11185,
+   "name": "integer to float into the uniform/staging file",
+   "mnemonic": "cvt.i2f",
+   "what": "The `.a` integer-to-float conversion into the uniform/staging file.",
+   "confidence": "static",
+   "sections": [
+    "25.120",
+    "25.179"
+   ]
+  },
+  {
+   "op": 11190,
+   "name": "32-bit NOT",
+   "mnemonic": "not",
+   "what": "d = ~a32.",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 11193,
+   "name": "NOT to 16-bit result",
+   "mnemonic": "not",
+   "what": "d16 = ~a & 0xFFFF.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11196,
+   "name": "32-bit NOT into the uniform/staging file",
+   "mnemonic": "not.a",
+   "what": "The `.a` NOT to the uniform/staging file.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11310,
+   "name": "32-bit compare, AND-chained into a flag",
+   "mnemonic": "cmp",
+   "what": "flag = (x cc K) ? c16 : 0; how `&&` is formed.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11313,
+   "name": "32-bit compare, OR-chained into a flag",
+   "mnemonic": "csel",
+   "what": "flag = (x cc y) ? T : flag_in, with T an immediate.",
+   "confidence": "executed",
+   "sections": [
+    "25.59 (last six)"
+   ]
+  },
+  {
+   "op": 11314,
+   "name": "32-bit compare, AND-chained into a flag with false arm",
+   "mnemonic": "csel",
+   "what": "flag = (x cc y) ? flag_in : F, with F an immediate.",
+   "confidence": "executed",
+   "sections": [
+    "25.59 (last six)"
+   ]
+  },
+  {
+   "op": 11322,
+   "name": "16-bit compare, chained into a flag",
+   "mnemonic": "cmp",
+   "what": "flag = (x16 cc K) ? flag_in : F.",
+   "confidence": "executed",
+   "sections": [
+    "25.59 (last six)"
+   ]
+  },
+  {
+   "op": 11362,
+   "name": "32-bit compare-select against immediate",
+   "mnemonic": "csel.imm",
+   "what": "d = (a32 cc imm) ? imm : imm; the compared value and both results are immediates.",
+   "confidence": "compiled",
+   "sections": [
+    "25.84"
+   ]
+  },
+  {
+   "op": 11364,
+   "name": "integer clamp",
+   "mnemonic": "clamp",
+   "what": "Metal integer `clamp`, attributed at two widths.",
+   "confidence": "executed",
+   "sections": [
+    "25.84"
+   ]
+  },
+  {
+   "op": 11365,
+   "name": "32-bit compare-select, three registers",
+   "mnemonic": "select.cc",
+   "what": "d = (a cc b) ? c : ...; the select an integer divide reaches.",
+   "confidence": "executed",
+   "sections": [
+    "25.80"
+   ]
+  },
+  {
+   "op": 11372,
+   "name": "32-bit register compare-select, immediate arms",
+   "mnemonic": "csel.reg",
+   "what": "d = (a cc b) ? T : F with integer immediates.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11375,
+   "name": "32-bit compare-select, four registers",
+   "mnemonic": "select",
+   "what": "d = (a cc b) ? c : d; cc 0 is a > b and cc 1 is a bit test (a & b) != 0.",
+   "confidence": "executed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 11392,
+   "name": "16-bit compare-select against immediate, 32-bit result",
+   "mnemonic": "csel.imm",
+   "what": "d32 = (x16 cc K) ? T : F, integer immediates.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11415,
+   "name": "16-bit compare float select",
+   "mnemonic": "fselect",
+   "what": "fselect from two 16-bit and two 32-bit sources; seen fed by the loop counter.",
+   "confidence": "compiled",
+   "sections": [
+    "25.39"
+   ]
+  },
+  {
+   "op": 11456,
+   "name": "32-bit compare against immediate, select to 16-bit",
+   "mnemonic": "csel",
+   "what": "d16 = (x32 cc K) ? t16 : F; a true csel returning the mask or an immediate.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11458,
+   "name": "32-bit compare against immediate, select to 16-bit, minifloat false arm",
+   "mnemonic": "csel",
+   "what": "d16 = (x32 cc K) ? t16 : F with a minifloat F.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11460,
+   "name": "32-bit compare against immediate, select to 16-bit, register false arm",
+   "mnemonic": "csel",
+   "what": "d16 = (x32 cc K) ? T : f16.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11461,
+   "name": "32-bit compare against immediate to half boolean",
+   "mnemonic": "cmp",
+   "what": "d16 = (x32 cc K) ? T : F, minifloat arms giving half 0.0/1.0.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11462,
+   "name": "32-bit register compare to 16-bit result",
+   "mnemonic": "cmp",
+   "what": "d16 = (a32 cc b32) ? 1 : 0, op11372 into a half; executed on Apple's GPU (25.195).",
+   "confidence": "executed",
+   "sections": [
+    "25.51",
+    "25.80",
+    "25.195"
+   ]
+  },
+  {
+   "op": 11466,
+   "name": "32-bit register compare, select to 16-bit",
+   "mnemonic": "csel",
+   "what": "d16 = (x32 cc y32) ? t16 : F.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11471,
+   "name": "32-bit register compare to half boolean",
+   "mnemonic": "csel",
+   "what": "d16 = (x32 cc y32) ? T : F with minifloat arms.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11472,
+   "name": "32-bit vs 16-bit compare to 16-bit result",
+   "mnemonic": "cmp",
+   "what": "Compare of a 32-bit and a 16-bit source writing a 16-bit register; table-only role.",
+   "confidence": "static",
+   "sections": [
+    "25.87"
+   ]
+  },
+  {
+   "op": 11482,
+   "name": "16-bit compare-select against immediate",
+   "mnemonic": "csel.imm.16",
+   "what": "d16 = (x16 cc K) ? T : F; `simd_is_first()` is lane == 0 ? 1 : 0.",
+   "confidence": "compiled",
+   "sections": [
+    "24.8",
+    "25.58"
+   ]
+  },
+  {
+   "op": 11491,
+   "name": "16-bit compare against immediate to half boolean",
+   "mnemonic": "cmp",
+   "what": "d16 = (x16 cc K) ? T : F with minifloat arms.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11507,
+   "name": "16-bit compare-select, four registers",
+   "mnemonic": "select",
+   "what": "d16 = (a == b) ? c : d; equality (not a bit test).",
+   "confidence": "executed",
+   "sections": [
+    "25.90",
+    "name audit"
+   ]
+  },
+  {
+   "op": 11564,
+   "name": "texture-coordinate staging write",
+   "mnemonic": "publish.coord.a",
+   "what": "ALU form that writes two coordinates per write into the op4 staging file for a later texture/image message.",
+   "confidence": "static",
+   "sections": [
+    "25.120.1"
+   ]
+  },
+  {
+   "op": 11624,
+   "name": "32-bit saturating subtract",
+   "mnemonic": "subsat",
+   "what": "d = a - b clamped at 0 (unsigned: the lanes receipt's fit, over signed saturation and wrapping).",
+   "confidence": "executed",
+   "sections": [
+    "25.145"
+   ]
+  },
+  {
+   "op": 11655,
+   "name": "64-bit subtract immediate",
+   "mnemonic": "sub.wide",
+   "what": "d64 = a - imm, the immediate `sub.wide` form.",
+   "confidence": "compiled",
+   "sections": [
+    "24.8",
+    "25.58"
+   ]
+  },
+  {
+   "op": 11666,
+   "name": "32-bit subtract immediate",
+   "mnemonic": "sub",
+   "what": "d = a32 - imm.",
+   "confidence": "compiled",
+   "sections": [
+    "25.95"
+   ]
+  },
+  {
+   "op": 11667,
+   "name": "32-bit subtract",
+   "mnemonic": "sub",
+   "what": "d = a32 - b32.",
+   "confidence": "executed",
+   "sections": [
+    "name audit"
+   ]
+  },
+  {
+   "op": 11689,
+   "name": "32-bit subtract immediate into the uniform/staging file",
+   "mnemonic": "sub.a",
+   "what": "The `.a` sub: uniform B - imm to the uniform/staging file.",
+   "confidence": "executed",
+   "sections": [
+    "25.59 (last six)"
+   ]
+  },
+  {
+   "op": 11701,
+   "name": "threadgroup atomic, no return",
+   "mnemonic": "atomic.tg.noret",
+   "what": "threadgroup atomic (e.g. fetch_add) whose result is unused.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 11765,
+   "name": "threadgroup atomic, returning old",
+   "mnemonic": "atomic.tg",
+   "what": "threadgroup atomic RMW returning the old value; the operation is a 4-bit table in operand 2; returns on slot 7.",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "25.87",
+    "25.115"
+   ]
+  },
+  {
+   "op": 11842,
+   "name": "move immediate, three-operand form",
+   "mnemonic": "movimm",
+   "what": "writes an immediate into a register (cc's movimm); its 10-byte width is not predicted by the always-present bits.",
+   "confidence": "executed",
+   "sections": [
+    "24.8",
+    "25.62",
+    "25.95",
+    "25.114.2",
+    "25.114.3",
+    "25.141.13"
+   ]
+  },
+  {
+   "op": 11994,
+   "name": "ray-tracing block load, 32-bit",
+   "mnemonic": "load.b32",
+   "what": "32-bit load used by the ray-tracing intersection block, two register sources.",
+   "confidence": "static",
+   "sections": [
+    "25.88"
+   ]
+  },
+  {
+   "op": 12073,
+   "name": "device load, register address",
+   "mnemonic": "load",
+   "what": "device load through a runtime address register (32-bit source); thread-private arrays lower to it.",
+   "confidence": "compiled",
+   "sections": [
+    "24.2",
+    "25.39.2"
+   ]
+  },
+  {
+   "op": 12074,
+   "name": "device load, 16-bit register address",
+   "mnemonic": "load",
+   "what": "the op12073 load with a 16-bit address source.",
+   "confidence": "static",
+   "sections": [
+    "24.2",
+    "25.39.2"
+   ]
+  },
+  {
+   "op": 12151,
+   "name": "imageblock load, 32-bit",
+   "mnemonic": "load.ib.32",
+   "what": "32-bit imageblock (tile) load at the lane's local x/y.",
+   "confidence": "executed",
+   "sections": [
+    "25.104.1",
+    "25.104.2"
+   ]
+  },
+  {
+   "op": 12352,
+   "name": "MMA operand load, space unconfirmed",
+   "mnemonic": "load",
+   "what": "The load that, paired with op12673, feeds MLX's tensor MMA (op5106) from registers in its quantized-matmul inner loop; unconfirmed: likely threadgroup memory.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.144.1"
+   ]
+  },
+  {
+   "op": 12364,
+   "name": "threadgroup-memory load",
+   "mnemonic": "load.tg",
+   "what": "Loads from threadgroup memory; the cooperative LayerNorm reads its partial sums back with it.",
+   "confidence": "executed",
+   "sections": [
+    "25.210"
+   ]
+  },
+  {
+   "op": 12397,
+   "name": "load, a further form",
+   "mnemonic": "load",
+   "what": "not modelled in g17emu yet; it follows op435 in two census programs (25.192).",
+   "confidence": "compiled",
+   "sections": [
+    "25.192"
+   ]
+  },
+  {
+   "op": 12646,
+   "name": "16-bit load",
+   "mnemonic": "load",
+   "what": "loads one 16-bit value (half/bf16), optionally into a register's high half (hi16), from base + index.",
+   "confidence": "executed",
+   "sections": [
+    "25.141.3",
+    "25.141.17"
+   ]
+  },
+  {
+   "op": 12655,
+   "name": "packed half2 load",
+   "mnemonic": "load",
+   "what": "loads two halves into one 32-bit register; lane t reads word t.",
+   "confidence": "executed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 12656,
+   "name": "int8 tensor load, one word",
+   "mnemonic": "load",
+   "what": "tensor-operand load of one word, four int8/uint8 elements, element code 1.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "7",
+    "24.2",
+    "24.5",
+    "25.23",
+    "25.34"
+   ]
+  },
+  {
+   "op": 12657,
+   "name": "masked int8 tensor load",
+   "mnemonic": "load",
+   "what": "op12656 with a 16-bit mask register for partial int8 tiles.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "24.2",
+    "24.5",
+    "25.34",
+    "25.37",
+    "25.51"
+   ]
+  },
+  {
+   "op": 12673,
+   "name": "plain 64-bit load, pair address",
+   "mnemonic": "load",
+   "what": "plain (non-tensor) load of two words into a register pair; op12674 with byte4[3] flipped; Apple loads at pointer + immediate with it.",
+   "confidence": "compiled",
+   "sections": [
+    "24.2",
+    "24.5",
+    "25.141.3"
+   ]
+  },
+  {
+   "op": 12674,
+   "name": "tensor load, half/bf16",
+   "mnemonic": "load",
+   "what": "tensor-operand load of two 32-bit words, normally four half/bfloat elements, element code 2, immediate element mask.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "6",
+    "7",
+    "19",
+    "20",
+    "24.2"
+   ]
+  },
+  {
+   "op": 12675,
+   "name": "masked tensor load, half/bf16",
+   "mnemonic": "load",
+   "what": "op12674 with a 16-bit mask register for partial tiles.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "7",
+    "24.2",
+    "24.5",
+    "25.23",
+    "25.24"
+   ]
+  },
+  {
+   "op": 12682,
+   "name": "plain 32-bit load",
+   "mnemonic": "load",
+   "what": "plain four-byte load, element code 4.",
+   "confidence": "executed",
+   "sections": [
+    "19",
+    "24.2",
+    "24.5",
+    "25.23",
+    "25.24",
+    "25.34"
+   ]
+  },
+  {
+   "op": 12688,
+   "name": "immediate-address one-word load",
+   "mnemonic": "load",
+   "what": "loads the word at (index + displacement) x element of a binding, an immediate address (component mask field 2066); the constant program fetches its uniform slots with it, and main reads device words (25.177).",
+   "confidence": "executed",
+   "sections": [
+    "25.67",
+    "25.120.1",
+    "25.177"
+   ]
+  },
+  {
+   "op": 12691,
+   "name": "plain 64-bit load",
+   "mnemonic": "load",
+   "what": "plain eight-byte load (int2/float2), element code 8.",
+   "confidence": "executed",
+   "sections": [
+    "24.2",
+    "24.5",
+    "25.37",
+    "25.51",
+    "25.73",
+    "25.139.2"
+   ]
+  },
+  {
+   "op": 12692,
+   "name": "tensor load, fp32",
+   "mnemonic": "load",
+   "what": "fp32-operand tensor load, element code 4.",
+   "confidence": "executed",
+   "sections": [
+    "7",
+    "19",
+    "24.2",
+    "24.5",
+    "25.37",
+    "25.51"
+   ]
+  },
+  {
+   "op": 12693,
+   "name": "masked tensor load, fp32",
+   "mnemonic": "load",
+   "what": "op12692 with a 16-bit mask register.",
+   "confidence": "executed",
+   "sections": [
+    "24.2",
+    "24.5",
+    "25.37"
+   ]
+  },
+  {
+   "op": 12697,
+   "name": "immediate-address two-word load",
+   "mnemonic": "load",
+   "what": "loads two consecutive words at an immediate address (component mask field 2098) into a register pair, lowest first; op17244's load, also through the constant program's register-pair pointer base (25.184).",
+   "confidence": "executed",
+   "sections": [
+    "25.177",
+    "25.184"
+   ]
+  },
+  {
+   "op": 12700,
+   "name": "three-component vector load",
+   "mnemonic": "load",
+   "what": "12-byte (x3) load whose access steps 16 bytes (4n rounded up to a power of two).",
+   "confidence": "executed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 12706,
+   "name": "immediate-address three-word load",
+   "mnemonic": "load",
+   "what": "loads three consecutive words at an immediate address (component mask field 2162) into a 32-bit register tuple; Apple's constant programs use it through a register-pair pointer base.",
+   "confidence": "executed",
+   "sections": [
+    "25.179"
+   ]
+  },
+  {
+   "op": 12709,
+   "name": "128-bit vector load",
+   "mnemonic": "load",
+   "what": "general vector load, width-selected; sixteen-byte access (element code 16) for float4/int4/long2.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "6",
+    "19",
+    "20",
+    "24.2",
+    "24.5"
+   ]
+  },
+  {
+   "op": 12715,
+   "name": "immediate-address four-word load",
+   "mnemonic": "load",
+   "what": "loads four consecutive words at an immediate address (component mask field 2290) into a 32-bit register tuple, lowest register first.",
+   "confidence": "executed",
+   "sections": [
+    "25.177"
+   ]
+  },
+  {
+   "op": 13075,
+   "name": "imageblock store, 32-bit",
+   "mnemonic": "store.ib.32",
+   "what": "32-bit imageblock (tile) store at the lane's local x/y; operand 1 bits 24-31 are its wait mask.",
+   "confidence": "executed",
+   "sections": [
+    "25.96",
+    "25.104.1",
+    "25.104.2"
+   ]
+  },
+  {
+   "op": 13276,
+   "name": "dequantized-block store, likely threadgroup",
+   "mnemonic": "store",
+   "what": "Stores the dequantized weight block (eight per K block) in MLX's quantized matmul; unconfirmed: likely threadgroup memory.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.144.1"
+   ]
+  },
+  {
+   "op": 13288,
+   "name": "threadgroup-memory store",
+   "mnemonic": "store.tg",
+   "what": "Stores to threadgroup memory; the cooperative LayerNorm writes its partial sums with it.",
+   "confidence": "executed",
+   "sections": [
+    "25.210"
+   ]
+  },
+  {
+   "op": 13483,
+   "name": "two-byte filler",
+   "mnemonic": "pad",
+   "what": "2-byte pad with zero varying bits; 89% of constant-program instructions.",
+   "confidence": "static",
+   "sections": [
+    "24.8",
+    "25.68",
+    "25.71",
+    "25.73",
+    "25.82"
+   ]
+  },
+  {
+   "op": 13574,
+   "name": "32-bit OR with immediate, seven-bit destination",
+   "mnemonic": "or",
+   "what": "d = a | imm with a seven-bit destination field (reaches R64 and above) and an authored load wait, 10 bytes; M8 uses OR with 0 as the register copy into R64+, bit-exact on hardware.",
+   "confidence": "executed",
+   "sections": [
+    "25.144.8"
+   ]
+  },
+  {
+   "op": 13575,
+   "name": "32-bit OR",
+   "mnemonic": "or",
+   "what": "d = a32 | b32.",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 13576,
+   "name": "OR with 16-bit operand",
+   "mnemonic": "or",
+   "what": "d = a32 | zext16(b).",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "name audit"
+   ]
+  },
+  {
+   "op": 13588,
+   "name": "16-bit OR",
+   "mnemonic": "or",
+   "what": "d16 = a16 | b16 (t13588, 17 cases).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 13592,
+   "name": "32-bit OR with immediate into the uniform/staging file",
+   "mnemonic": "or.a",
+   "what": "The `.a` OR: a | imm to the uniform/staging file.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 13597,
+   "name": "16-bit OR into the uniform/staging file",
+   "mnemonic": "or.a",
+   "what": "The `.a` OR of two 16-bit registers.",
+   "confidence": "compiled",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 13618,
+   "name": "fp8 pack, vector, from fp32/half/bf16",
+   "mnemonic": "cvt.f32.fp8",
+   "what": "Packs eight fp32, half or bfloat values to fp8 with round-to-nearest-even and no saturation; a format immediate selects e4m3fn (97) or e5m2 (98).",
+   "confidence": "executed",
+   "sections": [
+    "16",
+    "138",
+    "140",
+    "25.21"
+   ]
+  },
+  {
+   "op": 13620,
+   "name": "fp8 pack, scalar, from fp32",
+   "mnemonic": null,
+   "what": "Scalar counterpart of op13618: one f8 from one f32; Apple's compiler emits it for scalar fp8 air.convert.",
+   "confidence": "compiled",
+   "sections": [
+    "138",
+    "25.21"
+   ]
+  },
+  {
+   "op": 13754,
+   "name": "camera/video kernel op, function unknown",
+   "mnemonic": null,
+   "what": "A 14-byte, 6-operand form found 50 times in Apple camera and video kernels (VCPDownsample, deskCam warping/sharpening, CMIGDCComputeYUV); admitted to the contract as an encoding only, function unknown.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.58"
+   ]
+  },
+  {
+   "op": 13856,
+   "name": "quad prefix sum, fp32",
+   "mnemonic": "quad.prefix_sum.f32",
+   "what": "Inclusive prefix sum over a 4-lane quad; table-only.",
+   "confidence": "static",
+   "sections": [
+    "25.82"
+   ]
+  },
+  {
+   "op": 13944,
+   "name": "quad shuffle-xor, immediate mask",
+   "mnemonic": "quad.shuffle_xor",
+   "what": "quad_shuffle_xor; bounded to 4 lanes, masks of 4 or more give 0.0.",
+   "confidence": "compiled",
+   "sections": [
+    "12",
+    "24.5"
+   ]
+  },
+  {
+   "op": 13945,
+   "name": "quad shuffle-xor, runtime mask",
+   "mnemonic": null,
+   "what": "quad_shuffle_xor with the lane mask from a register.",
+   "confidence": "compiled",
+   "sections": [
+    "12",
+    "24.4"
+   ]
+  },
+  {
+   "op": 14047,
+   "name": "bit reverse",
+   "mnemonic": "reverse",
+   "what": "Reverses the 32 bits of a (Metal reverse_bits).",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 14059,
+   "name": "special-register read",
+   "mnemonic": "read_sr",
+   "what": "reads a special register (thread/group ids and similar) into a GPR.",
+   "confidence": "executed",
+   "sections": [
+    "25.82",
+    "25.120.1",
+    "25.141.13"
+   ]
+  },
+  {
+   "op": 14060,
+   "name": "special-register read, 16-bit",
+   "mnemonic": "read_sr",
+   "what": "Reads a special register into a 16-bit register; Apple's divergent simd_broadcast_first reads SR 38, the active-lane mask, with it.",
+   "confidence": "compiled",
+   "sections": [
+    "25.144.6"
+   ]
+  },
+  {
+   "op": 14061,
+   "name": "argument read, binding-table word",
+   "mnemonic": "base.wide",
+   "what": "reads one 32-bit half of a buffer's binding-table entry from the indexed slot space.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "24.8",
+    "25.35",
+    "25.59",
+    "25.67",
+    "25.120",
+    "25.179"
+   ]
+  },
+  {
+   "op": 14099,
+   "name": "flag to 16-bit register",
+   "mnemonic": "flag.mov",
+   "what": "materialises a condition flag as a 16-bit register value.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 14147,
+   "name": "bit interleave, Morton encode",
+   "mnemonic": null,
+   "what": "bit 2i of d is bit i of the first source's low 16 bits, bit 2i+1 of the second's (G13 intl).",
+   "confidence": "executed",
+   "sections": [
+    "24.4",
+    "24.8",
+    "25.59",
+    "25.72"
+   ]
+  },
+  {
+   "op": 14156,
+   "name": "device fence",
+   "mnemonic": null,
+   "what": "atomic_thread_fence(mem_device, seq_cst, thread_scope_device): makes this core's device stores visible to other cores.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "25.140.5",
+    "25.141.1"
+   ]
+  },
+  {
+   "op": 14157,
+   "name": "SIMD shuffle, constant lane, broadcast",
+   "mnemonic": "simd.shuffle",
+   "what": "simd_broadcast / simd_shuffle: reads a value from another lane.",
+   "confidence": "executed",
+   "sections": [
+    "25.102"
+   ]
+  },
+  {
+   "op": 14158,
+   "name": "SIMD shuffle, register lane",
+   "mnemonic": "simd.shuffle",
+   "what": "Reads a value from the lane whose index is in a register; op14157 takes the lane as a constant.",
+   "confidence": "compiled",
+   "sections": [
+    "25.144.6"
+   ]
+  },
+  {
+   "op": 14169,
+   "name": "SIMD shuffle-xor, immediate mask",
+   "mnemonic": "simd.shuffle_xor",
+   "what": "simd_shuffle_xor; the final immediate is the XOR lane mask.",
+   "confidence": "compiled",
+   "sections": [
+    "12",
+    "24.5"
+   ]
+  },
+  {
+   "op": 14170,
+   "name": "SIMD shuffle-xor, runtime mask",
+   "mnemonic": null,
+   "what": "32-lane simd_shuffle_xor with the lane mask from a register.",
+   "confidence": "compiled",
+   "sections": [
+    "12",
+    "24.4"
+   ]
+  },
+  {
+   "op": 14208,
+   "name": "simdgroup active-thread mask",
+   "mnemonic": null,
+   "what": "simd_active_threads_mask(): writes the mask of active lanes.",
+   "confidence": "executed",
+   "sections": [
+    "24.4",
+    "24.8",
+    "25.59"
+   ]
+  },
+  {
+   "op": 14211,
+   "name": "SIMD boolean reduce, base form",
+   "mnemonic": "simd.reduce_bool",
+   "what": "The contract's simd.reduce_bool (schedclass 14, 6 operands, 1 definition), cited as the base form that op14214 narrows; not emitted or measured by this project.",
+   "confidence": "static",
+   "sections": [
+    "25.144.6"
+   ]
+  },
+  {
+   "op": 14214,
+   "name": "SIMD boolean reduce",
+   "mnemonic": "simd.reduce_bool",
+   "what": "A narrowed form of op14211 in Apple's divergent simd_broadcast_first sequence; unconfirmed: likely selects the first active lane.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.144.6"
+   ]
+  },
+  {
+   "op": 14391,
+   "name": "32-bit shift left immediate",
+   "mnemonic": "shl",
+   "what": "d = a32 << imm.",
+   "confidence": "compiled",
+   "sections": [
+    "25.130",
+    "25.141"
+   ]
+  },
+  {
+   "op": 14392,
+   "name": "32-bit shift left by register",
+   "mnemonic": "shl",
+   "what": "d = a << k, where k is the amount's low 7 bits, and 0 when k is 32 or more (the satwrap and marginrepair receipts).",
+   "confidence": "executed",
+   "sections": [
+    "25.145"
+   ]
+  },
+  {
+   "op": 14394,
+   "name": "16-bit shift left immediate, 32-bit result",
+   "mnemonic": "shl",
+   "what": "d = zext16(a) << imm.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 14423,
+   "name": "shift left, a further form",
+   "mnemonic": "shl",
+   "what": "not modelled in g17emu yet; it follows op435 in a constant program (25.192).",
+   "confidence": "compiled",
+   "sections": [
+    "25.192"
+   ]
+  },
+  {
+   "op": 14661,
+   "name": "texture sample",
+   "mnemonic": "texture.sample",
+   "what": "texture sample; reads staged coordinates from the op4 staging file.",
+   "confidence": "compiled",
+   "sections": [
+    "25.120.1"
+   ]
+  },
+  {
+   "op": 15813,
+   "name": "texture read",
+   "mnemonic": "texture.read",
+   "what": "texture read (fetch without a sampler).",
+   "confidence": "compiled",
+   "sections": [
+    "25.120.1"
+   ]
+  },
+  {
+   "op": 16805,
+   "name": "32-bit arithmetic shift right immediate",
+   "mnemonic": "asr",
+   "what": "d = a >> n, sign-filling; executed only with source modifier 24 (confound3, lane.form_sar5).",
+   "confidence": "executed",
+   "sections": [
+    "25.145.1"
+   ]
+  },
+  {
+   "op": 16842,
+   "name": "SIMD sum, fp32",
+   "mnemonic": "simd.sum.f32",
+   "what": "simd_sum across 32 lanes in one instruction; xor order 1, 2, 4, 8, 16.",
+   "confidence": "executed",
+   "sections": [
+    "25.90",
+    "25.141"
+   ]
+  },
+  {
+   "op": 16858,
+   "name": "SIMD max, fp32",
+   "mnemonic": "simd.fmax.f32",
+   "what": "simd_max across 32 lanes in one instruction.",
+   "confidence": "executed",
+   "sections": [
+    "25.90"
+   ]
+  },
+  {
+   "op": 17013,
+   "name": "32-bit shift right immediate",
+   "mnemonic": "shr",
+   "what": "d = a32 >> imm; also serves extract_bits.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 17014,
+   "name": "32-bit shift right by register",
+   "mnemonic": "shr",
+   "what": "d = a32 >> b (logical).",
+   "confidence": "executed",
+   "sections": [
+    "25.128"
+   ]
+  },
+  {
+   "op": 17016,
+   "name": "16-bit shift right, 32-bit result",
+   "mnemonic": "shr",
+   "what": "d32 = a16 >> n.",
+   "confidence": "executed",
+   "sections": [
+    "25.93",
+    "name audit"
+   ]
+  },
+  {
+   "op": 17043,
+   "name": "16-bit shift right",
+   "mnemonic": "shr",
+   "what": "d16 = a16 >> n.",
+   "confidence": "executed",
+   "sections": [
+    "24.5",
+    "name audit"
+   ]
+  },
+  {
+   "op": 17193,
+   "name": "16-bit store",
+   "mnemonic": "store",
+   "what": "stores one 16-bit value at base + index.",
+   "confidence": "executed",
+   "sections": [
+    "24.8",
+    "25.71"
+   ]
+  },
+  {
+   "op": 17199,
+   "name": "16-bit store at an immediate address",
+   "mnemonic": "store",
+   "what": "stores a half register to the halfword at an immediate address (component mask field 2065); executed on Apple's GPU (25.195).",
+   "confidence": "executed",
+   "sections": [
+    "25.184",
+    "25.195"
+   ]
+  },
+  {
+   "op": 17202,
+   "name": "word store at word index",
+   "mnemonic": "store",
+   "what": "stores one 32-bit word at a word index (the packed int8 epilogue store).",
+   "confidence": "executed",
+   "sections": [
+    "25.105",
+    "25.105.1",
+    "25.105.2",
+    "25.127",
+    "25.129",
+    "25.129.1"
+   ]
+  },
+  {
+   "op": 17229,
+   "name": "plain 32-bit store",
+   "mnemonic": "store",
+   "what": "four-byte store (store sub-form 00), element code 4.",
+   "confidence": "executed",
+   "sections": [
+    "19",
+    "24.2",
+    "24.5",
+    "25.8",
+    "25.30",
+    "25.37"
+   ]
+  },
+  {
+   "op": 17235,
+   "name": "store, sub-form 01, texel/word-slot",
+   "mnemonic": "store",
+   "what": "store sub-form 01; the texel-store form, measured to read a texture fetch's destination.",
+   "confidence": "executed",
+   "sections": [
+    "25.62"
+   ]
+  },
+  {
+   "op": 17244,
+   "name": "two-component store",
+   "mnemonic": "store",
+   "what": "store sub-form 11 with two components (k and k+1 from a register pair); the store cc emits.",
+   "confidence": "executed",
+   "sections": [
+    "25.62",
+    "25.177"
+   ]
+  },
+  {
+   "op": 17253,
+   "name": "immediate-address three-word store",
+   "mnemonic": "store",
+   "what": "stores a three-register tuple to three consecutive words at an immediate address (component mask field 2162); op12706's store (25.192).",
+   "confidence": "executed",
+   "sections": [
+    "25.184",
+    "25.192"
+   ]
+  },
+  {
+   "op": 17256,
+   "name": "128-bit vector store",
+   "mnemonic": "store",
+   "what": "general vector store, sixteen-byte access.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "6",
+    "19",
+    "24.2",
+    "24.5",
+    "25.8"
+   ]
+  },
+  {
+   "op": 17257,
+   "name": "tensor store",
+   "mnemonic": "store",
+   "what": "four-word tensor store with an immediate mask.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "6",
+    "7",
+    "24.2",
+    "24.5",
+    "24.8"
+   ]
+  },
+  {
+   "op": 17258,
+   "name": "masked tensor store",
+   "mnemonic": "store",
+   "what": "op17257 with a 16-bit mask register; bit j enables word j.",
+   "confidence": "executed",
+   "sections": [
+    "0.8",
+    "6",
+    "7",
+    "24.2",
+    "24.5",
+    "25.23"
+   ]
+  },
+  {
+   "op": 17262,
+   "name": "immediate-address four-word store",
+   "mnemonic": "store",
+   "what": "stores a four-register tuple to four consecutive words at an immediate address (component mask field 2290).",
+   "confidence": "executed",
+   "sections": [
+    "25.177"
+   ]
+  },
+  {
+   "op": 17631,
+   "name": "convert-family base, class 11, unused",
+   "mnemonic": null,
+   "what": "Scheduling-class-427 base (4 operands, register class 11) paired with op17632; never emitted or witnessed, function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12",
+    "25.70"
+   ]
+  },
+  {
+   "op": 17632,
+   "name": "fp8 unpack, scalar, to fp32",
+   "mnemonic": null,
+   "what": "Class-428 member (5 operands) Apple's compiler emits for scalar f32 from f8.",
+   "confidence": "compiled",
+   "sections": [
+    "25.12",
+    "25.21"
+   ]
+  },
+  {
+   "op": 17633,
+   "name": "convert-family base, class 34, unused",
+   "mnemonic": null,
+   "what": "Class-427 base (4 operands, register class 34) paired with op17634; never emitted or witnessed, function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12"
+   ]
+  },
+  {
+   "op": 17634,
+   "name": "fp8 unpack, vector, to fp32 or half",
+   "mnemonic": null,
+   "what": "Unpacks fp8 (e4m3fn or e5m2, chosen by a format field, not the opcode) to fp32 or half; four of them convert a v8f8.",
+   "confidence": "compiled",
+   "sections": [
+    "25.12",
+    "25.21",
+    "25.94.1"
+   ]
+  },
+  {
+   "op": 17635,
+   "name": "convert-family base, store-shaped A, unused",
+   "mnemonic": null,
+   "what": "Class-427 base with 5 operands and no destination register (store-shaped), paired with op17636; function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12",
+    "25.70"
+   ]
+  },
+  {
+   "op": 17636,
+   "name": "convert-family, store-shaped A, unused",
+   "mnemonic": null,
+   "what": "Class-428 member with 6 operands and no destination register; once a candidate for sub-byte (fp4/fp6) lowering, but Apple lowers fp4 in software, so function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12",
+    "25.21",
+    "25.70",
+    "25.94.1"
+   ]
+  },
+  {
+   "op": 17637,
+   "name": "convert-family base, store-shaped B, unused",
+   "mnemonic": null,
+   "what": "Class-427 base with 5 operands and no destination register, paired with op17638; function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12",
+    "25.70"
+   ]
+  },
+  {
+   "op": 17638,
+   "name": "convert-family, store-shaped B, unused",
+   "mnemonic": null,
+   "what": "Class-428 member with 6 operands and no destination register; a former fp4/fp6 lowering candidate, function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12",
+    "25.21",
+    "25.70"
+   ]
+  },
+  {
+   "op": 17639,
+   "name": "convert-family base, class 0, unused",
+   "mnemonic": null,
+   "what": "Class-427 base (4 operands, register class 0) paired with op17640; never emitted or witnessed, function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12"
+   ]
+  },
+  {
+   "op": 17640,
+   "name": "convert-family, class 0 value-producing, unused",
+   "mnemonic": null,
+   "what": "Class-428 member (5 operands, classes 0,0) and the only unexplained member that defines a value; a former sub-byte lowering candidate, function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12",
+    "25.21",
+    "25.70"
+   ]
+  },
+  {
+   "op": 17641,
+   "name": "convert-family base, class 12, unused",
+   "mnemonic": null,
+   "what": "Class-427 base (4 operands, register class 12) and the one-fewer-operand sibling of the fp8-to-bf16 unpack op17642; never emitted, function unconfirmed.",
+   "confidence": "unconfirmed",
+   "sections": [
+    "25.12"
+   ]
+  },
+  {
+   "op": 17642,
+   "name": "fp8 unpack to bf16",
+   "mnemonic": "cvt.fp8.bf16",
+   "what": "Unpacks two fp8 values in a 16-bit register to two bfloat16 values in a 32-bit register; eight of them feed an ordinary bf16 tensor MMA for fp8 GEMM.",
+   "confidence": "executed",
+   "sections": [
+    "16",
+    "137",
+    "138",
+    "25.12"
+   ]
+  },
+  {
+   "op": 17771,
+   "name": "32-bit XOR",
+   "mnemonic": "xor",
+   "what": "d = a32 ^ b32.",
+   "confidence": "executed",
+   "sections": [
+    "25.84",
+    "name audit"
+   ]
+  },
+  {
+   "op": 17772,
+   "name": "XOR with 16-bit second operand",
+   "mnemonic": "xor",
+   "what": "d = a32 ^ zext16(b).",
+   "confidence": "executed",
+   "sections": [
+    "25.59",
+    "name audit"
+   ]
+  },
+  {
+   "op": 17774,
+   "name": "XOR with 16-bit first operand",
+   "mnemonic": "xor",
+   "what": "d = zext16(a) ^ b32.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 17775,
+   "name": "16-bit XOR, 32-bit result",
+   "mnemonic": "and",
+   "what": "d = a16 ^ b16; the map's `and` is wrong.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 17784,
+   "name": "16-bit XOR",
+   "mnemonic": "xor",
+   "what": "d16 = a16 ^ b16, register destination.",
+   "confidence": "compiled",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 17788,
+   "name": "32-bit XOR with immediate into the uniform/staging file",
+   "mnemonic": "xor.a",
+   "what": "The `.a` XOR: a ^ imm to the uniform/staging file.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  },
+  {
+   "op": 17789,
+   "name": "scalar spill store, 32-bit XOR into the staging file",
+   "mnemonic": "xor.a",
+   "what": "32-bit `.a` xor; Apple uses it as the 32-bit scalar spill store (fragment spills are op595).",
+   "confidence": "executed",
+   "sections": [
+    "12",
+    "24.5",
+    "25.59"
+   ]
+  },
+  {
+   "op": 17793,
+   "name": "16-bit XOR into the uniform/staging file",
+   "mnemonic": "xor.a",
+   "what": "The `.a` XOR of two 16-bit values; the high half of the output word stays untouched.",
+   "confidence": "executed",
+   "sections": [
+    "25.59"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1067 @@
+{
+  "format": "g17-native-qwen-generation-v1",
+  "passed": true,
+  "error": null,
+  "requests": [
+    {
+      "prompt": "Explain why the sky is blue.",
+      "prompt_tokens": 37,
+      "prompt_token_ids": [
+        151644,
+        8948,
+        198,
+        2610,
+        525,
+        1207,
+        16948,
+        11,
+        3465,
+        553,
+        54364,
+        14817,
+        13,
+        1446,
+        525,
+        264,
+        10950,
+        17847,
+        13,
+        151645,
+        198,
+        151644,
+        872,
+        198,
+        840,
+        20772,
+        3170,
+        279,
+        12884,
+        374,
+        6303,
+        13,
+        151645,
+        198,
+        151644,
+        77091,
+        198
+      ],
+      "generated_token_ids": [
+        785,
+        12884,
+        374,
+        6303,
+        1576,
+        315,
+        279,
+        71816,
+        315,
+        39020,
+        553,
+        13673
+      ],
+      "text": "The sky is blue because of the scattering of sunlight by tiny",
+      "logit_frames": [
+        {
+          "mode": "prefill",
+          "start": 0,
+          "valid_tokens": 32,
+          "cache_valid": 32,
+          "path": "results/qwen-cold-logits/request-0/logits-0.npy",
+          "sha256": "b4788a4af7b50d67ba27b90cfa8793b8acd92904eebb67ab50bfaf2c2626d454",
+          "bytes": 607872
+        },
+        {
+          "mode": "prefill",
+          "start": 32,
+          "valid_tokens": 5,
+          "cache_valid": 37,
+          "path": "results/qwen-cold-logits/request-0/logits-1.npy",
+          "sha256": "38edbe90f6b0a2c9add44c5790e880fee1282303c91ccb85d0e3d15232401ab8",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 785,
+          "position": 37,
+          "cache_valid": 38,
+          "path": "results/qwen-cold-logits/request-0/logits-2.npy",
+          "sha256": "378dae9805ada6a18611075b5f76a266a43a1c1ea4aabae89ad25280519cec6c",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 12884,
+          "position": 38,
+          "cache_valid": 39,
+          "path": "results/qwen-cold-logits/request-0/logits-3.npy",
+          "sha256": "f9f6b8432fe9237025dd03437a0f5656bbaa0ecff2adcb1cf86f92a55ba165a8",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 374,
+          "position": 39,
+          "cache_valid": 40,
+          "path": "results/qwen-cold-logits/request-0/logits-4.npy",
+          "sha256": "e6800996858095ed4423505c90a37983fc5652882af3957af92945ffea7b008b",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 6303,
+          "position": 40,
+          "cache_valid": 41,
+          "path": "results/qwen-cold-logits/request-0/logits-5.npy",
+          "sha256": "3edabfbd47475c5f8275e781ad208613e699c5abd506a03e5016ce071bb8bb8e",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 1576,
+          "position": 41,
+          "cache_valid": 42,
+          "path": "results/qwen-cold-logits/request-0/logits-6.npy",
+          "sha256": "703d079bdb0f26c17931842223c03a772ef5bde36ac0799c799201ab3cdb37bc",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 315,
+          "position": 42,
+          "cache_valid": 43,
+          "path": "results/qwen-cold-logits/request-0/logits-7.npy",
+          "sha256": "efc319d1768225af057d5669e37bcc66a9abf16f2b52d42c4650ff0a5f1ee57e",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 279,
+          "position": 43,
+          "cache_valid": 44,
+          "path": "results/qwen-cold-logits/request-0/logits-8.npy",
+          "sha256": "9e094889f50b53a0a3b649057d0ddadcf94a144256e4f6a34269eb187657626a",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 71816,
+          "position": 44,
+          "cache_valid": 45,
+          "path": "results/qwen-cold-logits/request-0/logits-9.npy",
+          "sha256": "3aa6624899df7697ddb9ca43956313203e4da93b755025c6ea1f2dd9b6dfd884",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 315,
+          "position": 45,
+          "cache_valid": 46,
+          "path": "results/qwen-cold-logits/request-0/logits-10.npy",
+          "sha256": "a1b62126a60f0c019d30344b45bc433d52e2d864c26d2678dea404e59188cc26",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 39020,
+          "position": 46,
+          "cache_valid": 47,
+          "path": "results/qwen-cold-logits/request-0/logits-11.npy",
+          "sha256": "5e35d9f31a452659c21c3a432da65af2c8a8ed3ea27d2e1ff9801d4559b8a7f6",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 553,
+          "position": 47,
+          "cache_valid": 48,
+          "path": "results/qwen-cold-logits/request-0/logits-12.npy",
+          "sha256": "90efc5fb406ad9592302cd0037ba9eddc584b65899d0be18d39345a91c3e5880",
+          "bytes": 607872
+        }
+      ],
+      "stop_reason": "max_new_tokens",
+      "tokenizer": {
+        "format": "g17-pinned-tokenizer-v1",
+        "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 7031645,
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "git_blob": "443909a61d429dff23010e5bddd28ff530edda00"
+          },
+          "tokenizer_config.json": {
+            "bytes": 7305,
+            "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "git_blob": "07bfe0640cb5a0037f9322287fbfc682806cf672"
+          },
+          "vocab.json": {
+            "bytes": 2776833,
+            "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+            "git_blob": "4783fe10ac3adce15ac8f358ef5462739852c569"
+          },
+          "merges.txt": {
+            "bytes": 1671839,
+            "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "git_blob": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+          }
+        }
+      },
+      "tokenizer_engine": {
+        "transformers": "5.16.1",
+        "tokenizers": "0.23.1"
+      },
+      "prefill": [
+        {
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 283228084,
+          "submit_call_ns": 38174000,
+          "submit_to_completion_ns": 199433000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 250435209,
+          "submit_call_ns": 18441000,
+          "submit_to_completion_ns": 174322000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        }
+      ],
+      "decode": [
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 228222209,
+          "submit_call_ns": 22660000,
+          "submit_to_completion_ns": 136098000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 222719916,
+          "submit_call_ns": 22256000,
+          "submit_to_completion_ns": 132870000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 272085333,
+          "submit_call_ns": 24751000,
+          "submit_to_completion_ns": 179102000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 285856958,
+          "submit_call_ns": 24926000,
+          "submit_to_completion_ns": 189232000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 301971000,
+          "submit_call_ns": 24293000,
+          "submit_to_completion_ns": 200888000,
+          "output_sha256": "5e38cbc61c3b8ff5a994a57178baee8dcbc73e2100eb924898717a1142e74c48",
+          "cache_valid": 42
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 287751000,
+          "submit_call_ns": 24118000,
+          "submit_to_completion_ns": 191432000,
+          "output_sha256": "4abaf992c3e4f943bc52084858e69f86147fed37824459cb8f45607be415077b",
+          "cache_valid": 43
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 276004667,
+          "submit_call_ns": 25496000,
+          "submit_to_completion_ns": 182235000,
+          "output_sha256": "e675fa392e2c1d72252757674781966d2f81feeb9b23ee9f9ea4076477721ce2",
+          "cache_valid": 44
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 279550792,
+          "submit_call_ns": 27287000,
+          "submit_to_completion_ns": 185598000,
+          "output_sha256": "73f0af7878700c830c9925701badcd3c69d8aee98f133ff23d7da66c37a5307a",
+          "cache_valid": 45
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 279075750,
+          "submit_call_ns": 27459000,
+          "submit_to_completion_ns": 186369000,
+          "output_sha256": "ff5f0019d8025e4e25a2b9d3632abb26d2c6b171aebcd262aed50eaf2a38d570",
+          "cache_valid": 46
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 275874250,
+          "submit_call_ns": 25329000,
+          "submit_to_completion_ns": 182860000,
+          "output_sha256": "b995f3ace030fd224b8eef0d670e5d35d4e8d5e167c1856b724a6b6a41a88c77",
+          "cache_valid": 47
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 276985500,
+          "submit_call_ns": 26773000,
+          "submit_to_completion_ns": 184612000,
+          "output_sha256": "ed62e78a750e7e3e5d0df7d678b205f17b07b7a30ed10104ef302498aa277136",
+          "cache_valid": 48
+        }
+      ],
+      "first_token_ns": 551289875,
+      "total_ns": 3557427125,
+      "decode_tokens_per_second": 3.683737875426785,
+      "submissions_per_decode_token": [
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844
+      ]
+    },
+    {
+      "prompt": "Write a short greeting.",
+      "prompt_tokens": 34,
+      "prompt_token_ids": [
+        151644,
+        8948,
+        198,
+        2610,
+        525,
+        1207,
+        16948,
+        11,
+        3465,
+        553,
+        54364,
+        14817,
+        13,
+        1446,
+        525,
+        264,
+        10950,
+        17847,
+        13,
+        151645,
+        198,
+        151644,
+        872,
+        198,
+        7985,
+        264,
+        2805,
+        42113,
+        13,
+        151645,
+        198,
+        151644,
+        77091,
+        198
+      ],
+      "generated_token_ids": [
+        9707,
+        0,
+        2585,
+        646,
+        358,
+        7789,
+        498,
+        3351,
+        30,
+        151645
+      ],
+      "text": "Hello! How can I assist you today?",
+      "logit_frames": [
+        {
+          "mode": "prefill",
+          "start": 0,
+          "valid_tokens": 32,
+          "cache_valid": 32,
+          "path": "results/qwen-cold-logits/request-1/logits-0.npy",
+          "sha256": "0af94e5339bb2e413861f6aac83a7c1adb726b91fc94590f3fafe48710051388",
+          "bytes": 607872
+        },
+        {
+          "mode": "prefill",
+          "start": 32,
+          "valid_tokens": 2,
+          "cache_valid": 34,
+          "path": "results/qwen-cold-logits/request-1/logits-1.npy",
+          "sha256": "699de196c68100e60b1ed0d01307bdb58145824a18515aa7ed907228806a8f42",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 9707,
+          "position": 34,
+          "cache_valid": 35,
+          "path": "results/qwen-cold-logits/request-1/logits-2.npy",
+          "sha256": "6b2622626f21b8f5d51038d6fab44e93f65a96ca3406ed72c6c85bd617160c76",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 0,
+          "position": 35,
+          "cache_valid": 36,
+          "path": "results/qwen-cold-logits/request-1/logits-3.npy",
+          "sha256": "14dbf206cb0c6235242adbf8a1de212ba3361ae40e42e70a6de210c4390c1c62",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 2585,
+          "position": 36,
+          "cache_valid": 37,
+          "path": "results/qwen-cold-logits/request-1/logits-4.npy",
+          "sha256": "6c19cf19798b47b91b1037eb7c522eb6e6d789010014ef6f0193222b28375c77",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 646,
+          "position": 37,
+          "cache_valid": 38,
+          "path": "results/qwen-cold-logits/request-1/logits-5.npy",
+          "sha256": "14381be2a2eefaadee0ec05b2caf04eebcf4e3412e5ecbf24a9f47c228239acd",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 358,
+          "position": 38,
+          "cache_valid": 39,
+          "path": "results/qwen-cold-logits/request-1/logits-6.npy",
+          "sha256": "de4b074f22f98c42c40085bbf8c4b66250ee1e2cfca2f6c414652320a2b4191c",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 7789,
+          "position": 39,
+          "cache_valid": 40,
+          "path": "results/qwen-cold-logits/request-1/logits-7.npy",
+          "sha256": "2e5b5c919baf54b78b779799f049da9a1edb9b2255c06567219919ed293e9a3c",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 498,
+          "position": 40,
+          "cache_valid": 41,
+          "path": "results/qwen-cold-logits/request-1/logits-8.npy",
+          "sha256": "ceb7ac221277a73148f5d450969aef3b94c6e3cbbc9c3bdc1c7a29bca95ba405",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 3351,
+          "position": 41,
+          "cache_valid": 42,
+          "path": "results/qwen-cold-logits/request-1/logits-9.npy",
+          "sha256": "92e20108370c696e6833a79de8172fc96cd3959e326bc74e827e02418bcd6f06",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 30,
+          "position": 42,
+          "cache_valid": 43,
+          "path": "results/qwen-cold-logits/request-1/logits-10.npy",
+          "sha256": "8bc6de5104ddb48d236ce88670ec754585cbb4f3c8d97aec96e5a7876c98e1b6",
+          "bytes": 607872
+        }
+      ],
+      "stop_reason": "eos",
+      "tokenizer": {
+        "format": "g17-pinned-tokenizer-v1",
+        "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 7031645,
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "git_blob": "443909a61d429dff23010e5bddd28ff530edda00"
+          },
+          "tokenizer_config.json": {
+            "bytes": 7305,
+            "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "git_blob": "07bfe0640cb5a0037f9322287fbfc682806cf672"
+          },
+          "vocab.json": {
+            "bytes": 2776833,
+            "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+            "git_blob": "4783fe10ac3adce15ac8f358ef5462739852c569"
+          },
+          "merges.txt": {
+            "bytes": 1671839,
+            "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "git_blob": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+          }
+        }
+      },
+      "tokenizer_engine": {
+        "transformers": "5.16.1",
+        "tokenizers": "0.23.1"
+      },
+      "prefill": [
+        {
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 281539709,
+          "submit_call_ns": 19720000,
+          "submit_to_completion_ns": 199714000,
+          "output_sha256": "76a50197620a8538918518d61c309d4a9e9c184cc5e9df38ea8740fc509646de",
+          "cache_valid": 32
+        },
+        {
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 197670875,
+          "submit_call_ns": 17544000,
+          "submit_to_completion_ns": 125122000,
+          "output_sha256": "325c708b587c8e25f6d18a5865ea20f4915764a0d6ee54402ea789ea82c388b7",
+          "cache_valid": 34
+        }
+      ],
+      "decode": [
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 219870333,
+          "submit_call_ns": 22201000,
+          "submit_to_completion_ns": 130154000,
+          "output_sha256": "545ab2a75c80a98e5ffe81abdf4146f9851e789d5b3a15c6e2b507729ba79162",
+          "cache_valid": 35
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 241267834,
+          "submit_call_ns": 23490000,
+          "submit_to_completion_ns": 150978000,
+          "output_sha256": "6aaa192de384c874b8b05692dcce464739d2c477fbdf11c41b2498c4bdbbb1a2",
+          "cache_valid": 36
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 298086875,
+          "submit_call_ns": 24901000,
+          "submit_to_completion_ns": 203640000,
+          "output_sha256": "49023c980b52f700b91c2d6ccbdb64ac05a879121d0d16e45113df42781b3b12",
+          "cache_valid": 37
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 277148584,
+          "submit_call_ns": 25933000,
+          "submit_to_completion_ns": 183992000,
+          "output_sha256": "d86912105e04565d5a62f66e3c03e4994d438c8c5425313cd9fbced0da5634a8",
+          "cache_valid": 38
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 295275042,
+          "submit_call_ns": 22363000,
+          "submit_to_completion_ns": 195909000,
+          "output_sha256": "fe4c0e32bdf3f350be561e51ec8563754936d48dbc7590c4bd47d57738ab3f3e",
+          "cache_valid": 39
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 286269083,
+          "submit_call_ns": 11641000,
+          "submit_to_completion_ns": 183370000,
+          "output_sha256": "2ca778ca978878407ce296a65649c6b0385815f921cdf211e56ca1719d65ecba",
+          "cache_valid": 40
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 270713334,
+          "submit_call_ns": 11332000,
+          "submit_to_completion_ns": 171174000,
+          "output_sha256": "54a3997119d88c7f0e013df6df3c3f997840ceadabe95f9db13a006dc2b888e8",
+          "cache_valid": 41
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 296268875,
+          "submit_call_ns": 12215000,
+          "submit_to_completion_ns": 190236000,
+          "output_sha256": "897f1307d6deb3104967847ce77c722ec06af178f5c113294db1e417cc49a017",
+          "cache_valid": 42
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 299401792,
+          "submit_call_ns": 12389000,
+          "submit_to_completion_ns": 188950000,
+          "output_sha256": "f863db2ed9624a1e0103482272e83e95855e2da37296ad4580aa18c0a79357b0",
+          "cache_valid": 43
+        }
+      ],
+      "first_token_ns": 496262583,
+      "total_ns": 3000217625,
+      "decode_tokens_per_second": 3.622748320631543,
+      "submissions_per_decode_token": [
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844
+      ]
+    },
+    {
+      "prompt": "Explain why the sky is blue.",
+      "prompt_tokens": 37,
+      "prompt_token_ids": [
+        151644,
+        8948,
+        198,
+        2610,
+        525,
+        1207,
+        16948,
+        11,
+        3465,
+        553,
+        54364,
+        14817,
+        13,
+        1446,
+        525,
+        264,
+        10950,
+        17847,
+        13,
+        151645,
+        198,
+        151644,
+        872,
+        198,
+        840,
+        20772,
+        3170,
+        279,
+        12884,
+        374,
+        6303,
+        13,
+        151645,
+        198,
+        151644,
+        77091,
+        198
+      ],
+      "generated_token_ids": [
+        785,
+        12884,
+        374,
+        6303,
+        1576,
+        315,
+        279,
+        71816,
+        315,
+        39020,
+        553,
+        13673
+      ],
+      "text": "The sky is blue because of the scattering of sunlight by tiny",
+      "logit_frames": [
+        {
+          "mode": "prefill",
+          "start": 0,
+          "valid_tokens": 32,
+          "cache_valid": 32,
+          "path": "results/qwen-cold-logits/request-2/logits-0.npy",
+          "sha256": "b4788a4af7b50d67ba27b90cfa8793b8acd92904eebb67ab50bfaf2c2626d454",
+          "bytes": 607872
+        },
+        {
+          "mode": "prefill",
+          "start": 32,
+          "valid_tokens": 5,
+          "cache_valid": 37,
+          "path": "results/qwen-cold-logits/request-2/logits-1.npy",
+          "sha256": "38edbe90f6b0a2c9add44c5790e880fee1282303c91ccb85d0e3d15232401ab8",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 785,
+          "position": 37,
+          "cache_valid": 38,
+          "path": "results/qwen-cold-logits/request-2/logits-2.npy",
+          "sha256": "378dae9805ada6a18611075b5f76a266a43a1c1ea4aabae89ad25280519cec6c",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 12884,
+          "position": 38,
+          "cache_valid": 39,
+          "path": "results/qwen-cold-logits/request-2/logits-3.npy",
+          "sha256": "f9f6b8432fe9237025dd03437a0f5656bbaa0ecff2adcb1cf86f92a55ba165a8",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 374,
+          "position": 39,
+          "cache_valid": 40,
+          "path": "results/qwen-cold-logits/request-2/logits-4.npy",
+          "sha256": "e6800996858095ed4423505c90a37983fc5652882af3957af92945ffea7b008b",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 6303,
+          "position": 40,
+          "cache_valid": 41,
+          "path": "results/qwen-cold-logits/request-2/logits-5.npy",
+          "sha256": "3edabfbd47475c5f8275e781ad208613e699c5abd506a03e5016ce071bb8bb8e",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 1576,
+          "position": 41,
+          "cache_valid": 42,
+          "path": "results/qwen-cold-logits/request-2/logits-6.npy",
+          "sha256": "703d079bdb0f26c17931842223c03a772ef5bde36ac0799c799201ab3cdb37bc",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 315,
+          "position": 42,
+          "cache_valid": 43,
+          "path": "results/qwen-cold-logits/request-2/logits-7.npy",
+          "sha256": "efc319d1768225af057d5669e37bcc66a9abf16f2b52d42c4650ff0a5f1ee57e",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 279,
+          "position": 43,
+          "cache_valid": 44,
+          "path": "results/qwen-cold-logits/request-2/logits-8.npy",
+          "sha256": "9e094889f50b53a0a3b649057d0ddadcf94a144256e4f6a34269eb187657626a",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 71816,
+          "position": 44,
+          "cache_valid": 45,
+          "path": "results/qwen-cold-logits/request-2/logits-9.npy",
+          "sha256": "3aa6624899df7697ddb9ca43956313203e4da93b755025c6ea1f2dd9b6dfd884",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 315,
+          "position": 45,
+          "cache_valid": 46,
+          "path": "results/qwen-cold-logits/request-2/logits-10.npy",
+          "sha256": "a1b62126a60f0c019d30344b45bc433d52e2d864c26d2678dea404e59188cc26",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 39020,
+          "position": 46,
+          "cache_valid": 47,
+          "path": "results/qwen-cold-logits/request-2/logits-11.npy",
+          "sha256": "5e35d9f31a452659c21c3a432da65af2c8a8ed3ea27d2e1ff9801d4559b8a7f6",
+          "bytes": 607872
+        },
+        {
+          "mode": "decode",
+          "input_token": 553,
+          "position": 47,
+          "cache_valid": 48,
+          "path": "results/qwen-cold-logits/request-2/logits-12.npy",
+          "sha256": "90efc5fb406ad9592302cd0037ba9eddc584b65899d0be18d39345a91c3e5880",
+          "bytes": 607872
+        }
+      ],
+      "stop_reason": "max_new_tokens",
+      "tokenizer": {
+        "format": "g17-pinned-tokenizer-v1",
+        "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+        "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+        "files": {
+          "tokenizer.json": {
+            "bytes": 7031645,
+            "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+            "git_blob": "443909a61d429dff23010e5bddd28ff530edda00"
+          },
+          "tokenizer_config.json": {
+            "bytes": 7305,
+            "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+            "git_blob": "07bfe0640cb5a0037f9322287fbfc682806cf672"
+          },
+          "vocab.json": {
+            "bytes": 2776833,
+            "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+            "git_blob": "4783fe10ac3adce15ac8f358ef5462739852c569"
+          },
+          "merges.txt": {
+            "bytes": 1671839,
+            "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+            "git_blob": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+          }
+        }
+      },
+      "tokenizer_engine": {
+        "transformers": "5.16.1",
+        "tokenizers": "0.23.1"
+      },
+      "prefill": [
+        {
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 253400791,
+          "submit_call_ns": 8847000,
+          "submit_to_completion_ns": 169648000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 218747375,
+          "submit_call_ns": 12922000,
+          "submit_to_completion_ns": 134996000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        }
+      ],
+      "decode": [
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 240018292,
+          "submit_call_ns": 14607000,
+          "submit_to_completion_ns": 142197000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 269661041,
+          "submit_call_ns": 11908000,
+          "submit_to_completion_ns": 169038000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 271146084,
+          "submit_call_ns": 10846000,
+          "submit_to_completion_ns": 171270000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 270485625,
+          "submit_call_ns": 10858000,
+          "submit_to_completion_ns": 171624000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 289067208,
+          "submit_call_ns": 12213000,
+          "submit_to_completion_ns": 184629000,
+          "output_sha256": "5e38cbc61c3b8ff5a994a57178baee8dcbc73e2100eb924898717a1142e74c48",
+          "cache_valid": 42
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 269100875,
+          "submit_call_ns": 10818000,
+          "submit_to_completion_ns": 170660000,
+          "output_sha256": "4abaf992c3e4f943bc52084858e69f86147fed37824459cb8f45607be415077b",
+          "cache_valid": 43
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 299336500,
+          "submit_call_ns": 12403000,
+          "submit_to_completion_ns": 191585000,
+          "output_sha256": "e675fa392e2c1d72252757674781966d2f81feeb9b23ee9f9ea4076477721ce2",
+          "cache_valid": 44
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 271325334,
+          "submit_call_ns": 10794000,
+          "submit_to_completion_ns": 173240000,
+          "output_sha256": "73f0af7878700c830c9925701badcd3c69d8aee98f133ff23d7da66c37a5307a",
+          "cache_valid": 45
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 270421583,
+          "submit_call_ns": 11096000,
+          "submit_to_completion_ns": 170773000,
+          "output_sha256": "ff5f0019d8025e4e25a2b9d3632abb26d2c6b171aebcd262aed50eaf2a38d570",
+          "cache_valid": 46
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 268921792,
+          "submit_call_ns": 11850000,
+          "submit_to_completion_ns": 168457000,
+          "output_sha256": "b995f3ace030fd224b8eef0d670e5d35d4e8d5e167c1856b724a6b6a41a88c77",
+          "cache_valid": 47
+        },
+        {
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 267434125,
+          "submit_call_ns": 12299000,
+          "submit_to_completion_ns": 165653000,
+          "output_sha256": "ed62e78a750e7e3e5d0df7d678b205f17b07b7a30ed10104ef302498aa277136",
+          "cache_valid": 48
+        }
+      ],
+      "first_token_ns": 489923667,
+      "total_ns": 3495250875,
+      "decode_tokens_per_second": 3.682725240408044,
+      "submissions_per_decode_token": [
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844,
+        844
+      ]
+    }
+  ],
+  "scope": "bounded Qwen greedy inference; CPU tokenization/control, all model arithmetic below Metal",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "bundle_manifest_sha256": "a00651771c82b72654c7ede2a860d6179fded25f2321a1eb9fbb55d2a1b08d6a",
+  "application_sha256": "93974e5d26b9250228c9f37ffb7ec03dde709b0698b62d2145a6f87dbb3069f3",
+  "bundle_verification_seconds": 8.133547415956855,
+  "native_returncode": 0,
+  "before_recovery": [
+    33
+  ],
+  "after_recovery": [
+    33
+  ],
+  "new_events": [],
+  "native_log": "STAGE 1: device=0x104f25a80  type-0x100005 conn=0x250b (open kr=0x0)  dev+0x14=0x1e0f\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x109480000\n  resv[1] kr=0x0 @0x109880000\n  resv[2] kr=0x0 @0x109c80000\n  resv[3] kr=0x0 @0x10a080000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x10a484000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x10a494000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x10a4a4000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x10a4c4000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x10a4d4000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x10a4f4000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x300000000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x10a510000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x10a574000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x10a57c000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x10a584000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x10a58c000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x10a594000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x10a59c000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x10a5a4000 size=0xc000\nORDERED QUEUE create=0x104f2c1a0 connection=0x250b prior=0x1e0f notification=0x104f2c1f0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x10a5b4000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x10a5b8000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5c5574eb55 second=0x5c5574eb56\nDECODER CLOSED: requests=37 Submits=30220 valid=48 result=0.\nDECODER PEAK RSS BYTES: 2157969408.\n",
+  "native_binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+  "runtime_source_sha256": "2831379cfc13156c491610558e10a2ba5322d2186acad453adaf4128bb5a58f4",
+  "runtime_header_sha256": "888c49f2b76a077f751f8fa6820700f1fd0edb0ad0ca685b693b29f65286a76f",
+  "graph_initializations": 1,
+  "weight_uploads": 1,
+  "program_uploads": 1,
+  "driver_prepare_seconds": 2.029273791005835,
+  "native_build_seconds": 2.932827125012409,
+  "resident_allocation_bytes": 1074970624,
+  "numerical_validation": "Separate preregistered decoder receipt; meaningful text is not a numerical oracle",
+  "timing_scope": "host guarded elapsed time; includes stage headers and full readonly checks; no speedup claim",
+  "native_process_peak_rss_bytes": 2157969408,
+  "host_process_peak_rss_bytes": 1403633664,
+  "memory_scope": "macOS per-process RSS high-water marks; native includes readonly checkpoint snapshot. Host/native RSS peaks are separate, must not be added as a simultaneous physical peak; GPU allocations are reported separately."
+}

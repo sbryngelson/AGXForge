@@ -1,0 +1,462 @@
+{
+ "what": "chained GPU timing (tools/g17chainwarm.m): per config 7 chains of 40 serial dispatches in ONE command buffer after a clock-ramp buffer, GPU span / 40; B rotated over `copies` buffers (1 = cache-warm, 8 = streamed); final C compared bit for bit with the generic_reference bytes",
+ "validation": "the delivered fp16 forms reproduce 25.160's closure-checked in-graph per-call times within 1-8 percent (qkv 143 vs 148, wo 75 vs 81, w1 283 vs 290, w2 289 vs 292 us)",
+ "configs": {
+  "fp16_w2_c8": {
+   "per_dispatch_us_median": 289.16,
+   "per_dispatch_us_range": [
+    288.14,
+    289.82
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "559246c7aaf5d388",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 8192,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_wo_c1": {
+   "per_dispatch_us_median": 74.92,
+   "per_dispatch_us_range": [
+    74.59,
+    75.59
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "cc66e0282a628744",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_w1_c1": {
+   "per_dispatch_us_median": 283.28,
+   "per_dispatch_us_range": [
+    281.96,
+    284.16
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "c4947dbbf8854d16",
+   "form": {
+    "M": 256,
+    "N": 8192,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 1,
+    "simdgroups": 8,
+    "grid_n": 256,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_w2_c1": {
+   "per_dispatch_us_median": 289.1,
+   "per_dispatch_us_range": [
+    288.2,
+    289.32
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "559246c7aaf5d388",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 8192,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_wo_c8": {
+   "per_dispatch_us_median": 77.45,
+   "per_dispatch_us_range": [
+    76.26,
+    78.71
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "cc66e0282a628744",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_qkv_c8": {
+   "per_dispatch_us_median": 143.81,
+   "per_dispatch_us_range": [
+    143.73,
+    144.04
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "7227903e61c6d6cb",
+   "form": {
+    "M": 256,
+    "N": 4096,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 2,
+    "simdgroups": 4,
+    "grid_n": 128,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_w1_c8": {
+   "per_dispatch_us_median": 283.8,
+   "per_dispatch_us_range": [
+    282.69,
+    288.76
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "c4947dbbf8854d16",
+   "form": {
+    "M": 256,
+    "N": 8192,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 1,
+    "simdgroups": 8,
+    "grid_n": 256,
+    "kloop_unroll": 4
+   }
+  },
+  "fp16_qkv_c1": {
+   "per_dispatch_us_median": 143.43,
+   "per_dispatch_us_range": [
+    143.38,
+    145.98
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "7227903e61c6d6cb",
+   "form": {
+    "M": 256,
+    "N": 4096,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 2,
+    "simdgroups": 4,
+    "grid_n": 128,
+    "kloop_unroll": 4
+   }
+  },
+  "qkv_int8_c1": {
+   "per_dispatch_us_median": 84.38,
+   "per_dispatch_us_range": [
+    84.11,
+    86.1
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "f81ae88b3566c5a2",
+   "form": {
+    "M": 256,
+    "N": 4096,
+    "K": 2048,
+    "a": "int8",
+    "threadgroups": 2,
+    "simdgroups": 4,
+    "grid_n": 128,
+    "kloop_unroll": 4
+   }
+  },
+  "wo_int8_c8": {
+   "per_dispatch_us_median": 46.7,
+   "per_dispatch_us_range": [
+    46.5,
+    47.14
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "63443c058d136878",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 2048,
+    "a": "int8",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "qkv_fp16_c8": {
+   "per_dispatch_us_median": 143.5,
+   "per_dispatch_us_range": [
+    143.39,
+    143.75
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "7227903e61c6d6cb",
+   "form": {
+    "M": 256,
+    "N": 4096,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 2,
+    "simdgroups": 4,
+    "grid_n": 128,
+    "kloop_unroll": 4
+   }
+  },
+  "w2_fp16_c8": {
+   "per_dispatch_us_median": 288.89,
+   "per_dispatch_us_range": [
+    288.06,
+    293.65
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "559246c7aaf5d388",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 8192,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "qkv_int8_c8": {
+   "per_dispatch_us_median": 83.49,
+   "per_dispatch_us_range": [
+    83.36,
+    84.04
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "f81ae88b3566c5a2",
+   "form": {
+    "M": 256,
+    "N": 4096,
+    "K": 2048,
+    "a": "int8",
+    "threadgroups": 2,
+    "simdgroups": 4,
+    "grid_n": 128,
+    "kloop_unroll": 4
+   }
+  },
+  "w2_int8_c8": {
+   "per_dispatch_us_median": 186.77,
+   "per_dispatch_us_range": [
+    185.97,
+    187.95
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "82e9f8f82a2757b2",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 8192,
+    "a": "int8",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "qkv_fp16_c1": {
+   "per_dispatch_us_median": 143.29,
+   "per_dispatch_us_range": [
+    142.99,
+    145.81
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "7227903e61c6d6cb",
+   "form": {
+    "M": 256,
+    "N": 4096,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 2,
+    "simdgroups": 4,
+    "grid_n": 128,
+    "kloop_unroll": 4
+   }
+  },
+  "w2_fp16_c1": {
+   "per_dispatch_us_median": 288.74,
+   "per_dispatch_us_range": [
+    288.12,
+    289.32
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "559246c7aaf5d388",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 8192,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "wo_fp16_c8": {
+   "per_dispatch_us_median": 77.7,
+   "per_dispatch_us_range": [
+    76.69,
+    78.14
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "cc66e0282a628744",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "w2_int8_c1": {
+   "per_dispatch_us_median": 179.06,
+   "per_dispatch_us_range": [
+    177.67,
+    180.58
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "82e9f8f82a2757b2",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 8192,
+    "a": "int8",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "wo_fp16_c1": {
+   "per_dispatch_us_median": 74.17,
+   "per_dispatch_us_range": [
+    73.94,
+    75.06
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "cc66e0282a628744",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "wo_int8_c1": {
+   "per_dispatch_us_median": 42.16,
+   "per_dispatch_us_range": [
+    42.0,
+    42.31
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "63443c058d136878",
+   "form": {
+    "M": 256,
+    "N": 2048,
+    "K": 2048,
+    "a": "int8",
+    "threadgroups": 4,
+    "simdgroups": 2,
+    "grid_n": 64,
+    "kloop_unroll": 4
+   }
+  },
+  "w1_int8_c1": {
+   "per_dispatch_us_median": 172.67,
+   "per_dispatch_us_range": [
+    171.86,
+    173.53
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "0a444b1d684f083e",
+   "form": {
+    "M": 256,
+    "N": 8192,
+    "K": 2048,
+    "a": "int8",
+    "threadgroups": 1,
+    "simdgroups": 4,
+    "grid_n": 256,
+    "kloop_unroll": 2
+   }
+  },
+  "w1_int8_c8": {
+   "per_dispatch_us_median": 175.1,
+   "per_dispatch_us_range": [
+    174.47,
+    176.12
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "0a444b1d684f083e",
+   "form": {
+    "M": 256,
+    "N": 8192,
+    "K": 2048,
+    "a": "int8",
+    "threadgroups": 1,
+    "simdgroups": 4,
+    "grid_n": 256,
+    "kloop_unroll": 2
+   }
+  },
+  "w1_fp16_sg8_c8": {
+   "per_dispatch_us_median": 283.12,
+   "per_dispatch_us_range": [
+    282.51,
+    285.21
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "c4947dbbf8854d16",
+   "form": {
+    "M": 256,
+    "N": 8192,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 1,
+    "simdgroups": 8,
+    "grid_n": 256,
+    "kloop_unroll": 4
+   }
+  },
+  "w1_fp16_sg8_c1": {
+   "per_dispatch_us_median": 283.62,
+   "per_dispatch_us_range": [
+    282.08,
+    284.69
+   ],
+   "bit_exact_all": true,
+   "program_sha16": "c4947dbbf8854d16",
+   "form": {
+    "M": 256,
+    "N": 8192,
+    "K": 2048,
+    "a": "half",
+    "threadgroups": 1,
+    "simdgroups": 8,
+    "grid_n": 256,
+    "kloop_unroll": 4
+   }
+  }
+ }
+}

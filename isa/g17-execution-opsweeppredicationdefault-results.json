@@ -1,0 +1,578 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 16,
+   "cases": 16,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4,
+   5,
+   6,
+   8,
+   19,
+   20,
+   259,
+   32771,
+   32772,
+   65540,
+   2147483651,
+   2147483652,
+   2147483653,
+   180150005,
+   1515870814,
+   3217031172
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "S9858.base",
+  "op": 9858,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9858.op1_1",
+  "op": 9858,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9858.op2_1",
+  "op": 9858,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9858.op3_1",
+  "op": 9858,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9858.op5_1",
+  "op": 9858,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9858.op6_1",
+  "op": 9858,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9861.base",
+  "op": 9861,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9861.op1_1",
+  "op": 9861,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9861.op2_1",
+  "op": 9861,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9861.op3_1",
+  "op": 9861,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9861.op7_1",
+  "op": 9861,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S9861.op8_1",
+  "op": 9861,
+  "length": null,
+  "nsrc": 1,
+  "status": "refused",
+  "why": "1 of 1 runs did not produce a usable result (refused)"
+ },
+ {
+  "id": "S11394.base",
+  "op": 11394,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11394,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202f80062207022287",
+    "02202f80062207022287",
+    "02202f80062207022287",
+    "02202f80062207022287",
+    "02202f80062207022287",
+    "02202f80062207022287",
+    "02202f80062207022287",
+    "02202f80062207022287"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11394,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   7,
+   858993459,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11394.op1_1",
+  "op": 11394,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11394,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02200f80062207022287",
+    "02200f80062207022287",
+    "02200f80062207022287",
+    "02200f80062207022287",
+    "02200f80062207022287",
+    "02200f80062207022287",
+    "02200f80062207022287",
+    "02200f80062207022287"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11394,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   7,
+   858993459,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11394.op2_1",
+  "op": 11394,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11394,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202f80022205022287",
+    "02202f80022205022287",
+    "02202f80022205022287",
+    "02202f80022205022287",
+    "02202f80022205022287",
+    "02202f80022205022287",
+    "02202f80022205022287",
+    "02202f80022205022287"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11394,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   7
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11394.op5_1",
+  "op": 11394,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11394,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202f80062217022287",
+    "02202f80062217022287",
+    "02202f80062217022287",
+    "02202f80062217022287",
+    "02202f80062217022287",
+    "02202f80062217022287",
+    "02202f80062217022287",
+    "02202f80062217022287"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11394,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   7,
+   7,
+   7,
+   7,
+   7,
+   7,
+   3722304989,
+   7
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11394.op7_1",
+  "op": 11394,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "S11394.op8_1",
+  "op": 11394,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11394,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202f80062207022281",
+    "02202f80062207022281",
+    "02202f80062207022281",
+    "02202f80062207022281",
+    "02202f80062207022281",
+    "02202f80062207022281",
+    "02202f80062207022281",
+    "02202f80062207022281"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11394,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1,
+   858993459,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11503.base",
+  "op": 11503,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11503,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202d22268007408224",
+    "02202d22268007408224",
+    "02202d22268007408224",
+    "02202d22268007408224",
+    "02202d22268007408224",
+    "02202d22268007408224",
+    "02202d22268007408224",
+    "02202d22268007408224"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11503,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   8738,
+   17476,
+   26214,
+   34952,
+   43690,
+   52428,
+   61166,
+   57072
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11503.op1_1",
+  "op": 11503,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11503,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02200d22268007008224",
+    "02200d22268007008224",
+    "02200d22268007008224",
+    "02200d22268007008224",
+    "02200d22268007008224",
+    "02200d22268007008224",
+    "02200d22268007008224",
+    "02200d22268007008224"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11503,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   8738,
+   17476,
+   26214,
+   34952,
+   43690,
+   52428,
+   61166,
+   57072
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11503.op2_1",
+  "op": 11503,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11503,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202d22228005408224",
+    "02202d22228005408224",
+    "02202d22228005408224",
+    "02202d22228005408224",
+    "02202d22228005408224",
+    "02202d22228005408224",
+    "02202d22228005408224",
+    "02202d22228005408224"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11503,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   8738,
+   0,
+   26214,
+   34952,
+   0,
+   0,
+   0,
+   57072
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "S11503.op6_1",
+  "op": 11503,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "S11503.op7_1",
+  "op": 11503,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11503,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "02202d22268107408224",
+    "02202d22268107408224",
+    "02202d22268107408224",
+    "02202d22268107408224",
+    "02202d22268107408224",
+    "02202d22268107408224",
+    "02202d22268107408224",
+    "02202d22268107408224"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11503,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   8738,
+   17476,
+   26214,
+   34952,
+   43690,
+   52428,
+   61166,
+   57072
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

@@ -1,0 +1,385 @@
+\chapter{Scalar instruction semantics}\label{app:b}
+
+The tables cover the scalar opcodes whose function the sources state, grouped as in \cref{ch:scalar-arithmetic,ch:control-flow-execution,ch:special-registers,ch:cross-lane-operations}. Names are copied from \code{isa/g17-opcode-glossary.json}. "Lengths" are the encoded byte lengths the sources name for the form ("-" where no length is recorded with the semantic); a semantic holds for the (opcode, length) forms that ran and is not claimed for other lengths. "Standing" is this reference's reading of the cited sections, using the statement kinds of \cref{sec:read-this-document}: \emph{measured} (executed against an independent reference with a control), \emph{measured (receipt fit)} (32 lanes matched one candidate semantics among rivals; the replay checks consistency and is not independent evidence, MM~\mm{25.145}), \emph{whole-program} (only inside programs verified bit-exact on the GPU), \emph{Apple's compiler emits} (compile-side only). A dagger ($^\dagger$) marks an opcode that the glossary still tags \emph{compiled} although the cited section, which is newer, measured it; see the notes after the tables.
+
+\section{Integer add, subtract and saturate}\label{sec:integer-add-subtract}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Integer add, subtract and saturate instructions.}\label{tab:scalar-int-add}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+32-bit add & \opn{10282} & – & d = a32 + b32, low 32 bits & measured & g17emu EVIDENCE; MM~\mm{0.16} \\
+32-bit add immediate & \opn{10279} & 12 & d = a32 + imm8; source scaled by modifier bits 8–10 & measured & g17emu EVIDENCE; MM~\mm{25.115} \\
+add, 32-bit plus zero-extended 16-bit & \opn{10283} & – & d = a32 + zext16(b), mod $2^{32}$ (zero, not sign, extension) & measured & MM~\mm{25.145.1} \\
+add 16-bit to 32-bit & \opn{10285} & – & d32 = zext16(a) + b32 & measured & MM~\mm{25.195} \\
+16-bit plus 16-bit, 32-bit result & \opn{10286} & – & d32 = zext16(a) + zext16(b); 0xFFFF + 1 = 65536 & measured & g17emu EVIDENCE; MM~\mm{25.145.2} \\
+16-bit add immediate & \opn{10289} & – & d16 = a16 + imm, wraps at 16 bits & measured & MM~\mm{25.195} \\
+64-bit add & \opn{10267} & – & d64 = a64 + b64 (base + offset addresses) & measured & glossary; MM~\mm{0.16} \\
+32-bit subtract & \opn{11667} & 12 & d = a32 - b32, wraps & measured & g17emu EVIDENCE \\
+32-bit subtract immediate & \opn{11666} & 12 & d = a32 - imm, wraps (4096 - 15 = 4081) & measured$^\dagger$ & MM~\mm{25.145.1}, MM~\mm{25.95} \\
+64-bit subtract immediate & \opn{11655} & – & d64 = a64 - imm & Apple's compiler emits & glossary \\
+32-bit saturating add & \opn{10239} & – & d = a + b, unsigned saturation (signed if source modifier carries 8) & measured (receipt fit) & MM~\mm{25.145}; MM~\mm{25.59} \\
+32-bit saturating subtract & \opn{11624} & – & d = a - b, clamped at 0 (unsigned saturation) & measured (receipt fit) & MM~\mm{25.145} \\
+\bottomrule
+\end{xltabular}
+
+\section{Integer multiply and multiply-add}\label{sec:integer-multiply-multiply-add}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Integer multiply and multiply-add instructions.}\label{tab:scalar-int-mul}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+32-bit multiply & \opn{10825} & 14 & d = a32 * b32, low 32 bits & measured & g17emu EVIDENCE; MM~\mm{25.73} \\
+32-bit multiply-add & \opn{10826} & – & d = a32 * b32 + c32, low 32 bits & measured (receipt fit) & MM~\mm{25.145} \\
+multiply by immediate, 32-bit addend & \opn{10823} & – & d = a32 * imm + b32 & measured & glossary \\
+multiply by immediate, 16-bit addend & \opn{10824} & – & d = a32 * imm + zext16(b) & measured & glossary \\
+multiply-add, 16-bit multiplier & \opn{10829} & – & d = a32 * zext16(b) + c32 & measured & glossary \\
+multiply-add, 16-bit multiplier and addend & \opn{10830} & – & d = a32 * zext16(b) + zext16(c) & measured & glossary \\
+16-bit multiply by immediate plus immediate & \opn{10831} & – & d32 = zext16(a) * imm + imm & measured & glossary \\
+multiply-add, 16-bit multiplicand & \opn{10835} & – & d = zext16(a) * b32 + c32 & measured & glossary \\
+multiply-add, 16-bit multiplicand and addend & \opn{10836} & – & d = zext16(a) * b32 + zext16(c) & measured & glossary \\
+signed-by-unsigned 16-bit multiply-add & \opn{10838} & – & d = sext16(a) * zext16(b) + c32 (60 of 60 over seven records) & measured & MM~\mm{25.59} \\
+16-bit multiply by immediate plus immediate, 16-bit result & \opn{10858} & – & d16 = a16 * imm + imm & measured & glossary \\
+16-bit multiply by immediate plus register & \opn{10860} & – & d16 = a16 * imm + b16 & measured & glossary \\
+multiply by immediate minus immediate & \opn{11059} & – & d = a * imm - imm & measured & glossary \\
+multiply by immediate minus register & \opn{11060} & – & d = a * imm - b32 & measured & glossary \\
+multiply-subtract & \opn{11063} & – & d = a * b - c & measured & glossary \\
+32 × immediate to 64-bit product & \opn{10789} & – & d64 = a32 * imm & measured & glossary \\
+64-bit address multiply-add & \opn{10790} & 12 & d64 = a64 + b32 * imm (address formation) & measured & glossary; MM~\mm{25.80} \\
+32 × 32 to 64-bit product & \opn{10793} & – & d64 = a32 * b32 & measured & glossary \\
+32 × 32 + 32 to 64-bit multiply-add & \opn{10795} & – & d64 = a * b + c, unsigned & measured & glossary \\
+\bottomrule
+\end{xltabular}
+
+\section{Logic, shifts and bit operations}\label{sec:logic-shifts-bit}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Logic, shift and bit-operation instructions.}\label{tab:scalar-logic}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+32-bit AND with immediate & \opn{423} & – & d = a32 \& imm; only the mask bits reach the result & measured$^\dagger$ & g17emu EVIDENCE (confound3 receipts); MM~\mm{25.145} \\
+32-bit AND & \opn{424} & 4, 10 & d = a32 \& b32 (the 4-byte form releases its sources) & measured & MM~\mm{24.8} row T4; MM~\mm{25.77} \\
+16-bit AND with immediate, 32-bit result & \opn{426} & – & d32 = a16 \& imm8, one half read, source kept & measured$^\dagger$ & MM~\mm{25.139.1} \\
+16-bit AND, 32-bit result & \opn{428} & – & d32 = a16 \& mask, mask a uniform from the constant pool & whole-program & MM~\mm{25.141.17}; MM~\mm{25.145} \\
+16-bit AND with immediate & \opn{435} & – & d16 = a16 \& imm8 (15, 63, 255 over 4,096 lanes) & measured & MM~\mm{25.192} \\
+16-bit AND & \opn{437} & – & d16 = a16 \& b16; also the form for a wide immediate through a uniform & measured & glossary; MM~\mm{25.192} \\
+32-bit OR & \opn{13575} & 4, 10 & d = a32 \textbar{} b32 (the 4-byte form releases its sources) & measured & MM~\mm{24.8} row T4; g17emu EVIDENCE \\
+32-bit OR with immediate, seven-bit destination & \opn{13574} & 10 & d = a32 \textbar{} imm, seven-bit destination (reaches R64+), carries a
+load wait & measured & glossary; g17emu EVIDENCE \\
+OR with 16-bit operand & \opn{13576} & – & d = a32 \textbar{} zext16(b) & measured & glossary \\
+16-bit OR & \opn{13588} & – & d16 = a16 \textbar{} b16 & measured & MM~\mm{25.145.1} \\
+32-bit XOR & \opn{17771} & 4, 10 & d = a32 \^{} b32 (the 4-byte form releases its sources) & measured & MM~\mm{25.145.1}; MM~\mm{24.8} row T4 \\
+XOR with 16-bit second operand & \opn{17772} & – & d = a32 \^{} zext16(b) & measured & glossary \\
+XOR with 16-bit first operand & \opn{17774} & – & d = zext16(a) \^{} b32 & measured & glossary \\
+16-bit XOR, 32-bit result & \opn{17775} & – & d = a16 \^{} b16, 32-bit result & measured & glossary \\
+16-bit XOR & \opn{17784} & – & d16 = a16 \^{} b16 & measured$^\dagger$ & MM~\mm{25.145.1} \\
+32-bit NOT & \opn{11190} & – & d = \textasciitilde a32 & measured (receipt fit) & MM~\mm{25.145} \\
+NOT to 16-bit result & \opn{11193} & – & d16 = \textasciitilde a \& 0xFFFF & measured & glossary \\
+32-bit shift left immediate & \opn{14391} & – & d = a32 <{}< imm & measured$^\dagger$ & g17emu EVIDENCE (receipt u14391) \\
+32-bit shift left by register & \opn{14392} & – & d = a <{}< k, k = low 7 bits of the amount, 0 when k
+≥ 32 & measured & glossary; g17emu EVIDENCE \\
+16-bit shift left immediate, 32-bit result & \opn{14394} & – & d32 = zext16(a) <{}< imm & measured & glossary \\
+32-bit shift right immediate & \opn{17013} & – & d = a32 >{}> imm, logical; also extract\_bits & measured & MM~\mm{25.84}; g17emu EVIDENCE \\
+32-bit shift right by register & \opn{17014} & – & d = a32 >{}> b, logical & measured & glossary; g17emu EVIDENCE \\
+16-bit shift right, 32-bit result & \opn{17016} & – & d32 = a16 >{}> n & measured & MM~\mm{25.145.1}; g17emu EVIDENCE \\
+16-bit shift right & \opn{17043} & – & d16 = a16 >{}> n & measured & glossary \\
+32-bit arithmetic shift right immediate & \opn{16805} & 12 & d = a >{}> n, sign-filling; executed only with
+source modifier 24 & measured & MM~\mm{25.145.1}; MM~\mm{25.80} \\
+population count & \opn{465} & – & number of set bits of a32 & measured & MM~\mm{25.84} \\
+bit reverse & \opn{14047} & – & reverses the 32 bits of a & measured (receipt fit) & MM~\mm{25.84}; MM~\mm{25.145} \\
+find most significant bit & \opn{9986} & – & index of the highest set bit; msb(0) = 0xFFFFFFFF & measured (receipt fit) & MM~\mm{25.145} \\
+msb bit scan, 16-bit result & \opn{9989} & – & the msb scan with a 16-bit destination & Apple's compiler emits & MM~\mm{25.144.6} \\
+bit interleave, Morton encode & \opn{14147} & – & Morton: bit 2i of d = bit i of a.lo16, bit 2i+1 = bit i of b.lo16 & measured & glossary \\
+range mask, immediate width & \opn{612} & – & bit j of a 4-bit result set iff lo ≤ src + j < lo + w
+(lo, w immediates) & measured & glossary; MM~\mm{25.59} \\
+range mask, register width & \opn{615} & – & as \op{612} with w from a 32-bit register;
+window wraps mod $2^{32}$ (41 of 41 values) & measured & MM~\mm{25.59} \\
+range mask, 16-bit source & \opn{621} & – & as \op{612} from a 16-bit source & measured & glossary \\
+integer clamp & \opn{11364} & – & Metal integer clamp, two widths & measured & MM~\mm{25.84} \\
+\bottomrule
+\end{xltabular}
+
+\section{Moves}\label{sec:moves}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Scalar move instructions.}\label{tab:scalar-moves}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+32-bit register move & \opn{586} & 4 & copy one 32-bit register; source lifetime is operand 3 & measured & g17emu EVIDENCE; \code{agxforge/g17/cc.py} \\*
+16-bit register move & \opn{590} & – & copy one 16-bit half (dst = low 16 of src) & measured & MM~\mm{25.145.1} \\*
+move immediate, two-operand form & \opn{554} & 4 & writes an immediate; only 0 has run & measured for 0$^\dagger$ & MM~\mm{25.145.1} \\*
+16-bit move immediate into a half & \opn{555} & 4 & dst16 = imm (byte 2); only 0 is claimed & measured for 0 & MM~\mm{25.184} \\*
+move immediate, three-operand form & \opn{11842} & 10 & writes a 32-bit immediate & measured & g17emu EVIDENCE; MM~\mm{25.95} \\*
+uniform / staging write & \opn{592} & 4 & uniform write (constant program, slot 0) or staging write (slot 1–8) & measured & MM~\mm{25.179} \\*
+\bottomrule
+\end{xltabular}
+
+\section{Compares, flags and selects}\label{sec:compares-flags-selects-2}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Compare, flag and select instructions.}\label{tab:scalar-compares}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+32-bit register compare-select, immediate arms & \opn{11372} & 14 & d = (a cc b) ? T : F; field codes 0 eq, 1 ult, 5 slt; only T = 1, F = 0
+executed & measured & \code{ledger/notes.toml} {[}g17-all-ten-relations-from-three-codes{]} \\
+32-bit compare-select, four registers & \opn{11375} & 14 & d = (a cc b) ? x : y; field code 0 = a > b, field code 1 =
+(a \& b) != 0 & measured & MM~\mm{25.90}; \code{ledger/claims.toml} {[}g17-csel-code-one-is-a-bit-test{]} \\
+32-bit compare-select, three registers & \opn{11365} & 8, 10, 14 & d = (a cc b) ? c : \dots{}; compare against an immediate 0..256 & measured & glossary; \code{isa/g17-comparison-semantics.json} \\
+32-bit compare-select against immediate & \opn{11362} & 10 & d = (a32 cc imm) ? imm : imm & Apple's compiler emits & MM~\mm{25.80} \\
+32-bit register compare to 16-bit result & \opn{11462} & 10, 14 & d16 = (a32 cc b32) ? 1 : 0; printed cc 9 is unsigned less-than & measured & MM~\mm{25.195} \\
+16-bit compare-select, four registers & \opn{11507} & – & d16 = (a == b) ? c : d, equality (not a bit test) & measured & MM~\mm{25.90} \\
+16-bit compare-select against immediate, 32-bit result & \opn{11392} & – & d32 = (x16 cc K) ? T : F & measured & glossary \\
+32-bit compare against immediate, select to 16-bit & \opn{11456} & – & d16 = (x32 cc K) ? t16 : F & measured & glossary \\
+32-bit compare against immediate, select to 16-bit, minifloat false arm & \opn{11458} & – & d16 = (x32 cc K) ? t16 : F, minifloat F & measured & glossary \\
+32-bit compare against immediate, select to 16-bit, register false arm & \opn{11460} & – & d16 = (x32 cc K) ? T : f16 & measured & glossary \\
+32-bit compare against immediate to half boolean & \opn{11461} & – & d16 = (x32 cc K) ? T : F, minifloat arms (half 0.0 / 1.0) & measured & glossary \\
+32-bit register compare, select to 16-bit & \opn{11466} & – & d16 = (x32 cc y32) ? t16 : F & measured & glossary \\
+32-bit register compare to half boolean & \opn{11471} & – & d16 = (x32 cc y32) ? T : F, minifloat arms & measured & glossary \\
+16-bit compare against immediate to half boolean & \opn{11491} & – & d16 = (x16 cc K) ? T : F, minifloat arms & measured & glossary \\
+32-bit compare with immediate into a flag & \opn{10369} & 6, 10 & flag = (a32 cc imm); printed cc = 8 \textbar{} field; uint counter /10,
+int /6 & measured & MM~\mm{25.73}; g17emu EVIDENCE \\
+32-bit compare with immediate into a flag, short form & \opn{10378} & 6 & the 6-byte sibling of \opn{10369}; signed test against 0 & measured & glossary \\
+16-bit register compare into a flag & \opn{10374} & – & flag = (a16 cc b16); compare only, no select & measured & glossary \\
+32-bit compare, AND-chained into a flag & \opn{11310} & – & flag = (x cc K) ? c16 : 0 (forms \&\&) & measured & glossary \\
+32-bit compare, OR-chained into a flag & \opn{11313} & – & flag = (x cc y) ? T : flag\_in (forms \textbar\textbar) & measured & glossary; \code{isa/g17-condition-codes.toml} \\
+32-bit compare, AND-chained into a flag with false arm & \opn{11314} & – & flag = (x cc y) ? flag\_in : F & measured & glossary \\
+16-bit compare, chained into a flag & \opn{11322} & – & flag = (x16 cc K) ? flag\_in : F & measured & glossary \\
+half compare, chained into a flag & \opn{9683} & – & flag = (half(x) REL 0.0) ? flag\_in : 0; −0 = 0, NaN false & measured & glossary \\
+flag to 16-bit register & \opn{14099} & – & flag to a 16-bit register; after one compare form (\op{10379}, no
+glossary entry) reads 1 true, 2 false & measured & \code{ledger/notes.toml} \\
+fp32 compare-select, fmax/fmin & \opn{9700} & – & float select; codes 0 ==, 1 \textless, 2 \textgreater, 4 !=, 5
+≥, 6 ≤; 3 and 7 are max/min-style & measured & MM~\mm{25.145}; \code{agxforge/g17/cc.py} \\
+float compare-select, fselect form & \opn{9748} & – & float select from a 16-bit and a 32-bit source, cc 0 (==) & measured & glossary \\
+float compare-select, csel form & \opn{9749} & – & as \op{9748}; the csel-named
+sibling & measured & glossary \\
+half compare-select against minifloat & \opn{9842} & – & d16 = (x16 cc K) ? a16 : b16, minifloat K; source modifier 20 = abs(x) & measured & MM~\mm{25.59} \\
+\bottomrule
+\end{xltabular}
+
+\section{fp32 arithmetic}\label{sec:fp32-arithmetic-2}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{fp32 arithmetic instructions.}\label{tab:scalar-fp32}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+fp32 add & \opn{998} & 4, 6, 8, 12 & d = a + b, RNE, subnormals flushed; subtract = negate modifier & measured & g17emu EVIDENCE; MM~\mm{25.180} \\
+fp32 add, common alternate encoding & \opn{1061} & – & d = a + b (alternate encoding, 511 corpus instances) & measured & glossary \\
+fp32 add with float immediate & \opn{1006} & 12 & d = a + K8, 8-bit float immediate & measured & MM~\mm{25.145.1} \\
+fp32 multiply & \opn{3290} & 4, 6, 14 & d = a * b, subnormals flushed & measured & g17emu EVIDENCE; MM~\mm{25.73} \\
+fp32 fused multiply-add & \opn{2190} & 4, 6, 8, 12, 16 & d = a * b + c, one rounding & measured & MM~\mm{25.90} \\
+fp32 fused multiply-add, alternate encoding & \opn{2238} & – & d = a * b + c (alternate encoding, 288 corpus instances) & measured & glossary \\
+fp32 FMA, literal addend & \opn{2192} & 16 & d = a * b + K, one rounding (3,186 discriminating lanes) & measured & MM~\mm{25.184} \\
+fp32 FMA, literal multiplicand & \opn{2198} & 16 & d = a * K + c; subnormal inputs flushed; NaN → 0x7fc00000 & measured$^\dagger$ & MM~\mm{25.145.1}; g17emu EVIDENCE \\
+fp32 FMA with two float immediates & \opn{2200} & – & d = a * K1 + K2; subnormals flushed; NaN → 0x7fc00000 & measured & MM~\mm{25.145.1}; g17emu EVIDENCE \\
+fp32 saturate & \opn{904} & 12 & sat(a + K), K = ±0; clamps to {[}0, 1{]}, −0 → +0 & measured & MM~\mm{25.90}; MM~\mm{25.145.1} \\
+fp32 truncate toward zero & \opn{3818} & – & trunc; 2.5 → 2, −0.3 → −0, −1.5
+→ −1 & measured & MM~\mm{25.145.1} \\
+round to nearest even & \opn{3770} & – & rint, ties to even & measured & MM~\mm{25.130}; g17emu EVIDENCE \\
+floor & \opn{3786} & – & floor (integral inputs checked); denormals to zero per the glossary & measured & MM~\mm{25.84}; glossary \\
+\bottomrule
+\end{xltabular}
+
+\section{fp16 and mixed-width float arithmetic}\label{sec:fp16-mixed-width-float}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{fp16 and mixed-width float arithmetic instructions.}\label{tab:scalar-fp16}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+fp16 fma, register form & \opn{798} & 12 & binary16 a * b + c, one rounding; halves as sources & measured & MM~\mm{25.196} \\*
+half add with float immediate & \opn{776} & – & half(a + K8); half subnormals kept; NaN → 0x7e00 & measured & MM~\mm{25.195} \\*
+fp32 add, half result & \opn{1014} & – & half(a32 + b32), one rounding; overflow → inf; NaN
+→ 0x7e00 & measured & MM~\mm{25.145.1}; g17emu EVIDENCE \\*
+fp32 plus half, half result & \opn{1015} & – & half(a32 + b16); half subnormals kept & measured & MM~\mm{25.145.1} \\*
+fp32 multiply, half result & \opn{3306} & – & half(a32 * b32) & measured & MM~\mm{25.145.1} \\*
+\bottomrule
+\end{xltabular}
+
+\section{Conversions}\label{sec:conversions-2}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Conversion instructions.}\label{tab:scalar-conversions}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+fp32 to half narrowing & \opn{1016} & – & fp32 → half, RNE, subnormal results kept, NaN
+→ 0x7e00 & measured & MM~\mm{6}; g17emu EVIDENCE \\
+half to fp32 widening & \opn{1004} & 12 & half → fp32, exact; destination holes & measured & MM~\mm{25.90}; \code{agxforge/g17/cc.py} \\
+32-bit integer to fp32 & \opn{11179} & 10 & int32/uint32 → fp32, RNE; operand 2: 4 unsigned, 5 signed & measured & MM~\mm{25.90} \\
+16-bit integer to fp32 & \opn{11180} & – & int16/uint16 → fp32, exact; code 2 unsigned, 3 signed & measured & MM~\mm{25.195} \\
+u32 to half & \opn{11182} & – & uint32 → half, RNE, past range → +inf & measured & MM~\mm{25.184} \\
+16-bit integer to half & \opn{11183} & – & int16/uint16 → half; operand 2: 2 unsigned, 3 signed & measured & glossary \\
+fp32 to 32-bit integer & \opn{9320} & 10 & fp32 → int; code 4 uint, 5 int; mode 1 truncates,
+saturates, NaN → 0 & measured & MM~\mm{25.186} \\
+half to 32-bit integer & \opn{9321} & – & half → int32 & measured & glossary \\
+fp32 to u32 into the uniform/staging file & \opn{9328} & 10 & fp32 → uint32 into the uniform/staging file & measured & glossary; MM~\mm{25.73} \\
+half to 32-bit integer into the uniform/staging file & \opn{9329} & – & half → int32 into the uniform/staging file; operand 3: 4
+u, 5 s; truncates & measured & glossary \\
+fp8 pack, vector, from fp32/half/bf16 & \opn{13618} & – & fp8 pack, RNE, no saturation, NaN → canonical NaN (all
+$2^{32}$ inputs) & measured & MM~\mm{0.11}; g17emu EVIDENCE \\
+fp8 unpack to bf16 & \opn{17642} & – & fp8 → two bf16, exact & measured & g17emu EVIDENCE \\
+\bottomrule
+\end{xltabular}
+
+\section{Special-function instructions}\label{sec:special-function-instructions-2}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Special-function instructions.}\label{tab:scalar-special-function}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+rsqrt seed & \opn{3850} & 10 & tabulated exact function; faithful (≤ 0.82 ulp); 0
+→ +inf & measured & MM~\mm{25.141.16}; MM~\mm{25.136} \\*
+sqrt-safe rsqrt & \opn{3978} & – & rsqrt returning 1.0 at 0 & measured & MM~\mm{6}; MM~\mm{25.180} \\*
+hardware reciprocal & \opn{3658} & 10 & 1/x within 1 ulp, not correctly rounded; subnormal result
+→ signed 0 & measured & MM~\mm{25.136}; MM~\mm{25.109} \\*
+hardware exp2 & \opn{1272} & 10 & 2\^{}x within 1 ulp, biased high, deterministic, no compact closed form & measured & MM~\mm{25.144.2}; MM~\mm{25.136} \\*
+hardware log2 & \opn{2570} & 10 & log2(x) in one instruction & Apple's compiler emits & MM~\mm{6}; MM~\mm{25.73} \\*
+\bottomrule
+\end{xltabular}
+
+\section{Cross-lane and special-register reads}\label{sec:cross-lane-special-register-reads}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Cross-lane instructions and special-register reads.}\label{tab:scalar-cross-lane}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+SIMD shuffle-xor, immediate mask & \opn{14169} & 10 & lane L receives in{[}L \^{} m{]}; m ≥ 32 gives 0.0 on every
+lane & measured$^\dagger$ & MM~\mm{12} \\
+SIMD shuffle-xor, runtime mask & \opn{14170} & 10 & runtime mask; must be lane-uniform & measured$^\dagger$ & MM~\mm{12} \\
+quad shuffle-xor, immediate mask & \opn{13944} & – & 4-lane xor; mask ≥ 4 gives 0.0 & measured$^\dagger$ & MM~\mm{12} \\
+quad shuffle-xor, runtime mask & \opn{13945} & – & quad runtime mask; follows each lane's own mask & measured$^\dagger$ & MM~\mm{12} \\
+SIMD shuffle, constant lane, broadcast & \opn{14157} & – & lane 0's value; only with every lane active & measured & MM~\mm{25.145.1}; MM~\mm{25.144.6} \\
+SIMD sum, fp32 & \opn{16842} & 10 & simd\_sum fp32; xor tree in mask order 1, 2, 4, 8, 16 & measured & MM~\mm{25.141.16} \\
+SIMD max, fp32 & \opn{16858} & 10 & simd\_max fp32, exact on 32 lanes & measured & MM~\mm{25.90} \\
+simdgroup active-thread mask & \opn{14208} & – & mask of active lanes & measured & glossary \\
+special-register read & \opn{14059} & 4 & special register → 32-bit register & measured & g17emu EVIDENCE; MM~\mm{0.8} \\
+special-register read, 16-bit & \opn{14060} & 8 & special register → one half; the other half is kept & measured$^\dagger$ & MM~\mm{25.145.4} \\
+argument read, binding-table word & \opn{14061} & – & binding K pointer, halfwords 8 + K and 10 + K & measured & MM~\mm{25.179} \\
+\bottomrule
+\end{xltabular}
+
+\section{Control flow}\label{sec:control-flow-detail}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.85\hsize}Xll>{\hsize=1.5\hsize}X>{\hsize=0.55\hsize}X>{\hsize=1.1\hsize}X@{}}
+\caption{Control-flow instructions. \Cref{ch:control-flow-execution} has the detail.}\label{tab:scalar-control-flow}\\
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+Name & Opcode & Lengths & Semantic & Standing & Source \\
+\midrule
+\endhead
+exec push, if, from flag & \opn{582} & 4 & push and narrow the exec state by a flag & measured & MM~\mm{25.145.2}; g17emu EVIDENCE \\*
+exec pop, restore mask & \opn{577} & 4 & counter = max(0, counter - n) & measured (n = 1); whole-program (n = 2) & MM~\mm{25.145.2} \\*
+while-exec, set mask in place & \opn{579} & 4 & inverting while; sets the state in place; does not gate \op{458} & whole-program & MM~\mm{25.145.2} \\*
+conditional back-edge branch & \opn{458} & 10 & backward branch, taken iff any lane is active & measured & g17emu EVIDENCE; \code{docs/g17-first-dispatch-trials.md} \\*
+skip branch, no active lanes & \opn{462} & 10 & forward branch, taken iff no lane is active & measured & MM~\mm{25.141.2} \\*
+call & \opn{450} & – & subroutine call (Apple's own program ran 32/32) & whole-program & MM~\mm{25.90} \\*
+return & \opn{580} & – & subroutine return & whole-program & MM~\mm{25.90} \\*
+end of program & \opn{684} & 4 & end of program & measured & g17emu EVIDENCE \\*
+\bottomrule
+\end{xltabular}
+
+\section{Notes on the tables}\label{sec:notes-table}
+
+\begin{itemize}
+\item The glossary tags these forms "compiled" though a cited section records
+  an execution: \op{11666} (receipt D11666.l12, MM~\mm{25.145.1}, and the release-mask arms of MM~\mm{25.95});
+  \op{423} (confound3 receipts); \op{426} (MM~\mm{25.139.1});
+  \op{17784} (receipt t17784, MM~\mm{25.145.1}); \op{14391} (receipt u14391); \op{554} (immediate 0 only, MM~\mm{25.145.1}); \op{2198} (receipt
+  t2198, MM~\mm{25.145.1}); the four shuffle-xor forms \opn{14169}, \opn{14170}, \opn{13944} and \opn{13945} (SIMD shuffle-xor, immediate mask;
+  SIMD shuffle-xor, runtime mask; quad shuffle-xor, immediate mask; quad shuffle-xor, runtime mask) (MM~\mm{12}); and
+  \op{14060} (MM~\mm{25.145.4}). The glossary text for \opn{2198} ("beyond that route its semantics are
+  unmeasured") predates MM~\mm{25.145.1}.
+\item Some glossary text describes this compiler rather than Apple. The glossary says \op{10094} returns on scoreboard slot 7; Apple's own \opn{10094} fills slot 0 and waits on it, and slot 7 is this compiler's
+  patched form (MM~\mm{25.115}). \Cref{ch:synchronization} covers atomics.
+\item Several forms run with no glossary entry; the chapters cite them by label. They are the multiply by immediate g17emu calls
+  mul-imm (\op{10822}) and the XOR with immediate it calls xor-imm (\op{17770}), both executed (g17emu EVIDENCE); the exec forms
+  \op{573}, \op{574}, \op{575}, \op{576}, \op{578} and \op{583} (\cref{ch:control-flow-execution}); and the selected forms \op{862} (half multiply), \op{9697}, \op{9737} and
+  \op{9740} (fused float, half and half/bfloat compare-selects), \op{11373}, \op{11374} and \op{11385} (immediate-arm selects) and
+  \op{13857} (\code{quad\_sum}), whose standing is Apple's compiler emits only.
+\item The tables leave out forms whose function is not stated (\op{3946}; \op{1062}, unconfirmed; \op{3298}), uniform-destination
+  constant-program forms other than those listed (MM~\mm{25.179}), memory forms (\cref{ch:memory}), atomics and barriers (\cref{ch:synchronization}) and
+  tensor forms (\cref{ch:tensor-unit}).
+\end{itemize}

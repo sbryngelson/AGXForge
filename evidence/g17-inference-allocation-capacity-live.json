@@ -1,0 +1,77 @@
+{
+  "format": "g17-native-allocation-capacity-v1",
+  "gpu_dispatched": false,
+  "driver_called": true,
+  "source_sha256": "1b094a0a0b1ace8b69052bfaef9cd904b72c7fa5a990bded533f039ff1c0b16a",
+  "allocation_request_table_sha256": "61d4d16bb69e132385da01dac3b245080c07eaa3902f16a4684d04e0365d1932",
+  "binary_sha256": "2b425c6fa6940b094a26da247b09923feb760b466ee123cf7a924509c20e94e8",
+  "rows": [
+    {
+      "name": "control_32k",
+      "size": 32768,
+      "dry_stdout": "REQUEST base=21 mode=0x4430 size=0x8000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x8000 -> dw18 = 0x8000\nDRY: driver not touched\n",
+      "stdout": "REQUEST base=21 mode=0x4430 size=0x8000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x8000 -> dw18 = 0x8000\nOPEN kr=0\nPREAMBLE sel-2 kr=0\nPREAMBLE sel-0 kr=0\nPREAMBLE sel-5 kr=0\nPREAMBLE sel-258 kr=0\nPREAMBLE sel-256 kr=0\nCONTEXT sel-261 kr=0\nALLOC sel-9 kr=0 outsize=88\n  out[0]=0x10000000000\n  out[1]=0x100900000\n  out[2]=0x1008f00c0\n  out[3]=0\n  out[4]=0x100000000\n  out[5]=0x8000\n  out[6]=0x58edb11ca7\n  out[7]=0x91ef8a\n  out[8]=0\n  out[9]=0\n  out[10]=0x8000\nPLACED window=0x100 low32=0\nCPUMAP readable=yes (kr=0)\nSENTINEL offset=0 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x4000 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x7ff8 write_kr=0 read_kr=0 exact=1\n",
+      "stderr": "",
+      "returncode": 0,
+      "recovery_before": [
+        33
+      ],
+      "recovery_after": [
+        33
+      ],
+      "new_gpu_events": [],
+      "passed": true
+    },
+    {
+      "name": "capacity_8m",
+      "size": 8388608,
+      "dry_stdout": "REQUEST base=21 mode=0x4430 size=0x800000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x800000 -> dw18 = 0x800000\nDRY: driver not touched\n",
+      "stdout": "REQUEST base=21 mode=0x4430 size=0x800000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x800000 -> dw18 = 0x800000\nOPEN kr=0\nPREAMBLE sel-2 kr=0\nPREAMBLE sel-0 kr=0\nPREAMBLE sel-5 kr=0\nPREAMBLE sel-258 kr=0\nPREAMBLE sel-256 kr=0\nCONTEXT sel-261 kr=0\nALLOC sel-9 kr=0 outsize=88\n  out[0]=0x10000000000\n  out[1]=0x1051f8000\n  out[2]=0x1007ec0c0\n  out[3]=0\n  out[4]=0x100000000\n  out[5]=0x800000\n  out[6]=0x58edb11cc3\n  out[7]=0x91ef96\n  out[8]=0\n  out[9]=0\n  out[10]=0x800000\nPLACED window=0x100 low32=0\nCPUMAP readable=yes (kr=0)\nSENTINEL offset=0 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x400000 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x7ffff8 write_kr=0 read_kr=0 exact=1\n",
+      "stderr": "",
+      "returncode": 0,
+      "recovery_before": [
+        33
+      ],
+      "recovery_after": [
+        33
+      ],
+      "new_gpu_events": [],
+      "passed": true
+    },
+    {
+      "name": "encoder_96m",
+      "size": 100663296,
+      "dry_stdout": "REQUEST base=21 mode=0x4430 size=0x6000000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x6000000 -> dw18 = 0x6000000\nDRY: driver not touched\n",
+      "stdout": "REQUEST base=21 mode=0x4430 size=0x6000000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x6000000 -> dw18 = 0x6000000\nOPEN kr=0\nPREAMBLE sel-2 kr=0\nPREAMBLE sel-0 kr=0\nPREAMBLE sel-5 kr=0\nPREAMBLE sel-258 kr=0\nPREAMBLE sel-256 kr=0\nCONTEXT sel-261 kr=0\nALLOC sel-9 kr=0 outsize=88\n  out[0]=0x10000000000\n  out[1]=0x108cc0000\n  out[2]=0x10411c0c0\n  out[3]=0\n  out[4]=0x100000000\n  out[5]=0x6000000\n  out[6]=0x58edb11cd8\n  out[7]=0x91ef9b\n  out[8]=0\n  out[9]=0\n  out[10]=0x6000000\nPLACED window=0x100 low32=0\nCPUMAP readable=yes (kr=0)\nSENTINEL offset=0 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x3000000 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x5fffff8 write_kr=0 read_kr=0 exact=1\n",
+      "stderr": "",
+      "returncode": 0,
+      "recovery_before": [
+        33
+      ],
+      "recovery_after": [
+        33
+      ],
+      "new_gpu_events": [],
+      "passed": true
+    },
+    {
+      "name": "decoder_1g",
+      "size": 1073741824,
+      "dry_stdout": "REQUEST base=21 mode=0x4430 size=0x40000000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x40000000 -> dw18 = 0x40000000\nDRY: driver not touched\n",
+      "stdout": "REQUEST base=21 mode=0x4430 size=0x40000000 type=0x18000000 flags=0  (dw3=0x1 dw4=0x1000101)\n  edit: set dw18 with 0x40000000 -> dw18 = 0x40000000\nOPEN kr=0\nPREAMBLE sel-2 kr=0\nPREAMBLE sel-0 kr=0\nPREAMBLE sel-5 kr=0\nPREAMBLE sel-258 kr=0\nPREAMBLE sel-256 kr=0\nCONTEXT sel-261 kr=0\nALLOC sel-9 kr=0 outsize=88\n  out[0]=0x10000000000\n  out[1]=0x300000000\n  out[2]=0x1044040c0\n  out[3]=0\n  out[4]=0x100000000\n  out[5]=0x40000000\n  out[6]=0x58edb11cfd\n  out[7]=0x91efa8\n  out[8]=0\n  out[9]=0\n  out[10]=0x40000000\nPLACED window=0x100 low32=0\nCPUMAP readable=yes (kr=0)\nSENTINEL offset=0 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x20000000 write_kr=0 read_kr=0 exact=1\nSENTINEL offset=0x3ffffff8 write_kr=0 read_kr=0 exact=1\n",
+      "stderr": "",
+      "returncode": 0,
+      "recovery_before": [
+        33
+      ],
+      "recovery_after": [
+        33
+      ],
+      "new_gpu_events": [],
+      "passed": true
+    }
+  ],
+  "prediction": "selector 9 returns requested rounded extent and CPU mapping supports three sentinel writes/reads, or refuses explicitly",
+  "scope": "allocation and CPU mapping only; no GPU visibility, publication, resource graph or model admission",
+  "status": "allocation_and_cpu_mapping_verified"
+}

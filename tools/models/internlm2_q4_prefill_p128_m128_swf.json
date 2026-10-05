@@ -1,0 +1,41 @@
+{
+    "name": "internlm2_q4_prefill_p128_m128_swf",
+    "bits": 4,
+    "cap": 2048,
+    "qmv": {
+        "qkv": {
+            "ks": 2
+        },
+        "wo_res1": {
+            "ks": 2
+        },
+        "ffn": {
+            "ks": 2
+        },
+        "w2_res2": {
+            "ks": 4
+        },
+        "head": {
+            "xvec": true
+        }
+    },
+    "norm": {
+        "out32": true,
+        "seed": false
+    },
+    "final_norm": {
+        "out32": true,
+        "seed": false
+    },
+    "attn": {
+        "widebf": true,
+        "attn32": true
+    },
+    "prompt_len": 128,
+    "prefill": {
+        "M": 128,
+        "persistent_w16": true,
+        "attn": "mma",
+        "swiglu_fused": true
+    }
+}

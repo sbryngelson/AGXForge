@@ -1,0 +1,25 @@
+{
+ "M": 32,
+ "N": 32,
+ "K": 64,
+ "a": "half",
+ "b": "half",
+ "simdgroups": 1,
+ "threadgroups": 1,
+ "epilogue": [],
+ "split_fp32": false,
+ "stages": [
+  [
+   32,
+   32,
+   "half",
+   "B"
+  ]
+ ],
+ "feed_model": "identity",
+ "guard": "sg0",
+ "accumulate": false,
+ "saturate": false,
+ "imageblock": null,
+ "ib_op1": null
+}

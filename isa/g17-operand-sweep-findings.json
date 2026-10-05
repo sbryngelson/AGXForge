@@ -1,0 +1,629 @@
+{
+ "10838/14": {
+  "baseline": "S10838.base",
+  "opcode": 10838,
+  "operands_that_did_not": [
+   1,
+   5
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "11373/14": {
+  "baseline": "S11373.base",
+  "opcode": 11373,
+  "operands_that_did_not": [
+   1,
+   7
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     0,
+     1,
+     2,
+     3,
+     7
+    ],
+    "operand": 2
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 2 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 7 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11392/10": {
+  "baseline": "S11392.base",
+  "opcode": 11392,
+  "operands_that_did_not": [
+   1,
+   2,
+   5
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 6
+   },
+   {
+    "cases_that_changed": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 7
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 6, 7 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 5 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11394/10": {
+  "baseline": "S11394.base",
+  "opcode": 11394,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 2
+   },
+   {
+    "cases_that_changed": [
+     1,
+     6
+    ],
+    "operand": 5
+   },
+   {
+    "cases_that_changed": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 8
+   }
+  ],
+  "operands_whose_value_would_not_encode": [
+   7
+  ],
+  "settled": true,
+  "verdict": "operands 2, 5, 8 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operand 1 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". Operand 7 would not ENCODE at 1, which is evidence about the width of those fields."
+ },
+ "11432/14": {
+  "baseline": "S11432.base",
+  "opcode": 11432,
+  "operands_that_did_not": [
+   1,
+   2,
+   3
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 6
+   },
+   {
+    "cases_that_changed": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 7
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 6, 7 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 3 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11437/14": {
+  "baseline": "S11437.base",
+  "opcode": 11437,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 2
+   },
+   {
+    "cases_that_changed": [
+     1,
+     6
+    ],
+    "operand": 3
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 2, 3 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operand 1 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11452/14": {
+  "baseline": "S11452.base",
+  "opcode": 11452,
+  "operands_that_did_not": [
+   1,
+   2,
+   5
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 6
+   },
+   {
+    "cases_that_changed": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 7
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 6, 7 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 5 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11453/10": {
+  "baseline": "S11453.base",
+  "opcode": 11453,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 2
+   },
+   {
+    "cases_that_changed": [
+     1,
+     6
+    ],
+    "operand": 5
+   },
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 6
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 2, 5, 6 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operand 1 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11463/10": {
+  "baseline": "S11463.base",
+  "opcode": 11463,
+  "operands_that_did_not": [
+   1,
+   2,
+   7
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "11482/14": {
+  "baseline": "S11482.base",
+  "opcode": 11482,
+  "operands_that_did_not": [
+   1,
+   2,
+   5
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 6
+   },
+   {
+    "cases_that_changed": [
+     0,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 7
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 6, 7 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 5 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11483/10": {
+  "baseline": "S11483.base",
+  "opcode": 11483,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 2
+   },
+   {
+    "cases_that_changed": [
+     1,
+     6
+    ],
+    "operand": 5
+   },
+   {
+    "cases_that_changed": [
+     1
+    ],
+    "operand": 6
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 2, 5, 6 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operand 1 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "11503/10": {
+  "baseline": "S11503.base",
+  "opcode": 11503,
+  "operands_that_did_not": [
+   1,
+   7
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1,
+     4,
+     5,
+     6
+    ],
+    "operand": 2
+   }
+  ],
+  "operands_whose_value_would_not_encode": [
+   6
+  ],
+  "settled": true,
+  "verdict": "operand 2 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 7 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". Operand 6 would not ENCODE at 1, which is evidence about the width of those fields."
+ },
+ "11656/12": {
+  "baseline": "S11656.base",
+  "opcode": 11656,
+  "operands_that_did_not": [
+   1,
+   5
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "14040/10": {
+  "baseline": "S14040.base",
+  "opcode": 14040,
+  "operands_that_did_not": [
+   1,
+   4
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "14060/8": {
+  "baseline": "S14060.base",
+  "opcode": 14060,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [
+   3
+  ],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "14099/10": {
+  "baseline": "S14099.base",
+  "opcode": 14099,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 4
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 4 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operand 1 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "14211/12": {
+  "baseline": "S14211.base",
+  "opcode": 14211,
+  "operands_that_did_not": [
+   1,
+   2
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1,
+     6
+    ],
+    "operand": 5
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 5 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "14301/10": {
+  "baseline": "S14301.base",
+  "opcode": 14301,
+  "operands_that_did_not": [
+   1,
+   4
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "16837/10": {
+  "baseline": "S16837.base",
+  "opcode": 16837,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "16841/10": {
+  "baseline": "S16841.base",
+  "opcode": 16841,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "3608/14": {
+  "baseline": "S3608.base",
+  "opcode": 3608,
+  "operands_that_did_not": [
+   1,
+   5
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "3817/10": {
+  "baseline": "S3817.base",
+  "opcode": 3817,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "3946/10": {
+  "baseline": "S3946.base",
+  "opcode": 3946,
+  "operands_that_did_not": [
+   1
+  ],
+  "operands_that_move_the_output": [],
+  "operands_whose_value_would_not_encode": [],
+  "settled": false,
+  "verdict": "no writable operand moved the output on these cases, so what selects this form's result is neither a declared source nor any free operand a record may write - the lifetime carriers the liveness pass owns are the remaining candidates, and they need liveness to drive them rather than a record"
+ },
+ "698/14": {
+  "opcode": 698,
+  "settled": false,
+  "verdict": "the BASELINE did not build, so nothing here is measured against anything"
+ },
+ "9701/16": {
+  "baseline": "S9701.base",
+  "opcode": 9701,
+  "operands_that_did_not": [
+   1,
+   2
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     4,
+     5,
+     6
+    ],
+    "operand": 9
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 9 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "9756/10": {
+  "baseline": "S9756.base",
+  "opcode": 9756,
+  "operands_that_did_not": [
+   1,
+   2,
+   5
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     0,
+     2,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 6
+   },
+   {
+    "cases_that_changed": [
+     1,
+     3
+    ],
+    "operand": 7
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operands 6, 7 reach the result: setting each to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 5 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "9807/16": {
+  "baseline": "S9807.base",
+  "opcode": 9807,
+  "operands_that_did_not": [
+   1,
+   2,
+   5,
+   7
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 6
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 6 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 5, 7 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "9816/16": {
+  "baseline": "S9816.base",
+  "opcode": 9816,
+  "operands_that_did_not": [
+   1,
+   2,
+   5,
+   7
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "operand": 6
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 6 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2, 5, 7 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "9842/10": {
+  "baseline": "S9842.base",
+  "opcode": 9842,
+  "operands_that_did_not": [
+   1,
+   2
+  ],
+  "operands_that_move_the_output": [
+   {
+    "cases_that_changed": [
+     1,
+     3
+    ],
+    "operand": 5
+   }
+  ],
+  "operands_whose_value_would_not_encode": [],
+  "settled": true,
+  "verdict": "operand 5 reaches the result: setting it to 1 changes the output column on at least one case with every other free operand held at zero, so the change belongs to that operand alone. Operands 1, 2 did NOT move the output at this value on these cases, which is a bounded statement and not \"no effect\". "
+ },
+ "9858/16": {
+  "opcode": 9858,
+  "settled": false,
+  "verdict": "the BASELINE did not build, so nothing here is measured against anything"
+ },
+ "9861/16": {
+  "opcode": 9861,
+  "settled": false,
+  "verdict": "the BASELINE did not build, so nothing here is measured against anything"
+ }
+}

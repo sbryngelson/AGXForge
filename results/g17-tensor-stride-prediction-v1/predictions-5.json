@@ -1,0 +1,59 @@
+{
+  "status": "predicted_not_compiled",
+  "gpu_dispatched": false,
+  "round": 5,
+  "cases": {
+    "a9-c10": {
+      "strides": {
+        "strideA": 288,
+        "strideB": 64,
+        "strideC": 640
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "aaf3196593e0c5328dc0556e40a9f0f0ba30f3f5e79e4f58365ac3e3bdbc36db",
+      "bytes": 1266,
+      "generated": [
+        "setup+10",
+        "address+116"
+      ],
+      "source_sha256": "40defdc9a6c04ef009ae820ec14f17ac5ddb729c8c89ba4b475dcbed90895715"
+    },
+    "b5-c11": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 160,
+        "strideC": 704
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "3403873d12facac652c97dd119f8adc5fdaf955da93aeff1aec4713b6aaa0c9f",
+      "bytes": 1266,
+      "generated": [
+        "setup+47",
+        "address+85",
+        "address+116"
+      ],
+      "source_sha256": "4f8ea99bb97141a244201c5ecd57d23a88aec9e31573dafec33b7d2b55abffbc"
+    },
+    "a16-b9-c13": {
+      "strides": {
+        "strideA": 512,
+        "strideB": 288,
+        "strideC": 832
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "9c70fcba054ee727863521caedff0f6712e4ce664ee9c1227967e1068c6ef582",
+      "bytes": 1266,
+      "generated": [
+        "setup+10",
+        "setup+47",
+        "address+85",
+        "address+116"
+      ],
+      "source_sha256": "4b3bd2746e0c7d73635865deaa2b07c2d05fb97d1d1b3f0fb2013db6d62da0ef"
+    }
+  },
+  "rule": "g17tensorlower.family_of + advance_bytes: power-of-two rows -> op10279 with the scale table; 1+2^k rows -> op10282 r + (r<<k); other A row counts -> the multiply program with byte 9 of op10822/op10823 = stride/8; else refused"
+}

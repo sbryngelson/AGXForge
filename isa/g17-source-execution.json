@@ -1,0 +1,1213 @@
+{
+ "apple_differential": {
+  "ad-idx_plus7": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 5 bindings (this class's layout has exactly 2 binding records; 5 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "bufx-A-s-r0": {
+   "authoring_class": null,
+   "code_sha256": "298acc9f3d8651c825985c76b6d6d116fc48aa97a9042727b75110c4e181d0c4",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "b8129b3e870b4743cc9c9ba29bd1aa41e9b81c0adcf200fa4491b1cf4c7304ed",
+    "ours": "b8129b3e870b4743cc9c9ba29bd1aa41e9b81c0adcf200fa4491b1cf4c7304ed"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "fill-f-177": {
+   "authoring_class": null,
+   "code_sha256": "25d500493ef326d7be0f3b003483d31ee14f177f88a350b2c104f6144c9d33c5",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "545cdabb136548a9ede4af3e90ab2f32b07ee5096922654ac7a68391efe906ac",
+    "ours": "545cdabb136548a9ede4af3e90ab2f32b07ee5096922654ac7a68391efe906ac"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "fill-f-282": {
+   "authoring_class": null,
+   "code_sha256": "99d956f4ed36a9a2f17108cbcb1d6093f25158087ee3b72dce8a2319132e2b20",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "6fb2d56529e77f25e9181081e05aa8a34a1abc301a822b58f27a7880e069f09d",
+    "ours": "6fb2d56529e77f25e9181081e05aa8a34a1abc301a822b58f27a7880e069f09d"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "fill-u-126": {
+   "authoring_class": null,
+   "code_sha256": "80a48ff9eb5b10fadfefd7f0b7f839c24100e4c2110bca9e6e9c8245b4cc10f2",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "006c76ff1ccb754489a00553a1860ec5e4f7ceaa094ec4a4e314bbf83b44dce0",
+    "ours": "006c76ff1ccb754489a00553a1860ec5e4f7ceaa094ec4a4e314bbf83b44dce0"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "fill-u-227": {
+   "authoring_class": null,
+   "code_sha256": "5a89aa80fae01df26592e8710bd1d02e016f7a87e9bfbc9e4b3eeaa19e804058",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "80f402e6edea69c7b37c78fae7476177f511b2e22edddc2665c6ca2b44303b0e",
+    "ours": "80f402e6edea69c7b37c78fae7476177f511b2e22edddc2665c6ca2b44303b0e"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "gap32-33": {
+   "authoring_class": "indexed-zero-sr156-v1",
+   "code_sha256": "493fa3d45d68d02e056a484aabeb19fdd79198b5dc8714875ea6b0ca5c51780a",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "eec518c3aa69876583ffdacde7310439fe4b9adec4c3b5c0e42e6c0838213674",
+    "ours": "eec518c3aa69876583ffdacde7310439fe4b9adec4c3b5c0e42e6c0838213674"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "gap32c-6-0": {
+   "authoring_class": "indexed-zero-sr156-v1",
+   "code_sha256": "f8997a9ded073b3dd8a3c48f4c4d60de7d735c77e969e91ce08afadd77f5cf6f",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "b0f7387eabbfbfa3f6927da97ccedddab7b7176377151d7b1897a0c5fe2badb6",
+    "ours": "b0f7387eabbfbfa3f6927da97ccedddab7b7176377151d7b1897a0c5fe2badb6"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "huL_h_abs": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 6 bindings (this class's layout has exactly 2 binding records; 6 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "l-sub": {
+   "authoring_class": null,
+   "code_sha256": "502859e74fe39e318a00158951dbf57a54996f4bdcc2e9ef4f227107522edca6",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "a0beee0bf4afe6ffff256dc93c1cf8ccad659908d1da14cfe132ca1d23cda665",
+    "ours": "a0beee0bf4afe6ffff256dc93c1cf8ccad659908d1da14cfe132ca1d23cda665"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "mi-bf_f.odd.fma_c-1": {
+   "authoring_class": null,
+   "code_sha256": "dfa5ac0ec0cfb36bc6f8b861e05c1bb299698ba1f2089cf10e5bd1e8f608d3df",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "1ce159cb05d95b58c7413d2cc1113ca099422417e68030fb5e96cbefcb6f3be5",
+    "ours": "1ce159cb05d95b58c7413d2cc1113ca099422417e68030fb5e96cbefcb6f3be5"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "mp-and.u4-2": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 16 bindings (this class's layout has exactly 2 binding records; 16 requested. A different count needs its own measured layout.)",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "mp-fmin.f2-4": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 16 bindings (this class's layout has exactly 2 binding records; 16 requested. A different count needs its own measured layout.)",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "mp-mulhi.W-2": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 16 bindings (this class's layout has exactly 2 binding records; 16 requested. A different count needs its own measured layout.)",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "mp-not.W-4": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 16 bindings (this class's layout has exactly 2 binding records; 16 requested. A different count needs its own measured layout.)",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "mp-reverse_bits.W-4": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 16 bindings (this class's layout has exactly 2 binding records; 16 requested. A different count needs its own measured layout.)",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "ng-fmaNb": {
+   "authoring_class": null,
+   "code_sha256": "3825083886c3c7487c90a0eda4a28734a9286cba47a6b59d38f94f2f805f2176",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "85bdd0bc8d5e425dff1c7897e0fae47d2dc17afdf94e31fe437be23f4b48ddea",
+    "ours": "85bdd0bc8d5e425dff1c7897e0fae47d2dc17afdf94e31fe437be23f4b48ddea"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "pr_eq4": {
+   "authoring_class": null,
+   "code_sha256": "7acb84807402122e206370620f5bc6e3f7e892b1ea6481da00a3dc0eadc73500",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "ebdd00aad293e2dcc4fa74f9e5c88ec6798b784e05d23e0c0d9412035144f405",
+    "ours": "ebdd00aad293e2dcc4fa74f9e5c88ec6798b784e05d23e0c0d9412035144f405"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "sgn-astype-s": {
+   "authoring_class": null,
+   "code_sha256": "fe42c0ed1328d47224e4b203369fdcca663268497d1fe55c3634adbf95d4dfd7",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "4d8ff7b25824e756353a5babeaf1fde14de6157e5d75d96135e5bd566cf496f8",
+    "ours": "4d8ff7b25824e756353a5babeaf1fde14de6157e5d75d96135e5bd566cf496f8"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "sib-ad-group_plus_idx-1": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 5 bindings (this class's layout has exactly 2 binding records; 5 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "sib-d_m92-1": {
+   "authoring_class": null,
+   "code_sha256": "6b3e939ee813530a5876c7c2f1b3e71d8de8a1da07d29c11ddb01ab02be71dd8",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "48ed5765759ff3904c80949162a912a2247a2637760367f936daebc6d6f9e741",
+    "ours": "48ed5765759ff3904c80949162a912a2247a2637760367f936daebc6d6f9e741"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "sib-sib-sib-sib-sib-bar_dev-1-2-2-2-787e0ecc": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: 'unmeasured cooperative binding class'",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "sib-sib-sib-sib-tgm-u16-a1-none-r-x2-2-2-2-1": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: 'the three-binding threadgroup class is witnessed below the slot-32 instruction boundary; this contract crosses it at 87 instructions'",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "sib-sib-tgm-f16-a1-none-r-x2-2-0": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: 'the three-binding threadgroup class is witnessed below the slot-32 instruction boundary; this contract crosses it at 88 instructions'",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "sib-sr-tp_in_grid_z-0": {
+   "authoring_class": null,
+   "code_sha256": "22338739c03de5f634af0615ceec0eada4e48c27a8287238f5c4d10a0a293beb",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "c9ecd7b8051310d5cea58985a21f0f2b3987377e7aaabf37127413ee93b73b72",
+    "ours": "c9ecd7b8051310d5cea58985a21f0f2b3987377e7aaabf37127413ee93b73b72"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "sr-local_x": {
+   "authoring_class": null,
+   "code_sha256": "b8fdbf28c97b9a1e11cbeffe17afcac8404fe9f0780e1658394f4108f307aeb0",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "a34ecec11eafea7a958b9f6f477fc337f5e05061856cb530bef2d04011fb2330",
+    "ours": "a34ecec11eafea7a958b9f6f477fc337f5e05061856cb530bef2d04011fb2330"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "sw-pr-tidtg": {
+   "authoring_class": null,
+   "code_sha256": "1a84763ab9a48704d64e727b93664849a27f4bfd70cfcc3b38ac8ab09476fadd",
+   "control": null,
+   "grid_b": "vacuous",
+   "outputs_sha256": {
+    "apple": "9c92bce9c1d08b2817824f6541745e4ce8b4837ae58d84d028e1a8bc8129f43c",
+    "ours": "9c92bce9c1d08b2817824f6541745e4ce8b4837ae58d84d028e1a8bc8129f43c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "vacuous"
+  },
+  "syn-s06816eb9da": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"this contract's bound indices are not contiguous, and the compiler emits pointer offsets at 2 * rank while this class was measured on Apple's 2 * (index - lowe",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-s09b3736f39": {
+   "authoring_class": null,
+   "code_sha256": "6ea974f8644e5f9f5c6aa06a5b0376b01d0dc3747c8d2c3f0e5120bc93aed41c",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "3d0b06d66ed0ef9c97b4f9bf743427e48dd2d63d272bc05dcaed73994984ea19",
+    "ours": "3d0b06d66ed0ef9c97b4f9bf743427e48dd2d63d272bc05dcaed73994984ea19"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s0c78cc3c92": {
+   "authoring_class": null,
+   "code_sha256": "f6d66684536cd3c301fd89263603fd755fe5133ea4e4e31c3f1ef3030fdf4c79",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "7ed45459b1e7b6da1d623c17892cd37a880c1407645311c8fc5151d0568b4de5",
+    "ours": "7ed45459b1e7b6da1d623c17892cd37a880c1407645311c8fc5151d0568b4de5"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s0f7e5c04a9": {
+   "authoring_class": null,
+   "code_sha256": "d37dcda556af52321068446eeaca68f2adaff84e46a8031dcbf8a1828a00e381",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "273514eef55273dc14813001664ba1e60a04d720e06878e7a47d51296b8796d7",
+    "ours": "273514eef55273dc14813001664ba1e60a04d720e06878e7a47d51296b8796d7"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s12ca3b220a": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: 'four-register separate class requires END-only entry64, no promotion or spill/preload, and dense read/read/write bindings'",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-s19a2f6d835": {
+   "authoring_class": null,
+   "code_sha256": "369f36584ec1c17c7197a601af7b258474aaa2790b47124ed924d03a6cec2ee8",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "62ea82b8f4beead922b9378b40af56cf22e53c14effd291bd241f4fa5b103b55",
+    "ours": "62ea82b8f4beead922b9378b40af56cf22e53c14effd291bd241f4fa5b103b55"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s1d2754c89e": {
+   "authoring_class": null,
+   "code_sha256": "89e14773a494ee2e6230c4c76545bef9493d05f69259284e9b1170bf33b905c4",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "eacb4cbb0f78b4fe67a0a70940f294a64c6edb92db61ff9704254b1008454d1c",
+    "ours": "eacb4cbb0f78b4fe67a0a70940f294a64c6edb92db61ff9704254b1008454d1c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s2390eeee22": {
+   "authoring_class": null,
+   "code_sha256": "1e0e3d7576cc6053e3f1002c35c041c74fc1eab478eb7c77caefb707622adcf3",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "96fc4cb7d54f51b3e76111efc0fcd3563272a36d3803fef9a4916724bac79f07",
+    "ours": "96fc4cb7d54f51b3e76111efc0fcd3563272a36d3803fef9a4916724bac79f07"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s2a3c5e1571": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 1 bindings (this class's layout has exactly 2 binding records; 1 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-s341b2cf313": {
+   "authoring_class": null,
+   "code_sha256": "1fefd2fd7016fe19d5faee528fd1c1445f04bb6957bd99db2035f37c2fb39592",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "7504585163244cc00b9ed4251b1915792c8acdcdf7f1d3c96e2bb13a10606741",
+    "ours": "7504585163244cc00b9ed4251b1915792c8acdcdf7f1d3c96e2bb13a10606741"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s3a8b806899": {
+   "authoring_class": null,
+   "code_sha256": "b60291af6f9f91b2cfd8d6683df741da249e5318e5f8be287b0fd9893711a301",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "7a33895cddee5e3c0fed51af9736c85ed5569d96ca345f4eb96ee1c6f44f1213",
+    "ours": "7a33895cddee5e3c0fed51af9736c85ed5569d96ca345f4eb96ee1c6f44f1213"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s3d6d44a0f2": {
+   "authoring_class": null,
+   "code_sha256": "6b772919aa68ce58d70b0d0bfdf3a0b3569c5cf0a106ea288354fe52670c500d",
+   "control": "differs",
+   "grid_b": "differs",
+   "outputs_sha256": {
+    "apple": "f5192d6b3760c33b6b58d829381500b1f1b601556f86560314aa654cfd41ccf2",
+    "ours": "f5192d6b3760c33b6b58d829381500b1f1b601556f86560314aa654cfd41ccf2"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s447197ee47": {
+   "authoring_class": null,
+   "code_sha256": "454bfa57e8d3421214568a833b49bd56176ed6961fe3f60bb5b839796648f929",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "6955190fbb7e7608396f3880c973e9b1f8af43e98988ad6f999f12e98c5ddaf5",
+    "ours": "6955190fbb7e7608396f3880c973e9b1f8af43e98988ad6f999f12e98c5ddaf5"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s47f3984d60": {
+   "authoring_class": null,
+   "code_sha256": "1566bc38eed913488ab73b8dd0cc5a3c0d9af2c8c11515d8a55bbae24e9aaa1b",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "4ed2bc73293f10ae7fb8ae0e9fd5fc79e0f467b25c21dc4d168d9424839e04da",
+    "ours": "4ed2bc73293f10ae7fb8ae0e9fd5fc79e0f467b25c21dc4d168d9424839e04da"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s4acc9cc307": {
+   "authoring_class": null,
+   "code_sha256": "d6f2fed86cbeab8eb30d3d4ec96088f1c72800d5e4c5df5da4c69e8dfe85a38b",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "cd80ee045aee0fc940716a108233e60211a5d1d365821c5d17bbafc5b7e59bbc",
+    "ours": "cd80ee045aee0fc940716a108233e60211a5d1d365821c5d17bbafc5b7e59bbc"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s4e69e1c302": {
+   "authoring_class": null,
+   "code_sha256": "e9879cb22c0629e7b1d8609268667f47ce6292045551d9dccd8344d6b8428c91",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "914eede3b633660d902116b7916b25810842834e6478bf8bae98619ecd80d306",
+    "ours": "914eede3b633660d902116b7916b25810842834e6478bf8bae98619ecd80d306"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s54c47df4dc": {
+   "authoring_class": null,
+   "code_sha256": "2a8ee733252f78a8f568c53cce3f5b82aaa51aead58694fd1546bbbb4f954afa",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "e6f4fbb98b91ff98cc3b06663c6abe525c114d9e8b5e7ab643a0d65b030f7173",
+    "ours": "e6f4fbb98b91ff98cc3b06663c6abe525c114d9e8b5e7ab643a0d65b030f7173"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s580c33d1d9": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"this contract's bound indices are not contiguous, and the compiler emits pointer offsets at 2 * rank while this class was measured on Apple's 2 * (index - lowe",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-s5bab75a5d6": {
+   "authoring_class": null,
+   "code_sha256": "09204cac6c53d486caecf2eecbc4050b81fe483ffcdf2eaaf9e6129b3dce14cb",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "40c250d4551c813d9e2ec5d747206f0f00bafba06bf1783cabe64b9b0ab7612b",
+    "ours": "40c250d4551c813d9e2ec5d747206f0f00bafba06bf1783cabe64b9b0ab7612b"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s5ed5557afe": {
+   "authoring_class": null,
+   "code_sha256": "71c3e18bef42a2b8c2a1936f8defb34c3c4abbd74b86176423132f285e84efe9",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "ee7116c63872d4d911a6236c390d5687601e70fd9ed7c5a2c7c3e6bd40024378",
+    "ours": "ee7116c63872d4d911a6236c390d5687601e70fd9ed7c5a2c7c3e6bd40024378"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s61bc1da675": {
+   "authoring_class": null,
+   "code_sha256": "11eda14648ebf6a89062ba6194ce60a7c6cf8702fa1189c7ea64d37ce2373be9",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "08638365632583aa3aa869035dd2ca75809f6e14153f9b21babf6dce6f5ef38c",
+    "ours": "08638365632583aa3aa869035dd2ca75809f6e14153f9b21babf6dce6f5ef38c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s6ea66c8429": {
+   "authoring_class": null,
+   "code_sha256": "32ea4dd53213d7082639ade7813dff71396d4e76563f3296deadb404ea7a1792",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "5c8db65b649d00fb388e7653ac207a935576e9ad54c88afc02520a958446a5db",
+    "ours": "5c8db65b649d00fb388e7653ac207a935576e9ad54c88afc02520a958446a5db"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s72051033d7": {
+   "authoring_class": null,
+   "code_sha256": "d993092db08f3e64bce1811a831bfb21ac02bcfa7b89d2a9f560b4264d2ba7eb",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "670f55bd548ce7ef14d2b16fda61b6e9149b4bcbe21b809d648992af831579fb",
+    "ours": "670f55bd548ce7ef14d2b16fda61b6e9149b4bcbe21b809d648992af831579fb"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s750e2e9977": {
+   "authoring_class": null,
+   "code_sha256": "1521c78fb8ee7afcd3bf2c9915482e6b562dec26638511be45e35c9addc1310b",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "5f892c1f5a91e46bc4e54244f7379119b136d38d394b96b4cc4fe1c5f84fa4bf",
+    "ours": "5f892c1f5a91e46bc4e54244f7379119b136d38d394b96b4cc4fe1c5f84fa4bf"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s78642ccc6a": {
+   "authoring_class": null,
+   "code_sha256": "f30f93af3d35ca0c0848b92558adba97b6da34bcd7e87b7d3f4913cc6e4b88de",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "4ae61c4f9c3325c7c3c5143d50a29a30d51c18f9224f9a4429b39f0bb8c2addc",
+    "ours": "4ae61c4f9c3325c7c3c5143d50a29a30d51c18f9224f9a4429b39f0bb8c2addc"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s7bc6eec389": {
+   "authoring_class": null,
+   "code_sha256": "c48aa3fd12cdf74ee050137deac21a025e6c5c11d35c3d824f4def17304933fa",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "f2a6cb0fd4f09e7b88986f6c30bbe9ecd21cc51561bb78f7f78807fad32415be",
+    "ours": "f2a6cb0fd4f09e7b88986f6c30bbe9ecd21cc51561bb78f7f78807fad32415be"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s82cb50ba15": {
+   "authoring_class": null,
+   "code_sha256": "4f44a5e9276c7843616413f3b8c32392d0155f5891f59a858bbc7bc801b1a2c4",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "cc0b6d093d9409eb8b82555f6565c8bdb828625380557e6275ddd35e4a931a2c",
+    "ours": "cc0b6d093d9409eb8b82555f6565c8bdb828625380557e6275ddd35e4a931a2c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s8fac8d5ba1": {
+   "authoring_class": null,
+   "code_sha256": "0d59e4e92284bb87d3f71abe3d90b2df96b63ca414780bed99d15cbadff81afd",
+   "control": "differs",
+   "grid_b": "differs",
+   "outputs_sha256": {
+    "apple": "133d3001a58147c11cdc15fde73e6813a832eeb2df7e812069af9c017ff5b920",
+    "ours": "133d3001a58147c11cdc15fde73e6813a832eeb2df7e812069af9c017ff5b920"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s92dfd1a063": {
+   "authoring_class": null,
+   "code_sha256": "acd82d4a94a810ad76e2a5e26c62a9ad73b7e6b8a0150ba48ce84e5e524ae6b0",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "be23055ac0867c09cee18d56c2b63b629317125b7b29138ed69a0177f6a6d0be",
+    "ours": "be23055ac0867c09cee18d56c2b63b629317125b7b29138ed69a0177f6a6d0be"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s9604ffe5f4": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"this contract's bound indices are not contiguous, and the compiler emits pointer offsets at 2 * rank while this class was measured on Apple's 2 * (index - lowe",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-s99a48a0ed6": {
+   "authoring_class": null,
+   "code_sha256": "92fcafddaf8316da1e89f9204a686fe8a211739bead27e2ecd415a8be6f0088d",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "7a9d748c44eee2d0d1b500b178ee4aea1aaf54fa115be19b0d4b6ba7b6b6a61d",
+    "ours": "7a9d748c44eee2d0d1b500b178ee4aea1aaf54fa115be19b0d4b6ba7b6b6a61d"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-s9d2593a54e": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 1 bindings (this class's layout has exactly 2 binding records; 1 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-sa0a7a34b7a": {
+   "authoring_class": "indexed-zero-sr156-v1",
+   "code_sha256": "36062c88d310b3036a05508a29851569ba9faac1f7b59d70e91a822f527e07eb",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "3a3855158647659219410e991d6e5e7552949a043057775fd251e0f83e9e9684",
+    "ours": "3a3855158647659219410e991d6e5e7552949a043057775fd251e0f83e9e9684"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sa4193bf13d": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 19 bindings (this class's layout has exactly 2 binding records; 19 requested. A different count needs its own measured layout.)",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-sa7696b27fc": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 5 bindings (this class's layout has exactly 2 binding records; 5 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-saaba6b629e": {
+   "authoring_class": null,
+   "code_sha256": "06a512792da2d4658e683aa9e9e1730cf3d8d1abe7c432fcbe697a30811ce82e",
+   "control": null,
+   "grid_b": "differs",
+   "outputs_sha256": {
+    "apple": "4b63f186937a64b759d214b095f6b7db64124a1aae49fb7a79d5d5a815d37bf6",
+    "ours": "89ca3cedd7899a73724d2185f72b94cb8f903256aff28cf3da45ff29a41f6ed3"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "differs"
+  },
+  "syn-sb215fbeb39": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"no measured metadata layout for 5 bindings (this class's layout has exactly 2 binding records; 5 requested. A different count needs its own measured layout.), ",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-sb571955501": {
+   "authoring_class": null,
+   "code_sha256": "5f7f28aa30589ace140b38aabb8d40c47b1200a67ae15265ff5271fff76d3267",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "573c838e69d5849288911dc72e07b672870d078f9075590001f8cb6453c51dd0",
+    "ours": "573c838e69d5849288911dc72e07b672870d078f9075590001f8cb6453c51dd0"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sbf352471d6": {
+   "authoring_class": null,
+   "code_sha256": "2a12a5adced4151ad40f306c45b5f011cd8a004ac1b54f49fb1031feca8e8a4b",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "884bf63c34d7362f07353e5d4e35b30222700526dbe2b04b20126886cf997bd3",
+    "ours": "884bf63c34d7362f07353e5d4e35b30222700526dbe2b04b20126886cf997bd3"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sc5af8687d5": {
+   "authoring_class": null,
+   "code_sha256": "ac7cfac125c409a69263b95dd0ac6f5f4f6165000fa13905a97d11250e39096e",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "8490a08ff059650f19fb7f84c2bb23d251db24846fce32572b5c340a35824449",
+    "ours": "8490a08ff059650f19fb7f84c2bb23d251db24846fce32572b5c340a35824449"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sc902dcec4a": {
+   "authoring_class": null,
+   "code_sha256": "69334b22f83749c7d003436c4970405153c483137fd0bb5dff9a31e820dfb079",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "9c37dfb1c359af1586e5c43914ad806b9417502c3d8782ae778332479fb6a2e4",
+    "ours": "9c37dfb1c359af1586e5c43914ad806b9417502c3d8782ae778332479fb6a2e4"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-scc8f7ad4bf": {
+   "authoring_class": null,
+   "code_sha256": "8ece84dacee38900837c2e89239e632c9fc71465fa4f74021000bc80b558f8fc",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "94303dd6622b9f1ed507cb9574ba5699d1ba2a8f2756a08e67d6c3a3f379db4c",
+    "ours": "94303dd6622b9f1ed507cb9574ba5699d1ba2a8f2756a08e67d6c3a3f379db4c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sd356798b7b": {
+   "authoring_class": null,
+   "code_sha256": "b83f4a5dca30f75a9d4dc3a382cc183ea4e49a51f62f4efbf35dbca18f7f06a8",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "100e658073cb6538e163c3f5d7d2c9f7a6399eee47d691eea61fa4e9b659871f",
+    "ours": "100e658073cb6538e163c3f5d7d2c9f7a6399eee47d691eea61fa4e9b659871f"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sd72fa23804": {
+   "authoring_class": null,
+   "code_sha256": "19e5bda2626027f837df636b03dad56630b949f12b666ff4e3ac43eca27d3b98",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "2c4171573262bc8823c6477c1d1ad754a3ebd79d7826597a6f400d7219de2956",
+    "ours": "2c4171573262bc8823c6477c1d1ad754a3ebd79d7826597a6f400d7219de2956"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sdaa1408de3": {
+   "authoring_class": null,
+   "code_sha256": "d9f6894a1b190a12eaacf094e1eb0296c6eb515a7df0c6ba28e6f4f892ecfb64",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "dd65ad483fb756bb27970d3a1320dc19b417f07ebd1a5c9854f61f6987e8e84c",
+    "ours": "dd65ad483fb756bb27970d3a1320dc19b417f07ebd1a5c9854f61f6987e8e84c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sddf9783eb5": {
+   "authoring_class": null,
+   "code_sha256": "20dc8c7e092144ce6ed1fd20836bb672fd04943f994820fb266de8dd5b18d939",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "65adbb9399cbe43664f73fa9780afea7acdd7a4bb07e9de2e53276de63e7be05",
+    "ours": "65adbb9399cbe43664f73fa9780afea7acdd7a4bb07e9de2e53276de63e7be05"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-se1b00e89ea": {
+   "authoring_class": null,
+   "code_sha256": "4a0470d3931b318e063a21b5e7d8180983f5503afd46a5cbc013c752823f2a2e",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "ee8bd9995dad24aef4b872eb6986b3cbc8b5ef968512869ed7e49e2bf55a453f",
+    "ours": "ee8bd9995dad24aef4b872eb6986b3cbc8b5ef968512869ed7e49e2bf55a453f"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-se516adef52": {
+   "authoring_class": null,
+   "code_sha256": "790cd18ec343d93db641c6115644ebfa773af3f2f5e094b7808316cc1151f64f",
+   "control": null,
+   "grid_b": "differs",
+   "outputs_sha256": {
+    "apple": "4e7622ecb5906139ab1ca774cf81df2de8cc35c4502ff0c3aa867121c0a3f2f0",
+    "ours": "5e2f0307ed09054b73bcc6b576bba11f6c3b2f81c7c9731a549fd947161f8d1d"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "differs"
+  },
+  "syn-sebe0ba9cb3": {
+   "authoring_class": null,
+   "code_sha256": null,
+   "control": null,
+   "grid_b": null,
+   "outputs_sha256": null,
+   "reason": "author: None: \"this contract's bound indices are not contiguous, and the compiler emits pointer offsets at 2 * rank while this class was measured on Apple's 2 * (index - lowe",
+   "stage": "author",
+   "verdict": "refused"
+  },
+  "syn-seedd775b1c": {
+   "authoring_class": null,
+   "code_sha256": "0bf755fb44446fd76240c964d91443c1b7ed96dfe762f6726f98e96429db346b",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "2983074187b03898d8d325b44041f7f7456cf430762bfed001ed9bb3a5e18051",
+    "ours": "2983074187b03898d8d325b44041f7f7456cf430762bfed001ed9bb3a5e18051"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sf1cc51860e": {
+   "authoring_class": null,
+   "code_sha256": "4b25f07e33d14c4d1be8b0155fd76c5f1e0fd50abb811e1d43be6fb985edcfb9",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "f605ac0a2408407961adf3a24b535bf53ab4ee99521d55128fcdcecfcee8a6cb",
+    "ours": "f605ac0a2408407961adf3a24b535bf53ab4ee99521d55128fcdcecfcee8a6cb"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sf503732f5e": {
+   "authoring_class": "indexed-zero-sr156-v1",
+   "code_sha256": "7490c1d6036fd0d3400fa2e6332144436d013e389eb7c74949b1c12932dc25ca",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "1e42ecee2518674bc9509c38488a530855e6567072b283933a9542a61ca860cd",
+    "ours": "1e42ecee2518674bc9509c38488a530855e6567072b283933a9542a61ca860cd"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sf887c90853": {
+   "authoring_class": null,
+   "code_sha256": "6bd7902da0b88b19f647e995803b9e18ec7a55adbaaad8dc700b84185cc2aaea",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "08638365632583aa3aa869035dd2ca75809f6e14153f9b21babf6dce6f5ef38c",
+    "ours": "08638365632583aa3aa869035dd2ca75809f6e14153f9b21babf6dce6f5ef38c"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "syn-sfbb623ecab": {
+   "authoring_class": null,
+   "code_sha256": "5dea0d6f9c505190b70a2110c263e0437c0b6585822a585a1969f73288c65911",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "0202e957563f15d721fda45b2a1bbe5f417d49019fe33b439985e872e2daefa6",
+    "ours": "0202e957563f15d721fda45b2a1bbe5f417d49019fe33b439985e872e2daefa6"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "tb-n8": {
+   "authoring_class": "indexed-zero-sr156-v1",
+   "code_sha256": "a9d39bdc9a9725c48fb363d0929c4b7eb8c401c8b7ff0315372d3f10e1f8b211",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "82c6daea1559f252e8783a1c4bb28da48bd14b8275802120c220156dbe60442b",
+    "ours": "82c6daea1559f252e8783a1c4bb28da48bd14b8275802120c220156dbe60442b"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "tgm-f256-a1-dev": {
+   "authoring_class": null,
+   "code_sha256": "dbb08ce4a3f2ffe24cda97281c95c50629dcbd281965859408005180a7d27de7",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "5215aea6bea0b64f391fc754445a2eed58fff244798bcb5e4ea6de6de9a7e8aa",
+    "ours": "5215aea6bea0b64f391fc754445a2eed58fff244798bcb5e4ea6de6de9a7e8aa"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  },
+  "tgm-u64-a1-dev": {
+   "authoring_class": null,
+   "code_sha256": "71a66af925f34e7060b87e988433af4093e2416968295e5ed9a32d02960c318e",
+   "control": "differs",
+   "grid_b": "match",
+   "outputs_sha256": {
+    "apple": "b191eefc71288bb7a0ae8bd288c89a4522096524c831cf70f99cc7b1a6766a61",
+    "ours": "b191eefc71288bb7a0ae8bd288c89a4522096524c831cf70f99cc7b1a6766a61"
+   },
+   "reason": null,
+   "stage": null,
+   "verdict": "match"
+  }
+ },
+ "compiled": 125,
+ "note": "MM 25.149: the 125 fixed197 sources this compiler compiles. retained_receipts: the 41 with a passing, dispatched, fully checked execution.json for today's code. apple_differential: the other 84, each dispatched against Apple's compiler on the same source by tools/g17sourceexec.py; grid A (one thread) is the verdict, grid B (32 threads) is informative. outputs_sha256 hashes every buffer after the dispatch, in binding order.",
+ "retained_receipts": {
+  "b45_d2": [
+   "results/g17-execution150-v1/completion-two-runtime/b45_d2/worker-a/execution.json",
+   "results/g17-execution150-v1/completion-two-runtime/b45_d2/worker-b/execution.json"
+  ],
+  "c3-u-eq": [
+   "results/g17-source125-validation-v1/c3-u-eq/worker-a/execution.json",
+   "results/g17-source125-validation-v1/c3-u-eq/worker-b/execution.json"
+  ],
+  "cmp_ne": [
+   "results/g17-source-half-add-comparison-runtime-v1/cmp_ne/first-worker/execution.json",
+   "results/g17-source-half-add-comparison-runtime-v1/cmp_ne/second-worker/execution.json"
+  ],
+  "coop4-n190": [
+   "results/g17-source125-validation-v1/coop4-runtime/worker-a/execution.json",
+   "results/g17-source125-validation-v1/coop4-runtime/worker-b/execution.json"
+  ],
+  "fill-h-151": [
+   "results/g17-source-fill-half-runtime-v2/fill_h_151/first-worker/execution.json",
+   "results/g17-source-fill-half-runtime-v2/fill_h_151/second-worker/execution.json"
+  ],
+  "fill-h-254": [
+   "results/g17-source-fill-half-runtime-v2/fill_h_254/first-worker/execution.json",
+   "results/g17-source-fill-half-runtime-v2/fill_h_254/second-worker/execution.json"
+  ],
+  "hold-b-vec0": [
+   "results/g17-source125-validation-v1/vector-runtime-v2/hold-b-vec0/worker-a/execution.json",
+   "results/g17-source125-validation-v1/vector-runtime-v2/hold-b-vec0/worker-b/execution.json"
+  ],
+  "if_bi_or60": [
+   "results/g17-execution150-v1/or60-raw-reply-runtime/worker-a/execution.json",
+   "results/g17-execution150-v1/or60-raw-reply-runtime/worker-b/execution.json"
+  ],
+  "loadauth1": [
+   "results/g17-execution150-v1/dataflow-runtime/loadauth1/worker-a/execution.json",
+   "results/g17-execution150-v1/dataflow-runtime/loadauth1/worker-b/execution.json"
+  ],
+  "mf-f32f32_f.fma.nega-1": [
+   "results/g17-execution150-v1/final-measured-two-runtime/mf-f32f32_f.fma.nega-1/worker-a/execution.json",
+   "results/g17-execution150-v1/final-measured-two-runtime/mf-f32f32_f.fma.nega-1/worker-b/execution.json"
+  ],
+  "mf-f32f32_h.fmax-2": [
+   "results/g17-source125-validation-v1/corrected-nosr/mf-f32f32_h.fmax-2/worker-a/execution.json",
+   "results/g17-source125-validation-v1/corrected-nosr/mf-f32f32_h.fmax-2/worker-b/execution.json"
+  ],
+  "mf-hf32_h.copysign-1": [
+   "results/g17-source125-validation-v1/copysign-ordinary/worker-a/execution.json",
+   "results/g17-source125-validation-v1/copysign-ordinary/worker-b/execution.json"
+  ],
+  "mi-f32_f.half.mul.sat-2": [
+   "results/g17-source125-validation-v1/corrected-nosr/mi-f32_f.half.mul.sat-2/worker-a/execution.json",
+   "results/g17-source125-validation-v1/corrected-nosr/mi-f32_f.half.mul.sat-2/worker-b/execution.json"
+  ],
+  "mn-s16_s32.add-4": [
+   "results/g17-source-integer16-widen-runtime-v1/mn-s16_s32.add-4/worker-a/execution.json",
+   "results/g17-source-integer16-widen-runtime-v1/mn-s16_s32.add-4/worker-b/execution.json"
+  ],
+  "mn-s32.madd.small-1": [
+   "results/g17-execution150-v1/scalar-runtime/mn-s32.madd.small-1/worker-a/execution.json",
+   "results/g17-execution150-v1/scalar-runtime/mn-s32.madd.small-1/worker-b/execution.json"
+  ],
+  "mn-s32_s16.shl-2": [
+   "results/g17-source-integer16-runtime-v1/mn-s32_s16.shl-2/worker-a/execution.json",
+   "results/g17-source-integer16-runtime-v1/mn-s32_s16.shl-2/worker-b/execution.json"
+  ],
+  "mn-u16_u32.and-4": [
+   "results/g17-source-integer16-widen-runtime-v1/mn-u16_u32.and-4/worker-a/execution.json",
+   "results/g17-source-integer16-widen-runtime-v1/mn-u16_u32.and-4/worker-b/execution.json"
+  ],
+  "mn-u32.mul-1": [
+   "results/g17-execution150-v1/scalar-runtime/mn-u32.mul-1/worker-a/execution.json",
+   "results/g17-execution150-v1/scalar-runtime/mn-u32.mul-1/worker-b/execution.json"
+  ],
+  "mn-u32_u16.xor-2": [
+   "results/g17-source-integer16-runtime-v1/mn-u32_u16.xor-2/worker-a/execution.json",
+   "results/g17-source-integer16-runtime-v1/mn-u32_u16.xor-2/worker-b/execution.json"
+  ],
+  "mp-ctz.u-2": [
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-ctz.u-2/worker-a/execution.json",
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-ctz.u-2/worker-b/execution.json",
+   "results/g17-source125-validation-v1/mp-ctz.u-2/worker-a/execution.json",
+   "results/g17-source125-validation-v1/mp-ctz.u-2/worker-b/execution.json"
+  ],
+  "mp-fabs.f-1": [
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-fabs.f-1/worker-a/execution.json",
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-fabs.f-1/worker-b/execution.json",
+   "results/g17-execution150-v1/scalar-runtime/mp-fabs.f-1/worker-a/execution.json",
+   "results/g17-execution150-v1/scalar-runtime/mp-fabs.f-1/worker-b/execution.json"
+  ],
+  "mp-step.f-2": [
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-step.f-2/worker-a/execution.json",
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-step.f-2/worker-b/execution.json",
+   "results/g17-execution150-v1/scalar-runtime/mp-step.f-2/worker-a/execution.json",
+   "results/g17-execution150-v1/scalar-runtime/mp-step.f-2/worker-b/execution.json"
+  ],
+  "mp-trunc.h-4": [
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-trunc.h-4/worker-a/execution.json",
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/mp-trunc.h-4/worker-b/execution.json",
+   "results/g17-execution150-v1/half-truncation-zero-set-v2-runtime/worker-a/execution.json",
+   "results/g17-execution150-v1/half-truncation-zero-set-v2-runtime/worker-b/execution.json"
+  ],
+  "probe-ro-8": [
+   "results/g17-execution150-v1/final-measured-two-runtime/probe-ro-8/worker-a/execution.json",
+   "results/g17-execution150-v1/final-measured-two-runtime/probe-ro-8/worker-b/execution.json"
+  ],
+  "r-shr64a": [
+   "results/g17-source125-validation-v1/shift-repair-runtime/worker-a/execution.json",
+   "results/g17-source125-validation-v1/shift-repair-runtime/worker-b/execution.json"
+  ],
+  "sl32-u148": [
+   "results/g17-source-literals-runtime-v2/candidate/source_literals/first-worker/execution.json",
+   "results/g17-source-literals-runtime-v2/candidate/source_literals/second-worker/execution.json"
+  ],
+  "syn-s03aa67fd92": [
+   "results/g17-source125-validation-v1/syn-s03aa67fd92/worker-a/execution.json",
+   "results/g17-source125-validation-v1/syn-s03aa67fd92/worker-b/execution.json"
+  ],
+  "syn-s15e3f34461": [
+   "results/g17-execution150-v1/dataflow-runtime/syn-s15e3f34461/worker-a/execution.json",
+   "results/g17-execution150-v1/dataflow-runtime/syn-s15e3f34461/worker-b/execution.json"
+  ],
+  "syn-s209163dca8": [
+   "results/g17-source125-validation-v1/vector-runtime-v2/syn-s209163dca8/worker-a/execution.json",
+   "results/g17-source125-validation-v1/vector-runtime-v2/syn-s209163dca8/worker-b/execution.json"
+  ],
+  "syn-s30da6b6133": [
+   "results/g17-source125-validation-v1/syn-s30da6b6133/worker-a/execution.json",
+   "results/g17-source125-validation-v1/syn-s30da6b6133/worker-b/execution.json"
+  ],
+  "syn-s379644aefe": [
+   "results/g17-source-half-add-comparison-runtime-v1/syn_s379644aefe/first-worker/execution.json",
+   "results/g17-source-half-add-comparison-runtime-v1/syn_s379644aefe/second-worker/execution.json"
+  ],
+  "syn-s5186cb7b7d": [
+   "results/g17-execution150-v1/declaration-only-runtime/syn-s5186cb7b7d/worker-a/execution.json",
+   "results/g17-execution150-v1/declaration-only-runtime/syn-s5186cb7b7d/worker-b/execution.json"
+  ],
+  "syn-s6bedd68422": [
+   "results/g17-source-float-uint-runtime-v1/source_float_uint/first-worker/execution.json",
+   "results/g17-source-float-uint-runtime-v1/source_float_uint/second-worker/execution.json"
+  ],
+  "syn-s7f595f1cd1": [
+   "results/g17-source-half-add-extended-runtime-v2/syn_s7f595f1cd1/first-worker/execution.json",
+   "results/g17-source-half-add-extended-runtime-v2/syn_s7f595f1cd1/second-worker/execution.json"
+  ],
+  "syn-s89678d5435": [
+   "results/g17-source125-validation-v1/syn-s89678d5435/worker-a/execution.json",
+   "results/g17-source125-validation-v1/syn-s89678d5435/worker-b/execution.json"
+  ],
+  "syn-s8ca6afc036": [
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/syn-s8ca6afc036/worker-a/execution.json",
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/syn-s8ca6afc036/worker-b/execution.json",
+   "results/g17-execution150-v1/wide-runtime/syn-s8ca6afc036/worker-a/execution.json",
+   "results/g17-execution150-v1/wide-runtime/syn-s8ca6afc036/worker-b/execution.json"
+  ],
+  "syn-sae82ffd475": [
+   "results/g17-execution150-v1/completion-two-runtime/syn-sae82ffd475/worker-a/execution.json",
+   "results/g17-execution150-v1/completion-two-runtime/syn-sae82ffd475/worker-b/execution.json"
+  ],
+  "syn-sbba7fec913": [
+   "results/g17-source-half-add-comparison-runtime-v1/syn_sbba7fec913/first-worker/execution.json",
+   "results/g17-source-half-add-comparison-runtime-v1/syn_sbba7fec913/second-worker/execution.json"
+  ],
+  "syn-sc2371448fb": [
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/syn-sc2371448fb/worker-a/execution.json",
+   "results/g17-execution150-v1/fourbinding-sr-revalidation/syn-sc2371448fb/worker-b/execution.json",
+   "results/g17-execution150-v1/wide-runtime/syn-sc2371448fb/worker-a/execution.json",
+   "results/g17-execution150-v1/wide-runtime/syn-sc2371448fb/worker-b/execution.json"
+  ],
+  "syn-sd0185e23bf": [
+   "results/g17-source125-validation-v1/syn-sd0185e23bf/worker-a/execution.json",
+   "results/g17-source125-validation-v1/syn-sd0185e23bf/worker-b/execution.json"
+  ],
+  "syn-se8dbb86316": [
+   "results/g17-source-conversion-runtime-v1/first-worker/execution.json",
+   "results/g17-source-conversion-runtime-v1/second-worker/execution.json"
+  ]
+ }
+}

@@ -1,0 +1,189 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op16806.sarv",
+  "op": 16806,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16806,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700003a2e00a30288812034",
+    "2700003a2e00a30288812034",
+    "2700003a2e00a30288812034",
+    "2700003a2e00a30288812034"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    16806,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3221225472,
+   4160749568,
+   4293918720,
+   16
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   false,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op13488.nandn",
+  "op": 13488,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13488,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2b0006803878a4028481",
+    "2b0006803878a4028481",
+    "2b0006803878a4028481",
+    "2b0006803878a4028481"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    13488,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   251662080,
+   251662080,
+   0,
+   1749164034
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op1000.fadd.imm",
+  "op": 1000,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 1000,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2100041a4220a00206064200",
+    "2100041a4220a00206064200",
+    "2100041a4220a00206064200",
+    "2100041a4220a00206064200"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    1000,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065877504,
+   1074003968,
+   1082261504,
+   1090584576
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op1062.fsat",
+  "op": 1062,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 1062,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700001a2320aa02b013",
+    "2700001a2320aa02b013",
+    "2700001a2320aa02b013",
+    "2700001a2320aa02b013"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    1062,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1048576000,
+   1056964608,
+   1061158912,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

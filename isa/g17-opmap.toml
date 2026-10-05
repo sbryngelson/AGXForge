@@ -1,0 +1,356 @@
+# IR OPERATION -> APPLE OPCODE, with source-level ground truth.
+#
+# Recovered by compiling one arithmetic operation per kernel, with runtime-loaded operands so
+# nothing folds and the result stored so nothing is eliminated, then reading back the opcode
+# Apple's own compiler chose. The scaffolding common to every kernel - 684 end, 12682 load,
+# 14059 read_sr, 17235 store - is subtracted, leaving the opcode that IS the operation.
+#
+# This is the table instruction selection needs and did not have: g17forms picks a canonical
+# template per FAMILY NAME, and only 2 of its 7 families are a single Apple instruction
+# (ledger/g17-form-selection-is-by-prefix.toml). Selecting by opcode was blocked on not knowing
+# which opcode an IR op should choose. This answers that for eleven operations.
+#
+# spike/accel/re/opmap.py regenerates it.
+date = "2026-09-04"
+confidence = "causal - the operation is stated by the Metal source, the opcode read from Apple's decoder"
+
+[scaffolding]
+common_to_every_kernel = [684, 12682, 14059, 17235]
+note = "end, load, read_sr, store - present whatever the arithmetic is, so not the operation"
+
+[[op]]
+ir = "add"
+operands = "reg, imm"
+opcode = 10279
+length = 12
+note = "what the compiler already emits for add, and it is right - confirmed by `x + 7u` whose only non-scaffolding opcode is this one"
+[[op]]
+ir = "add"
+operands = "reg, reg"
+opcode = 10282
+length = 12
+[[op]]
+ir = "sub"
+operands = "reg, imm"
+opcode = 11666
+length = 12
+note = "NOT add's encoding with a different byte6. The compiler's ALU_OP swaps byte6 alone and produces bytes Apple's decoder rejects; the real sub-immediate is a different instruction. ledger/g17-oracle-authority-boundary.toml"
+[[op]]
+ir = "sub"
+operands = "reg, reg"
+opcode = 11667
+length = 12
+[[op]]
+ir = "sub"
+operands = "imm, reg"
+opcode = 11664
+length = 12
+note = "`5u - x`. The DIRECTION is the opcode: 11664 and 11666 share byte6 0xa2 and differ in which slot holds the immediate, and every form computes slotA - slotB. ledger/g17-alu-slot-model.toml"
+[[op]]
+ir = "mul"
+operands = "reg, imm"
+opcode = 10822
+length = 14
+note = "only for constants Apple does not strength-reduce: x*2,4,8 are one add with a fused shift scale, x*3,9,17 are one add with both slots the same register, x*6 is two. x*100 and x*255 are this."
+[[op]]
+ir = "mul"
+operands = "reg, reg"
+opcode = 10825
+length = 14
+note = "FOURTEEN bytes, not twelve - so the compiler's 12-byte mul was truncated as well as mis-encoded"
+[[op]]
+ir = "and"
+operands = "reg, imm"
+opcode = 423
+length = 10
+note = "`x & 15u`. The mask IS the decoder's operand 4, and every value a peer catalogued as unexplained on this opcode - 4, 15, 60, 195, 255 - reproduces from a source-level AND. Not a bitfield extract."
+[[op]]
+ir = "or"
+operands = "reg, imm"
+opcode = 13574
+length = 10
+[[op]]
+ir = "xor"
+operands = "reg, imm"
+opcode = 17770
+length = 10
+[[op]]
+ir = "and"
+operands = "reg, reg"
+opcode = 424
+length = 10
+note = "the same family as 423. NOTE two encodings: this 10-byte one, and a 4-byte one carrying all three registers that the corpus uses 203 times. 13575 and 17771 have both lengths too. Which one Apple picks is not established."
+[[op]]
+ir = "or"
+operands = "reg, reg"
+opcode = 13575
+length = 10
+[[op]]
+ir = "xor"
+operands = "reg, reg"
+opcode = 17771
+length = 10
+[[op]]
+ir = "shl"
+operands = "reg, reg"
+opcode = 14392
+length = 14
+note = "accompanied by op423 at 10 bytes - the mask `y & 31` in the source"
+[[op]]
+ir = "shr"
+operands = "reg, reg"
+opcode = 17014
+length = 14
+note = "likewise accompanied by op423"
+
+[what_this_costs_the_current_compiler]
+text = """
+Three of the compiler's arithmetic lowerings are now known to be wrong as instructions, not merely
+unverified:
+
+    sub with an immediate   should be opcode 11666; the compiler emits add's bytes with byte6
+                            changed, which Apple's decoder rejects outright
+    mul with an immediate   should be 14 bytes; the compiler emits 12
+    and/or/xor              are 10-byte instructions in the 423/424 family, and the compiler
+                            refuses them entirely for want of an operand model it now has
+
+All of them execute today, which is why none of this was visible from execution alone. The
+mission's rule - instruction selection must be semantic, IR op -> form -> fields -> bytes - now has
+the mapping it was missing.
+"""
+
+# ------------------------------------------------------------------------------------------
+# THE OPERAND-CLASS GRID, read at the source. Each row is one Metal expression whose operand
+# TYPES are written in the kernel, so the opcode Apple chose is attributable to a stated
+# operand class rather than to a position in a numbering.
+#
+# A peer session predicted this grid from MCOperandInfo register classes, with the layout
+# claimed identical across the and/or/xor families. Three of its four specific predictions land
+# exactly - op426 and-u16-imm, op10283 add-u32-u16, and the and/or/xor rows - and two do not:
+# add u16+u16 is 10295 rather than the predicted 10286, and the 16-bit shift row is 17043/17045
+# rather than 17016. So the grid is real and its STRIDE is per family, not shared.
+#
+# Nothing here is executed unless it also appears in ledger/g17-alu-slot-model.toml. What is
+# established for all of them is which opcode Apple's compiler selects for which operand types.
+
+[[grid]]
+ir = "add"
+operands = "u32 reg, u32 reg"
+opcode = 10282
+length = 12
+
+[[grid]]
+ir = "add"
+operands = "u32 reg, imm"
+opcode = 10279
+length = 12
+
+[[grid]]
+ir = "add"
+operands = "u32 reg, u16 reg"
+opcode = 10283
+length = 12
+note = "`b + (uint)a`"
+
+[[grid]]
+ir = "add"
+operands = "u16 reg, u16 reg"
+opcode = 10295
+length = 12
+note = "`(ushort)(a + b2)`"
+
+[[grid]]
+ir = "add"
+operands = "s16 reg, imm"
+opcode = 10289
+length = 12
+note = "`(short)(sa + 3)` - the SIGNED 16-bit cell is its own opcode"
+
+[[grid]]
+ir = "sub"
+operands = "imm, u32 reg"
+opcode = 11664
+length = 12
+note = "`5u - x`"
+
+[[grid]]
+ir = "sub"
+operands = "u32 reg, imm"
+opcode = 11666
+length = 12
+note = "`x - 5u`"
+
+[[grid]]
+ir = "sub"
+operands = "u32 reg, u32 reg"
+opcode = 11667
+length = 12
+
+[[grid]]
+ir = "sub"
+operands = "u32 reg, u16 reg"
+opcode = 11668
+length = 12
+
+[[grid]]
+ir = "sub"
+operands = "u16 reg, u16 reg"
+opcode = 11680
+length = 12
+
+[[grid]]
+ir = "mul"
+operands = "u32 reg, imm"
+opcode = 10822
+length = 14
+note = "only for constants Apple does not strength-reduce"
+
+[[grid]]
+ir = "mul"
+operands = "u32 reg, u32 reg"
+opcode = 10825
+length = 14
+
+[[grid]]
+ir = "mul"
+operands = "u32 reg, u16 reg"
+opcode = 10828
+length = 14
+
+[[grid]]
+ir = "mul"
+operands = "u16 reg, u16 reg"
+opcode = 10864
+length = 14
+
+[[grid]]
+ir = "and"
+operands = "u32 reg, imm"
+opcode = 423
+length = 10
+note = "`x & 15u` - the mask IS the decoder's operand"
+
+[[grid]]
+ir = "and"
+operands = "u32 reg, u32 reg"
+opcode = 424
+length = 10
+note = "also has a 4-byte encoding the corpus uses 117 times"
+
+[[grid]]
+ir = "and"
+operands = "u32 reg, u16 reg"
+opcode = 425
+length = 10
+
+[[grid]]
+ir = "and"
+operands = "u16 reg, imm"
+opcode = 426
+length = 10
+
+[[grid]]
+ir = "and"
+operands = "u16 reg, u16 reg"
+opcode = 428
+length = 10
+
+[[grid]]
+ir = "or"
+operands = "u32 reg, imm"
+opcode = 13574
+length = 10
+
+[[grid]]
+ir = "or"
+operands = "u32 reg, u32 reg"
+opcode = 13575
+length = 10
+note = "also 4-byte, 245 corpus instances"
+
+[[grid]]
+ir = "or"
+operands = "u16 reg, u16 reg"
+opcode = 13579
+length = 10
+
+[[grid]]
+ir = "xor"
+operands = "u32 reg, imm"
+opcode = 17770
+length = 10
+
+[[grid]]
+ir = "xor"
+operands = "u32 reg, u32 reg"
+opcode = 17771
+length = 10
+note = "also 4-byte, 1070 corpus instances - the short form is the normal one here"
+
+[[grid]]
+ir = "shl"
+operands = "u32 reg, imm"
+opcode = 14391
+length = 14
+note = "`x << 13u`; small left shifts strength-reduce into an add's fused scale instead"
+
+[[grid]]
+ir = "shl"
+operands = "u32 reg, u32 reg"
+opcode = 14392
+length = 14
+
+[[grid]]
+ir = "shl"
+operands = "u32 reg, u16 reg"
+opcode = 14393
+length = 14
+
+[[grid]]
+ir = "shr"
+operands = "u32 reg, imm"
+opcode = 17013
+length = 14
+note = "logical"
+
+[[grid]]
+ir = "shr"
+operands = "u32 reg, u32 reg"
+opcode = 17014
+length = 14
+note = "logical"
+
+[[grid]]
+ir = "shr"
+operands = "u32 reg, u16 reg"
+opcode = 17015
+length = 14
+note = "logical"
+
+[[grid]]
+ir = "shr"
+operands = "u16 reg, imm"
+opcode = 17043
+length = 14
+note = "logical"
+
+[[grid]]
+ir = "shr"
+operands = "u16 reg, u16 reg"
+opcode = 17045
+length = 14
+note = "logical"
+
+[[grid]]
+ir = "sar"
+operands = "s32 reg, imm"
+opcode = 16805
+length = 12
+note = "ARITHMETIC shift right is a different family from logical, not a bit"
+
+[[grid]]
+ir = "sar"
+operands = "s16 reg, imm"
+opcode = 16817
+length = 12
+note = "arithmetic"

@@ -1,0 +1,449 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "quad.sum.f16.lanevarying",
+  "op": 13853,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13853,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02000a2780a8020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    13853,
+    14059,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   17409
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "quad.product.f16.lanevarying",
+  "op": 13855,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13855,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02000a2780a9020002"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    13855,
+    14059,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15366
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond00",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   286331153,
+   1015021568,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond01",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   286331153,
+   1015021568,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond02",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   286331153,
+   1015021568,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond03",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022",
+    "02200b81268100028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   286331153,
+   1015021568,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond04",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1015021568,
+   1015021568,
+   4294967295,
+   1015021568
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond05",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1015021568,
+   1015021568,
+   4294967295,
+   1015021568
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond06",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1015021568,
+   1015021568,
+   4294967295,
+   1015021568
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond07",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9754,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022",
+    "02200b81268101028022"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9754,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1015021568,
+   1015021568,
+   4294967295,
+   1015021568
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "op9754.cond08",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond09",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond10",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond11",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond12",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond13",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond14",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ },
+ {
+  "id": "op9754.cond15",
+  "op": 9754,
+  "length": null,
+  "nsrc": 1,
+  "status": "build-failed",
+  "why": "1 of 1 runs did not produce a usable result (build-failed)"
+ }
+]

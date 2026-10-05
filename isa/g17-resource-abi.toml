@@ -1,0 +1,200 @@
+# THE COMPILER-TO-LINKER RESOURCE ABI, AS THE LINKER SIDE REQUIRES IT
+#
+# What this file is: the facts the metadata builder needs from a backend in order to emit a
+# __GPU_METADATA,__compute section, and what it derives for itself. It is written from THIS side
+# only. The backend's emission format is the other session's to specify, and a contract written
+# unilaterally by one side is how the kind-93 misunderstanding happened - so every entry here
+# carries the population it was measured on, and a field with no measurement is marked REFUSED
+# rather than given a plausible default.
+#
+# The rule that generated this file: a field the backend cannot supply is a refusal, not a guess.
+
+[container]
+what = "the five sections an object carries, and who owns each one's input"
+__GPU_METADATA = "CONSTRUCTED by this side from the contract; 4,732 of 8,684 Apple, 18,091 corpus"
+__GPU_REMARKS_MD = "CONSTRUCTED; empty in all 21,001 corpus objects"
+__GPU_LD_MD = """THE COMPILER'S. Reads and round-trips byte-exactly on 20,999 of 21,055, so the
+format is not the obstacle. Its size follows from the main table's SLOT SET, which is a function of
+nothing this side has - 9 contract-fact cells, none single-valued, 26 slot sets over 20,999
+objects. A backend must supply that slot set or the values it elides from."""
+__GPU_ARCH_LD_MD = """THE COMPILER'S, BY ELIMINATION, and the elimination is the evidence. The
+section is a root table plus a sub-table carrying ONE optional boolean: 40 bytes when it is set, 32
+when it elides. The boolean is set in 6,234 of 21,001 corpus objects and NOTHING this side has
+determines it - seven contract facts tested (texture, tensor, raytracing, threadgroup, slots 30, 31
+and 33), none clean in either direction, and no opcode appears in all 6,234 flagged objects and no
+unflagged one. Since this side cannot compute it and the section is not optional, the compiler must
+report it. That is an owner, not an unknown."""
+__GPU_STATS_MD = """THE COMPILER'S. 96 bytes with 20,999 DISTINCT patterns over 20,999 objects, so
+it is per-kernel data by construction rather than a constant this side could derive. Whether the
+loader reads it cannot be settled from bytes; the earlier claim that it is ignored was measured on
+buffer kernels only."""
+
+[meta]
+measured_on = "9,556 Apple __compute sections and 20,992 corpus sections"
+builder = "tools/g17nobuild.py"
+invariant = "a refusal is a result; a wrong build is a defect"
+
+# -------------------------------------------------------------------------------------------
+# WHAT THE BACKEND MUST SUPPLY. None of these is recoverable from the machine code alone.
+# -------------------------------------------------------------------------------------------
+[required.bindings]
+what = "the ordered list of resource bindings the kernel uses"
+fields = ["index", "written", "class"]
+order = """ORDER IS PART OF THE FACT, NOT A DETAIL. The slot-4 vector lists bindings in the
+backend's order; the pointer-block rank law decides each record's OFFSET and does NOT decide the
+emission order. Sorting by rank instead put two records in each other's blocks in
+CC_ClearTextureToValue with every offset still correct."""
+measured = "vector order vs address order: descending in 9,147 Apple and 10,788 corpus vectors, no exceptions"
+load_bearing = """THE BINDING LIST IS NOT DESCRIPTIVE - THE MACHINE CODE INDEXES IT. A store's buffer
+constant encodes a RANK into the binding list, not a Metal index: the ISA side's authored texture
+kernel stores with buf_const 4, which is rank 1 of {1, 2} and resolves to buffer index 2. So
+dropping a declared-but-unused binding, or reordering the list, RETARGETS every load and store in
+the program. This is the one place where a metadata field the linker emits changes what the
+instructions mean rather than describing them, and it is why the order entry above is a fact and
+not a formatting detail."""
+unused = """WHETHER APPLE ELIDES A DECLARED-BUT-UNUSED BUFFER IS NOT SETTLED HERE. A source-based
+check over 20,964 corpus kernels gives exceptions in both directions - 943 declarations used and
+absent, 11 unused and present - and it is not trustworthy: a .metal file declares buffers for every
+kernel it contains while the binding vector belongs to one, so "declared" from source is the wrong
+unit. REFUSED as a rule. For an AUTHORED program the question does not arise: the list must match
+what the code's ranks assume."""
+
+[required.backend_scalars]
+what = "quantities the register allocator and layout produce"
+fields = ["temporary_register_count", "spill_bytes", "thread_invariant_spill_bytes",
+          "private_storage_bytes", "threadgroup_allocation_bytes", "texture_state_bytes"]
+note = """These are slots 0, 1, 31, 14/41, 28 and 38/42. Presence follows from the value by the
+elision law - a slot is present exactly when its value is not the default. Ablation showed the
+builder was recovering all six by reading the slot it was predicting, so they are INPUTS and
+calling them derivations overstated the builder by eight slots."""
+
+[required.program_facts]
+what = "facts about the emitted program the linker cannot infer safely"
+fields = ["instruction_count", "has_backward_branch", "declares_matmul"]
+note = """instruction_count and has_backward_branch give the size class and slot 33. op458 alone is
+exactly slot 33 in both populations (8,684/8,684 and 2,500/2,500) so this side CAN recover them, but
+a backend knows them without a decode. declares_matmul is slot 44 and MUST come from IR semantics:
+a transposed matmul emits zero tensor units and still carries slot 44, so it cannot be inferred
+from whether a tensor block was emitted."""
+
+[required.write_and_threadgroup_use]
+what = "two facts the section records as USE where the contract supplies only a DECLARATION"
+fields = ["has_stores", "uses_threadgroup"]
+note = """Slot 15 and slot 18. Any binding write bit implies slot 15 - 8,361 of 8,361 - but 42 Apple
+sections carry bindings and NO write bit, and there the cell is genuinely split: 39 lack the slot
+and 15 carry it. So slot 15 needs has_stores, which is not the buffer write set. Slot 18's absence
+is a law over both populations - 30,548 of 30,548 - and its presence is a cell the two writers
+disagree on: an allocation implies it on all 9,556 Apple sections and has 84 corpus
+counterexamples, every one a tgatomic_load kernel that declares threadgroup memory and only loads
+from it. Both stay REFUSALS on this side until a backend supplies them: 42 and 851 sections."""
+
+[required.source_constructs]
+what = "constructs whose presence the metadata records and the instruction stream cannot decide"
+fields = ["uses_imageblock", "uses_device_atomic_rmw", "uses_raytracing", "uses_tensor_ops"]
+note = """Slots 19, 30, 40 and 44. Each has a NECESSARY opcode - absence of the construct proves the
+slot absent - and none is sufficient, because declaring a construct is not using it. Without these
+from the backend, the builder can only prove absence and must refuse on presence: that is 926
+sections on slot 19 and 529 on slot 30 today."""
+
+# -------------------------------------------------------------------------------------------
+# WHAT THE LINKER DERIVES. The backend must NOT supply these; they are laws.
+# -------------------------------------------------------------------------------------------
+[derived.pointer_block]
+rule = "internals ranked first ascending, then users ascending; offset = 2 * rank; block = 2 * (max rank + 1)"
+measured = "74,325 binding records over both populations, 0 not at 2*rank"
+
+[derived.offset_maps]
+rule = "one emission order per table kind, walked back to front, aligning each field down to its width"
+measured = "199,974 of 200,230 record tables over both populations, 0 wrong"
+note = "replaces a mined (vector, slot set) table that reproduced 17,061 with 51 wrong"
+
+[derived.declared_lengths]
+rule = "a table's declared length is the slack to the next block, not its field extent"
+measured = "168,626 record tables, start == align_down(end - extent, 4)"
+
+[derived.vtable_sharing]
+rule = """forced, and decided on the FINAL declared lengths - which requires a fixed point, because
+the length is the slack to the next block and the next block's position depends on which tables
+carry a vtable of their own"""
+measured = "17,249 groups with an identical vtable shape, 17,249 share one vtable position"
+
+[derived.argument_region]
+rule = "per-kernel slot 1 is the region total; the kind-6 tail record's length is slot 1 minus its destination"
+measured = "24,615 of 24,615 sections carrying a kind-6 record"
+
+[derived.empty_vectors]
+rule = "slots 6, 8, 10 and 12 point at four DISTINCT consecutive empty vectors, never a shared one"
+measured = "30,554 of 30,554 sections across both populations"
+
+[derived.section_size]
+rule = "the end of the last block, rounded up to four; not to sixteen"
+
+# -------------------------------------------------------------------------------------------
+# RESOURCE CLASSES: what each one costs in the section. Measured, not assumed.
+# -------------------------------------------------------------------------------------------
+[class.buffer]
+records = "one kind-5 record in the slot-4 vector"
+per_kernel = "slot 3 present iff any binding exists; slot 15 iff any binding write bit; 16 user, 17 internal"
+status = "SUPPORTED"
+
+[class.threadgroup]
+records = "a kind-43 record in the slot-10 vector, and/or slot 28 bytes"
+per_kernel = "slot 9 from the threadgroup records; slot 18 from a kind-43 record or an allocation"
+status = """PARTIAL. Only the absence direction of slot 18 is a law (30,548/30,548). An allocation
+implies the slot on all 9,556 Apple sections and has 84 corpus counterexamples, every one a
+tgatomic_load kernel that declares threadgroup memory and only loads from it."""
+
+[class.texture]
+internal_bindings = """[44, 48] for an ordinary texture, CONSTANT across one to four accesses, one
+to four distinct textures and 1d/2d/3d/cube/ms - twelve controlled probes. texture_buffer adds 46.
+A function of the resource kind alone, so unlike slot 38 it needs nothing from the backend.
+LIMIT: every controlled probe has one texture and no sampler. Apple's shipping kernels carry richer
+sets, commonest [44, 45, 48] at 4,456 sections, and the extra members are not explained."""
+renumbering = """ADDING A TEXTURE RENUMBERS EVERY USER BUFFER. The internals take ranks 0 and 1, so
+the first user buffer lands at rank 2 - measured on tu-use1, ty-2d and mr-tex.uint_read-1. Since a
+load or store encodes a RANK into the binding list, a resource the linker adds for its own reasons
+changes what every existing instruction means. This is the one entry in this file that obliges the
+BACKEND to change when the linker's side changes."""
+records = """AN INTERNAL BINDING RECORD, ALWAYS. Every section with texture state names at least
+one internal binding - 6,495 of 6,495 Apple and 399 of 399 corpus, no exceptions - commonly the
+index set [44, 45, 48] or [44, 48]. The fetch reaches its descriptor through one.
+
+CORRECTED AFTER A HANG. This entry previously read "an ordinary texture emits no record at all",
+which was measured on vector 10 and the kind-93 record and never on the BINDING vector. A section
+built to it - slot 38 = 8, two user bindings, no internals - loaded, created a pipeline and hung
+the GPU. An ordinary texture adds no record to vector 10; it does add a binding."""
+records_vector10 = "none for an ordinary texture; a kind-93 record only for texture_buffer"
+per_kernel = "slot 38 and its copy 42"
+measured = "5,709 Apple sections carry texture state with no kind-93 record; 786 carry one"
+value_rule = "REFUSED, but its BASE is measured"
+value_base = "one access: 1d 4, 2d 8, 3d 16, cube 16, ms 16"
+value_note = """Four readings tested and refuted. A five-probe lever varying only the type at one
+access gives the base above, with ty-2d matching tu-use1 as a control. Base times accesses fits some
+families - 1d gives 4, 8, 16 and uint_read 8, 16, 24 - and not others: cube gives 16, 32, 32 where
+the third would be 64. There is a base, growth, and a ceiling that differs by family.
+
+THE LINKER COULD NOT DERIVE THIS EVEN WITH UNLIMITED EFFORT, which is stronger than every other
+entry here. The input is the number of texture INSTRUCTIONS, which exists only after instruction
+selection - so it is not available to the frontend either. It is a fact created in the middle of
+the pipeline and belongs to neither end."""
+also = """The instruction does not name its texture: it carries a coordinate, a dense index over
+textures actually used, a fetch counter and two constant offsets. So the dense-index-to-binding
+mapping has to live in the section, and slot 38 is the only candidate."""
+
+[class.texture_buffer]
+records = "one kind-93 record in the slot-10 vector, field 1 = the Metal texture index"
+status = "SUPPORTED as a record shape; its slot-38 contribution is REFUSED with the rest"
+execution_validated = """The [44, 48] rule and the rank shift it forces are validated by a clean
+dispatch, not only by Apple's files: an authored texture kernel with a section built to them loads,
+creates a pipeline and runs at status 0. The section that omitted the internals hung the device."""
+
+[class.acceleration_structure]
+status = "REFUSED - 854 Apple sections, a different internal ordering, detectable by 0x83d0-namespace indices"
+
+[class.tensor]
+records = "none in the vectors this builder composes"
+per_kernel = "slot 44, a boolean, value 1 wherever present"
+status = """SUPPORTED as a marker and REFUSED as anything more. No per-kernel field is a function of
+M, N or K over 528 corpus tensor sections; the only slots that are functions of them are 15, 16 and
+44, all constant 1, and a constant is a function of every input. slot 44 must come from IR: it
+marks a DECLARED matmul and is present on kernels that emit zero tensor units."""

@@ -1,0 +1,121 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "POSITIVE CONTROL: proven to return src+4. If this does not replicate, the instrument is not running and every other record in the batch is void."
+ },
+ {
+  "id": "d423",
+  "op": 423,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "note": "does op423 (and) deliver its operands on silicon?"
+ },
+ {
+  "id": "d612",
+  "op": 612,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "note": "does op612 (addr16) deliver its operands on silicon?"
+ },
+ {
+  "id": "d5106",
+  "op": 5106,
+  "cases": [
+   [
+    4096,
+    4096,
+    4096
+   ],
+   [
+    4097,
+    4097,
+    4097
+   ],
+   [
+    4352,
+    4352,
+    4352
+   ],
+   [
+    8192,
+    8192,
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "note": "does op5106 (tensor.mac) deliver its operands on silicon?"
+ },
+ {
+  "id": "d10369",
+  "op": 10369,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "note": "does op10369 (cmp) deliver its operands on silicon?"
+ }
+]

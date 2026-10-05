@@ -1,0 +1,54 @@
+{"opcode": 441, "name": "and.a", "verified_by": ["in:s32.and.small", "in:u32.and.small"]}
+{"opcode": 442, "name": "and.a", "verified_by": ["in:s32.and", "in:s32.and.big", "in:u32.and", "in:u32.and.big", "tx:i64.and"]}
+{"opcode": 443, "name": "and.a", "verified_by": ["in:u16_u32.and"]}
+{"opcode": 934, "name": "fadd.sat.f32.f32.a", "verified_by": ["fa:f32f32_f.add.sat", "fa:f32f32_f.sub.sat"]}
+{"opcode": 1030, "name": "fadd.a", "verified_by": ["fa:f32f32_f.add", "fa:f32f32_f.sub"]}
+{"opcode": 2318, "name": "ffma.a", "verified_by": ["fa:f32f32_f.fma"]}
+{"opcode": 3130, "name": "fmul.sat.f32.f32.a", "verified_by": ["fa:f32f32_f.mul.sat"]}
+{"opcode": 3322, "name": "fmul.a", "verified_by": ["fa:f32f32_f.mul"]}
+{"opcode": 3330, "name": "fmul.imm.a", "verified_by": ["fi:f32_f.half.mul"]}
+{"opcode": 9352, "name": "pack.2x16", "verified_by": ["tx:pk.unorm2x16"]}
+{"opcode": 9706, "name": "fcmp", "verified_by": ["fa:f32f32_f.step"]}
+{"opcode": 9750, "name": "fselect", "verified_by": ["tx:i64.div"]}
+{"opcode": 9881, "name": "fcsel.a", "verified_by": ["cs:sel.reg.f32", "fa:f32f32_f.fmax", "fa:f32f32_f.fmin", "fa:f32f32_f.max", "fa:f32f32_f.min"]}
+{"opcode": 10298, "name": "add.a", "verified_by": ["in:s32.add.small", "in:u32.add.small"]}
+{"opcode": 10299, "name": "add.a", "verified_by": ["in:s16_s32.add.small", "in:u16_u32.add.small"]}
+{"opcode": 10306, "name": "add.a", "verified_by": ["in:s32.add", "in:s32.mul.small", "in:u32.add", "in:u32.mul.small"]}
+{"opcode": 10307, "name": "add.a", "verified_by": ["in:s16_s32.add", "in:s32.add.big", "in:u16_u32.add", "in:u32.add.big"]}
+{"opcode": 10311, "name": "add.a", "verified_by": ["in:s16_s32.add.big", "in:s16_s32.mul.small", "in:u16_u32.add.big", "in:u16_u32.mul.small"]}
+{"opcode": 10883, "name": "madd.a", "verified_by": ["in:s32.mul", "in:s32.mul.big", "in:u32.mul", "in:u32.mul.big"]}
+{"opcode": 10885, "name": "madd.a", "verified_by": ["in:s32.madd", "in:s32.madd.big", "in:u32.madd", "in:u32.madd.big"]}
+{"opcode": 10887, "name": "madd.a", "verified_by": ["in:s16_s32.mul", "in:u16_u32.mul"]}
+{"opcode": 10889, "name": "madd.a", "verified_by": ["in:s16_s32.madd", "in:u16_u32.madd"]}
+{"opcode": 10895, "name": "madd.a", "verified_by": ["in:s16_s32.mul.big", "in:u16_u32.mul.big"]}
+{"opcode": 10897, "name": "madd.a", "verified_by": ["in:s16_s32.madd.big", "in:u16_u32.madd.big"]}
+{"opcode": 11365, "name": "select.cc", "verified_by": ["fa:f32f32_f.copysign"]}
+{"opcode": 11375, "name": "select", "verified_by": ["in:s32.clamp", "in:s32.max", "in:s32.min", "in:u16_u32.clamp", "in:u16_u32.max", "in:u16_u32.min", "in:u32.clamp", "in:u32.max", "in:u32.min"]}
+{"opcode": 11652, "name": "sub.64", "verified_by": ["tx:i64.sub"]}
+{"opcode": 11691, "name": "sub.a", "verified_by": ["in:s32.sub", "in:u32.sub"]}
+{"opcode": 11695, "name": "sub.a", "verified_by": ["in:s16_s32.sub", "in:u16_u32.sub"]}
+{"opcode": 13512, "name": "unpack.4x8", "verified_by": ["tx:up.snorm4x8", "tx:up.unorm4x8"]}
+{"opcode": 13513, "name": "unpack.2x16", "verified_by": ["tx:up.unorm2x16"]}
+{"opcode": 13593, "name": "or.a", "verified_by": ["in:s32.or", "in:u32.or", "tx:i64.or"]}
+{"opcode": 13594, "name": "or.a", "verified_by": ["in:u16_u32.or"]}
+{"opcode": 17649, "name": "unpack.10a2", "verified_by": ["tx:up.unorm10a2"]}
+{"opcode": 17789, "name": "xor.a", "verified_by": ["in:s32.xor", "in:u32.xor", "tx:i64.xor"]}
+{"opcode": 17790, "name": "xor.a", "verified_by": ["in:u16_u32.xor"]}
+{"opcode": 397, "name": "andn", "verified_by": ["substitution-audit"]}
+{"opcode": 410, "name": "andn", "verified_by": ["substitution-audit"]}
+{"opcode": 424, "name": "and", "verified_by": ["substitution-audit"]}
+{"opcode": 437, "name": "and", "verified_by": ["substitution-audit"]}
+{"opcode": 798, "name": "ffma.f16", "verified_by": ["substitution-audit"]}
+{"opcode": 854, "name": "fmul.sat.f16", "verified_by": ["substitution-audit"]}
+{"opcode": 862, "name": "fmul.f16", "verified_by": ["substitution-audit"]}
+{"opcode": 3098, "name": "fmul.sat", "verified_by": ["substitution-audit"]}
+{"opcode": 3226, "name": "fmul", "verified_by": ["substitution-audit"]}
+{"opcode": 3290, "name": "fmul", "verified_by": ["substitution-audit"]}
+{"opcode": 10295, "name": "add", "verified_by": ["substitution-audit"]}
+{"opcode": 13473, "name": "nand", "verified_by": ["substitution-audit"]}
+{"opcode": 13561, "name": "orn", "verified_by": ["substitution-audit"]}
+{"opcode": 13575, "name": "or", "verified_by": ["substitution-audit"]}
+{"opcode": 13588, "name": "or", "verified_by": ["substitution-audit"]}
+{"opcode": 17757, "name": "xnor", "verified_by": ["substitution-audit"]}
+{"opcode": 17771, "name": "xor", "verified_by": ["substitution-audit"]}
+{"opcode": 17784, "name": "xor", "verified_by": ["substitution-audit"]}

@@ -1,0 +1,113 @@
+{
+  "format": "g17-native-inference-application-startup-performance-v1",
+  "passed": true,
+  "gpu_dispatched": true,
+  "samples": [
+    {
+      "mode": "original_repr",
+      "process_wall_seconds": 26.364911792,
+      "compiler_calls": 1336,
+      "generation_receipt": "results/g17-native-inference-application-startup-v1/sample-0/generation.json",
+      "generation_receipt_sha256": "6e6ea65feb24b63784e4462a39fcbcb5bedb933b5436030b5e0bde076047c8ac",
+      "bundle_verification_seconds": 17.249245499959216,
+      "native_build_seconds": 2.4019496249966323,
+      "driver_prepare_seconds": 1.8943947079824284,
+      "first_token_seconds": 0.512337208,
+      "decode_tokens_per_second": 4.447898148398713,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "native_binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+      "frame_hashes": [
+        "0af94e5339bb2e413861f6aac83a7c1adb726b91fc94590f3fafe48710051388",
+        "699de196c68100e60b1ed0d01307bdb58145824a18515aa7ed907228806a8f42",
+        "6b2622626f21b8f5d51038d6fab44e93f65a96ca3406ed72c6c85bd617160c76"
+      ],
+      "generated_token_ids": [
+        9707,
+        0
+      ],
+      "new_events": []
+    },
+    {
+      "mode": "structural",
+      "process_wall_seconds": 14.503909667,
+      "compiler_calls": 45,
+      "generation_receipt": "results/g17-native-inference-application-startup-v1/sample-1/generation.json",
+      "generation_receipt_sha256": "55e8dea7a7e76471d7f5ddeaa2846577095ea5c29c6686a3855951148735c289",
+      "bundle_verification_seconds": 6.548756083997432,
+      "native_build_seconds": 2.2635205830447376,
+      "driver_prepare_seconds": 1.1323737500351854,
+      "first_token_seconds": 0.525586958,
+      "decode_tokens_per_second": 4.446858910958738,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "native_binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+      "frame_hashes": [
+        "0af94e5339bb2e413861f6aac83a7c1adb726b91fc94590f3fafe48710051388",
+        "699de196c68100e60b1ed0d01307bdb58145824a18515aa7ed907228806a8f42",
+        "6b2622626f21b8f5d51038d6fab44e93f65a96ca3406ed72c6c85bd617160c76"
+      ],
+      "generated_token_ids": [
+        9707,
+        0
+      ],
+      "new_events": []
+    },
+    {
+      "mode": "structural",
+      "process_wall_seconds": 15.530238792,
+      "compiler_calls": 45,
+      "generation_receipt": "results/g17-native-inference-application-startup-v1/sample-2/generation.json",
+      "generation_receipt_sha256": "f0cd6b2f035af31abfaa852fe314cecb68d7b3b70b159007f348771a9e6be45d",
+      "bundle_verification_seconds": 6.9672306250431575,
+      "native_build_seconds": 2.508249624981545,
+      "driver_prepare_seconds": 1.4386533750221133,
+      "first_token_seconds": 0.59393075,
+      "decode_tokens_per_second": 4.471922760163028,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "native_binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+      "frame_hashes": [
+        "0af94e5339bb2e413861f6aac83a7c1adb726b91fc94590f3fafe48710051388",
+        "699de196c68100e60b1ed0d01307bdb58145824a18515aa7ed907228806a8f42",
+        "6b2622626f21b8f5d51038d6fab44e93f65a96ca3406ed72c6c85bd617160c76"
+      ],
+      "generated_token_ids": [
+        9707,
+        0
+      ],
+      "new_events": []
+    },
+    {
+      "mode": "original_repr",
+      "process_wall_seconds": 25.658702459,
+      "compiler_calls": 1336,
+      "generation_receipt": "results/g17-native-inference-application-startup-v1/sample-3/generation.json",
+      "generation_receipt_sha256": "c01053f043b085fbb6fb4c5c1a019533c9bc7f24d2738a627ce44500c8a53c44",
+      "bundle_verification_seconds": 17.412702792033087,
+      "native_build_seconds": 2.4428544159745798,
+      "driver_prepare_seconds": 1.0708317090175115,
+      "first_token_seconds": 0.532347958,
+      "decode_tokens_per_second": 4.426401938321408,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "native_binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+      "frame_hashes": [
+        "0af94e5339bb2e413861f6aac83a7c1adb726b91fc94590f3fafe48710051388",
+        "699de196c68100e60b1ed0d01307bdb58145824a18515aa7ed907228806a8f42",
+        "6b2622626f21b8f5d51038d6fab44e93f65a96ca3406ed72c6c85bd617160c76"
+      ],
+      "generated_token_ids": [
+        9707,
+        0
+      ],
+      "new_events": []
+    }
+  ],
+  "paired_process_wall_speedups": [
+    1.8177796468207967,
+    1.6521769434876568
+  ],
+  "prompt": "Write a short greeting.",
+  "max_new_tokens": 2,
+  "exact_frames_compared": 12,
+  "retained_generation_sha256": "8a92a4910d5aea7a887e586b7ae059c1689a5c6a58d1f5732cf48a11ea42540d",
+  "source_sha256": "0082684da261e931ff90c9c6c411eb7af36c4522d6989fd8e817e49bb839f301",
+  "scope": "Four fresh Python/native worker processes in ABBA order; same bundle, request and two greedy tokens. All guards and captures retained. Process wall includes imports, tokenizer, bundle verification, worker build, upload, inference, capture and exit; comparison outside timing. OS caches not purged; this is a short-request startup benefit, not steady-state decode throughput or a broad performance distribution."
+}

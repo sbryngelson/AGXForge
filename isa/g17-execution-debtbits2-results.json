@@ -1,0 +1,371 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op13460.debt-cleared",
+  "op": 13460,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13460,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230006803378a4028481",
+    "230006803378a4028481",
+    "230006803378a4028481",
+    "230006803378a4028481"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13460,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   268374015,
+   4293984240,
+   4294967295,
+   4025215983
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op13521.debt-cleared",
+  "op": 13521,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13521,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230006803170a4028481",
+    "230006803170a4028481",
+    "230006803170a4028481",
+    "230006803170a4028481"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13521,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   983055,
+   4026593280,
+   0,
+   2240383365
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op13548.debt-cleared",
+  "op": 13548,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13548,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230007803370a4028481",
+    "230007803370a4028481",
+    "230007803370a4028481",
+    "230007803370a4028481"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13548,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4043305215,
+   4043305215,
+   4294967295,
+   2545803261
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op17744.debt-cleared",
+  "op": 17744,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17744,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230007803170a4028481",
+    "230007803170a4028481",
+    "230007803170a4028481",
+    "230007803170a4028481"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17744
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4027576335,
+   4027576335,
+   0,
+   2510134677
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op11375.debt-cleared",
+  "op": 11375,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11375,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0200472a0700ac028a81a0000408",
+    "0200472a0700ac028a81a0000408",
+    "0200472a0700ac028a81a0000408",
+    "0200472a0700ac028a81a0000408"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11375,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   286331153,
+   1145324612,
+   1717986918
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op13488.debt-cleared",
+  "op": 13488,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13488,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2b0006803878a4028481",
+    "2b0006803878a4028481",
+    "2b0006803878a4028481",
+    "2b0006803878a4028481"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13488,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   251662080,
+   251662080,
+   0,
+   1749164034
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op16806.debt-cleared",
+  "op": 16806,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16806,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700003a2e00a30288812034",
+    "2700003a2e00a30288812034",
+    "2700003a2e00a30288812034",
+    "2700003a2e00a30288812034"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    16806,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3221225472,
+   4160749568,
+   4293918720,
+   16
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op1000.debt-cleared",
+  "op": 1000,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 1000,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2100041a4220a00206064200",
+    "2100041a4220a00206064200",
+    "2100041a4220a00206064200",
+    "2100041a4220a00206064200"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    1000,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065877504,
+   1074003968,
+   1082261504,
+   1090584576
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

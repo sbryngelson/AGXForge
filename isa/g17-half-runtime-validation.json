@@ -1,0 +1,115 @@
+{
+  "status": "passed",
+  "scope": "small-fixture FP16 GPU queries through persistent scan-to-top-k",
+  "runtime_commit": "be9cc5331b8daeec9c08bbf04fdfba09583bc75e",
+  "compiler_fix_commit": "b04d9cdeae47fb3bce1e1a23513e743bec7d49cf",
+  "gpu_queries": 12,
+  "loader_only_stages": 3,
+  "stages": [
+    {
+      "rows": 1,
+      "columns": 1,
+      "bundle": "results/g17-half-runtime-executed-1",
+      "archive_sha256": "5c8aac72b66688a7f6085a8a0a6fa58d20adf3f83d281ffc350c770843d7ddc9",
+      "gpu_queries": 4,
+      "returned_half_bit_exact": true,
+      "repeated_query_bit_exact": true,
+      "persistent_identity": {
+        "packed": 4375465216,
+        "output": 4375465472,
+        "input_bytes": 4,
+        "matrix_uploads": 1,
+        "output_bytes": 130,
+        "pipeline_builds": 1,
+        "buffer_allocations": 2,
+        "pipeline": 4382323408,
+        "matrix_bytes": 2,
+        "storage_dtype": "float16"
+      },
+      "evidence_sha256": {
+        "scan.lib.metallib": "d737476f8aae397f15b12e24aaf79480ab70584510fb6c4778adcc853bb67c40",
+        "query-repeat.json": "7637ecf11638499a69570f5a3a0efae21df9154db85d42173dc05dac72d70646",
+        "query-first.json": "80c8aea9c6d7f829bf27c1e11e4649945b6aa54c24848a8f115ef30b2d9e61f1",
+        "fixture.npz": "d185b9442bb3f7cda526dedd779c9dbda1de0d879e00f86bcbd2c9d2cc2ca88e",
+        "manifest.json": "32cda1f2d76a8c3ff38909e916199100cf2e474c46292537bdb48f94c17b4dfe",
+        "offline-check.json": "5c68012212b4f2ef6659a77e4c9cca7900ee74d24f7dc6234e1568b0582ffd93",
+        "half-loader-check.json": "e2adc66e3d2fd3ab80df986246499e7f820b3c403a54922214351fd5ca18c1bb",
+        "scan.o": "680638d2fe18b74fe556b14d9179982980b05dbc9b70d000519efed96dfcc020",
+        "scan.arc.metallib": "5c8aac72b66688a7f6085a8a0a6fa58d20adf3f83d281ffc350c770843d7ddc9"
+      }
+    },
+    {
+      "rows": 3,
+      "columns": 7,
+      "bundle": "results/g17-half-runtime-executed-3",
+      "archive_sha256": "579c6b9876af712fc409ec232a30209676282fb12c9a665cef59254137f7af69",
+      "gpu_queries": 4,
+      "returned_half_bit_exact": true,
+      "repeated_query_bit_exact": true,
+      "persistent_identity": {
+        "packed": 4314303744,
+        "output": 4314304000,
+        "input_bytes": 56,
+        "matrix_uploads": 1,
+        "output_bytes": 134,
+        "pipeline_builds": 1,
+        "buffer_allocations": 2,
+        "pipeline": 4318458512,
+        "matrix_bytes": 42,
+        "storage_dtype": "float16"
+      },
+      "evidence_sha256": {
+        "scan.lib.metallib": "2e16490bc08e2c2d98d36ec8f105e271729c165713e52af9ae7c9f6ba2af96bf",
+        "query-repeat.json": "dc451f4f0cfd89feffd686033f6f9e16a588950a501a99b64fdb55ee44431cea",
+        "query-first.json": "d761321ca5a8737b222da4c62b0e96a3da7013ed4236be010ce835d851668b5a",
+        "fixture.npz": "467e5a6c0407f84b53c5aed2b541c8a6739e5cad187eed7ea23540d54f29483f",
+        "manifest.json": "006bb0ec37c954bf17f5b4e1083da7d833d6d74d5f9da9c86c8ee0a14bf50a00",
+        "offline-check.json": "c311d167512122e57b2741d7ab516299d6e1ab22745b6faac1128b51f65ee3d5",
+        "half-loader-check.json": "187042603d7a23c896908fc99a324ffe71af5ac16381bbb00e1208d473942e83",
+        "scan.o": "2b9f9ee3913ee13c20794443a333f3ebcb3716aa04835fd335942a3aa48ebc73",
+        "scan.arc.metallib": "579c6b9876af712fc409ec232a30209676282fb12c9a665cef59254137f7af69"
+      }
+    },
+    {
+      "rows": 33,
+      "columns": 384,
+      "bundle": "results/g17-half-runtime-executed-33",
+      "archive_sha256": "210191ff2af91109d0ad1991687c20c234afd77b23b4dd33446ec3f99506462b",
+      "gpu_queries": 4,
+      "returned_half_bit_exact": true,
+      "repeated_query_bit_exact": true,
+      "persistent_identity": {
+        "packed": 4385587200,
+        "output": 4385213696,
+        "input_bytes": 26112,
+        "matrix_uploads": 1,
+        "output_bytes": 194,
+        "pipeline_builds": 1,
+        "buffer_allocations": 2,
+        "pipeline": 4313821872,
+        "matrix_bytes": 25344,
+        "storage_dtype": "float16"
+      },
+      "evidence_sha256": {
+        "scan.lib.metallib": "9b301437a7d4f1b7a449ecb04c923b97ebb70726fe22836a997d35479dadd693",
+        "query-repeat.json": "ebfff8b1640e85d3bcae7ddbfa3d0c8864d51541418a550e6c5abbb50be47093",
+        "query-first.json": "be33a0060369834a1855757537cb73b7032b389ac8aeee266f7fbdaec4746e83",
+        "fixture.npz": "778e07cbd06cb14a60daf82bfac4bb3e41a8aa921dc7b8c02d68a016d9c5a76c",
+        "manifest.json": "ce584cc66b5edba5d1fe5f5809c1d55a44cda444b67d76a22fc089c3691e3c25",
+        "offline-check.json": "a55f78ce89586f7dd367625d97002bb2202515e1dd9efaef75ceeaf99d01b1ff",
+        "half-loader-check.json": "1c6f44c14ae8b0c3f0c268236cab25bb4ee8124e0002c7a8353931dfc2d89652",
+        "scan.o": "bc865f4a628e4337234a2400e398f2bad0a41c40b6bf6e1cfb303c1885b7c35b",
+        "scan.arc.metallib": "210191ff2af91109d0ad1991687c20c234afd77b23b4dd33446ec3f99506462b"
+      }
+    }
+  ],
+  "no_new_gpu_diagnostics": true,
+  "direct_half_device_storage": true,
+  "adjacent_unwritten_halfword_guards_preserved": true,
+  "halfword_guard_control": "full-word corruption tested on CPU only; GPU full-word negative control outstanding",
+  "abi_hypothesis": "half-scan-semantic-arch-true-serialized-elided-v1",
+  "arch_true_variant_executed": false,
+  "full_target_executed": false,
+  "numerical_reference": "sequential CPU FP32 accumulation narrowed to FP16, plus independent error bound; intermediate GPU FP32 values not observed",
+  "decoder_note": "two CPU interpretations share the vendor decoder; the GPU runs are separate execution evidence"
+}

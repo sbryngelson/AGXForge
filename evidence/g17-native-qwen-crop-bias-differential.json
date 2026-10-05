@@ -1,0 +1,73 @@
+{
+  "format": "g17-native-qwen-crop-bias-differential-v1",
+  "passed": true,
+  "gpu_dispatched": true,
+  "checks": [
+    {
+      "prompt": "Explain why the sky is blue.",
+      "prompt_ids_exact": true,
+      "generated_ids_exact": true,
+      "all_logit_files_exact": true,
+      "frames": 13
+    },
+    {
+      "prompt": "Write a short greeting.",
+      "prompt_ids_exact": true,
+      "generated_ids_exact": true,
+      "all_logit_files_exact": true,
+      "frames": 11
+    },
+    {
+      "prompt": "Explain why the sky is blue.",
+      "prompt_ids_exact": true,
+      "generated_ids_exact": true,
+      "all_logit_files_exact": true,
+      "frames": 13
+    }
+  ],
+  "local_stage_checks": 30,
+  "performance_vectors_checked": 32,
+  "paired_performance": [
+    {
+      "decode_speedup": 1.0788605309806683,
+      "model_roundtrip_speedup": 1.1003132990645608
+    },
+    {
+      "decode_speedup": 0.7691658104309905,
+      "model_roundtrip_speedup": 0.8233904645943525
+    }
+  ],
+  "throughput_advantage_established": false,
+  "performance_qualification": "First pair improved; reverse pair regressed. Another exclusive dispatcher was observed between third/fourth runs, without execution overlap. No causal attribution or stable throughput claim.",
+  "receipts": {
+    "baseline": {
+      "path": "evidence/g17-native-qwen-interactive-generation.json",
+      "sha256": "0820f9498cb9bdd52d1ca76f49a6328bd1c5232ee68829572b185c2a2f438a6b"
+    },
+    "optimized": {
+      "path": "evidence/g17-native-qwen-crop-bias-generation.json",
+      "sha256": "6cffe7c57db88faf7e8fdc2902dd299bcf7036f34e4cb0404508515bcb76e97f"
+    },
+    "independent": {
+      "path": "evidence/g17-native-qwen-generation-independent-check.json",
+      "sha256": "0d0527be7bc88bd1c0f49fe3774f94b4d088799442450e9a846d2df37d341f24"
+    },
+    "local": {
+      "path": "evidence/g17-native-qwen-crop-bias-local-check.json",
+      "sha256": "a212782aeae21f9ffbdbc15c1cf918515efc5cd40f71a41918ef5b54d6eae3ea"
+    },
+    "performance": {
+      "path": "evidence/g17-native-qwen-crop-bias-performance.json",
+      "sha256": "aff8aaf922f7470b4bca24e0542917992212f6964b9a2831ac684a1e4d539ef5"
+    },
+    "preregistration": {
+      "path": "evidence/g17-native-qwen-crop-bias-preregistration.json",
+      "sha256": "f8d331719f0a7ab2b078aff8de2a165b69c1985a8ac6401feb34a5d7f21f3294"
+    },
+    "body": {
+      "path": "evidence/g17-native-qwen-crop-bias-body.json",
+      "sha256": "4e291eb55f4bf79c41b547f68457e6b1154209ace141777c1b44274ab06ffff2"
+    }
+  },
+  "scope": "Optional fusion: 37 complete-generation vectors identical to independent original-model validated baseline, 30 independent decode-prefix local checks, 32 ordered-performance vectors exact. Baseline preserved; all bounds unchanged."
+}

@@ -1,0 +1,198 @@
+% Preamble for the G17 technical reference.
+\usepackage{fontspec}
+\usepackage{libertinus-otf}
+\setmonofont{Inconsolatazi4}[Scale=MatchLowercase, ItalicFont=Inconsolatazi4, ItalicFeatures={FakeSlant=0.18}]
+\usepackage{unicode-math}
+\setmathfont{Libertinus Math}
+\usepackage[final]{microtype}
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+
+\usepackage[margin=1.05in, top=1in, bottom=1.1in]{geometry}
+\usepackage{xcolor}
+\definecolor{ink}{HTML}{1F2933}
+\definecolor{accent}{HTML}{25569A}
+\definecolor{apple}{HTML}{6B7280}
+\definecolor{ours}{HTML}{1F5FA6}
+\definecolor{native}{HTML}{B4462B}
+\definecolor{rule}{HTML}{C9CED6}
+\definecolor{codebg}{HTML}{F5F6F8}
+\definecolor{hilite}{HTML}{F6D365}
+
+\usepackage{enumitem}
+\setlist{itemsep=2pt, topsep=0pt, parsep=0pt}
+\setlist[itemize]{label=\textcolor{apple}{\textbullet}, leftmargin=1.4em}
+\setlist[itemize,2]{label=\textcolor{apple}{\textendash}}
+
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{xltabular}
+\renewcommand\tabularxcolumn[1]{>{\raggedright\arraybackslash}p{#1}}
+\setlength{\LTpre}{9pt}
+\setlength{\LTpost}{6pt}
+\usepackage{etoolbox}
+\newcommand{\tablesize}{\small}
+% \widetable before a table with six or more columns sets it one size smaller.
+\newcommand{\widetable}{\gdef\tablesize{\footnotesize}}
+\AtBeginEnvironment{longtable}{\tablesize\renewcommand\arraystretch{1.12}\gdef\tablesize{\small}}
+\AtBeginEnvironment{xltabular}{\tablesize\renewcommand\arraystretch{1.12}\gdef\tablesize{\small}}
+\setlength{\extrarowheight}{1.5pt}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
+\usepackage{seqsplit}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\footnotesize, columns=fullflexible, keepspaces=true,
+  breaklines=true, breakatwhitespace=false, backgroundcolor=\color{codebg},
+  frame=none, xleftmargin=6pt, xrightmargin=6pt, framesep=4pt,
+  aboveskip=8pt, belowskip=8pt, showstringspaces=false, upquote=true,
+  extendedchars=true}
+\lstdefinestyle{py}{language=Python, keywordstyle=\color{accent}\bfseries,
+  commentstyle=\color{apple}\itshape, stringstyle=\color{native}}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, fit, backgrounds, calc, shapes.misc, decorations.pathreplacing}
+\usepackage{bytefield}
+\bytefieldsetup{bitformatting=\footnotesize}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf, format=plain, labelsep=period, justification=raggedright,
+  singlelinecheck=false, margin=0pt}
+\usepackage[most]{tcolorbox}
+
+% Chapter-number sections in the opening (0.1, 0.2, ...).
+\KOMAoptions{parskip=half-}
+\setkomafont{disposition}{\normalfont\bfseries\color{ink}}
+\setkomafont{part}{\normalfont\Huge\bfseries\color{ink}}
+\setkomafont{chapter}{\normalfont\huge\bfseries\color{ink}}
+\RedeclareSectionCommand[beforeskip=0pt, afterskip=1.2\baselineskip]{chapter}
+\RedeclareSectionCommand[tocnumwidth=2.6em]{section}
+\setkomafont{title}{\normalfont\bfseries\color{ink}}
+\setkomafont{subtitle}{\normalfont\large\color{ink!80}}
+\RedeclareSectionCommand[beforeskip=-1.4\baselineskip, afterskip=0.5\baselineskip]{section}
+\RedeclareSectionCommand[beforeskip=-1.0\baselineskip, afterskip=0.3\baselineskip, font=\normalsize\bfseries]{subsection}
+\setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{1}
+\counterwithout{figure}{chapter}
+\renewcommand{\thefigure}{\thechapter.\arabic{figure}}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+\captionsetup[table]{position=top, skip=4pt}
+% A table's caption row: \caption{...}\label{tab:...}\\ before \toprule. The header is repeated under a
+% "continued" line when a long table breaks across pages.
+\newcommand{\tablecontinued}[1]{\multicolumn{#1}{@{}l@{}}{\footnotesize\itshape\tablename~\thetable, continued}\\}
+
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true, linkcolor=accent, urlcolor=accent, citecolor=accent, linktoc=page,
+  pdftitle={The G17 technical reference}, bookmarksnumbered=true]{hyperref}
+\usepackage{bookmark}
+% Cross-references: \cref{x} prints "section 10.4", "chapter 9", "appendix C" or "figure 3.1" from the label's
+% own type, so the word cannot go stale; \Cref at the start of a sentence; \crefrange{a}{b} for "sections 2.4 to 2.6".
+\usepackage[nameinlink, noabbrev]{cleveref}
+\crefname{part}{Part}{Parts}
+\crefname{chapter}{chapter}{chapters}
+\crefname{section}{section}{sections}
+\crefname{appendix}{appendix}{appendices}
+\crefname{figure}{figure}{figures}
+\crefname{table}{table}{tables}
+\newcommand{\crefrangeconjunction}{ to~}
+\pdfstringdefDisableCommands{\def\_{_}\def\code#1{#1}\def\op#1{op#1}\def\Op#1{op#1}\def\opn#1{op#1}\def\val#1{#1}}
+
+% --- Semantic macros -------------------------------------------------------
+% Inline code may break after / . _ , ; : ( and before =, so long paths and
+% identifiers do not run into the margin.
+\usepackage{luacode}
+\begin{luacode*}
+function g17_code(s)
+  local long = #s > 16
+  s = s:gsub('"', '\0Q')
+  s = s:gsub('\\_ ?', '\0U'):gsub('\\%& ?', '\0A'):gsub('\\%# ?', '\0H'):gsub('\\%$ ?', '\0D')
+  s = s:gsub('\\%% ?', '\0P'):gsub('\\{ ?', '\0L'):gsub('\\} ?', '\0R')
+  s = s:gsub('\\textbackslash ?{}', '\0B'):gsub('\\textasciicircum ?{}', '\0C'):gsub('\\textasciitilde ?{}', '\0T')
+  s = s:gsub('([/,;])', '%1\0Z')
+  if long then
+    s = s:gsub('%z(U)', '\0V')
+    s = s:gsub('([%.|(])', '%1\0Z')
+    s = s:gsub('%zZ(%a%a?%a?%a?)$', '%1')   -- no break before a file extension
+  end
+  if #s > 30 then s = s:gsub('(%l%l%l)(%u%l%l)', '%1\0Z%2') end
+  local m = {U='\\textunderscore{}', V='\\textunderscore\\allowbreak{}', Q='\\textquotedbl{}', A='\\&', H='\\#', D='\\$', P='\\%', L='\\{', R='\\}',
+             B='\\textbackslash{}', C='\\textasciicircum{}', T='\\textasciitilde{}', Z='\\allowbreak{}'}
+  s = s:gsub('%z(%u)', m)
+  tex.sprint(s)
+end
+\end{luacode*}
+\DeclareRobustCommand{\code}[1]{\texttt{\exhyphenpenalty=10000\hyphenchar\font=-1 \directlua{g17_code("\luaescapestring{\detokenize{#1}}")}}}
+\emergencystretch=3em
+\widowpenalty=10000
+\clubpenalty=10000
+\usepackage{needspace}
+% Keep a heading with at least a few lines of what follows it.
+\AddToHook{cmd/section/before}{\Needspace{7\baselineskip}}
+\AddToHook{cmd/subsection/before}{\Needspace{5\baselineskip}}
+% A bold run-in line that introduces a list or table stays with it.
+\newcommand{\leadhead}[1]{\Needspace{4\baselineskip}\noindent\textbf{#1}\par\nopagebreak}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+\renewcommand{\floatpagefraction}{0.75}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\newcommand{\hash}[1]{\texttt{\seqsplit{#1}}}
+
+% Opcodes name themselves. \op{5107} prints the glossary name and the number, linked to the opcode's row in
+% appendix C; \Op{5107} capitalises the name at a sentence start; \opn{5107} prints the linked number alone (a
+% table cell beside a name column, or a deliberately shortened name); \opdef{5107} makes the row. The names come
+% from opnames.tex, generated from isa/g17-opcode-glossary.json by tools/g17docs.py --write-opnames. An opcode
+% with no glossary entry prints its number only, and its paragraph says "no glossary entry".
+\newcommand{\opnamedef}[3]{\expandafter\def\csname opname@#1\endcsname{#2}%
+  \expandafter\def\csname Opname@#1\endcsname{#3}}
+\DeclareRobustCommand{\opn}[1]{\hyperlink{op:#1}{\textcolor{ink}{\texttt{op#1}}}}
+\DeclareRobustCommand{\op}[1]{\ifcsname opname@#1\endcsname\csname opname@#1\endcsname\ (\opn{#1})\else\opn{#1}\fi}
+\DeclareRobustCommand{\Op}[1]{\ifcsname Opname@#1\endcsname\csname Opname@#1\endcsname\ (\opn{#1})\else\opn{#1}\fi}
+\newcommand{\opdef}[1]{\hypertarget{op:#1}{\texttt{op#1}}}
+\input{opnames}
+% Numbers quoted from generated artifacts: \val{d1} prints the value from values.tex, generated by
+% tools/g17docs.py --write-values (its VALUES list names each artifact). An unknown key prints ?? and warns.
+\newcommand{\valdef}[2]{\expandafter\def\csname val@#1\endcsname{#2}}
+\DeclareRobustCommand{\val}[1]{\ifcsname val@#1\endcsname\csname val@#1\endcsname\else
+  \textbf{??}\PackageWarning{g17}{Undefined value #1}\fi}
+\input{values}
+
+% Machine-model citations: \mm{25.91} prints the section number and links to it.
+\newcommand{\mmbase}{https://github.com/sbryngelson/AGXForge/blob/main/docs/g17-tensorops-machine-model.md}
+\makeatletter
+\newcommand{\mmdef}[2]{\expandafter\def\csname mm@#1\endcsname{#2}}
+\def\mm@show#1/#2\@nil{#1}
+% mm-anchors.tex is generated from the machine model's headings on every build (tools/g17docs.py
+% --write-mm-anchors). mm-aliases.tex may name a finding, \mmalias{name}{25.91}; \mm{name} then prints and
+% links the target section, so a finding that moves to a later section is re-pointed in one place.
+\newcommand{\mmalias}[2]{\@ifundefined{mm@#2}{\PackageWarning{g17}{alias #1 points at undefined MM section #2}}{%
+  \expandafter\edef\csname mm@#1\endcsname{\csname mm@#2\endcsname}%
+  \expandafter\def\csname mmshow@#1\endcsname{#2}}}
+\DeclareRobustCommand{\mm}[1]{%
+  \@ifundefined{mm@#1}{\textbf{??#1}\PackageWarning{g17}{undefined MM section #1}}{%
+  \href{\mmbase\#\csname mm@#1\endcsname}{\@ifundefined{mmshow@#1}{\mm@show#1/\@nil}%
+    {\expandafter\expandafter\expandafter\mm@show\csname mmshow@#1\endcsname/\@nil}}}}
+\makeatother
+\input{mm-anchors}
+\input{mm-aliases}
+
+% A labelled box for an open question that qualifies the rule beside it.
+\newtcolorbox{openq}[1][]{enhanced, breakable, colback=white, colframe=rule,
+  boxrule=0.5pt, leftrule=2.5pt, colbacktitle=white, coltitle=native, arc=0pt,
+  fonttitle=\small\bfseries, title={Open}, attach title to upper={\enspace}, #1}
+
+% --- Figure styles -----------------------------------------------------------
+\tikzset{
+  >={Stealth[length=5pt]},
+  box/.style={draw, rounded corners=2pt, align=center, font=\small, inner sep=5pt, line width=0.6pt,
+    execute at begin node={\hyphenpenalty=10000\exhyphenpenalty=10000}},
+  ours/.style={box, draw=ours, fill=ours!8, text=ink},
+  nat/.style={box, draw=native, fill=native!8, text=ink},
+  apple/.style={box, draw=apple, fill=apple!12, text=ink},
+  band/.style={box, draw=apple, fill=apple!12, text=ink, minimum height=7mm},
+  flow/.style={->, line width=0.7pt, color=ink!80},
+  tag/.style={font=\scriptsize\itshape, text=ink!75, align=center},
+}

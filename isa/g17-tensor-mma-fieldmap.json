@@ -1,0 +1,4906 @@
+{
+ "5106": {
+  "reference": "2f0025122202a4420004",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R8_R9_R10_R11"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    1
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "9": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": 16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": -8
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": -4
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 128
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 4
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": 1
+     },
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 1
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    [
+     2581,
+     10
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    null
+   ],
+   [
+    48,
+    [
+     10384,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    65,
+    [
+     5107,
+     10
+    ]
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    71,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "5107": {
+  "reference": "2f0005102200a4420200",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R0_R1_R2_R3"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    2
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": 16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": -4
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 128
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 4
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": 1
+     },
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 1
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    null
+   ],
+   [
+    48,
+    [
+     10385,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    65,
+    [
+     5106,
+     10
+    ]
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    71,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "5104": {
+  "reference": "2f0025012282a4020004",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R16_R17_R18_R19"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R8_R9_R10_R11_R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    1
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "9": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R16_R17_R18_R19",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": -16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 4
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -2752
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11_R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": 1
+     },
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    [
+     2581,
+     10
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    [
+     5106,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     10384,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    62,
+    null
+   ],
+   [
+    65,
+    [
+     5105,
+     10
+    ]
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    71,
+    null
+   ],
+   [
+    73,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "5098": {
+  "reference": "2f0025012282a0021004",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R16_R17_R18_R19_R20_R21_R22_R23"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R8_R9_R10_R11_R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    1
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "9": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R16_R17_R18_R19_R20_R21_R22_R23",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": -16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -3310
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11_R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    [
+     12685,
+     10
+    ]
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    28,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    [
+     5100,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     10384,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    62,
+    null
+   ],
+   [
+    65,
+    [
+     5099,
+     10
+    ]
+   ],
+   [
+    68,
+    [
+     5104,
+     10
+    ]
+   ],
+   [
+    71,
+    null
+   ],
+   [
+    73,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "10384": {
+  "reference": "2f00250a220aa1024004",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    9
+   ],
+   [
+    "GPR32tup2_alignedrc",
+    "R10_R11"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    75
+   ],
+   [
+    "GPR32tup2_alignedrc",
+    "R8_R9"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    75
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    9
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "9": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup2_alignedrc",
+    "kind": "reg",
+    "base": "R10_R11",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": 16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": -8
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": -2
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 4
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 128
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup2_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9",
+    "bits": [
+     {
+      "bit": 39,
+      "byte": 4,
+      "bitpos": 7,
+      "delta": 2
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 4
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 75,
+    "bits": [
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -64
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 75,
+    "bits": [
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": -64
+     }
+    ]
+   },
+   "2": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 9,
+    "bits": [
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    [
+     17229,
+     10
+    ]
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    65,
+    [
+     10385,
+     10
+    ]
+   ],
+   [
+    71,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   44,
+   45,
+   46,
+   47,
+   50,
+   51,
+   57,
+   62,
+   69,
+   72,
+   77,
+   79
+  ]
+ },
+ "5100": {
+  "reference": "2f0025012202a0021004",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R16_R17_R18_R19_R20_R21_R22_R23"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R8_R9_R10_R11"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    3
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    1
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "9": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R16_R17_R18_R19_R20_R21_R22_R23",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": -16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -3310
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 4
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 3,
+    "bits": [
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": -1
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    [
+     12685,
+     10
+    ]
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    28,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    [
+     5098,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     10384,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    65,
+    [
+     5101,
+     10
+    ]
+   ],
+   [
+    68,
+    [
+     5106,
+     10
+    ]
+   ],
+   [
+    71,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "5101": {
+  "reference": "2f0025012202a0021204",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R16_R17_R18_R19_R20_R21_R22_R23"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R8_R9_R10_R11"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    3
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R16_R17_R18_R19_R20_R21_R22_R23",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": -16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -3310
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 4
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 3,
+    "bits": [
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": -1
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    [
+     12083,
+     10
+    ]
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    28,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    [
+     5099,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     10385,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    65,
+    [
+     5100,
+     10
+    ]
+   ],
+   [
+    68,
+    [
+     5107,
+     10
+    ]
+   ],
+   [
+    71,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "5099": {
+  "reference": "2f0025012282a0021204",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R16_R17_R18_R19_R20_R21_R22_R23"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R8_R9_R10_R11_R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R16_R17_R18_R19_R20_R21_R22_R23",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": -16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -3310
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11_R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    [
+     12083,
+     10
+    ]
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    28,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    [
+     5101,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     10385,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    62,
+    null
+   ],
+   [
+    65,
+    [
+     5098,
+     10
+    ]
+   ],
+   [
+    68,
+    [
+     5105,
+     10
+    ]
+   ],
+   [
+    71,
+    null
+   ],
+   [
+    73,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "5105": {
+  "reference": "2f0025012282a4020204",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    1
+   ],
+   [
+    "GPR32tup4_alignedrc",
+    "R16_R17_R18_R19"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "GPR32tup8_alignedrc",
+    "R8_R9_R10_R11_R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    1
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": -16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup4_alignedrc",
+    "kind": "reg",
+    "base": "R16_R17_R18_R19",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": -16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 4
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -2752
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R8_R9_R10_R11_R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": -8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": 1
+     },
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 1,
+    "bits": [
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    [
+     2581,
+     10
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    27,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    39,
+    null
+   ],
+   [
+    47,
+    [
+     5107,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     10385,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    62,
+    null
+   ],
+   [
+    65,
+    [
+     5104,
+     10
+    ]
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    71,
+    null
+   ],
+   [
+    73,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   43,
+   44,
+   45,
+   46,
+   51,
+   57,
+   69,
+   70,
+   72,
+   77,
+   79
+  ]
+ },
+ "10385": {
+  "reference": "2f0005102200a5420200",
+  "operands": [
+   [
+    "GPR32tup8_alignedrc",
+    "R0_R1_R2_R3_R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    2147483648
+   ],
+   [
+    "imm",
+    9
+   ],
+   [
+    "GPR32tup2_alignedrc",
+    "R4_R5"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    11
+   ],
+   [
+    "GPR32tup2_alignedrc",
+    "R0_R1"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    11
+   ]
+  ],
+  "fields": {
+   "1": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 2147483648,
+    "bits": [
+     {
+      "bit": 3,
+      "byte": 0,
+      "bitpos": 3,
+      "delta": -2147483648
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 10,
+      "byte": 1,
+      "bitpos": 2,
+      "delta": 16777216
+     },
+     {
+      "bit": 11,
+      "byte": 1,
+      "bitpos": 3,
+      "delta": 33554432
+     },
+     {
+      "bit": 12,
+      "byte": 1,
+      "bitpos": 4,
+      "delta": 67108864
+     },
+     {
+      "bit": 13,
+      "byte": 1,
+      "bitpos": 5,
+      "delta": 134217728
+     },
+     {
+      "bit": 14,
+      "byte": 1,
+      "bitpos": 6,
+      "delta": 268435456
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 1073741824
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 32
+     },
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 137438953472
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 64
+     },
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 2199023255552
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 140737488355328
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 536870912
+     }
+    ]
+   },
+   "0": {
+    "operand": "GPR32tup8_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1_R2_R3_R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 19,
+      "byte": 2,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "4": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 15,
+      "byte": 1,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 16
+     }
+    ]
+   },
+   "3": {
+    "operand": "GPR32tup2_alignedrc",
+    "kind": "reg",
+    "base": "R4_R5",
+    "bits": [
+     {
+      "bit": 24,
+      "byte": 3,
+      "bitpos": 0,
+      "delta": 16
+     },
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 8
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 2
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": -4
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 64
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 128
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "operand": "GPR32tup2_alignedrc",
+    "kind": "reg",
+    "base": "R0_R1",
+    "bits": [
+     {
+      "bit": 39,
+      "byte": 4,
+      "bitpos": 7,
+      "delta": 2
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 64
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 4
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 8
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 16
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 64,
+      "byte": 8,
+      "bitpos": 0,
+      "delta": 32
+     }
+    ]
+   },
+   "8": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 11,
+    "bits": [
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 32
+     }
+    ]
+   },
+   "5": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 11,
+    "bits": [
+     {
+      "bit": 66,
+      "byte": 8,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 64
+     }
+    ]
+   },
+   "2": {
+    "operand": "imm",
+    "kind": "imm",
+    "base": 9,
+    "bits": [
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": 32
+     }
+    ]
+   }
+  },
+  "structural_bits": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    4,
+    null
+   ],
+   [
+    6,
+    null
+   ],
+   [
+    9,
+    null
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    32,
+    null
+   ],
+   [
+    33,
+    null
+   ],
+   [
+    38,
+    null
+   ],
+   [
+    48,
+    [
+     5107,
+     10
+    ]
+   ],
+   [
+    49,
+    null
+   ],
+   [
+    54,
+    null
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    58,
+    null
+   ],
+   [
+    59,
+    null
+   ],
+   [
+    60,
+    null
+   ],
+   [
+    65,
+    [
+     10384,
+     10
+    ]
+   ],
+   [
+    71,
+    null
+   ]
+  ],
+  "inert_bits": [
+   8,
+   26,
+   34,
+   36,
+   40,
+   44,
+   45,
+   46,
+   47,
+   50,
+   51,
+   57,
+   62,
+   69,
+   72,
+   77,
+   79
+  ]
+ }
+}

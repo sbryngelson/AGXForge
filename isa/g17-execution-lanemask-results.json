@@ -1,0 +1,604 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 16,
+   "cases": 16,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4,
+   5,
+   6,
+   8,
+   19,
+   20,
+   259,
+   32771,
+   32772,
+   65540,
+   2147483651,
+   2147483652,
+   2147483653,
+   180150005,
+   1515870814,
+   3217031172
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m0",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9023800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m1",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9027800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4112
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m2",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902b800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4128
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m3",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902f800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4144
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m4",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9023801"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4160
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m7",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902f801"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4208
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m8",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9023802"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4224
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m15",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902f803"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4336
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m16",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9023804"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4352
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m31",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902f807"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4592
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m32",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9023808"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m33",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a9027808"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m48",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902380c"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m63",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902f80f"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "L14169.m255",
+  "op": 14169,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14169,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880a902f83f"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    10825,
+    11842,
+    14059,
+    14169,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ }
+]

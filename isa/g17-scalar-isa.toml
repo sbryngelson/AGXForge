@@ -1,0 +1,1328 @@
+# Machine-readable G17 SCALAR subset, recovered on H17s / applegpu_g17s (M5 Pro).
+# Companion to isa/tensor-isa.toml. Every field carries a confidence class so that code
+# generation and documentation cannot drift apart:
+#   causal      mutating the field changed hardware behaviour as predicted
+#   structural  constant across all observed encodings; carried through, not understood
+#   context     meaning depends on other bytes (sub-form or coupled codeword)
+#   unresolved  measured to matter, not explained
+
+[meta]
+chip = "H17s"
+arch = "applegpu_g17s"
+probe = "spike/accel/re/dst_map.py - tensor-bearing kernel, ten-plus named live registers"
+note = """A scalar-only kernel is recompiled from AIR; native code executes only when the
+kernel also contains a tensor op. Every probe here therefore carries a matmul2d, and the
+positive control is that disabling all accelerator issues zeroes the tensor tile."""
+
+[[instruction]]
+name = "alu.add.imm"
+example = "27 01 04 3a 2d 00 a3 02 a0 80 01 00"
+size = 12
+confidence = "causal"
+# byte0's LOW NIBBLE is 7 or f for the same family: an address add with byte0=0x3f decodes,
+# round-trips and authors identically to a byte0=0x37 one. Treat (byte0 & 0xF) in (7, 0xf)
+# as one form, as tools/agxdis already did.
+
+[instruction.fields.dest]
+expr = "byte0[4] + 2*byte7[3] + 4*byte7[4]"
+confidence = "causal"
+note = "All 8 values enumerated; 7 confirmed by clobbering a named register, the 8th is stock."
+
+[instruction.fields.src1]
+expr = "2*byte9[2:0] + byte8[7]"
+confidence = "causal"
+note = "Validated on six instructions whose source register is known independently (r0..r5)."
+
+[instruction.fields.operand_b_mode]
+expr = "byte4[2]: 1 = immediate, 0 = register   (byte4[3] is NOT part of this field)"
+confidence = "causal"
+note = """THE SECOND OPERAND IS ONE SLOT IN byte1 AND byte3, read either as an immediate or as a
+register index. byte4 selects which. This is why the immediate field and the register-index field
+appeared to overlap: they are the same bits.
+
+Authored in both directions, each with the other fields held fixed:
+
+  byte4 0x29 -> 0x25 on a register-operand add, with imm 10 encoded in byte1/byte3
+      converts x + y into x + 10, measured 17 with x = 7            immediate takes effect
+  byte4 left 0x29, same imm bits (byte3 0x5a, byte1 0x02)
+      read as register index 4*1 + 2*0 + 1 = r5, unallocated
+      measured 7 = x + 0, and the untouched consumer gave 14        immediate ignored
+  byte4 0x25 -> 0x29 on the consumer with imm 20 encoded
+      read as register index 4*1 + 2*1 + 0 = r6, unallocated
+      measured 17 = 17 + 0                                          immediate ignored
+
+The compiler's own choices agree: 0x25 on every add-immediate, 0x29 on the register-register add
+x + y, whose operand index decodes as 1 = the register holding y.
+
+NARROWED 2026-09-04, same day. This was first recorded as the two-bit byte4[3:2]. It is ONE bit.
+byte4[3] is the liveness marker already known to be causally inert
+(ledger/g17-byte4-liveness-metadata.toml), and reading the two together conflated an operand
+selector with metadata. The full 2x2, authored on the dep4 consumer with rA = 17:
+
+    byte4  bit2 bit3   measured out[110]
+    0x25    1    0        37    immediate 20 applied
+    0x2d    1    1        37    immediate 20 applied
+    0x29    0    1        17    register mode, reads an unallocated index
+    0x21    0    0        17    register mode, reads an unallocated index
+
+bit3 changes nothing in either column, which is also why the earlier L0 control - clearing byte4[3]
+on dep2's producer - was inert. That inertness needed no separate explanation after all.
+
+The corpus agrees the field is one bit: byte4 takes 0x21, 0x25, 0x29, 0x2d and 0x08 among its
+commonest values, and grouping by bit2 alone splits them into 23931 register-mode and 6257
+immediate-mode instructions."""
+
+[instruction.fields.src2_imm]
+expr = "byte1[1:0] | byte3[7:5]<<2 | byte5[7]<<5 | byte8[1:0]<<6   (when operand_b_mode = immediate)"
+confidence = "causal"
+note = """8-bit immediate; every bit confirmed by the resulting value change. Only read as an
+immediate when byte4 selects immediate mode - see operand_b_mode.
+
+byte8[5] additionally gates it: clearing it on an authored consumer, byte8 0xa0 -> 0x80, made the
+result rA + 0 instead of rA + 20. Whether byte8[5] is part of the same mode field or a separate
+enable is not established."""
+
+[instruction.fields.src2_reg]
+expr = "8*byte3[7] + 4*byte3[6] + 2*byte3[5] + byte1[1]   (when operand_b_mode = register)"
+confidence = "causal"
+note = """The same register index recovered for alu.shift.imm, in the same bits, which settles the
+cross-family question left open earlier that day: byte3[6] is causal in BOTH families. Two
+unallocated-register readings, r5 and r6, were predicted and measured as zero contributions.
+
+WIDENED to FOUR bits 2026-09-04. byte3[7] is the high bit, making this the same width as dest and
+src1. Authored on the dep4 consumer in register mode, reading index 1 = rA = 17:
+
+    byte3 0x1a, bit7 = 0   index 1   out[110] = 34 = 17 + 17     preregistered 34
+    byte3 0x9a, bit7 = 1   index 9   out[110] = 17 = 17 +  0     index 9 unallocated
+
+The second cell also restored out[100] to 17, because index 9 does not consume r1 - see the
+lifetime field byte10[5]."""
+
+[instruction.fields.src2_lifetime]
+expr = "byte10[5]: 1 = the SRC1-slot register is released after this read, 0 = it survives"
+confidence = "causal"
+note = """Reading a register does not by itself destroy it; this bit decides. Authored in BOTH
+directions across two independent kernels, with rA = x + 10 = 17 and rB = rA + 20 = 37:
+
+    chain kernel   byte10 0x21 -> 0x01   out = [ 0, 37] -> [17, 37]   preregistered [17, 37]
+    dep4  kernel   byte10 0x01 -> 0x21   out = [17, 37] -> [ 0, 37]   preregistered [ 0, 37]
+
+In both, the dependent value 37 is unchanged: the consumer reads the correct operand either way,
+and only the producer's survival to the later store differs. That is what makes this a lifetime
+bit rather than an operand bit.
+
+SCOPE. All four cells use IMMEDIATE operand-b mode, so the only register the consumer reads is the
+src1 slot. The bit is therefore established for src1 and is NOT established for the operand-b
+register. A separate observation shows operand-b reads can also release a register: a register-mode
+consumer reading index 1 measured out[100] = 0 with byte10[5] ALREADY CLEAR, so whatever governs
+that slot is a different control and is unresolved.
+
+FAILED PREDICTION, kept - and now EXPLAINED. byte8[3] was predicted to be src1's lifetime bit by
+symmetry - it is the largest unexplained bit in the scalar ALU family at 4240 instructions, and
+g17asm's VARIABLE set already flagged it as varying with operand routing. Setting it on the dep4
+consumer, byte8 0xa0 -> 0xa8, preregistered [0, 37] and measured [17, 37]: completely inert at
+that site. Symmetry was not evidence.
+
+SUPERSEDED 2026-09-04: byte8[3] is operand B's WIDTH, 1 = 32-bit - see operand_width below. The
+old evidence is now fully explained rather than merely set aside. The dep4 consumer takes an
+immediate operand B, and widening the declaration of an immediate that already fits changes
+nothing the hardware does, so inertness at that site is exactly what the width reading predicts.
+That is also why mutation could never have found this bit and a compiler differential could:
+it is structural, and structural fields do not announce themselves under mutation."""
+
+[instruction.fields.operand_width]
+expr = "byte9[7] = src1 is 32-bit; byte8[3] = operand B is 32-bit; byte3[1] = DEST is 32-bit"
+# NORMALISED to the mission's taxonomy 2026-09-04. This one label covered THREE fields with two
+# different standings, which no single taxonomy value can express. The standing per field is:
+#   byte3[1] dest width       causal      (truncation proven)
+#   byte9[7] src1 width       structural  (controlled differential, never executed)
+#   byte8[3] operand B width  structural  (same)
+# Kept as one entry because the three are one encoding decision, with the split stated here.
+confidence = "causal"
+confidence_per_bit = "byte3[1] causal; byte9[7] structural; byte8[3] structural"
+note = """The two largest causes of ENCODE failure in the corpus: byte9[7] differed in 54.6% of
+alu.12 re-encodes and byte8[3] in 37.5%, and 58% of all failures were one or two bits. Modelling
+them took alu.12 from 10.9% to 50.9% byte-exact and the corpus from 3.6% to 8.7%.
+
+Neither is predicted by src1, the opcode, the operand mode, byte2, or by each other, and all four
+combinations occur (13.6 / 16.2 / 30.9 / 39.3 percent). Both are inert at the two sites where
+inertness was measured, so they had to be recovered by CONTROLLED DIFFERENTIAL rather than by
+mutation - which is the general lesson: a structural field is invisible to the instrument that
+finds causal ones.
+
+Within ONE kernel, register allocation and prologue held fixed (spike/accel/re/widthbit.py):
+
+    uint   c = u[i] + u[i+1]     32-bit int add    (byte9[7], byte8[3]) = (1, 1)
+    ushort a = s[i] + s[i+1]     16-bit int add                         = (0, 0)
+
+The mixed cells are what separate two independent operand-width bits from a single op-width
+field, and both were preregistered and hit (spike/accel/re/immwidth.py):
+
+    uint   c = u[i] + 5u         32-bit src1, immediate operand B       = (1, 0)
+    uint   c = (uint)s[i] + u[i] 16-bit src1, 32-bit register operand B = (0, 1)
+
+Corpus support: operand B is a register in 82% of instructions with byte8[3] set but only 9% of
+those with it clear - the correlation "operand B is a register" gets, and the residue is what the
+width reading predicts, namely 16-bit registers and 32-bit immediates.
+
+DESTINATION added 2026-09-04, completing the triple. byte3[1] was the third largest cause of
+ENCODE failure on Apple's shaders, 37.8% of alu.12, and the model never wrote it. The decisive
+cells hold SOURCE width fixed and vary only the destination, in one kernel, distinguished by
+opcode so neither instruction can be mistaken for the other:
+
+    uint   wide   = (uint)s[i] * (uint)s[i+1]     MUL  src1 16-bit  dest 32-bit  byte3 = 0x3a
+    ushort narrow = (ushort)u[i] + (ushort)u[i+1] ADD  src1 16-bit  dest 16-bit  byte3 = 0x18
+
+Both preregistered and both hit. Corroborated by three cells already in hand from probes built
+for other questions: 32-bit dest with 32-bit sources gives 1, 16-bit dest with 16-bit sources
+gives 0, and (uint)s[i] + u[i] - a 32-bit destination with a 16-bit src1 - gives 1, which
+separates destination from source in the opposite direction.
+
+Effect on Apple's driver shaders: alu.12 9.3% -> 13.3% byte-exact, corpus 2.9% -> 3.4%.
+
+CAUSAL, 2026-09-04, with a preregistered prediction of an unseen value. a = 0x12345 and b = 1, so
+a + b = 0x12346, which does not fit in 16 bits:
+
+    baseline        byte3 = 0x1a, dest_w = 1    out[100] = 0x12346
+    byte3 -> 0x18   dest_w = 0                  out[100] = 0x2346    truncated to the low half
+
+Predicted 0x2346 before running; measured 0x2346. A second, untouched store held 0x369cf in both
+cells, so the mutation is localised to the instruction changed. dest_w is therefore causal, not
+merely structural - forcing a 16-bit destination narrows the value the instruction writes.
+
+The two SOURCE width bits remain structural: they are inert under mutation by construction,
+because declaring a narrower source that already fits changes nothing the hardware does.
+
+UNEXPLAINED CELL, kept. 'uint c = u[i] + 70000u' measured (0, 1) where the reading predicts
+(1, 1): the optimiser materialised the constant into a register, which accounts for the operand-B
+half, but src1 is the loaded uint and should be 32-bit. Its sibling '+ 4000u' measured (1, 1) as
+predicted after the same materialisation. One cell of six is unaccounted for."""
+
+# A NARROW NAMED FORM, deliberately not filed under generic class-2 semantics. The evidence
+# covers one 32-bit integer compare subfamily - the 8-byte class-c with byte2 0x80 (compare) or
+# 0x82 (min/max) - and nothing wider. Corpus class-2 is dominated by other subforms entirely
+# (byte0/byte1 pairs 22 c0, 22 a0, 82 80, 42 0f), which this does NOT model.
+[instruction.forms.cmp_i32_ordering]
+carrier = "8-byte class-c, byte2 = 0x80 compare / 0x82 min-max"
+relation_base = "eq, lt, gt - the hardware carries three relations and a complement, not six"
+negate = "byte6[0]: 0 for eq, lt, gt and 1 for ne, le, ge (ne = !eq, ge = !lt, le = !gt)"
+unsigned = "byte7[5]: set for unsigned lt/le/gt/ge/min/max, clear for their signed counterparts"
+confidence = "structural (controlled differential, 12/12 across both signednesses)"
+note = """eq and ne encode identically in both signednesses, which is the invariant worth
+emphasising: equality does not depend on how operands are ordered, and the reading gets that
+right without having been fitted to it.
+
+NOT APPLICABLE, not a failed generalisation: float and ushort comparisons emit no 8-byte class-c
+at all, so the preregistered negate-bit test over those types returned 0 matched and 0 missed.
+Those comparisons use an instruction that has not been located.
+ledger/g17-comparison-operation-field.toml"""
+
+# THE ALU OPCODE. byte6 takes 0xa0..0xaf; this is the map recovered by sweeping thirty Metal
+# expressions with runtime-loaded operands so nothing folds (spike/accel/re/opmap.py).
+[instruction.forms.alu_opcode]
+expr = "byte6, low nibble selects the operation"
+confidence = "structural (controlled differential, one operation varied per kernel)"
+note = """
+    0xa0   a * b - c        multiply-subtract
+    0xa1   a * b            multiply; also the multiply inside mad, a*b+c
+    0xa2   operandB - src1  SUBTRACT, and the operand order is that way round - measured by
+                           authoring it: a compiled ADD at a site with a = 5 and b = 7 was
+                           rewritten to op = 2 and computed 2, not -2. Also abs, negate and
+                           rotate, which lower through it.
+    0xa3   a + b            add; also addsat, insert_bits, hadd, rhadd
+    0xa9   mulhi(a, b)      high half; also reverse_bits
+    0xaa   popcount
+    0xab   clz
+    0xae  and  0xaf        the division and modulo lowering sequence; a / b emits
+                           af af a1 af ae af ae a9 a1
+    0xa4, 0xa7, 0xac, 0xad, 0xa8   NOT REACHED by any expression tried
+
+Distribution matters as much as coverage. byte6 = 0xa3 is 83.1% of MY alu.12 and only 42.1% of
+Apple's, while 0xa2 is 20.8% of Apple's and was 0.9% of mine before this sweep. A probe repertoire
+skewed like that makes the ENCODE gate measure the wrong thing and makes bit-level differentials
+fail for reasons that have nothing to do with the bit - see
+ledger/g17-byte8-bit6-unresolved.toml, where four hypotheses failed in a row because the bit is
+concentrated in operations no probe emitted.
+
+0xa8 remains unreached and is 5.5% of Apple's alu.12."""
+
+[instruction.fields.op]
+expr = "byte10"
+confidence = "context-dependent"
+note = "0x21 and 0x01 both seen for add, 0x24 for multiply; also gates the length extension."
+
+[instruction.fields.mode]
+expr = "byte4[2]"
+confidence = "causal"
+note = "Changes the VALUE computed, not the destination: t 6 -> 1 with the victim unchanged."
+
+[instruction.fields.dest_high]
+expr = "byte0[7]"
+confidence = "causal"
+note = """RESOLVED 2026-09-03: byte0[7] is the weight-8 destination bit, so this form reaches
+r0..r15. Proof came from the store side rather than from a sweep: an add whose byte0 is 0xa7
+decodes as dest r0 under the low bits alone, yet its value appears in the slot that a
+4-component store starting at r5 writes fourth - i.e. r8. The earlier LEAD below predicted
+exactly this. byte7[5] is NOT weight 8 - setting it produces no write at all. Original note: of six same-form adds in one kernel, the only one with byte0[7]
+set is also the only one whose destination decodes to r0, which would clobber the live source and
+cannot be right - so byte0[7] is a candidate high destination bit. Untested."""
+
+[instruction.fields.liveness]
+expr = "byte4[3]"
+confidence = "structural"
+note = """Set by the compiler exactly when the result feeds a later ALU instruction (31/31 across
+add, shift, register-register add and multiply producers), but CAUSALLY INERT: clearing it on a
+producer whose result is forwarded leaves the forwarded value unchanged, with a positive control
+proving that same instruction is patchable. Compiler scheduling metadata, not architectural
+state. A backend should derive it from liveness; nothing depends on it."""
+
+# Encoding an instruction of this form requires a TEMPLATE of the same sub-form: the semantic
+# fields own only the bits in tools/g17asm.py OWNED_ADD, and every other bit is structural.
+# An encoder that zeroes unknown bits emits instructions that DECODE correctly and misexecute.
+# Gate every authored instruction on the byte-exact round trip before dispatching it.
+
+[forwarding]
+rule = "ALU results forward immediately; no minimum producer-consumer separation"
+confidence = "causal"
+note = """An authored dependent pair is exact at 0, 1 and 2 intervening instructions, adjacent
+included (r7 = r0 + 10; r6 = r7 + 20 with r0=7 gives 17 and 37). No filler, spacing, scoreboard
+or wait encoding is needed, so an assembler may chain these ALU operations directly."""
+
+[[instruction]]
+name = "mov.imm.short"
+example = "04 2a"
+size = 2
+confidence = "causal"
+
+[instruction.fields.imm]
+expr = "byte1"
+confidence = "causal"
+note = "Small immediates only; 200 already needs the wide form."
+
+[[instruction]]
+name = "mov.imm.wide"
+example = "0c ef 02 de 1a 0c 6d 05"
+size = 8
+confidence = "causal"
+
+[instruction.fields.imm]
+expr = "byte1[6:0] | byte4[4:1]<<7 | byte5[3:2]<<11 | byte6[7:0]<<13 | byte7[3:0]<<21 | byte3[7:1]<<25"
+confidence = "causal"
+note = "Full 32 bits. Verified byte-exact on 0xDEADBEEF and 0x12345678, both preregistered."
+
+[[instruction]]
+name = "read.sr"
+example = "0c 9c 10 06"
+size = 4
+confidence = "causal"
+
+[instruction.fields.dest]
+expr = "byte0[7:4]"
+confidence = "causal"
+note = "0c/1c/2c/3c observed as r0..r3."
+
+[instruction.fields.sr]
+expr = "byte1"
+confidence = "causal"
+note = "0x9c/0x9d/0x9e = threadgroup_position x/y/z; 0x9e predicted by extrapolation, then confirmed."
+
+[[instruction]]
+name = "load.indexed"
+example = "0f 04 03 08 18 22 10 c0 41 00 80 00 00 00"
+size = 14
+confidence = "causal"
+
+[instruction.fields.index_reg]
+expr = "byte3 / 2"
+confidence = "causal"
+note = """r0..r4 seen as 0x00,0x02,0x04,0x06,0x08; the r4 case was preregistered. Now CAUSALLY
+validated by retargeting: a load's index register moved to r2, r4 and r5 loads pad1[7], pad1[57]
+and pad1[16] respectively, each preregistered and exact, with the buffer seeded so every value
+names its own index."""
+
+[instruction.fields.length]
+expr = "byte7[7]"
+confidence = "structural"
+note = """Across three sites byte7=0xc0 accompanies a 14-byte encoding and byte7=0x40 an 8-byte
+one. Three sites is not a length rule; recorded as an observation, not claimed."""
+
+[instruction.fields.const_off]
+expr = "not encoded in the instruction"
+confidence = "structural"
+note = "in[0], in[1], in[2] compile identically: a constant index folds into the buffer descriptor."
+
+[[instruction]]
+name = "store.device"
+example = "0f 00 03 00 01 04 10 20"
+size = 8
+confidence = "structural"
+
+[instruction.fields.src]
+expr = "byte0[7:4]"
+confidence = "causal"
+note = """First source register. A store writes N CONSECUTIVE registers to N consecutive slots,
+which is why a kernel with eight scalar stores emits only three instructions. Setting byte0[7:4]
+to 0 on a 4-component store made out[100..103] read r0,r1,r2,r3 exactly as preregistered."""
+
+[instruction.fields.components]
+expr = "byte4[6:5]: 1->{k,k+1}, 2->{k,k+1,k+2}, 3->{k..k+3}, 0->{k, k+3} - a MASK, not a count"
+confidence = "causal"
+note = """CORRECTED 2026-09-04 by executing a compiler-generated store, and the correction is only
+visible to an encoder that asks for something Apple's compiler never emits.
+
+The old reading - a count, 0->1, 1->2, 2->3, 3->4, writing r<src>..r<src+n-1> to k..k+n-1 - is
+EXACTLY RIGHT for 1, 2 and 3. It is wrong for 0, which does NOT write a single slot:
+
+    byte4[6:5]=0   slot k <- r<src>   AND   slot k+3 <- r<src+1>
+
+Measured by dispatching generated programs: a no-store control writes nothing at all, so the store
+causes both; the slot sweep k in {6,7,8,9,12,16,20,33} writes k and k+3 every time; and the source
+sweep, reading the physical register map back out of the emitted movimms, gives 4 of 4 -
+src=r0 -> k+3 <- r1, src=r2 -> r3, src=r5 -> r6, src=r9 -> r10.
+
+So the field selects WHICH COMPONENTS are written, and 0 selects components 0 and 3. THERE IS NO
+ENCODING THAT WRITES A SINGLE SLOT: every value writes at least two. A backend storing one value
+must reserve a second slot or place a known value in r<src+1>.
+
+Apple's compiler emits 4-component stores for 4-value groups and never asks for the case that
+exposes this, which is why decoding could not have found it.
+ledger/g17-store-has-no-single-slot-form.toml"""
+
+[instruction.fields.slot]
+expr = "2*byte7[6:0] + byte6[7]"
+confidence = "causal"
+note = """Destination element index. Validated by moving a store to slots 111, 112, 114, 118 and
+126 in the compiler's own output, then by authoring stores to 116..121 and 125."""
+
+[instruction.fields.subform]
+expr = "byte5[3]"
+confidence = "context-dependent"
+note = """byte5 = 0x0c on multi-capable stores, 0x04 on the single-component form the compiler
+emits for a lone value. THE 0x04 SUB-FORM REJECTS ANY SOURCE CHANGE: sixteen values of
+byte0[7:4] there produced no write at all, while the same sweep on a 0x0c store re-sourced it
+correctly. Not understood; tools/g17asm.py refuses to author from a 0x04 template rather than
+emit an instruction that silently stores nothing."""
+
+[[instruction]]
+name = "end"
+example = "0e 00 00 00"
+size = 4
+confidence = "causal"
+
+
+# ---------------------------------------------------------------------------------------
+# Strength-reduced multiply form: `dest = src1 * m`, emitted for grid/index scaling.
+# The MULTIPLIER IS ENUMERATED, not decoded - byte10 selects among several operations and
+# which of its bits carry a shift amount versus an add-back selector is unresolved. Measured
+# by authoring each value and reading the multiplier off self-identifying addresses.
+[[instruction]]
+name = "alu.mul.strength_reduced"
+example = "37 04 04 1a 29 00 a3 02 08 80 05 00"
+size = 12
+confidence = "causal"
+
+[instruction.fields.multiplier]
+expr = "enumerated over byte10"
+confidence = "causal"
+note = """byte10 -> m: 0x00/0x08 -> 17, 0x01/0x09 -> 2, 0x04/0x0c -> 3, 0x05/0x0d -> 5,
+0x0a/0x0b/0x0e/0x0f -> 1. byte10 in {0x02,0x03,0x06,0x07} is NOT a multiply: it yields
+src1 + 2^k with k = 23,19,20,21 respectively. byte10[3] is a don't-care for m in {17,2,3,5}.
+Each value was authored and the resulting multiplier read off addresses seeded so every loaded
+value names its own index, across four threadgroups. Do NOT extrapolate past 0x0f: byte10 bit7
+changes the instruction length.
+
+The compiler does not use one form for all strides - 3, 5 and 9 (2^k+1) get this shift-add
+form while 7 and 11 get a different one - so a stride is a code pattern, not a single field.
+An earlier hypothesis m = 2*byte10 - 5 fitted 3 and 5 and was falsified by 7, 9 and 11."""
+
+# Comparison against an immediate, recovered 2026-09-03 by controlled differential compilation
+# plus preregistered predictions on constants never sampled (6 of 6 exact).
+[[instruction]]
+name = "cmp.imm"
+example = "07 02 20 0c 22 81 07 86 a6 c9 17 02"
+size = 12
+confidence = "causal"
+
+[instruction.fields.imm]
+expr = "byte7[6:1]<<1 | byte10[4] | byte6[4]<<7"
+confidence = "causal"
+note = """The 8-bit compared constant is scattered over three bytes, and every bit was confirmed
+by varying the constant alone and observing which bytes move:
+    imm[0]    -> byte10[4]      byte10 is 0x07 for an even constant, 0x17 for an odd one
+    imm[6:1]  -> byte7[6:1]     byte7 = 0x80 | (imm & 0x7e); byte7[7] is always set
+    imm[7]    -> byte6[4]       byte6 is 0x07 below 128, 0x17 at or above
+Sampled at 0,1,2,3,7,15,16,23,31,32,63,64,71,127,128,255, then PREREGISTERED for 100, 45, 200,
+111, 6 and 250 - all six predicted byte6, byte7 and byte10 exactly before compiling."""
+
+# Bitwise mask against an immediate. This is the 4-BYTE class-3 form - the second half of the
+# 6+4 pair that NOP coherence uncovered when it overturned the universal "class 3 = 10" rule.
+# Recovered 2026-09-03 by controlled differential plus preregistered predictions (6 of 6 exact).
+[[instruction]]
+name = "mask.imm"
+example = "a3 0a 02 8c"
+size = 4
+confidence = "causal"
+
+[instruction.fields.imm]
+expr = "((byte3 & 0x7f) << 2) | (byte2 >> 6)"
+confidence = "causal"
+note = """The mask constant is split across the last two bytes: its low 2 bits sit in byte2[7:6]
+and the rest in byte3[6:0], with byte3[7] always set. AND and OR produce byte-identical
+immediate encodings, so the operation is selected elsewhere in the pair.
+
+Sampled at 1, 2, 5, 7, 8, 16, 24 and 31, then PREREGISTERED for 100, 45, 200, 63, 129 and 250 -
+all six predicted both bytes exactly before compiling, and the inverse decode recovers each
+constant."""
+
+# CONTROL FLOW, the first branch recovered. A conditional backward branch: the loop-closing
+# instruction of a while-loop. Found 2026-09-03 by differential compilation over 20 variants that
+# grow the loop body without changing register pressure, then confirmed causally.
+[[instruction]]
+name = "branch.cond.back"
+example = "de 6f f3 1e"
+size = 4
+confidence = "causal"
+note = """Identified causally, not by pattern. In the Collatz kernel (x = n|3, count steps to 1,
+n = 7 so the baseline is 16 iterations) overwriting exactly these four bytes with the compiler's
+own 06 00 filler makes the loop fall through after one pass, and out[100] becomes exactly 1 -
+the value preregistered before the run. A positive control in the same harness (destroying 40
+bytes of the prologue) drives the output to 0, so the measurement path is live.
+
+The target is PC-relative to the branch's own offset: target = branch_offset + displacement. The
+three candidate PC conventions the fit allowed (+0, +2, +4) were separated by independent
+information - only base+0 puts the target on an instruction boundary that the strict walk found
+on its own; +2 and +4 land mid-instruction."""
+
+[instruction.fields.displacement]
+expr = "sign_extend(word[22]<<8 | word[21]<<7 | word[19]<<6 | word[17]<<5 | word[14]<<4 | word[13]<<3 | word[12]<<2 | word[7]<<1, 9)"
+confidence = "causal"
+note = """word is the four bytes read little-endian. Displacement bit 0 is implicit zero -
+branch targets are 2-byte aligned - and bits 1..8 are scattered:
+
+    word[7]  = d[1]     word[12] = d[2]    word[13] = d[3]    word[14] = d[4]
+    word[17] = d[5]     word[19] = d[6]    word[21] = d[7]    word[22] = d[8]
+
+Fitted over 20 variants spanning d = -70 to -404, then PREREGISTERED for four unseen variants
+(d = -196, -214, -232, -250): all four predicted the whole 32-bit word exactly before compiling.
+Corpus check over 316 kernels, scoring whether the decoded target lands on an instruction start
+the walk found independently: 23/23 in the loop kernels and 324/326 in our other kernels,
+against a measured chance level of 16.7% (instruction starts per byte)."""
+
+[instruction.fields.displacement_high]
+expr = "word[23] = d[9], word[8] = d[10], word[28] = sign"
+confidence = "causal"
+note = """UPGRADED from 'fitted-not-validated' by the FORWARD branch - a different family, a
+different kernel, the opposite direction, so independent of the statistic that first suggested
+these bits.
+
+Forcing a compiler branch needs a conditional block big enough to defeat if-conversion; below
+eight statements the block is predicated and no branch is emitted at all. From eight upward the
+branch sits at a FIXED +0x06e and only its displacement moves, a cleaner differential than the
+backward case where the branch itself moves. Decoding those and checking each target against
+instruction starts the walk found independently:
+
+    block+8    d = +352   -> +0x1ce      needs d[1..8] only
+    block+12   d = +502   -> +0x264      needs d[1..8] only
+    block+16   d = +652   -> +0x2fa      REQUIRES word[23] as d[9]
+    block+32   d = +1208  -> +0x526      REQUIRES word[8]  as d[10]
+
+All four land exactly on an instruction start, and the last two are unreachable without those
+bits - established by construction, not by fitting a statistic.
+
+So the displacement is 12-bit two's complement with bit 0 implicit: magnitude d[1..10], sign
+word[28] (byte3[4]). Backward branches carry byte3 = 0x1e, forward 0x0e. Read back on the
+backward family: pad+0 has magnitude 1978, and 1978 - 2048 = -70, the measured displacement."""
+
+# The forward form. Same displacement encoding, opposite sign bit. byte0[5] ALSO differs between
+# the two families (0x1e backward, 0x3e forward after masking) and is NOT yet separated from the
+# condition/opcode field - recorded as unresolved rather than assigned.
+[[instruction]]
+name = "branch.cond.fwd"
+example = "3e 00 5b 0e"
+size = 4
+confidence = "causal"
+note = """AUTHORED AND EXECUTED - the first control-flow encoding written rather than decoded.
+Safe by construction: a forward branch only moves the PC forward, so no authored displacement
+can produce a non-terminating loop, which is what rules out retargeting a backward branch here.
+
+Kernel body runs only when n > 3. Compiler branch at +0x06e carries d = +352 to +0x1ce.
+Baseline out[100]: 114 for n = 2 (taken, body skipped), 1868193279 for n = 7 (body runs).
+
+  authored d = +370 -> +0x1e0, the terminator, skipping the store at +0x1d2.
+     PREREGISTERED: taken -> nothing stored -> 0 ; not taken -> inert -> 1868193279.
+     MEASURED: exactly [0, 1868193279].
+
+  negative control, d = +352 re-encoded from scratch: reproduces the compiler's bytes
+     byte-for-byte and the baseline [114, 1868193279].
+
+Only displacement bits are rewritten; every other bit is kept as emitted, per the rule from the
+encoder that zeroed unknown bits and produced instructions that decode correctly and misexecute."""
+
+# THE RECONVERGENCE POINT. Promoted from 'unresolved' after a three-way causal discrimination.
+[[instruction]]
+name = "exec.restore"
+example = "3e 03 40 0e"
+size = 4
+confidence = "causal"
+note = """The join instruction at a conditional's reconvergence point. It restores execution-mask
+state; without it, code after the join retires with no active lanes.
+
+HOW IT WAS SEPARATED FROM THE ALTERNATIVES. A kernel where one arm writes a unique value, both
+arms reconverge, and post-join code writes a SECOND observable that does not depend on the
+branch at all (out[101] = n*13+5, computed after the join):
+
+    join present  n=2 taken     (114, 31)          n=7 not taken  (1868193279, 96)
+    join NOPed    n=2 taken     (0, 0)             n=7 not taken  (1868193279, 96)
+
+Three things fall out, and together they exclude the alternatives:
+  - the branch-INDEPENDENT observable is destroyed too, which a value-producing op cannot do;
+  - it matters ONLY when the branch was taken, which a barrier or dependency op would not;
+  - with the output buffer pre-filled with 0xDEADBEEF the sentinel SURVIVES, so the store never
+    retired at all - it did not write zeros, it did not execute.
+
+CONSEQUENCE FOR THE BACKEND. G17 structured control flow is organised around execution-mask
+state, not merely PC redirection. A synthesised CFG must emit reconvergence, and a branch target
+must be the join point rather than any instruction boundary - which is exactly why authoring a
+displacement one instruction past the compiler's own target produced 0 instead of the predicted
+114. That failed prediction is what located this instruction.
+
+NOT established: the mask's width, where it is held, how nesting is represented, and whether
+byte1/byte2 (03 40 here) select a depth, a register or a mask value. Only the single-level case
+was measured."""
+
+
+# The condition a branch tests is produced by a PAIR of instructions before it, never by the
+# branch itself (the branch word is byte-identical across every relation and constant tried).
+[[instruction]]
+name = "cmp.pair.imm"
+example = "23 04 23 80  +  ca 00"
+size = 6
+confidence = "causal"
+note = """A 4-byte class-3 compare plus a 2-byte class-a instruction. Together they compare a
+register against an 8-bit immediate and leave a predicate the following branch consumes.
+
+Relation, partial: the compare's byte0 is 0x23 for the > family and 0x33 for the < family, and
+the class-a byte0 separates all four - > is 0xca, >= is 0x8a, < is 0xc8, <= is 0x08. Reading
+those as bits, one is set for the > family and one for the strict relations, but a third moves
+too and is not separated. NOT resolved. Equality and bit-test conditions change the instruction
+layout entirely and use a different form that was not pursued."""
+
+[instruction.fields.imm]
+expr = "classa_byte0[6] | classa_byte0[7]<<1 | cmp_byte2[7]<<2 | ((classa_byte1>>1)&0xf)<<3 | cmp_byte3[2]<<7"
+confidence = "causal"
+note = """The 8-bit constant is split across FOUR bytes of TWO instructions - three low bits in
+the class-a byte0 and the compare's byte2, four middle bits in the class-a byte1 (shifted up by
+one, its bit 0 is always clear), and the top bit in the compare's byte3.
+
+No single bit of either instruction maps to a bit of the constant, which is why an automatic
+bit-solver returned nothing: the field is interleaved across two instructions. Fitted over 27
+variants with the CFG held byte-identical (same 72 instructions at the same offsets, __text
+fixed at 484), covering K = 0..255, then PREREGISTERED for K = 11, 27, 55, 99, 150 and 222 -
+all six predicted the whole six-byte pair exactly before compiling.
+
+Note the compiler normalises n > K to n >= K+1, so the encoded quantity is the source constant
+K itself. Above K = 255 the CFG changes and this form is no longer used."""
+
+# THREAD / THREADGROUP / GRID INDEXING. Two distinct forms, both 4 bytes, recovered by compiling
+# one kernel per Metal builtin and diffing - the kernels are byte-identical apart from the
+# instruction that reads the builtin, so attribution is exact.
+[[instruction]]
+name = "read_sr.direct"
+example = "0c 9c 10 06"
+size = 4
+confidence = "causal"
+note = """byte1 is the special-register index; byte0 carries the destination. Measured:
+
+    0x9c 0x9d 0x9e   threadgroup_position_in_grid    x y z
+    0xa0 0xa1 0xa2   thread_position_in_grid         x y z
+    0x82             quadgroup_index_in_threadgroup
+    0x98             simdgroups_per_threadgroup
+
+The kernels differ ONLY in this byte, which is what makes the mapping causal rather than
+correlational. byte0 varies with the destination register (0x0c, 0x04 observed) and byte2/byte3
+are 0x10 0x06 throughout."""
+
+[[instruction]]
+name = "read_sr.indexed"
+example = "24 80 01 20"
+size = 4
+confidence = "context-dependent"
+completeness = "mapping incomplete - see note"
+
+[instruction.fields.dest]
+expr = "byte0 bits 7 and 4 form a 2-bit destination index; bits 5 and 6 are don't-care"
+confidence = "causal"
+note = """Measured with a sixteen-destination probe (spike/accel/re/c4wide.py) that watches ALL
+outputs, so a value can be read back whichever register it lands in. At +0x088 the four byte0
+values 0x94, 0xb4, 0xd4, 0xf4 all deliver and all read the same value, while every other byte0
+leaves the consumers reading 0 - an unwritten register. Those four share bit7 = 1 and bit4 = 1
+and differ in bits 5 and 6, so the destination is (bit7, bit4) and bits 5-6 are free.
+
+This confound is why three earlier readings were wrong: a wrong destination is INVISIBLE with a
+narrow probe and reads as 'the mutation did nothing'."""
+
+[instruction.fields.source]
+expr = "byte3 selects, but the mapping depends on byte0 bit 7; byte1 also participates"
+confidence = "context-dependent"
+completeness = "mapping incomplete - see note"
+note = """byte0 bit 7 is SHARED between destination and source selection. Two sites in one kernel,
+byte1 = 0x80 throughout, differing only in that bit:
+
+    byte3            0x20  0x28  0x30  0x38  0x40  0x48  0x50  0x58
+    byte0 bit7 = 0     16     0    16     0     1    32     8     0
+    byte0 bit7 = 1      1     0     1     0     1     1     1     0
+
+Same byte1, same byte3, different value - so bit 7 is not only the destination. This EXPLAINS the
+apparent site-dependence recorded earlier: the two sites compared then differed in exactly this
+bit, not in their position.
+
+byte1 participates too: with byte3 = 0x40 in the earlier kernel, byte1 0x80 read 32 while 0x81
+read 1, although 0x80 and 0x83 agreed, which is why a byte1-only mutation once looked inert.
+
+STILL NOT GENERATIVE. With bit7 = 1 several distinct byte3 values collapse to the same value,
+which a plain index bit would not do - it may select a register FILE, a width, or act as a
+modifier. All readings are reproducible across repeats. Do not synthesise this instruction until
+the bit7 = 1 behaviour is characterised."""
+
+
+# Multiply by an odd immediate. TWO BYTES - the compact form the compiler emits when a constant is
+# too expensive to strength-reduce into shifts and adds.
+[[instruction]]
+name = "alu.mul.imm"
+example = "68 09"
+size = 2
+confidence = "causal"
+
+[instruction.fields.multiplier]
+expr = "S = 2*((byte1 << 1) | byte0[7]) + 1"
+confidence = "causal"
+note = """Equivalently m = (S-1)/2 with byte1 = m >> 1 and byte0[7] = m & 1. Only ODD multipliers
+are representable, which is consistent with even ones being a shift plus this form.
+
+Fitted on ten prime scales compiled one per kernel, all with identical __text length so the shape
+is stable and the differential clean - the ONLY bytes that move across all ten are these two.
+Then PREREGISTERED for four unseen scales, 87, 143, 199 and 245, predicting e815, e823, e831 and
+683d: all four exact before compiling.
+
+AUTHORED AND EXECUTED. In a kernel compiled with S = 37, rewriting these two bytes changes the
+address a load computes, and the loaded value names it exactly because pad1[k] = k*1000 + 1:
+
+    S = 37 re-encoded   pad1[263]  = 263001     byte-identical negative control
+    S = 101             pad1[711]  = 711001
+    S = 245             pad1[1719] = 1719001
+    S = 7               pad1[53]   = 53001
+
+S = 7 is the interesting one: the compiler would strength-reduce it into shifts and never emit
+this form for it, so that is an encoding Apple did not produce at that location, executing
+correctly."""
+
+# Load from a bound buffer. The base is a REGISTER the prologue materialises, named by byte1.
+[[instruction]]
+name = "load.base"
+example = "0f 04 03 00 18 02 10 c0 41 00 80 00 00 00"
+size = 14
+confidence = "context-dependent"
+completeness = "mapping incomplete - see note"
+
+[instruction.fields.base]
+expr = "byte1 = 4 * base_register_index"
+confidence = "causal"
+note = """Established with the positive control that a two-buffer kernel could not supply: a kernel
+that materialises ALL THREE bases, with each buffer carrying a distinct pattern so the loaded
+value names its source. Sweeping byte1 of the load at +0x090, every value selects a different
+buffer at the SAME element:
+
+    0x00  ->  0xaaaa000b   buffer 0, element 11
+    0x04  ->  0x00002af9   buffer 1, element 11   (what the compiler emitted)
+    0x08  ->  0xcccc000b   buffer 2, element 11
+    0x0c  ->  0            no fourth base materialised
+
+Two of those read buffers the source never mentions at that load, so they are encodings Apple did
+not emit there. The earlier two-buffer experiment saw 0x08 return zero and could not tell 'that
+base is empty here' from 'byte1 is not a base field'; with three bases live the distinction is
+made, and the reading is confirmed.
+
+Sweeping byte1 on the OTHER loads in the same kernel leaves this observable untouched, which is
+the negative control - each load names its own base."""
+
+# Shift left by an immediate. The form the compiler uses for amounts 9..31; amounts 1..8 use two
+# other forms with different __text sizes and are NOT recovered.
+[[instruction]]
+name = "alu.shift.imm"
+example = "2f 00 00 1a 26 00 a0 02 78 82 00 34"
+size = 12
+confidence = "causal"
+
+[instruction.fields.dest]
+expr = "byte0[4] + 2*byte7[3] + 4*byte7[4] + 8*byte0[7] + 16*byte7[5]   (shared across classes)"
+confidence = "causal"
+note = """The destination field is SHARED between class 7 and class f, not family-local.
+
+Found by sweeping byte0's high nibble 0x0f..0x7f: only bit 4 is causal, bits 5 and 6 are inert,
+which rules out the high nibble being a register index and matches alu.add's expression exactly.
+Baseline (byte0 0x3f, byte7 0x0a) decodes as 3, and clearing byte0[4] gives 2, which is the
+register holding b - so out[120] = b & 15 breaks alongside out[110], as observed.
+
+Authored across families with a preregistered downstream consequence: encoding dest = 4 as
+byte0 0x3f -> 0x2f with byte7 0x0a -> 0x12 redirects the shift's result into the register the
+LATER add consumes, predicting out[100] = (7 << 9) + 1 = 3585, out[110] = 0 stale, out[120] = 5
+restored. Measured [3585, 0, 5] exactly. The program's dataflow graph, not just its operands,
+is now ours to rewire.
+
+byte0[7] is untested here: the sweep held it at 0 throughout.
+
+WIDENED 2026-09-04 with byte7[5] as bit 4. On the dep4 producer, which writes rA = r1, setting
+byte7[5] moves the destination out of the allocated range exactly as the known bit byte7[4] does:
+both give out = [4, 24], where r1 keeps the loaded y = 4 and the consumer computes 4 + 20.
+byte7[6] is INERT in the same sweep and is not a destination bit.
+
+The WEIGHT is NOT MEASURED. Weight 16 is written here because Apple's own high-destination
+instructions decode as 16 and 17 under it in an 18-register kernel, which is the natural reading -
+but that is consistency, not measurement. See ledger/g17-dest-fifth-bit.toml for a retracted
+argument that the corpus round trip settles it; it cannot, because decode and encode are inverses
+under ANY weight and the score is invariant to the choice (16 and 32 both give 59.6-59.7%)."""
+
+[instruction.fields.src]
+expr = "4*byte3[6] + 2*byte3[5] + byte1[1]   (register index of the SHIFTED operand)"
+confidence = "causal"
+note = """The shifted register, distinct from the shift amount K in bytes 8-9. Located by a
+non-destructive differential - two kernels identical except for which of two live runtime values
+feeds the shift - which moved byte3 alone, 0x3a vs 0x1a, i.e. bit 5.
+
+Swept over four simultaneously live values 7, 5, 3, 9 (left-shifted by 9 they give 3584, 2560,
+1536, 4608, all distinct). Four encodings reach the four values and the rest read zero:
+
+    byte3[6] byte3[5] byte1[1]   index   out
+       1        0        0         4     3584   = 7   (compiler's own choice)
+       0        1        0         2     2560   = 5
+       0        0        1         1     1536   = 3
+       0        0        0         0     4608   = 9
+       others                    3,5,6,7    0   unallocated
+
+The indices 4, 2, 1, 0 are exactly the four loads' destinations, whose byte0 high nibbles are
+0x4f, 0x2f, 0x1f, 0x0f - an independent decode of the same allocation. r3 reads zero because
+Apple's allocator skipped it, not because the encoding is invalid: retargeting one load's
+destination to r3 (byte0 0x2f -> 0x3f) and setting this field to index 3 preregistered 2560 and
+measured 2560, placing a value in a register no instruction in the program had used."""
+
+[instruction.fields.direction]
+expr = "byte6 bit 0: 0 = left, 1 = right"
+confidence = "causal"
+note = """shl and shr at the same amount are byte-identical except byte6 - 0xa0 versus 0xa1 - and
+flipping it converts one into the other. With x = 7 and K = 9, so left gives 3584 and right gives
+0, measured in both directions with a negative control:
+
+    shr kernel, baseline                        0
+    shr kernel, byte6 rewritten as its own 0xa1 0      negative control
+    shr kernel, byte6 0xa1 -> 0xa0              3584   authored left
+    shl kernel, baseline                        3584
+    shl kernel, byte6 0xa0 -> 0xa1              0      authored right
+
+Both conversions were preregistered. The amount field below is shared by both directions."""
+
+[instruction.fields.amount]
+expr = "K = ((byte9 << 8 | byte8) >> 6) & 0x1f"
+confidence = "causal"
+note = """SHARED BY BOTH DIRECTIONS. Shift right puts 18 of 19 amounts in one __text size, a
+cleaner grouping than shift left, and 17 of those 18 decode with this identical expression -
+K = 31 is the one outlier and uses a different form entirely (its bytes there are 01 00). So the
+field was fitted on shl and transfers to shr unchanged.
+
+Recovered by compiling one kernel per shift amount and diffing. Amounts split into three
+groups by __text size - 112 bytes for K in 1..4 and 16, 124 for K in 5..8, and 114 for K in 9..31 -
+so the compiler picks a different form by magnitude. Only the 114 group is recovered here.
+
+Within it exactly TWO bytes move across ten amounts, and as a little-endian halfword they run
+0x8278, 0x82b8, 0x82f8, 0x8338 ... exactly +0x40 per unit of K, giving the expression above. It
+decodes all ten fitted amounts (9..15, 20, 24, 31) with no mismatch, and PREREGISTERED encodings
+for three unseen amounts - K = 17, 18, 19 predicted as bytes 7884, b884, f884 - were all exact
+before compiling.
+
+AUTHORED AND EXECUTED, with x = 7 so the result names the amount:
+
+    K = 9 re-encoded    3584        byte-identical to the compiler, negative control
+    K = 17              917504      7 << 17
+    K = 31              2147483648  7 << 31
+    K = 0               7           7 << 0
+
+K = 0 is the notable one: the compiler folds x << 0 away and would never emit this form for it,
+so that is an encoding Apple did not produce at this location, executing correctly."""
+
+# Bitwise AND / OR / XOR against an immediate. The operation is selected by three bytes, not one.
+[[instruction]]
+name = "alu.bitwise.imm"
+example = "07 80 30 30 a3 02 44 82"
+size = 8
+confidence = "causal"
+note = """SIZE RESOLVED 2026-09-04, was "unresolved". Build `y = x & 15; C[8] = y;` so the store
+immediately follows: the four bytes the old 12-byte framing swallowed decode as a complete
+store.8 with slot = 8, exactly what the source writes.
+
+    +0x060  07 80 30 30 a3 02 c4 83     this instruction
+    +0x068  0f 04 03 00 21 0c 10 24     store.8 src=r0 n=2 slot=8
+
+ledger/g17-bitwise-size-resolved.toml. The OPERATION SELECTOR below was always independent of the
+length: measured by differential and confirmed by authoring.
+
+    and   07 80 30 30 a3 02 44 82
+    or    07 80 32 38 a3 02 44 82
+    xor   06 80 32 38 a3 02 44 82
+
+Only bytes 0, 2 and 3 move. or and xor differ from each other in byte0 alone; and differs from or
+in bytes 2 and 3.
+
+THE PAIR SET IS CLOSED AT THESE THREE, confirmed 2026-09-04 by a LABELLED sweep: 48 kernels with
+one bitwise operation each, the operation known from the source, and a candidate accepted only if
+its immediate equals that kernel's single constant. All 48 land on these three triples, invariant
+across four source kinds (load, ALU result, special register, computed builtin) and four
+immediates, with no triple shared between operations.
+
+Two widenings were proposed and both REJECTED on the boundary statistic - freeing the whole pair
+gives 22.3% of hits on an instruction boundary and freeing byte2[3]/byte3[7] gives 27.0%, against
+92.5% for the encoding as recorded. ledger/g17-bitwise-operation-space-larger.toml"""
+
+[instruction.fields.imm]
+expr = "((byte7 & 0x3F) << 2) | (byte6 >> 6)"
+confidence = "causal"
+note = """An 8-bit immediate split across two bytes - high six in byte7, low two in byte6[7:6].
+K = 1, 7, 15, 31, 255 all reproduced, 5/5. The same split-immediate shape as cmp.imm."""
+
+[instruction.fields.operands]
+expr = "NOT IN THIS INSTRUCTION"
+confidence = "unresolved"
+note = """Six source expressions (x, tp.x, x*3, x+7, tg.x, x^tp.x) and two destination registers
+all leave these eight bytes unchanged; the destination was read from the following store's own
+decoded src field, so it is ground truth. The 2-byte instruction immediately BEFORE varies instead
+- 23 02, 23 06, 2b 02 - which is the idiom the compare uses, where `0a <(reg<<1)|1>` names the
+operand and the operation follows. Located, not decoded: the compiler cannot allocate for this
+form until it is."""
+
+[instruction.fields.operation]
+expr = "(byte0, byte2, byte3): and = (07,30,30), or = (07,32,38), xor = (06,32,38)"
+confidence = "causal"
+note = """AUTHORED IN BOTH DIRECTIONS. With x = 7 against the constant 9 the three operations give
+distinct results - 1, 15 and 14 - so the observable names the operation.
+
+From the AND host:   re-encoded and -> 1 (negative control),  or -> 15,  xor -> 14
+From the XOR host:   re-encoded xor -> 14 (negative control), and -> 1,  or  -> 15
+
+Six conversions, all preregistered from the differential, all exact. Every one writes an encoding
+the compiler did not emit at that location."""
+
+# Comparison producing a VALUE (0 or 1), as distinct from the compare pair that feeds a branch.
+# The relation is carried by TWO instructions, not one.
+[[instruction]]
+name = "cmp.value.imm"
+example = "22 00 05 0a 27 00  +  ac 02 41 02 46 1c 00 38"
+size = 14
+confidence = "causal"
+note = """A comparison producing a VALUE (0 or 1), distinct from the class-3 plus class-a pair
+that produces a predicate for a branch. Carried by TWO instructions: a 6-byte class-2 and an
+8-byte class-c."""
+
+[instruction.fields.imm]
+expr = "K = (byte3 << 8 | byte2) >> 6   of the class-c, i.e. the stored halfword is 1 + 64*K"
+confidence = "causal"
+note = """Fitted on 21 constants from 0 to 255, all compiling to the same layout, and it
+reproduces all nine sampled encodings exactly.
+
+AUTHORED from a K = 9 host and checked by the four-input threshold pattern over x in
+{5, 7, 9, 11}: K = 9 re-encoded (control), 3, 100, 6, 10 and 255 all produced exactly the pattern
+their threshold implies.
+
+THIS FIELD CORRECTS THE RELATION TABLE BELOW. An earlier version of this entry read byte2 of the
+class-c as a strict/non-strict selector because it differed across relations. It is the
+immediate's low byte. The compiler normalises non-strict comparisons into strict ones with an
+adjusted constant - x >= 9 becomes x > 8, x <= 9 becomes x < 10 - so byte2 moved for a reason
+that had nothing to do with the relation. Likewise x > 0 is emitted as x != 0, which is why K = 0
+carries the equality encoding."""
+
+[instruction.fields.relation]
+expr = "class-c bytes (4,5,6,7); class-2 byte2 carries the direction"
+confidence = "causal"
+note = """With the immediate separated out there are FOUR distinct relation encodings, not six:
+
+    gt and ge   (46, 1c, 00, 38)      class-2 byte2 = 0x05
+    lt and le   (46, 18, 00, 38)      class-2 byte2 = 0x45
+    eq          (46, 1c, 00, 18)
+    ne          (42, 1c, 01, 18)
+
+byte7 separates ordered (0x38) from equality (0x18) comparisons and byte5 marks the less-than
+direction. ge and le have no encodings of their own; the compiler reaches them by adjusting the
+constant.
+
+AUTHORED: from a single gt host, all six source-level relations were written and each reproduced
+its unique four-input response pattern - gt 0001, ge 0011, lt 1100, le 1110, eq 0010, ne 1101 -
+with gt re-encoded as the negative control. That test remains valid: it authored relation bytes
+AND the accompanying immediate together, which is exactly how ge and le are reached."""
+
+
+# Register-register addition. Shares destination and first-source encodings with add.imm; the
+# second source is its own two-bit field split across byte1 and byte3.
+[[instruction]]
+name = "alu.add.reg"
+example = "27 86 04 1a 31 00 a3 12 08 80 11 00"
+size = 12
+confidence = "causal"
+
+[instruction.fields.dest]
+expr = "byte0[4] + 2*byte7[3] + 4*byte7[4] + 8*byte0[7]   (same as alu.add.imm)"
+confidence = "causal"
+note = "Decodes three reg-reg adds in one kernel as 4, 5, 6 - three consecutive destinations, as three separate results require."
+
+[instruction.fields.src1]
+expr = "2*(byte9 & 7) + byte8[7]   (same as alu.add.imm)"
+confidence = "causal"
+note = """Decodes the same three adds as 0, 0, 1 - exactly the first operands of x+y, x+z, y+z.
+Authored: setting byte8[7] converts x + y into y + y, giving 30 with x=5, y=15, z=100, where the
+competing reading x + z would give 105."""
+
+[instruction.fields.src2]
+expr = "4*byte3[6] + 2*byte3[5] + byte1[1]"
+confidence = "causal"
+note = """A two-bit field SPLIT across two bytes, which is why moving either byte alone looked
+context-dependent. It decodes all three compiler-emitted adds correctly: (byte1 0x86, byte3 0x1a)
+gives 1 = y, (0x80, 0x3a) gives 2 = z, (0x00, 0x3a) gives 2 = z.
+
+Measured as a complete 2x2 at one site with x = 5, y = 15, z = 100 chosen so every sum differs:
+
+    byte1[1]=0 byte3[5]=0  ->  10  = x + x    src2 = r0
+    byte1[1]=1 byte3[5]=0  ->  20  = x + y    src2 = r1
+    byte1[1]=0 byte3[5]=1  -> 105  = x + z    src2 = r2
+    byte1[1]=1 byte3[5]=1  -> 261  = x + 256  src2 = r3
+
+then PREREGISTERED and authored at a DIFFERENT instruction, all four values exact.
+
+byte1 bit 2 must be set for the instruction to remain valid at the first site but not at the
+second; that bit is structural and its rule is not established.
+
+WIDENED 2026-09-04. The table above was measured with only r0..r3 live, so it fitted a two-bit
+field. alu.shift.imm, measured with four live values in r0, r1, r2 and r4, requires byte3[6] as a
+third bit, and every row above is unchanged under the wider reading (byte3[5]=1, byte1[1]=1 is
+index 3 either way). byte3[6] itself is causal in alu.shift.imm and UNTESTED in alu.add.reg; the
+shared-field claim across the two families rests on bits 5 and 1 only. See
+ledger/g17-register-operand-field.toml."""
+
+
+# THE FUSED SHIFT-ADD. One instruction computing (src1 << k) + imm, used for tiled addressing.
+[[instruction]]
+name = "alu.shiftadd.imm"
+example = "27 07 04 1a 25 00 a3 02 a0 80 10 01"
+size = 12
+confidence = "causal"
+note = """Emitted for row*S + C, one instruction rather than a multiply and an add. All the ALU
+fields decode normally - dest, src1, mode, immediate - and the SCALE lives in byte10/byte11."""
+
+[instruction.fields.scale]
+expr = "table: (byte10,byte11) = (0x11,0x00) x1, (0x14,0x00) x2, (0x15,0x00) x4, (0x10,0x01) x8, (0x10,0x00) x16"
+confidence = "causal"
+note = """A lookup table, not an arithmetic shift field - as a number the sequence is 1, 4, 5, 8, 0.
+Recovered by compiling row*S + 3 for S = 1..128 and validated by authoring x1, x2 and x4 onto an
+x8 kernel, five threadgroups each, every address preregistered and exact.
+ledger/g17-fused-shift-add-scale.toml"""
+
+
+# K-LOOP CONTROL. The reduction loop of a matmul2d is not unrolled - the same 16 tensor.mac
+# instructions run once per pass - and its trip count lives in one byte of this instruction.
+[[instruction]]
+name = "loop.trip.k"
+example = "22 a0 04 02 37 00"
+size = 6
+confidence = "causal"
+note = """Located by elimination: a K=64 against K=128 differential leaves nine differing bytes in
+1384, and patching them individually into the K=64 kernel shows ONE that moves the result -
+byte1 of this class-2 instruction. The other eight, including a 16-bit constant that also tracks
+K, are inert with respect to the loop.
+ledger/g17-k-loop-trip-count-authored.toml"""
+
+[instruction.fields.trip]
+expr = "byte1 = K + 96      (K = the matmul2d reduction depth; K >= 192 overflows the byte and the form changes)"
+confidence = "causal"
+note = """Verified on three compiled kernels - K=64 gives 0xa0, K=96 gives 0xc0, K=128 gives 0xe0 -
+including K=96, an off-grid value that falsified an earlier linear fit to a different constant.
+
+AUTHORED into a K=64 kernel, with the compiled kernel for that depth as the reference:
+
+    byte1 0xc0   tile 131072   compiled K=96  gives 131072   preregistered, exact
+    byte1 0xe0   tile 163840   compiled K=128 gives 163840
+
+The observable is the accumulated tile, which follows 32768 * (1 + floor(K/32)) when the
+accumulation control at +0x2c8 has byte2[0] clear. With that bit SET the tile is K-independent, so
+the control must be cleared for this field to be visible at all."""
+
+# Recovered by AUTHORING, not by differential: the load's address fields were set from semantic
+# values and the loaded value identifies the address, because the probe fills the buffer with
+# b1[k] = 1000 + k so a wrong address cannot pass for a right one.
+[instruction.forms.load_address]
+expr = "offset and disp2 are ELEMENT offsets added to the computed address"
+confidence = "causal (authored, preregistered, 4/4 exact)"
+note = """
+    baseline                 out = 1000     b1[0], the positive control
+    offset = 5               out = 1005
+    offset = 10              out = 1010
+    disp2  = 1               out = 1001
+
+Both offset and disp2 move the address by whole elements, not bytes, on a 4-byte element type.
+Authored together with a store slot as a complete load/store sequence:
+
+    offset = 7, slot -> 140  out[100] = sentinel, out[140] = 1007
+
+ledger/g17-stage2-address-generation.toml"""
+
+# The fused shift-add, recovered by AUTHORING both instructions of a real address computation and
+# predicting the address. The operand order is the half that a differential never pinned down.
+[instruction.forms.shift_add]
+expr = "dest = src2 + (src1 << scale)"
+confidence = "causal (authored, preregistered, exact)"
+note = """
+NOT dest = src1 + (src2 << scale). The first authored attempt assumed that order, predicted 1017
+and measured 1016; solving the baseline settles it - the compiler's own pair computes
+r1 = r1 + (r1 << 3) = 27 and then r0 = r1 + (r0 << 0) = 32, which is the observed 1032 only under
+this order.
+
+Re-predicted under the corrected order and confirmed exactly:
+
+    authored  r1 = r1 + (r1 << 2) = 3 + 12 = 15
+              r0 = r1 + (r0 << 0) = 15 + 5 = 20     predicted b1[20] = 1020, measured 1020
+
+Scale table, three points confirmed by authoring:
+    scale_code  2 = (b10[2],b10[0],b11[0]) 010 -> x1
+    scale_code  8 =                        100 -> x2
+    scale_code 10 =                        110 -> x4
+    scale_code  1 =                        001 -> x8
+ledger/g17-stage3-authored-address.toml"""
+
+# --- the compare-immediate form used when the operand is a register ---------------------------
+[[instruction]]
+name = "cmp.imm.split"
+example = "0a 03  +  2a 84  +  04 22"
+size = 6
+confidence = "causal + executed"
+note = """Three 2-byte instructions producing a predicate. Distinct from cmp.pair.imm above, which
+is the 4+2 class-3 form the compiler uses when the operand is a freshly loaded value; this one
+appears whenever the operand is already in a register.
+
+The compiler NEVER emits >= or <=: `x >= K` comes out as `x > K-1` and `x <= K` as `x < K+1`, so
+the relation field only ever holds two values.
+
+Followed by `1e 00 00 0e`, which writes the EXEC MASK from the predicate - the conditional is
+predication, not branching. ledger/g17-exec-mask-is-the-conditional.toml"""
+
+[instruction.fields.reg]
+expr = "cmpsrc_byte1[7:1]"
+confidence = "executed"
+note = """The compared register, in the FIRST of the three instructions: 0a <(reg<<1)|1>. Read out
+of eight compilations against the producing instruction's own decoded destination, then executed:
+with r1 holding tp.x and r0 holding a stale tg.x, `0a 03` and `0a 01` give branch thresholds of
+gw >= 22 and gw >= 43, both exact over twelve grid sizes.
+
+NOT byte3 of the pair, which is where I looked first - that is constant at 0x02 across r0, r1,
+r2, r3 and r5."""
+
+[instruction.fields.imm]
+expr = "cmp_byte0[4]<<7 | (cmp_byte1 & 0x7e) | rel_byte0[4]"
+confidence = "causal + executed"
+note = """Eight bits split three ways, with the LOW BIT in the relation instruction. 22 compiler
+outputs reproduced exactly over K = 1..255 and all four relations; 128 dispatches over 8 variants
+x 16 threadgroup widths, each predicting the exact width at which behaviour changes. One of the
+executed variants, `2a 90` + `14 22`, is a combination the compiler emits nowhere."""
+
+[instruction.fields.rel]
+expr = "rel_byte0[3:0]"
+confidence = "causal + executed"
+note = "0x4 unsigned >, 0x5 unsigned <. 0x6 appears for signed compares and is NOT resolved - its immediate byte has bit7 clear, so the field layout differs and it was not pursued."
+
+[instruction.fields.byte3]
+expr = "unresolved"
+confidence = "unresolved"
+note = """0x22 when the operand came from read_sr, 0x02 when it came from an ALU result. Real, not
+noise - but it is not the register and its meaning is unrecovered, so the compiler inherits it."""
+
+[instruction.hazard]
+note = """LOAD-USE. Pointing the compare at a register whose load has not landed makes it read the
+register's PREVIOUS contents; measured over eight data values, all wrong in the same way. The
+compare's wait mechanism is unlocated, so the compiler refuses a load operand."""
+
+# ---- the constant program's uniform preload (handoff 10z; tools/g17uniformpreload.py) -------------
+# Three forms Apple's compiler uses to preload a uniformly read word into the argument block before
+# main runs. Recovered by DIFFERENTIAL over retained Apple compiles (results/g17-texture-slot1-
+# compiles-v1 S1/S2/S3, results/g17-texture-family-compiles-v1 M1/M4) and validated by the decoder
+# round trip and byte-exact reproduction of S1's and M1's prologues - NOT by hardware. Confidence
+# "located" means: the field's bits are the only bits that move when that operand moves across the
+# witnesses, and writing them reproduces every witness. Fields with one witnessed value are recorded
+# as unlocated and the encoder refuses any other value by name.
+
+[[instruction]]
+name = "argument.pointer.read.4"
+opcode = 14061
+example = "1c 8a 08 27"
+size = 4
+confidence = "located (differential, decoder round trip; no hardware)"
+note = "The second half of the pointer-read pair: reads an argument-table entry half into a register. Nine witnesses (S1/S2/S3/M1: registers 105..110, offsets 10..18). The offset is in two-byte units of the argument table: 8 and 10 name the eight-byte entry at bytes 16..24 (buffer 1's pointer in a four-record layout)."
+
+[instruction.fields.dest]
+expr = "105 + byte0[6:4]"
+confidence = "located"
+note = "byte0 = 0x0c | (reg - 105) << 4 on all nine witnesses"
+
+[instruction.fields.argument_offset]
+expr = "byte1[4:1] (byte1 = 0x80 | offset) and, redundantly, byte3[7:5] = (offset >> 2) - 1"
+confidence = "located"
+note = "both encodings agree on every witnessed even offset 10..18; offsets outside that range are refused because the two are not known to keep agreeing"
+
+[[instruction]]
+name = "argument.pointer.read.8"
+opcode = 14061
+example = "24 80 21 10 47 01 a0 82"
+size = 8
+confidence = "partly located (differential over three witnesses; no hardware)"
+note = "The first half of the pointer-read pair, always at offset 8 in the witnesses (S1/S2/S3/M1/M4). Register bits 1..2 at byte7[4:3]; bit 0 and the offset field are NOT located (every witness even, every offset 8) - the encoder refuses odd registers and other offsets by name."
+
+[instruction.fields.dest]
+expr = "105 + 2*byte7[4:3]   (bit 0 unlocated)"
+confidence = "partly located"
+
+[[instruction]]
+name = "load.through.pair.14"
+opcode = 12688
+example = "0f 00 03 00 80 44 00 a0 41 00 80 00 00 00"
+size = 14
+confidence = "destination and pair located by a decoder sweep; offset and the wait composite not located (no hardware)"
+note = "Loads a 32-bit word at pair + offset into dest. [10ab] Destination (seven bits) and pair (seven bits, byte1[7:1] = pair - 105) located by the decoder sweep on the S1/S2/S3 witnesses (results/g17-s23-whole-program-v1/sweeps/ld14_*.json); the offset field is NOT located - S1 carries 0, M4 carries 1604 across bytes 6, 7 and 13 (M4's load is the reproducer); bytes 4..5 hold a composite the decoder prints inside one immediate (0x01 / 0x03 / 0x07 on the members' LAST load, one bit per earlier load) - a wait or scoreboard field whose rule is not recovered, inherited from the witness at that position. The decoder names the pair as reg:2451 + (pair - 105)."
+
+[instruction.fields.dest]
+expr = "105 + byte0[4] + 2*byte0[5] + 4*byte0[6] + 8*byte0[7] + 16*byte2[6] + 32*byte2[7] + 64*byte5[4]"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.pair]
+expr = "105 + byte1[1] + 2*byte1[2] + 4*byte1[3] + 8*byte1[4] + 16*byte1[5] + 32*byte1[6] + 64*byte1[7]   (the decoder prints 2451 + this)"
+confidence = "located (decoder sweep)"
+
+[[instruction]]
+name = "publish.block0.8"
+opcode = 592
+example = "c3 04 07 02 36 a0 a4 02"
+size = 8
+confidence = "constant and source located by a decoder sweep, two witnesses (S1 16, M4 12); no hardware"
+note = "Publishes a register into the ARGUMENT block (op0) at a byte constant - the same instruction family as the coordinate publish, a different sub-form. Witnesses: S1/M1 const 16 from r105; M4 const 12 from r105. [10ab] The constant is a NINE-BIT field in bytes (fields.const below) that both witnesses read through - M4's instruction is S1's with 12 written into it - closing 10z's 'two points, no rule' by the decoder (results/g17-s23-whole-program-v1/sweeps/pub8_*.json); the source is an eight-bit field. The trailing operand is the source lifetime (ledger/g17-publish-lifetime-operand.toml): 16 = release, and r105 dies here in S1. The compiler still emits only the witnessed program shapes (S1/M1 16, M4 12)."
+
+[instruction.fields.const]
+expr = "byte3[0] + 2*byte0[4] + 4*byte7[3] + 8*byte7[4] + 16*byte0[7] + 32*byte7[5] + 64*byte2[7] + 128*byte2[3] + 256*byte2[4]   (bytes; bits 1..8 are the ALU dest slot)"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.src]
+expr = "105 + byte1[1] + 2*byte3[3] + 4*byte3[4] + 8*byte3[5] + 16*byte3[6] + 32*byte3[7] + 64*byte6[0] + 128*byte6[1]"
+confidence = "located (decoder sweep)"
+
+[[instruction]]
+name = "alu.add.block"
+opcode = 10282
+example = "27 04 04 1a 21 00 a3 02 28 84 03 00"
+size = 12
+confidence = "located by a decoder sweep and three witnesses (S1/M1 const 16, M4 const 12); no hardware"
+note = "dest = src1 + block[const]: the ALU whose second operand reads the argument block, Apple's consumer of a uniform preload (handoff 10aa). Registers are eight-bit fields whose low three bits coincide with alu.add.imm's dest/src1; the decoder validates values 0..143. The constant is nine bits in BYTES (byte8[7:6] + 4*byte9[6:0]); Apple's constant is 4 x the declared binding count on every witness (the linker's block-layout derivation). The operand after src1 is its lifetime (16 = release: S1's fetch register dies at the add). S2/S3 use a second operand order (the block operand first, const in byte3[7:5]) not encoded here. Whether this form reads a texture FETCH is unmeasured: the retained stale-fetch measurement was on this compiler's alu.12, and Apple's S1 consumes its fetch through this form."
+
+[instruction.fields.dest]
+expr = "byte0[4] + 2*byte7[3] + 4*byte7[4] + 8*byte0[7] + 16*byte7[5] + 32*byte2[7] + 64*byte2[3] + 128*byte2[4]"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.src1]
+expr = "byte1[1] + 2*byte3[5] + 4*byte3[6] + 8*byte3[7] + 16*byte5[7] + 32*byte8[0] + 64*byte8[1] + 128*byte8[2]"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.const]
+expr = "byte8[6] + 2*byte8[7] + 4*byte9[0] + ... + 256*byte9[6]   (bytes)"
+confidence = "located (decoder sweep; three witnesses)"
+
+[[instruction]]
+name = "load.through.pair.8"
+opcode = 12688
+example = "2f 04 03 00 80 44 00 20"
+size = 8
+confidence = "destination and pair located by a decoder sweep (three witnesses: S2 +20, S3 +28, S3 +36); no hardware"
+note = "The 8-byte form of load.through.pair, used by S2/S3 for every term but the last (handoff 10ab): dest and pair through the same carriers as the 14-byte form (byte0[7:4] byte2[7:6] byte5[4]; byte1[7:1]); bytes 4..5 carry a composite the decoder prints inside one immediate (0x2100000 on a member's first load, 0x4100000 on its second) whose rule is not recovered - inherited from the witness at that position. Offset 0 on every witness."
+
+[instruction.fields.dest]
+expr = "105 + byte0[4] + 2*byte0[5] + 4*byte0[6] + 8*byte0[7] + 16*byte2[6] + 32*byte2[7] + 64*byte5[4]"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.pair]
+expr = "105 + byte1[7:1]"
+confidence = "located (decoder sweep)"
+
+[[instruction]]
+name = "alu.add.reg.12"
+opcode = 10282
+example = "27 04 04 3a 29 00 a3 02 28 82 21 00"
+size = 12
+confidence = "dest, slot A and slot B located by a decoder sweep (S3 +58: r105 = r107 + r109); no hardware for the constant-program instance"
+note = "The register form of op10282 as S3's constant program uses it (handoff 10ab): dest = A + B. dest and slot A are alu.add.block's carriers; slot B is byte8[7] + byte9[6:0] - the SAME slot the block form's constant occupies (its constant adds byte8[6] as bit 0 and sets the mode bit byte10[1]); byte4[2] is the mode bit that would make slot A a block operand (S2/S3's mains, which read block[20|24] in slot A). Both trailing operands are lifetimes (16 = release)."
+
+[instruction.fields.src2]
+expr = "105 + byte8[7] + 2*byte9[0] + 4*byte9[1] + 8*byte9[2] + 16*byte9[3] + 32*byte9[4] + 64*byte9[5] + 128*byte9[6]"
+confidence = "located (decoder sweep)"
+
+[[instruction]]
+name = "publish.add.block0.12"
+opcode = 10306
+example = "c7 04 04 1a 31 00 a3 0a 28 81 21 00"
+size = 12
+confidence = "constant and both sources located by a decoder sweep (two witnesses: S2 const 20 = r105 + r107, S3 const 24 = r106 + r105); no hardware"
+note = "The publishing add (handoff 10ab): block[const] = A + B, both released - how S2/S3 fold a[0] + b[0] (+ c[0]) into the one word main reads. The constant is publish.block0.8's nine-bit field (byte3[0] + the ALU dest slot as bits 1..8); A and B are alu.add.reg.12's slots. byte1[3:2] differ between the two witnesses and print nothing - inherited per member, not authored. S3's instruction is reproduced from S2's template by writing (24, 106, 105) into the located carriers, differing only in those inherited bits."
+
+[instruction.fields.const]
+expr = "byte3[0] + 2*byte0[4] + 4*byte7[3] + 8*byte7[4] + 16*byte0[7] + 32*byte7[5] + 64*byte2[7] + 128*byte2[3] + 256*byte2[4]   (bytes)"
+confidence = "located (decoder sweep)"
+
+[[instruction]]
+name = "publish.coord.imm.10"
+opcode = 11844
+example = "34 81 03 0a 20 00 a0 02 00 00"
+size = 10
+confidence = "immediate (32 bits) located by a decoder sweep, two witnesses (T3 y = 1, T4 x = 3); the held-out T6 (y = 2) predicted byte for byte; no hardware"
+note = "Publishes a NON-ZERO constant into the coordinate block (op4) at a byte constant - Apple's form for tex.read(uint2(3, 0)) / uint2(gid.x, 1) (handoff 10ad). A zero constant takes op556 (4 bytes, no immediate). This compiler publishes constants from materialised registers through op592 instead. The 32-bit immediate: bit 0 byte1[0], bit 1 byte1[1], bits 2..9 byte8, 10..17 byte9, then byte5[7] byte3[7:5] byte6[3:0] byte4[2:0] byte5[3] byte2[2] byte2[5] (results/g17-texture-fetch-consumer-v1); the constant shares op592's nine-bit carriers plus byte7[6] byte4[4:3] byte4[7]."
+
+[[instruction]]
+name = "alu.mul.block"
+opcode = 10825
+example = "27 04 04 1a 21 00 a1 02 28 84 02 00 01 02"
+size = 14
+confidence = "one witness (T2: r105 = r105 x block[16]); no hardware"
+note = "The block-operand form of the 14-byte multiply, Apple's consumer of a fetch multiplied by a preloaded word (handoff 10ad); the block constant sits where alu.add.block's does. Not modeled, not emitted by this compiler (a multiply of a uniform term refuses by name)."
+
+[[instruction]]
+name = "block.read.4"
+opcode = 586
+example = "1b 10 01 08"
+size = 4
+confidence = "one witness in this family (T1: r106 <- block[16]); many in the corpus; no hardware"
+note = "Reads a word of the argument block into a register (handoff 10ad): Apple's way of bringing a preloaded word into a register when no ALU consumes it directly (T1 stores a[0] beside the fetch). Not modeled here."
+
+[[instruction]]
+name = "load.vec4.indexed.8"
+opcode = 12709
+example = "0f 04 03 08 78 0a 10 00"
+size = 8
+confidence = "operands located by a decoder sweep over the V-family witnesses; no hardware"
+note = "Loads FOUR consecutive words at [descriptor + index register (+ displacement)] into a register 4-tuple r<t>..r<t+3> - what Apple selects for `in[gid.x]` on a device uint4 buffer (handoff 10ae; results/g17-vector-memory-v1). The descriptor constant is byte1 in bytes, 4 x the binding rank, the same law the scalar load and the texture fetch follow; the tuple base is the store family's seven-bit source field; the index is byte3[7:1]; the displacement is byte6[7:5] + byte7[4:0] in units of EIGHT bytes (16 -> 2, 32 -> 4); byte5[2] is the index register's lifetime (set = release). LENGTH IS NOT AN OPERAND: Apple picks 8 bytes after an ALU and 14 after a special-register read or a store, through the same unrecovered wait composite in bytes 4..5 that handoff 10ac left open. A program with ONE vector load keeps that selection; a program with MORE than one takes the 14-byte form for every load (MM 25.139.2: bytes 4..13 of the scalar load.14 with the count and access size written are Apple's witnessed op12709/14 tail), so the composite is never asked. Earlier this compiler refused a second vector load by name."
+
+[instruction.fields.descriptor]
+expr = "byte1   (bytes; 4 x the binding rank)"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.tuple_base]
+expr = "105 + byte0[4] + 2*byte0[5] + 4*byte0[6] + 8*byte0[7] + 16*byte2[6] + 32*byte2[7] + 64*byte5[4]"
+confidence = "located (decoder sweep)"
+
+[instruction.fields.index]
+expr = "105 + byte3[7:1]"
+confidence = "located (decoder sweep)"
+
+[[instruction]]
+name = "store.vec4.indexed.8"
+opcode = 17256
+example = "0f 00 03 08 61 0e 10 00"
+size = 8
+confidence = "operands located by a decoder sweep over the V-family witnesses; no hardware"
+note = "Stores a register 4-tuple to [descriptor + index register + displacement] (handoff 10ae): the per-thread vector store this compiler's mem.device.store limitation named as unrepresented. Same carriers as load.vec4.indexed.8; displacements 0, 16 and 32 are witnessed (V0/V4/V6) and any other refuses. A value taken straight from a load or a texture fetch refuses: this form has no load-wait, and every witness stores ALU results."
+

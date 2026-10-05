@@ -1,0 +1,33 @@
+# A MATCHED THREADGROUP STORE AND LOAD FROM ONE KERNEL, so their address expressions
+# agree by construction rather than by being matched up afterwards.
+# This is the observable that would make threadgroup memory readable the way op14099
+# flag.mov made the flag file readable: author the store, author the load to the same
+# address, then an ordinary device store of what came back.
+# The address is operand 3 and it is an EXPRESSION - agx3dis --expr walks the MCExpr and
+# prints its constant instead of the allocator's address, which is what made these
+# comparable at all.
+
+== a6-tgcalc ==
+  store.tg  op13288  len 8   0f04030203061040
+      00000000  8  13288 reg:105 imm:16 imm:2066 expr:bin(op0,const(4),2) imm:0 reg:426 imm:16 imm:0 imm:4
+  load.tg   op12367  len 14  0f0403001a0410a0410080000000
+      00000000 14  12367 reg:105 imm:137447342080 imm:2066 expr:bin(op0,const(4),2) imm:0 imm:0 imm:0 imm:1
+
+== a6-tgidx ==
+  store.tg  op13288  len 10  0f040302030611c00020
+      00000000 10  13288 reg:105 imm:2147483664 imm:2066 expr:bin(op0,const(4),2) imm:0 reg:282 imm:16 imm:0 imm:4
+  load.tg   op12364  len 14  0f0403021a2610c0410080000000
+      00000000 14  12364 reg:105 imm:137464119296 imm:2066 expr:bin(op0,const(4),2) imm:0 reg:426 imm:16 imm:0 imm:4
+
+== bar_both ==
+  store.tg  op13288  len 8   1f08030003061040
+      00000000  8  13288 reg:106 imm:16 imm:2066 expr:bin(op0,const(8),2) imm:0 reg:425 imm:16 imm:0 imm:4
+  load.tg   op12364  len 14  0f0803001a0211c0410080000000
+      00000000 14  12364 reg:105 imm:137447342080 imm:2066 expr:bin(op0,const(8),2) imm:0 reg:281 imm:0 imm:0 imm:4
+
+== bar_dev ==
+  store.tg  op13288  len 8   1f08030003061040
+      00000000  8  13288 reg:106 imm:16 imm:2066 expr:bin(op0,const(8),2) imm:0 reg:425 imm:16 imm:0 imm:4
+  load.tg   op12364  len 14  0f0803001a0211c0410080000000
+      00000000 14  12364 reg:105 imm:137447342080 imm:2066 expr:bin(op0,const(8),2) imm:0 reg:281 imm:0 imm:0 imm:4
+

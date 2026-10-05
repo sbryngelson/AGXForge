@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "source_commit": "e58cf627f",
+  "scope": "33 stage checkpoints and three final outputs against preregistered fourteen-stage cold hardware run",
+  "rows": [
+    {
+      "iteration": 0,
+      "input_sha256": "1e37ff1f15d7fc099fdf372e3c1d37668285bdc0cd53f8804a5c04bf8aaadb16",
+      "stage_byte_identity": {
+        "pack": true,
+        "q_bias": true,
+        "k_bias": true,
+        "v_bias": true,
+        "scores": true,
+        "softmax": true,
+        "context": true,
+        "context_pack": true,
+        "out_projection": true,
+        "residual": true,
+        "layernorm": true
+      },
+      "final_byte_identity": true
+    },
+    {
+      "iteration": 1,
+      "input_sha256": "f8a55cd27e8eff239c4bf97528b1c2ef0ae368a08bb57e8f097f546661ad8f42",
+      "stage_byte_identity": {
+        "pack": true,
+        "q_bias": true,
+        "k_bias": true,
+        "v_bias": true,
+        "scores": true,
+        "softmax": true,
+        "context": true,
+        "context_pack": true,
+        "out_projection": true,
+        "residual": true,
+        "layernorm": true
+      },
+      "final_byte_identity": true
+    },
+    {
+      "iteration": 2,
+      "input_sha256": "f26a318ee84dee6c71e2deecc4d4be0df7d1bb452358a601aab6455693b0176c",
+      "stage_byte_identity": {
+        "pack": true,
+        "q_bias": true,
+        "k_bias": true,
+        "v_bias": true,
+        "scores": true,
+        "softmax": true,
+        "context": true,
+        "context_pack": true,
+        "out_projection": true,
+        "residual": true,
+        "layernorm": true
+      },
+      "final_byte_identity": true
+    }
+  ]
+}

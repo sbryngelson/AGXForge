@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-19",
+  "source": "results/g17-tensorops-recon-v1/variant_int_survey.log",
+  "method": "compile-only Apple backend survey; one op10384 per spelling",
+  "forms_built": 40,
+  "ordinary_four_letter": {
+    "forms": 16,
+    "live_positions": {
+      "A_signedness": 3,
+      "B_signedness": 4
+    },
+    "dead_positions": [
+      1,
+      2
+    ],
+    "instruction_bytes_by_live_pair": {
+      "ss": "2f00250a220aa1024004",
+      "su": "2f00250a2202a1024004",
+      "us": "2f00250a220aa1020004",
+      "uu": "2f00250a2202a1020004"
+    }
+  },
+  "saturating_four_letter": {
+    "forms": 16,
+    "live_positions": {
+      "A_signedness": 2,
+      "B_signedness": 3
+    },
+    "dead_positions": [
+      1,
+      4
+    ],
+    "instruction_bytes_by_live_pair": {
+      "ss": "2f00250a220aa1025004",
+      "su": "2f00250a2202a1025004",
+      "us": "2f00250a220aa1021004",
+      "uu": "2f00250a2202a1021004"
+    }
+  },
+  "ordinary_two_letter": {
+    "forms": 4,
+    "A_signedness_position": 1,
+    "B_signedness_position": 2
+  },
+  "saturating_two_letter": {
+    "forms": 4,
+    "A_signedness": "forced signed",
+    "B_signedness_position": 1,
+    "dead_positions": [
+      2
+    ]
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "format": "g17-complete-encoder-reference-v1",
+  "status": "cpu_references_generated_not_gpu_validated",
+  "gpu_dispatched": false,
+  "checkpoint": {
+    "format": "g17-checkpoint-payload-verification-v1",
+    "repository": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "bytes": 90868376,
+    "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "weight_payload_verified": true,
+    "gpu_admitted": false
+  },
+  "contract_sha256": "a226a16458bb9067ea1b2cf64cc8c0edf0695218778f3f235954d949c83ba0ef",
+  "graph_sha256": "280e3d17544436149531e26a566dc2595a71060ebfdbec966d5c6ef6030292ed",
+  "source_sha256": {
+    "g17inferencereference.py": "b42a88950ac6f3a5dd0432139a89ea5544bc99eb67a0436499c7909d04c940d5",
+    "g17residentffnreference.py": "ad2ba6cb9daee5215528b472a0c7da485ff267685b2ff4496e07645183938b99",
+    "g17residentattentionreference.py": "4f50a74196b73dd020d271ef03f6d72e15a32d8fd13f893939b3794412177aa8"
+  },
+  "libraries": {
+    "torch": "2.12.0",
+    "numpy": "2.4.6",
+    "transformers": "5.16.1"
+  },
+  "cases": [
+    {
+      "text": "A dog is running through the grass.",
+      "tokens": 10,
+      "input": {
+        "format": "g17-native-text-input-v1",
+        "checkpoint_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "tokenizer": {
+          "format": "g17-pinned-tokenizer-v1",
+          "repository": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "files": {
+            "tokenizer.json": {
+              "bytes": 466247,
+              "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+              "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+            },
+            "tokenizer_config.json": {
+              "bytes": 350,
+              "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+              "git_blob": "c79f2b6a0cea6f4b564fed1938984bace9d30ff0"
+            },
+            "special_tokens_map.json": {
+              "bytes": 112,
+              "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+              "git_blob": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5"
+            },
+            "vocab.txt": {
+              "bytes": 231508,
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+              "git_blob": "fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+            }
+          }
+        },
+        "tokenizer_engine": {
+          "transformers": "5.16.1",
+          "tokenizers": "0.23.1"
+        },
+        "token_ids": [
+          101,
+          1037,
+          3899,
+          2003,
+          2770,
+          2083,
+          1996,
+          5568,
+          1012,
+          102
+        ],
+        "position_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "attention_mask": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "segment_ids": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "chat": false,
+        "gpu_dispatched": false
+      },
+      "framework_control_max_abs": 5.3290705182007514e-14,
+      "native_estimate_vs_original": {
+        "max_abs": 0.00010252403334097202,
+        "cosine": 0.9999998163114581
+      },
+      "native_estimate_vs_policy": {
+        "max_abs": 6.491016536528619e-05,
+        "cosine": 0.9999999103014854
+      },
+      "cpu_policy_bound_passed": true,
+      "cpu_original_quality_passed": true,
+      "reference_file": {
+        "name": "case-0.npz",
+        "sha256": "561bd3f25a83a283f9556b088e89fc4c971da1a049650dc3b181a0cc79d7776d"
+      },
+      "node_outputs_per_policy": {
+        "original_fp64": 79,
+        "half_transport_fp64": 79,
+        "native_schedule_estimate": 79
+      }
+    },
+    {
+      "text": "A puppy runs across a green field.",
+      "tokens": 10,
+      "input": {
+        "format": "g17-native-text-input-v1",
+        "checkpoint_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "tokenizer": {
+          "format": "g17-pinned-tokenizer-v1",
+          "repository": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "files": {
+            "tokenizer.json": {
+              "bytes": 466247,
+              "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+              "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+            },
+            "tokenizer_config.json": {
+              "bytes": 350,
+              "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+              "git_blob": "c79f2b6a0cea6f4b564fed1938984bace9d30ff0"
+            },
+            "special_tokens_map.json": {
+              "bytes": 112,
+              "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+              "git_blob": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5"
+            },
+            "vocab.txt": {
+              "bytes": 231508,
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+              "git_blob": "fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+            }
+          }
+        },
+        "tokenizer_engine": {
+          "transformers": "5.16.1",
+          "tokenizers": "0.23.1"
+        },
+        "token_ids": [
+          101,
+          1037,
+          17022,
+          3216,
+          2408,
+          1037,
+          2665,
+          2492,
+          1012,
+          102
+        ],
+        "position_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "attention_mask": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "segment_ids": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "chat": false,
+        "gpu_dispatched": false
+      },
+      "framework_control_max_abs": 2.2537527399890678e-14,
+      "native_estimate_vs_original": {
+        "max_abs": 8.068630235846114e-05,
+        "cosine": 0.9999998235979833
+      },
+      "native_estimate_vs_policy": {
+        "max_abs": 5.8970840115663004e-05,
+        "cosine": 0.999999930407871
+      },
+      "cpu_policy_bound_passed": true,
+      "cpu_original_quality_passed": true,
+      "reference_file": {
+        "name": "case-1.npz",
+        "sha256": "8d93b9bc6d03c678ee885af30b3e91b5b2ebee95370f701505599eb3d095a4f4"
+      },
+      "node_outputs_per_policy": {
+        "original_fp64": 79,
+        "half_transport_fp64": 79,
+        "native_schedule_estimate": 79
+      }
+    },
+    {
+      "text": "The spacecraft entered orbit around Mars.",
+      "tokens": 9,
+      "input": {
+        "format": "g17-native-text-input-v1",
+        "checkpoint_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+        "tokenizer": {
+          "format": "g17-pinned-tokenizer-v1",
+          "repository": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "files": {
+            "tokenizer.json": {
+              "bytes": 466247,
+              "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+              "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+            },
+            "tokenizer_config.json": {
+              "bytes": 350,
+              "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",
+              "git_blob": "c79f2b6a0cea6f4b564fed1938984bace9d30ff0"
+            },
+            "special_tokens_map.json": {
+              "bytes": 112,
+              "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",
+              "git_blob": "e7b0375001f109a6b8873d756ad4f7bbb15fbaa5"
+            },
+            "vocab.txt": {
+              "bytes": 231508,
+              "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+              "git_blob": "fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+            }
+          }
+        },
+        "tokenizer_engine": {
+          "transformers": "5.16.1",
+          "tokenizers": "0.23.1"
+        },
+        "token_ids": [
+          101,
+          1996,
+          12076,
+          3133,
+          8753,
+          2105,
+          7733,
+          1012,
+          102
+        ],
+        "position_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "attention_mask": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "segment_ids": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "chat": false,
+        "gpu_dispatched": false
+      },
+      "framework_control_max_abs": 4.440892098500626e-15,
+      "native_estimate_vs_original": {
+        "max_abs": 0.00011181716624928187,
+        "cosine": 0.9999998241378121
+      },
+      "native_estimate_vs_policy": {
+        "max_abs": 5.3082249684005545e-05,
+        "cosine": 0.9999999487613972
+      },
+      "cpu_policy_bound_passed": true,
+      "cpu_original_quality_passed": true,
+      "reference_file": {
+        "name": "case-2.npz",
+        "sha256": "ebd869df7f9d3afea2b1114e35f52df9cbb3b66d26338ffba521c9f03824372a"
+      },
+      "node_outputs_per_policy": {
+        "original_fp64": 79,
+        "half_transport_fp64": 79,
+        "native_schedule_estimate": 79
+      }
+    }
+  ],
+  "scope": "Independent original FP64 framework control and half-transport FP64 model; native arithmetic estimate is not an exact transcendental silicon oracle"
+}

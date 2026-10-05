@@ -1,0 +1,46 @@
+{
+ "name": "pfhead_m7_p1024",
+ "bits": 8,
+ "cap": 2048,
+ "qmv": {
+  "qkv": {
+   "ks": 4
+  },
+  "wo_res1": {
+   "ks": 4
+  },
+  "ffn": {
+   "ks": 2
+  },
+  "w2_res2": {
+   "ks": 4
+  },
+  "head": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "x32": true
+  }
+ },
+ "norm": {
+  "out32": true,
+  "seed": false
+ },
+ "final_norm": {
+  "out32": true,
+  "seed": false
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true
+ },
+ "prompt_len": 1024,
+ "prefill": {
+  "M": 512,
+  "persistent_w16": true,
+  "attn": "mma"
+ },
+ "gen": {
+  "batched": true
+ }
+}

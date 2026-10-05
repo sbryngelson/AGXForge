@@ -1,0 +1,6668 @@
+{
+ "means": "what the ENCODING says about addressing, recovered by compiling programs whose addressing is known and decoding what Apple emits. One thing varies per sweep",
+ "rules": {
+  "alignment": {
+   "answer": "NO SEPARATE INSTRUCTION was observed for a misaligned access",
+   "evidence": "an int written and read at a byte offset of one, through a char pointer cast, emits the SAME opcode pair as the aligned access - 12682 load and 17229 store",
+   "means": "misalignment does not select a form at this width. What this does NOT show is that the hardware permits it: the compiler was told the pointer was aligned by the cast and may simply have believed it, and no dispatch can check because the safety gate refuses these opcodes"
+  },
+  "base_plus_dynamic_index": {
+   "answer": "ordinary integer arithmetic into the index register",
+   "evidence": "A[j + tid] with j loaded at runtime emits a load for j, then an add, then the indexed load - no fused base-plus-index form appears",
+   "means": "the base-plus-dynamic-index rule a weight arena or a spill slot needs is just an add, which is the same path a constant displacement takes and has the same 8-bit ceiling when the addend is a constant"
+  },
+  "beyond_the_immediate": {
+   "boundary": 256,
+   "evidence": "op10279 carries displacements 1 through 255. At 256 and above the compiler emits op10282 or op10283 instead, whose immediate this decoder does not surface as an operand",
+   "means": "an 8-bit unsigned field is the bound on a single-instruction constant offset. A weight arena or spill slot beyond it costs a second instruction, which is the same ceiling the loop-counter work hit on the compare immediate"
+  },
+  "displacement_field": {
+   "bits": 8,
+   "control": {
+    "byte_exact": 15,
+    "disagreements": [],
+    "means": "the field map wrote bytes for displacements it had not seen and Apple compiled the same ones. A map fitted from a sweep and never asked to predict is a description of that sweep",
+    "ran": true,
+    "tested": [
+     5,
+     7,
+     11,
+     23,
+     37,
+     53,
+     73,
+     97,
+     131,
+     173,
+     199,
+     211,
+     233,
+     254,
+     255
+    ]
+   },
+   "layout": [
+    {
+     "byte": 1,
+     "shift": 0,
+     "value_bit": 0,
+     "width": 2
+    },
+    {
+     "byte": 3,
+     "shift": 5,
+     "value_bit": 2,
+     "width": 3
+    },
+    {
+     "byte": 5,
+     "shift": 7,
+     "value_bit": 5,
+     "width": 1
+    },
+    {
+     "byte": 8,
+     "shift": 0,
+     "value_bit": 6,
+     "width": 2
+    }
+   ],
+   "opcode": 10279,
+   "range": "0 to 255"
+  },
+  "displacement_owner": {
+   "evidence": "at displacement 0 the compiler emits read_sr, load, store and no add at all; at any non-zero displacement an add appears between them. No operand of the load moves with the displacement, in any of six element widths",
+   "instruction": "a separate integer add, op10279, emitted BEFORE the load",
+   "means": "the load carries NO displacement field. A compiler wanting base+offset addressing materialises the offset into the index register first"
+  },
+  "displacement_units": {
+   "answer": "ELEMENTS, not bytes",
+   "evidence": "displacement 1, 2, 4 and 8 encode as immediate 1, 2, 4 and 8 for char, short, half, int, float and long alike - six element widths from one byte to eight, with the same immediate",
+   "means": "the element scale is not in the add; it is implied by the LOAD opcode"
+  },
+  "element_width_selects_the_opcode": {
+   "mapping": {
+    "char": [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ],
+    "float": [
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      10
+     ]
+    ],
+    "half": [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ],
+    "int": [
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      10
+     ]
+    ],
+    "long": [
+     [
+      12691,
+      14
+     ],
+     [
+      17238,
+      10
+     ]
+    ],
+    "short": [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ]
+   },
+   "means": "char, short and half share one load/store pair, int and float another, long a third. The width is chosen by the OPCODE rather than carried in a field, so a heterogeneous arena needs a different instruction per element width, not a different operand"
+  },
+  "equation": "address = base + (index + displacement) * sizeof(element)",
+  "index_width": {
+   "answer": "a 64-bit index selects a DIFFERENT load form",
+   "evidence": "a uint index emits op12682; the same access with a ulong index emits op12688, preceded by a shl/shl.hi pair that scales the 64-bit value",
+   "means": "index width is in the OPCODE, like element width, and a 64-bit index also costs an explicit two-instruction shift to scale. A compiler indexing a large arena pays both"
+  },
+  "negative_displacement": {
+   "answer": "NOT OBSERVED, and not shown to be impossible",
+   "evidence": "every negative source displacement tried compiled to a program with no add at all - the compiler folds it elsewhere - so this instrument saw no negative immediate to read",
+   "means": "the field is reported as UNSIGNED because 0 to 255 is what was observed. Whether the silicon reads it as signed is a question about a value Apple never emitted here, which only an authored dispatch could settle - and the safety gate refuses these opcodes"
+  },
+  "vector_width": {
+   "answer": "a four-wide vector access has its own form",
+   "evidence": "int4 emits op12709 and op17256 where int emits op12682 and op17229",
+   "means": "vector width selects the opcode as element width does, so a 128-bit access is one instruction rather than four"
+  }
+ },
+ "sweeps": {
+  "displacement.char": {
+   "element": "char",
+   "element_bytes": 1,
+   "forms": [
+    [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ]
+   ],
+   "label": "disp",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "17000300182210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "127": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "128": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "255": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "256": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1023": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1024": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4095": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 1": {
+     "slope": null,
+     "values": {
+      "0": 16777216,
+      "1": 0,
+      "1023": 0,
+      "1024": 0,
+      "127": 0,
+      "128": 0,
+      "16": 0,
+      "2": 0,
+      "255": 0,
+      "256": 0,
+      "3": 0,
+      "32": 0,
+      "4": 0,
+      "4095": 0,
+      "64": 0,
+      "8": 0
+     }
+    },
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "0": 0,
+      "1": 2,
+      "1023": 2,
+      "1024": 2,
+      "127": 2,
+      "128": 2,
+      "16": 2,
+      "2": 2,
+      "255": 2,
+      "256": 2,
+      "3": 2,
+      "32": 2,
+      "4": 2,
+      "4095": 2,
+      "64": 2,
+      "8": 2
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    16,
+    32,
+    64,
+    127,
+    128,
+    255,
+    256,
+    1023,
+    1024,
+    4095
+   ]
+  },
+  "displacement.float": {
+   "element": "float",
+   "element_bytes": 4,
+   "forms": [
+    [
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      10
+     ]
+    ]
+   ],
+   "label": "disp",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "0f000302182210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "127": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "128": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "255": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "256": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1023": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1024": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "4095": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "0": 2,
+      "1": 0,
+      "1023": 0,
+      "1024": 0,
+      "127": 0,
+      "128": 0,
+      "16": 0,
+      "2": 0,
+      "255": 0,
+      "256": 0,
+      "3": 0,
+      "32": 0,
+      "4": 0,
+      "4095": 0,
+      "64": 0,
+      "8": 0
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    16,
+    32,
+    64,
+    127,
+    128,
+    255,
+    256,
+    1023,
+    1024,
+    4095
+   ]
+  },
+  "displacement.half": {
+   "element": "half",
+   "element_bytes": 2,
+   "forms": [
+    [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ]
+   ],
+   "label": "disp",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "1700030018221080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2049,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "127": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "128": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "255": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "256": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1023": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1024": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4095": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 1": {
+     "slope": null,
+     "values": {
+      "0": 16777216,
+      "1": 0,
+      "1023": 0,
+      "1024": 0,
+      "127": 0,
+      "128": 0,
+      "16": 0,
+      "2": 0,
+      "255": 0,
+      "256": 0,
+      "3": 0,
+      "32": 0,
+      "4": 0,
+      "4095": 0,
+      "64": 0,
+      "8": 0
+     }
+    },
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "0": 0,
+      "1": 2,
+      "1023": 2,
+      "1024": 2,
+      "127": 2,
+      "128": 2,
+      "16": 2,
+      "2": 2,
+      "255": 2,
+      "256": 2,
+      "3": 2,
+      "32": 2,
+      "4": 2,
+      "4095": 2,
+      "64": 2,
+      "8": 2
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    16,
+    32,
+    64,
+    127,
+    128,
+    255,
+    256,
+    1023,
+    1024,
+    4095
+   ]
+  },
+  "displacement.int": {
+   "element": "int",
+   "element_bytes": 4,
+   "forms": [
+    [
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      10
+     ]
+    ]
+   ],
+   "label": "disp",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "0f000302182210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "127": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "128": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "255": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "256": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1023": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1024": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "4095": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "0": 2,
+      "1": 0,
+      "1023": 0,
+      "1024": 0,
+      "127": 0,
+      "128": 0,
+      "16": 0,
+      "2": 0,
+      "255": 0,
+      "256": 0,
+      "3": 0,
+      "32": 0,
+      "4": 0,
+      "4095": 0,
+      "64": 0,
+      "8": 0
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    16,
+    32,
+    64,
+    127,
+    128,
+    255,
+    256,
+    1023,
+    1024,
+    4095
+   ]
+  },
+  "displacement.long": {
+   "element": "long",
+   "element_bytes": 8,
+   "forms": [
+    [
+     [
+      12691,
+      14
+     ],
+     [
+      17238,
+      10
+     ]
+    ]
+   ],
+   "label": "disp",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "0f000304382a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 24117248,
+        "2": 2048,
+        "3": 0,
+        "5": 4,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "127": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "128": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "255": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "256": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "1023": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "1024": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "4095": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 1": {
+     "slope": null,
+     "values": {
+      "0": 24117248,
+      "1": 7340032,
+      "1023": 7340032,
+      "1024": 7340032,
+      "127": 7340032,
+      "128": 7340032,
+      "16": 7340032,
+      "2": 7340032,
+      "255": 7340032,
+      "256": 7340032,
+      "3": 7340032,
+      "32": 7340032,
+      "4": 7340032,
+      "4095": 7340032,
+      "64": 7340032,
+      "8": 7340032
+     }
+    },
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "0": 4,
+      "1": 0,
+      "1023": 0,
+      "1024": 0,
+      "127": 0,
+      "128": 0,
+      "16": 0,
+      "2": 0,
+      "255": 0,
+      "256": 0,
+      "3": 0,
+      "32": 0,
+      "4": 0,
+      "4095": 0,
+      "64": 0,
+      "8": 0
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    16,
+    32,
+    64,
+    127,
+    128,
+    255,
+    256,
+    1023,
+    1024,
+    4095
+   ]
+  },
+  "displacement.short": {
+   "element": "short",
+   "element_bytes": 2,
+   "forms": [
+    [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ]
+   ],
+   "label": "disp",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "1700030018221080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2049,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "127": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "128": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "255": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "256": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1023": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "1024": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4095": {
+     "memory": [
+      {
+       "bytes": "1700030218021080c10080000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2049,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610808020",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2049,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 1": {
+     "slope": null,
+     "values": {
+      "0": 16777216,
+      "1": 0,
+      "1023": 0,
+      "1024": 0,
+      "127": 0,
+      "128": 0,
+      "16": 0,
+      "2": 0,
+      "255": 0,
+      "256": 0,
+      "3": 0,
+      "32": 0,
+      "4": 0,
+      "4095": 0,
+      "64": 0,
+      "8": 0
+     }
+    },
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "0": 0,
+      "1": 2,
+      "1023": 2,
+      "1024": 2,
+      "127": 2,
+      "128": 2,
+      "16": 2,
+      "2": 2,
+      "255": 2,
+      "256": 2,
+      "3": 2,
+      "32": 2,
+      "4": 2,
+      "4095": 2,
+      "64": 2,
+      "8": 2
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    8,
+    16,
+    32,
+    64,
+    127,
+    128,
+    255,
+    256,
+    1023,
+    1024,
+    4095
+   ]
+  },
+  "dynamic_index.int": {
+   "element": "int",
+   "forms": [
+    [
+     [
+      12688,
+      8
+     ],
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      8
+     ]
+    ]
+   ],
+   "label": "dyn",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "2f04030088640020",
+       "length": 8,
+       "op": 12688,
+       "operands": {
+        "0": 4,
+        "1": 0,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 0
+       }
+      },
+      {
+       "bytes": "0f000304804600c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "1f04030001261040",
+       "length": 8,
+       "op": 17229,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      12688,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "2f04030088648020",
+       "length": 8,
+       "op": 12688,
+       "operands": {
+        "0": 4,
+        "1": 0,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 4
+       }
+      },
+      {
+       "bytes": "0f000304804600c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "1f04030001261040",
+       "length": 8,
+       "op": 17229,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      12688,
+      17229
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "2f04030088640021",
+       "length": 8,
+       "op": 12688,
+       "operands": {
+        "0": 4,
+        "1": 0,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 8
+       }
+      },
+      {
+       "bytes": "0f000304804600c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "1f04030001261040",
+       "length": 8,
+       "op": 17229,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      12688,
+      17229
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "2f04030088648021",
+       "length": 8,
+       "op": 12688,
+       "operands": {
+        "0": 4,
+        "1": 0,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 12
+       }
+      },
+      {
+       "bytes": "0f000304804600c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "1f04030001261040",
+       "length": 8,
+       "op": 17229,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 0,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      12688,
+      17229
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 6": {
+     "slope": 4.0,
+     "values": {
+      "0": 0,
+      "1": 4,
+      "2": 8,
+      "3": 12
+     }
+    }
+   },
+   "values": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  "index_scale.char": {
+   "element": "char",
+   "element_bytes": 1,
+   "forms": [
+    [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ]
+   ],
+   "label": "scale",
+   "per_value": {
+    "1": {
+     "memory": [
+      {
+       "bytes": "17000300182210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "1700030018221080c10480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "17000300182210c0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "17000300182210e0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "1700030018221080410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 16777216,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 1": {
+     "slope": null,
+     "values": {
+      "1": 16777216,
+      "16": 16777216,
+      "2": 16777216,
+      "3": 0,
+      "4": 16777216,
+      "8": 16777216
+     }
+    },
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "1": 0,
+      "16": 0,
+      "2": 0,
+      "3": 2,
+      "4": 0,
+      "8": 0
+     }
+    }
+   },
+   "values": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    16
+   ]
+  },
+  "index_scale.int": {
+   "element": "int",
+   "element_bytes": 4,
+   "forms": [
+    [
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      10
+     ]
+    ]
+   ],
+   "label": "scale",
+   "per_value": {
+    "1": {
+     "memory": [
+      {
+       "bytes": "0f000302182210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "1": 2,
+      "16": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "8": 0
+     }
+    }
+   },
+   "values": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    16
+   ]
+  },
+  "index_scale.long": {
+   "element": "long",
+   "element_bytes": 8,
+   "forms": [
+    [
+     [
+      12691,
+      14
+     ],
+     [
+      17238,
+      10
+     ]
+    ]
+   ],
+   "label": "scale",
+   "per_value": {
+    "1": {
+     "memory": [
+      {
+       "bytes": "0f000304382a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 24117248,
+        "2": 2048,
+        "3": 0,
+        "5": 4,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "3": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "0f000300380a10e0410080000000",
+       "length": 14,
+       "op": 12691,
+       "operands": {
+        "0": 0,
+        "1": 7340032,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040304210e10e00020",
+       "length": 10,
+       "op": 17238,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "3": 2,
+        "5": 4,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12691,
+      17238
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {
+    "instruction 0 operand 1": {
+     "slope": null,
+     "values": {
+      "1": 24117248,
+      "16": 7340032,
+      "2": 7340032,
+      "3": 7340032,
+      "4": 7340032,
+      "8": 7340032
+     }
+    },
+    "instruction 0 operand 5": {
+     "slope": null,
+     "values": {
+      "1": 4,
+      "16": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "8": 0
+     }
+    }
+   },
+   "values": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    16
+   ]
+  },
+  "negative_displacement.char": {
+   "element": "char",
+   "element_bytes": 1,
+   "forms": [
+    [
+     [
+      12646,
+      14
+     ],
+     [
+      17193,
+      10
+     ]
+    ]
+   ],
+   "label": "negdisp",
+   "per_value": {
+    "-1024": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-256": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-128": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-64": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-32": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-16": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-8": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-4": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-2": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    },
+    "-1": {
+     "memory": [
+      {
+       "bytes": "17000302180210a0410480000000",
+       "length": 14,
+       "op": 12646,
+       "operands": {
+        "0": 2,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "17040300010610a00024",
+       "length": 10,
+       "op": 17193,
+       "operands": {
+        "0": 2,
+        "1": 16,
+        "2": 2048,
+        "3": 2,
+        "5": 0,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12646,
+      17193
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {},
+   "values": [
+    -1,
+    -2,
+    -4,
+    -8,
+    -16,
+    -32,
+    -64,
+    -128,
+    -256,
+    -1024
+   ]
+  },
+  "negative_displacement.int": {
+   "element": "int",
+   "element_bytes": 4,
+   "forms": [
+    [
+     [
+      12682,
+      14
+     ],
+     [
+      17229,
+      10
+     ]
+    ]
+   ],
+   "label": "negdisp",
+   "per_value": {
+    "-1024": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-256": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-128": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-64": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-32": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-16": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-8": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-4": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-2": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    },
+    "-1": {
+     "memory": [
+      {
+       "bytes": "0f000300180210c0410080000000",
+       "length": 14,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12682,
+      17229
+     ],
+     "status": "ok"
+    }
+   },
+   "shape_changed_at": [],
+   "stable_forms": true,
+   "tracks": {},
+   "values": [
+    -1,
+    -2,
+    -4,
+    -8,
+    -16,
+    -32,
+    -64,
+    -128,
+    -256,
+    -1024
+   ]
+  },
+  "shape_probes": {
+   "aligned_int": {
+    "instructions": [
+     {
+      "length": 14,
+      "name": "load",
+      "op": 12682
+     },
+     {
+      "length": 10,
+      "name": "store",
+      "op": 17229
+     }
+    ],
+    "source": "    C[tid] = A[tid];\n",
+    "status": "ok"
+   },
+   "base_plus_dynamic_index": {
+    "instructions": [
+     {
+      "length": 14,
+      "name": "load",
+      "op": 12688
+     },
+     {
+      "length": 12,
+      "name": "add",
+      "op": 10282
+     },
+     {
+      "length": 14,
+      "name": "load",
+      "op": 12682
+     },
+     {
+      "length": 10,
+      "name": "store",
+      "op": 17229
+     }
+    ],
+    "source": "    uint j = C[0];\n    C[tid] = A[j + tid];\n",
+    "status": "ok"
+   },
+   "byte_misaligned_int": {
+    "instructions": [
+     {
+      "length": 14,
+      "name": "load",
+      "op": 12682
+     },
+     {
+      "length": 10,
+      "name": "store",
+      "op": 17229
+     }
+    ],
+    "source": "    device char *p = (device char*)C;\n    const device char *q = (const device char*)A;\n    *(device int*)(p + tid*4 + 1) = *(const device int*)(q + tid*4 + 1);\n",
+    "status": "ok"
+   },
+   "index_is_64_bit": {
+    "instructions": [
+     {
+      "length": 14,
+      "name": "shl.hi",
+      "op": 14310
+     },
+     {
+      "length": 14,
+      "name": "shl",
+      "op": 14391
+     },
+     {
+      "length": 14,
+      "name": "load",
+      "op": 12688
+     },
+     {
+      "length": 10,
+      "name": "store",
+      "op": 17229
+     }
+    ],
+    "source": "    ulong j = (ulong)tid * 3;\n    C[tid] = A[j];\n",
+    "status": "ok"
+   },
+   "vector_int4": {
+    "instructions": [
+     {
+      "length": 14,
+      "name": "load",
+      "op": 12709
+     },
+     {
+      "length": 10,
+      "name": "store",
+      "op": 17256
+     }
+    ],
+    "source": "    device int4 *c4 = (device int4*)C;\n    const device int4 *a4 = (const device int4*)A;\n    c4[tid] = a4[tid];\n",
+    "status": "ok"
+   }
+  },
+  "threadgroup_displacement.int": {
+   "element": "int",
+   "element_bytes": 4,
+   "label": "tgdisp",
+   "note": "threadgroup address space, which uses its own load and store opcodes",
+   "per_value": {
+    "0": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210c0410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "1": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0290c0410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 4
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "2": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210c1410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 8
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "4": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210c2410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 16
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "8": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210c4410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 32
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "16": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210c8410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 64
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "32": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210d0410080000000",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 128
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    },
+    "64": {
+     "memory": [
+      {
+       "bytes": "0f00030218221040",
+       "length": 8,
+       "op": 12682,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f080302030210c00020",
+       "length": 10,
+       "op": 13288,
+       "operands": {
+        "0": 0,
+        "1": 16,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 0
+       }
+      },
+      {
+       "bytes": "0f0803021a0210c0410080000001",
+       "length": 14,
+       "op": 12364,
+       "operands": {
+        "0": 0,
+        "1": 0,
+        "2": 2048,
+        "3": 4,
+        "5": 2,
+        "6": 0,
+        "7": 256
+       }
+      },
+      {
+       "bytes": "0f040302010610c00020",
+       "length": 10,
+       "op": 17229,
+       "operands": {
+        "0": 0,
+        "1": 2147483664,
+        "2": 2048,
+        "3": 2,
+        "5": 2,
+        "6": 16,
+        "7": 0
+       }
+      }
+     ],
+     "opcodes": [
+      12364,
+      12682,
+      13288,
+      17229
+     ],
+     "status": "ok"
+    }
+   }
+  }
+ },
+ "what_this_is_not": "not a claim about what the silicon does with a displacement Apple never emits. A compiler-selected pattern is evidence that an encoding EXISTS, never that it is the only legal one, and every statement here is about the encoding",
+ "why_not_dispatched": "g17safe refuses every load, store and atomic opcode as MayLoad/memory. That gate exists because two GPU hangs on this machine came from memory instructions, one of them taking the window server, so the authored oracle cannot ask these forms anything and this is not a queue to work through"
+}

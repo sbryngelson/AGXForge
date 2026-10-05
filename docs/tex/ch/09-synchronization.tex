@@ -1,0 +1,461 @@
+\chapter{Synchronization}\label{ch:synchronization}
+
+A G17 program has four ordering mechanisms, one per scope, and little is ordered implicitly between them.
+
+\begin{itemize}
+\item Inside one simdgroup, an eight-slot \emph{scoreboard} orders late values. A producer (load, atomic, imageblock read,
+  special-register read, staging write) names a slot; a consumer names the slots it waits on in an eight-bit mask in
+  its own operand 1. There is no wait instruction and, for late values, no interlock: a consumer that does not name the
+  slot reads whatever the register held before.
+\item Between simdgroups of a threadgroup, \emph{\op{447}} is an execution rendezvous whose immediate names
+  the memory kinds it covers. Registers never cross simdgroups, so every hand-off goes through memory and a barrier.
+\item Between threadgroups of one dispatch, the threadgroup barrier does not help. Visibility of device stores
+  across cores needs \emph{\op{14156}} on both sides, and the order of arrival comes from an \emph{atomic}.
+\item Between dispatches, the driver's encoder places a \emph{barrier token} in the command stream.
+\end{itemize}
+
+Forward progress is treated in \cref{sec:forward-progress-in-order}. In the tested configurations threadgroups were
+dispatched in order and no spinning threadgroup gave way to a producer dispatched after it (MM~\mm{25.141.1}). No
+guarantee of that behaviour has been established, so a program must never depend on preemption, and any grid whose
+threadgroups wait on one another must be sized to measured residency.
+
+Several failures measured on this machine came from getting one of visibility, ordering and progress right and
+assuming the others. A device-scope barrier gave a perfect atomic count but stale data, so the count was ordered and the
+data not visible. In a spin-wait the producer ran only after the waiting wave had spun to its cap: visibility was
+in place, progress was not. And one atomic updated memory correctly while its consumer read 0, because the return had
+not yet arrived in the register. Where the three differ they are stated separately below;
+\cref{tab:ordering-by-scope} gives them for each scope.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.71\hsize}XX>{\hsize=1.12\hsize}XXX@{}}
+\caption{Ordering mechanism for each scope, with what it provides for visibility, ordering and forward progress.}\label{tab:ordering-by-scope}\\
+\toprule
+Scope & Mechanism & Visibility & Ordering & Forward progress \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Scope & Mechanism & Visibility & Ordering & Forward progress \\
+\midrule
+\endhead
+one simdgroup & scoreboard slot + consumer wait mask & the register holds the value only for a consumer that waits on its slot & program order on one scoreboard; same-address stores: lowest active lane
+wins & not an issue \\*
+simdgroups of one threadgroup & \op{447} at the matching scope & threadgroup memory: any scope; device memory: see 
+\cref{sec:barriers-fences} & across the barrier & barriers among a threadgroup's simdgroups completed in
+every measured case \\*
+threadgroups of one dispatch & \op{14156} on writer and reader, plus an atomic count & measured for the last-threadgroup pattern & from the atomic; a threadgroup barrier gives none & observed only among resident threadgroups; do not depend on preemption \\*
+dispatches & encoder barrier token & measured & serial encoder: after every dispatch & in order (observed) \\*
+\bottomrule
+\end{xltabular}
+
+\leadhead{Notation.}
+
+\begin{itemize}
+\item \emph{Slot}: one of eight scoreboard entries, 0–7. \emph{Fill slot}: the slot a producer names, printed by the decoder as slot +
+  1 in operand 1 bits 20–23. \emph{Wait mask}: operand 1 bits 24–31; bit 24 + s waits on slot s.
+\item \emph{Late value}: a result that arrives after its producer issues and needs a waiting consumer (\cref{sec:scoreboard}).
+\item \emph{Scope immediate}: operand 1 of \op{447} (20, 154, 276, 532, 1144; \cref{sec:barriers-fences}).
+\item \emph{Residency}: how many threadgroups a core holds at once (rules: \cref{sec:residency-occupancy-rules}; measurements: \cref{sec:residency-occupancy-measurements}).
+\item Registers are named by role. Where the bits named here sit is \cref{sec:scoreboard-publish-wait}; the release lifetime (modifier 16) is
+  \cref{ch:register-file}; costs (dispatch floors, hand-off times, fence costs) are \cref{ch:performance}. "Below Metal" is as defined in
+  \cref{ch:memory}; those runs are recorded in \code{docs/g17-first-dispatch-trials.md}.
+\end{itemize}
+
+\section{The scoreboard}\label{sec:scoreboard}
+
+A late-value producer names its fill slot in its own control word (bits 20–23; measured, MM~\mm{0.8}, MM~\mm{6}); the decoder prints slot + 1, so this compiler's first group reads 8 and means slot 7. A consumer carries
+an eight-bit wait mask in bits 24–31, bit 24 + s for slot s. Nothing else orders them; there is no separate wait instruction. What earlier work called a "tag ring" and separately a
+"load-use wait bit" are this one field.
+
+If the hardware interlocked on the register, the mask would be only a hint; clearing one wait bit tests this. On an MMA whose operands come from loads filling slot 7, clearing its slot-7 wait bit
+(byte0{[}3{]}) made it read the fragments before the loads landed and produce zeros, deterministically; for tensor loads, 50
+of 50 dispatches across five processes returned exactly zero (MM~\mm{6}). The mask's layout was established causally (43
+dispatches) and then by preregistration: for a load filling slot v - 1 the consumer must set bit 24 + (v - 1), 20 of 20
+predicted and confirmed. The imageblock store adds a wrong-slot arm. Storing a freshly loaded value (the load fills slot
+7), the compiled wait on slot 7 gave 32 of 32 lanes correct; with the wait cleared, and with the wait moved to slot 1,
+which nothing fills, every lane stored 0 (three runs each, MM~\mm{25.96}). A set bit therefore waits on its own slot only;
+a late value outstanding on another slot does not hold it.
+
+If the consumer's bit for the producer's slot is clear, the consumer does not stall. It reads the
+register before the late value lands and gets whatever the register held (\cref{fig:scoreboard}(b)).
+\Cref{fig:scoreboard}(a) follows the running example's epilogue through its two late values (\cref{sec:one-program-ir}).
+
+\input{fig/scoreboard}
+
+The same field orders every late value (loads, atomics, imageblock reads, staging writes and special-register reads). The per-form carriers (general loads, the 128-bit vector load, tensor load, the tensor MMA's
+scattered mask bits, the 12-byte ALU wait bits, \op{592}) are \cref{sec:scoreboard-publish-wait}'s table; this section
+gives what they mean. Two carriers are not in that table: in 14-byte stores byte9{[}5{]} is slot 7 in this compiler's encoder
+(\code{agxforge/g17/cc.py}), and for \op{12674} MM~\mm{6} called the whole field bits 20–27, which includes the
+load's own wait mask; the fill slot is bits 20–23 alone. The general-load field is measured through executed consumers
+(MM~\mm{25.115}, MM~\mm{25.121}; \code{tools/g17emu.py} \code{load\_hazards}), the staging-file slot only through the decoder (MM~\mm{25.120.1}).
+
+The rule behind these comes from a decoder census: for 126 forms across 6,594 Apple programs, every instance's wait bits equal
+exactly the slots its source registers are still pending on (\code{isa/g17-wait-mask-census.json}, MM~\mm{25.96}). It covers
+stores: the \op{17256} uses every bit 24–31 (13,140 instances in a 314-object census, each one-hot
+value present), which refuted an earlier "three-bit store limit" that was an encoder-table artifact (MM~\mm{6}). Tensor stores
+are a separate class: all 876 \op{17257} and 118 \op{17258} instances carry a zero wait
+byte, and the same-simdgroup MMA-to-tensor-store path is exact with no wait (measured, MM~\mm{6}).
+
+\emph{Correction:} the 8-byte \op{17229} does carry wait bits (15 corpus instances match their pending
+slots, \code{isa/g17-wait-mask-census.json}; Apple's \code{tex2d-read} carries 0x1000010 on one, MM~\mm{25.146}). The "no wait bit" note
+in \code{agxforge/g17/cc.py} describes this compiler's encoder, which has no carrier for them (\cref{app:a}).
+
+Which consumers need a wait has been measured:
+
+\begin{itemize}
+\item \emph{Not needed:} ordinary ALU to ALU. 52 of 52 ordered adjacent pairs of ordinary ALU instructions read the previous
+  result bit-exactly with no wait (MM~\mm{25.90}, MM~\mm{6}).
+\item \emph{Needed:} loads, imageblock reads, vector-load lanes, the packed half2 load, atomic returns, texture fetches and staging
+  writes. "Needed" applies to every consumer kind: an indirect load whose index is a loaded value read index 0 on every
+  lane (1 of 32 right) until its operand 1 also named slot 7 (32 of 32; MM~\mm{25.104}, MM~\mm{25.90}); \code{simd\_shuffle\_xor} and
+  \code{simd\_broadcast} reading a loaded value directly read it before it arrived (MM~\mm{25.90}); \op{11190}, \op{9986}, \op{14047} and \op{590} do not interlock on a load
+  (MM~\mm{25.133}); a store takes its value register at issue (MM~\mm{25.96}).
+\item \emph{Special-register reads:} \op{14059} publishes a slot and Apple's compiler always waits on it,
+  but a slot-0 read is readable at distance 0 with no wait, and the wait has no measurable cost (measured, MM~\mm{25.117}, MM~\mm{25.121}; the probe and the counts are \cref{sec:read-latency-whether}).
+\item \emph{Open:} whether an ALU consumer of an MMA result is interlocked. One ALU consumer placed directly after an MMA carried
+  no wait and still read the result; no measured pair had an MMA producer (MM~\mm{6}, MM~\mm{25.90}).
+\end{itemize}
+
+An unwaited consumer could read arbitrary data, the late value if it happened to arrive in time, or the register's
+previous contents. To tell these apart the producer's destination was pre-set. With a poison in it, the
+four non-interlocking unary forms returned exactly op(poison) on every lane; with a fresh register they returned op(0); a
+negative control, an add with its load-wait bit cleared, read the poison on 1,024 of 1,024 lanes, so the instrument can
+see a race (measured, MM~\mm{25.133}). The unwaited consumer reads the previous contents, which is why most observed
+failures read 0 and why detecting them takes a sentinel or poison value; a zero-filled buffer cannot show them. Added
+distance does not help; an atomic whose return was published on a slot its consumer did not name returned 0 with
+64 independent instructions in between (below).
+
+\textbf{Worked example: an atomic return published on the wrong slot} (decoded, then executed on hardware; MM~\mm{25.115},
+\code{docs/g17-first-dispatch-trials.md}). This compiler's residency probe counts arrivals with \op{10094} and reads the returned old value. At S = 256 simdgroups every arrival read 1 (a returned 0, plus
+one) while the departure maximum was 256. Of the two explanations that fit, the one first recorded, and later withdrawn, was that
+simultaneous same-address atomics combine and each requester sees the pre-combine value. The other is that the consumer
+read the register before the return arrived. The decoded bytes favoured the second. Marking the atomic's result late
+gave its consumer, \op{10279}, this compiler's load-use wait, mask 0b10000000, slot 7, because this
+compiler's loads fill slot 7. But the atomic's operand 1 bits 20–23 were 1: it filled slot 0, copied from Apple's
+witnesses, where Apple's first consumer waits on bit 24 (120 of 120 corpus instances). The consumer waited on a slot the
+atomic never touched. At larger S arrivals had agreed with departures, which had been read as the wait working; in fact
+the arrivals were staggered enough that each return landed before its consumer read it. The discriminating run changes only the slot: publishing the atomic on slot 7
+(the two programs differ in four bytes) gave an arrival maximum of 256, equal to the departure maximum, 3 of 3, while the
+slot-0 arm read 1. Combining would not depend on which slot the return is published on. Below Metal, the per-lane form behaved the same way: a 12-byte \op{10090}
+publishing on slot 0 (operand 1 0x80100000) updated all 64 cells correctly and returned 0 to every lane, still 0 with 64
+independent two-byte moves inserted before the consumer; changing two atomic bytes to publish on slot 7 (operand 1
+0x80800000) returned all 64 old values. In both cases the fix was to name the producer's actual slot in the consumer's
+mask.
+
+Rules for choosing and reusing slots:
+
+\begin{itemize}
+\item Past eight groups the slot sequence Apple's compiler assigns is scheduler-chosen (twelve loads got 8, 1, 2, 3, 4, 4, 4,
+  4, 7, 7, 6, 5 in decoded values), so an emitter should use an explicit rule, such as K-step k in slot k mod 8; this
+  compiler's K = 256 lowerings use slot k mod 7, exact in 3 of 3 cases (MM~\mm{6}, \code{tools/tensorops-model/scoreboard-store-census.json}).
+\item Reusing a slot after its named consumer has waited is safe (measured); reuse before that consumer is unmeasured and
+  forbidden (MM~\mm{0.14}, MM~\mm{6}).
+\item Not every slot works for every producer. Loads and atomic returns work on slot 7 (measured), but a special-register read
+  publishing on slot 7 stored nothing, waited or not, recorded and not explained (measured, MM~\mm{25.121}; \cref{sec:read-latency-whether}). Use a
+  slot that has been measured for that producer kind.
+\item Atomic return slots (contradiction resolved by scope): the glossary's "the return fills scoreboard slot 7" for the
+  uniform-address atomic and \op{11765} describes this compiler's emission. Apple's corpus fills slots 0
+  and 1, and every first consumer waits on exactly that slot (25 of 25 for the uniform atomic, MM~\mm{25.115}). Slot 7 is this compiler's convention,
+  checked on hardware; Apple's corpus does not use it, and the hardware does not require it.
+\end{itemize}
+
+The release lifetime (16) is destructive and per lane (\cref{ch:register-file}): a store naming one
+register as both value and index, with the index slot releasing it, stores 0 (measured, MM~\mm{25.117}), and an instruction no
+lane executes releases nothing (MM~\mm{25.95}).
+
+\section{Barriers and fences}\label{sec:barriers-fences}
+
+The \op{447} is one six-byte instruction with scheduling class 3, MayStore, NotDuplicable and side effects.
+Only operand 1, the scope immediate, changes with the Metal barrier (\cref{tab:barrier-scopes}; Apple's compiler emits,
+\code{isa/g17-barrier-scopes.txt}).
+
+\begin{longtable}{@{}lll@{}}
+\caption{Metal threadgroup barriers with the bytes and scope immediate Apple's compiler emits for each.}\label{tab:barrier-scopes}\\
+\toprule
+Metal barrier & Bytes & Scope \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Metal barrier & Bytes & Scope \\
+\midrule
+\endhead
+\code{threadgroup\_barrier(mem\_none)} & \code{075100060000} & 20 \\
+\code{threadgroup\_barrier(mem\_device)} & \code{0f6900060000} & 154 \\
+\code{threadgroup\_barrier(mem\_threadgroup)} & \code{275100060000} & 276 \\
+\code{threadgroup\_barrier(mem\_texture)} & \code{876700060000} & 1144 \\
+\code{threadgroup\_barrier(mem\_threadgroup\_imageblock)} & \code{475100060000} & 532 \\
+\bottomrule
+\end{longtable}
+
+\code{mem\_threadgroup | mem\_device} emits two barriers, one per flag; \code{simdgroup\_barrier} emits nothing at all
+(Apple's compiler emits, \code{isa/g17-atomic-semantics.json} barriers). Scopes 16, 528 and 1138 substituted for 276 each
+carried a threadgroup-memory round trip (measured, the threadgroup-barrier notes in \code{tools/g17emu.py}).
+
+Between simdgroups a threadgroup barrier is mandatory (measured, MM~\mm{14}, MM~\mm{17} rule 7). With no barrier, and with
+\code{air.simdgroup.barrier} alone (which emits no instruction), a cross-simdgroup hand-off was wrong in 12 of 12 trials and
+the consumer read exactly the buffer's pre-write state, a race rather than garbage. Every workgroup-barrier variant
+(execution-only, threadgroup memory, device memory, both) was correct in 12 of 12. Below Metal, threadgroup store,
+barrier and load exchanged values between the two simdgroups of a 64-thread group, and also in a half-full 32-thread
+second group (measured, \code{docs/g17-first-dispatch-trials.md}; other partial sizes and inactive-lane accesses untested).
+
+MM~\mm{14} and the emulator treat device-memory ordering between simdgroups differently without conflicting. MM~\mm{14} observed that the execution-only barrier (scope 20) sufficed, and says so as "an observation about this chip, not a guarantee". The
+emulator's race check (MM~\mm{25.197}) orders threadgroup memory across every threadgroup barrier but device memory only across scope 154,
+a conservative choice that no measurement forced. Scope 276 (or any threadgroup barrier scope) is safe for threadgroup
+memory between simdgroups, and scope 154 for device memory between simdgroups of one threadgroup. Code must not rely on scope 20 to
+order memory, on any threadgroup barrier to order anything across threadgroups, or on \code{simdgroup\_barrier} to do anything.
+
+\textbf{Worked example: threadgroup barrier against device fence} (executed on hardware, MM~\mm{25.140.5}). Every threadgroup
+writes a marker, crosses a barrier, and counts itself with \op{10094} on its rank-0
+written buffer; the last threadgroup to arrive sums all markers. With the barrier at scope 154 the count was a perfect
+permutation, yet the last threadgroup read stale markers: it summed 1,560 of 2,080 at 64 threadgroups and 123,408 of
+131,328 at 512, differing by round. Apple's compiler, given
+\code{atomic\_thread\_fence(mem\_device, seq\_cst, thread\_scope\_device)}, emits \op{14156}, operands (0, 186), six
+bytes \code{0f2b00060000}, no registers, and places one after the stores and one again inside the last threadgroup's region;
+the loads stay ordinary. With those two fences both sums were exact. This compiler now emits those bytes, read back
+through Apple's decoder. A fused attention merge built on the pattern was bit-exact at q0 = 0, 5, 128 and 271 over five
+rounds each, with NaN-poisoned rows (costs are \cref{ch:performance}'s).
+
+The imageblock barrier is the threadgroup barrier at scope 532 (\cref{sec:imageblock-per-core-tile}). The emulator admits it only for one simdgroup in
+lockstep; more than one simdgroup was never witnessed (MM~\mm{25.145.2}). A barrier inside an exec-mask region is not modelled
+there either (\code{tools/g17emu.py}).
+
+Encoder-level barriers come from a static read of the AGX user driver (decoder, MM~\mm{25.141.20}); their costs are measured
+in \cref{ch:performance}.
+
+\begin{itemize}
+\item A serial compute encoder emits a barrier token after every dispatch. A concurrent encoder emits one only where
+  \code{memoryBarrierWithScope:} asks; in a serial encoder that call only posts a notification. For a chain where every
+  dispatch depends on the last, both emit the same tokens.
+\item The token is one 32-bit command word, 0x60000160, OR 0x1000 when a pending flag is set; with its boolean arguments it
+  ORs 0x400 or appends 0x60000502, both of unknown function. Its cost is the GPU draining at the token.
+\item Hazard tracking never enters the per-dispatch path: tracked and untracked buffers encode identically inside an encoder.
+  Consecutive compute encoders in one command buffer are merged, with an unconditional barrier after a concurrent one.
+\item Measurements agree with this: tracked buffers with one serial encoder per token beat untracked buffers ordered by an
+  \code{MTLSharedEvent} between command buffers, and untracked buffers without ordering race (MM~\mm{0.15}).
+\end{itemize}
+
+Below Metal, two dependent Submits on one queue (the second reading the first's output) computed exactly, also with a
+program switch between them; and one Submit carrying two or three command records, each running a per-lane \code{+7}
+read-modify-write on the same words, left 14 and 21 in every lane, so each record saw the previous record's result
+(measured, \code{docs/g17-first-dispatch-trials.md}, "Dependent two-stage pure GPU pipeline" and "One to three dependent GPU
+computations in one Submit"). The ordering of other command shapes, and whether records can overlap, is unmeasured.
+
+\section{Atomics}\label{sec:atomics}
+
+In the decoder (\code{isa/g17-atomic-family.toml}), 208 opcodes share the scheduling class of \op{10094} and flags
+(classes 286 and 287 with flags 0x402002400 for device scope, class 329 with 0x402002800 for threadgroup scope) and one
+operand skeleton, \code{[dest] imm imm [address] imm [index] imm imm imm [value] imm}, with parts present or absent. Five occur
+in the corpus; 29 are reachable from one encoding of it by bit flips. The other 179 were never produced by single-bit
+walks to saturation, 132,240 two-bit mutations, 1,365,504 three-bit mutations or 800,000 random encodings; the boundary is
+width (a bounded negative). Its structural bits: byte4{[}0{]} returns old (to \op{10022}); byte4{[}1{]} selects a threadgroup GPR16 address over a device register pair (\op{11769}, no glossary entry);
+byte5{[}2{]} selects an index register (\op{10090}); byte6{[}2{]} leaves the family.
+\Cref{tab:atomic-forms} lists the forms this chapter uses.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.18\hsize}Xl>{\hsize=0.85\hsize}XX@{}}
+\caption{Atomic forms by address kind.}\label{tab:atomic-forms}\\
+\toprule
+Glossary name & Opcode & Address & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Glossary name & Opcode & Address & Standing \\
+\midrule
+\endhead
+uniform-address atomic, returning old & \opn{10094} & device, uniform, byte offset in operand 6 & measured (below Metal, all operations below; MM~\mm{25.140.3}) \\
+uniform-address compare-exchange, returning & \opn{10095} & device, uniform & measured (below Metal) \\
+uniform-address no-return atomic, 32-bit & \opn{10022} & device, uniform & Apple's compiler emits \\
+uniform-address no-return compare-exchange & \opn{10023} & device, uniform & Apple's compiler emits \\
+per-lane-address atomic, returning & \opn{10090} & device, base + index register & measured (below Metal) \\
+per-lane-address compare-exchange, returning & \opn{10091} & device, base + index register & measured (below Metal) \\
+per-lane-address no-return atomic & \opn{10019} & device, per lane & Apple's compiler emits \\
+64-bit no-return atomic, max/min & \opn{9996} & device & Apple's compiler emits \\
+threadgroup atomic, returning old & \opn{11765} & threadgroup & measured (MM~\mm{25.115}) \\
+threadgroup atomic, no return & \opn{11701} & threadgroup & measured (glossary) \\
+\bottomrule
+\end{xltabular}
+
+Below, "the uniform atomic" means \op{10094} and "the per-lane atomic"
+\op{10090}. "Uniform-address" describes the address, not the issue: the uniform atomic
+executes once per active lane, so 32 lanes add 32 and receive 32 distinct old values (measured, MM~\mm{25.140.3}). Its operand 6 is the address's byte offset: values 4, 8 and 16
+moved the cell by 1, 2 and 4 words. \emph{Correction:} earlier claims called operand 6 a source lifetime ("16 writes nothing");
+the probe had watched the wrong word (MM~\mm{25.140.3}).
+
+The operation is a four-bit field, named by the decoder's operation operand. The decoder prints operand 2 as
+0x40200 + code, so every executed operation has an unambiguous name: 262656 + code. For the uniform atomic the four bits
+are byte4{[}5{]}, byte5{[}3{]}, byte6{[}3{]} and byte7{[}7{]}; \cref{tab:atomic-operation-codes} reproduces all ten encodings Apple's compiler emits for
+\code{atomic\_fetch\_\{add,sub,and,or,min,max\}} (both signednesses), \code{atomic\_exchange} and \code{atomic\_fetch\_xor} (decoder plus
+Apple's compiler, \code{isa/g17-atomic-family.toml}) and gives the uniform atomic's shortest length for each code.
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=1.47\hsize}X>{\hsize=0.74\hsize}X>{\hsize=0.79\hsize}X@{}}
+\caption{Atomic operation codes, with the operand value the decoder prints, the uniform form's shortest length in bytes and
+whether it has executed below Metal.}\label{tab:atomic-operation-codes}\\
+\toprule
+Code (operand) & Operation & Shortest length, uniform form & Executed below Metal, uniform form \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Code (operand) & Operation & Shortest length, uniform form & Executed below Metal, uniform form \\
+\midrule
+\endhead
+0 (262656) & add & 10 & yes, returns consumed \\
+1 (262657) & sub & 12 & yes \\
+2 (262658) & exchange & 12 & yes \\
+3 (262659) & compare-exchange: selects \op{10095} & 10 & yes \\
+4 (262660) & unsigned min & 12 & yes \\
+5 (262661) & signed min & 10 & yes \\
+6 (262662) & unsigned max & 12 & yes \\
+7 (262663) & signed max & 10 & yes \\
+8 (262664) & and & 10 & yes \\
+9 (262665) & or & 10 & yes \\
+10 (262666) & xor & 12 & yes \\
+12 (262668) & fp32 add, emitted by no tested Metal builtin & 10 & yes \\
+\bottomrule
+\end{xltabular}
+
+Four combinations do not decode. The same operand values name the per-lane operations, but the bits carrying them differ
+by form and length: in the 12-byte per-lane atomic the fourth bit is byte11{[}4{]}, and a decoder sweep of that form maps the
+assembler's three-bit operation with byte11{[}4{]} set and clear onto these codes (\code{docs/g17-first-dispatch-trials.md},
+"Per-lane AND old-value return"). An authored "OR" with byte11{[}4{]} set executed exchange, updating every cell to the new
+value; clearing that one bit gave operand 262665 and OR (measured). \emph{Correction:} the "eight unassigned raw operation
+codes" of \code{isa/g17-atomic-semantics.json} were read off one witness's field placement and are retracted
+(\code{isa/g17-atomic-family.toml}; \cref{app:a}); a census of unassigned codes must be made per form.
+
+The following semantics were measured below Metal (\code{docs/g17-first-dispatch-trials.md}; \code{isa/g17-atomic-family.toml}),
+all in relaxed order, single dispatch, each case in two fresh processes with output guards.
+
+\begin{itemize}
+\item \emph{Atomicity.} 64 lanes adding to one cell left exactly the sum (5 to 69 with +1; 5 to 2085 with lane i adding i + 1), and
+  every lane received a distinct old value; with lane-varying addends the returned values form a unique chain through all
+  64 lanes. Two simdgroups' elected lanes on one uniform atomic received non-overlapping intervals (5–36 and 37–68).
+\item \emph{Integer operations} behave as named, including 32-bit modular sub (5 - 32 - 32 = 4294967237), signed against unsigned
+  extrema on 0xFFFFFFFF and 0x80000000, and exchange.
+\item \emph{Compare-exchange.} The register tuple is (desired, expected), established from the compiler's witness; matched and
+  failed compares both returned the old value.
+\item \emph{fp32 add (code 12)}, uniform and per-lane: 1.0f + 1.0f + 1.0f gave returned values 1.0f, 2.0f and final 3.0f; 64
+  per-lane updates of 1.0f from 1.0f reached 65.0f and returned 1.0f through 64.0f once each. Each update rounds to
+  nearest even: half-ULP ties left an even mantissa unchanged and moved an odd one up once (0x3F800001 to 0x3F800002) and
+  no further. Subnormal inputs, operands and results flush to zero. A quiet NaN seed 0x7FC12345 was returned raw to its
+  first caller and then stored as canonical 0x7FC00000; −0 plus +0 returned −0 and stored +0; infinities were preserved.
+  Signaling NaNs and other payloads are untested.
+\end{itemize}
+
+Atomics have been run only on the rank-0 buffer, through Metal and below it; this compiler refuses an
+atomic whose identity base and binding rank disagree (open, \code{agxforge/g17/cc.py}; MM~\mm{25.140.3}). Threadgroup atomics need a
+threadgroup region, which only an ordinary threadgroup load or store provisions (\cref{sec:threadgroup-memory}).
+
+Atomic return values are late; the fill slot is operand 1 bits 20–23 minus 1, and slot choice is in \cref{sec:scoreboard}. The 10-byte uniform atomic also releases its value: operand 9 is the value's lifetime and only 16 is
+representable, so a second atomic sharing a constant read 0 (A{[}0{]} = 0 against 24; measured by this compiler's fuzzer,
+MM~\mm{25.144.6}, \code{agxforge/g17/cc.py}); a value read again must be copied first.
+
+Validation with a consumed return, by form:
+
+\begin{itemize}
+\item The uniform atomic, below Metal: all eleven of its operations in \cref{tab:atomic-operation-codes} (every code except 3), each under two-group
+  contention with the returned old value consumed; \op{10095} at match and
+  mismatch. Through Metal, add (the residency probe, MM~\mm{25.115})
+  and the compiler's wave-broadcast program (\code{agxforge/g17/cc.py}).
+\item The per-lane atomic, below Metal: update-only for add, and, or, sub, xor, signed and unsigned min and max, exchange and
+  fp32 add; returns through slot 7 for add (also contended, both fixed and lane-varying addends), and, or, sub, xor and
+  fp32 add (also contended, half-ULP and NaN cases). Compiler-generated 12-byte programs for add, and, or, sub and xor
+  passed with a direct indexed-store consumer, plus an ordinary add consumer for add and xor.
+\item \Op{10091}: hand-authored slot-7 return (one matching and 63 failing compares), then
+  compiler-generated programs at index placements R0, R1, R5, R7 and R12 (ten Submits); other placements are decode-checked
+  predictions, and placement 13 is refused.
+\item \Op{11765}: dispatched through Metal with its return consumed; its \op{11667} consumer had read both returns with an empty wait mask until fixed, where Apple waits 10 of 10 (MM~\mm{25.115}).
+\item Not validated: per-lane min and max returns, unsigned long-form returns, other consumer shapes (refused by this
+  compiler), 64-bit atomics (\op{9996}, compiled only), and any atomic on a buffer other
+  than rank 0.
+\end{itemize}
+
+An atomic does not order other memory. The count in \cref{sec:barriers-fences}'s worked example was exact while the data it
+guarded was stale. Ordering of ordinary stores through an atomic needs \op{14156}. The emulator does not
+track atomics in its race check and does not model acquire or release through atomics or the fence, so it refuses any
+program that synchronises threadgroups through an atomic counter (MM~\mm{25.197}).
+
+\section{Ordering by scope}\label{sec:ordering-across-lanes}
+
+\subsection*{Lanes of one simdgroup}
+
+\begin{itemize}
+\item Program order holds on one scoreboard: a store followed by a load in one simdgroup needs no fence, as two separately
+  generated bodies joined at a shared buffer showed, including a cross-lane stress where each lane read another lane's
+  write (measured, MM~\mm{13}). Late values still need the consumer's wait.
+\item Same-address stores with \op{17229}: the lowest active lane wins, by lane and not by value (all
+  lanes: lane 0; lanes 0–15 under an exec region: lane 0; odd lanes: lane 1; reversed values: lane 0; five runs each;
+  measured, MM~\mm{25.145.4}, \code{isa/g17-execution-storewinner-results.json}). Across simdgroups the winner is unmeasured.
+\item Registers never cross a simdgroup: a cross-simdgroup \code{simd\_shuffle} returns the caller's own value, 256 of 256
+  (measured, MM~\mm{14}).
+\end{itemize}
+
+\subsection*{Simdgroups of one threadgroup}
+
+Simdgroups are ordered only across a \op{447} (\cref{sec:barriers-fences}). Same-value writes by several simdgroups are
+harmless by construction (no schedule changes the bytes), and shipped code relies on that: the fused attention appends a
+new K/V row from every simdgroup of every threadgroup and each reads its own copy back (modelling rule, MM~\mm{25.197}).
+
+\subsection*{Threadgroups of one dispatch}
+
+MM~\mm{0.14}'s map says "cross-threadgroup handoff requires a
+dispatch boundary". It was written about tensor fragment hand-offs before any in-dispatch mechanism had been measured, and
+MM~\mm{25.140.5} and MM~\mm{25.141.1} have since measured two, so the statement is superseded in part:
+
+\begin{itemize}
+\item \emph{Visibility.} Device stores from one threadgroup are visible to another in the same dispatch after \op{14156}
+  on the writer side and again on the reader side (measured for the last-threadgroup pattern, MM~\mm{25.140.5}). A threadgroup
+  barrier at any scope does not provide it (measured, same section).
+\item \emph{Ordering.} An atomic count decides who is last; atomicity is measured (\cref{sec:atomics}). Without the fences the count can be
+  right and the data stale.
+\item \emph{Forward progress.} The last-threadgroup pattern needs none, because no threadgroup waits: whoever counts last does the
+  follow-on work. Any pattern that waits needs the producer resident: in the forward-progress probe the first resident
+  wave spun to its cap before the producer, dispatched last, ran at all (measured, MM~\mm{25.141.1}; the grid sizes and counts
+  are \cref{sec:forward-progress-in-order}). In the tested configurations a grid barrier among resident threadgroups, fenced and capped, kept
+  totals exact in every run and never reached its cap (measured, MM~\mm{25.141.1}). No progress guarantee follows
+  beyond those configurations, and the barrier costs more than the dispatch boundary it replaces (\cref{sec:dispatch-encoder-command-buffer}).
+\end{itemize}
+
+\emph{Correction:} "cross-threadgroup handoff requires a dispatch boundary" (MM~\mm{0.14}) is the safe default, not a hardware
+limit; fenced atomic patterns work within one dispatch under the conditions above.
+
+\textbf{Residency of large threadgroups (unresolved).} For 1,024-thread threadgroups the forward-progress probe implies at least
+10 co-resident per core and the driver formula gives 3 (MM~\mm{25.141.1}, MM~\mm{25.141.20}); no residency count may be assumed, and
+a spin-waiting grid of them must not be sized from either number (\cref{sec:residency-occupancy-rules}, rule 5).
+
+\subsection*{Dispatches}
+
+Dispatch order and the absence of observed preemption are as stated at the head of the chapter
+(\cref{sec:forward-progress-in-order}). A serial encoder places
+a barrier token after every dispatch; a concurrent encoder lets a dependent kernel start early, but its threadgroups queue
+behind all of the producer's, so only the producer's last-wave tail overlaps (measured, MM~\mm{25.141.1}; costs \cref{ch:performance}).
+The GPU's L2 is not coherent with CPU stores: a recently read line of a write-combined buffer the CPU updates reads stale
+(measured, MM~\mm{0.15}). A submitted command buffer outlives its host process (\cref{sec:faults-hangs-recovery}).
+
+\subsection*{Safe ordering patterns}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item Within a simdgroup: program order, plus a wait on the producer's actual slot for every late value. Never rely on
+  distance.
+\item Between simdgroups: one threadgroup barrier at a scope covering the memory used (276 for threadgroup memory, 154 for
+  device memory).
+\item Between threadgroups in one dispatch: a device fence after the stores, an atomic count, a device fence again before
+  reading; or a dispatch boundary. Never a threadgroup barrier alone.
+\item Waiting on another threadgroup only when every participant fits in measured resident capacity at the kernel's own
+  register and threadgroup-memory use, with capped spins and work pulled from an atomic queue (MM~\mm{17} rule 40); never spin
+  on a producer that may not be resident.
+\item Between dispatches: a serial encoder, or a concurrent encoder with barriers at every true dependency.
+\end{enumerate}
+
+\textbf{Not known.} MMA-to-ALU interlock; the cross-simdgroup winner of same-address stores; whether an execution-only
+barrier orders device memory by design; why a special-register read on slot 7 stores nothing; per-lane min, max and
+unsigned long-form atomic returns; atomics beyond rank 0; 64-bit atomics on hardware; acquire and release semantics in
+general (only the fence-count-fence pattern is measured); the function of the barrier-token variants 0x400 and 0x60000502;
+the residency count for 1,024-thread threadgroups.
+
+\textbf{Evidence.} MM~\mm{0.8}, MM~\mm{0.14}, MM~\mm{0.15}, MM~\mm{6}, MM~\mm{13}, MM~\mm{14}, MM~\mm{17} rules 4, 7, 35 and 40, MM~\mm{25.90}, MM~\mm{25.95}, MM~\mm{25.96},
+MM~\mm{25.104}, MM~\mm{25.115}, MM~\mm{25.117}, MM~\mm{25.120.1}, MM~\mm{25.121}, MM~\mm{25.133}, MM~\mm{25.140.3}, MM~\mm{25.140.5}, MM~\mm{25.141.1}, MM~\mm{25.141.20},
+MM~\mm{25.144.6}, MM~\mm{25.145.2}, MM~\mm{25.145.4}, MM~\mm{25.146}, MM~\mm{25.197}; \code{isa/g17-barrier-scopes.txt}, \code{isa/g17-atomic-family.toml},
+\code{isa/g17-atomic-semantics.json}, \code{isa/g17-wait-mask-census.json}, \code{isa/g17-execution-storewinner-results.json},
+\code{docs/g17-first-dispatch-trials.md}, \code{agxforge/g17/cc.py}, \code{tools/g17emu.py},
+\code{tools/tensorops-model/scoreboard-store-census.json}.

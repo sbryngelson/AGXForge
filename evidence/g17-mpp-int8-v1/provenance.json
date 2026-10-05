@@ -1,0 +1,387 @@
+{
+ "measured": "2026-10-04 (session of the showcase revision); records carry no per-run timestamps",
+ "hardware": {
+  "device_reported_by_metal": "Apple M5 Pro",
+  "gpu_cores": 20,
+  "memory_bytes": 51539607552
+ },
+ "os": {
+  "product_version": "27.0.1",
+  "build": "26A434",
+  "installed": "2026-10-02 00:30 (softwareupdate --history)"
+ },
+ "toolchain": {
+  "xcode": "Xcode 27.0 (27A266a)",
+  "sdk": "macOS SDK 27.0",
+  "metal_front_end": "Apple metal version 32023.921 (metalfe-32023.921.6)",
+  "metal_flags": "-std=metal4.0 -O3, then xcrun metallib",
+  "harness_compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "harness_flags": "clang -fobjc-arc -O2 -framework Foundation -framework Metal -I tools"
+ },
+ "os_gpu_compiler": "NOT RECORDED: the OS-side compiler that lowers AIR to G17 at pipeline creation was not versioned in this run",
+ "python": {
+  "python": "3.14.7",
+  "numpy": "2.4.6"
+ },
+ "repository": {
+  "head": "76cc9de2be8d636da024756176a535bab4c7791f",
+  "working_tree": "dirty: tools/g17mppint8.py and tools/g17mppint8.m were uncommitted at run time; they are committed unchanged with this archive",
+  "tool_sha256": {
+   "tools/g17mppint8.py": "9fc9cdf46d34a9cab4eedb45ee0b18bb5284a1d829b25397c15d6e7429edaf37",
+   "tools/g17mppint8.m": "0a392ff470e9cdfcb63f57656d33f1b139f4ea60a5bfbe3eda75bd90a1d5e18a",
+   "tools/g17gpulock.h": "79b7d51a21348d9c499fc3ef7807e11dc132cb7ed7106147889fae04e7879451"
+  }
+ },
+ "inputs": {
+  "generator": "numpy.random.default_rng(161), per shape in SHAPES order: A = integers(-128,128,(M,K),int8), B = integers(-128,128,(K,N),int8); reference C = A.astype(int64) @ B.astype(int64), checked < 2^31, stored little-endian int32",
+  "retained": "NOT RETAINED (64 MB): the input and reference binaries; regenerate with tools/g17mppint8.py and compare these SHA-256s",
+  "sha256": {
+   "qkv.a.i8": "4d10b1a1ab903c23bc10cbaf13aa21aaaad6c70387abcd86f6fabdfebe388ecf",
+   "qkv.b.i8": "734c0bccb7e1b73f8d35867c2720e2d27772e6e1933a7e35fa2768a645f93ddc",
+   "qkv.c.i32": "a5fa50c66b3175af0556170b1c77be052ce0d1857253c6343c440857c8f2b48c",
+   "w1.a.i8": "c5483c244ae76bfed2e7d8dee4362c6a10599cdc68adfc9fd9b444263c5a7380",
+   "w1.b.i8": "5356afc959ba35d3b34278191076fefc17a76d1b164f0dfbd2f87124efff6cbb",
+   "w1.c.i32": "2a04752f16ae30c1656fec99a407271a09c1a62ae84c328b0a5688f97ebdd911",
+   "w2.a.i8": "cec27c5e5b62861e83b6accd1b3c14bfb508b31853d04445d26c7198779c452b",
+   "w2.b.i8": "507a23d2eca5bf1d33c1f63b8e44d9911516ba14bdf2812b5b58fb4ee32dbfba",
+   "w2.c.i32": "50efd6a8306bdd1f69d50f8af356bd4b888144339e252f610584d1b71d4d8576",
+   "wo.a.i8": "d540a2b523bf6f72dfd9a0c72634e3f85c616f9f8d6ffae7c0a50b28a7f7c818",
+   "wo.b.i8": "eb0967e3affbad7a28f059de18e0f9d808e7316408d344bf129d0e588a3f56f9",
+   "wo.c.i32": "761ddfa464dbdaac86377c4c6643585cedfd251172ed8cacf2b958599a1ed6c0"
+  }
+ },
+ "kernels": {
+  "template": "tools/g17mppint8.py HEAD: MPP matmul2d_descriptor(TM, TN, dynamic_length_v<int>, false, false, false, mode::multiply), execution_simdgroups<SG>, threadgroup grid (N/TN, M/TM), 32*SG threads",
+  "retained": "sources and metallibs NOT RETAINED; regenerated from the template, SHA-256 of each below",
+  "built": [
+   {
+    "fn": "mm_128_128_1",
+    "metal_sha256": "dd8931c7f96a66aed124ae6b9e01ad19a4a42cab57abfa895264ea6fc7d64eb5",
+    "metallib_sha256": "ab17ea8953076b8ea5cb577c6ab68393972a02e70b82780bb5daf21432399a28"
+   },
+   {
+    "fn": "mm_128_128_2",
+    "metal_sha256": "61a429f2e140eafbed3203a9c7ac0ad3417a6523c2677382c19b12ee329b8c60",
+    "metallib_sha256": "30a5d41bde5e031919863f50bc370018b69e8b0c40b2eac26bbe21dc34b6bd32"
+   },
+   {
+    "fn": "mm_128_128_4",
+    "metal_sha256": "edf8ea7d5756c04aa7fbf7e280e6806fc93441ce731cde3d488b708581a1dd15",
+    "metallib_sha256": "5a696680a0267f22f26fc7b196ed95a92e622de2d5087fd0d76158e1cb1a1168"
+   },
+   {
+    "fn": "mm_128_128_8",
+    "metal_sha256": "15f19173004a309bf7ac6a3293ac4c11b04be1167be8e6e10788c9b5eb7c38e3",
+    "metallib_sha256": "1f55cff9a159ea12f45528243584bfe15d636a0d654bf59a1e57118a469eb040"
+   },
+   {
+    "fn": "mm_128_16_1",
+    "metal_sha256": "6be177b9971b84c48e0aaaf20a3609b8cdd1b714d1855141c549df3c67f7651e",
+    "metallib_sha256": "f0a274c3221498e3e348bde1dc08a2048ede29d8e5a99050a29ec4df0bb5bb92"
+   },
+   {
+    "fn": "mm_128_16_2",
+    "metal_sha256": "c0380311cba9e56f7f68a571fa1b3d7c08a29053e3736660a9208eccea08a210",
+    "metallib_sha256": "419ab78c0bdfda3c2226b69c7ebed0c880153de6bb05ade12723c66f8cb08fa2"
+   },
+   {
+    "fn": "mm_128_16_4",
+    "metal_sha256": "1f784a2aca364cf72fbf8149c31528bb382007f8aa56ea4794415554861bda8b",
+    "metallib_sha256": "a6f07a88d7a12bea0060fdaeffb272f599e93f2b4414a6b2e1c887466f15f0b4"
+   },
+   {
+    "fn": "mm_128_16_8",
+    "metal_sha256": "b1c4a6d44316ba3c41e11231435afa481f317d433f1e0573e90910a3f55d6d1b",
+    "metallib_sha256": "2ec1c4e8080b79c3cc7e1ca171038d7af7bdc8816bd97d9e1db48375c06247e7"
+   },
+   {
+    "fn": "mm_128_32_1",
+    "metal_sha256": "00f8be9481a084ae20ec7915527348cec02f06df48b22cef8a49ea11452f7716",
+    "metallib_sha256": "c3e6f62878a718aa9962f0805b143c8ceac2f3a047a8a425111f0dd6e44fe006"
+   },
+   {
+    "fn": "mm_128_32_2",
+    "metal_sha256": "e7931a6308e07c3c4043121486f177446f0f18546f8469bc5fc0295884a1a011",
+    "metallib_sha256": "d3634af919e609411e4bb351b338da96b057a3655d0710dd395024f26d14f69d"
+   },
+   {
+    "fn": "mm_128_32_4",
+    "metal_sha256": "20c8f4bf20883ace48e1372c72db103f2fc7d3af4697f4bcb76c88212d255901",
+    "metallib_sha256": "40a8bf985eac9638988ff2d46e38c2532ba2d46065eab8cef6429775be7df6ce"
+   },
+   {
+    "fn": "mm_128_32_8",
+    "metal_sha256": "96b2c9a09e59e82eca71321c80cc4a0b66037b4006411d746feea3b50bfc7e8a",
+    "metallib_sha256": "c9f6081bef6463ce01f62faf33d698bb22a99beb0a4d628f2870dd2755695e03"
+   },
+   {
+    "fn": "mm_128_64_1",
+    "metal_sha256": "e46001fef5a2d94ab7848417c6d81beb1b097856e6fe90e99315048a0ba02a7c",
+    "metallib_sha256": "7c56b89b1f03383e9da0ad69fd30b29b891e9291ce3a70072a3ebe982fcf963e"
+   },
+   {
+    "fn": "mm_128_64_2",
+    "metal_sha256": "e94f0c4fc9557c61ea92a2585853e4704476fb0ffa7c2c4a2759afdf3dadf40f",
+    "metallib_sha256": "8ef1bccbbedca81b64419b701604f06f45fd8c3f24c0c6b5c112513974aa8d53"
+   },
+   {
+    "fn": "mm_128_64_4",
+    "metal_sha256": "7387787af9d4ce51e78c9a496f7141194813a1e5e238e54ec5a2deabaabd0a51",
+    "metallib_sha256": "3517a79944b3b59ed7c767180d60f5e147d077ba534b020a303bb48485c89d8f"
+   },
+   {
+    "fn": "mm_128_64_8",
+    "metal_sha256": "058275db8f78207345b8fd94e3cc101b3d496e2a8f0652490f56a503c7c23581",
+    "metallib_sha256": "d934cdf11cc36c1a6a88e22e861ca3eaa8991599a3915355265239285234a661"
+   },
+   {
+    "fn": "mm_16_128_1",
+    "metal_sha256": "dbeadd203bf1e874bb6c56923cfed7e68e6d3611298d9ad658254dd9f3d379c9",
+    "metallib_sha256": "7718df42a0f6060926e63b6c35843c1aa7c8798f5d7ad1621719fcb4a323ce0b"
+   },
+   {
+    "fn": "mm_16_128_2",
+    "metal_sha256": "ac6b92f1a7c9ffdd698a87efd51c6524f0a006720c58f58e0aa2266c94dab1e8",
+    "metallib_sha256": "6867e895d5a4b2bc0153b619b1d18e1cf2d2d63808c57fba5ba54dde53834358"
+   },
+   {
+    "fn": "mm_16_128_4",
+    "metal_sha256": "f542584ad316943f404617d0cd5ab2d46e3279f9398207b84fc42e7421fcc817",
+    "metallib_sha256": "ea012b7ba5d5a0871aed74fe7f610979eda2658ad05a003f88ec2fcc75eeed31"
+   },
+   {
+    "fn": "mm_16_128_8",
+    "metal_sha256": "98ec0fa8fd42ba7ea3146df9bda0958e3648c911a75dd7f3ec7d7688fa8f04dd",
+    "metallib_sha256": "c52522780d65cda1d4ea6907f535202ad0a2d42b5fd0bf04b71fb53d1405c6f2"
+   },
+   {
+    "fn": "mm_16_16_1",
+    "metal_sha256": "874b49800089f5229598ce48384e144548ceb4ea1d6708f14df49695f2340e87",
+    "metallib_sha256": "44da51afc5579cd76d5e70fb6c4239213f2919c4afdcecaaa25ed016eea375b2"
+   },
+   {
+    "fn": "mm_16_16_2",
+    "metal_sha256": "ad918b51236d6cafdb2720c63e3d04e0b66bc38e80743a855e15b58dd5e0d817",
+    "metallib_sha256": "dec2a313bf23ba351e6c74d0f87f031f0d6b83e0ac309c9b11e3012439396e80"
+   },
+   {
+    "fn": "mm_16_16_4",
+    "metal_sha256": "4ff4fdadde066d31a788c2bc3134952334ae0cea97f0cea2ef4bc6c574727304",
+    "metallib_sha256": "daa76abc317e61e01eed9831c8f46ff623dfe7e8db7cfa6c4e321c6e4f767d55"
+   },
+   {
+    "fn": "mm_16_16_8",
+    "metal_sha256": "c12a4cef8342973bff114d6aa5ab2b977433bf24815827888f1d4c4093581883",
+    "metallib_sha256": "bae5d73428a5588bfdbb9b8cf7212c2981957eab828094a53838fd168223d5cf"
+   },
+   {
+    "fn": "mm_16_32_1",
+    "metal_sha256": "9849b674e6e3d157bf8608c2841b6b85604495cc27ca7c7f4d2bcb4d58e6df61",
+    "metallib_sha256": "6141a2b6ce81f902bb5076b4ff554cece92c0cd764e90ef03a849c34f085e09c"
+   },
+   {
+    "fn": "mm_16_32_2",
+    "metal_sha256": "1553982c7974305302ee1f74ec9b1ca181e3ccdb13378795b2760b8aaebb1514",
+    "metallib_sha256": "e33dd87413e5438e48d1bad87eaeb33862c14fcac2f7d2a9dfdf0170310a3983"
+   },
+   {
+    "fn": "mm_16_32_4",
+    "metal_sha256": "9ca66a9f9ed1f14fa6208be965f50d32cf2a33842914792874bc47ff59ec5723",
+    "metallib_sha256": "c67e4058624bb400329d048aa8c6cf4086655532da9349f02cd56a8ccf41c2c3"
+   },
+   {
+    "fn": "mm_16_32_8",
+    "metal_sha256": "e2370f624a28bf01c2d98a8dfe24bd327181a81870d578df297a597f8417cc59",
+    "metallib_sha256": "6ae95653649fa056427c19801ffda9e612b6423a00135d16844aa6cdc24f9d7d"
+   },
+   {
+    "fn": "mm_16_64_1",
+    "metal_sha256": "a32ce8f725fe25935369d98b08db59e441525128ac13c394ac3d5c19ed40611d",
+    "metallib_sha256": "cb2b0acf4d9ce32ef66e8d6609a617159ce179da3fc46df5c6d6acff068e712b"
+   },
+   {
+    "fn": "mm_16_64_2",
+    "metal_sha256": "2f3b9cfc2d197190287eb74e24dd24542f35a914e94b30c451121a43b24ecdbd",
+    "metallib_sha256": "5aa6412fb45b395556b5bad25924cb17b0bec4e51215f3ee3f02de2b078c7a7f"
+   },
+   {
+    "fn": "mm_16_64_4",
+    "metal_sha256": "34d1de7b9644ccac2ea1540909c7234b93b03259015398bec5b8f4cef143b4c9",
+    "metallib_sha256": "e32adf2a7565aedb30edcf933addd7a77c11620fb478c04a98f9e897831c9e01"
+   },
+   {
+    "fn": "mm_16_64_8",
+    "metal_sha256": "37d66dfc474f34937a9c88e314d548766be34f8a434818bc8f80e50d10fb3b2c",
+    "metallib_sha256": "3fc064b696e6f5931de20d31ae439bb2b6bfc0e9c6b7b4b4a96d9af6d8e6da26"
+   },
+   {
+    "fn": "mm_32_128_1",
+    "metal_sha256": "f06b90e7d89ff0ee193df8feda0dac968f881309e072194f70f00ff42edba2d9",
+    "metallib_sha256": "d270cf6fa6620c38e25a0ac8e0efce4a1799d6b0b3f92388c8487ac128acc20e"
+   },
+   {
+    "fn": "mm_32_128_2",
+    "metal_sha256": "a724aab69f5ff329564beb5957da5d67a0473f72a2fa7bca115e88ef59a3900e",
+    "metallib_sha256": "c8979dfaa452a58dbf353de11c0ecfb2d213f19fc366cfbb344925027d36ebea"
+   },
+   {
+    "fn": "mm_32_128_4",
+    "metal_sha256": "11a5bb76c494bab09662bc1a1e6fdf283ca1321617a19d7b3f2654d5313c27ae",
+    "metallib_sha256": "f5767b6bec2a3278e18d46e1afb6b874608eb2d230b4624a975284237a0d85d1"
+   },
+   {
+    "fn": "mm_32_128_8",
+    "metal_sha256": "d814ea0175e14451b490547da8cf2bf1255f0c83ea785836b7399b8c18675389",
+    "metallib_sha256": "70fdc7a6e53b7574c6f81ba43b5ef58af005b067865e516c091374aa9b19597b"
+   },
+   {
+    "fn": "mm_32_16_1",
+    "metal_sha256": "acababae18d50da311461f98982d8396209a0e33ec410bb9df5863051eb5272b",
+    "metallib_sha256": "1c4b61ef752a3a5fe3a2a77169952d3cb1908ad8ecfda3e0c43faa3127ac1255"
+   },
+   {
+    "fn": "mm_32_16_2",
+    "metal_sha256": "56ed7488f3982877406f4ef6346cfa7b26fbc513021b24002ec42a84a3f79b1c",
+    "metallib_sha256": "dcefd8570a1d6a23a4af8ee28565e5f72336bde8cea1f196ebe3450d0eb83783"
+   },
+   {
+    "fn": "mm_32_16_4",
+    "metal_sha256": "bd26b5aef09c618144078b1e04937e4f0646b4967421efad85ed022f372e21d1",
+    "metallib_sha256": "f704da6be31eb47cde6bb40aa7bce8ea06fe61a6ca2019182b105fc7ac7999d3"
+   },
+   {
+    "fn": "mm_32_16_8",
+    "metal_sha256": "9a11de77c42628466663271efafa65efa08ad9989180bb117013dc3108f3cd2a",
+    "metallib_sha256": "6872a95cf308d9bb2911abfe8fe119ce94877784474168b5f5f017be97515e16"
+   },
+   {
+    "fn": "mm_32_32_1",
+    "metal_sha256": "b24a737c5bc19b523872c6a195111852e36dad6d82fdbb62c21dd81e795735f7",
+    "metallib_sha256": "2ce6c02a4361598e17538d9b2bb41225b2f688eed7159aa63a66f49cadafb266"
+   },
+   {
+    "fn": "mm_32_32_2",
+    "metal_sha256": "5d99eb45597a4509126d4de14947297c65b8ea69b3a38c62d56a71b1b29ff52c",
+    "metallib_sha256": "c830aff3c65d3ef9211e9387f9d3283e6c359481ae9e6c97f139c5b0b18a5b89"
+   },
+   {
+    "fn": "mm_32_32_4",
+    "metal_sha256": "bd0a4349a2814b6f6ef0e8d3d73ba7e8190c6bc5674a48acb0b9e5fba2cc5feb",
+    "metallib_sha256": "929cf202d7b34634b90eb84e0731abc19283add0706212a7edde55903f23cec1"
+   },
+   {
+    "fn": "mm_32_32_8",
+    "metal_sha256": "862d06d4c505f00045b008a54d2c8a900e93900106257650646295d4eadcbeff",
+    "metallib_sha256": "143ac70f150cdadfb6550e9eaac655a0340ef513630de7fd1306b83acea35ab6"
+   },
+   {
+    "fn": "mm_32_64_1",
+    "metal_sha256": "817abc8fc547082a9ab2aecc2ac340a0243a7da7e75d015e185cbb405239288c",
+    "metallib_sha256": "57d6808a8e5b62baadec9809d5509a5b6d175930dce7b1016ac8e61a65f1cc61"
+   },
+   {
+    "fn": "mm_32_64_2",
+    "metal_sha256": "fdccb2fc5b82f75bb6a219612cc9f37dafd334f6a948e16cb6ad08a224a00b12",
+    "metallib_sha256": "c53ac1d70ed85e3d7bdad071057c8e4233ccbd5930e00b9e81ca5f39c9ef247e"
+   },
+   {
+    "fn": "mm_32_64_4",
+    "metal_sha256": "08e749ab5b95a439839f4a745156a178b1dc3c409a82cf184ed17d4331356774",
+    "metallib_sha256": "1abcc3adda8569dfbdd85b06374386693b885561ad3d032932a47eac5abfe133"
+   },
+   {
+    "fn": "mm_32_64_8",
+    "metal_sha256": "c8144e78e79329d8bd22b38418fa5cc30a9ae46d6bd3520b8193ebc4b2db8a87",
+    "metallib_sha256": "64c38e9169b79e9aa7516c3a7dccbec206780f98ef966bc5c318fb73a0aa9449"
+   },
+   {
+    "fn": "mm_64_128_1",
+    "metal_sha256": "fa393b787ee20e419c498bc1bd35ba19ee8f01e896e138a3b5582c841adcf7ea",
+    "metallib_sha256": "24a6864f7f593f49292e82c05c40a7264898870d409c5fd9d2267ed817f5c167"
+   },
+   {
+    "fn": "mm_64_128_2",
+    "metal_sha256": "b112fdbf8dec9019024b958df30d3d50087f69645ec9146c7acdd4afc3aba4eb",
+    "metallib_sha256": "076e7b0f107663da96badc9eb0f5124e45d0a14482ab1023bcac49f561555a67"
+   },
+   {
+    "fn": "mm_64_128_4",
+    "metal_sha256": "757ccb001aac2de6fea98b57aa7287cc192be325306dd8a760f54948d9469e2f",
+    "metallib_sha256": "2f3d6ddf0c85cf887aea5f9d108909a61c3066789df77621c9082592e5eb058c"
+   },
+   {
+    "fn": "mm_64_128_8",
+    "metal_sha256": "6f0e8ff3d4b707dd75692d2426618c84b8ca07c6d7f2942ca65920a2cabbf359",
+    "metallib_sha256": "8b45ac280a956c74bd64a40bcb3f4c980f7ad8830f652ee9fe30bb9abbfa3715"
+   },
+   {
+    "fn": "mm_64_16_1",
+    "metal_sha256": "e1f010ab1fcbb298dfc52098f8bdfc9f776f06b6e2d5063fd69a1d90ef1def47",
+    "metallib_sha256": "986eba43d43d5c6372f22009381fb0f12d837ff6ef6596072e21d7dcccc17519"
+   },
+   {
+    "fn": "mm_64_16_2",
+    "metal_sha256": "8fef0d6e34aaa0ad87aa98517532dde72e5903317455eb0714ee1ccf5c1e1559",
+    "metallib_sha256": "2e74a131cd32ab0f8ebea0fb2582a975ea0ab5247c48fb3ec14ae1574c6817cf"
+   },
+   {
+    "fn": "mm_64_16_4",
+    "metal_sha256": "66b289c5f63252af14188a34a1053941a5255d1f72c0c50023afdff0efd6f48d",
+    "metallib_sha256": "a266b2fcb5f2790194959afa134ab775d0abdee1405ab1db70dfaa3f5b114b1c"
+   },
+   {
+    "fn": "mm_64_16_8",
+    "metal_sha256": "255b94083d5e5bc64112463e662cb3def6e859b7dded5b2103452697be2dd0c4",
+    "metallib_sha256": "364ab5217e9b2245f8380c43f25c8c7f646977bbd5c9a861940a40cb083ec90e"
+   },
+   {
+    "fn": "mm_64_32_1",
+    "metal_sha256": "8c2fc7deeab932dd2024b71d0acce2b7f3ee18aeafb743d7bbe75dc675b770de",
+    "metallib_sha256": "36b223ee4d8754c28eac2391c03942ddd6796d7bbdd82924ee8ffb74b53af73c"
+   },
+   {
+    "fn": "mm_64_32_2",
+    "metal_sha256": "f37604775f847817323f29811c10849711b8d4a8e25680b62e469a681336a1e4",
+    "metallib_sha256": "dea2fb1a356d8b10ae0c5c688a8937dcfadc12254224e4dabbde8328d21306aa"
+   },
+   {
+    "fn": "mm_64_32_4",
+    "metal_sha256": "2c6c73c7aa792094e9c7d3c18a8fcd2d53d6cb7d5b9a0bcf04d6dbee82d922f1",
+    "metallib_sha256": "58c8761b2121fd445e63b980c8b9382b49de54f2e5bc53b02512a14e869f06b3"
+   },
+   {
+    "fn": "mm_64_32_8",
+    "metal_sha256": "97fef6b6639e1140c5be26c8785e880f762340670ffe75b71c1e8883b4428ec5",
+    "metallib_sha256": "0d4ff6918a5e29ba61c383237213a0ce46eecf523f6a3e96a405ec6afcc05e45"
+   },
+   {
+    "fn": "mm_64_64_1",
+    "metal_sha256": "7979285b4a2d0f5c17dfa74c4fdb300f050d47edaac9e92c7fb6e2d74d7f1696",
+    "metallib_sha256": "ce2bbeba9acd8828ec3aa60188513880f363b026ff57b804b935af33df052f24"
+   },
+   {
+    "fn": "mm_64_64_2",
+    "metal_sha256": "5825cdf01bcccd69438d4df76624bcc79f6ab7df7f860c39e13604e25f631c43",
+    "metallib_sha256": "b6f4513a4a505d5221b0153c3ab86dd94c68bb3b0704a74e22dc81e4f8e50602"
+   },
+   {
+    "fn": "mm_64_64_4",
+    "metal_sha256": "9298451326d3d51cb239ab45281a538a9dc3e61f3fa5cb05e8b44ebece1d428f",
+    "metallib_sha256": "33b3d294395a0891f4af122e60fe362fc7dcf6e86bc3886ffaf38d5bbfebd768"
+   },
+   {
+    "fn": "mm_64_64_8",
+    "metal_sha256": "754858a3e2bc83c301cbe6f0b1b5b818ac1b5f71869a41fe142bacd22e7d574b",
+    "metallib_sha256": "8b5d1dea11be8ccf9e4fcb0a1e20da199d5e35ee705b67712edea98ad260a36e"
+   }
+  ]
+ },
+ "harness_binary_sha256": "e48f08b01fe4aa43803e80a805fbc9210e65847d2a706c0eb5995e5bd3bee513",
+ "not_recorded": [
+  "GPU clock or power state beyond the clock-ramp buffers",
+  "system load average",
+  "other GPU clients during the run",
+  "per-record wall-clock timestamps"
+ ],
+ "comparison_caveat": "this project's int8 times (evidence/g17-three-threads-v1/int8-gemm-chained.json, MM 25.161) were recorded 2026-09-30 under macOS 26.6.2 (25G83), before the OS update; they were NOT re-timed in this session or on this OS build. Apple/ours ratios in mpp-int8.json compare medians from two sessions, two OS builds and two drivers, not a paired study."
+}

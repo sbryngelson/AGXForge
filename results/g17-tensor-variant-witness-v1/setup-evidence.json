@@ -1,0 +1,137 @@
+{
+  "inputs": [
+    4096,
+    4097,
+    4352,
+    8192
+  ],
+  "retained_outputs": [
+    1024,
+    1024,
+    1088,
+    2048
+  ],
+  "candidate": "unsigned input >> 2 on these four inputs only",
+  "retained_operand_fields": [
+    [
+      "reg:105",
+      "imm:16777248",
+      "imm:0",
+      "reg:435",
+      "imm:16",
+      "imm:2",
+      "imm:32"
+    ],
+    [
+      "reg:107",
+      "imm:16777248",
+      "imm:0",
+      "reg:435",
+      "imm:16",
+      "imm:2",
+      "imm:32"
+    ],
+    [
+      "reg:109",
+      "imm:16777248",
+      "imm:0",
+      "reg:435",
+      "imm:16",
+      "imm:2",
+      "imm:32"
+    ],
+    [
+      "reg:111",
+      "imm:16777248",
+      "imm:0",
+      "reg:435",
+      "imm:16",
+      "imm:2",
+      "imm:32"
+    ]
+  ],
+  "tensor_instances": [
+    {
+      "offset": 8,
+      "fields": [
+        "reg:107",
+        "imm:16777248",
+        "imm:0",
+        "reg:428",
+        "imm:32",
+        "imm:2",
+        "imm:32"
+      ],
+      "changed_fields": [
+        {
+          "index": 0,
+          "retained": "reg:105",
+          "tensor": "reg:107"
+        },
+        {
+          "index": 3,
+          "retained": "reg:435",
+          "tensor": "reg:428"
+        },
+        {
+          "index": 4,
+          "retained": "imm:16",
+          "tensor": "imm:32"
+        }
+      ]
+    },
+    {
+      "offset": 22,
+      "fields": [
+        "reg:106",
+        "imm:32",
+        "imm:0",
+        "reg:428",
+        "imm:32",
+        "imm:1",
+        "imm:2"
+      ],
+      "changed_fields": [
+        {
+          "index": 0,
+          "retained": "reg:105",
+          "tensor": "reg:106"
+        },
+        {
+          "index": 1,
+          "retained": "imm:16777248",
+          "tensor": "imm:32"
+        },
+        {
+          "index": 3,
+          "retained": "reg:435",
+          "tensor": "reg:428"
+        },
+        {
+          "index": 4,
+          "retained": "imm:16",
+          "tensor": "imm:32"
+        },
+        {
+          "index": 5,
+          "retained": "imm:2",
+          "tensor": "imm:1"
+        },
+        {
+          "index": 6,
+          "retained": "imm:32",
+          "tensor": "imm:2"
+        }
+      ]
+    }
+  ],
+  "transfer_status": "not_established",
+  "limits": "The retained record reports execution but is not rerun here. Its input population does not cover lane values 0..31. Tensor operands differ; this does not establish either exact tensor instance or all op17016 semantics.",
+  "status": "retained_evidence_reconciled",
+  "gpu_dispatched": false,
+  "sources": {
+    "isa/g17-execution-delivery.json": "ecbcb63061a55f2d48d8ffcfa9478c0e7ddf4f4b28c47cb0eff9dc34d798d459",
+    "isa/g17-execution-delivery-results.json": "d617e2556b57298558e6f70d004e29e7d9f8a7e028879fbcd2011c8af4a70d05"
+  },
+  "tensor_object_sha256": "c79433216cec09df2092065b38008ff96793f8710ddd075cf3fc7881c2bff44e"
+}

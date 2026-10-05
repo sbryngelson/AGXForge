@@ -1,0 +1,112 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "tg.nobarrier.op13288",
+  "op": 13288,
+  "length": 10,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13288,
+   "found": 12,
+   "cases": 1,
+   "encoded": [
+    "1f245320030210c00020"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1515852340
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "tg.nobarrier.op12364",
+  "op": 12364,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 12364,
+   "found": 12,
+   "cases": 1,
+   "encoded": [
+    "4f2203201a0610c0010000000000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1515852340
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ }
+]

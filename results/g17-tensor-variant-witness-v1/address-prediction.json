@@ -1,0 +1,178 @@
+{
+  "status": "compiler_emission_measurement",
+  "gpu_dispatched": false,
+  "cases": {
+    "tensor-common": {
+      "object_sha256": "c79433216cec09df2092065b38008ff96793f8710ddd075cf3fc7881c2bff44e",
+      "checked_instructions": 40,
+      "strides_elements": {
+        "a": 64,
+        "b": 32,
+        "c": 32
+      },
+      "immediate_offsets": {
+        "a": [
+          0,
+          1024,
+          32,
+          1056,
+          2048,
+          3072,
+          2080,
+          3104,
+          0,
+          1024,
+          32,
+          1056,
+          2048,
+          3072,
+          2080,
+          3104
+        ],
+        "b": [
+          0,
+          512,
+          1024,
+          1536,
+          32,
+          544,
+          1056,
+          1568,
+          0,
+          512,
+          1024,
+          1536,
+          32,
+          544,
+          1056,
+          1568
+        ],
+        "c": [
+          0,
+          1024,
+          64,
+          1088,
+          2048,
+          3072,
+          2112,
+          3136
+        ]
+      }
+    },
+    "tensor-b-stride": {
+      "object_sha256": "233e20fc94be9ea43e44e530d220e3d7dff1de77a9712c03c93d7e00248bc753",
+      "checked_instructions": 40,
+      "strides_elements": {
+        "a": 64,
+        "b": 48,
+        "c": 32
+      },
+      "immediate_offsets": {
+        "a": [
+          0,
+          1024,
+          32,
+          1056,
+          2048,
+          3072,
+          2080,
+          3104,
+          0,
+          1024,
+          32,
+          1056,
+          2048,
+          3072,
+          2080,
+          3104
+        ],
+        "b": [
+          0,
+          768,
+          1536,
+          2304,
+          32,
+          800,
+          1568,
+          2336,
+          0,
+          768,
+          1536,
+          2304,
+          32,
+          800,
+          1568,
+          2336
+        ],
+        "c": [
+          0,
+          1024,
+          64,
+          1088,
+          2048,
+          3072,
+          2112,
+          3136
+        ]
+      }
+    },
+    "tensor-c-stride-48": {
+      "object_sha256": "c7b8816059f1f1102e501b0a0d2c173a828506b75874ad9d2423b3314a589d5c",
+      "checked_instructions": 40,
+      "strides_elements": {
+        "a": 64,
+        "b": 32,
+        "c": 48
+      },
+      "immediate_offsets": {
+        "a": [
+          0,
+          1024,
+          32,
+          1056,
+          2048,
+          3072,
+          2080,
+          3104,
+          0,
+          1024,
+          32,
+          1056,
+          2048,
+          3072,
+          2080,
+          3104
+        ],
+        "b": [
+          0,
+          512,
+          1024,
+          1536,
+          32,
+          544,
+          1056,
+          1568,
+          0,
+          512,
+          1024,
+          1536,
+          32,
+          544,
+          1056,
+          1568
+        ],
+        "c": [
+          0,
+          1536,
+          64,
+          1600,
+          3072,
+          4608,
+          3136,
+          4672
+        ]
+      }
+    }
+  },
+  "limits": "Fixed 32x32x64 schedule only. Ordered immediate offsets and memory roles match; dynamic index/lane arithmetic and effective hardware addresses are not checked. A stride has not been varied. Each retained object is hashed and freshly decoded by Apple instrumentation."
+}

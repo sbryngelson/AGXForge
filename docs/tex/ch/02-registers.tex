@@ -1,0 +1,521 @@
+\chapter{The register file}\label{ch:register-file}
+
+Each lane of a simdgroup owns a private file of 32-bit general registers, addressed by number in the instruction and
+also viewed as 16-bit halves and as 2-, 4- and 8-register tuples. Beside it sits a small uniform file, written once per
+dispatch. There is no separate accumulator file for the tensor unit, no register renaming visible to software, and no
+interlock that protects a value a program has said it no longer needs. Register sources carry a \emph{modifier} (a few short forms fix it) that can negate it, take its absolute value, or \emph{release} it,
+and a release is destructive.
+
+Register allocation on this GPU, and the composition of kernels, must respect three facts:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item Fields can name R0–R143, but the hardware executes only R0–R125. An instruction naming a higher register does
+  not fault; it is discarded whole, with no error (\cref{sec:namespace}).
+\item Fields can be narrower than the namespace: certain forms can name only R0–R15, and others cannot name
+  particular registers at all (\cref{sec:narrow-fields-narrow,sec:encoding-holes}). Register choice has to satisfy each form's
+  constraints, which a graph colouring over one homogeneous register file does not capture.
+\item Lifetime is encoded in the instruction and applies per lane, under the execution mask. The last reader of a value
+  marks it released,
+  the release destroys the lane's copy (controlled probes then read zero, \cref{sec:release-does}), and no hardware mechanism
+  notices a later read (\crefrange{sec:operand-modifiers}{sec:loops-loop-variable-rule}). Liveness is a correctness property of the emitted
+  bytes and must be computed per lane over the control-flow graph, including back edges.
+\end{enumerate}
+
+When kernels are composed, a value that stays live across a region boundary (a loop header, a fused stage, a
+second GEMM) must be kept live in the bytes, inside the 126-register pool, in registers every consuming form can name.
+
+Register notation:
+
+\begin{itemize}
+\item \emph{Rn}: general register n, 32 bits per lane. \emph{RnL}, \emph{RnH}: its low and high 16-bit halves. \emph{Ra\_\dots{}\_Rb}: a tuple
+  (for example R20\_R21\_R22\_R23, a 16-bit tensor fragment).
+\item \emph{MCRegister id}: the number Apple's decoder uses for a register; the general block starts at 105, so Rn has id
+  105 + n (verified over 300 registers in 60 shaders; \code{docs/agx3-oracle.md} section 6). The project's code writes
+  "r119" for id 119, which is R14; this chapter always writes hardware numbers.
+\item \emph{Slot domain}: an operand field value counting halves, 2 × n + h (h = 0 low, 1 high) (decoder, MM~\mm{25.139.1}).
+\item \emph{Modifier}: the immediate operand that follows a register source (\cref{sec:operand-modifiers}). \emph{Release} (weight 16), \emph{keep}
+  (weight 32).
+\item \emph{Late value}: a result that arrives after its producer issues and needs a scoreboard wait (\cref{sec:scoreboard}).
+\item \emph{Registers used}: the highest 32-bit register named in the main program, plus one; it equals the declared count
+  this compiler writes into metadata slot 0 (\cref{sec:gpu-metadata-slots}).
+\item The running example (\cref{sec:one-program-ir}) is used in \cref{sec:release-does}.
+\end{itemize}
+
+\Cref{tab:register-statements} lists the chapter's main statements and their standing.
+
+\begin{xltabular}{\linewidth}{@{}XX@{}}
+\caption{Main statements of the chapter and their standing.}\label{tab:register-statements}\\
+\toprule
+Statement & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+Statement & Standing \\
+\midrule
+\endhead
+R0–R125 execute; naming R126–R143 squashes the whole instruction & measured (MM~\mm{10}, MM~\mm{25.18}) \\*
+Release destroys the lane's value, per lane, gated by
+the execution mask & measured (MM~\mm{6}, MM~\mm{25.95}) \\*
+A released register's later read returns 0 & observed in every controlled run; not established as a rule (
+\cref{sec:release-does}) \\*
+Loop-carried values must not be released before the back edge & measured, with a machine-hanging failure (MM~\mm{25.116}) \\*
+8N + K ≤ 115 and 8N + 4M ≤ 108 & measured frontiers of the kernels tested (MM~\mm{11}) \\*
+Field widths and holes & decoder (Apple's decoder reading back the
+encoder's bytes) \\*
+\bottomrule
+\end{xltabular}
+
+\section{Register namespace}\label{sec:namespace}
+
+Allocate only R0–R125: 126 registers per lane, fifteen eight-register groups at bases R0, R8, \dots{}, R112
+(measured, MM~\mm{10}, MM~\mm{0.7}). Any instruction that names R126, R127 or R128–R143 in \emph{any} register operand is squashed as a
+whole: no register write, no memory write, no atomic, no tensor-unit time, and no error from the compiler, the driver
+or the API (measured, MM~\mm{17} rule 1). Nothing faults, and a stray high operand shows up only as wrong output, so the
+allocator has to enforce the bound when it assigns registers.
+
+The boundary first showed up as a store of a tuple reaching R126 that failed to round-trip, independent of the
+declared count. A follow-up wrote through R126 and R127 and read zeros from the output buffer, and was recorded as
+R126 and R127 \emph{reading as zero and dropping writes}, like a hardwired zero register. The rival reading is that the
+hardware discards any instruction that names them. The two predict different results for an instruction that reads
+R126 and stores it: the first stores 0, the second stores nothing. That experiment could not separate them, because the
+output buffer had been zero-filled before the dispatch and "stored 0" and "stored nothing" leave the same bytes. With
+the buffer filled with a sentinel instead, the sentinel survived, so the store had not executed (MM~\mm{19}, MM~\mm{25.20}).
+The same test was then repeated in every operand role: ALU sources and destinations, store sources of three widths, a
+store's index register, a load's destination group, an atomic's destination, and the tensor MMA's accumulator, A and B
+operands (MM~\mm{10}). In each the whole instruction is discarded, not only the register access. For R128–R143 the result
+is unchanged by declared register counts from 12 to 255, by one against 32 simdgroups, and by a 32- against a
+1,024-thread pipeline limit (MM~\mm{25.18}). The wide RMSNorm's first check (\cref{sec:release-does}), which passed against an output that
+carried no sentinel, had the same flaw.
+
+\code{agxforge/g17/registerdomain.py} encodes the rule: \code{ALLOCATABLE\_MAX = 125}, \code{REGISTER\_COUNT = 126},
+\code{MAX\_FP32\_ACCUMULATOR\_GROUPS = 15}, group starts on a multiple of 8 (this compiler). The boundary is measured on
+one part; whether another G17 implementation backs the higher names with storage is not tested (MM~\mm{25.18}).
+
+Beyond R125, the encoding and the decoder distinguish four cases.
+
+\begin{itemize}
+\item \emph{R126 and R127} are the top pair of a 128-register architectural file that this part populates only to R125. Three
+  routes agree on 128: the half-register move's seven-bit source field plus a one-bit file selector (128 halves × 2
+  files = 128 registers, measured in this repository); the five-bit accumulator selector's eighteen groups, of which
+  exactly fifteen lie inside R0–R125, one straddles (R120–R127) and two lie wholly beyond; and, as a hypothesis source
+  only, Mesa's G13 model of 256 sixteen-bit slots. Sentinel stores rule out a hardwired zero and unique encodings rule
+  out aliases, and no metadata or launch control enables the two registers (MM~\mm{24.2} row H1, MM~\mm{25.20}). Whether anything \emph{reserves} the
+  top pair, rather than the part simply populating 126 of 128, is open; only documentation could settle it.
+\item \emph{R128–R143} are decoder-visible names outside that file, reachable only through fields wide enough to express them
+  (accumulator-selector groups 16 and 17, nine-bit slot fields). Load and store register fields reach R127 only, so for
+  those forms R126/R127 are expressible and R128–R143 are not (MM~\mm{24.2} row H1, MM~\mm{25.38}). Prior art's larger uniform file
+  is selected by operand type, not by a high register number, so it does not explain them (MM~\mm{25.18}).
+\item \emph{The encoding} admits R0–R143 and rejects 144–255 (MM~\mm{24.2} row H2).
+\item \emph{Accumulator selector values 18–31} decode to no operand at all: null targets with no name, absent from every
+  compiled witness, never dispatched because malformed tensor encodings have hung the GPU (decoder, MM~\mm{25.19}). An
+  assembler must reject them.
+\end{itemize}
+
+\Cref{tab:highest-base} gives the highest legal base register for each value class (measured, MM~\mm{0.7}, MM~\mm{23.2}).
+
+\begin{xltabular}{\linewidth}{@{}Xlll@{}}
+\caption{Highest legal base register per value class.}\label{tab:highest-base}\\
+\toprule
+Value & Registers & Alignment & Highest base \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Value & Registers & Alignment & Highest base \\
+\midrule
+\endhead
+scalar 32-bit & 1 & 1 & R125 \\*
+int8 / uint8 tensor fragment & 2 & 2 & R124 \\*
+half / bfloat tensor fragment & 4 & 4 & R120 \\*
+fp32 tensor fragment, fp32 / int32 accumulator & 8 & 8 & R112 \\*
+\bottomrule
+\end{xltabular}
+
+\section{Register classes}\label{sec:register-classes}
+
+Apple's decoder tables survive with register and register-class names (3,567 registers, 500 classes); instruction
+names do not (decoder, \code{docs/agx3-oracle.md} section 6). \Cref{tab:register-classes} lists the classes used in this document, with member counts read from those
+tables (\code{tools/agx3meta classes}, \code{members}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.72\hsize}Xll>{\hsize=1.28\hsize}X@{}}
+\caption{Register classes in Apple's decoder tables, with width and member count.}\label{tab:register-classes}\\
+\toprule
+Class & Width & Members & What it is \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Class & Width & Members & What it is \\
+\midrule
+\endhead
+GPR32 & 32 & 144 & R0–R143 \\*
+GPR16 & 16 & 288 & R0L, R0H, \dots{}, R143H \\*
+GPR32tup2 / tup4 & 64 / 128 & 143 / 141 & 2- and 4-register tuples \\*
+GPR32tup8\_alignedrc & 256 & 18 & the eighteen 8-aligned groups R0–R7 \dots{} R136–R143 \\*
+IR32 & 32 & 16 & IR0–IR15, MCRegister ids 89–104 \\*
+IRGPR32 & 32 & 160 & R0–R143 followed by IR0–IR15 \\*
+FLAGR / FLAGwritable & 16 & 17 / 15 & FLAG0–FLAG14 plus the constant sources FLAGTRUE, FLAGFALSE (
+\cref{ch:control-flow-execution}) \\*
+\bottomrule
+\end{xltabular}
+
+A 16-bit operand names a half of a general register; the slot domain numbers halves 2n + h, confirmed
+through Apple's decoder (MM~\mm{25.139.1}). Writes and releases act per half (\cref{sec:release-does}): a 16-bit write leaves the other
+half's contents and history untouched. Measured for \op{14060}: with R holding
+7t + 0xABCD0000, writing its low half with the lane index left 0xABCD0000 \textbar{} lane, three runs identical; it does not
+zero-extend (MM~\mm{25.145.4}).
+
+Register fields are encoded in units of the tuple width, so a tuple base must be naturally
+aligned (2, 4 or 8); an unaligned request cannot be expressed and must be refused, not rounded (MM~\mm{0.4}, MM~\mm{2}; the
+encoder bug that rounded silently is \cref{sec:admission-decodes-executes}). The tensor unit's operands use three classes found nowhere else in
+the table: class 335 (8-register tuple, the destination of every 32-bit-accumulator form), class 159 (4-register
+tuple) and class 41 (2-register tuple); there is no fourth, hence no sub-byte fragment class (decoder, MM~\mm{25.6}). Eight-bit
+slot fields come in two addressing conventions (half-indexed: the value 128 names R64, on 3,970 operands;
+register-indexed: 128 names R128, on 638), and one scalar form carries one of each, so field width alone does not say
+which registers a field reaches (decoder, MM~\mm{25.38}).
+
+The IR file proper is the 16-member class IR32. IRGPR32 is a class that \emph{admits} the IR
+registers alongside the general ones (R0–R143 followed by IR0–IR15, 160 members); its operands decode as ordinary
+registers, value 105 = R0, and all 229 corpus writes by its users (\op{10239}, \op{10824}, \op{11060}, \op{14147}) land in Rn that ordinary instructions read (MM~\mm{25.59}). The corpus uses only its general members. What the 16
+IR registers hold, and whether any executed program names one, is not recorded (open).
+
+The uniform file is a per-dispatch file of 32-bit uniforms u0, u1, \dots{}, written by the \emph{constant program} (a second
+program Apple's compiler emits, run once per dispatch before main; \cref{sec:constant-program-record}) and read by main-program sources.
+Apple's decoder writes a uniform operand as \code{bin(op0, const(K), S)}, where op0 is the \op{0}, and K counts 16-bit halves, so the uniform is K // 2; a 64-bit value occupies u(2k), u(2k+1) (decoder, MM~\mm{25.120}). In tensor (MMA)
+programs u0–u5 are reserved and constant-program writes start at u6; outside MMA programs some constant programs write
+below u6 (Apple's compiler emits, MM~\mm{25.120}). A uniform destination must be written with one value across the active
+lanes (measured by emulation against Apple's GPU, MM~\mm{25.179}). Uniforms also serve as operands of ordinary forms: the mask
+operand of \op{428} in its pool form is a uniform halfword preloaded from the slot-13
+pool (MM~\mm{25.141.17}, MM~\mm{25.145}; \cref{sec:constants-uniforms}).
+
+\Op{592} stages operands for texture messages in the \op{4}; the writer names a scoreboard slot and the message instruction waits on it
+(decoder over 189,898 staging writes, MM~\mm{25.120.1}; \cref{sec:textures}, \cref{sec:scoreboard-publish-wait}).
+
+FLAG0–FLAG14 are an allocatable predicate resource with pressure, not one condition code; compact forms
+reach FLAG0–FLAG6 only (decoder, \code{isa/g17-special-registers.toml}). They are covered in \cref{ch:control-flow-execution}.
+
+\section{Narrow register fields}\label{sec:narrow-fields-narrow}
+
+Each operand field has its own width, and the allocator must compute, per value, the highest register
+every form touching it can name. The authoring table records field widths per (opcode, length) form, and this
+compiler derives each value's ceiling from them (\code{cc.\_caps}), with a hand list only for forms outside the table
+(this compiler, \code{agxforge/g17/cc.py} \code{\_needs\_narrow}). The binding narrow field today is the four-byte special-register
+read's four-bit destination, R0–R15 (decoder and this compiler, MM~\mm{25.110.1}, \code{agxforge/g17/cc.py}). Other forms carry
+field-specific ceilings: the fp16 conversions author destinations to R61 with holes (\cref{sec:encoding-holes}), and in measured
+kernels the fma's first source and a load's index register were confined to narrow registers by their forms' fields at
+the time (MM~\mm{25.144.3}).
+
+This compiler keeps R4–R15 (twelve registers) as its narrow pool and places a value that is only
+ever an ALU first source in the wide pool (R16 and up) first, to keep the narrow registers free (this compiler,
+MM~\mm{25.146}). For one witness the policy makes this compiler declare 17 registers where Apple's compiler
+declares 3; which policy gives better occupancy is unmeasured (MM~\mm{25.146}). Refusals name the pool ("12 narrow + 110
+wide available"); when they occur, the narrow pool, not the file, ran out (MM~\mm{25.144.3}).
+
+The widths now used were measured after the early scalar field map proved wrong. That map read the ALU
+destination as five bits and the load, store, special-register-read and move-immediate destinations as four bits in
+byte 0, which implied a 32-register file (the ALU destination saturated at 31 in kernels needing 32 to 64 live values).
+Apple's own shaders contradicted that (39 percent exceed R31; driver shaders reach R112). The ceiling was then measured on
+the hardware, with one value pinned into one high register and read back, one dispatch per process, with the expected value 107
+preregistered every time. R20, R40, R64, R100, R120, R124 and R125 read back correctly, and R126 and above were squashed (measured, \code{agxforge/g17/cc.py} comment,
+\code{spike/accel/re/hireg.py}). The fields were re-measured at seven and eight bits (extension bits in byte 2 and byte 5).
+The hand list also hid one under-measured field: a register-register bitwise form that it held to the narrow
+registers had a destination field recorded as five bits. The field was six bits, which went unnoticed until something
+was allocated above R15 (this compiler, \code{agxforge/g17/cc.py}).
+
+\section{Operand modifiers}\label{sec:operand-modifiers}
+
+Every register source is followed by a modifier immediate. Over 12,000 corpus instances of five opcodes
+it takes exactly the values \{0, 2, 16, 18, 20, 32, 34, 36\}: bit 1 (2) negate, bit 2 (4) absolute value, bit 4 (16)
+release, bit 5 (32) keep, composing freely (18 = negate + release, 34 = negate + keep) (Apple's compiler emits;
+\code{agxforge/g17/auth.py}, \code{isa/g17-source-modifier-operand.toml}). A destination's modifier takes only 0 or 32: a definition
+is always a keep. Value 0 carries no lifetime information and preserves the register (the running example's first
+reads, \cref{sec:release-does}, execute exactly with 0). Floating subtraction is \op{998} with a negate modifier on the
+second source; \code{a - b} and \code{a + (-b)} compile to the same bytes (Apple's compiler emits, MM~\mm{25.146}).
+
+In the ALU and tensor forms the destination's raw operand (operand 1, which
+the decoder prints as one wide integer and older notes call the "flags word") packs several fields: bits 4–5 the
+destination's lifetime, bits 20–23 a fill slot, bits 24–31 the scoreboard wait mask (measured, MM~\mm{25.145}, MM~\mm{6}; the fields are \cref{sec:scoreboard-publish-wait}). In the
+tensor MMA the keep bit is operand 1 weight 32, physically byte 4 bit 3 (\code{auth.carriers(5106, 1)[5] = [(4, 3, 0)]}), and
+it is hardware-inert: a conservative assertion that the next MMA writes the same destination tuple (\cref{sec:modifiers-keep-flag}).
+
+MM~\mm{6} and \code{agxforge/g17/auth.py} give bit 5 as keep; MM~\mm{25.59} reports that
+\op{10239}'s 101 instances carry "source modifier 16 (32 for a high-half source)" in unsigned
+kernels and 24 (40) in signed ones. These are consistent: in
+the saturating add the modifier carries an extra bit 3 (weight 8) that selects signed saturation (signed arm executed and clamped to
+INT\_MIN..INT\_MAX, MM~\mm{25.59}), so the field's low bits are not uniform across forms. The 16 / 32 split itself is
+consistent with release and keep: 16 + 8 = 24 and 32 + 8 = 40 preserve it. MM~\mm{25.59} records a correlation over 101
+instances, not a measurement isolating the bit, and nothing shows a high-half \emph{selector} at weight 32. A compiler may
+treat 32 as keep in the saturating add as in the general census; it may not assume that every form's modifier is limited to the
+four general bits.
+
+In the forms of \cref{tab:fixed-modifiers}, the modifier cannot be chosen freely.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.95\hsize}X>{\hsize=1.05\hsize}X>{\hsize=1.05\hsize}X>{\hsize=0.95\hsize}X@{}}
+\caption{Forms whose modifier cannot be chosen freely, with the consequence for a compiler. Each row is measured or decoder-checked.}\label{tab:fixed-modifiers}\\
+\toprule
+Form & Fact & Consequence & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Form & Fact & Consequence & Source \\
+\midrule
+\endhead
+four-byte \op{424}, \op{13575}, \op{17771} & no lifetime bit: always release their sources & use the longer form for a source read again & measured, MM~\mm{24.8} row T4, ledger
+\code{g17-the-four-byte-bitwise-releases-its-sources} \\*
+\op{10094}, ten bytes & the value's lifetime (operand 9) is pinned at 16 & two atomics sharing a value, or the value stored afterwards, read 0
+(fuzz seed 5012: 0 where 24) & measured, MM~\mm{25.144.6} \\*
+\op{17256} & the stored tuple's lifetime (operand 1) is 16 in every
+witness; no keep value measured & a value read after the store read 0 on 32 of 32 lanes; store a copy & measured, MM~\mm{25.144.6} \\*
+\op{14157} & the source lifetime is operand 3, not operand 1; a
+template's 16 released x & \code{y = broadcast(x); z = fma(x, x, y)} stored 0 & measured, MM~\mm{25.144.6} \\*
+imageblock store & operand 6 is the coordinate's lifetime (0 keep, 16
+release) & releasing it collapsed all 32 lanes to element 0 (one-bit control) & measured, MM~\mm{6} \\*
+\op{5106} & the accumulator's modifier (operand 10) has no
+single-bit carrier in the 80-bit field map & cannot be authored; a multi-bit encoding is not excluded & decoder, MM~\mm{6} \\*
+\bottomrule
+\end{xltabular}
+
+The position of the lifetime operand varies by form (\op{586}: operand 3; \op{17229}/8: operands 1 and 6 for value and index; the fp16 fma, register form: operands 3, 5, 7), and each must be
+written from liveness (MM~\mm{25.117}, MM~\mm{25.196}, \code{agxforge/g17/cc.py}). All four modifier bits must be written, not only the
+lifetime: witnesses taken from a mutation walk rather than from Apple's code can carry 0 or 52 (keep, release and
+absolute value at once), and inheriting them made four opcodes in a naming sweep return the same value for every input
+(\code{agxforge/g17/auth.py}).
+
+\section{Release semantics}\label{sec:release-does}
+
+A release (modifier 16) destroys the lane's value, per lane, under the execution mask, and a
+later write restores the register. Every controlled probe of a released register read zero, but that is not
+established as a rule (see the end of this section).
+
+Each of the following was measured in executed programs.
+
+\begin{itemize}
+\item The contents do not survive, in the controlled probes. An instruction carrying 16 as the first reader of a
+  register made every later reader in that program see 0, and the register read 0 at a store. Modifier 32, or another
+  first-reader form, preserved it (MM~\mm{6}). The imageblock store's coordinate behaved the same way, so the effect is not
+  specific to the tensor feed (MM~\mm{6}).
+\item The release acts per lane, gated by the execution mask. Every earlier release had run on all 32 lanes, so two
+  mechanisms fit equally well: the release frees a register the simdgroup shares, or it clears each lane's copy. A
+  partial mask separates them. \code{y = t + 3054} was read by \op{11666}/12 inside a
+  region gated on \code{t < bound}, with that read's lifetime written 32 → 16 and decoded back; after the region every lane
+  stored \code{y + 0} (MM~\mm{25.95}, \code{tools/g17releasemask.py}). \Cref{tab:release-mask-arms} gives the four arms.
+
+  \begin{xltabular}{\linewidth}{@{}lllX@{}}
+\caption{Lanes reading 0 after a release under each execution mask (MM~\mm{25.95}).}\label{tab:release-mask-arms}\\
+\toprule
+Arm & Region & Patched & Lanes reading 0 \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Arm & Region & Patched & Lanes reading 0 \\
+\midrule
+\endhead
+  control & t < 16 & no & none \\*
+  partial & t < 16 & yes & 0–15 only; 16–31 read y exactly \\*
+  all on & t < 32 & yes & all 32 \\*
+  all off & t < 0 & yes & none \\*
+  \bottomrule
+\end{xltabular}
+
+  In the partial arm only the lanes that executed the release lost y, and in the all-off arm none did: the release acts
+  on each lane's copy, an instruction no lane executes releases nothing, and a simdgroup-wide free is ruled out. A
+  compiler must therefore treat a value released inside a branch as dead only on the lanes that took the branch
+  (\cref{sec:loops-loop-variable-rule}, rule 3).
+\item The register is cleared, not handed to another simdgroup, within the measured bound. Group 0 released y (one
+  lifetime operand, the only bytes that differ from the keep arm), stayed resident for about 13,100
+  instructions while 8,191 other groups (about 300 instructions each, 16 distinctive live values each) launched and
+  finished, then re-read y: 0 in 3 of 3 rounds, never another simdgroup's value, while group 1 (not released) read y in
+  the same dispatch (MM~\mm{25.95}, \code{isa/g17-execution-release-reuse-results.json}). This bounds when reuse could occur but
+  does not exclude reuse.
+\item A write restores the register: 230 release → rewrite → read chains in 15 bit-exact tensor bodies, rewritten by ALU results,
+  immediate moves, loads and a tensor MMA; for example \op{998} releases R19, \op{3290} writes R19,
+  and the add reads it (MM~\mm{25.95}).
+\item Order inside one instruction depends on the form. fp32 multiply squaring \code{x * x} with a release on the first read
+  is bit-exact, and \op{9700} naming one register in two released slots is harmless: in
+  these ALU forms the release takes effect after the sources are read (MM~\mm{25.145}, MM~\mm{25.117}). But \op{17229} naming one register as both value and index, with the \emph{index} slot releasing it, stores 0 on every lane: the
+  store reads its value after the index's release has cleared it (\code{5f04030a01061040} decodes to {[}R5, 16, 2066, expr,
+  0, R5, 16{]}; clearing operand 6 alone restores the value). Apple's compiler releases neither slot in all 142 such
+  stores among 32,162 (MM~\mm{25.117}). Rule: never release, in one slot, a register another slot of the same instruction
+  reads, except in forms measured safe.
+\item A write cancels the destination's pending release. An in-place accumulate that reads C with a release and writes
+  D = C + \dots{} with D = C is bit-exact (MM~\mm{25.145}).
+\item Release acts per 16-bit half. A 16-bit write revives only its half; the other keeps its history (MM~\mm{25.145}).
+\end{itemize}
+
+Whether a released register reads 0, or can still return its old value, is unresolved (the sources' differing wordings
+are listed in \cref{app:a}). The evidence on each side is as follows.
+
+\begin{itemize}
+\item every controlled measurement read 0: adjacent reads, one ALU op later, about 7 instructions later, past a barrier,
+  under partial masks, after 13,100 instructions of residency (MM~\mm{25.95}); and the M 2048 register-O attention whose
+  32-bit read of R33 needed its released high half to be zero, which passed 20 of 20 in fresh processes once
+  the 16-bit special-register read was shown not to zero-extend (\cref{sec:register-classes}; MM~\mm{25.147}, MM~\mm{25.145.4});
+\item the only "old value" observation is a loop kernel (the wide RMSNorm's scale loop, \cref{sec:loops-loop-variable-rule}) that passed one check
+  and then failed with the same bytes; the check that passed had no sentinel in the output, so leftover correct values
+  could have hidden unwritten ones (MM~\mm{25.142.7}, \code{agxforge/g17/releasecheck.py} header).
+\end{itemize}
+
+The old-value branch is weakly evidenced but not excluded. A compiler may assume that a released register never
+shows another simdgroup's value within the measured bound, and that rewriting it restores it. It may not assume it
+reads 0, and may not assume it keeps its value. It may read one only where both outcomes give the same answer, which
+is the rule this project's emulator applies (it admits such a read only when the old value is zero, MM~\mm{25.145}) and the
+rule the attention loop's latch relies on (the counter a finished lane released is the zero that ended its loop).
+\emph{Correction:} MM~\mm{0.15}'s "A released register: reads zero" and MM~\mm{17} rule 37's "every later read returns zero" state an
+observation as a rule.
+
+Of the never-written registers, untouched R2, R20 and R60 read zero as operands in a whole-program measurement; R0 does not
+(measured, MM~\mm{25.145}; the emulator admits such reads only in its whole-program tier). Do not rely on R0.
+
+Apple's compiler reads released registers in one place. Its legacy simdgroup MMA programs release R0 and R1
+(address arithmetic) and then issue \op{2842} with accumulator R0\_R1 (Apple's compiler
+emits, \code{agxforge/g17/releasecheck.py}). The checker treats this as a zero initialisation and exempts it; it is a statement
+about what Apple emits, not a measurement of the read. The checker treats Apple's 6,594 corpus programs as ground
+truth and is required to report zero findings on them; this exemption, one for cross-lane value operands and a few
+path-sensitivity rules were each added for a named false positive there (\code{agxforge/g17/releasecheck.py}).
+
+\textbf{Worked example: release at the last read in the running example's four MMAs} (compiled by this project's compiler;
+decoded by Apple's decoder; executed below Metal, 323 of 323 exact). The product is 17 × 19 × 16, so the M and N axes
+each need two 16-wide tiles (the second masked) and K = 16 needs one step: four \op{5107} instructions, each reading one A tile and one B tile. Each tile is read twice, so its first read
+carries modifier 0 and its second, last read carries 16 (\cref{tab:example-mma-releases}).
+
+\begin{xltabular}{\linewidth}{@{}lX>{\hsize=1.21\hsize}X>{\hsize=0.91\hsize}X>{\hsize=0.91\hsize}X@{}}
+\caption{Tile modifiers in the running example's four tensor MMAs, with the release on each tile's last read.}\label{tab:example-mma-releases}\\
+\toprule
+Offset & Bytes & D (accumulator tile) & A tile, modifier & B tile, modifier \\
+\midrule
+\endfirsthead
+\tablecontinued{5}
+\toprule
+Offset & Bytes & D (accumulator tile) & A tile, modifier & B tile, modifier \\
+\midrule
+\endhead
+0x29a & \hash{a70405112204a4620202} & R24–R31 (rows 0–15, cols 0–15) & R20\_R23, \textbf{0} & R68\_R71, \textbf{0} \\*
+0x2a4 & \hash{2704a5112204a4420204} & R32–R39 (rows 0–15, cols 16–31) & R20\_R23, \textbf{16} (last read) & R72\_R75, \textbf{0} \\*
+0x2ae & \hash{a70485832206a4420202} & R40–R47 (rows 16–31, cols 0–15) & R56\_R59, \textbf{0} & R68\_R71, \textbf{16} (last read) \\*
+0x2b8 & \hash{2704a5832206a4620204} & R48–R55 (rows 16–31, cols 16–31) & R56\_R59, \textbf{16} (last read) & R72\_R75, \textbf{16} (last read) \\*
+\bottomrule
+\end{xltabular}
+
+R20\_R23 holds A rows 0–15 (two tensor loads at byte offsets 0 and 256, eight rows of 32 bytes each); R56\_R59 holds A
+rows 16–31, of which only row 16 exists (masked loads at 512 and 768); R68\_R71 and R72\_R75 hold B columns 0–15 and 16–31
+(row stride 38 bytes, so offsets 0 / 304 and 32 / 336). The A modifier is operand 4, carried by byte1 bit 7 (weight 32)
+and byte2 bit 5 (weight 16); the B modifier is operand 7, carried by byte5 bit 1 (16) and byte8 bit 0 (32)
+(\code{isa/g17-tensor-mma-fieldmap.json}). The first two instructions differ in four bytes: byte 2 bit 5 sets A's release
+(0 → 16); D moves from R24 to R32 through byte 0 bit 7, byte 2 bit 7 and byte 7 bit 5 (weights 8, 32 and 16 on the
+tuple's base register); byte 9 moves B from R68 to R72. Nothing reads R20–R23, R56–R59 or R68–R75 afterwards; each D
+tile is read once, as two four-register halves, by the tensor stores that follow.
+
+Placing the release on the \emph{first} read of any tile would have zeroed one of the four products on every lane. Three properties
+of the schedule make the placement trivial here and are what a general allocator must establish: the four MMAs run on
+every lane (no mask divides them), there is no loop (no back edge reads a tile again), and no instruction reads a tile in
+two slots.
+
+\section{Loop-carried values}\label{sec:loops-loop-variable-rule}
+
+A loop compiled by this compiler (measured, MM~\mm{25.116}), bounded by a register
+(\code{i < trips}) and capped by a constant (\code{i < 255}) so that it was "bounded on paper", never returned. The host was killed
+at its 600 s timeout and the kernel kept running: with nothing dispatching, the GPU read 100 percent device utilisation
+until a reboot. Decoded offline, the latch was \code{icmp(i1 < trips)} followed by the cap
+\code{icmp(i1 < 255)}, and the cap compare, the instruction added to make termination provable, carried a release on the
+counter. The next trip read the cleared counter, \code{i} stuck at 1, and neither bound could ever be reached.
+The compiler's liveness took a value's last textual read as its last live point; a loop header's phi carries no uses, so
+the latch value, read only inside the body, looked dead after its last mention. Every earlier runtime-loop test stored its
+counter after the loop, which kept it live and hid the defect.
+
+A loop phi that inherits its entry value's register must keep
+that value live into the loop (measured, MM~\mm{25.142.7}, MM~\mm{25.144.6}). In the wide RMSNorm, the scale loop's index phi started at the thread index t and took
+t's register; t's last mention before the loop released it, so every thread stored as thread 0 (only out{[}0{]} and out{[}1024{]}
+written). This holds even when the instruction falling into the header itself reads the entry value: the value's last
+point is the loop header label, because that instruction would otherwise be its last reader by index (\code{c = B[t] + 7; x = c + 1; loop i = phi(c, i + 1)} returned 2 instead of 1009 on 32 of 32 lanes; 29 of 150 fuzzed loop programs had the pattern, all with
+phis starting at constant 0, which a released register also read, so they were right by luck).
+
+This compiler applies three liveness rules.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item A back edge \emph{reads} its header phis' latch values; liveness must treat it so (this compiler: \code{Alloc.\_cfg\_uses}).
+\item Refuse a release of any loop-carried register (one read in the body before the body writes it) after the body's last
+  write of it (MM~\mm{25.116}).
+\item Compute releases per lane over every path a lane can take, with masks and loops, to a fixed point: a value released
+  inside a branch is dead only on the lanes that took it, so it may not be treated as dead after the join (MM~\mm{25.95}).
+  Liveness taken from the last mention in instruction order is wrong for loops, where a back edge reads a value after its last mention.
+\end{enumerate}
+
+\code{agxforge/g17/releasecheck.py} implements rule 3 on emitted bytes, walking each lane's paths with the execution-mask
+counter and joining released-half sets by union to a fixed point; it runs after every compile, held to zero findings on
+Apple's corpus (this compiler, MM~\mm{25.144.6}; \cref{sec:release-does}). The check has to be static, because the looping
+kernel at the start of this section could not be stopped from the host (MM~\mm{25.116}). Because a released read can pass a
+check once, loop kernels must also be verified against sentinel-filled outputs (MM~\mm{17} rule 37).
+
+\section{Encoding holes}\label{sec:encoding-holes}
+
+Some forms cannot name particular registers: no byte pattern the encoder knows decodes back to them. These are found
+by authoring each register and reading it back through Apple's decoder (decoder only); \cref{tab:encoding-holes} lists them.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.00\hsize}X>{\hsize=0.85\hsize}X>{\hsize=1.40\hsize}X>{\hsize=0.75\hsize}X@{}}
+\caption{Registers each holed form cannot author, found by reading each authored register back through Apple's decoder.}\label{tab:encoding-holes}\\
+\toprule
+Form & Operand & Registers it cannot author & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Form & Operand & Registers it cannot author & Source \\
+\midrule
+\endhead
+\op{1004}/12 & destination & R14, R15, R30, R31, R46, R47, and R62 and above (the encoder reads back
+d + 2, or refuses a forced bit) & MM~\mm{25.133}, \code{agxforge/g17/cc.py} \\*
+\op{798}/12 & low-half destination & R18, R19, R26, R27, R50, R51, R58, R59 (low halves) & MM~\mm{25.196} \\*
+\op{798}/12 & operand 4 / operand 6 sources & R17L / R18L & MM~\mm{25.196} \\*
+\bottomrule
+\end{xltabular}
+
+\emph{Correction:} the fp16 fma's holes are the listed set, not "registers 2 and 3 mod 8"; MM~\mm{25.136.6}'s widening holes
+(d = 14 and 15) are a subset of the set above (\cref{app:a}).
+
+To avoid the holes, this compiler's allocator sweeps the admissible indices once from the encoder rather than typing them in
+(\code{\_encodable\_dests}, \code{\_encodable\_fma16\_sources}), and offers them only to values those forms define or read. A third,
+hole-aware allocation attempt, used only after two refusals so earlier programs keep their bytes, gives unconstrained
+values the holed forms' unauthorable registers first (MM~\mm{25.136.6}). The holes surfaced as compile crashes in a fuzzer
+(seed 6) and as refusals of loop arms, never as wrong bytes, because every emitted operand is read back (\cref{sec:admission-decodes-executes}).
+
+Before per-length slot read-back existed, two forms misencoded silently, without raising:
+\op{11994}/16's operand 5 named R105 for every register from R16 up, and \op{3291} and two sibling forms at four bytes wrapped R64 and above by writing past byte 4 (decoder, MM~\mm{25.88}). The
+encoder now reads every slot back through the decoder-measured layout for its length and refuses a value it cannot hold.
+
+\textbf{Not known.} Whether these registers are unreachable in the encoding or only in the project's field maps (a carrier
+bit Apple's instances never vary would be absent from the maps).
+
+\section{Register budgets and spills}\label{sec:capacity-budgets-spills}
+
+The capacity rules are measured (MM~\mm{11}, MM~\mm{17} rules 2 and 3).
+
+\begin{itemize}
+\item One flat pool of 126 registers: accumulators, fragments and scalars trade capacity; there is no separate accumulator
+  resource and no aliasing. Widths: fp32 accumulator 8, fp32 operand fragment 8, half or bfloat fragment 4, int8 operand
+  pair 2, scalar 1.
+\item At most 15 live eight-register fp32 accumulator groups in straight-line code (122 registers touched; 16 spill 24
+  stores), 14 in a loop with one A and one B fragment live.
+\item With one A and one B fragment live, the measured trade lines are \code{8N + K <= 115} for N accumulators against K live
+  scalars and \code{8N + 4M <= 108} against M 16-bit fragments, exact at every point tested. The constants include the
+  measured kernels' own overhead registers; they are frontiers of those kernels, and the hardware bound is the 126-register
+  pool.
+\item Spill points in Apple's compiler are scheduling outcomes, where its backend schedule overflows the pool, not
+  register-file boundaries (peaks at the cliffs 118–125). Count both spill forms when diagnosing: \op{595} and \op{17789}; a scalar-heavy kernel had 0 of the first and
+  74 of the second (Apple's compiler emits, MM~\mm{0.7}, MM~\mm{11}, MM~\mm{13}).
+\item This compiler does not spill: it refuses a program that does not fit, naming the pool that ran out (this compiler,
+  MM~\mm{25.113}, MM~\mm{25.144.3}).
+\end{itemize}
+
+What spills, registers and occupancy cost in time is measured in \cref{sec:registers-spills-occupancy,sec:residency-occupancy-measurements}; residency against registers
+used is a rule in \cref{sec:residency-occupancy-rules}.
+
+\textbf{Evidence.} MM~\mm{0.4}, MM~\mm{0.7}, MM~\mm{0.15}, MM~\mm{2}, MM~\mm{6}, MM~\mm{10}, MM~\mm{11}, MM~\mm{13}, MM~\mm{17} (rules 1–3, 37), \mm{19}, \mm{23.2},
+\mm{24.2} (rows H1, H2), \mm{24.8}, \mm{25.6}, \mm{25.18}, \mm{25.19}, \mm{25.20}, \mm{25.38}, \mm{25.59}, \mm{25.88}, \mm{25.95},
+\mm{25.110.1}, \mm{25.113}, \mm{25.116}, \mm{25.117}, \mm{25.120}, \mm{25.133}, \mm{25.136.6}, \mm{25.139.1}, \mm{25.141.17},
+\mm{25.142.7}, \mm{25.144.3}, \mm{25.144.6}, \mm{25.145}, \mm{25.145.4}, \mm{25.146}, \mm{25.147}, \mm{25.179}, \mm{25.196}; \code{agxforge/g17/releasecheck.py},
+\code{agxforge/g17/cc.py}, \code{agxforge/g17/auth.py}, \code{agxforge/g17/registerdomain.py}, \code{isa/g17-tensor-mma-fieldmap.json}.

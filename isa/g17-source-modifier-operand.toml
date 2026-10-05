@@ -1,0 +1,66 @@
+# THE MODIFIER OPERAND. What this project has been calling "operand width" is not a width.
+title = "The immediate after each source register is a MODIFIER: lifetime, negate and absolute value"
+date = "2026-09-05"
+
+[the_decode]
+text = """
+    bit 1  value  2   NEGATE the source
+    bit 2  value  4   ABSOLUTE VALUE of the source
+    bit 4  value 16   RELEASE - this is the last read of the register
+    bit 5  value 32   KEEP - the register is read again later
+
+So 16 is release, 32 is keep, 18 is negate-and-release, 20 is abs-and-release, 34 is
+negate-and-keep, 36 is abs-and-keep, and 0 is neither lifetime bit.
+"""
+
+[evidence]
+text = """
+THE SET OF VALUES IS EXACTLY THAT AND NOTHING ELSE, over 12,000 corpus instances of five opcodes:
+
+    op998  fadd  operand 5   0 x2   2 x1   16 x628   18 x589   32 x4   34 x17
+    op3290 fmul  operand 3   0 x393   16 x82   20 x1   32 x776
+    op10282 add  operand 3   0 x2436   16 x3728   32 x1767
+    op2190 ffma  operand 7   0 x75   16 x1186   18 x2   32 x13
+
+No value outside {0, 2, 16, 18, 20, 32, 34, 36} appears anywhere. A field carrying an operand
+WIDTH would not have that shape.
+
+THE LIFETIME HALF IS CAUSAL, established by the encode session by differencing kernels that differ
+only in whether a value is read again:
+
+    f[200] = rint(p);                        modifier 16
+    f[200] = rint(p); f[201] = floor(p);     modifier 32     p is read again
+    f[200] = p + q;                          16 and 16
+    f[200] = p + q; f[201] = p * q;          32 and 32
+
+and it is why a nine-operation authored float program read zero seven times: the composer was
+writing 16 on a register it went on to use.
+
+THE SIGN AND ABS HALF was established here by compilation, one source expression at a time:
+f[x] * -f[y] moves the modifier 16 -> 18 and sets b2[5]; f[x] * fabs(f[y]) moves it 16 -> 20 and
+sets b10[2]; f[x] - f[y] is f[x] + f[y] with the same 16 -> 18. See
+ledger/g17-float-source-modifiers.toml.
+"""
+
+[what_it_corrects]
+text = """
+CAUSAL_FIELDS in tools/g17layout.py called b3[1], b8[3] and b9[7] "operand width", and every
+comment in tools/g17slice.py that reads "operand width" means this. The bits are right and the
+NAME was wrong, which matters because a composer that thinks it is writing a width will write a
+constant and destroy the value it is meant to keep.
+
+The DESTINATION's modifier takes only 0 or 32 - a definition is always "keep" - which is a
+consistency check on the reading rather than a separate fact.
+"""
+
+[the_encoding_asymmetry]
+text = """
+A value bit can have MORE THAN ONE CARRIER in the encoding, and the two halves of this operand want
+opposite rules. The register ladder certifies writing EVERY mapped bit; the lifetime needs exactly
+ONE carrier written, because op3290's operand 3 maps value bit 4 at both b6[3] (inverted) and
+b8[2], and b6[3] also turns operand 2 from a register into an expression.
+
+That is the encode session's finding and it is a defect in the field maps this project publishes:
+1,031 of 9,282 sampled operands have a value bit with more than one carrier. Writing all of them
+is what a field map naturally invites and it silently changes an unrelated operand.
+"""

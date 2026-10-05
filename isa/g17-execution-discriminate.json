@@ -1,0 +1,239 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "MANDATORY POSITIVE CONTROL, the convention every batch in this directory follows: op10279 returns src + 4. If this does not replicate, the instrument is not running and no other record in this file says anything."
+ },
+ {
+  "id": "x408.discriminate",
+  "op": 408,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x586.discriminate",
+  "op": 586,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x590.discriminate",
+  "op": 590,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x10284.discriminate",
+  "op": 10284,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x13853.discriminate",
+  "op": 13853,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x13855.discriminate",
+  "op": 13855,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x13873.discriminate",
+  "op": 13873,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x13875.discriminate",
+  "op": 13875,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x13881.discriminate",
+  "op": 13881,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ },
+ {
+  "id": "x13883.discriminate",
+  "op": 13883,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3212836864
+   ],
+   [
+    1069547520
+   ],
+   [
+    3225419776
+   ],
+   [
+    5
+   ]
+  ],
+  "note": "PREREGISTERED DISCRIMINATION, committed before the dispatch. These four inputs are -1.0f, 1.5f, -3.0f and the integer 5 (0xBF800000, 0x3FC00000, 0xC0400000, 0x00000005). The five candidates that survived this opcode's earlier record - which used only small positive words and so returned the input unchanged - give FIVE DISTINCT answers here, verified before running: identity [0xBF800000, 0x3FC00000, 0xC0400000, 5] ; abs_s32 [0x40800000, 0x3FC00000, 0x3FC00000, 5] ; fabs [0x3F800000, 0x3FC00000, 0x40400000, 5] ; fsat [0, 0x3F800000, 0, 5] ; ffract [0, 0x3F000000, 0, 5]. NO `expect` FIELD ON PURPOSE: the reading is by elimination against the published candidate library, not by confirming a guess, and a stored expectation that shipped in the same commit as its results could not fail. The earlier record's inputs were the limit, not the library - isa/g17-execution-fits.json reports abs_s32/identity as inseparable across 46 records for exactly this reason."
+ }
+]

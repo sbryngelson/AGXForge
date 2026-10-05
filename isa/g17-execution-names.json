@@ -1,0 +1,129 @@
+[
+  {
+    "id": "CONTROL.op10279",
+    "op": 10279,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        4096
+      ],
+      [
+        4097
+      ],
+      [
+        4352
+      ],
+      [
+        8192
+      ]
+    ],
+    "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+    ],
+    "note": "MANDATORY POSITIVE CONTROL. The batch is void without it."
+  },
+  {
+    "id": "op13460.called-nand",
+    "op": 13460,
+    "author": "fieldmap",
+    "cases": [
+      [
+        4042322160,
+        4278255360
+      ],
+      [
+        16711935,
+        252645135
+      ],
+      [
+        4294967295,
+        0
+      ],
+      [
+        305419896,
+        2018915346
+      ]
+    ],
+    "note": "DELIVERY PROOF IS NOT A NAME. op13460 is already execution-proven, which says its operands reach it and NOT that it computes what g17cc calls it. The one opcode on that line whose name was CHECKED - op13488, called nandn - turned out to compute ~a & b, a different function. So all four remaining names get the same treatment: four input pairs fitted against fourteen candidate bitwise functions, with no expect written, and the name is whichever one survives all four. The pairs are chosen so that nand, nor, orn, xnor, and, or, xor and both and-not orderings all separate.",
+    "function": "~(a & b)  - name confirmed by fit"
+  },
+  {
+    "id": "op13521.called-nor",
+    "op": 13521,
+    "author": "fieldmap",
+    "cases": [
+      [
+        4042322160,
+        4278255360
+      ],
+      [
+        16711935,
+        252645135
+      ],
+      [
+        4294967295,
+        0
+      ],
+      [
+        305419896,
+        2018915346
+      ]
+    ],
+    "note": "Same four pairs, same fit. op13521 is called nor.",
+    "function": "~(a | b)  - name confirmed by fit"
+  },
+  {
+    "id": "op13548.called-orn",
+    "op": 13548,
+    "author": "fieldmap",
+    "cases": [
+      [
+        4042322160,
+        4278255360
+      ],
+      [
+        16711935,
+        252645135
+      ],
+      [
+        4294967295,
+        0
+      ],
+      [
+        305419896,
+        2018915346
+      ]
+    ],
+    "note": "Same four pairs, same fit. op13548 is called orn, and orn is exactly the kind of name with two readings - a | ~b or ~a | b - that the op13488 result says not to trust.",
+    "function": "a | ~b    - name confirmed by fit"
+  },
+  {
+    "id": "op17744.called-xnor",
+    "op": 17744,
+    "author": "fieldmap",
+    "cases": [
+      [
+        4042322160,
+        4278255360
+      ],
+      [
+        16711935,
+        252645135
+      ],
+      [
+        4294967295,
+        0
+      ],
+      [
+        305419896,
+        2018915346
+      ]
+    ],
+    "note": "Same four pairs, same fit. op17744 is called xnor, which is symmetric and so cannot be wrong by operand order - if this one disagrees with its name the error is of a different kind.",
+    "function": "~(a ^ b)  - name confirmed by fit"
+  }
+]

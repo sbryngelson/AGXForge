@@ -1,0 +1,67 @@
+{
+  "cases": [
+    {
+      "baseline": {
+        "code_bytes": 1958,
+        "fadd_op998": 50,
+        "instructions": 266,
+        "object_sha256": "3b0996b62f1aa4c42b3539f6ea8042ac5f15c63b55af69227c61813e8f769167",
+        "shuffle_xor_op14169": 28,
+        "source_sha256": "eb4acb09c062188e4ce83b2d1927728789db5b7bed545469bf305907c66bb294",
+        "stack_stores_op595": 20,
+        "store_opcodes": {
+          "17229": 2
+        },
+        "stores_before_first_fadd": 0
+      },
+      "per_lane_capacity": 16,
+      "read_all": {
+        "code_bytes": 2038,
+        "fadd_op998": 50,
+        "instructions": 274,
+        "object_sha256": "25289310e021c0d83d5d2258a6adf66a0579f60dd8798bbffa830fc06756a606",
+        "shuffle_xor_op14169": 28,
+        "source_sha256": "2a274c8085d40bf83add094ae49d54ab9264aea3a35937d9a2dcca207ab4ba3c",
+        "stack_stores_op595": 20,
+        "store_opcodes": {
+          "17229": 2,
+          "17256": 4
+        },
+        "stores_before_first_fadd": 2
+      },
+      "shape": "16x32"
+    },
+    {
+      "baseline": {
+        "code_bytes": 2422,
+        "fadd_op998": 84,
+        "instructions": 338,
+        "object_sha256": "a1feb36b816f979cdf354927b7d4994ec8e7f8e0b7725ce2b42408d9126750b5",
+        "shuffle_xor_op14169": 32,
+        "source_sha256": "c833cad9e5888c474d96fe4750b17351dc48580654daec25fdd677475f34a658",
+        "stack_stores_op595": 24,
+        "store_opcodes": {
+          "17229": 2
+        },
+        "stores_before_first_fadd": 0
+      },
+      "per_lane_capacity": 32,
+      "read_all": {
+        "code_bytes": 4080,
+        "fadd_op998": 84,
+        "instructions": 539,
+        "object_sha256": "06d25bf4861fe9f11e5dfdafbbddd9c62203e452e715f636121f32b14fa6a318",
+        "shuffle_xor_op14169": 32,
+        "source_sha256": "2ca3be899c055732fcafbd41f50b7f0b8b1369201b2d10f1ea9e72f1d3c7ebed",
+        "stack_stores_op595": 88,
+        "store_opcodes": {
+          "17229": 18
+        },
+        "stores_before_first_fadd": 16
+      },
+      "shape": "32x32"
+    }
+  ],
+  "method": "compile-only; xcrun metal -> driver native compile -> agxforge.g17.model.decode; no dispatch",
+  "result": "read-all stores survive below and at the direction-flip threshold; the fold-away hypothesis is refuted"
+}

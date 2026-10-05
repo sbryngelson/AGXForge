@@ -1,0 +1,71 @@
+% Figure 9.1: scoreboard timelines. Panel (a) is the running example's epilogue, with
+% the control words read from its bytes (low 32 bits of operand 1). Panel (b) is the
+% missing-wait experiment of MM 6. Time is schematic: order, not duration, is measured.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=7.9mm, y=-7.5mm, font=\small,
+    issue/.style={circle, fill=ink, inner sep=1.6pt},
+    stall/.style={line width=3pt, color=apple!45},
+    pend/.style={line width=5pt, color=#1!55},
+    ins/.style={anchor=east, align=right, font=\small},
+    ctl/.style={anchor=west, font=\scriptsize\ttfamily, text=ink!70}]
+  \node[anchor=west, font=\small\bfseries] at (-7.4,-1.3) {(a) The running example's epilogue};
+  % instruction rows
+  \foreach \y/\n/\o in {0/special-register read/14059, 1/plain 32-bit load/12682,
+      2/move immediate/11842, 3/fp32 add/998, 4/plain 32-bit store/17229}
+    \node[ins] at (-0.3,\y) {\n\ (\opn{\o})};
+  \draw[rule] (0,-0.6) -- (0,6.7);
+  % slot lanes
+  \node[ins, text=ours] at (-0.3,5.5) {slot 0 pending};
+  \node[ins, text=native] at (-0.3,6.3) {slot 7 pending};
+  \draw[pend=ours] (0.3,5.5) -- (3.2,5.5);
+  \draw[pend=native] (3.4,6.3) -- (8.2,6.3);
+  % issue points and stalls
+  \node[issue] (i0) at (0.3,0) {};
+  \draw[stall] (0.9,1) -- (3.2,1);  \node[issue] (i1) at (3.4,1) {};
+  \node[issue] (i2) at (4.0,2) {};
+  \draw[stall] (4.6,3) -- (8.2,3);  \node[issue] (i3) at (8.4,3) {};
+  \node[issue] (i4) at (9.0,4) {};
+  % publish and wait arrows
+  \draw[->, ours, line width=0.6pt] (i0) -- (0.3,5.2);
+  \draw[->, ours, line width=0.6pt, dashed] (3.2,5.5) -- (3.2,1.2);
+  \draw[->, native, line width=0.6pt] (i1) -- (3.4,6.0);
+  \draw[->, native, line width=0.6pt, dashed] (8.2,6.3) -- (8.2,3.2);
+  % control words
+  \node[ctl] at (0.5,-0.32) {0x00100000 publish slot 0};
+  \node[ctl] at (3.6,0.68) {0x01800000 wait 0, publish 7};
+  \node[ctl] at (4.2,1.68) {0x00000000};
+  \node[ctl] at (8.6,2.68) {0x80000000 wait 7};
+  \node[ctl] at (9.2,3.68) {no wait: ALU result};
+  \node[font=\scriptsize\itshape, text=apple] at (2.05,1.35) {stalled};
+  \node[font=\scriptsize\itshape, text=apple] at (6.4,3.35) {stalled};
+  \draw[->, ink!50] (0,7.2) -- (10,7.2) node[right, font=\scriptsize\itshape] {time};
+
+  \begin{scope}[yshift=-77mm]
+  \node[anchor=west, font=\small\bfseries] at (-7.4,-1.3) {(b) A missing wait (MM~\mm{6})};
+  \node[ins] at (-0.3,0) {\op{12674}};
+  \node[ins] at (-0.3,1) {tensor MMA, no accumulator (\opn{5107})};
+  \node[ins, text=native] at (-0.3,2.2) {slot 7 pending};
+  \draw[rule] (0,-0.6) -- (0,2.8);
+  \draw[pend=native] (0.3,2.2) -- (6.0,2.2);
+  \node[issue] (j0) at (0.3,0) {};
+  \node[issue] (j1) at (0.9,1) {};
+  \draw[->, native, line width=0.6pt] (j0) -- (0.3,1.9);
+  \node[ctl] at (0.5,-0.32) {publish slot 7};
+  \node[ctl] at (1.1,0.68) {wait mask without bit 31: issues at once};
+  \node[font=\scriptsize, text=native, align=left, anchor=north west, text width=52mm] at (1.1,1.15)
+    {reads A and B before the load writes them; the result is zeros in 50 of 50 dispatches};
+  \node[draw=native, cross out, line width=1.1pt, minimum size=7pt, inner sep=0pt] at (0.9,1) {};
+  \draw[ink, line width=0.8pt] (6.0,-0.25) -- (6.0,0.25);
+  \node[ctl, anchor=south] at (6.0,0.25) {load writes A, B};
+  \draw[->, ink!50] (0,3.2) -- (10,3.2) node[right, font=\scriptsize\itshape] {time};
+  \end{scope}
+\end{tikzpicture}
+\caption{Late values and their waits, as the control words specify them. A dot is an instruction's issue; grey is
+an instruction held at issue by its wait mask; a coloured bar is a scoreboard slot that a producer has published and
+that has not yet arrived. A dashed arrow is a slot's arrival releasing its waiter. The control words in (a) are read
+from the running example's bytes (the low 32 bits of operand 1: bits 20--23 publish slot + 1, bits 24--31 are the
+wait mask). Panel (b) is the measured missing-wait experiment. Only the ordering is measured: positions on the time
+axis are schematic.}
+\label{fig:scoreboard}
+\end{figure}

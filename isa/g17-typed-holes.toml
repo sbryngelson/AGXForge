@@ -1,0 +1,2190 @@
+# TYPED HOLES: every opcode this corpus contains that has no recovered semantic ROLE.
+#
+# The mission's rule is that an unknown instruction stays a typed hole rather than acquiring a
+# guessed name. This file is that set stated precisely, and each entry now carries THREE kinds of
+# fact, none of them a guess:
+#
+#   1. WHAT APPLE DECLARES - NumDefs, scheduling class, TSFlags, operand class signature.
+#   2. WHETHER IT CAN BE CONSTRUCTED - residual_bits is the number of varying bits not attributed
+#      to an operand. Zero means the form is FULLY DECODED and a composer can build it from its
+#      operands alone; what is missing is a name, not an encoding.
+#   3. WHERE IT SITS IN THE DATAFLOW GRAPH - measured over the corpus by def-use, not inferred.
+#      "address: 97% of its consumers are loads or stores" is a measurement of op612's position;
+#      it is not a claim that op612 computes an address.
+#
+# 133 opcodes and 11598 instructions are fully decoded with an unknown role; 16 opcodes and 1629
+# instructions are neither named nor fully decoded, and those are the only ones where a composer
+# would have to inherit template state it cannot account for.
+#
+# A scheduling class groups opcodes by how Apple's scheduler treats them and TSFlags is a bitfield
+# of target properties; neither is a semantics. Generated from isa/g17-opcodes.toml, the corpus
+# walk, and tools/g17layout.py.
+#
+# residual_bits > 0 entries now carry a [[hole.residual]] block per bit: the byte and bit, the
+# form it was measured in, the DOMINANT value, and how many of that form's instances carry the
+# other one. A composer that emits the dominant value everywhere is making a stated assumption
+# with a counted cost - 911 instruction-bits across these 16 opcodes - rather than inheriting a
+# template it cannot account for. That is the difference between an unexamined constant and a
+# measured one, and this project has already paid once for confusing them.
+
+
+[meta]
+chip = "H17s"
+arch = "applegpu_g17s"
+opcodes = 149
+instructions = 13227
+fully_decoded_role_unknown = 133
+not_fully_decoded = 16
+dominant_value_cost_instruction_bits = 911
+
+[[hole]]
+id = 590
+instructions = 1084
+defs = 1
+sched_class = 27
+tsflags = "0x100400002001"
+signature = ["GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 612
+instructions = 831
+defs = 1
+sched_class = 29
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 97% of its consumers are loads or stores"
+
+[[hole]]
+id = 586
+instructions = 705
+defs = 1
+sched_class = 27
+tsflags = "0x100400002001"
+signature = ["GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes materialised constants"
+
+[[hole]]
+id = 11179
+instructions = 668
+defs = 1
+sched_class = 258
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 9320
+instructions = 592
+defs = 1
+sched_class = 258
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11375
+instructions = 550
+defs = 1
+sched_class = 279
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 4
+state = "residual bits remain"
+graph_role = "feeds and in 40% of uses"
+
+[[hole.residual]]
+id = 11375
+form_bytes = 8
+form_instances = 37
+byte = 5
+bit = 1
+dominant = 0
+exceptions = 11
+
+[[hole.residual]]
+id = 11375
+form_bytes = 8
+form_instances = 37
+byte = 5
+bit = 2
+dominant = 1
+exceptions = 17
+
+[[hole.residual]]
+id = 11375
+form_bytes = 8
+form_instances = 37
+byte = 5
+bit = 3
+dominant = 1
+exceptions = 18
+
+[[hole.residual]]
+id = 11375
+form_bytes = 8
+form_instances = 37
+byte = 5
+bit = 5
+dominant = 0
+exceptions = 18
+
+[[hole]]
+id = 11395
+instructions = 549
+defs = 1
+sched_class = 283
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11452
+instructions = 505
+defs = 1
+sched_class = 14
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 93% of its consumers are loads or stores"
+
+[[hole]]
+id = 998
+instructions = 389
+defs = 1
+sched_class = 56
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 3290
+instructions = 379
+defs = 1
+sched_class = 56
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 9750
+instructions = 374
+defs = 1
+sched_class = 283
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 14061
+instructions = 368
+defs = 1
+sched_class = 462
+tsflags = "0x100400002d01"
+signature = ["GPR32", "imm", "imm.t3", "imm.t3", "imm.t3"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "source: reads no register defined earlier in the program"
+
+[[hole]]
+id = 2190
+instructions = 352
+defs = 1
+sched_class = 87
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11373
+instructions = 327
+defs = 1
+sched_class = 278
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 410
+instructions = 276
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11365
+instructions = 270
+defs = 1
+sched_class = 283
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 7
+state = "residual bits remain"
+graph_role = "address: 51% of its consumers are loads or stores"
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 4
+bit = 0
+dominant = 1
+exceptions = 15
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 4
+bit = 6
+dominant = 1
+exceptions = 24
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 5
+bit = 1
+dominant = 1
+exceptions = 24
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 5
+bit = 2
+dominant = 1
+exceptions = 24
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 5
+bit = 3
+dominant = 1
+exceptions = 23
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 5
+bit = 4
+dominant = 0
+exceptions = 19
+
+[[hole.residual]]
+id = 11365
+form_bytes = 8
+form_instances = 49
+byte = 5
+bit = 6
+dominant = 0
+exceptions = 19
+
+[[hole]]
+id = 10826
+instructions = 261
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 10793
+instructions = 248
+defs = 1
+sched_class = 313
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11482
+instructions = 235
+defs = 1
+sched_class = 14
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds sub in 98% of uses"
+
+[[hole]]
+id = 11432
+instructions = 234
+defs = 1
+sched_class = 14
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11437
+instructions = 234
+defs = 1
+sched_class = 283
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "imm", "GPR32", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 5
+state = "residual bits remain"
+graph_role = "unclassified"
+
+[[hole.residual]]
+id = 11437
+form_bytes = 8
+form_instances = 156
+byte = 4
+bit = 0
+dominant = 1
+exceptions = 16
+
+[[hole.residual]]
+id = 11437
+form_bytes = 8
+form_instances = 156
+byte = 5
+bit = 1
+dominant = 0
+exceptions = 75
+
+[[hole.residual]]
+id = 11437
+form_bytes = 8
+form_instances = 156
+byte = 5
+bit = 2
+dominant = 1
+exceptions = 61
+
+[[hole.residual]]
+id = 11437
+form_bytes = 8
+form_instances = 156
+byte = 5
+bit = 4
+dominant = 0
+exceptions = 77
+
+[[hole.residual]]
+id = 11437
+form_bytes = 8
+form_instances = 156
+byte = 5
+bit = 5
+dominant = 1
+exceptions = 73
+
+[[hole]]
+id = 10280
+instructions = 200
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds store in 44% of uses"
+
+[[hole]]
+id = 14147
+instructions = 188
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds or in 85% of uses"
+
+[[hole]]
+id = 999
+instructions = 176
+defs = 1
+sched_class = 57
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR16", "imm"]
+residual_bits = 2
+state = "residual bits remain"
+graph_role = "unclassified"
+
+[[hole.residual]]
+id = 999
+form_bytes = 6
+form_instances = 176
+byte = 3
+bit = 2
+dominant = 1
+exceptions = 38
+
+[[hole.residual]]
+id = 999
+form_bytes = 6
+form_instances = 176
+byte = 4
+bit = 4
+dominant = 1
+exceptions = 10
+
+[[hole]]
+id = 10272
+instructions = 176
+defs = 1
+sched_class = 289
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11363
+instructions = 173
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds sub in 63% of uses"
+
+[[hole]]
+id = 9700
+instructions = 173
+defs = 1
+sched_class = 279
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11362
+instructions = 157
+defs = 1
+sched_class = 14
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 95% of its consumers are loads or stores"
+
+[[hole]]
+id = 9986
+instructions = 150
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds sub in 100% of uses"
+
+[[hole]]
+id = 11466
+instructions = 140
+defs = 1
+sched_class = 278
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 68% of its consumers are loads or stores"
+
+[[hole]]
+id = 3658
+instructions = 130
+defs = 1
+sched_class = 73
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 5107
+instructions = 125
+defs = 1
+sched_class = 173
+tsflags = "0x400002001"
+signature = ["GPR32tup8_alignedrc", "imm", "imm", "GPR32tup4_alignedrc", "imm", "imm", "GPR32tup4_alignedrc", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11624
+instructions = 109
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds add in 50% of uses"
+
+[[hole]]
+id = 396
+instructions = 108
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 10790
+instructions = 100
+defs = 1
+sched_class = 313
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32", "imm", "imm", "GPR32tup2", "imm"]
+residual_bits = 4
+state = "residual bits remain"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole.residual]]
+id = 10790
+form_bytes = 12
+form_instances = 97
+byte = 3
+bit = 0
+dominant = 0
+exceptions = 29
+
+[[hole.residual]]
+id = 10790
+form_bytes = 12
+form_instances = 97
+byte = 8
+bit = 4
+dominant = 0
+exceptions = 19
+
+[[hole.residual]]
+id = 10790
+form_bytes = 12
+form_instances = 97
+byte = 10
+bit = 6
+dominant = 0
+exceptions = 11
+
+[[hole.residual]]
+id = 10790
+form_bytes = 12
+form_instances = 97
+byte = 10
+bit = 7
+dominant = 0
+exceptions = 1
+
+[[hole]]
+id = 11364
+instructions = 94
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11456
+instructions = 78
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 78% of its consumers are loads or stores"
+
+[[hole]]
+id = 10829
+instructions = 71
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR16", "imm", "GPR32", "imm"]
+residual_bits = 6
+state = "residual bits remain"
+graph_role = "address: 96% of its consumers are loads or stores"
+
+[[hole.residual]]
+id = 10829
+form_bytes = 14
+form_instances = 64
+byte = 8
+bit = 7
+dominant = 0
+exceptions = 3
+
+[[hole.residual]]
+id = 10829
+form_bytes = 14
+form_instances = 64
+byte = 9
+bit = 0
+dominant = 0
+exceptions = 21
+
+[[hole.residual]]
+id = 10829
+form_bytes = 14
+form_instances = 64
+byte = 9
+bit = 1
+dominant = 1
+exceptions = 17
+
+[[hole.residual]]
+id = 10829
+form_bytes = 14
+form_instances = 64
+byte = 9
+bit = 2
+dominant = 1
+exceptions = 26
+
+[[hole.residual]]
+id = 10829
+form_bytes = 14
+form_instances = 64
+byte = 9
+bit = 3
+dominant = 0
+exceptions = 16
+
+[[hole.residual]]
+id = 10829
+form_bytes = 14
+form_instances = 64
+byte = 9
+bit = 4
+dominant = 0
+exceptions = 5
+
+[[hole]]
+id = 14389
+instructions = 60
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 437
+instructions = 57
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 6
+state = "residual bits remain"
+graph_role = "unclassified"
+
+[[hole.residual]]
+id = 437
+form_bytes = 10
+form_instances = 56
+byte = 8
+bit = 6
+dominant = 0
+exceptions = 18
+
+[[hole.residual]]
+id = 437
+form_bytes = 10
+form_instances = 56
+byte = 8
+bit = 7
+dominant = 0
+exceptions = 24
+
+[[hole.residual]]
+id = 437
+form_bytes = 10
+form_instances = 56
+byte = 9
+bit = 0
+dominant = 1
+exceptions = 20
+
+[[hole.residual]]
+id = 437
+form_bytes = 10
+form_instances = 56
+byte = 9
+bit = 1
+dominant = 1
+exceptions = 26
+
+[[hole.residual]]
+id = 437
+form_bytes = 10
+form_instances = 56
+byte = 9
+bit = 2
+dominant = 1
+exceptions = 2
+
+[[hole.residual]]
+id = 437
+form_bytes = 10
+form_instances = 56
+byte = 9
+bit = 3
+dominant = 0
+exceptions = 2
+
+[[hole]]
+id = 10381
+instructions = 51
+defs = 1
+sched_class = 168
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11374
+instructions = 42
+defs = 1
+sched_class = 278
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 10831
+instructions = 40
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 10378
+instructions = 38
+defs = 1
+sched_class = 168
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 14310
+instructions = 38
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes materialised constants"
+
+[[hole]]
+id = 14047
+instructions = 37
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 10789
+instructions = 36
+defs = 1
+sched_class = 313
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 14099
+instructions = 34
+defs = 1
+sched_class = 412
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "FLAGR", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "source: reads no register defined earlier in the program"
+
+[[hole]]
+id = 11674
+instructions = 34
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 595
+instructions = 32
+defs = 0
+sched_class = 27
+tsflags = "0x100400002e01"
+signature = ["imm.t3", "imm.t3", "imm", "GPR32", "imm"]
+residual_bits = 2
+state = "residual bits remain"
+graph_role = "sink: nothing reads its definition"
+
+[[hole.residual]]
+id = 595
+form_bytes = 8
+form_instances = 13
+byte = 5
+bit = 5
+dominant = 0
+exceptions = 4
+
+[[hole.residual]]
+id = 595
+form_bytes = 8
+form_instances = 13
+byte = 5
+bit = 6
+dominant = 1
+exceptions = 5
+
+[[hole]]
+id = 441
+instructions = 31
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 4
+state = "residual bits remain"
+graph_role = "sink: nothing reads its definition"
+
+[[hole.residual]]
+id = 441
+form_bytes = 10
+form_instances = 31
+byte = 0
+bit = 4
+dominant = 0
+exceptions = 15
+
+[[hole.residual]]
+id = 441
+form_bytes = 10
+form_instances = 31
+byte = 0
+bit = 7
+dominant = 0
+exceptions = 10
+
+[[hole.residual]]
+id = 441
+form_bytes = 10
+form_instances = 31
+byte = 7
+bit = 3
+dominant = 0
+exceptions = 11
+
+[[hole.residual]]
+id = 441
+form_bytes = 10
+form_instances = 31
+byte = 7
+bit = 4
+dominant = 1
+exceptions = 10
+
+[[hole]]
+id = 1006
+instructions = 30
+defs = 1
+sched_class = 58
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 14208
+instructions = 30
+defs = 1
+sched_class = 22
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "source: reads no register defined earlier in the program"
+
+[[hole]]
+id = 9989
+instructions = 30
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 14158
+instructions = 30
+defs = 1
+sched_class = 408
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds add in 60% of uses"
+
+[[hole]]
+id = 11190
+instructions = 29
+defs = 1
+sched_class = 27
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds add in 100% of uses"
+
+[[hole]]
+id = 10267
+instructions = 26
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds publish in 100% of uses"
+
+[[hole]]
+id = 3298
+instructions = 22
+defs = 1
+sched_class = 58
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 5077
+instructions = 22
+defs = 1
+sched_class = 168
+tsflags = "0x400002001"
+signature = ["FLAGR", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 1
+state = "residual bits remain"
+graph_role = "source: reads no register defined earlier in the program"
+
+[[hole.residual]]
+id = 5077
+form_bytes = 10
+form_instances = 22
+byte = 6
+bit = 3
+dominant = 0
+exceptions = 8
+
+[[hole]]
+id = 11467
+instructions = 22
+defs = 1
+sched_class = 279
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 3
+state = "residual bits remain"
+graph_role = "unclassified"
+
+[[hole.residual]]
+id = 11467
+form_bytes = 10
+form_instances = 22
+byte = 3
+bit = 2
+dominant = 0
+exceptions = 2
+
+[[hole.residual]]
+id = 11467
+form_bytes = 10
+form_instances = 22
+byte = 3
+bit = 3
+dominant = 1
+exceptions = 1
+
+[[hole.residual]]
+id = 11467
+form_bytes = 10
+form_instances = 22
+byte = 3
+bit = 4
+dominant = 0
+exceptions = 1
+
+[[hole]]
+id = 14394
+instructions = 21
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes materialised constants"
+
+[[hole]]
+id = 465
+instructions = 21
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds add in 48% of uses"
+
+[[hole]]
+id = 10858
+instructions = 18
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "GPR16", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 3978
+instructions = 18
+defs = 1
+sched_class = 73
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11765
+instructions = 18
+defs = 1
+sched_class = 329
+tsflags = "0x402002800"
+signature = ["GPR32", "imm", "imm", "imm", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 10094
+instructions = 18
+defs = 1
+sched_class = 287
+tsflags = "0x402002400"
+signature = ["GPR32", "imm", "imm", "GPR32tup2", "imm", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 10023
+instructions = 18
+defs = 0
+sched_class = 287
+tsflags = "0x402002400"
+signature = ["imm", "imm", "GPR32tup2", "imm", "imm", "imm", "imm", "GPR32tup2", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11193
+instructions = 17
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds publish in 53% of uses"
+
+[[hole]]
+id = 17772
+instructions = 17
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 10795
+instructions = 15
+defs = 1
+sched_class = 313
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11120
+instructions = 15
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 2
+state = "residual bits remain"
+graph_role = "sink: nothing reads its definition"
+
+[[hole.residual]]
+id = 11120
+form_bytes = 14
+form_instances = 15
+byte = 7
+bit = 3
+dominant = 1
+exceptions = 6
+
+[[hole.residual]]
+id = 11120
+form_bytes = 14
+form_instances = 15
+byte = 7
+bit = 4
+dominant = 0
+exceptions = 2
+
+[[hole]]
+id = 10306
+instructions = 15
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 4
+state = "residual bits remain"
+graph_role = "sink: nothing reads its definition"
+
+[[hole.residual]]
+id = 10306
+form_bytes = 12
+form_instances = 15
+byte = 0
+bit = 4
+dominant = 0
+exceptions = 1
+
+[[hole.residual]]
+id = 10306
+form_bytes = 12
+form_instances = 15
+byte = 0
+bit = 7
+dominant = 0
+exceptions = 4
+
+[[hole.residual]]
+id = 10306
+form_bytes = 12
+form_instances = 15
+byte = 7
+bit = 3
+dominant = 1
+exceptions = 6
+
+[[hole.residual]]
+id = 10306
+form_bytes = 12
+form_instances = 15
+byte = 7
+bit = 4
+dominant = 1
+exceptions = 3
+
+[[hole]]
+id = 11701
+instructions = 15
+defs = 0
+sched_class = 329
+tsflags = "0x402002800"
+signature = ["imm", "imm", "imm", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11314
+instructions = 15
+defs = 1
+sched_class = 270
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 397
+instructions = 14
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 13576
+instructions = 13
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR16", "imm"]
+residual_bits = 1
+state = "residual bits remain"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole.residual]]
+id = 13576
+form_bytes = 10
+form_instances = 11
+byte = 8
+bit = 6
+dominant = 0
+exceptions = 3
+
+[[hole]]
+id = 615
+instructions = 12
+defs = 1
+sched_class = 29
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR32", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 2200
+instructions = 12
+defs = 1
+sched_class = 58
+tsflags = "0x80400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 697
+instructions = 12
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11491
+instructions = 12
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 1
+state = "residual bits remain"
+graph_role = "consumes loaded data"
+
+[[hole.residual]]
+id = 11491
+form_bytes = 10
+form_instances = 12
+byte = 7
+bit = 6
+dominant = 1
+exceptions = 3
+
+[[hole]]
+id = 11310
+instructions = 12
+defs = 1
+sched_class = 274
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR32", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11463
+instructions = 12
+defs = 1
+sched_class = 278
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11183
+instructions = 12
+defs = 1
+sched_class = 258
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11458
+instructions = 12
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 17784
+instructions = 12
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 10834
+instructions = 12
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 10835
+instructions = 12
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 50% of its consumers are loads or stores"
+
+[[hole]]
+id = 14400
+instructions = 12
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11453
+instructions = 11
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11394
+instructions = 11
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds or in 67% of uses"
+
+[[hole]]
+id = 10860
+instructions = 10
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "GPR16", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds and in 86% of uses"
+
+[[hole]]
+id = 10823
+instructions = 10
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11460
+instructions = 10
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11652
+instructions = 10
+defs = 1
+sched_class = 289
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32tup2", "imm", "GPR32tup2", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11665
+instructions = 9
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes materialised constants"
+
+[[hole]]
+id = 10838
+instructions = 9
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "GPR16", "imm", "GPR32", "imm"]
+residual_bits = 5
+state = "residual bits remain"
+graph_role = "feeds add in 44% of uses"
+
+[[hole.residual]]
+id = 10838
+form_bytes = 14
+form_instances = 9
+byte = 8
+bit = 6
+dominant = 0
+exceptions = 3
+
+[[hole.residual]]
+id = 10838
+form_bytes = 14
+form_instances = 9
+byte = 8
+bit = 7
+dominant = 0
+exceptions = 1
+
+[[hole.residual]]
+id = 10838
+form_bytes = 14
+form_instances = 9
+byte = 9
+bit = 0
+dominant = 1
+exceptions = 4
+
+[[hole.residual]]
+id = 10838
+form_bytes = 14
+form_instances = 9
+byte = 9
+bit = 1
+dominant = 0
+exceptions = 3
+
+[[hole.residual]]
+id = 10838
+form_bytes = 14
+form_instances = 9
+byte = 9
+bit = 2
+dominant = 1
+exceptions = 3
+
+[[hole]]
+id = 10830
+instructions = 8
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds add in 44% of uses"
+
+[[hole]]
+id = 11651
+instructions = 8
+defs = 1
+sched_class = 289
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32tup2", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 621
+instructions = 7
+defs = 1
+sched_class = 29
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR16", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 56% of its consumers are loads or stores"
+
+[[hole]]
+id = 11392
+instructions = 7
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 9706
+instructions = 6
+defs = 1
+sched_class = 10
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 11502
+instructions = 6
+defs = 1
+sched_class = 10
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm", "GPR16", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 13592
+instructions = 6
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 17788
+instructions = 6
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11461
+instructions = 6
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11196
+instructions = 6
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11060
+instructions = 6
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 10298
+instructions = 5
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 774
+instructions = 5
+defs = 1
+sched_class = 438
+tsflags = "0x40400002001"
+signature = ["GPR16", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 11393
+instructions = 4
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds or in 75% of uses"
+
+[[hole]]
+id = 11471
+instructions = 4
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11657
+instructions = 4
+defs = 1
+sched_class = 289
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11457
+instructions = 4
+defs = 1
+sched_class = 283
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR32", "imm", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11486
+instructions = 4
+defs = 1
+sched_class = 282
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11309
+instructions = 4
+defs = 1
+sched_class = 274
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR32", "imm", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11648
+instructions = 4
+defs = 1
+sched_class = 289
+tsflags = "0x400006001"
+signature = ["GPR32tup2", "imm", "imm", "GPR32tup2", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds sub in 50% of uses"
+
+[[hole]]
+id = 11315
+instructions = 4
+defs = 1
+sched_class = 271
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 14401
+instructions = 4
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 698
+instructions = 4
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 10866
+instructions = 3
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "GPR16", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds and in 67% of uses"
+
+[[hole]]
+id = 10879
+instructions = 3
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11059
+instructions = 3
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "predicate: feeds compare or exec"
+
+[[hole]]
+id = 11487
+instructions = 3
+defs = 1
+sched_class = 283
+tsflags = "0x400006001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "unclassified"
+
+[[hole]]
+id = 11470
+instructions = 3
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 10836
+instructions = 3
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "GPR32", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 11313
+instructions = 3
+defs = 1
+sched_class = 270
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 10095
+instructions = 3
+defs = 1
+sched_class = 287
+tsflags = "0x402002400"
+signature = ["GPR32", "imm", "imm", "GPR32tup2", "imm", "imm", "imm", "imm", "GPR32tup2", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11372
+instructions = 3
+defs = 1
+sched_class = 10
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "imm", "GPR32", "imm", "GPR32", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes materialised constants"
+
+[[hole]]
+id = 10374
+instructions = 3
+defs = 1
+sched_class = 166
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 14421
+instructions = 3
+defs = 1
+sched_class = 7
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 11322
+instructions = 3
+defs = 1
+sched_class = 274
+tsflags = "0x400006001"
+signature = ["FLAGR", "imm", "imm", "GPR16", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 9683
+instructions = 3
+defs = 1
+sched_class = 274
+tsflags = "0x400002001"
+signature = ["FLAGR", "imm", "imm", "GPR16", "imm", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 10284
+instructions = 3
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 75% of its consumers are loads or stores"
+
+[[hole]]
+id = 10824
+instructions = 2
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 9329
+instructions = 2
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 13588
+instructions = 2
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 11689
+instructions = 2
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 9321
+instructions = 2
+defs = 1
+sched_class = 259
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 50% of its consumers are loads or stores"
+
+[[hole]]
+id = 11669
+instructions = 1
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 17775
+instructions = 1
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 9328
+instructions = 1
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 11483
+instructions = 1
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "consumes loaded data"
+
+[[hole]]
+id = 9842
+instructions = 1
+defs = 1
+sched_class = 283
+tsflags = "0x400002001"
+signature = ["GPR16", "imm", "imm", "GPR16", "imm", "imm", "GPR16", "imm", "GPR16", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "feeds add in 100% of uses"
+
+[[hole]]
+id = 17793
+instructions = 1
+defs = 0
+sched_class = -1
+tsflags = "?"
+signature = []
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "sink: nothing reads its definition"
+
+[[hole]]
+id = 17774
+instructions = 1
+defs = 1
+sched_class = 5
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "GPR16", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 10239
+instructions = 1
+defs = 1
+sched_class = 5
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 11063
+instructions = 1
+defs = 1
+sched_class = 312
+tsflags = "0x400006001"
+signature = ["IRGPR32", "imm", "GPR32", "imm", "GPR32", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "address: 100% of its consumers are loads or stores"
+
+[[hole]]
+id = 9749
+instructions = 1
+defs = 1
+sched_class = 282
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "GPR32", "imm", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "source: reads no register defined earlier in the program"
+
+[[hole]]
+id = 9748
+instructions = 1
+defs = 1
+sched_class = 282
+tsflags = "0x400002001"
+signature = ["IRGPR32", "imm", "imm", "GPR16", "imm", "imm", "imm", "GPR32", "imm"]
+residual_bits = 0
+state = "fully decoded, role unknown"
+graph_role = "source: reads no register defined earlier in the program"

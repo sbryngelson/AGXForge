@@ -1,0 +1,660 @@
+{
+ "note": "    python3 tools/g17slot29census.py build     write isa/g17-slot29-entries.json\n    python3 tools/g17slot29census.py check     re-derive and compare",
+ "population": {
+  "cache_objects_with_an_object_file": 22388,
+  "admitted_one_read_one_entry": 10971,
+  "why": "one read and one entry, so the entry has a single source; multi-register programs cannot attribute an entry to a read"
+ },
+ "keyed_on_byte1_width_byte3": {
+  "keys": 35,
+  "ambiguous": 0
+ },
+ "keyed_on_byte1_width": {
+  "keys": 20,
+  "ambiguous": 4,
+  "cases": {
+   "0x80,len8": {
+    "5": 7,
+    "8": 10,
+    "48": 699,
+    "80": 1
+   },
+   "0x81,len8": {
+    "0": 64,
+    "6": 7,
+    "9": 4,
+    "49": 27
+   },
+   "0x82,len8": {
+    "10": 4,
+    "50": 9,
+    "52": 105
+   },
+   "0x83,len8": {
+    "4": 48,
+    "51": 7,
+    "53": 17
+   }
+  },
+  "why": "the CONTROL. Without it \"no ambiguity\" is unfalsifiable, because a key fine enough separates everything"
+ },
+ "cross_check_against_committed_map": {
+  "agree": 11,
+  "disagree": 1,
+  "not_in_population": 0,
+  "rows": [
+   {
+    "system_register": 130,
+    "committed_entry": 52,
+    "population_entries": [
+     10,
+     50,
+     52
+    ],
+    "agrees": false,
+    "in_population": true
+   },
+   {
+    "system_register": 133,
+    "committed_entry": 53,
+    "population_entries": [
+     53
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 152,
+    "committed_entry": 4,
+    "population_entries": [
+     4
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 156,
+    "committed_entry": 0,
+    "population_entries": [
+     0
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 157,
+    "committed_entry": 1,
+    "population_entries": [
+     1
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 158,
+    "committed_entry": 2,
+    "population_entries": [
+     2
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 160,
+    "committed_entry": 80,
+    "population_entries": [
+     80
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 161,
+    "committed_entry": 81,
+    "population_entries": [
+     81
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 162,
+    "committed_entry": 82,
+    "population_entries": [
+     82
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 164,
+    "committed_entry": 48,
+    "population_entries": [
+     48
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 165,
+    "committed_entry": 49,
+    "population_entries": [
+     49
+    ],
+    "agrees": true,
+    "in_population": true
+   },
+   {
+    "system_register": 166,
+    "committed_entry": 50,
+    "population_entries": [
+     50
+    ],
+    "agrees": true,
+    "in_population": true
+   }
+  ]
+ },
+ "worked_example": {
+  "byte1": 130,
+  "why": "the finding's own best illustration, and a correction to how I first summarised it. I wrote \"372 objects read SR130 alone and say 52\" as though it were one population. It is FOUR keys: (width 4, byte3 6) with 273 objects and (width 8, byte3 56) with 99 both give 52 - two forms of the register read the same functional way, agreeing, which is corroboration rather than one row - while (width 8, byte3 32) gives 50 on 9 objects and (width 8, byte3 64) gives 10 on 4. Every one of the four has decode_sr reporting sr=130. Summing across keys is exactly the collapse this census exists to undo, so quoting the sum without the split was the coarse-key mistake in miniature. Named by the linker lane, which read the rows rather than the summary"
+ },
+ "not_claimed": [
+  "which BITS of byte3 carry the register: 0x38, 0x20 and 0x40 differ in bits 3, 4 and 6, so the key is the whole byte",
+  "anything about registers absent from this population",
+  "that the FORM COUNT here is comparable with any other count of SR130-sharing forms. This population admits only objects with exactly one read and one entry - 10,661 of 22,037 - so it deliberately excludes every multi-register program. Within it, byte1 0x82 appears as FOUR distinct (byte3, width) forms. The release record separately names THIRTEEN latent SR130-sharing forms, counted over a broader population that includes multi-register objects. Four and thirteen are counts over different populations: they do not conflict and must never be summed or compared",
+  "that a slot-29 entry is sufficient to author a section: this is the entry value only, and the vector length and section size are measured elsewhere"
+ ],
+ "rows": [
+  {
+   "byte1": 128,
+   "width": 8,
+   "byte3": 26,
+   "entry": 80,
+   "entries_seen": {
+    "80": 1
+   },
+   "objects": 1,
+   "decode_sr_reports_sr": [
+    128
+   ],
+   "example": "fp16scan-unrolled"
+  },
+  {
+   "byte1": 128,
+   "width": 8,
+   "byte3": 32,
+   "entry": 48,
+   "entries_seen": {
+    "48": 698
+   },
+   "objects": 698,
+   "decode_sr_reports_sr": [
+    128
+   ],
+   "example": "ad-L_idx"
+  },
+  {
+   "byte1": 128,
+   "width": 8,
+   "byte3": 33,
+   "entry": 48,
+   "entries_seen": {
+    "48": 1
+   },
+   "objects": 1,
+   "decode_sr_reports_sr": [
+    128
+   ],
+   "example": "syn-s9ec7c19dd6"
+  },
+  {
+   "byte1": 128,
+   "width": 8,
+   "byte3": 64,
+   "entry": 8,
+   "entries_seen": {
+    "8": 10
+   },
+   "objects": 10,
+   "decode_sr_reports_sr": [
+    128
+   ],
+   "example": "probe-rb-tgpg"
+  },
+  {
+   "byte1": 128,
+   "width": 8,
+   "byte3": 72,
+   "entry": 5,
+   "entries_seen": {
+    "5": 7
+   },
+   "objects": 7,
+   "decode_sr_reports_sr": [
+    128
+   ],
+   "example": "frontbi-TGSIZEY-c6dde833"
+  },
+  {
+   "byte1": 129,
+   "width": 8,
+   "byte3": 18,
+   "entry": 0,
+   "entries_seen": {
+    "0": 64
+   },
+   "objects": 64,
+   "decode_sr_reports_sr": [
+    129
+   ],
+   "example": "ffma8-fma-wide"
+  },
+  {
+   "byte1": 129,
+   "width": 8,
+   "byte3": 32,
+   "entry": 49,
+   "entries_seen": {
+    "49": 27
+   },
+   "objects": 27,
+   "decode_sr_reports_sr": [
+    129
+   ],
+   "example": "sib-cf-while_div-0"
+  },
+  {
+   "byte1": 129,
+   "width": 8,
+   "byte3": 64,
+   "entry": 9,
+   "entries_seen": {
+    "9": 4
+   },
+   "objects": 4,
+   "decode_sr_reports_sr": [
+    129
+   ],
+   "example": "sib-sr2_dtty-0"
+  },
+  {
+   "byte1": 129,
+   "width": 8,
+   "byte3": 72,
+   "entry": 6,
+   "entries_seen": {
+    "6": 7
+   },
+   "objects": 7,
+   "decode_sr_reports_sr": [
+    129
+   ],
+   "example": "frontbi-TGSIZEZ-84a54862"
+  },
+  {
+   "byte1": 130,
+   "width": 4,
+   "byte3": 6,
+   "entry": 52,
+   "entries_seen": {
+    "52": 277
+   },
+   "objects": 277,
+   "decode_sr_reports_sr": [
+    130
+   ],
+   "example": "abi-v1-a-stride-256-8c74cdd043"
+  },
+  {
+   "byte1": 130,
+   "width": 8,
+   "byte3": 32,
+   "entry": 50,
+   "entries_seen": {
+    "50": 9
+   },
+   "objects": 9,
+   "decode_sr_reports_sr": [
+    130
+   ],
+   "example": "probe-tpz"
+  },
+  {
+   "byte1": 130,
+   "width": 8,
+   "byte3": 56,
+   "entry": 52,
+   "entries_seen": {
+    "52": 105
+   },
+   "objects": 105,
+   "decode_sr_reports_sr": [
+    130
+   ],
+   "example": "frontbi-SIMDELEM-51839749"
+  },
+  {
+   "byte1": 130,
+   "width": 8,
+   "byte3": 64,
+   "entry": 10,
+   "entries_seen": {
+    "10": 4
+   },
+   "objects": 4,
+   "decode_sr_reports_sr": [
+    130
+   ],
+   "example": "sib-sr2_dttz-0"
+  },
+  {
+   "byte1": 131,
+   "width": 8,
+   "byte3": 24,
+   "entry": 51,
+   "entries_seen": {
+    "51": 7
+   },
+   "objects": 7,
+   "decode_sr_reports_sr": [
+    131
+   ],
+   "example": "pro_idx_tix"
+  },
+  {
+   "byte1": 131,
+   "width": 8,
+   "byte3": 56,
+   "entry": 53,
+   "entries_seen": {
+    "53": 17
+   },
+   "objects": 17,
+   "decode_sr_reports_sr": [
+    131
+   ],
+   "example": "frontbi-SIMDGRP-e7bdd18b"
+  },
+  {
+   "byte1": 131,
+   "width": 8,
+   "byte3": 64,
+   "entry": 4,
+   "entries_seen": {
+    "4": 48
+   },
+   "objects": 48,
+   "decode_sr_reports_sr": [
+    131
+   ],
+   "example": "frontbi-TGSIZEX-383d5656"
+  },
+  {
+   "byte1": 133,
+   "width": 4,
+   "byte3": 6,
+   "entry": 53,
+   "entries_seen": {
+    "53": 1
+   },
+   "objects": 1,
+   "decode_sr_reports_sr": [
+    133
+   ],
+   "example": "uf2-use-sg"
+  },
+  {
+   "byte1": 149,
+   "width": 4,
+   "byte3": 6,
+   "entry": 58,
+   "entries_seen": {
+    "58": 139
+   },
+   "objects": 139,
+   "decode_sr_reports_sr": [
+    149
+   ],
+   "example": "abi-v1-tensor-matmul-4190795c7b"
+  },
+  {
+   "byte1": 152,
+   "width": 4,
+   "byte3": 6,
+   "entry": 4,
+   "entries_seen": {
+    "4": 2
+   },
+   "objects": 2,
+   "decode_sr_reports_sr": [
+    152
+   ],
+   "example": "syn-sc3e4c86e00"
+  },
+  {
+   "byte1": 156,
+   "width": 4,
+   "byte3": 6,
+   "entry": 0,
+   "entries_seen": {
+    "0": 6589
+   },
+   "objects": 6589,
+   "decode_sr_reports_sr": [
+    156
+   ],
+   "example": "a6-tgcalc"
+  },
+  {
+   "byte1": 156,
+   "width": 4,
+   "byte3": 230,
+   "entry": 0,
+   "entries_seen": {
+    "0": 20
+   },
+   "objects": 20,
+   "decode_sr_reports_sr": [
+    156
+   ],
+   "example": "fb0-w0-gx"
+  },
+  {
+   "byte1": 157,
+   "width": 4,
+   "byte3": 6,
+   "entry": 1,
+   "entries_seen": {
+    "1": 225
+   },
+   "objects": 225,
+   "decode_sr_reports_sr": [
+    157
+   ],
+   "example": "pro_idx_tgy"
+  },
+  {
+   "byte1": 158,
+   "width": 4,
+   "byte3": 6,
+   "entry": 2,
+   "entries_seen": {
+    "2": 50
+   },
+   "objects": 50,
+   "decode_sr_reports_sr": [
+    158
+   ],
+   "example": "pro_idx_tgz"
+  },
+  {
+   "byte1": 160,
+   "width": 4,
+   "byte3": 6,
+   "entry": 80,
+   "entries_seen": {
+    "80": 1900
+   },
+   "objects": 1900,
+   "decode_sr_reports_sr": [
+    160
+   ],
+   "example": "a4-cmpx-uni"
+  },
+  {
+   "byte1": 160,
+   "width": 4,
+   "byte3": 38,
+   "entry": 80,
+   "entries_seen": {
+    "80": 5
+   },
+   "objects": 5,
+   "decode_sr_reports_sr": [
+    160
+   ],
+   "example": "probe-ax-sample-0-lane"
+  },
+  {
+   "byte1": 160,
+   "width": 4,
+   "byte3": 230,
+   "entry": 80,
+   "entries_seen": {
+    "80": 2
+   },
+   "objects": 2,
+   "decode_sr_reports_sr": [
+    160
+   ],
+   "example": "a4-load-uni"
+  },
+  {
+   "byte1": 161,
+   "width": 4,
+   "byte3": 6,
+   "entry": 81,
+   "entries_seen": {
+    "81": 9
+   },
+   "objects": 9,
+   "decode_sr_reports_sr": [
+    161
+   ],
+   "example": "att3-y-only"
+  },
+  {
+   "byte1": 162,
+   "width": 4,
+   "byte3": 6,
+   "entry": 82,
+   "entries_seen": {
+    "82": 8
+   },
+   "objects": 8,
+   "decode_sr_reports_sr": [
+    162
+   ],
+   "example": "pro_idx_gpz"
+  },
+  {
+   "byte1": 164,
+   "width": 4,
+   "byte3": 6,
+   "entry": 48,
+   "entries_seen": {
+    "48": 403
+   },
+   "objects": 403,
+   "decode_sr_reports_sr": [
+    164
+   ],
+   "example": "ad-idx_times2"
+  },
+  {
+   "byte1": 164,
+   "width": 4,
+   "byte3": 230,
+   "entry": 48,
+   "entries_seen": {
+    "48": 118
+   },
+   "objects": 118,
+   "decode_sr_reports_sr": [
+    164
+   ],
+   "example": "mt-tgatomic_add-1"
+  },
+  {
+   "byte1": 165,
+   "width": 4,
+   "byte3": 6,
+   "entry": 49,
+   "entries_seen": {
+    "49": 8
+   },
+   "objects": 8,
+   "decode_sr_reports_sr": [
+    165
+   ],
+   "example": "lpaxis-y-v1"
+  },
+  {
+   "byte1": 166,
+   "width": 4,
+   "byte3": 6,
+   "entry": 50,
+   "entries_seen": {
+    "50": 1
+   },
+   "objects": 1,
+   "decode_sr_reports_sr": [
+    166
+   ],
+   "example": "lpaxis-z-v1"
+  },
+  {
+   "byte1": 167,
+   "width": 4,
+   "byte3": 6,
+   "entry": 51,
+   "entries_seen": {
+    "51": 199
+   },
+   "objects": 199,
+   "decode_sr_reports_sr": [
+    167
+   ],
+   "example": "bar_both"
+  },
+  {
+   "byte1": 172,
+   "width": 4,
+   "byte3": 6,
+   "entry": 12,
+   "entries_seen": {
+    "12": 3
+   },
+   "objects": 3,
+   "decode_sr_reports_sr": [
+    172
+   ],
+   "example": "mb-q.width-1"
+  },
+  {
+   "byte1": 173,
+   "width": 4,
+   "byte3": 6,
+   "entry": 13,
+   "entries_seen": {
+    "13": 3
+   },
+   "objects": 3,
+   "decode_sr_reports_sr": [
+    173
+   ],
+   "example": "mb-q.height-1"
+  }
+ ]
+}

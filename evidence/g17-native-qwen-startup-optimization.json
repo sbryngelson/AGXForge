@@ -1,0 +1,42 @@
+{
+  "format": "g17-inference-startup-optimization-v1",
+  "passed": true,
+  "gpu_dispatched": false,
+  "samples": [
+    {
+      "mode": "original_repr",
+      "seconds": 14.535229332977906,
+      "compiler_calls": 1336,
+      "verified_manifest_sha256": "77a09934e7dac366f3ff598a64991ddc18bdc9dab99a78f117d7be55cb2cea98"
+    },
+    {
+      "mode": "structural",
+      "seconds": 1.8918725419789553,
+      "compiler_calls": 45,
+      "verified_manifest_sha256": "77a09934e7dac366f3ff598a64991ddc18bdc9dab99a78f117d7be55cb2cea98"
+    },
+    {
+      "mode": "structural",
+      "seconds": 1.8274758330080658,
+      "compiler_calls": 45,
+      "verified_manifest_sha256": "77a09934e7dac366f3ff598a64991ddc18bdc9dab99a78f117d7be55cb2cea98"
+    },
+    {
+      "mode": "original_repr",
+      "seconds": 11.599433083028998,
+      "compiler_calls": 1336,
+      "verified_manifest_sha256": "77a09934e7dac366f3ff598a64991ddc18bdc9dab99a78f117d7be55cb2cea98"
+    }
+  ],
+  "paired_speedups": [
+    7.68298551327016,
+    6.347242942160321
+  ],
+  "scope": "Full decoder verifier; same process and files; two pairs with reversed order. Not OS-cold-cache, GPU throughput or matched framework evidence.",
+  "sources": {
+    "tools/g17inferencelower.py": "f4490b2bf968549367dff9794e9da964bc24937e840a03bfae4081cafa1129fe",
+    "tools/g17decoderlower.py": "813bd9cb9394be02331adac6b16a04185be49c6f6fc8a52b0efd35db5a30e8ce",
+    "tools/g17inferencesession.py": "13f10fefa13b8b54e239fe911fbb2d3d1a9bf8b955a30049d109b54fbb89e324",
+    "tools/g17inferencestartupbench.py": "e22d76072be45cf365c2abe06747618ca631f946ef5fc12c5e49452df11c0277"
+  }
+}

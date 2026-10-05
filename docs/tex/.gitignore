@@ -1,0 +1,13 @@
+# LaTeX build products; the committed PDF is docs/g17-technical-reference.pdf.
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.pdf
+revision.tex
+revision.tmp
+opindex.tex
+mm-anchors.tex

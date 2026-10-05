@@ -1,0 +1,230 @@
+\chapter{Control flow and the execution mask}\label{ch:control-flow-execution}
+
+A G17 simdgroup executes 32 lanes in lockstep. Divergence is handled by an execution state per lane:
+instructions that change it (push a condition, flip it for an else, pop it), and two kinds of branch that move the program
+counter only when the state of the whole simdgroup allows. Most conditionals do not branch; Apple's compiler
+predicates them.
+
+The execution state behaves as a per-lane nesting counter, active when zero, not as a
+stack of masks (measured for the push and one-level pop; for the other forms, a model that balances every corpus program;
+\cref{sec:execution-mask-family}). Structured control flow is built on that counter, and three of its consequences
+first appeared as faulty programs. Code after a join runs on no lanes unless the join restores the
+state (\cref{sec:execution-mask-family}). A loop nested inside a guarded region needs its own push before the loop, or the latch's pop removes the
+region's level (\cref{sec:branches-back-edges}). A branch decides only whether the simdgroup skips work that no lane needs; which lanes run is set
+by the counter (\cref{sec:predication-if-conversion,sec:branches-back-edges}).
+
+Names used below:
+
+\begin{itemize}
+\item The exec family (one 4-byte encoding word, \cref{sec:execution-mask-family}): \op{582}; \op{577};
+  \op{579}; the inverting if (\op{583}), the else forms (\op{575}, \op{576}) and the plain while
+  (\op{578}), which have no glossary entries; \op{684}.
+\item Branches (10 bytes): \op{458}, \op{462}, \op{450}; \op{580} ends a subroutine.
+\item A \textbf{flag} is a per-lane predicate register (FLAG0-FLAG14) written by a compare such as \op{10369} (\cref{sec:compares-flags-selects}). FLAGTRUE is a constant source that always holds.
+\item "Counter n" is the lane's nesting counter.
+\end{itemize}
+
+\section{Execution-mask instructions}\label{sec:execution-mask-family}
+
+The family shares one encoding word (decoder; \code{agxforge/g17/cf.py}, \code{isa/g17-exec-mask.txt}). Bit 4 of byte 0 separates end of program
+(\opn{684}, \code{0e 00 00 00}) from the family; bit 4 of byte 2 separates exec forms from branches; kind = b0.5 + 2 × b0.6; and
+b2.1 inverts the predicate (\cref{tab:exec-family-encoding}).
+
+\begin{xltabular}{\linewidth}{@{}lXXX@{}}
+\caption{Exec-family and branch opcodes by kind, inversion bit b2.1 and branch bit b2.4.}\label{tab:exec-family-encoding}\\
+\toprule
+kind & b2.1 = 0 & b2.1 = 1 & with b2.4 = 1 (branch) \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+kind & b2.1 = 0 & b2.1 = 1 & with b2.4 = 1 (branch) \\
+\midrule
+\endhead
+0 if & \op{582} & \op{583} (no glossary entry) & stays exec (\op{573} / \op{574}, no glossary entries) \\*
+1 pop & \op{577} & \opn{577} (b2.1 dead) & \op{462} \\*
+2 else & \op{575} (no glossary entry) & \op{576} (no glossary entry) & \op{458} \\*
+3 while & \op{578} (no glossary entry) & \op{579} & \op{450} \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item The count is b0.7 (high) and b2.3 (low), and it is a code table, not an integer: 00 → 1, 01 → 0, 10 → 2, 11 → 3. An
+  encoder that writes the count as a plain 2-bit number emits \code{pop 0} when it means \code{pop 1}. Apple never emits count 3,
+  nor a single pop deeper than 2.
+\item The predicate is b1{[}4:6{]}, an 8-entry lookup: {[}74, 75, 76, 77, 78, 79, 3, 2{]}, register ids for FLAG0-FLAG5 and then two
+  entries in another register file, which Apple uses to push a level unconditionally (FLAGTRUE). Pop reads no predicate.
+\item Auxiliary operand 0 (bits b1.0, b1.1, b2.5-b2.7, b3.5, b3.7) takes only a few witnessed values per kind; its
+  meaning is \emph{open}, and hard-coding one value writes an instruction Apple never emitted 4.6 percent of the time.
+\item An encoder built from this field map re-encodes all 14,195 control-flow instructions in Apple's corpus byte for byte. It
+  reached that only after the auxiliary field was carried as a field; as a constant it scored 94.34 percent.
+\end{itemize}
+
+\textbf{Worked example: an exec push and its join} (decoded; the second executed). \code{1e 00 00 0e}: b0 = 0x1e has bit 4 set, b0.5 = b0.6 = 0 (kind if),
+b2 = 0x00 (exec, not inverted), count code 00 = 1: \op{582}, one level on FLAG0. \code{3e 03 40 0e}: b0 = 0x3e gives kind 1,
+b2 = 0x40 has bit 4 clear, count code 00 = 1: \op{577}, pop 1. The second word is the join; it
+was identified after a prediction failed (measured, \code{isa/g17-scalar-isa.toml}). A forward branch authored
+one instruction past the compiler's own target, predicted to store 114, stored 0. A kernel was then built whose post-join
+code writes a second value that does not depend on the branch (\cref{tab:join-removal}).
+
+\begin{longtable}{@{}lll@{}}
+\caption{Stored values with the join present and replaced by filler, on the taken and not-taken paths.}\label{tab:join-removal}\\
+\toprule
+join & taken (n = 2) & not taken (n = 7) \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+join & taken (n = 2) & not taken (n = 7) \\
+\midrule
+\endhead
+present & (114, 31) & (1868193279, 96) \\
+replaced by filler & (0, 0) & (1868193279, 96) \\
+\bottomrule
+\end{longtable}
+
+Without the join the branch-independent value was also lost, on the taken path only. With the output pre-filled with
+0xDEADBEEF the sentinel remained, so the store did not execute. Code after a join therefore retires with no active lanes
+unless the join restores the state, and a branch must target the join.
+
+The counter semantics, per lane and with n the instruction's count, are these (measured for the push and one-level pop forms; whole-program for the rest; MM~\mm{25.145.2},
+\code{agxforge/g17/releasecheck.py}):
+
+\begin{itemize}
+\item \textbf{if n}: an active lane (counter 0) stays 0 if its condition holds, else becomes n; an inactive lane adds n.
+\item \textbf{else n}: 0 becomes n; n becomes 0 if the condition holds; any other value is unchanged.
+\item \textbf{pop n}: counter = max(0, counter - n).
+\item \textbf{while n}: an active lane whose condition fails becomes n (and waits for the matching pop n); otherwise unchanged.
+\item FLAGTRUE always holds; the inverting if, the b2.1 = 1 else (no glossary entries) and while-exec, set mask in place
+  negate the condition. A condition is the lane's flag value, which stays
+  the same until a compare rewrites it.
+\end{itemize}
+
+Two observations rule out a push/pop stack in favour of the counter. Apple's corpus contains 338 top-level loops of the shape \code{while 2 / back edge / pop 2} with no push; a stack would pop levels never pushed, while the counter model balances all
+6,594 corpus programs. And Apple over-pops on early-exit paths (in one probe a branch leaves a region two levels deep and
+lands on \code{pop 2} then \code{pop 1}), which only a saturating counter tolerates; that one is an inference from the correctness of
+Apple's code (decoder, \code{isa/g17-exec-mask.txt}). This is the model Asahi/Mesa call r0l. For every executed receipt that uses
+a push and one-level pops, the counter and a stack agree. The in-place while and the two-level pop are needed by the
+imageblock kernels' K loop and are admitted only on whole-program evidence. Nesting depth 1 to 6 with a store per level
+emits one \code{if 1} per level and pops that sum to the pushes (depth 6: pop 2, pop 2, pop 2); else and while are net-neutral.
+
+\emph{Correction:} the 4-byte backward branch in \code{isa/g17-scalar-isa.toml} (\code{de 6f f3 1e}) is the first four bytes of the
+10-byte branch below (\code{agxforge/g17/cf.py}; \cref{app:a}). Author branches from the 10-byte map.
+
+In the branch encoding (decoder, verified on 65 of 65 branches) b2.0 is set, and a signed two's-complement displacement has its
+sign at b9.6 and weights 2 through $2^{47}$ scattered over bytes 0–9 (no weight-1 bit, so displacements are even). The target is the
+branch's own offset + displacement, not the end of the instruction.
+
+\section{Predication and if-conversion}\label{sec:predication-if-conversion}
+
+Apple's compiler predicates first (Apple's compiler emits; \code{isa/g17-exec-mask.txt}, \code{isa/g17-scalar-isa.toml}). A
+single-sided \code{if} emits no control-flow instruction: the store becomes a predicated store form, or the region is
+if-converted to a compare-select (\cref{sec:compares-flags-selects}). Two or three nested levels with one assignment each still if-convert.
+The exec machinery appears once a region has two sides, side effects at more than one level, or a loop. Forcing a real
+branch took a conditional block of eight statements or more; below eight the block is predicated and no branch is emitted.
+
+Apple places \op{462}
+directly after a region's \op{582}; it is taken when no lane of the simdgroup is active and lands
+on the region's pop, so it never changes which lanes run. On a 512-threadgroup grid with a selector matching no arm, both skips were taken and the program wrote
+nothing (measured, MM~\mm{25.141.2}).
+
+This project's compiler lowers a
+conditional as pure predication by default (measured, MM~\mm{25.139.9}, MM~\mm{25.141.2}), so every dispatch walks the masked-off arms: +2.4~µs per dispatch for two arms
+and +38~µs per four-op chain in an uber kernel. With the skip branch emitted (opt-in), an uber arm costs what the plain
+kernel costs (131.2 against 131.0~µs; 68.8 against 68.7).
+
+For lanes that are masked off:
+
+\begin{itemize}
+\item A release inside a region acts only on the lanes that executed the releasing instruction: with the region gated on
+  t < 16, a released value read 0 on lanes 0–15 only, and with the region gated on t < 0 nothing was released (measured,
+  MM~\mm{25.95}), so a value released in one arm is dead only on the lanes that took that arm. \Cref{ch:register-file} holds the release rules.
+\item Load waits are per consumer, so a use after a join still waits for a load whose first consumer was skipped (this
+  compiler, MM~\mm{25.141.2}).
+\item Cross-lane reads inside a partially active simdgroup are a separate hazard (\cref{ch:cross-lane-operations}).
+\end{itemize}
+
+\section{Branches and loops}\label{sec:branches-back-edges}
+
+The back edge, \op{458}, is taken iff any lane of the simdgroup is active. Every backward
+branch in Apple's corpus is this branch (581 across 401 programs), every one of those programs also contains a while form, and
+Apple never emits \op{450} backward (decoder, \code{isa/g17-exec-mask.txt}). \op{582} gates the
+back edge; \op{579} sets the state in place and does not gate it (glossary). The loop shape Apple uses and this compiler emits is a latch \code{pop, compare, push, back edge}, with one more pop at the exit (measured, MM~\mm{25.139.9}).
+
+A loop inside a region needs its own push, because the first trip's latch pop removes one level. At top level that is
+harmless, but inside a guarded region it removes the region's level, and the guarded-off lanes then run everything after
+the loop. The defect appeared when an uber kernel's masked-off arm stored threadgroup 0's rows; with a selector that matched no
+arm, both arms stored them. The design measured for loops starts with a preheader push, which the lowering had never
+emitted. This compiler now emits \code{0 < 1} and an exec push before a loop nested in a region, keeping every top-level loop's bytes
+(measured, MM~\mm{25.139.9}).
+
+A loop whose trip count is a runtime value lowers to an unsigned compare against a capped
+count. The cap is required, since without it termination is not provable (measured, MM~\mm{25.90}). Apple's compiler emits \op{10369}/10 and \op{9328}/10 for such a loop
+(MM~\mm{25.73}).
+
+A loop-carried value must not be released. A release on the counter in the cap compare left a kernel unable to reach
+either bound, and it ran until a reboot (measured, MM~\mm{25.116}; the case is described in
+\cref{sec:loops-loop-variable-rule}). The same
+family of defect, a loop phi's entry value released before the loop, made every thread store as thread 0 (MM~\mm{25.142.7},
+MM~\mm{25.144.6}). The rules (a back edge reads its header phis' latch values; refuse a release of any loop-carried register
+after the body's last write of it) are \cref{sec:loops-loop-variable-rule}'s, and the dispatch hazard is \cref{sec:forward-progress-in-order}'s.
+
+\Cref{tab:loops-below-metal} lists loops executed below Metal (measured; programs authored by this compiler and submitted without Metal, each checked
+against the exact expected output with guards, callbacks and recovery state; \code{docs/g17-first-dispatch-trials.md}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.58\hsize}X>{\hsize=1.52\hsize}XX>{\hsize=0.84\hsize}X@{}}
+\caption{Loop programs authored by this compiler and run below Metal, each checked against the exact expected output.}\label{tab:loops-below-metal}\\
+\toprule
+Trial & Program & Result & What it establishes \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Trial & Program & Result & What it establishes \\
+\midrule
+\endhead
+Bounded per-lane GPU loop & 88 bytes: each lane starts at its lane index and adds 7 per trip; one-
+and three-trip variants differ only at code byte 55 (compare immediate
+0x80 against 0x82); \op{10369}, \op{582}, a 10-byte \op{458} at byte 62 with displacement −38 landing on
+the body at byte 24, \op{577}, store, end & 64 of 64 words exact: 7..70 for one trip, 21..84 for three (the back
+edge ran twice) & bounded cyclic control flow for this program and layout \\*
+Per-lane divergent loop bounds & 146 bytes: bound loaded from A{[}lane{]}, runtime compare with a cap of
+3, \op{458} at byte 120 with displacement
+−82 to byte 38; byte-identical code under two input profiles & bounds 1,3 alternating gave 7, 22, 9, 24, \dots{} 69, 84; reversed gave 21,
+8, 23, 10, \dots{} 83, 70: each lane computed lane + 7 × A{[}lane{]} beside
+neighbours with different trip counts & per-lane divergent trip counts in one simdgroup \\*
+Runtime loop cap and zero bound & the same 146 bytes & bounds 5,3: every lane i + 21 (over-cap lanes stopped at three trips);
+bounds 0,3: even lanes i + 7, odd lanes i + 21 & the cap clamps; this emitted loop tests at the bottom, so a zero bound
+still runs the body once \\*
+Bounded loop inside a divergent region & 140 bytes: every lane stores its index, then only lanes with lane
+< 32 enter a two-trip loop; pushes at offsets 50, 68 and 106,
+pops at 96, 120 and 132, \op{458} at 110
+with displacement −38 to the body at 72 & lanes 0–31 i + 14, lanes 32–63 i & the preheader push keeps the outer guard; not arbitrary nesting \\*
+\bottomrule
+\end{xltabular}
+
+The zero-bound result comes from this loop shape and is not a machine property. A compiler that needs zero-trip
+semantics must guard the loop or test before the body.
+
+Apple's own program that uses call and \op{580} runs 32 of 32 lanes correctly in this
+project's image path, and this compiler inlines calls (whole-program, MM~\mm{25.90}). Indirect calls are \emph{open}.
+
+\leadhead{Safe assumptions.}
+
+\begin{itemize}
+\item The exec forms and branches Apple emits can be emitted with the field map of \cref{sec:execution-mask-family}; they
+  are byte-identical to code that executed. No novel exec encoding (count 3, an unwitnessed auxiliary value, a predicate index Apple never selects) has been
+  executed (\code{isa/g17-exec-mask.txt}).
+\item The counter semantics hold for the exec push and the one-level exec pop (measured); for the in-place while and
+  the two-level pop they hold only as whole programs use them. The else rule and the saturation are model statements consistent with all corpus programs, not
+  separate measurements.
+\item Branch-taken conditions (the skip branch when no lane is active, the back edge when any lane is) are measured for the
+  skip-taken case and the executed loops; the skip branch's not-taken behaviour under partial activity follows from the
+  same programs.
+\end{itemize}
+
+\textbf{Not known.} The auxiliary operand's meaning; where the counter is held and its width; indirect calls.
+
+\textbf{Evidence.} MM~\mm{25.73}, MM~\mm{25.90}, MM~\mm{25.95}, MM~\mm{25.116}, MM~\mm{25.139.9}, MM~\mm{25.141.2}, MM~\mm{25.142.7}, MM~\mm{25.144.6}, MM~\mm{25.145.2};
+\code{isa/g17-exec-mask.txt}, \code{isa/g17-scalar-isa.toml}, \code{agxforge/g17/cf.py}, \code{agxforge/g17/releasecheck.py},
+\code{docs/g17-first-dispatch-trials.md}.

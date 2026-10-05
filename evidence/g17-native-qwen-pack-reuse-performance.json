@@ -1,0 +1,493 @@
+{
+  "format": "g17-native-qwen-pack-reuse-performance-v1",
+  "passed": true,
+  "gpu_dispatched": true,
+  "samples": [
+    {
+      "mode": "baseline",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 274454417,
+          "submit_call_ns": 30646000,
+          "submit_to_completion_ns": 197784000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 206695875,
+          "submit_call_ns": 19301000,
+          "submit_to_completion_ns": 133356000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 223978042,
+          "submit_call_ns": 23468000,
+          "submit_to_completion_ns": 140128000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 250621167,
+          "submit_call_ns": 24171000,
+          "submit_to_completion_ns": 163436000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 272877208,
+          "submit_call_ns": 25154000,
+          "submit_to_completion_ns": 185027000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 264681709,
+          "submit_call_ns": 21433000,
+          "submit_to_completion_ns": 178825000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 275196833,
+          "submit_call_ns": 24151000,
+          "submit_to_completion_ns": 186874000,
+          "output_sha256": "5e38cbc61c3b8ff5a994a57178baee8dcbc73e2100eb924898717a1142e74c48",
+          "cache_valid": 42
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 275224500,
+          "submit_call_ns": 25787000,
+          "submit_to_completion_ns": 188217000,
+          "output_sha256": "4abaf992c3e4f943bc52084858e69f86147fed37824459cb8f45607be415077b",
+          "cache_valid": 43
+        }
+      ],
+      "decode_tokens_per_second": 3.839804731491738,
+      "first_token_seconds": 0.481150292,
+      "model_roundtrip_ns": 2043729751,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "driver_prepare_seconds": 2.24270012503257,
+      "native_build_seconds": 2.428565541980788,
+      "binary_sha256": "3ff474563b200d536a555e3b83d97fb193fccce7c7e5eac0ae85750bac179837",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x104d69a20  type-0x100005 conn=0x260b (open kr=0x0)  dev+0x14=0xb13\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x109158000\n  resv[1] kr=0x0 @0x109558000\n  resv[2] kr=0x0 @0x109958000\n  resv[3] kr=0x0 @0x109d58000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x1046b0000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x1046c0000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x1046d0000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x1046f0000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x104700000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x104720000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x300000000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x10473c000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x1047a0000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x1047a8000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x1047b0000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x1047b8000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x1047c0000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x1047c8000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x1047d0000 size=0xc000\nORDERED QUEUE create=0x104d73990 connection=0x260b prior=0xb13 notification=0x104d739e0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x1047e0000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x1047e4000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5c0b611ac1 second=0x5c0b611ac2\nDECODER CLOSED: requests=8 Submits=6992 valid=43 result=0.\nDECODER PEAK RSS BYTES: 2157953024.\n"
+    },
+    {
+      "mode": "optimized",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 270028083,
+          "submit_call_ns": 36394000,
+          "submit_to_completion_ns": 198163000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 188979500,
+          "submit_call_ns": 17584000,
+          "submit_to_completion_ns": 117894000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 215155292,
+          "submit_call_ns": 21811000,
+          "submit_to_completion_ns": 130324000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 233959792,
+          "submit_call_ns": 22159000,
+          "submit_to_completion_ns": 147576000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 261306250,
+          "submit_call_ns": 23395000,
+          "submit_to_completion_ns": 176717000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 265927709,
+          "submit_call_ns": 25134000,
+          "submit_to_completion_ns": 180572000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 262113750,
+          "submit_call_ns": 24146000,
+          "submit_to_completion_ns": 177216000,
+          "output_sha256": "5e38cbc61c3b8ff5a994a57178baee8dcbc73e2100eb924898717a1142e74c48",
+          "cache_valid": 42
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 265963541,
+          "submit_call_ns": 24698000,
+          "submit_to_completion_ns": 179019000,
+          "output_sha256": "4abaf992c3e4f943bc52084858e69f86147fed37824459cb8f45607be415077b",
+          "cache_valid": 43
+        }
+      ],
+      "decode_tokens_per_second": 3.988231171178103,
+      "first_token_seconds": 0.459007583,
+      "model_roundtrip_ns": 1963433917,
+      "bundle_manifest_sha256": "a00651771c82b72654c7ede2a860d6179fded25f2321a1eb9fbb55d2a1b08d6a",
+      "driver_prepare_seconds": 1.235922749969177,
+      "native_build_seconds": 2.418049084022641,
+      "binary_sha256": "3ff474563b200d536a555e3b83d97fb193fccce7c7e5eac0ae85750bac179837",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x104871a20  type-0x100005 conn=0x260b (open kr=0x0)  dev+0x14=0x90f\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x108ce0000\n  resv[1] kr=0x0 @0x1090e0000\n  resv[2] kr=0x0 @0x1094e0000\n  resv[3] kr=0x0 @0x1098e0000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x109ce4000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x109cf4000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x109d04000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x109d24000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x109d34000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x109d54000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x300000000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x109d70000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x109dd4000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x109ddc000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x109de4000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x109dec000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x109df4000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x109dfc000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x109e04000 size=0xc000\nORDERED QUEUE create=0x10487b990 connection=0x260b prior=0x90f notification=0x10487b9e0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x109e14000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x109e18000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5c0d61380b second=0x5c0d61380c\nDECODER CLOSED: requests=8 Submits=6416 valid=43 result=0.\nDECODER PEAK RSS BYTES: 2157953024.\n"
+    },
+    {
+      "mode": "optimized",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 263895417,
+          "submit_call_ns": 29863000,
+          "submit_to_completion_ns": 187716000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 676,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 191775959,
+          "submit_call_ns": 17729000,
+          "submit_to_completion_ns": 123356000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 209741834,
+          "submit_call_ns": 21589000,
+          "submit_to_completion_ns": 125846000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 231781000,
+          "submit_call_ns": 22670000,
+          "submit_to_completion_ns": 147219000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 266410709,
+          "submit_call_ns": 24802000,
+          "submit_to_completion_ns": 180168000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 264102000,
+          "submit_call_ns": 24247000,
+          "submit_to_completion_ns": 177890000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 262186209,
+          "submit_call_ns": 23907000,
+          "submit_to_completion_ns": 177033000,
+          "output_sha256": "5e38cbc61c3b8ff5a994a57178baee8dcbc73e2100eb924898717a1142e74c48",
+          "cache_valid": 42
+        },
+        {
+          "mode": "decode",
+          "submissions": 844,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 264066167,
+          "submit_call_ns": 24621000,
+          "submit_to_completion_ns": 176393000,
+          "output_sha256": "4abaf992c3e4f943bc52084858e69f86147fed37824459cb8f45607be415077b",
+          "cache_valid": 43
+        }
+      ],
+      "decode_tokens_per_second": 4.004570766348147,
+      "first_token_seconds": 0.455671376,
+      "model_roundtrip_ns": 1953959295,
+      "bundle_manifest_sha256": "a00651771c82b72654c7ede2a860d6179fded25f2321a1eb9fbb55d2a1b08d6a",
+      "driver_prepare_seconds": 1.2016525830258615,
+      "native_build_seconds": 2.3811215829919092,
+      "binary_sha256": "3ff474563b200d536a555e3b83d97fb193fccce7c7e5eac0ae85750bac179837",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x1044b5a20  type-0x100005 conn=0x2507 (open kr=0x0)  dev+0x14=0xd13\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x108e90000\n  resv[1] kr=0x0 @0x109290000\n  resv[2] kr=0x0 @0x109690000\n  resv[3] kr=0x0 @0x109a90000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x109e94000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x109ea4000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x109eb4000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x109ed4000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x109ee4000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x109f04000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x125604000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x109f20000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x109f84000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x109f8c000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x109f94000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x109f9c000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x109fa4000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x109fac000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x109fb4000 size=0xc000\nORDERED QUEUE create=0x1044bf990 connection=0x2507 prior=0xd13 notification=0x1044bf9e0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x109fc4000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x109fc8000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5c0f6152e6 second=0x5c0f6152e7\nDECODER CLOSED: requests=8 Submits=6416 valid=43 result=0.\nDECODER PEAK RSS BYTES: 2157953024.\n"
+    },
+    {
+      "mode": "baseline",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 298105958,
+          "submit_call_ns": 32809000,
+          "submit_to_completion_ns": 205882000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 264961666,
+          "submit_call_ns": 22442000,
+          "submit_to_completion_ns": 185606000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 226515209,
+          "submit_call_ns": 23858000,
+          "submit_to_completion_ns": 137452000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 242505166,
+          "submit_call_ns": 23813000,
+          "submit_to_completion_ns": 154153000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 284223750,
+          "submit_call_ns": 27014000,
+          "submit_to_completion_ns": 191024000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 287802334,
+          "submit_call_ns": 27966000,
+          "submit_to_completion_ns": 193405000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 277439209,
+          "submit_call_ns": 12181000,
+          "submit_to_completion_ns": 176745000,
+          "output_sha256": "5e38cbc61c3b8ff5a994a57178baee8dcbc73e2100eb924898717a1142e74c48",
+          "cache_valid": 42
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 273641958,
+          "submit_call_ns": 12672000,
+          "submit_to_completion_ns": 174252000,
+          "output_sha256": "4abaf992c3e4f943bc52084858e69f86147fed37824459cb8f45607be415077b",
+          "cache_valid": 43
+        }
+      ],
+      "decode_tokens_per_second": 3.7685421080684143,
+      "first_token_seconds": 0.563067624,
+      "model_roundtrip_ns": 2155195250,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "driver_prepare_seconds": 3.3614766250248067,
+      "native_build_seconds": 2.3817125420318916,
+      "binary_sha256": "3ff474563b200d536a555e3b83d97fb193fccce7c7e5eac0ae85750bac179837",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x105861a20  type-0x100005 conn=0x220f (open kr=0x0)  dev+0x14=0xc07\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x109c50000\n  resv[1] kr=0x0 @0x10a050000\n  resv[2] kr=0x0 @0x10a450000\n  resv[3] kr=0x0 @0x10a850000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x105020000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x105030000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x105040000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x105060000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x105070000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x105090000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x300000000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x1050ac000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x105110000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x105118000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x105120000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x105128000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x105130000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x105138000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x105140000 size=0xc000\nORDERED QUEUE create=0x10586b990 connection=0x220f prior=0xc07 notification=0x10586b9e0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x105150000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x105154000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5c11616e37 second=0x5c11616e38\nDECODER CLOSED: requests=8 Submits=6992 valid=43 result=0.\nDECODER PEAK RSS BYTES: 2157953024.\n"
+    }
+  ],
+  "paired_ratios": [
+    {
+      "decode_speedup": 1.0386546843044029,
+      "model_roundtrip_speedup": 1.0408956131931788
+    },
+    {
+      "decode_speedup": 1.062631291229146,
+      "model_roundtrip_speedup": 1.1029888163560746
+    }
+  ],
+  "decode_steps": 6,
+  "prompt_token_ids": [
+    151644,
+    8948,
+    198,
+    2610,
+    525,
+    1207,
+    16948,
+    11,
+    3465,
+    553,
+    54364,
+    14817,
+    13,
+    1446,
+    525,
+    264,
+    10950,
+    17847,
+    13,
+    151645,
+    198,
+    151644,
+    872,
+    198,
+    840,
+    20772,
+    3170,
+    279,
+    12884,
+    374,
+    6303,
+    13,
+    151645,
+    198,
+    151644,
+    77091,
+    198
+  ],
+  "captured_vectors_compared": 32,
+  "generation_receipt_sha256": "0820f9498cb9bdd52d1ca76f49a6328bd1c5232ee68829572b185c2a2f438a6b",
+  "source_sha256": "06775ee168ae76ff214b974ed72242d751b928d3116ab5ca466d8dbe9989493f",
+  "scope": "Four prepared native processes in ABBA order; identical checkpoint, programs, valid prefixes and continuation tokens. Every retained last-valid-row vector must be bit-identical, guards and readonly scans active. Decode timing is guarded client roundtrip; setup and capture/reference loading excluded. Two short pairs, not a broad performance distribution."
+}

@@ -1,0 +1,71 @@
+title = "The float immediate is an 8-bit MINIATURE FLOAT: sign, 3-bit exponent, 4-bit mantissa, with a subnormal row"
+date = "2026-09-05"
+status = "derived by the peer from a hardware sweep; independently confirmed here from Apple's own emitted constants"
+
+[format]
+text = """
+    bit 7     sign
+    bits 6:4  exponent, 0 selects the subnormal row
+    bits 3:0  mantissa
+
+    value = sign * (mant + 16*(exp != 0)) * 2**(exp-1 if exp else 0) / 64
+
+    0 -> 0        1 -> 1/64      4 -> 1/16      16 -> 0.25     32 -> 0.5
+    48 -> 1.0     64 -> 2.0      112 -> 16.0    127 -> 31.0    129 -> -1/64   255 -> -31.0
+"""
+
+[how_it_was_established]
+text = """
+THE PEER SWEPT IT. op775 at x = 0.25, reading the result for fifteen immediates, then stated the
+formula and tested TWELVE VALUES OUTSIDE THE FIT - three exponent rows the fit never saw, both
+signs, both ends. 12 of 12 exact. 48 -> 1.0 is what kills the obvious linear reading, since 48/64
+is 0.75.
+
+Additivity is a separate claim and was measured separately: immediate 48 against six different
+inputs returns x + 1 for all six.
+
+INDEPENDENTLY CONFIRMED HERE, from Apple's own code rather than from hardware. Decoding the
+immediates that appear in the corpus on this opcode family with that formula gives:
+
+    raw 32 x56 -> 0.5     raw 16 x17 -> 0.25    raw 48 x14 -> 1.0     raw 64 -> 2.0
+    raw 80 -> 4.0         raw 84 -> 5.0         raw 72 -> 3.0         raw 68 -> 2.5
+    raw 76 -> 3.5         raw 82 -> 4.5         raw 86 -> 5.5         raw 90 -> 6.5
+
+Every one is a round constant, and the commonest by a wide margin is 0.5. A wrong format would
+decode Apple's constants to arbitrary numbers; this one decodes them to exactly the set a compiler
+emits. Two derivations with nothing in common - a hardware sweep and a corpus census - agreeing.
+
+IT IS NOT AN f16 FACT. op1000 is in the f32 add block and six immediates through it at f32 are
+predicted by the same formula (255 -> -31, 112 -> +16). The immediate belongs to the SOURCE
+ENCODING, not to the datapath.
+"""
+
+[what_it_corrected]
+text = """
+This is why 72 opcodes were misnamed cvt.h in this project's table, and why two more were named
+saturate.f16 and fabs.f16.
+
+The immediate makes a two-source instruction LOOK like a one-source one: Apple's decoder prints
+the operand, but as a raw number in a form the reader took for a modifier. So the whole
+immediate-addend family read as unary, and a unary float operation whose destination is narrower
+than its source reads as a conversion.
+
+    op1000 executed: x + imm at f32. Source and destination both 32-bit - nothing to convert.
+    op1048 is selected by fabs.bf AND fneg.bf AND copysign.bf - three different unary
+      constructs, which no single unary operation can be. They set a source modifier and add zero.
+    op767 clamps its result to [0,1] and op775 does not, on the same immediate.
+
+    op767  clamp(x + imm, 0, 1)  f16      op775  x + imm  f16      op1000  x + imm  f32
+
+Renamed by RESULT WIDTH, which is what a compiler selects on: fadd.imm and fadd.imm.f16, with
+fadd.imm.sat.f16 for the saturating form. Where the destination is narrower than the source the
+instruction does convert, but that is a consequence of the destination class and not the
+operation.
+"""
+
+[for_the_compiler]
+text = """
+Encoding a constant: find (sign, exp, mant) with value * 64 = (mant + 16*(exp!=0)) * 2**(exp-1),
+mant in 0..15, exp in 0..7. Constants outside that lattice have NO exact code and must be refused
+rather than rounded - the peer's encoder refuses 0.3 and names the nearest representable, 0.296875.
+"""

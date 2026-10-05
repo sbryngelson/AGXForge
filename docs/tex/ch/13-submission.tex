@@ -1,0 +1,285 @@
+\chapter{Submission below Metal}\label{ch:submission-below-metal}
+
+Without Metal, a process reaches the GPU through GPU and shared-memory allocations, a set of launch words, a submission
+record, a call into the kernel and a completion notification. The resident runtime that assembles these into a model
+execution, and validates its results, is in \cref{ch:below-metal-native}.
+
+A Metal application asks Metal to build a pipeline and encode a command buffer; Metal's driver library
+(AGXMetal) then writes command pages and calls Apple's private \code{IOGPU} framework, which enters the kernel driver. A
+below-Metal process does the same work itself: it allocates GPU memory and shared memory through the AGX driver's user
+client, writes the code, the launch state and the command pages, builds the submission record, and calls the same \code{IOGPU}
+submission function. The kernel driver, the GPU firmware and the hardware are unchanged.
+
+The project's process owns the program bytes, the launch words, the command pages and the record.
+IOGPU took ownership of the submitted callback blocks on every observed successful Submit; ownership on failure, timeout
+or teardown is not established (\cref{sec:completion-callbacks-their}). The kernel driver and firmware own
+everything after the trap.
+
+Launches are known to work in the configurations whose layout was measured. Within the
+measured graphs the words a launch needs are known by role, except for some known only by value, such as the
+shader-state bits and the kernel-page word at offset 0x3c0; those are copied as captured. The runtime refuses every
+configuration outside the envelope. Some of those might work, but none has been measured.
+
+Interface terms:
+
+\begin{itemize}
+\item \emph{User client}: the IOKit connection to the AGX kernel driver. Its numbered entry points are \emph{selectors}.
+\item \emph{Allocation n}: the n-th GPU memory allocation in a measured resource graph, created through selector 9. Each has a
+  GPU virtual address (VA) and a CPU mapping at the same address.
+\item \emph{Command pages}: two 16 KiB shared-memory regions per submission, created through selector 14: the \emph{kernel page}
+  (kernel-command shared memory) and the \emph{segment page} (the segment list). Each has a shared-memory ID.
+\item \emph{Launch state}: the per-launch words in measured allocations that select a program, its grid and its buffers.
+\item \emph{Submit record}: the record handed to \code{IOGPUCommandQueueSubmitCommandBuffers}.
+\item \emph{Measured graph}: a complete set of allocations, pages and launch words whose layout was captured from Metal once,
+  then rebuilt from fields. Four sizes are in use: 3 MiB, 4 MiB, 128 MiB and 1 GiB.
+\end{itemize}
+
+Standing in this chapter: \emph{measured} means executed below Metal with a checked output and a control; \emph{observed} means
+traced in a live process (Frida) or read from Apple's binary without executing a GPU command; \emph{static} means resolved by
+reading the installed \code{IOGPU} code (\code{tools/g17submitinspect.c}).
+
+\section{Apple-owned layers}\label{sec:stays-apple-s}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.59\hsize}X>{\hsize=1.26\hsize}X>{\hsize=1.15\hsize}X@{}}
+\caption{What the below-Metal process writes and what remains Apple's, by layer.}\label{tab:apple-layers}\\
+\toprule
+Layer & Below Metal & Still Apple's \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Layer & Below Metal & Still Apple's \\
+\midrule
+\endhead
+program & every instruction byte, from the project's compiler & encoding rules recovered with Apple's decoder \\*
+resources and launch & allocations, command pages, launch words, bindings, the Submit record,
+written by the project's host code & the formats themselves, recovered by measurement \\*
+submission & the call into \code{IOGPUCommandQueueSubmitCommandBuffers} & \code{IOGPU.framework}, IOKit, the AGX kernel driver \\*
+execution &  & the GPU firmware and the hardware \\*
+\bottomrule
+\end{xltabular}
+
+The process never creates an \code{MTLDevice} or a Metal command buffer, and it checks that AGXMetal is not loaded
+(MM~\mm{25.210.9}).
+
+\section{Device, context and queue setup}\label{sec:opening-device-contexts}
+
+\begin{itemize}
+\item The AGX user client opens with no entitlement. A process with no Metal driver loaded creates the device and a
+  context (measured; \code{tools/g17dispatch.c}, README rows 1–2).
+\item Creating a command queue calls selectors 7, 16 and 28, in \code{IOGPUCommandQueueCreate} (observed in a Metal process that
+  created only a device and a queue). Selector 28 registers the queue's completion notification queue (static). Calling
+  the group a second time by hand ends in a selector-28 error (\code{docs/g17-first-dispatch-trials.md}, "Submission transport
+  and record, resolved statically" and the preflight that follows it).
+\item The sampler-source query (selector 261) returns a privilege error; nothing below depends on it (MM~\mm{25.143}).
+\end{itemize}
+
+\emph{Correction:} an earlier reading named selector 7 the submit and fence, and selector 14 a telemetry ring (MM~\mm{25.143}). The
+static resolution places 7, 16 and 28 in queue creation and identifies selector 14 as the shared-memory allocator
+(\cref{sec:memory-allocations-shared}), superseding the earlier attribution.
+
+\section{Allocations and address windows}\label{sec:memory-allocations-shared}
+
+\begin{itemize}
+\item GPU allocations come from selector 9. Each request names an allocation class (a request \emph{type}), a size, and an
+  address; the driver returns a buffer mapped at the same CPU and GPU virtual address (measured; MM~\mm{0.15}, README row 2).
+\item The address window depends on the request type. The exact type value 0x58000000 places an allocation in the window
+  at 0x6f\_00000000; other tested values do not reach the 0x1ea\_ window that Metal's command buffer names. Whether that
+  window is the shader window is not shown (measured; MM~\mm{25.143.O}).
+\item Shared memory comes from selector 14 (\code{IOGPUDeviceCreateDeviceShmem}). Its 16-byte output is
+  \code{\{cpu\_address: u64, size: u32, shmem\_id: u32\}}. A submission uses two 16 KiB regions, the kernel page and the segment
+  page, with IDs such as 2 and 1 (static and observed; trials, "Submission transport and record").
+\item Allocations of 32 KiB, 8 MiB, 96 MiB and 1 GiB were created and CPU-mapped with sentinels and no Submit.
+  This shows allocation and mapping only; GPU visibility was not established, so the runtime reuses measured graphs
+  instead of a size formula (MM~\mm{25.210.3}).
+\end{itemize}
+
+\section{Code placement and the program counter}\label{sec:code-placement-program}
+
+\begin{itemize}
+\item Every program is uploaded into allocation 0, at GPU address 0x10000000000, and the allocation is treated as immutable
+  after upload. Programs start at offset 0x6c0 and are 64-byte aligned (measured; MM~\mm{25.210.6}).
+\item A launch's program counter is allocation 0's base plus the program's offset. It is written in pieces into allocation 23:
+  the low 16 bits OR 7 at offset 0x40, bits 16–31 at offset 0x46, bits 32–47 at offset 0x48 (MM~\mm{25.210.6}).
+\item The shader-state word at offset 0x42 of allocation 23 is written separately. A single 32-bit program-counter write once
+  corrupted it (measured; MM~\mm{25.210.6}).
+\item \emph{Not known:} the low program-counter tag bits outside the measured entry class.
+\end{itemize}
+
+\section{Launch state and command pages}\label{sec:launch-state-command}
+
+\Cref{tab:launch-words} lists the words a launch needs, all written by the project's runner (MM~\mm{25.210.6}, unless noted).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.14\hsize}X>{\hsize=0.67\hsize}X>{\hsize=1.38\hsize}X>{\hsize=0.81\hsize}X@{}}
+\caption{Launch words by location, with width, meaning and standing.}\label{tab:launch-words}\\
+\toprule
+Where & Width & Meaning & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Where & Width & Meaning & Standing \\
+\midrule
+\endhead
+allocation 23, offsets 0x40, 0x46, 0x48 & 16 bits each & program counter: low half OR 7, bits 16–31, bits 32–47 & measured \\
+allocation 23, offset 0x42 & 16 bits & shader state & measured value; bits unnamed \\
+allocation 23, offset 0x38 & two 32-bit words & scratch/config word, then zero & measured value; bits unnamed \\
+allocation 22 offset 0xa8; allocation 25 offset 0x10 & three 32-bit words each & grid x, y, z, written twice & measured \\
+allocation 25, offset 0x1c & 32 bits & threads per threadgroup (32 in the measured classes) & measured \\
+allocation 28, offset 0x1ba0 & four 64-bit pointers & program buffer pointers; at most three are admitted & measured \\
+allocation 23, offset 0x06 & 16 bits & scaled metadata address coordinate: \code{(VA28 >> 13) \& 0xffff} & measured (see below) \\
+allocation 25, offset 0x09 & 16 bits & scaled address coordinate: \code{(VA23 >> 14) \& 0xffff} & measured equality \\
+kernel page, offset 0x3c0 & word & needed for the tensor contribution: clearing it removes the MMA result
+while Submit and callbacks succeed & measured; meaning unknown \\
+kernel page, offsets 0x3ec and 0x3f8 & words & kept as measured & unknown \\
+\bottomrule
+\end{xltabular}
+
+Launch state comes in two classes. Scalar and packing programs use the state word 0x0e40 with the scratch word 0x0c000007. Tensor
+projections and the cooperative LayerNorm use 0x0e58 with 0x0c00100f. Their individual bits are not named (MM~\mm{25.210.6}).
+
+MM~\mm{25.210.6} lists the halfwords at allocation 23 offset 0x06 and allocation 25 offset 0x09
+as "graph-identity correlates; no formula". The trial log fits both exactly at six graph sizes from 17 to 34 MiB, and in
+the 4 MiB graph, as the shifted addresses above (\code{docs/g17-first-dispatch-trials.md}, the address-coordinate table). For
+allocation 23's halfword the evidence is causal in one graph: changing only that halfword between the high and low
+coordinate decided pass or fail. Treat the formula as established for the measured graphs; do not assume which firmware
+step reads it, or that every allocation with that encoding has the same role.
+
+In the 1 GiB class the complete 32 KiB shader record is copied into allocation 17 at offset 0x10000 and
+selected by allocation 25's halfword (0x001a) at offset 0x09; the originally wrapped selector value (0x0048)
+page-faulted and must not be reused. The 48 KiB binding metadata is copied from allocation 28 into allocation 17 and
+selected by allocation 23's halfword (0x002c) at offset 0x06. The executor rewrites the selected low copy of the shader
+record for each stage; writing the original high record after the copy does not change the program that runs
+(measured; MM~\mm{25.210.3}).
+
+\section{Submit record and IOGPU call}\label{sec:submit-record-call}
+
+The Submit record's base layout is 48 bytes; Metal's observed records are 64 bytes, one per command buffer
+(\cref{tab:submit-record}; static and observed; trials, "Submission transport and record").
+
+\begin{xltabular}{\linewidth}{@{}lX@{}}
+\caption{Fields of the Submit record by byte offset.}\label{tab:submit-record}\\
+\toprule
+Offset & Field \\
+\midrule
+\endfirsthead
+\tablecontinued{2}
+\toprule
+Offset & Field \\
+\midrule
+\endhead
+0x00, u32 & shared-memory ID of the kernel page \\*
+0x04, u32 & shared-memory ID of the segment page \\*
+0x08, u32 & optional sideband shared-memory ID \\*
+0x10, u64 & scheduled callback block \\*
+0x18, u64 & completed callback block \\*
+0x20, u32 & optional debug shared-memory ID \\*
+0x28, u64 & declared by the framework's metadata; meaning not
+established \\*
+0x30 on & possible driver extension; kept uninterpreted \\*
+\bottomrule
+\end{xltabular}
+
+The runner must also meet these conditions (measured; MM~\mm{25.210.6}):
+
+\begin{itemize}
+\item \code{IOGPUDeviceGetNextGlobalTraceID} must return consecutive IDs for the trace-ID words in the command pages.
+\item The coordination word at offset 0x24 of shared region 0 must hold the fire value 0x800000f0. The staged value 0xf0 was
+  rejected.
+\item Exactly one scheduled and one completed callback are required, each a fresh \code{Block\_copy}. Reusing blocks crashed the
+  CPU notification dispatcher; the crash is in host code and says nothing about the GPU.
+\end{itemize}
+
+The call reaches the kernel in one of two ways (static; trials, "Submission transport and record"):
+
+\begin{itemize}
+\item A one-record Submit calls \code{IOConnectTrap4}: a kernel trap with trap index 0, the queue ID, the record size, the record
+  pointer and an output pointer. The Metal reference runs observed exactly this, with count 1 and stride 64.
+\item A multi-record Submit calls \code{IOConnectCallMethod} with selector 0x1d, passing the contiguous record array.
+\end{itemize}
+
+\emph{Correction:} MM~\mm{25.143} and README row 6a describe a Submit with no per-dispatch kernel call (shared-memory writes
+only, a candidate store at Submit+0x11c). The static resolution shows each Submit enters the kernel through the trap
+or the method call above; the store at Submit+0x11c is an output-argument write (\cref{app:a}).
+
+\emph{Open: what consumes the fire value.} In a Metal process, a control that never set the ready bit still executed
+(MM~\mm{25.143}). In the pure process, the staged value 0xf0 was rejected and only 0x800000f0 works (MM~\mm{25.210.6}). The two
+observations come from different paths and do not settle what consumes the word. \emph{Safe assumption:} a pure process
+writes 0x800000f0 before Submit. \emph{Not safe:} treating that write as the mechanism that starts the GPU.
+
+\section{Completion and callback ownership}\label{sec:completion-callbacks-their}
+
+\begin{itemize}
+\item Completion arrives as a notification. \code{IOGPUNotificationQueueDispatchAvailableCompletionNotifications} dequeues
+  40-byte notifications (\code{IODataQueueDequeue}) and invokes the referenced callback block. In the Metal reference runs,
+  two notifications per submission carried, as their first 64-bit values, exactly the record's scheduled and completed
+  callback pointers, in that order (observed; trials, "Submission transport and record").
+\item In the MiniLM FFN block, a warm request spends 2.385~ms from Submit to the completed-callback entry and 0.0495~ms
+  from callback entry to the waiter's return (measured; MM~\mm{25.210.5}). The first interval mixes GPU
+  execution, driver work and completion delivery and is not GPU time.
+\item Callback ownership was observed on macOS 26.6.2 (MM~\mm{25.210.9a}). On the successful count-one path, each of six observed callback
+  blocks was invoked, returned, released by the notification dispatcher, and freed through \code{\_Block\_release}. No caller
+  release occurred, and no block accumulated. \emph{Policy this supports:} allocate fresh copied blocks per Submit, hand them
+  to IOGPU, and neither release nor reuse them. \emph{Not known:} ownership on failure, timeout, or queue teardown with
+  pending callbacks, and behaviour on other OS versions.
+\end{itemize}
+
+\section{Multi-record Submits and dependent dispatches}\label{sec:several-records-per}
+
+\begin{itemize}
+\item Several records in one Submit execute. Count-two and count-three Submits ran distinct programs and bindings into
+  separate outputs, and later trials reached seven separately bound records, the seventh predicted without a Metal
+  capture (measured; trials, "Two command records in one pure Submit" through "Seventh record predicted").
+\item Dependent stages, as the resident runtime runs them, are consecutive count-one Submits: 7 for the MiniLM FFN, 916
+  for one Qwen decode token (measured; MM~\mm{25.210.3}, MM~\mm{25.210.5}). A two-stage dependent pipeline, with and without a
+  program switch, passed in the trials (measured; trials, "Dependent two-stage pure GPU pipeline").
+\item \emph{Not built:} many dependent dispatches in one Submit with explicit barriers between them. Metal's serial-barrier word
+  and fence semantics are decoded (README row 10), but the runtime does not use them.
+\end{itemize}
+
+\section{Faults, hangs and recovery}\label{sec:faults-hangs-recovery}
+
+\begin{itemize}
+\item Malformed kernels have hung the GPU on this machine. Killing the host process does not cancel a submitted command
+  buffer; recovery from that hang was a reboot (rule 35 of MM~\mm{17}).
+\item The GPU's recovery counter and event reports are observable before and after a run. The resident runtime refuses a run
+  if either changes (MM~\mm{25.210.9}).
+\item The runtime bounds the wait for each Submit's callbacks to five seconds (MM~\mm{25.210.6}).
+\item \emph{Not available:} detecting or recovering from a hang beyond that bound, and resetting the GPU (README row 11).
+\end{itemize}
+
+\section{Scope of the measured graphs}\label{sec:measured-graphs-generalizes}
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=1.27\hsize}X>{\hsize=0.73\hsize}X@{}}
+\caption{Measured resource graphs by size, with the work each carries and its source.}\label{tab:measured-graphs}\\
+\toprule
+Graph & Used for & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Graph & Used for & Source \\
+\midrule
+\endhead
+3 MiB & the MiniLM FFN and attention blocks & MM~\mm{25.210.4}, MM~\mm{25.210.6} \\*
+4 MiB & the connected layer (allocation 20 enlarged to 4 MiB, allocation 21
+moved) & MM~\mm{25.210.6} \\*
+128 MiB & the MiniLM encoder & MM~\mm{25.210.3} \\*
+1 GiB & the Qwen2.5-0.5B decoder & MM~\mm{25.210.3} \\*
+\bottomrule
+\end{xltabular}
+
+Outside these graphs the program-counter placement, the grid and threadgroup words, up to three buffer pointers, the
+two state classes, the record layout, and the address-coordinate halfwords within the tested range still apply. Not
+yet carried over:
+
+\begin{itemize}
+\item arbitrary graph allocation and publication (the runtime recovers only the request and page sets of the measured
+  graphs, and refuses every other size);
+\item a fourth buffer pointer (earlier controls wrote 0 of 32 outputs);
+\item new shapes, data types, simdgroup counts, OS versions or GPU generations;
+\item GPU-only timestamps.
+\end{itemize}
+
+\textbf{Evidence.} MM~\mm{0.15}, MM~\mm{25.143} (with 25.143.N and 25.143.O), MM~\mm{25.147}, MM~\mm{25.150}, MM~\mm{25.210} (25.210.3, 25.210.5,
+25.210.6, 25.210.9, 25.210.9a); \code{docs/g17-first-dispatch-trials.md}; README rows 1–16.

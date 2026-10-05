@@ -1,0 +1,203 @@
+[
+ {
+  "condition": "baseline",
+  "section": null,
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": true,
+  "len": null,
+  "sha": null,
+  "status": 0,
+  "A400": 1012,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "coord",
+  "section": null,
+  "coord": [
+   2,
+   3
+  ],
+  "want": 3009,
+  "dispatched": true,
+  "len": null,
+  "sha": null,
+  "status": 0,
+  "A400": 3009,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "stats-zero",
+  "section": "__GPU_STATS_MD",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": true,
+  "len": 96,
+  "sha": "2ea9ab9198d16380",
+  "status": 0,
+  "A400": 1012,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "stats-ff",
+  "section": "__GPU_STATS_MD",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": true,
+  "len": 96,
+  "sha": "ce65609cc564ce3d",
+  "status": 0,
+  "A400": 1012,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "stats-foreign",
+  "section": "__GPU_STATS_MD",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": true,
+  "len": 96,
+  "sha": "8fcefac8fb601746",
+  "status": 0,
+  "A400": 1012,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "stats-absent",
+  "section": "__GPU_STATS_MD",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": true,
+  "len": 0,
+  "sha": "e3b0c44298fc1c14",
+  "status": 0,
+  "A400": 1012,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "arch-zero",
+  "section": "__GPU_ARCH_LD_MD",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "arch-ff",
+  "section": "__GPU_ARCH_LD_MD",
+  "signal": 10,
+  "outcome": "LOADER BUS ERROR",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "arch-foreign",
+  "section": "__GPU_ARCH_LD_MD",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": true,
+  "len": 32,
+  "sha": "845ce41fbf1f29a6",
+  "status": 0,
+  "A400": 1012,
+  "outcome": "CORRECT"
+ },
+ {
+  "condition": "arch-absent",
+  "section": "__GPU_ARCH_LD_MD",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "ldmd-zero",
+  "section": "__GPU_LD_MD",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "ldmd-ff",
+  "section": "__GPU_LD_MD",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "_ZZN3AGX13DynamicLoaderINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE8LinkInfo10initializeERK20AGCDeseri"
+ },
+ {
+  "condition": "ldmd-foreign",
+  "section": "__GPU_LD_MD",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": false,
+  "len": 224,
+  "sha": "18af7b3e5854d9a9",
+  "outcome": "PIPELINE BUILT (not run)"
+ },
+ {
+  "condition": "ldmd-absent",
+  "section": "__GPU_LD_MD",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "md-zero",
+  "section": "__GPU_METADATA",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "md-ff",
+  "section": "__GPU_METADATA",
+  "signal": 11,
+  "outcome": "LOADER SEGFAULT",
+  "error": "___ZN3AGX23UserCommonShaderFactoryINS_6HAL3008EncodersENS1_7ClassesENS1_10ObjClassesEE27createComputeProgramVa"
+ },
+ {
+  "condition": "md-foreign",
+  "section": "__GPU_METADATA",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": false,
+  "len": 412,
+  "sha": "4cc9ccc7a4c1b8e3",
+  "outcome": "PIPELINE BUILT (not run)"
+ },
+ {
+  "condition": "md-absent",
+  "section": "__GPU_METADATA",
+  "coord": [
+   5,
+   1
+  ],
+  "want": 1012,
+  "dispatched": false,
+  "len": 0,
+  "sha": "e3b0c44298fc1c14",
+  "outcome": "REFUSED (pipeline)",
+  "error": "pipeline: Error Domain=AGXMetalG17X Code=3 \"Internal error during function compilation\" UserInfo={NSLocalizedDescription"
+ }
+]

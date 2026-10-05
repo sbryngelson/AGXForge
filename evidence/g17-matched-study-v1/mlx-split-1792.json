@@ -1,0 +1,9 @@
+{
+ "section": "MM 25.211",
+ "note": "1,792-token prompt, the first token where mlx-lm generate_step differs from ours (and the twins): mlx-lm's own full-prompt forward (model(prompt + 39 tokens), native dtype) ranks our token higher by one bf16 step",
+ "index": 39,
+ "ours_tok": 410,
+ "mlx_tok": 395,
+ "logit_ours_tok": 16.125,
+ "logit_mlx_tok": 16.0
+}

@@ -1,0 +1,1596 @@
+[
+ {
+  "id": "at.10370.10.0_5.0",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "8a0023084300840a8a8a"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.10370.10.0_5.1",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0a0023084300840a8a8a"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.10370.10.0_5.2",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "8a0023084300840a8a8a"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.10370.10.3_5.0",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0a00a3b24300840a8a8a"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.10370.10.3_5.1",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0a00a3a24300840a8a8a"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.10370.10.3_5.2",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0a00a3b04300840a8a8a"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.11364.10.0_3.0",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "42010f82820414022080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   0,
+   2,
+   0,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   2
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11364.10.0_3.1",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "82010f82820414022080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   16,
+   32,
+   0,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   6
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11364.10.0_3.2",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "c2010f82820414022080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   0,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   10
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11364.10.0_6.0",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "42010f82820414022080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   0,
+   2,
+   0,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   2
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11364.10.0_6.1",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "82010f82820414022080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   16,
+   32,
+   0,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   6
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11364.10.0_6.2",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "c2010f82820414022080"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   0,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   10
+  ],
+  "written": []
+ },
+ {
+  "id": "at.9832.16.3_5.0",
+  "op": 9832,
+  "length": 16,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 9832,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "2200052a2300a0020c81a06020c60000"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    9832,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   32
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.9832.16.3_5.1",
+  "op": 9832,
+  "length": 16,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 9832,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "2200054a2300a0020c81a06020c60000"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    9832,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   32
+  ],
+  "identities": [
+   0,
+   2,
+   0,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   2,
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.9832.16.3_5.2",
+  "op": 9832,
+  "length": 16,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 9832,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "2200056a2300a0020c81a06020c60000"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    9832,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   32
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   0,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   4,
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.9832.8.7_9.0",
+  "op": 9832,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 9832,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0282350005820200"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    9832,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.11385.10.7_9.0",
+  "op": 11385,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11385,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "22052f88820805008000"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11385,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 0 read back as 0x00000004, which is neither its identity 1<<0 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.11385.10.7_9.1",
+  "op": 11385,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11385,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "22052f88821005008000"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11385,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 0 read back as 0x00000040, which is neither its identity 1<<0 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.11385.10.7_9.2",
+  "op": 11385,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11385,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "22052f88821805008000"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11385,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 0 read back as 0x00000400, which is neither its identity 1<<0 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.11463.8.0_8.0",
+  "op": 11463,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11463,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "428f254b21810402"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11463,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 2 read back as 0x00000001, which is neither its identity 1<<2 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.11463.8.0_8.1",
+  "op": 11463,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11463,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "828f254b21810402"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11463,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 6 read back as 0x00000001, which is neither its identity 1<<6 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.11463.8.0_8.2",
+  "op": 11463,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11463,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "c28f254b21810402"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11463,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 10 read back as 0x00000001, which is neither its identity 1<<10 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.11507.8.0_7.0",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "420c1d0e810d0d00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   0,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   2,
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11507.8.0_7.1",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "820c1d0e810d0d00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   0,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5,
+   6
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11507.8.0_7.2",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "c20c1d0e810d0d00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   0,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5,
+   10
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11507.8.3_7.0",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "02081d0e810d0d00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11507.8.3_7.1",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "02101d0e810d0d00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.11507.8.3_7.2",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "02181d0e810d0d00"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "at.13588.4.0_2.0",
+  "op": 13588,
+  "length": 4,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 13588,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "43001c08"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13588,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "at.13588.4.0_2.1",
+  "op": 13588,
+  "length": 4,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 13588,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "83001c08"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13588,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 6 read back as 0x00000004, which is neither its identity 1<<6 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "at.13588.4.0_2.2",
+  "op": 13588,
+  "length": 4,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 13588,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "c3001c08"
+   ],
+   "from_template": true,
+   "opcodes": [
+    684,
+    11842,
+    13588,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 10 read back as 0x00000004, which is neither its identity 1<<10 nor zero; the program did something this cannot describe"
+ }
+]

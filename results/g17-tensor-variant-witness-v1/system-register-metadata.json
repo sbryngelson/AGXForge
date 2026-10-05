@@ -1,0 +1,184 @@
+{
+  "status": "compiler_emission_measurement",
+  "gpu_dispatched": false,
+  "cases": {
+    "tensor-common": {
+      "object_sha256": "c79433216cec09df2092065b38008ff96793f8710ddd075cf3fc7881c2bff44e",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-b-stride": {
+      "object_sha256": "233e20fc94be9ea43e44e530d220e3d7dff1de77a9712c03c93d7e00248bc753",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-c-stride-48": {
+      "object_sha256": "c7b8816059f1f1102e501b0a0d2c173a828506b75874ad9d2423b3314a589d5c",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-leading-buf": {
+      "object_sha256": "516f3ead61b7e7f2a8f92b671f15562316c2c509045912db974320f063a8ad02",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-a-stride-80": {
+      "object_sha256": "86df3e694c91e52ca25509818f2c738ff91eed32fb3cc278d80e45513a447838",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-a-stride-96": {
+      "object_sha256": "4825667112c70556fd7d05c27562a024d79784b9242814d8f79284c56e0f5d35",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-a-stride-128": {
+      "object_sha256": "81e9c9b3d1547e5db808eeaf60bf97acc4f6f576fae4ad46171abdd71d459411",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    },
+    "tensor-a-stride-256": {
+      "object_sha256": "cb8161217a5523904af5ab27464d70b5cb3a598a02f3047fd5f1f33ec0dd3a75",
+      "reads": [
+        {
+          "offset": 0,
+          "bytes": "34821006",
+          "encoded_selector": 130,
+          "decoder_operands": [
+            "reg:428",
+            "imm:1048576",
+            "reg:45",
+            "imm:0"
+          ]
+        }
+      ],
+      "abi_system_registers": [
+        130
+      ],
+      "metadata_slot29": [
+        52
+      ]
+    }
+  },
+  "conclusion": "Encoded selector 130 accompanies metadata entry 52 in these objects. Decoder reg:45 is a different numbering domain.",
+  "limits": "Observed singleton SR sets only; no multi-register ordering, general arithmetic mapping, or tensor hardware execution is established."
+}

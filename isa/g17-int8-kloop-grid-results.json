@@ -1,0 +1,652 @@
+{
+ "arms": [
+  {
+   "emu_secs": 12.8,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00010508333798497915,
+    9.762501576915383e-05
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    64,
+    1,
+    1
+   ],
+   "name": "tail_grid_n2",
+   "output_sha256": [
+    "0793766c4b2976189bb5650ae377c5b70d09af6b513d0c4d80835c83a3237b4d",
+    "0793766c4b2976189bb5650ae377c5b70d09af6b513d0c4d80835c83a3237b4d"
+   ],
+   "program": "ed4be0b8eeed9c4a",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 256,
+    "M": 128,
+    "N": 128,
+    "grid_n": 2
+   },
+   "tg": [
+    32,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 4.9,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0003008333151228726,
+    0.00029983336571604013
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    64,
+    1,
+    1
+   ],
+   "name": "kg_small",
+   "output_sha256": [
+    "fe9e60ae1279fe60e3497321034f1591659e18dc933a9fec0ae6ea299930bd1a",
+    "fe9e60ae1279fe60e3497321034f1591659e18dc933a9fec0ae6ea299930bd1a"
+   ],
+   "program": "9b451b5347723cbd",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 512,
+    "M": 128,
+    "N": 256,
+    "grid_n": 2,
+    "kloop": true
+   },
+   "tg": [
+    32,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 4.6,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00042937503894791007,
+    0.00042925000889226794
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    512,
+    1,
+    1
+   ],
+   "name": "kg_sg4",
+   "output_sha256": [
+    "7cf5d65d3a21a185dc439d3fb279266d1ac35eac1bbd4935c981b02f617d6c71",
+    "7cf5d65d3a21a185dc439d3fb279266d1ac35eac1bbd4935c981b02f617d6c71"
+   ],
+   "program": "fcee19342e11111e",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 1024,
+    "M": 256,
+    "N": 512,
+    "grid_n": 4,
+    "kloop": true,
+    "simdgroups": 4
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 9.2,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00027041666908189654,
+    0.0002651250106282532
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    8192,
+    1,
+    1
+   ],
+   "name": "kg_prefill",
+   "output_sha256": [
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b",
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b"
+   ],
+   "program": "f1064e09c16010af",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 64,
+    "kloop": true,
+    "simdgroups": 4
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 41.3,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0012137916637584567,
+    0.001202416664455086
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    8192,
+    1,
+    1
+   ],
+   "name": "kg_ffn_up",
+   "output_sha256": [
+    "0fb044c14422b52eac5c890d5442937b0619f335d92865abdebd94a21b5be744",
+    "0fb044c14422b52eac5c890d5442937b0619f335d92865abdebd94a21b5be744"
+   ],
+   "program": "c542f261f82ccc22",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 8192,
+    "grid_n": 64,
+    "kloop": true,
+    "simdgroups": 4
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 13.0,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00024087500059977174,
+    0.00024154165294021368
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    8192,
+    1,
+    1
+   ],
+   "name": "kg_u2",
+   "output_sha256": [
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b",
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b"
+   ],
+   "program": "e5049a2724a3aa83",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 64,
+    "kloop": true,
+    "kloop_unroll": 2,
+    "simdgroups": 4
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 11.7,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00024191668489947915,
+    0.000241041649132967
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    16384,
+    1,
+    1
+   ],
+   "name": "kg_u4",
+   "output_sha256": [
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b",
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b"
+   ],
+   "program": "5961009cbd55d471",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 128,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 4
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 42.9,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0010883749928325415,
+    0.0011417499626986682
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    16384,
+    1,
+    1
+   ],
+   "name": "kg_down_u4",
+   "output_sha256": [
+    "cd42bf6dc944b74be132a5930f61c4eee22cb90bb8d1989f0b6be7ee820a8481",
+    "cd42bf6dc944b74be132a5930f61c4eee22cb90bb8d1989f0b6be7ee820a8481"
+   ],
+   "program": "03ed1ae4cdd55d76",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 8192,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 128,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 4
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 7.9,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00020599999697878957,
+    0.0002221250324510038
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    16384,
+    1,
+    1
+   ],
+   "name": "wo_int8",
+   "output_sha256": [
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b",
+    "33d8835f90d94089139f3fe87d53c94048c64dbdcb3128895d18406be0b13e8b"
+   ],
+   "program": "63443c058d136878",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 64,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 2,
+    "threadgroups": 4
+   },
+   "tg": [
+    64,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 2.9,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00040179170900955796,
+    0.000358375022187829
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    16384,
+    1,
+    1
+   ],
+   "name": "wo_fp16",
+   "output_sha256": [
+    "04d416be7d2aae6af0547fbe58000f0b5252f087709b4afbf4477af23999d200",
+    "04d416be7d2aae6af0547fbe58000f0b5252f087709b4afbf4477af23999d200"
+   ],
+   "program": "cc66e0282a628744",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 2048,
+    "a": "half",
+    "b": "half",
+    "grid_n": 64,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 2,
+    "threadgroups": 4
+   },
+   "tg": [
+    64,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 13.5,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.00040879170410335064,
+    0.00040808337507769465
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    32768,
+    1,
+    1
+   ],
+   "name": "qkv_int8",
+   "output_sha256": [
+    "1d561877879560254889acd4874889705d9fc291a67f1c97858887a2ce606ce6",
+    "1d561877879560254889acd4874889705d9fc291a67f1c97858887a2ce606ce6"
+   ],
+   "program": "f81ae88b3566c5a2",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 4096,
+    "grid_n": 128,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 4,
+    "threadgroups": 2
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 5.7,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0007026667008176446,
+    0.0007027083192951977
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    32768,
+    1,
+    1
+   ],
+   "name": "qkv_fp16",
+   "output_sha256": [
+    "c3849c1d77d239f4fc6953071516ba17e923980d17bf57eaef2e98b616db6e0c",
+    "c3849c1d77d239f4fc6953071516ba17e923980d17bf57eaef2e98b616db6e0c"
+   ],
+   "program": "7227903e61c6d6cb",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 4096,
+    "a": "half",
+    "b": "half",
+    "grid_n": 128,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 4,
+    "threadgroups": 2
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 32.2,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0009408749756403267,
+    0.0008495833026245236
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    16384,
+    1,
+    1
+   ],
+   "name": "w2_int8",
+   "output_sha256": [
+    "cd42bf6dc944b74be132a5930f61c4eee22cb90bb8d1989f0b6be7ee820a8481",
+    "cd42bf6dc944b74be132a5930f61c4eee22cb90bb8d1989f0b6be7ee820a8481"
+   ],
+   "program": "82e9f8f82a2757b2",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 8192,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 64,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 2,
+    "threadgroups": 4
+   },
+   "tg": [
+    64,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 8.4,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.001712083350867033,
+    0.001438374980352819
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    16384,
+    1,
+    1
+   ],
+   "name": "w2_fp16",
+   "output_sha256": [
+    "01478cbfa26d7d4d8aa547750dd56b06b3cf141203b2a9b180b8d4f3a189b2c5",
+    "01478cbfa26d7d4d8aa547750dd56b06b3cf141203b2a9b180b8d4f3a189b2c5"
+   ],
+   "program": "559246c7aaf5d388",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 8192,
+    "M": 256,
+    "N": 2048,
+    "a": "half",
+    "b": "half",
+    "grid_n": 64,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 2,
+    "threadgroups": 4
+   },
+   "tg": [
+    64,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 30.6,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0007918333285488188,
+    0.0007953749736770988
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    32768,
+    1,
+    1
+   ],
+   "name": "w1_int8",
+   "output_sha256": [
+    "0fb044c14422b52eac5c890d5442937b0619f335d92865abdebd94a21b5be744",
+    "0fb044c14422b52eac5c890d5442937b0619f335d92865abdebd94a21b5be744"
+   ],
+   "program": "0a444b1d684f083e",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 8192,
+    "grid_n": 256,
+    "kloop": true,
+    "kloop_unroll": 2,
+    "simdgroups": 4,
+    "threadgroups": 1
+   },
+   "tg": [
+    128,
+    1,
+    1
+   ]
+  },
+  {
+   "emu_secs": 9.8,
+   "emu_vs_ref": 0,
+   "gpu_seconds": [
+    0.0013324999599717557,
+    0.001332125044427812
+   ],
+   "gpu_status": "passed",
+   "gpu_vs_emu": 0,
+   "gpu_vs_ref": 0,
+   "grid": [
+    65536,
+    1,
+    1
+   ],
+   "name": "w1_fp16_sg8",
+   "output_sha256": [
+    "174d76073c872cc23c19bdf9fef5a02673d1c1fd7e3c00a26b60c01512160d0d",
+    "174d76073c872cc23c19bdf9fef5a02673d1c1fd7e3c00a26b60c01512160d0d"
+   ],
+   "program": "c4947dbbf8854d16",
+   "receipt_status": "passed",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 8192,
+    "a": "half",
+    "b": "half",
+    "grid_n": 256,
+    "kloop": true,
+    "kloop_unroll": 4,
+    "simdgroups": 8,
+    "threadgroups": 1
+   },
+   "tg": [
+    256,
+    1,
+    1
+   ]
+  }
+ ],
+ "fp16_twin": {
+  "gpu_seconds": [
+   0.0004136249772273004,
+   0.0004103333340026438
+  ],
+  "name": "fp16_prefill",
+  "spec": {
+   "K": 2048,
+   "M": 256,
+   "N": 2048,
+   "a": "half",
+   "grid_n": 64,
+   "kloop": true,
+   "simdgroups": 4
+  },
+  "status": "passed"
+ },
+ "generator": "the int8 K-loop + grid widening (MM 25.145.4): T.author_generic under the widened int8_split rule, emulated by g17emu, run on hardware by g17tensorcommonruntime.run (2 queries), each compared bit for bit with generic_reference and with the emulator",
+ "refused": {
+  "kg_ffn_down": {
+   "reason": "tlower: kloop is implemented for 2..256 slices (K 8192 is 512); with kloop_unroll 4 (grid_n 128, sg 4) it fits: kg_down_u4",
+   "spec": {
+    "K": 8192,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 64,
+    "kloop": true,
+    "simdgroups": 4
+   }
+  },
+  "unroll_register_group": {
+   "reason": "tlower: kloop_unroll 4 needs every tile in one register group (8 tiles, 6 per group)",
+   "spec": {
+    "K": 2048,
+    "M": 256,
+    "N": 2048,
+    "grid_n": 64,
+    "kloop_unroll": 4,
+    "simdgroups": 4
+   }
+  },
+  "w1_int8_rowgrid_gn256": {
+   "reason": "the launch is threadgroups x grid_n x split_k <= 256: 2 row groups at grid_n 256 is 512"
+  },
+  "w1_int8_sg8": {
+   "reason": "simdgroups 8 with int8 is two widening classes (simdgroups_8 + int8_split), refused by design"
+  }
+ }
+}

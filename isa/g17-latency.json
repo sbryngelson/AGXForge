@@ -1,0 +1,1363 @@
+{
+ "chains": 8,
+ "generator": "tools/g17latency.py --run --write",
+ "interpretation": {
+  "issue_relative_to_iadd": {
+   "fadd": 0.876,
+   "ffma": 0.764,
+   "fmax": 0.926,
+   "fmul": 0.764,
+   "iadd": 1.0,
+   "iadd_imm": 0.948,
+   "icmp": 1.03,
+   "imul": 1.95,
+   "shl_imm": 1.954,
+   "xor_imm": 1.015
+  },
+  "latency_measured": false,
+  "where_latency_is": "loop.interpretation (a hot instruction cache)",
+  "why_not": "one-simdgroup dependent and independent chains cost the same within noise and both scale with instruction bytes: fetch-bound, so the dependence is hidden"
+ },
+ "issue_threads": 262144,
+ "loop": {
+  "bodies": [
+   8,
+   16,
+   32,
+   64
+  ],
+  "chains": 8,
+  "generator": "tools/g17latency.py --loop --run --write",
+  "interpretation": {
+   "issue_interval_ns": 3.105,
+   "latency_measured": true,
+   "load": "a cached device load (op12682, every lane one address) in a pointer chase whose loads wait on their predecessor's slot: its latency is the load-to-use time; its issue arm is the same chain WITHOUT waits (arms_for explains why a load has no independent arm)",
+   "per_op": {
+    "addsat": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.04,
+     "issue_ns": 3.23,
+     "latency_intervals": 1.94,
+     "latency_ns": 6.033
+    },
+    "exp2": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.94,
+     "issue_ns": 6.039,
+     "latency_intervals": 4.79,
+     "latency_ns": 14.883
+    },
+    "fadd": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.0,
+     "issue_ns": 3.106,
+     "latency_intervals": 1.95,
+     "latency_ns": 6.062
+    },
+    "ffma": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.06,
+     "issue_ns": 3.296,
+     "latency_intervals": 1.97,
+     "latency_ns": 6.111
+    },
+    "fmax": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.02,
+     "issue_ns": 3.165,
+     "latency_intervals": 1.98,
+     "latency_ns": 6.139
+    },
+    "fmul": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.02,
+     "issue_ns": 3.18,
+     "latency_intervals": 1.97,
+     "latency_ns": 6.129
+    },
+    "fsat": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.03,
+     "issue_ns": 3.213,
+     "latency_intervals": 3.29,
+     "latency_ns": 10.206
+    },
+    "iadd": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.0,
+     "issue_ns": 3.105,
+     "latency_intervals": 1.95,
+     "latency_ns": 6.048
+    },
+    "iadd_imm": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.0,
+     "issue_ns": 3.11,
+     "latency_intervals": 1.96,
+     "latency_ns": 6.076
+    },
+    "icmp": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 0.98,
+     "issue_ns": 3.034,
+     "latency_intervals": 1.95,
+     "latency_ns": 6.044
+    },
+    "imul": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.96,
+     "issue_ns": 6.09,
+     "latency_intervals": 4.81,
+     "latency_ns": 14.939
+    },
+    "load": {
+     "issue_arm": "loop_unwaited",
+     "issue_intervals": 3.01,
+     "issue_ns": 9.347,
+     "latency_intervals": null,
+     "latency_ns": null
+    },
+    "log2": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.95,
+     "issue_ns": 6.062,
+     "latency_intervals": 4.8,
+     "latency_ns": 14.896
+    },
+    "msb": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.95,
+     "issue_ns": 6.055,
+     "latency_intervals": 4.8,
+     "latency_ns": 14.9
+    },
+    "recip": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.94,
+     "issue_ns": 6.031,
+     "latency_intervals": 4.79,
+     "latency_ns": 14.875
+    },
+    "reverse": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.95,
+     "issue_ns": 6.062,
+     "latency_intervals": 4.79,
+     "latency_ns": 14.882
+    },
+    "rint": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.95,
+     "issue_ns": 6.052,
+     "latency_intervals": 5.05,
+     "latency_ns": 15.677
+    },
+    "rsqrt": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.94,
+     "issue_ns": 6.031,
+     "latency_intervals": 4.79,
+     "latency_ns": 14.877
+    },
+    "sar_imm": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.99,
+     "issue_ns": 6.173,
+     "latency_intervals": 4.8,
+     "latency_ns": 14.901
+    },
+    "shl_imm": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.97,
+     "issue_ns": 6.102,
+     "latency_intervals": 4.81,
+     "latency_ns": 14.93
+    },
+    "subsat": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 1.04,
+     "issue_ns": 3.235,
+     "latency_intervals": 1.95,
+     "latency_ns": 6.051
+    },
+    "xor_imm": {
+     "issue_arm": "loop_indep",
+     "issue_intervals": 0.97,
+     "issue_ns": 3.015,
+     "latency_intervals": 1.94,
+     "latency_ns": 6.029
+    }
+   }
+  },
+  "rows": {
+   "addsat": {
+    "exposed_ns": 2.803372096779007,
+    "loop_dep": {
+     "intercept_us": 14.030776978672847,
+     "ns_per_op": 6.033107895390181,
+     "seconds": [
+      2.0249979570508003e-05,
+      2.624996704980731e-05,
+      3.887503407895565e-05,
+      6.34166644886136e-05
+     ],
+     "worst_residual_us": 0.13661489862462595
+    },
+    "loop_indep": {
+     "intercept_us": 14.514477579328029,
+     "ns_per_op": 3.229735798611174,
+     "seconds": [
+      1.791666727513075e-05,
+      2.1041661966592073e-05,
+      2.7708301786333323e-05,
+      4.1000021155923605e-05
+     ],
+     "worst_residual_us": 0.09494023802487842
+    },
+    "opcode": 10239,
+    "prediction": {
+     "holds": true,
+     "measured_rounded": [
+      2,
+      1
+     ],
+     "predicted": [
+      2,
+      1
+     ]
+    }
+   },
+   "exp2": {
+    "exposed_ns": 8.84426358622833,
+    "loop_dep": {
+     "intercept_us": 12.880434160647184,
+     "ns_per_op": 14.883021717453275,
+     "seconds": [
+      2.804165706038475e-05,
+      4.33750101365149e-05,
+      7.395830471068621e-05,
+      0.00013474997831508517
+     ],
+     "worst_residual_us": 0.11701359535040332
+    },
+    "loop_indep": {
+     "intercept_us": 14.050742206366166,
+     "ns_per_op": 6.038758131224946,
+     "seconds": [
+      2.0291656255722046e-05,
+      2.6291701942682266e-05,
+      3.887497587129474e-05,
+      6.349995965138078e-05
+     ],
+     "worst_residual_us": 0.12641691643258918
+    },
+    "opcode": 1272
+   },
+   "fadd": {
+    "exposed_ns": 2.956230970164103,
+    "loop_dep": {
+     "intercept_us": 13.898562073059704,
+     "ns_per_op": 6.06211978779554,
+     "seconds": [
+      2.012500772252679e-05,
+      2.6250025257468224e-05,
+      3.8791680708527565e-05,
+      6.354169454425573e-05
+     ],
+     "worst_residual_us": 0.06375814099674805
+    },
+    "loop_indep": {
+     "intercept_us": 14.8441961399563,
+     "ns_per_op": 3.105888817631437,
+     "seconds": [
+      1.7666665371507406e-05,
+      2.1166633814573288e-05,
+      2.824998227879405e-05,
+      3.999995533376932e-05
+     ],
+     "worst_residual_us": 0.6840655418193834
+    },
+    "opcode": 998
+   },
+   "ffma": {
+    "exposed_ns": 2.8146888800382954,
+    "loop_dep": {
+     "intercept_us": 14.398563349538524,
+     "ns_per_op": 6.110941364528591,
+     "seconds": [
+      2.054165815934539e-05,
+      2.7166679501533508e-05,
+      3.925000783056021e-05,
+      6.449996726587415e-05
+     ],
+     "worst_residual_us": 0.25290823744043245
+    },
+    "loop_indep": {
+     "intercept_us": 14.384054457363874,
+     "ns_per_op": 3.2962524844902954,
+     "seconds": [
+      1.7666665371507406e-05,
+      2.1249987185001373e-05,
+      2.7875008527189493e-05,
+      4.137499490752816e-05
+     ],
+     "worst_residual_us": 0.11520763940137466
+    },
+    "opcode": 2190
+   },
+   "fmax": {
+    "exposed_ns": 2.9746220404732684,
+    "loop_dep": {
+     "intercept_us": 13.706540061241906,
+     "ns_per_op": 6.139247409958878,
+     "seconds": [
+      2.012500772252679e-05,
+      2.6166671887040138e-05,
+      3.8791680708527565e-05,
+      6.40416401438415e-05
+     ],
+     "worst_residual_us": 0.13187831348699308
+    },
+    "loop_indep": {
+     "intercept_us": 14.514485171631627,
+     "ns_per_op": 3.1646253694856092,
+     "seconds": [
+      1.7749960534274578e-05,
+      2.112501533702016e-05,
+      2.7291651349514723e-05,
+      4.0499959141016006e-05
+     ],
+     "worst_residual_us": 0.18513933552995993
+    },
+    "opcode": 9700
+   },
+   "fmul": {
+    "exposed_ns": 2.948445893233166,
+    "loop_dep": {
+     "intercept_us": 13.7680908665061,
+     "ns_per_op": 6.128641416580649,
+     "seconds": [
+      2.012500772252679e-05,
+      2.624996704980731e-05,
+      3.8833299186080694e-05,
+      6.400002166628838e-05
+     ],
+     "worst_residual_us": 0.08118804544210366
+    },
+    "loop_indep": {
+     "intercept_us": 14.454695780802032,
+     "ns_per_op": 3.180195523347483,
+     "seconds": [
+      1.7624988686293364e-05,
+      2.1166633814573288e-05,
+      2.7333328034728765e-05,
+      4.054163582623005e-05
+     ],
+     "worst_residual_us": 0.19889760195560985
+    },
+    "opcode": 3290
+   },
+   "fsat": {
+    "exposed_ns": 6.992675717692296,
+    "loop_dep": {
+     "intercept_us": 4.851438975690499,
+     "ns_per_op": 10.205783580560187,
+     "seconds": [
+      1.6000005416572094e-05,
+      2.2374966647475958e-05,
+      5.0499977078288794e-05,
+      8.729164255782962e-05
+     ],
+     "worst_residual_us": 3.8456485566237717
+    },
+    "loop_indep": {
+     "intercept_us": 14.547071338671705,
+     "ns_per_op": 3.213107862867891,
+     "seconds": [
+      1.7958285752683878e-05,
+      2.1041661966592073e-05,
+      2.762500662356615e-05,
+      4.091666778549552e-05
+     ],
+     "worst_residual_us": 0.12099196243545333
+    },
+    "opcode": 904
+   },
+   "iadd": {
+    "exposed_ns": 2.9427758857744504,
+    "loop_dep": {
+     "intercept_us": 13.985509133857228,
+     "ns_per_op": 6.04760593294328,
+     "seconds": [
+      2.0249979570508003e-05,
+      2.620834857225418e-05,
+      3.887497587129474e-05,
+      6.349995965138078e-05
+     ],
+     "worst_residual_us": 0.16265751227088301
+    },
+    "loop_indep": {
+     "intercept_us": 14.858710093666678,
+     "ns_per_op": 3.1048300471688295,
+     "seconds": [
+      1.7625046893954277e-05,
+      2.1249987185001373e-05,
+      2.824998227879405e-05,
+      4.0000013541430235e-05
+     ],
+     "worst_residual_us": 0.6738883119238479
+    },
+    "opcode": 10282
+   },
+   "iadd_imm": {
+    "exposed_ns": 2.965791538925892,
+    "loop_dep": {
+     "intercept_us": 13.909403882596802,
+     "ns_per_op": 6.075564986373217,
+     "seconds": [
+      2.0124949514865875e-05,
+      2.6250025257468224e-05,
+      3.895832924172282e-05,
+      6.36249897070229e-05
+     ],
+     "worst_residual_us": 0.1634111749413222
+    },
+    "loop_indep": {
+     "intercept_us": 14.73555027547738,
+     "ns_per_op": 3.1097734474473246,
+     "seconds": [
+      1.7625046893954277e-05,
+      2.112501533702016e-05,
+      2.7958303689956665e-05,
+      3.999995533376932e-05
+     ],
+     "worst_residual_us": 0.4851213737350435
+    },
+    "opcode": 10279
+   },
+   "icmp": {
+    "exposed_ns": 3.010009293021817,
+    "loop_dep": {
+     "intercept_us": 13.978255953153838,
+     "ns_per_op": 6.044075709486725,
+     "seconds": [
+      2.0249979570508003e-05,
+      2.6250025257468224e-05,
+      3.875000402331352e-05,
+      6.350001785904169e-05
+     ],
+     "worst_residual_us": 0.10649774871442617
+    },
+    "loop_indep": {
+     "intercept_us": 14.963764798544023,
+     "ns_per_op": 3.0340664164649076,
+     "seconds": [
+      1.812499249354005e-05,
+      2.120831049978733e-05,
+      2.7250032871961594e-05,
+      3.987498348578811e-05
+     ],
+     "worst_residual_us": 0.1412679684226903
+    },
+    "opcode": 11372
+   },
+   "imul": {
+    "exposed_ns": 8.849213412284605,
+    "loop_dep": {
+     "intercept_us": 12.778990861514345,
+     "ns_per_op": 14.939285827732299,
+     "seconds": [
+      2.8083333745598793e-05,
+      4.33750101365149e-05,
+      7.395836291834712e-05,
+      0.00013516668695956469
+     ],
+     "worst_residual_us": 0.011942693558722852
+    },
+    "loop_indep": {
+     "intercept_us": 14.239117381689343,
+     "ns_per_op": 6.090072415447692,
+     "seconds": [
+      2.033333294093609e-05,
+      2.6999972760677338e-05,
+      3.9000005926936865e-05,
+      6.416667019948363e-05
+     ],
+     "worst_residual_us": 0.2883870721511202
+    },
+    "opcode": 10825
+   },
+   "load": {
+    "exposed_ns": null,
+    "loop_dep": {
+     "intercept_us": 206.17392400036687,
+     "nonlinear": true,
+     "ns_per_op": 36.421176999916185,
+     "seconds": [
+      0.00015204166993498802,
+      0.0002757500042207539,
+      0.0005228749942034483,
+      0.0004334583063609898
+     ],
+     "worst_residual_us": 167.51992921142474
+    },
+    "loop_unwaited": {
+     "intercept_us": 13.367741105511136,
+     "ns_per_op": 9.34705450044535,
+     "seconds": [
+      2.3083295673131943e-05,
+      3.2333366107195616e-05,
+      5.1666691433638334e-05,
+      8.995836833491921e-05
+     ],
+     "worst_residual_us": 0.1771426152275923
+    },
+    "opcode": 12682
+   },
+   "log2": {
+    "exposed_ns": 8.833639798388543,
+    "loop_dep": {
+     "intercept_us": 12.840551789849997,
+     "ns_per_op": 14.896113498252816,
+     "seconds": [
+      2.8166628908365965e-05,
+      4.3249980080872774e-05,
+      7.387495134025812e-05,
+      0.0001348749501630664
+     ],
+     "worst_residual_us": 0.09781215339899199
+    },
+    "loop_indep": {
+     "intercept_us": 14.032594070000492,
+     "ns_per_op": 6.062473699864273,
+     "seconds": [
+      2.033333294093609e-05,
+      2.624996704980731e-05,
+      3.9000005926936865e-05,
+      6.366666639223695e-05
+     ],
+     "worst_residual_us": 0.19857315751521376
+    },
+    "opcode": 2570
+   },
+   "msb": {
+    "exposed_ns": 8.844612061100474,
+    "loop_dep": {
+     "intercept_us": 12.815196026602514,
+     "ns_per_op": 14.900007025299482,
+     "seconds": [
+      2.8124952223151922e-05,
+      4.3249980080872774e-05,
+      7.387500954791903e-05,
+      0.0001348749501630664
+     ],
+     "worst_residual_us": 0.08043033354307765
+    },
+    "loop_indep": {
+     "intercept_us": 13.976466700272713,
+     "ns_per_op": 6.0553949641990075,
+     "seconds": [
+      2.0208361092954874e-05,
+      2.6250025257468224e-05,
+      3.891665255650878e-05,
+      6.354169454425573e-05
+     ],
+     "worst_residual_us": 0.13728808287693248
+    },
+    "opcode": 9986,
+    "prediction": {
+     "holds": true,
+     "measured_rounded": [
+      5,
+      2
+     ],
+     "predicted": [
+      5,
+      2
+     ]
+    }
+   },
+   "recip": {
+    "exposed_ns": 8.843552796347268,
+    "loop_dep": {
+     "intercept_us": 12.922060230503917,
+     "ns_per_op": 14.874891131393783,
+     "seconds": [
+      2.8124952223151922e-05,
+      4.337495192885399e-05,
+      7.391668623313308e-05,
+      0.00013474997831508517
+     ],
+     "worst_residual_us": 0.06707192844022546
+    },
+    "loop_indep": {
+     "intercept_us": 14.068829604303062,
+     "ns_per_op": 6.031338335046514,
+     "seconds": [
+      2.033333294093609e-05,
+      2.624996704980731e-05,
+      3.887503407895565e-05,
+      6.345834117382765e-05
+     ],
+     "worst_residual_us": 0.17104346467101256
+    },
+    "opcode": 3658
+   },
+   "reverse": {
+    "exposed_ns": 8.819847607810516,
+    "loop_dep": {
+     "intercept_us": 12.90399560947781,
+     "ns_per_op": 14.882316364768801,
+     "seconds": [
+      2.824998227879405e-05,
+      4.325003828853369e-05,
+      7.387500954791903e-05,
+      0.00013483333168551326
+     ],
+     "worst_residual_us": 0.13294123599062854
+    },
+    "loop_indep": {
+     "intercept_us": 13.949288784161858,
+     "ns_per_op": 6.062468756958285,
+     "seconds": [
+      2.0250037778168917e-05,
+      2.624996704980731e-05,
+      3.8791680708527565e-05,
+      6.36249897070229e-05
+     ],
+     "worst_residual_us": 0.11525774860511444
+    },
+    "opcode": 14047,
+    "prediction": {
+     "holds": true,
+     "measured_rounded": [
+      5,
+      2
+     ],
+     "predicted": [
+      5,
+      2
+     ]
+    }
+   },
+   "rint": {
+    "exposed_ns": 9.624803802264227,
+    "loop_dep": {
+     "intercept_us": 6.530785669937082,
+     "ns_per_op": 15.676660140066499,
+     "seconds": [
+      2.804165706038475e-05,
+      3.0124967452138662e-05,
+      7.395836291834712e-05,
+      0.00013479165500029922
+     ],
+     "worst_residual_us": 8.51161818465461
+    },
+    "loop_indep": {
+     "intercept_us": 14.010849712497514,
+     "ns_per_op": 6.051856337802272,
+     "seconds": [
+      2.0249979570508003e-05,
+      2.624996704980731e-05,
+      3.895832924172282e-05,
+      6.354163633659482e-05
+     ],
+     "worst_residual_us": 0.15907596958719825
+    },
+    "opcode": 3770
+   },
+   "rsqrt": {
+    "exposed_ns": 8.84603561802499,
+    "loop_dep": {
+     "intercept_us": 12.860461340650268,
+     "ns_per_op": 14.877373458780905,
+     "seconds": [
+      2.8166628908365965e-05,
+      4.3249980080872774e-05,
+      7.379165617749095e-05,
+      0.00013475003652274609
+     ],
+     "worst_residual_us": 0.07934210336078709
+    },
+    "loop_indep": {
+     "intercept_us": 14.110493635677773,
+     "ns_per_op": 6.031337840755915,
+     "seconds": [
+      2.037500962615013e-05,
+      2.6291643735021353e-05,
+      3.891665255650878e-05,
+      6.350001785904169e-05
+     ],
+     "worst_residual_us": 0.17102979852453745
+    },
+    "opcode": 3850
+   },
+   "sar_imm": {
+    "exposed_ns": 8.728205142213719,
+    "loop_dep": {
+     "intercept_us": 12.83332644759313,
+     "ns_per_op": 14.900719792342937,
+     "seconds": [
+      2.8124952223151922e-05,
+      4.325003828853369e-05,
+      7.395836291834712e-05,
+      0.0001348750083707273
+     ],
+     "worst_residual_us": 0.09996229377777721
+    },
+    "loop_indep": {
+     "intercept_us": 14.141298142140325,
+     "ns_per_op": 6.172514650129218,
+     "seconds": [
+      2.0625011529773474e-05,
+      2.662499900907278e-05,
+      3.937497967854142e-05,
+      6.47500273771584e-05
+     ],
+     "worst_residual_us": 0.16305838590082833
+    },
+    "opcode": 16805,
+    "prediction": {
+     "holds": true,
+     "measured_rounded": [
+      5,
+      2
+     ],
+     "predicted": [
+      5,
+      2
+     ]
+    }
+   },
+   "shl_imm": {
+    "exposed_ns": 8.82869491523825,
+    "loop_dep": {
+     "intercept_us": 12.802499164219789,
+     "ns_per_op": 14.930442968919953,
+     "seconds": [
+      2.824998227879405e-05,
+      4.3249980080872774e-05,
+      7.387495134025812e-05,
+      0.00013516668695956469
+     ],
+     "worst_residual_us": 0.15870951440022926
+    },
+    "loop_indep": {
+     "intercept_us": 14.163039968875438,
+     "ns_per_op": 6.101748053681703,
+     "seconds": [
+      2.0291656255722046e-05,
+      2.6875000912696123e-05,
+      3.904168261215091e-05,
+      6.416667019948363e-05
+     ],
+     "worst_residual_us": 0.2155809298805592
+    },
+    "opcode": 14391
+   },
+   "subsat": {
+    "exposed_ns": 2.815764456381262,
+    "loop_dep": {
+     "intercept_us": 13.992711699203305,
+     "ns_per_op": 6.051156916604985,
+     "seconds": [
+      2.0249979570508003e-05,
+      2.624996704980731e-05,
+      3.887497587129474e-05,
+      6.354169454425573e-05
+     ],
+     "worst_residual_us": 0.13551401460300108
+    },
+    "loop_indep": {
+     "intercept_us": 14.492755998735841,
+     "ns_per_op": 3.2353924602237227,
+     "seconds": [
+      1.799996243789792e-05,
+      2.1000043489038944e-05,
+      2.7583329938352108e-05,
+      4.108331631869078e-05
+     ],
+     "worst_residual_us": 0.19416455989298667
+    },
+    "opcode": 11624,
+    "prediction": {
+     "holds": true,
+     "measured_rounded": [
+      2,
+      1
+     ],
+     "predicted": [
+      2,
+      1
+     ]
+    }
+   },
+   "xor_imm": {
+    "exposed_ns": 3.0135409993501683,
+    "loop_dep": {
+     "intercept_us": 14.0380402824477,
+     "ns_per_op": 6.028503084171857,
+     "seconds": [
+      2.020830288529396e-05,
+      2.6291701942682266e-05,
+      3.887497587129474e-05,
+      6.337498780339956e-05
+     ],
+     "worst_residual_us": 0.14418695607910773
+    },
+    "loop_indep": {
+     "intercept_us": 15.182964726472678,
+     "ns_per_op": 3.0149620848216885,
+     "seconds": [
+      1.858331961557269e-05,
+      2.112501533702016e-05,
+      2.7333328034728765e-05,
+      4.0000013541430235e-05
+     ],
+     "worst_residual_us": 0.31303371424260495
+    },
+    "opcode": 17770
+   }
+  },
+  "trips": 128
+ },
+ "reps": 20,
+ "rows": {
+  "fadd": {
+   "fetch": {
+    "intercept_us": 6.596023803981749,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.749993190169334e-06,
+     7.2499969974160194e-06,
+     7.916707545518875e-06,
+     8.874980267137289e-06
+    ],
+    "slope_ns": 18.36492826797716,
+    "worst_residual_us": 0.14532833238658752
+   },
+   "issue": {
+    "intercept_us": 13.148525992975287,
+    "rises": true,
+    "seconds": [
+     1.9249971956014633e-05,
+     1.954165054485202e-05,
+     2.8458365704864264e-05,
+     4.633335629478097e-05
+    ],
+    "slope_ns": 0.031020731876938244,
+    "worst_residual_us": 2.0354965944652967
+   },
+   "latency": {
+    "intercept_us": 6.391304929781219,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.5416679717600346e-06,
+     7.291673682630062e-06,
+     7.874972652643919e-06,
+     9.166658855974674e-06
+    ],
+    "slope_ns": 22.12397268284922,
+    "worst_residual_us": 0.20362052094677188
+   },
+   "opcode": 998
+  },
+  "ffma": {
+   "fetch": {
+    "intercept_us": 6.856870047910058,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.2499969974160194e-06,
+     7.874972652643919e-06,
+     8.500006515532732e-06,
+     1.0416668374091387e-05
+    ],
+    "slope_ns": 27.559018116849273,
+    "worst_residual_us": 0.13621402499468405
+   },
+   "issue": {
+    "intercept_us": 17.21918005901186,
+    "rises": true,
+    "seconds": [
+     2.2874970454722643e-05,
+     2.362497616559267e-05,
+     2.8749986086040735e-05,
+     4.683330189436674e-05
+    ],
+    "slope_ns": 0.02706223264804857,
+    "worst_residual_us": 2.657597803551214
+   },
+   "latency": {
+    "intercept_us": 6.217395623578973,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.6666980274021626e-06,
+     7.291673682630062e-06,
+     8.416653145104647e-06,
+     1.0375049896538258e-05
+    ],
+    "slope_ns": 32.83538440566348,
+    "worst_residual_us": 0.0977929195632104
+   },
+   "opcode": 2190
+  },
+  "fmax": {
+   "fetch": {
+    "intercept_us": 6.559803454286378,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.166701834648848e-06,
+     7.2499969974160194e-06,
+     8.624978363513947e-06,
+     1.0333315003663301e-05
+    ],
+    "slope_ns": 29.732409925402507,
+    "worst_residual_us": 0.26124357448323826
+   },
+   "issue": {
+    "intercept_us": 17.773580190766115,
+    "rises": true,
+    "seconds": [
+     2.31250305660069e-05,
+     2.5875051505863667e-05,
+     3.38749960064888e-05,
+     5.270837573334575e-05
+    ],
+    "slope_ns": 0.03280086926709017,
+    "worst_residual_us": 1.095686330581488
+   },
+   "latency": {
+    "intercept_us": 6.320666137110928,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.749993190169334e-06,
+     7.2499969974160194e-06,
+     7.875030860304832e-06,
+     9.749957825988531e-06
+    ],
+    "slope_ns": 26.426309689312525,
+    "worst_residual_us": 0.136919096922098
+   },
+   "opcode": 9700
+  },
+  "fmul": {
+   "fetch": {
+    "intercept_us": 6.634020752718915,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.291615474969149e-06,
+     7.2499969974160194e-06,
+     8.500006515532732e-06,
+     1.025001984089613e-05
+    ],
+    "slope_ns": 28.14814924140987,
+    "worst_residual_us": 0.2847645310280118
+   },
+   "issue": {
+    "intercept_us": 16.951088226683762,
+    "rises": true,
+    "seconds": [
+     2.2958323825150728e-05,
+     2.279167529195547e-05,
+     2.8708367608487606e-05,
+     4.654168151319027e-05
+    ],
+    "slope_ns": 0.027056729803491733,
+    "worst_residual_us": 2.4608559096636973
+   },
+   "latency": {
+    "intercept_us": 6.284430602808362,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.62502134218812e-06,
+     7.2499969974160194e-06,
+     8.000002708286047e-06,
+     9.708339348435402e-06
+    ],
+    "slope_ns": 26.85682493788393,
+    "worst_residual_us": 0.1061479965953716
+   },
+   "opcode": 3290
+  },
+  "iadd": {
+   "fetch": {
+    "intercept_us": 6.646730268940978,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.291673682630062e-06,
+     7.2499969974160194e-06,
+     7.916649337857962e-06,
+     9.791692718863487e-06
+    ],
+    "slope_ns": 23.596215254181754,
+    "worst_residual_us": 0.2674039696221767
+   },
+   "issue": {
+    "intercept_us": 17.583322124150783,
+    "rises": true,
+    "seconds": [
+     2.31250305660069e-05,
+     2.624996704980731e-05,
+     3.549997927621007e-05,
+     5.5083364713937044e-05
+    ],
+    "slope_ns": 0.03541313329536854,
+    "worst_residual_us": 0.9000382345655701
+   },
+   "latency": {
+    "intercept_us": 6.369537795367449,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.666639819741249e-06,
+     7.166643626987934e-06,
+     7.875030860304832e-06,
+     9.291688911616802e-06
+    ],
+    "slope_ns": 23.007716821587604,
+    "worst_residual_us": 0.07102144477160138
+   },
+   "opcode": 10282
+  },
+  "iadd_imm": {
+   "fetch": {
+    "intercept_us": 6.748158383466627,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.2499969974160194e-06,
+     7.291615474969149e-06,
+     8.000002708286047e-06,
+     9.500014130026102e-06
+    ],
+    "slope_ns": 21.037482403461702,
+    "worst_residual_us": 0.16523889549400472
+   },
+   "issue": {
+    "intercept_us": 17.773491613890815,
+    "rises": true,
+    "seconds": [
+     2.30416189879179e-05,
+     2.5999965146183968e-05,
+     3.4708296880126e-05,
+     5.3333351388573647e-05
+    ],
+    "slope_ns": 0.03356387631593743,
+    "worst_residual_us": 0.868842977544535
+   },
+   "latency": {
+    "intercept_us": 6.960107661459757,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.249989382922649e-06,
+     7.333292160183191e-06,
+     7.83335417509079e-06,
+     6.750051397830248e-06
+    ],
+    "slope_ns": 1.3594019591160442,
+    "worst_residual_us": 0.786244788247606
+   },
+   "opcode": 10279
+  },
+  "icmp": {
+   "fetch": {
+    "intercept_us": 6.820631982839625,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.166643626987934e-06,
+     7.2499969974160194e-06,
+     7.958326023072004e-06,
+     9.000010322779417e-06
+    ],
+    "slope_ns": 17.051870995403632,
+    "worst_residual_us": 0.11629485727652188
+   },
+   "issue": {
+    "intercept_us": 15.076090399499819,
+    "rises": true,
+    "seconds": [
+     2.0083331037312746e-05,
+     2.4500011932104826e-05,
+     3.3999967854470015e-05,
+     5.341664655134082e-05
+    ],
+    "slope_ns": 0.0364662657558335,
+    "worst_residual_us": 0.22753425266431787
+   },
+   "latency": {
+    "intercept_us": 6.396723303781903,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.624963134527206e-06,
+     7.2499969974160194e-06,
+     7.874972652643919e-06,
+     9.249954018741846e-06
+    ],
+    "slope_ns": 22.554139950839073,
+    "worst_residual_us": 0.13262640846812238
+   },
+   "opcode": 11372
+  },
+  "imul": {
+   "fetch": {
+    "intercept_us": 6.516314739280421,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.166701834648848e-06,
+     7.2499969974160194e-06,
+     8.541624993085861e-06,
+     1.0416668374091387e-05
+    ],
+    "slope_ns": 30.457221842168465,
+    "worst_residual_us": 0.24094884081379264
+   },
+   "issue": {
+    "intercept_us": 11.699294428462565,
+    "rises": true,
+    "seconds": [
+     2.31250305660069e-05,
+     2.820836380124092e-05,
+     4.6124972868710756e-05,
+     8.508336031809449e-05
+    ],
+    "slope_ns": 0.06904324841318908,
+    "worst_residual_us": 2.376099481530814
+   },
+   "latency": {
+    "intercept_us": 6.35505927240719,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.791669875383377e-06,
+     7.374968845397234e-06,
+     8.166651241481304e-06,
+     1.0124989785254002e-05
+    ],
+    "slope_ns": 29.32517774119649,
+    "worst_residual_us": 0.08150388527175653
+   },
+   "opcode": 10825
+  },
+  "shl_imm": {
+   "fetch": {
+    "intercept_us": 6.626797941229913,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.208320312201977e-06,
+     7.374968845397234e-06,
+     8.541683200746775e-06,
+     1.0333315003663301e-05
+    ],
+    "slope_ns": 28.9628983212068,
+    "worst_residual_us": 0.178641842111297
+   },
+   "issue": {
+    "intercept_us": 11.552550384531848,
+    "rises": true,
+    "seconds": [
+     2.2916647139936686e-05,
+     2.8250040486454964e-05,
+     4.600000102072954e-05,
+     8.512497879564762e-05
+    ],
+    "slope_ns": 0.06921461278515696,
+    "worst_residual_us": 2.291999028428745
+   },
+   "latency": {
+    "intercept_us": 6.255460903048515,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.583344656974077e-06,
+     7.3750270530581474e-06,
+     8.291681297123432e-06,
+     1.0124989785254002e-05
+    ],
+    "slope_ns": 30.638329917564985,
+    "worst_residual_us": 0.16232952475547807
+   },
+   "opcode": 14391
+  },
+  "xor_imm": {
+   "fetch": {
+    "intercept_us": 6.771772978422435,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     7.166701834648848e-06,
+     7.291673682630062e-06,
+     7.875030860304832e-06,
+     9.166658855974674e-06
+    ],
+    "slope_ns": 18.38738883278616,
+    "worst_residual_us": 0.10073063490183397
+   },
+   "issue": {
+    "intercept_us": 15.822423966196567,
+    "rises": true,
+    "seconds": [
+     2.0041654352098703e-05,
+     2.5708286557346582e-05,
+     3.483332693576813e-05,
+     5.337502807378769e-05
+    ],
+    "slope_ns": 0.035943908718981336,
+    "worst_residual_us": 0.4920096177121863
+   },
+   "latency": {
+    "intercept_us": 6.257227379018846,
+    "means": "instruction fetch of a single simdgroup; not an ALU latency",
+    "rises": true,
+    "seconds": [
+     6.624963134527206e-06,
+     7.166701834648848e-06,
+     7.1249669417738914e-06,
+     9.04168700799346e-06
+    ],
+    "slope_ns": 20.539205845283426,
+    "worst_residual_us": 0.44676961134309373
+   },
+   "opcode": 17770
+  }
+ },
+ "rs": [
+  16,
+  32,
+  64,
+  128
+ ],
+ "scheduler": {
+  "bodies": [
+   8,
+   16,
+   32,
+   64
+  ],
+  "generator": "tools/g17latency.py --sched --run --write",
+  "rows": {
+   "fmul": {
+    "as_written": {
+     "digests": [
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5",
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5",
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5",
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5"
+     ],
+     "ns_per_op": 6.1098845712283785,
+     "seconds": [
+      2.020830288529396e-05,
+      2.675002906471491e-05,
+      3.891665255650878e-05,
+      6.412499351426959e-05
+     ],
+     "worst_residual_us": 0.19894771115935303
+    },
+    "identical_outputs": true,
+    "scheduled": {
+     "digests": [
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5",
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5",
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5",
+      "f91db59bf0e1e12ed43b683cacbc590310a5b88e2d31b3d7ee24b8634776a9e5"
+     ],
+     "ns_per_op": 3.1444622673797826,
+     "seconds": [
+      1.8000020645558834e-05,
+      2.162496093660593e-05,
+      2.762500662356615e-05,
+      4.070834256708622e-05
+     ],
+     "worst_residual_us": 0.2702546265462161
+    },
+    "speedup": 1.9430618184264692
+   },
+   "iadd": {
+    "as_written": {
+     "digests": [
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add",
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add",
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add",
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add"
+     ],
+     "ns_per_op": 6.060004718323319,
+     "seconds": [
+      2.0249979570508003e-05,
+      2.6208290364593267e-05,
+      3.891665255650878e-05,
+      6.358337122946978e-05
+     ],
+     "worst_residual_us": 0.17175461044130172
+    },
+    "identical_outputs": true,
+    "scheduled": {
+     "digests": [
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add",
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add",
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add",
+      "5152dc9339f524844c7d238c2f6933eb71f3cfcbb04356ad5389c967a3342add"
+     ],
+     "ns_per_op": 3.133489016086653,
+     "seconds": [
+      1.8000020645558834e-05,
+      2.099998528137803e-05,
+      2.762500662356615e-05,
+      4.037498729303479e-05
+     ],
+     "worst_residual_us": 0.13480236267913817
+    },
+    "speedup": 1.933947968929385
+   },
+   "imul": {
+    "as_written": {
+     "digests": [
+      "9eed3415dcd18d8d87b984146d84966f8dbd05094bf5360577347c3d9852ee8b",
+      "0b0ecfb878d4769d803eb88eaf50e3800be2c6329ece51866260cfea4b6845d8",
+      "dad2a6d767aec9d2c301bad1cc701aebe431d8b1142ab0f53e181a2315b12b92",
+      "a82c90355e32ba9513ddda1338fe02754f03afe62b7cc9324c61fac5a27834fe"
+     ],
+     "ns_per_op": 14.913808113108288,
+     "seconds": [
+      2.7499976567924023e-05,
+      4.299997817724943e-05,
+      7.325003389269114e-05,
+      0.00013449997641146183
+     ],
+     "worst_residual_us": 0.16303105360787812
+    },
+    "identical_outputs": true,
+    "scheduled": {
+     "digests": [
+      "9eed3415dcd18d8d87b984146d84966f8dbd05094bf5360577347c3d9852ee8b",
+      "0b0ecfb878d4769d803eb88eaf50e3800be2c6329ece51866260cfea4b6845d8",
+      "dad2a6d767aec9d2c301bad1cc701aebe431d8b1142ab0f53e181a2315b12b92",
+      "a82c90355e32ba9513ddda1338fe02754f03afe62b7cc9324c61fac5a27834fe"
+     ],
+     "ns_per_op": 7.552443014941199,
+     "seconds": [
+      2.1374959032982588e-05,
+      2.9375019948929548e-05,
+      4.449998959898949e-05,
+      7.562502287328243e-05
+     ],
+     "worst_residual_us": 0.1902499681581617
+    },
+    "speedup": 1.9746998532268176
+   }
+  },
+  "trips": 128
+ }
+}

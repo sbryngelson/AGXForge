@@ -1,0 +1,26 @@
+% Figure 15.1: the compiler's two input routes.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[node distance=5mm and 5mm]
+  \node[apple] (msl) {Metal source\\[-1pt]{\footnotesize written outside the project}};
+  \node[apple, right=of msl] (fe) {Apple's front end\\[-1pt]{\footnotesize\code{xcrun metal}}};
+  \node[apple, right=of fe] (air) {AIR};
+  \node[ours, right=of air] (tr) {AIR translation};
+  \node[ours, below=10mm of tr] (ir) {The project's IR};
+  \node[ours, left=12mm of ir] (py) {Python kernel builders};
+  \node[ours, below=of ir, text width=60mm] (be) {Native backend\\[-1pt]{\footnotesize instruction selection, register
+    allocation, encoding, tensor lowering}};
+  \node[ours, below=of be, text width=60mm] (prog) {Native program\\[-1pt]{\footnotesize G17 bytes and interface description}};
+  \node[ours, below left=9mm and -22mm of prog, text width=46mm] (img) {Image author\\[-1pt]{\footnotesize object, metadata, library, archive}};
+  \node[nat, below right=9mm and -22mm of prog, text width=46mm] (rt) {Native runtime\\[-1pt]{\footnotesize builds its own resource and launch state}};
+  \draw[flow] (msl) -- (fe); \draw[flow] (fe) -- (air); \draw[flow] (air) -- (tr);
+  \draw[flow] (tr) -- (ir); \draw[flow] (py) -- (ir);
+  \draw[flow] (ir) -- (be); \draw[flow] (be) -- (prog);
+  \draw[flow] (prog.south) -- ++(0,-3mm) -| node[pos=0.75, left, tag] {through Metal} (img.north);
+  \draw[flow] (prog.south) -- ++(0,-3mm) -| node[pos=0.75, right, tag] {below Metal} (rt.north);
+\end{tikzpicture}
+\caption{Input routes to a native program. Metal source passes through Apple's front end to AIR, which the project
+translates into its own IR; the model kernels are built in that IR directly. Both routes share the native backend,
+whose output feeds both execution paths. Grey: Apple's components; blue and red: the project's.}
+\label{fig:compile-routes}
+\end{figure}

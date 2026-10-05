@@ -1,0 +1,183 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220852100",
+    "2700043a2500a30a20852100",
+    "2700043a2500a31220852100",
+    "2700043a2500a31a20852100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "d423",
+  "op": 423,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 423,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230007823870a3028480",
+    "230007823870a30a8480",
+    "230007823870a3128480",
+    "230007823870a31a8480"
+   ],
+   "from_template": false,
+   "opcodes": [
+    423,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d612",
+  "op": 612,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700002a2120a10214001c18",
+    "2700002a2120a10a14001c18",
+    "2700002a2120a11214001c18",
+    "2700002a2120a11a14001c18"
+   ],
+   "from_template": false,
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d5106",
+  "op": 5106,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 5106,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "af0025022a02a4420004",
+    "af0025022a02a4420004",
+    "af0025022a02a4420004",
+    "af0025022a02a4420004"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    5106,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10369",
+  "op": 10369,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10369,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "aa00ab062380a50ac200",
+    "aa002b062380a50ac200",
+    "2a00ab062380a50ac200",
+    "2a002b062380a50ac200"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10369,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

@@ -1,0 +1,210 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "r612.range",
+  "op": 612,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "270000422120a10214001c18",
+    "270000422120a10214001c18",
+    "270000422120a10214001c18",
+    "270000422120a10214001c18",
+    "270000422120a10214001c18"
+   ],
+   "from_template": false,
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   7,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "r612.hi8",
+  "op": 612,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "270000422120a1020c001c18",
+    "270000422120a1020c001c18",
+    "270000422120a1020c001c18",
+    "270000422120a1020c001c18",
+    "270000422120a1020c001c18"
+   ],
+   "from_template": false,
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15,
+   7,
+   3,
+   1,
+   0
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "r612.lo8",
+  "op": 612,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "270000422120a10224021c18",
+    "270000422120a10224021c18",
+    "270000422120a10224021c18",
+    "270000422120a10224021c18",
+    "270000422120a10224021c18"
+   ],
+   "from_template": false,
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   12,
+   15,
+   8,
+   15,
+   15
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   false,
+   false
+  ],
+  "runs": 3
+ },
+ {
+  "id": "r612.marker0",
+  "op": 612,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 2,
+   "cases": 2,
+   "encoded": [
+    "270000422120a10214001c18",
+    "270000422120a10214001c18"
+   ],
+   "from_template": false,
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   7,
+   15
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   false
+  ],
+  "runs": 3
+ }
+]

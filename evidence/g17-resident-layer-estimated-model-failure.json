@@ -1,0 +1,584 @@
+{
+  "status": "failed",
+  "schedule_validation_passed": false,
+  "original_application_fp64_passed": false,
+  "mode": "validate",
+  "gpu_dispatched": true,
+  "requests": 1,
+  "submissions": 21,
+  "runs": [
+    {
+      "timing": {
+        "stages": [
+          {
+            "stage": "att_pack",
+            "submit_call_ns": 4673000,
+            "submit_to_completion_ns": 4813000,
+            "output_readback_bytes": 24576,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_q_projection",
+            "submit_call_ns": 60000,
+            "submit_to_completion_ns": 455000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_q_bias",
+            "submit_call_ns": 48000,
+            "submit_to_completion_ns": 447000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_k_projection",
+            "submit_call_ns": 64000,
+            "submit_to_completion_ns": 467000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_k_bias",
+            "submit_call_ns": 53000,
+            "submit_to_completion_ns": 174000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_v_projection",
+            "submit_call_ns": 64000,
+            "submit_to_completion_ns": 227000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_v_bias",
+            "submit_call_ns": 55000,
+            "submit_to_completion_ns": 204000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_scores",
+            "submit_call_ns": 38000,
+            "submit_to_completion_ns": 176000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_softmax",
+            "submit_call_ns": 50000,
+            "submit_to_completion_ns": 181000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_context",
+            "submit_call_ns": 46000,
+            "submit_to_completion_ns": 140000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_context_pack",
+            "submit_call_ns": 58000,
+            "submit_to_completion_ns": 165000,
+            "output_readback_bytes": 24576,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_out_projection",
+            "submit_call_ns": 29000,
+            "submit_to_completion_ns": 424000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_residual",
+            "submit_call_ns": 72000,
+            "submit_to_completion_ns": 456000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "att_layernorm",
+            "submit_call_ns": 56000,
+            "submit_to_completion_ns": 480000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_pack",
+            "submit_call_ns": 37000,
+            "submit_to_completion_ns": 458000,
+            "output_readback_bytes": 24576,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_expand",
+            "submit_call_ns": 52000,
+            "submit_to_completion_ns": 457000,
+            "output_readback_bytes": 196608,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_activation",
+            "submit_call_ns": 38000,
+            "submit_to_completion_ns": 423000,
+            "output_readback_bytes": 196608,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_pack_hidden",
+            "submit_call_ns": 44000,
+            "submit_to_completion_ns": 426000,
+            "output_readback_bytes": 98304,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_contract",
+            "submit_call_ns": 26000,
+            "submit_to_completion_ns": 546000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_residual",
+            "submit_call_ns": 58000,
+            "submit_to_completion_ns": 494000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "ffn_layernorm",
+            "submit_call_ns": 39000,
+            "submit_to_completion_ns": 194000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          }
+        ],
+        "client_roundtrip_ns": 16013500,
+        "input_upload_bytes": 49152,
+        "submits": 21,
+        "callbacks": 42
+      },
+      "checks": {
+        "att_pack": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_q_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_q_bias": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_k_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_k_bias": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_v_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_v_bias": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_scores": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_softmax": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 5.960464477539063e-08,
+          "max_error_over_budget": 0.0019608684388263556,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_context": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 2.384185791015625e-07,
+          "max_error_over_budget": 0.004614347806927381,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_context_pack": {
+          "passed": false,
+          "failures": 3,
+          "max_abs_error": 0.0001220703125,
+          "max_error_over_budget": 5.328218243819267,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_out_projection": {
+          "passed": false,
+          "failures": 1,
+          "max_abs_error": 2.212822437286377e-05,
+          "max_error_over_budget": 1.078799172948966,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_residual": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 2.2143125534057617e-05,
+          "max_error_over_budget": 0.7815803373490082,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 2.193450927734375e-05,
+          "max_error_over_budget": 0.7628919291572197,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_pack": {
+          "passed": false,
+          "failures": 23,
+          "max_abs_error": 0.00048828125,
+          "max_error_over_budget": 15.183723048891588,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_expand": {
+          "passed": false,
+          "failures": 1332,
+          "max_abs_error": 0.00016689300537109375,
+          "max_error_over_budget": 7.168960792333455,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_activation": {
+          "passed": false,
+          "failures": 300,
+          "max_abs_error": 0.00011879205703735352,
+          "max_error_over_budget": 3.7042382553756,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_pack_hidden": {
+          "passed": false,
+          "failures": 406,
+          "max_abs_error": 0.0009765625,
+          "max_error_over_budget": 22.88329519450801,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_contract": {
+          "passed": false,
+          "failures": 950,
+          "max_abs_error": 0.0001837611198425293,
+          "max_error_over_budget": 8.175845271253818,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_residual": {
+          "passed": false,
+          "failures": 810,
+          "max_abs_error": 0.00018106400966644287,
+          "max_error_over_budget": 7.934947693983839,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_layernorm": {
+          "passed": false,
+          "failures": 765,
+          "max_abs_error": 0.0001558363437652588,
+          "max_error_over_budget": 7.004592180627333,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "stagewise_checks": {
+        "att_pack": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "att_q_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.0260773706249893e-06,
+          "max_error_over_budget": 0.023248723280248088,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_q_bias": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "att_k_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 6.846676114946604e-07,
+          "max_error_over_budget": 0.01615200927172,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_k_bias": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "att_v_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 2.093031525873812e-07,
+          "max_error_over_budget": 0.008561761549563075,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_v_bias": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "att_scores": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 4.880065038292969e-06,
+          "max_error_over_budget": 0.026137048133853095,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_softmax": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.9978118681596158e-07,
+          "max_error_over_budget": 0.005422890475225581,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_context": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 4.3646137726227607e-07,
+          "max_error_over_budget": 0.007690646808327377,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_context_pack": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "att_out_projection": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 3.07749999706175e-07,
+          "max_error_over_budget": 0.004007233157077602,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "att_residual": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "att_layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.0644732597597795e-06,
+          "max_error_over_budget": 0.027452222372369568,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_pack": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "ffn_expand": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 2.593234967207536e-06,
+          "max_error_over_budget": 0.01775373007352386,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_activation": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 3.666464274409975e-07,
+          "max_error_over_budget": 0.012889402790293837,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_pack_hidden": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "ffn_contract": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 4.875106469626189e-06,
+          "max_error_over_budget": 0.024287651157383735,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "ffn_residual": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))",
+          "exact_transport_or_scalar": true
+        },
+        "ffn_layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.952838326602091e-06,
+          "max_error_over_budget": 0.010692912591897632,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "input_sha256": "1e37ff1f15d7fc099fdf372e3c1d37668285bdc0cd53f8804a5c04bf8aaadb16",
+      "iteration": 0,
+      "validation_readbacks": true,
+      "readback_artifact": "results/g17-resident-layer-execution-v1/validate-readbacks-1790735656006946000.npz",
+      "readback_sha256": "db88f607a40ce9b684478546fe804b202eaac81dabb33a119ae2b586d652ed2e",
+      "application_fp64": {
+        "passed": false,
+        "failures": 1055,
+        "max_abs_error": 0.0010263559581140669,
+        "max_error_over_budget": 2.7887768185426123,
+        "error_bound": "Preregistered complete layer: 2e-4*(1+abs(independent reference))"
+      },
+      "quantized_fp64": {
+        "passed": true,
+        "failures": 0,
+        "max_abs_error": 0.00017943838955321312,
+        "max_error_over_budget": 0.8122761845007564,
+        "error_bound": "Preregistered complete layer: 2e-4*(1+abs(independent reference))"
+      },
+      "output_sha256": "8592c78094f25fd780ad343228e03a1a4b8f41a8b0ccd9d7234a8f4e9ffc4321"
+    }
+  ],
+  "failure": null,
+  "distinct_inputs": 1,
+  "warm": {
+    "samples": 0,
+    "median_client_roundtrip_ms": null,
+    "median_submit_to_completion_sum_ms": null,
+    "median_host_submit_sum_ms": null
+  },
+  "weights_and_programs_uploaded_once": true,
+  "resident_submissions_per_request": 21,
+  "diagnostic_comparison_scope": "Historical attention uses FP32 projections; no matched diagnostic timing or output identity claimed",
+  "timing_scope": "Host clocks; first request excluded from warm medians; GPU device time not measured",
+  "numerical_scope": "All actual-predecessor local checks at2e-5 with exact transports; final model at2e-5 and independently quantized whole-layer FP64 at preregistered2e-4; original FP64 whole-layer separately reported",
+  "attempted_requests": 1,
+  "native_build_seconds": 3.2265116670168936,
+  "driver_prepare_seconds": 0.21392912499140948,
+  "before_recovery": [
+    33
+  ],
+  "after_recovery": [
+    33
+  ],
+  "new_gpu_events": [],
+  "native_returncode": 0,
+  "native_log": "STAGE 1: device=0x1030a1ac0  type-0x100005 conn=0x2613 (open kr=0x0)  dev+0x14=0x1d07\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x107490000\n  resv[1] kr=0x0 @0x107890000\n  resv[2] kr=0x0 @0x107c90000\n  resv[3] kr=0x0 @0x108090000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x102a30000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x102a40000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x102a50000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x102a70000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x102a80000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x102aa0000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x108490000 size=0x400000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100004a8000 expected=0x100004a8000 host=0x102abc000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10000510000 expected=0x10000510000 host=0x102b20000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10000520000 expected=0x10000520000 host=0x102b28000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10000530000 expected=0x10000530000 host=0x102b30000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10000540000 expected=0x10000540000 host=0x102b38000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10000550000 expected=0x10000550000 host=0x102b40000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10000560000 expected=0x10000560000 host=0x102b48000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10000570000 expected=0x10000570000 host=0x102b50000 size=0xc000\nORDERED QUEUE create=0x1030a9e60 connection=0x2613 prior=0x1d07 notification=0x1030aaca0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x102b60000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x102b64000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x53f454cfab second=0x53f454cfac\nWORKLOAD LAYER CLOSED: requests=1 Submits=21 result=0; benchmark stages 0..19 omit code/weight/source scans.\n",
+  "native_binary_sha256": "67337391d83456ba7964b28bbf987ffb5a8ec35efd33da7079398a75962b21f9",
+  "native_source_sha256": "5d3b9019b98937677c3373fb50b747d0ebdc2d727be4c0de2cfe960440e39803",
+  "native_header_sha256": "560e98e4eb161f0390a864dc3707c98968c8a4c4b853903ed95203c04162af65",
+  "prediction": {
+    "schema": 1,
+    "gpu_dispatched": false,
+    "workload": "resident_minilm_attention_ffn",
+    "manifest_sha256": "575c16fef3b48c2f9d56ac327209024442935cb50f674993dc7fcf6d6508dd7d",
+    "schedule_sha256": "541919771c333d64ab4695f94b542e40dd8ddc48eb1017e644a18f6aa4afef98",
+    "native_header_sha256": "560e98e4eb161f0390a864dc3707c98968c8a4c4b853903ed95203c04162af65",
+    "native_source_sha256": "5d3b9019b98937677c3373fb50b747d0ebdc2d727be4c0de2cfe960440e39803",
+    "scheduler_header_sha256": "9fce2bc7875d29839232ec6f3b3b9083896653cc7646058c1bd192fa04a8d6dc",
+    "submissions_per_request": 21,
+    "reference_contract": {
+      "submissions": 21,
+      "input": "Normalized FP32 embeddings [32,384]",
+      "local_bound": "2e-5*(1+abs(actual-predecessor reference)); packing/bias/residual exact",
+      "complete_quantized_bound": "2e-4*(1+abs(independent quantized FP64 full-layer reference)), preregistered before dispatch",
+      "original_precision": "Original FP64 full layer reported separately; not silently claimed by quantized-domain success",
+      "handoff": "Actual attention GPU output supplies FFN pack AND FFN residual without host reconstruction",
+      "immutable": "All weights, parameters, code, caller input; saved attention output readonly throughout FFN",
+      "repeat": "Token-permuted normalized inputs; recompute every independent reference for each input"
+    },
+    "model_output_sha256": "482dbf0d807614304e4200d47aa315c929422682f449fe9e124375edcbd5d223",
+    "quantized_fp64_sha256": "7cd3e3f66191e4ba84a0ca166a3049674ef568c84bb7fe9da2f59447ad0156c4",
+    "original_fp64_sha256": "203b5c096c8e598a84b1e4fd2cabbb08f0a64845670e78728f6498c6deaa9a64",
+    "prospective_quantized_error": {
+      "passed": true,
+      "failures": 0,
+      "max_abs_error": 0.00017943838955321312,
+      "max_error_over_budget": 0.8122761845007564,
+      "error_bound": "Preregistered complete layer: 2e-4*(1+abs(independent reference))"
+    },
+    "prospective_original_error": {
+      "passed": false,
+      "failures": 1054,
+      "max_abs_error": 0.0010282633067468794,
+      "max_error_over_budget": 2.7887768185426123,
+      "error_bound": "Preregistered complete layer: 2e-4*(1+abs(independent reference))"
+    },
+    "reference_source_sha256": "e56adbf6287ea9c8e2cf51db8d8c75848ac475632c13be6c288f621ca576e515",
+    "source_sha256": "1e37ff1f15d7fc099fdf372e3c1d37668285bdc0cd53f8804a5c04bf8aaadb16",
+    "source_variants": {
+      "rule": "np.roll(source, iteration, axis=0), iteration=0..15; Token permutation; complete layer references recomputed for each input",
+      "sha256": [
+        "1e37ff1f15d7fc099fdf372e3c1d37668285bdc0cd53f8804a5c04bf8aaadb16",
+        "f8a55cd27e8eff239c4bf97528b1c2ef0ae368a08bb57e8f097f546661ad8f42",
+        "f26a318ee84dee6c71e2deecc4d4be0df7d1bb452358a601aab6455693b0176c",
+        "11e372198047148b5e72d1c77378b68bc94e195de02f2733dabc365a56377882",
+        "566bd95d0243ca8b66ec627971a1720f45df81b4a3559b1a3610b7eb3953294a",
+        "9eecb596782c991600996296688cba1b6cb85b07c63b68540eb98d0335714e77",
+        "805b67826fc28b5523c8230eb7aba3c710fb6b45f5e0071223371a2ec4a2e864",
+        "0ea2326e5fb53b43b16fbdb7d2c501fcdddc098fca6890233ef606121897a8fc",
+        "578f762aef18608d3da86bb0df5bda2cff8fc1166362c17dc9e8a689897d64c4",
+        "75733d0d433176da236cfa3c6b5e10e5cab44e70ef11ebbbde50be6631b7b1d7",
+        "05de6aefe518e05feae6672bf659127e6c77198c56f8dce57205609457f9defb",
+        "e76d73f120f31e632d7805d7bc84925a17e7a4506d3b029e10d4f427a8de978a",
+        "03bd434f3a9ecfb080c1a8e30adeafe8df29e002fa435e85a715b0eb2adca624",
+        "bb962e111241ff68cb6242a4ba60ee420b7b698a7c97ed88e77a21ef262cfdb0",
+        "853220ed9ab3ff262edb7027edad9c1fce6a00db0c5785566941ae5380a34415",
+        "1349b63ed197fdd56f9ce7262a061d1e9e7d84636ffcb4eb840db55852d0b3e3"
+      ]
+    }
+  }
+}

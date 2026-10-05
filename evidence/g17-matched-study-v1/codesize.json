@@ -1,0 +1,94 @@
+{
+ "section": "MM 25.211",
+ "note": "static size of each twin's Apple machine code (the __TEXT,__text of the applegpu object a serialized MTLBinaryArchive holds, decoded by triad.g17.model.decode) against our program.bin; static counts, not executed counts",
+ "kernels": {
+  "attn_widebf_s32_attn32_cap2048_kvvec_hwexp2-e943e4638593675f_attn": {
+   "apple_text_bytes": 2260,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 305,
+   "ours_bytes": 6434,
+   "ours_insts": 579
+  },
+  "gen_argmax_pass1_cap2048_batched-f007d00be0ab26ea_argmax": {
+   "apple_text_bytes": 1226,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 162,
+   "ours_bytes": 3268,
+   "ours_insts": 302
+  },
+  "gen_step_cap2048_batched-3f51e0e33e61201b_gen": {
+   "apple_text_bytes": 1064,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 141,
+   "ours_bytes": 5870,
+   "ours_insts": 559
+  },
+  "qmv_q4_lmhead_ks2_lean_ptr-4c774e098bd1840a_lm": {
+   "apple_text_bytes": 1102,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 157,
+   "ours_bytes": 2006,
+   "ours_insts": 182
+  },
+  "qmv_q4_v2_ffn_ks2_lean_ptr_chain-dc83c597e2bd4d2e_ffn": {
+   "apple_text_bytes": 1312,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 187,
+   "ours_bytes": 4454,
+   "ours_insts": 403
+  },
+  "qmv_q4_v2_qkv_ks2_lean_ptr_chain-fab643654b4a14f8_qkv": {
+   "apple_text_bytes": 1062,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 156,
+   "ours_bytes": 1900,
+   "ours_insts": 175
+  },
+  "qmv_q4_v2_w2_res2_ks4_lean_ptr_chain-01444cf35015414a_w2_res2": {
+   "apple_text_bytes": 1094,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 160,
+   "ours_bytes": 2048,
+   "ours_insts": 188
+  },
+  "qmv_q4_v2_wo_res1_ks2_lean_ptr_chain-d1e4a4a78288f72f_wo_res1": {
+   "apple_text_bytes": 1096,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 159,
+   "ours_bytes": 1958,
+   "ours_insts": 180
+  },
+  "rmsnorm_wide_float_d2048_t1024_out32_seed_ffn_norm-7e80b8eb0b9a3142_norm": {
+   "apple_text_bytes": 486,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 82,
+   "ours_bytes": 886,
+   "ours_insts": 88
+  },
+  "rmsnorm_wide_half_d2048_t1024_out32_seed_attn_norm-959bdb9a86559d4f_norm": {
+   "apple_text_bytes": 486,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 82,
+   "ours_bytes": 902,
+   "ours_insts": 89
+  },
+  "rmsnorm_wide_half_d2048_t1024_out32_seed_final_norm-959bdb9a86559d4f_norm": {
+   "apple_text_bytes": 486,
+   "apple_main": 64,
+   "apple_const": 0,
+   "apple_insts": 82,
+   "ours_bytes": 902,
+   "ours_insts": 89
+  }
+ }
+}

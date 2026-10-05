@@ -1,0 +1,74 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3290.len6",
+  "op": 3290,
+  "length": 6,
+  "nsrc": 1,
+  "decoded": {
+   "ok": false,
+   "want": 3290,
+   "found": 8,
+   "cases": 8,
+   "encoded": [
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210",
+    "210005100280a0029c0820000210"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3290,
+    11842,
+    17244
+   ]
+  },
+  "status": "decode-mismatch",
+  "why": "1 of 1 runs did not produce a usable result (decode-mismatch)"
+ }
+]

@@ -1,0 +1,79 @@
+{
+ "section": "MM 25.183",
+ "instrument": "g17tensorcommonruntime.run (the common worker, composition generic) on the prefill w1 launch with epilogue ['half'], random fp16 A [M][2048] and B [2048][8192] (x 0.05), against the pinned MMA model's RNE narrowing",
+ "receipts": {
+  "kloop_half_m256": {
+   "status": "passed",
+   "mismatched": 0,
+   "program_sha256": null,
+   "keys": [
+    "accumulated_error_max_abs",
+    "boundary_guard",
+    "bytes",
+    "gpu_seconds",
+    "max_abs_vs_reference",
+    "mismatched_elements",
+    "output_sha256",
+    "readonly_inputs",
+    "reference_bit_exact",
+    "reference_bound",
+    "reference_max_abs",
+    "reference_within_bound"
+   ]
+  },
+  "kloop_half_m128": {
+   "status": "passed",
+   "mismatched": 0,
+   "program_sha256": null,
+   "keys": [
+    "accumulated_error_max_abs",
+    "boundary_guard",
+    "bytes",
+    "gpu_seconds",
+    "max_abs_vs_reference",
+    "mismatched_elements",
+    "output_sha256",
+    "readonly_inputs",
+    "reference_bit_exact",
+    "reference_bound",
+    "reference_max_abs",
+    "reference_within_bound"
+   ]
+  },
+  "kloop_half_m512": {
+   "status": "passed",
+   "mismatched": 0,
+   "program_sha256": null,
+   "keys": [
+    "accumulated_error_max_abs",
+    "boundary_guard",
+    "bytes",
+    "gpu_seconds",
+    "max_abs_vs_reference",
+    "mismatched_elements",
+    "output_sha256",
+    "readonly_inputs",
+    "reference_bit_exact",
+    "reference_bound",
+    "reference_max_abs",
+    "reference_within_bound"
+   ]
+  },
+  "w1_m256_control_half_rz": {
+   "status": "timed_mismatch",
+   "mismatched": 785910,
+   "same_program": true
+  },
+  "w1_m256_control_fp32_out": {
+   "status": "timed_mismatch",
+   "mismatched": 2097152,
+   "same_program": true
+  }
+ },
+ "launches": {
+  "m128": "sg 4, grid_n 256, kloop_unroll 4",
+  "m256": "sg 8, grid_n 256, kloop_unroll 4",
+  "m512": "sg 4 (gemm_shape), grid_n 256"
+ },
+ "controls_note": "half_rz (the reference narrowed toward zero) and fp32_out (C read as fp32) run the SAME program bytes and fail: 785,910 and 2,097,152 of 2,097,152 words"
+}

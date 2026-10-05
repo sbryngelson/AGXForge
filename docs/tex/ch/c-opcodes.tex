@@ -1,0 +1,13 @@
+\chapter{Opcode index}\label{app:c}
+
+\Cref{tab:opcode-index} lists every opcode this document mentions, as \href{https://github.com/sbryngelson/AGXForge/blob/main/isa/g17-opcode-glossary.json}{the opcode glossary} records it. The names are
+this project's, chosen by measured function; Apple's spellings are not used. \emph{Standing} is the glossary's confidence:
+\emph{executed}, the behaviour confirmed by running it on this GPU; \emph{compiled}, seen in compiled code, including programs that
+ran correctly, without its own semantics separately confirmed; \emph{static}, known only from Apple's tables or the corpus;
+\emph{unconfirmed}, a partial identification whose name says what is known and marks what is not (MM~\mm{0.16}). A few opcodes
+the chapters mention have no glossary entry; the table marks them, and the chapter that mentions one says what is known.
+"Discussed in" gives the one or two sections that discuss the opcode most; the last column gives up to four machine-model sections.
+
+% The table is generated on every build from the glossary and from where the chapters mention each opcode
+% (tools/g17docs.py --write-opindex, run by docs/tex/Makefile).
+\input{opindex}

@@ -1,0 +1,7 @@
+# The compiler, the image author, workflows 1-2 and the retained tests. Versions as used to produce this release.
+numpy==2.4.6
+pydantic==2.13.4
+PyYAML==6.0.3
+ml_dtypes==0.5.4
+# the figure generator (tools/g17showcasefigs.py)
+matplotlib==3.11.0

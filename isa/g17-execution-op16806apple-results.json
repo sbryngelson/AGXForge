@@ -1,0 +1,125 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op16806.apple_operand5",
+  "op": 16806,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16806,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0700003a0600030088812000",
+    "0700003a0600030088812000",
+    "0700003a0600030088812000",
+    "0700003a0600030088812000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    16806,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3221225472,
+   4160749568,
+   4293918720,
+   16
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op16806.apple_operand3_low",
+  "op": 16806,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 16806,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0700003a0600030088816000",
+    "0700003a0600030088816000",
+    "0700003a0600030088816000",
+    "0700003a0600030088816000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    16806,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3221225472,
+   4160749568,
+   4293918720,
+   16
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

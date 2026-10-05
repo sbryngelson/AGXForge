@@ -1,0 +1,680 @@
+{
+  "records" : [
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 1663.6250074952841,
+      "per_dispatch_us" : 41.590625187382102,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 6574.6250038500875,
+      "per_dispatch_us" : 164.36562509625219,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 6226.1249986477196,
+      "per_dispatch_us" : 155.65312496619299,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 1701.3750039041042,
+      "per_dispatch_us" : 42.534375097602606,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 6097.0000049564987,
+      "per_dispatch_us" : 152.42500012391247,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 3138.875006698072,
+      "per_dispatch_us" : 78.471875167451799,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 3157.2083244100213,
+      "per_dispatch_us" : 78.930208110250533,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 6326.6250072047114,
+      "per_dispatch_us" : 158.16562518011779,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 6638.7499973643571,
+      "per_dispatch_us" : 165.96874993410893,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 3266.5416656527668,
+      "per_dispatch_us" : 81.663541641319171,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 6059.6250114031136,
+      "per_dispatch_us" : 151.49062528507784,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 3124.2500117514282,
+      "per_dispatch_us" : 78.106250293785706,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 6366.4999906904995,
+      "per_dispatch_us" : 159.16249976726249,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 1565.2500151190907,
+      "per_dispatch_us" : 39.131250377977267,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 6106.0416628606617,
+      "per_dispatch_us" : 152.65104157151654,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 6364.0833541285247,
+      "per_dispatch_us" : 159.10208385321312,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 6289.3333088140935,
+      "per_dispatch_us" : 157.23333272035234,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 3261.2500071991235,
+      "per_dispatch_us" : 81.531250179978088,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 6842.6250072661787,
+      "per_dispatch_us" : 171.06562518165447,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 1568.2500088587403,
+      "per_dispatch_us" : 39.206250221468508,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 1678.0416772235185,
+      "per_dispatch_us" : 41.951041930587962,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 1581.6249942872673,
+      "per_dispatch_us" : 39.540624857181683,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 3223.9166612271219,
+      "per_dispatch_us" : 80.597916530678049,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 1682.1250028442591,
+      "per_dispatch_us" : 42.053125071106479,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 1567.625004099682,
+      "per_dispatch_us" : 39.190625102492049,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 1600.4166682250798,
+      "per_dispatch_us" : 40.010416705626994,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 6435.9583193436265,
+      "per_dispatch_us" : 160.89895798359066,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 6448.1666777282953,
+      "per_dispatch_us" : 161.20416694320738,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 3208.375012036413,
+      "per_dispatch_us" : 80.209375300910324,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 6109.9999875295907,
+      "per_dispatch_us" : 152.74999968823977,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 6505.7083265855908,
+      "per_dispatch_us" : 162.64270816463977,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 6165.7500045839697,
+      "per_dispatch_us" : 154.14375011459924,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 3192.6250085234642,
+      "per_dispatch_us" : 79.815625213086605,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 6280.1250023767352,
+      "per_dispatch_us" : 157.00312505941838,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 6724.5000100228935,
+      "per_dispatch_us" : 168.11250025057234,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 3054.7500064130872,
+      "per_dispatch_us" : 76.368750160327181,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 1610.0000066217035,
+      "per_dispatch_us" : 40.250000165542588,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 3136.6249895654619,
+      "per_dispatch_us" : 78.415624739136547,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 6277.9583386145532,
+      "per_dispatch_us" : 156.94895846536383,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 3196.9166884664446,
+      "per_dispatch_us" : 79.922917211661115,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 3072.1249931957573,
+      "per_dispatch_us" : 76.803124829893932,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 6532.4999741278589,
+      "per_dispatch_us" : 163.31249935319647,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 6203.3750000409782,
+      "per_dispatch_us" : 155.08437500102445,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 6272.8750053793192,
+      "per_dispatch_us" : 156.82187513448298,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 3626.9583215471357,
+      "per_dispatch_us" : 90.673958038678393,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 6308.4999856073409,
+      "per_dispatch_us" : 157.71249964018352,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 6352.6250014547259,
+      "per_dispatch_us" : 158.81562503636815,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 2125.8333581499755,
+      "per_dispatch_us" : 53.145833953749388,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 3157.4583554174751,
+      "per_dispatch_us" : 78.936458885436878,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 3070.6250108778477,
+      "per_dispatch_us" : 76.765625271946192,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 1674.9583301134408,
+      "per_dispatch_us" : 41.873958252836019,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 6062.2916789725423,
+      "per_dispatch_us" : 151.55729197431356,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 3191.6250009089708,
+      "per_dispatch_us" : 79.790625022724271,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 1731.0416442342103,
+      "per_dispatch_us" : 43.276041105855256,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 6049.3750206660479,
+      "per_dispatch_us" : 151.2343755166512,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 6420.4583177343011,
+      "per_dispatch_us" : 160.51145794335753,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 3070.2083313371986,
+      "per_dispatch_us" : 76.755208283429965,
+      "tag" : "qkv\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 1955.0416909623891,
+      "per_dispatch_us" : 48.876042274059728,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 6239.458336494863,
+      "per_dispatch_us" : 155.98645841237158,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 6516.2499959114939,
+      "per_dispatch_us" : 162.90624989778735,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 1584.3750152271241,
+      "per_dispatch_us" : 39.609375380678102,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 1672.6666653994471,
+      "per_dispatch_us" : 41.816666634986177,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 6728.0000075697899,
+      "per_dispatch_us" : 168.20000018924475,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 1819.6250020992011,
+      "per_dispatch_us" : 45.490625052480027,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 6240.9999954979867,
+      "per_dispatch_us" : 156.02499988744967,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 6660.7916669454426,
+      "per_dispatch_us" : 166.51979167363606,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 6300.3333343658596,
+      "per_dispatch_us" : 157.50833335914649,
+      "tag" : "w2\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 1679.6250129118562,
+      "per_dispatch_us" : 41.990625322796404,
+      "tag" : "wo\/mm_32_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 6150.41668061167,
+      "per_dispatch_us" : 153.76041701529175,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 3245.4166794195771,
+      "per_dispatch_us" : 81.135416985489428,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 1739.7916817571968,
+      "per_dispatch_us" : 43.49479204392992,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 6222.6250011008233,
+      "per_dispatch_us" : 155.56562502752058,
+      "tag" : "w2\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 3176.7500040587038,
+      "per_dispatch_us" : 79.418750101467595,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 1583.4583318792284,
+      "per_dispatch_us" : 39.586458296980709,
+      "tag" : "wo\/mm_128_32_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 6250.7083348464221,
+      "per_dispatch_us" : 156.26770837116055,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 0,
+      "n" : 40,
+      "span_us" : 1731.8750033155084,
+      "per_dispatch_us" : 43.296875082887709,
+      "tag" : "wo\/mm_32_128_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 3165.5833299737424,
+      "per_dispatch_us" : 79.139583249343559,
+      "tag" : "qkv\/mm_32_64_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 6446.8749915249646,
+      "per_dispatch_us" : 161.17187478812411,
+      "tag" : "w2\/mm_64_32_1",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 3,
+      "n" : 40,
+      "span_us" : 6098.2500144746155,
+      "per_dispatch_us" : 152.45625036186539,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 4,
+      "n" : 40,
+      "span_us" : 6222.3749991971999,
+      "per_dispatch_us" : 155.55937497993,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 5,
+      "n" : 40,
+      "span_us" : 6268.7083263881505,
+      "per_dispatch_us" : 156.71770815970376,
+      "tag" : "w1\/mm_128_64_4",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 6,
+      "n" : 40,
+      "span_us" : 6266.9999897480011,
+      "per_dispatch_us" : 156.67499974370003,
+      "tag" : "w1\/mm_128_64_8",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 1,
+      "n" : 40,
+      "span_us" : 3262.1249847579747,
+      "per_dispatch_us" : 81.553124618949369,
+      "tag" : "qkv\/mm_64_64_2",
+      "bit_exact" : true
+    },
+    {
+      "chain" : 2,
+      "n" : 40,
+      "span_us" : 6354.3750147800893,
+      "per_dispatch_us" : 158.85937536950223,
+      "tag" : "w1\/mm_64_128_4",
+      "bit_exact" : true
+    }
+  ],
+  "n" : 40,
+  "device" : "Apple M5 Pro",
+  "seed" : 161,
+  "chains" : 7
+}

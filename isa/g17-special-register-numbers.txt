@@ -1,0 +1,64 @@
+# THE HARDWARE SPECIAL-REGISTER NUMBERING, which is not the MCRegister numbering and which
+# nothing in Apple's tables exposes.
+#
+# read_sr's second operand is declared SIR32 and the authoring pass could never map it. It fits no
+# base-plus-field in any of this project's three encoding domains - not the MCRegister id, not the
+# slot form, not the index within the register class. It is a LOOKUP: the field holds a hardware
+# special-register number that Apple's LLVM tables do not contain anywhere.
+#
+# The consecutive triples are what make it a numbering rather than a coincidence:
+#
+#     SR_TG_X_SIZE, Y, Z  ->  24, 25, 26        SR_LOCAL_X, Y  ->  36, 37
+#     SR_LIBXDIM, YDIM    ->  44, 45            SR_PVQUAD, PVSIMD -> 20, 21
+#
+# In each case the MCRegister ids are NOT consecutive - SR_TG_X/Y/Z_SIZE are 55, 57, 59 - so the
+# grouping comes from the hardware side, not from LLVM's alphabetical enum.
+#
+# THE FIELD DEPENDS ON THE ENCODED LENGTH and so does the numbering, which is why one table would
+# have been wrong. Both are given below, each derived by requiring every bit to be constant across
+# all instances that print the same register and to differ across registers, then checking the
+# result is a bijection.
+#
+# WHAT THIS LICENSES: an authoring pass can emit read_sr for any register listed here by writing
+# the number into the field. It must REFUSE a register not listed - the mapping is observed, not
+# derived, and nothing here predicts the number of a register the corpus never read.
+
+=== 4-byte form, 1116 instances ===
+field bits, low to high: byte1 bit0, byte1 bit1, byte1 bit2, byte1 bit3, byte1 bit4, byte1 bit5, byte1 bit6
+mcreg name                   hardware number
+45    SR_SIMD_ELEM           2
+46    SR_SIMD_GRP            5
+37    SR_PVQUAD              20
+38    SR_PVSIMD              21
+65    SR_TVQUAD              22
+66    SR_TVSIMD              23
+55    SR_TG_X_SIZE           24
+57    SR_TG_Y_SIZE           25
+59    SR_TG_Z_SIZE           26
+26    SR_LOCAL_X             36
+27    SR_LOCAL_Y             37
+25    SR_LIN_ID              39
+51    SR_TG_DISP_X_SIZE      40
+53    SR_TG_DISP_Z_SIZE      42
+23    SR_LIBXDIM             44
+24    SR_LIBYDIM             45
+71    SR_VRID_SET            106
+
+=== 8-byte form, 154 instances ===
+field bits, low to high: byte1 bit0, byte1 bit1, byte3 bit3, byte3 bit4, byte3 bit5, byte3 bit6
+mcreg name                   hardware number
+25    SR_LIN_ID              15
+26    SR_LOCAL_X             16
+27    SR_LOCAL_Y             17
+28    SR_LOCAL_Z             18
+37    SR_PVQUAD              23
+38    SR_PVSIMD              24
+45    SR_SIMD_ELEM           30
+46    SR_SIMD_GRP            31
+51    SR_TG_DISP_X_SIZE      32
+52    SR_TG_DISP_Y_SIZE      33
+53    SR_TG_DISP_Z_SIZE      34
+55    SR_TG_X_SIZE           35
+57    SR_TG_Y_SIZE           36
+59    SR_TG_Z_SIZE           37
+66    SR_TVSIMD              41

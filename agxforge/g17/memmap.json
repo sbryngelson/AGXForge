@@ -1,0 +1,10222 @@
+{
+ "load8": {
+  "op": 12709,
+  "reference": "cf000300780a1000",
+  "operands": [
+   [
+    "reg",
+    "R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R0"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    16
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": -8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -4194304
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R0",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": -15
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": -12
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     12673,
+     8
+    ]
+   ],
+   [
+    16,
+    [
+     14667,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     12712,
+     8
+    ]
+   ],
+   [
+    32,
+    [
+     17256,
+     8
+    ]
+   ],
+   [
+    33,
+    [
+     12400,
+     8
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     12700,
+     8
+    ]
+   ],
+   [
+    38,
+    [
+     12691,
+     8
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     12709,
+     8
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     12709,
+     8
+    ]
+   ],
+   [
+    43,
+    [
+     12682,
+     8
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     12091,
+     8
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    63,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19
+  ]
+ },
+ "load8_c": {
+  "op": 12709,
+  "reference": "0f080320780a1040",
+  "operands": [
+   [
+    "reg",
+    "R0_R1_R2_R3"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R16"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R0_R1_R2_R3",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -4194304
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R16",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": -16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     12673,
+     8
+    ]
+   ],
+   [
+    16,
+    [
+     14667,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     12712,
+     8
+    ]
+   ],
+   [
+    32,
+    [
+     17256,
+     8
+    ]
+   ],
+   [
+    33,
+    [
+     12400,
+     8
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     12700,
+     8
+    ]
+   ],
+   [
+    38,
+    [
+     12691,
+     8
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     12709,
+     8
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     12709,
+     8
+    ]
+   ],
+   [
+    43,
+    [
+     12682,
+     8
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     12091,
+     8
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    63,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19
+  ]
+ },
+ "load10": {
+  "op": 12709,
+  "reference": "cf000300780a10800008",
+  "operands": [
+   [
+    "reg",
+    "R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    242
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R0"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    16
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": -8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 79,
+      "byte": 9,
+      "bitpos": 7,
+      "delta": 184549376
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R0",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": -15
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": -12
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": -14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 242,
+    "bits": [
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     12673,
+     10
+    ]
+   ],
+   [
+    16,
+    [
+     14667,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     12712,
+     10
+    ]
+   ],
+   [
+    32,
+    [
+     17256,
+     10
+    ]
+   ],
+   [
+    33,
+    [
+     12400,
+     10
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     12700,
+     10
+    ]
+   ],
+   [
+    38,
+    [
+     12691,
+     10
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     12709,
+     10
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     12709,
+     10
+    ]
+   ],
+   [
+    43,
+    [
+     12682,
+     10
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     12091,
+     10
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    63,
+    [
+     12709,
+     8
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    null
+   ],
+   [
+    74,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   66
+  ]
+ },
+ "load14": {
+  "op": 12709,
+  "reference": "4f080320780a10c2410080000000",
+  "operands": [
+   [
+    "reg",
+    "R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    137447342080
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R16"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    4
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 137447342080,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 4294967296
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": -133143986176
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 1039382085632
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 2134598746112
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 79,
+      "byte": 9,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 80,
+      "byte": 10,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": -60129542144
+     },
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 71339406786560
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R16",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": -16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 104,
+      "byte": 13,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 105,
+      "byte": 13,
+      "bitpos": 1,
+      "delta": 512
+     },
+     {
+      "bit": 106,
+      "byte": 13,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 4096
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 2290,
+    "bits": [
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": -2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     12673,
+     14
+    ]
+   ],
+   [
+    16,
+    [
+     14667,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     12712,
+     14
+    ]
+   ],
+   [
+    32,
+    [
+     17256,
+     14
+    ]
+   ],
+   [
+    33,
+    [
+     12400,
+     14
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     12700,
+     14
+    ]
+   ],
+   [
+    38,
+    [
+     12691,
+     14
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     12709,
+     14
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     12709,
+     14
+    ]
+   ],
+   [
+    43,
+    [
+     12682,
+     14
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     12091,
+     14
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    63,
+    [
+     12709,
+     8
+    ]
+   ],
+   [
+    64,
+    [
+     12709,
+     10
+    ]
+   ],
+   [
+    65,
+    null
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    71,
+    null
+   ],
+   [
+    74,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   66,
+   81,
+   82,
+   83,
+   84,
+   85,
+   86,
+   88,
+   89,
+   90,
+   96,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   103
+  ]
+ },
+ "store8": {
+  "op": 17256,
+  "reference": "0f080320610a1040",
+  "operands": [
+   [
+    "reg",
+    "R0_R1_R2_R3"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R16"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R0_R1_R2_R3",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -16
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R16",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": -16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     17220,
+     8
+    ]
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     17259,
+     8
+    ]
+   ],
+   [
+    32,
+    [
+     12709,
+     8
+    ]
+   ],
+   [
+    33,
+    [
+     13324,
+     8
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     17247,
+     8
+    ]
+   ],
+   [
+    38,
+    [
+     17238,
+     8
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     17256,
+     8
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     17256,
+     8
+    ]
+   ],
+   [
+    43,
+    [
+     17229,
+     8
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     17598,
+     8
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    63,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   35,
+   36
+  ]
+ },
+ "store8_b": {
+  "op": 17256,
+  "reference": "4f080320610e1042",
+  "operands": [
+   [
+    "reg",
+    "R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R16"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    4
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -16
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R16",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": -16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": -16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     17220,
+     8
+    ]
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     17259,
+     8
+    ]
+   ],
+   [
+    32,
+    [
+     12709,
+     8
+    ]
+   ],
+   [
+    33,
+    [
+     13324,
+     8
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     17247,
+     8
+    ]
+   ],
+   [
+    38,
+    [
+     17238,
+     8
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     17256,
+     8
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     17262,
+     8
+    ]
+   ],
+   [
+    43,
+    [
+     17229,
+     8
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     17598,
+     8
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    63,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   35,
+   36
+  ]
+ },
+ "store14": {
+  "op": 17256,
+  "reference": "4f080320610e1080010000000002",
+  "operands": [
+   [
+    "reg",
+    "R4_R5_R6_R7"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R16"
+   ],
+   [
+    "imm",
+    16
+   ],
+   [
+    "imm",
+    512
+   ],
+   [
+    "imm",
+    16
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R4_R5_R6_R7",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -16
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 21990232555520
+     },
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 79,
+      "byte": 9,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 80,
+      "byte": 10,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 4294967296
+     },
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 70446053588992
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R16",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": -16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 512,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 104,
+      "byte": 13,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 105,
+      "byte": 13,
+      "bitpos": 1,
+      "delta": -512
+     },
+     {
+      "bit": 106,
+      "byte": 13,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 4096
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": -15
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": -12
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": -14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 2290,
+    "bits": [
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": -2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     17220,
+     14
+    ]
+   ],
+   [
+    16,
+    [
+     14667,
+     14
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12682,
+     10
+    ]
+   ],
+   [
+    24,
+    [
+     17259,
+     14
+    ]
+   ],
+   [
+    32,
+    [
+     12709,
+     14
+    ]
+   ],
+   [
+    33,
+    [
+     13324,
+     14
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     17247,
+     14
+    ]
+   ],
+   [
+    38,
+    [
+     17238,
+     14
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     17256,
+     14
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     17262,
+     14
+    ]
+   ],
+   [
+    43,
+    [
+     17229,
+     14
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     17598,
+     14
+    ]
+   ],
+   [
+    50,
+    [
+     9994,
+     12
+    ]
+   ],
+   [
+    63,
+    [
+     17256,
+     8
+    ]
+   ],
+   [
+    64,
+    [
+     17256,
+     10
+    ]
+   ],
+   [
+    65,
+    null
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    74,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   35,
+   36,
+   66,
+   81,
+   82,
+   83,
+   84,
+   85,
+   86,
+   88,
+   89,
+   90,
+   96,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   103
+  ]
+ },
+ "load14_disp": {
+  "op": 12709,
+  "reference": "cf000320600a0080010000000002",
+  "operands": [
+   [
+    "reg",
+    "R12_R13_R14_R15"
+   ],
+   [
+    "imm",
+    1048576
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R16"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    512
+   ],
+   [
+    "imm",
+    16
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R12_R13_R14_R15",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": -8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 1048576,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": 1048576
+     },
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": 2097152
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 4194304
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 79,
+      "byte": 9,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 80,
+      "byte": 10,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 4294967296
+     },
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 70446053588992
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R16",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": -16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 512,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 104,
+      "byte": 13,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 105,
+      "byte": 13,
+      "bitpos": 1,
+      "delta": -512
+     },
+     {
+      "bit": 106,
+      "byte": 13,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 4096
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 16,
+    "bits": [
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": -15
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": -12
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": -14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 2290,
+    "bits": [
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": -2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    [
+     17775,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     12673,
+     14
+    ]
+   ],
+   [
+    16,
+    [
+     14667,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12682,
+     10
+    ]
+   ],
+   [
+    24,
+    [
+     12712,
+     14
+    ]
+   ],
+   [
+    32,
+    [
+     17256,
+     14
+    ]
+   ],
+   [
+    33,
+    [
+     12400,
+     14
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    37,
+    [
+     12700,
+     14
+    ]
+   ],
+   [
+    38,
+    [
+     12691,
+     14
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     12709,
+     14
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     12709,
+     14
+    ]
+   ],
+   [
+    43,
+    [
+     12682,
+     14
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     12091,
+     14
+    ]
+   ],
+   [
+    50,
+    [
+     9994,
+     12
+    ]
+   ],
+   [
+    63,
+    [
+     12709,
+     8
+    ]
+   ],
+   [
+    64,
+    [
+     12709,
+     10
+    ]
+   ],
+   [
+    65,
+    null
+   ],
+   [
+    68,
+    null
+   ],
+   [
+    74,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   66,
+   81,
+   82,
+   83,
+   84,
+   85,
+   86,
+   88,
+   89,
+   90,
+   96,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   103
+  ]
+ },
+ "mstore10": {
+  "op": 17258,
+  "reference": "0f088700280e610a1840",
+  "operands": [
+   [
+    "reg",
+    "R32_R33_R34_R35"
+   ],
+   [
+    "imm",
+    4398046511120
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R0"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4
+   ],
+   [
+    "reg",
+    "R7L"
+   ],
+   [
+    "imm",
+    0
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R32_R33_R34_R35",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": -32
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 4398046511120,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": -4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -16
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R0",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "8": {
+    "kind": "reg",
+    "base": "R7L",
+    "bits": [
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 38,
+      "byte": 4,
+      "bitpos": 6,
+      "delta": 64
+     },
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -144
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -1
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -2
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -4
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 32
+     }
+    ]
+   },
+   "9": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 39,
+      "byte": 4,
+      "bitpos": 7,
+      "delta": 16
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     17222,
+     10
+    ]
+   ],
+   [
+    16,
+    [
+     14763,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     17261,
+     10
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     17256,
+     10
+    ]
+   ],
+   [
+    37,
+    [
+     17257,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     12711,
+     10
+    ]
+   ],
+   [
+    49,
+    [
+     13326,
+     10
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    53,
+    [
+     17249,
+     10
+    ]
+   ],
+   [
+    54,
+    [
+     17240,
+     10
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     17258,
+     10
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     17258,
+     10
+    ]
+   ],
+   [
+    59,
+    [
+     17231,
+     10
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     17598,
+     10
+    ]
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    79,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   51,
+   52
+  ]
+ },
+ "mstore16": {
+  "op": 17258,
+  "reference": "4f088700280e610a18c0010000000010",
+  "operands": [
+   [
+    "reg",
+    "R36_R37_R38_R39"
+   ],
+   [
+    "imm",
+    4398046511120
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R0"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4096
+   ],
+   [
+    "imm",
+    4
+   ],
+   [
+    "reg",
+    "R7L"
+   ],
+   [
+    "imm",
+    0
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R36_R37_R38_R39",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": -32
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 4398046511120,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": -4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -16
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 96,
+      "byte": 12,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 103,
+      "byte": 12,
+      "bitpos": 7,
+      "delta": 4294967296
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 70446053588992
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R0",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     },
+     {
+      "bit": 84,
+      "byte": 10,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "8": {
+    "kind": "reg",
+    "base": "R7L",
+    "bits": [
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 38,
+      "byte": 4,
+      "bitpos": 6,
+      "delta": 64
+     },
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -144
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -1
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -2
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -4
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 32
+     }
+    ]
+   },
+   "9": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 39,
+      "byte": 4,
+      "bitpos": 7,
+      "delta": 16
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 4096,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 120,
+      "byte": 15,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 121,
+      "byte": 15,
+      "bitpos": 1,
+      "delta": 512
+     },
+     {
+      "bit": 122,
+      "byte": 15,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 123,
+      "byte": 15,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 124,
+      "byte": 15,
+      "bitpos": 4,
+      "delta": -4096
+     },
+     {
+      "bit": 125,
+      "byte": 15,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 126,
+      "byte": 15,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 127,
+      "byte": 15,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 2290,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": -2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     17222,
+     16
+    ]
+   ],
+   [
+    16,
+    [
+     14763,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     17261,
+     16
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     17256,
+     16
+    ]
+   ],
+   [
+    37,
+    [
+     17257,
+     16
+    ]
+   ],
+   [
+    48,
+    [
+     12711,
+     16
+    ]
+   ],
+   [
+    49,
+    [
+     13326,
+     16
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    53,
+    [
+     17249,
+     16
+    ]
+   ],
+   [
+    54,
+    [
+     17240,
+     16
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     17258,
+     16
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     17258,
+     16
+    ]
+   ],
+   [
+    59,
+    [
+     17231,
+     16
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     17598,
+     16
+    ]
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    79,
+    [
+     17258,
+     10
+    ]
+   ],
+   [
+    80,
+    [
+     17258,
+     12
+    ]
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    87,
+    null
+   ],
+   [
+    90,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   51,
+   52,
+   82,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   104,
+   105,
+   106,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119
+  ]
+ },
+ "tload12": {
+  "op": 12674,
+  "reference": "070047400800780a10808008",
+  "operands": [
+   [
+    "reg",
+    "R16_R17"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    241
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R32"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "imm",
+    15
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R16_R17",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": -16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": -1251
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R32",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "8": {
+    "kind": "imm",
+    "base": 15,
+    "bits": [
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -14
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -13
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -11
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -7
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 241,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     13483,
+     2
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     12710,
+     12
+    ]
+   ],
+   [
+    16,
+    [
+     14571,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12646,
+     8
+    ]
+   ],
+   [
+    24,
+    [
+     12677,
+     12
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     12673,
+     12
+    ]
+   ],
+   [
+    37,
+    [
+     12675,
+     12
+    ]
+   ],
+   [
+    38,
+    [
+     12675,
+     12
+    ]
+   ],
+   [
+    48,
+    [
+     17221,
+     12
+    ]
+   ],
+   [
+    49,
+    [
+     12353,
+     12
+    ]
+   ],
+   [
+    53,
+    [
+     12665,
+     12
+    ]
+   ],
+   [
+    54,
+    [
+     12656,
+     12
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     12674,
+     12
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     12674,
+     12
+    ]
+   ],
+   [
+    59,
+    [
+     12647,
+     12
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     12079,
+     12
+    ]
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    77,
+    null
+   ],
+   [
+    78,
+    null
+   ],
+   [
+    79,
+    [
+     12674,
+     10
+    ]
+   ],
+   [
+    80,
+    null
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    84,
+    null
+   ],
+   [
+    90,
+    [
+     12656,
+     12
+    ]
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   36,
+   39,
+   44,
+   45,
+   46,
+   47,
+   82
+  ]
+ },
+ "tload16": {
+  "op": 12674,
+  "reference": "270047400800780a1080810800000008",
+  "operands": [
+   [
+    "reg",
+    "R18_R19"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    241
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R32"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    2048
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "imm",
+    15
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R18_R19",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": -2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": -16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": -1251
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 96,
+      "byte": 12,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 103,
+      "byte": 12,
+      "bitpos": 7,
+      "delta": 4294967296
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 70446053588992
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R32",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "8": {
+    "kind": "imm",
+    "base": 15,
+    "bits": [
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -14
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -13
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -11
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -7
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 2048,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 120,
+      "byte": 15,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 121,
+      "byte": 15,
+      "bitpos": 1,
+      "delta": 512
+     },
+     {
+      "bit": 122,
+      "byte": 15,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 123,
+      "byte": 15,
+      "bitpos": 3,
+      "delta": -2048
+     },
+     {
+      "bit": 124,
+      "byte": 15,
+      "bitpos": 4,
+      "delta": 4096
+     },
+     {
+      "bit": 125,
+      "byte": 15,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 126,
+      "byte": 15,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 127,
+      "byte": 15,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 241,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     13483,
+     2
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     12710,
+     16
+    ]
+   ],
+   [
+    16,
+    [
+     14571,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12646,
+     8
+    ]
+   ],
+   [
+    24,
+    [
+     12677,
+     16
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     12673,
+     16
+    ]
+   ],
+   [
+    37,
+    [
+     12675,
+     16
+    ]
+   ],
+   [
+    38,
+    [
+     12675,
+     16
+    ]
+   ],
+   [
+    48,
+    [
+     17221,
+     16
+    ]
+   ],
+   [
+    49,
+    [
+     12353,
+     16
+    ]
+   ],
+   [
+    53,
+    [
+     12665,
+     16
+    ]
+   ],
+   [
+    54,
+    [
+     12656,
+     16
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     12674,
+     16
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     12674,
+     16
+    ]
+   ],
+   [
+    59,
+    [
+     12647,
+     16
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     12079,
+     16
+    ]
+   ],
+   [
+    66,
+    [
+     9994,
+     14
+    ]
+   ],
+   [
+    77,
+    null
+   ],
+   [
+    78,
+    null
+   ],
+   [
+    79,
+    [
+     12674,
+     10
+    ]
+   ],
+   [
+    80,
+    [
+     12674,
+     12
+    ]
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    84,
+    null
+   ],
+   [
+    90,
+    [
+     12656,
+     16
+    ]
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   36,
+   39,
+   44,
+   45,
+   46,
+   47,
+   82,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   104,
+   105,
+   106,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119
+  ]
+ },
+ "tload16_end": {
+  "op": 12674,
+  "reference": "270407100800780a1080c10880000001",
+  "operands": [
+   [
+    "reg",
+    "R2_R3"
+   ],
+   [
+    "imm",
+    137447342080
+   ],
+   [
+    "imm",
+    241
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R8"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    256
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "imm",
+    15
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R2_R3",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": -2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 34,
+      "byte": 4,
+      "bitpos": 2,
+      "delta": 128
+     },
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": -1251
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 137447342080,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 4294967296
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": -133143986176
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 1039382085632
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 2134598746112
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 96,
+      "byte": 12,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 103,
+      "byte": 12,
+      "bitpos": 7,
+      "delta": -60129542144
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 71339406786560
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R8",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": -8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     },
+     {
+      "bit": 84,
+      "byte": 10,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "8": {
+    "kind": "imm",
+    "base": 15,
+    "bits": [
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -14
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -13
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -11
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -7
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 256,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 120,
+      "byte": 15,
+      "bitpos": 0,
+      "delta": -256
+     },
+     {
+      "bit": 121,
+      "byte": 15,
+      "bitpos": 1,
+      "delta": 512
+     },
+     {
+      "bit": 122,
+      "byte": 15,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 123,
+      "byte": 15,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 124,
+      "byte": 15,
+      "bitpos": 4,
+      "delta": 4096
+     },
+     {
+      "bit": 125,
+      "byte": 15,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 126,
+      "byte": 15,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 127,
+      "byte": 15,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 241,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     13483,
+     2
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     12710,
+     16
+    ]
+   ],
+   [
+    16,
+    [
+     14571,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12646,
+     8
+    ]
+   ],
+   [
+    24,
+    [
+     12677,
+     16
+    ]
+   ],
+   [
+    35,
+    [
+     12673,
+     16
+    ]
+   ],
+   [
+    37,
+    [
+     12675,
+     16
+    ]
+   ],
+   [
+    38,
+    [
+     12675,
+     16
+    ]
+   ],
+   [
+    48,
+    [
+     17221,
+     16
+    ]
+   ],
+   [
+    49,
+    [
+     12353,
+     16
+    ]
+   ],
+   [
+    53,
+    [
+     12665,
+     16
+    ]
+   ],
+   [
+    54,
+    [
+     12656,
+     16
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     12674,
+     16
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     12674,
+     16
+    ]
+   ],
+   [
+    59,
+    [
+     12647,
+     16
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     12079,
+     16
+    ]
+   ],
+   [
+    66,
+    [
+     9994,
+     14
+    ]
+   ],
+   [
+    77,
+    null
+   ],
+   [
+    78,
+    null
+   ],
+   [
+    79,
+    [
+     12674,
+     10
+    ]
+   ],
+   [
+    80,
+    [
+     12674,
+     12
+    ]
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    90,
+    [
+     12656,
+     16
+    ]
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   36,
+   39,
+   44,
+   45,
+   46,
+   47,
+   82,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   104,
+   105,
+   106,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119
+  ]
+ },
+ "mload12": {
+  "op": 12675,
+  "reference": "c700c706280f780a10808008",
+  "operands": [
+   [
+    "reg",
+    "R60_R61"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    241
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R3"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "reg",
+    "R7H"
+   ],
+   [
+    "imm",
+    0
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R60_R61",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": -8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": -16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": -32
+     },
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": -1251
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R3",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": -1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": -2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     },
+     {
+      "bit": 84,
+      "byte": 10,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "8": {
+    "kind": "reg",
+    "base": "R7H",
+    "bits": [
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 38,
+      "byte": 4,
+      "bitpos": 6,
+      "delta": 64
+     },
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": 144
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -1
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -2
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -4
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 32
+     }
+    ]
+   },
+   "9": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 39,
+      "byte": 4,
+      "bitpos": 7,
+      "delta": 16
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 241,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     13483,
+     2
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     12711,
+     12
+    ]
+   ],
+   [
+    16,
+    null
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    null
+   ],
+   [
+    24,
+    [
+     12678,
+     12
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     12673,
+     12
+    ]
+   ],
+   [
+    37,
+    [
+     12674,
+     12
+    ]
+   ],
+   [
+    48,
+    [
+     17222,
+     12
+    ]
+   ],
+   [
+    49,
+    [
+     12354,
+     12
+    ]
+   ],
+   [
+    53,
+    [
+     12666,
+     12
+    ]
+   ],
+   [
+    54,
+    [
+     12657,
+     12
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     12675,
+     12
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     12675,
+     12
+    ]
+   ],
+   [
+    59,
+    [
+     12648,
+     12
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     12079,
+     12
+    ]
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    77,
+    null
+   ],
+   [
+    78,
+    null
+   ],
+   [
+    79,
+    [
+     12675,
+     10
+    ]
+   ],
+   [
+    80,
+    null
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    90,
+    [
+     12657,
+     12
+    ]
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   82
+  ]
+ },
+ "mload16": {
+  "op": 12675,
+  "reference": "0704070c280e601a0080810800000010",
+  "operands": [
+   [
+    "reg",
+    "R64_R65"
+   ],
+   [
+    "imm",
+    1048576
+   ],
+   [
+    "imm",
+    241
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R6"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4096
+   ],
+   [
+    "imm",
+    2
+   ],
+   [
+    "reg",
+    "R7L"
+   ],
+   [
+    "imm",
+    0
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R64_R65",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 50,
+      "byte": 6,
+      "bitpos": 2,
+      "delta": -1251
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": -64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 1048576,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 1048576
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": 2097152
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": 4194304
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 96,
+      "byte": 12,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 103,
+      "byte": 12,
+      "bitpos": 7,
+      "delta": 4294967296
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 70446053588992
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R6",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": -2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": -4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     },
+     {
+      "bit": 84,
+      "byte": 10,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "8": {
+    "kind": "reg",
+    "base": "R7L",
+    "bits": [
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 38,
+      "byte": 4,
+      "bitpos": 6,
+      "delta": 64
+     },
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -144
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -1
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -2
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -4
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 32
+     }
+    ]
+   },
+   "9": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 39,
+      "byte": 4,
+      "bitpos": 7,
+      "delta": 16
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 32
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 4096,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 120,
+      "byte": 15,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 121,
+      "byte": 15,
+      "bitpos": 1,
+      "delta": 512
+     },
+     {
+      "bit": 122,
+      "byte": 15,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 123,
+      "byte": 15,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 124,
+      "byte": 15,
+      "bitpos": 4,
+      "delta": -4096
+     },
+     {
+      "bit": 125,
+      "byte": 15,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 126,
+      "byte": 15,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 127,
+      "byte": 15,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 87,
+      "byte": 10,
+      "bitpos": 7,
+      "delta": 14
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 241,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     13483,
+     2
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     12711,
+     16
+    ]
+   ],
+   [
+    16,
+    [
+     14571,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12655,
+     8
+    ]
+   ],
+   [
+    24,
+    [
+     12678,
+     16
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     12673,
+     16
+    ]
+   ],
+   [
+    37,
+    [
+     12674,
+     16
+    ]
+   ],
+   [
+    48,
+    [
+     17222,
+     16
+    ]
+   ],
+   [
+    49,
+    [
+     12354,
+     16
+    ]
+   ],
+   [
+    53,
+    [
+     12666,
+     16
+    ]
+   ],
+   [
+    54,
+    [
+     12657,
+     16
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     12675,
+     16
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     12675,
+     16
+    ]
+   ],
+   [
+    59,
+    [
+     12648,
+     16
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     12079,
+     16
+    ]
+   ],
+   [
+    66,
+    [
+     9994,
+     14
+    ]
+   ],
+   [
+    77,
+    null
+   ],
+   [
+    78,
+    null
+   ],
+   [
+    79,
+    [
+     12675,
+     10
+    ]
+   ],
+   [
+    80,
+    [
+     12675,
+     12
+    ]
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    90,
+    [
+     12657,
+     16
+    ]
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   82,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   104,
+   105,
+   106,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119
+  ]
+ },
+ "load1w": {
+  "op": 12655,
+  "reference": "57000308380a10808008",
+  "operands": [
+   [
+    "reg",
+    "R5"
+   ],
+   [
+    "imm",
+    8388608
+   ],
+   [
+    "imm",
+    49
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R4"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    2
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R5",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": -1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": 8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": 16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 34,
+      "byte": 4,
+      "bitpos": 2,
+      "delta": 666
+     },
+     {
+      "bit": 44,
+      "byte": 5,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 8388608,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 35,
+      "byte": 4,
+      "bitpos": 3,
+      "delta": -1048576
+     },
+     {
+      "bit": 36,
+      "byte": 4,
+      "bitpos": 4,
+      "delta": -2097152
+     },
+     {
+      "bit": 45,
+      "byte": 5,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 46,
+      "byte": 5,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 47,
+      "byte": 5,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 51,
+      "byte": 6,
+      "bitpos": 3,
+      "delta": 4398046511104
+     },
+     {
+      "bit": 52,
+      "byte": 6,
+      "bitpos": 4,
+      "delta": -4194304
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 79,
+      "byte": 9,
+      "bitpos": 7,
+      "delta": 184549376
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R4",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": -4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": 32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 49,
+    "bits": [
+     {
+      "bit": 37,
+      "byte": 4,
+      "bitpos": 5,
+      "delta": 96
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 2048
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 53,
+      "byte": 6,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 54,
+      "byte": 6,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 55,
+      "byte": 6,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 56,
+      "byte": 7,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 57,
+      "byte": 7,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 59,
+      "byte": 7,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 2,
+    "bits": [
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 14
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    null
+   ],
+   [
+    1,
+    [
+     17659,
+     8
+    ]
+   ],
+   [
+    2,
+    [
+     17784,
+     4
+    ]
+   ],
+   [
+    3,
+    [
+     12691,
+     10
+    ]
+   ],
+   [
+    16,
+    [
+     14475,
+     8
+    ]
+   ],
+   [
+    17,
+    [
+     14021,
+     10
+    ]
+   ],
+   [
+    18,
+    [
+     12648,
+     10
+    ]
+   ],
+   [
+    24,
+    [
+     12658,
+     10
+    ]
+   ],
+   [
+    32,
+    [
+     17202,
+     10
+    ]
+   ],
+   [
+    33,
+    [
+     12328,
+     10
+    ]
+   ],
+   [
+    38,
+    [
+     12673,
+     10
+    ]
+   ],
+   [
+    39,
+    [
+     "operand count",
+     12655,
+     10
+    ]
+   ],
+   [
+    40,
+    null
+   ],
+   [
+    41,
+    [
+     "operand count",
+     12655,
+     10
+    ]
+   ],
+   [
+    43,
+    [
+     12646,
+     10
+    ]
+   ],
+   [
+    48,
+    null
+   ],
+   [
+    49,
+    [
+     12073,
+     10
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    61,
+    null
+   ],
+   [
+    62,
+    null
+   ],
+   [
+    63,
+    [
+     12655,
+     8
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     12664,
+     10
+    ]
+   ],
+   [
+    74,
+    [
+     12646,
+     10
+    ]
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   66
+  ]
+ },
+ "tstore10": {
+  "op": 17257,
+  "reference": "8f0847400800610a1840",
+  "operands": [
+   [
+    "reg",
+    "R24_R25_R26_R27"
+   ],
+   [
+    "imm",
+    4398046511120
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R32"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4
+   ],
+   [
+    "imm",
+    15
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R24_R25_R26_R27",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": 4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": -8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": -16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 4398046511120,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": -4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -16
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R32",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "8": {
+    "kind": "imm",
+    "base": 15,
+    "bits": [
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -14
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -13
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -11
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -7
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     17221,
+     10
+    ]
+   ],
+   [
+    16,
+    [
+     14763,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12682,
+     8
+    ]
+   ],
+   [
+    24,
+    [
+     17260,
+     10
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     17256,
+     10
+    ]
+   ],
+   [
+    37,
+    [
+     17258,
+     10
+    ]
+   ],
+   [
+    38,
+    [
+     17258,
+     10
+    ]
+   ],
+   [
+    48,
+    [
+     12710,
+     10
+    ]
+   ],
+   [
+    49,
+    [
+     13325,
+     10
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    53,
+    [
+     17248,
+     10
+    ]
+   ],
+   [
+    54,
+    [
+     17239,
+     10
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     17257,
+     10
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     17257,
+     10
+    ]
+   ],
+   [
+    59,
+    [
+     17230,
+     10
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     17598,
+     10
+    ]
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    79,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   36,
+   39,
+   44,
+   45,
+   46,
+   47,
+   51,
+   52
+  ]
+ },
+ "tstore16": {
+  "op": 17257,
+  "reference": "cf0847400800610a18c0010000000010",
+  "operands": [
+   [
+    "reg",
+    "R28_R29_R30_R31"
+   ],
+   [
+    "imm",
+    4398046511120
+   ],
+   [
+    "imm",
+    2290
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "reg",
+    "R32"
+   ],
+   [
+    "imm",
+    0
+   ],
+   [
+    "imm",
+    4096
+   ],
+   [
+    "imm",
+    4
+   ],
+   [
+    "imm",
+    15
+   ]
+  ],
+  "fields": {
+   "0": {
+    "kind": "reg",
+    "base": "R28_R29_R30_R31",
+    "bits": [
+     {
+      "bit": 4,
+      "byte": 0,
+      "bitpos": 4,
+      "delta": 1
+     },
+     {
+      "bit": 5,
+      "byte": 0,
+      "bitpos": 5,
+      "delta": 2
+     },
+     {
+      "bit": 6,
+      "byte": 0,
+      "bitpos": 6,
+      "delta": -4
+     },
+     {
+      "bit": 7,
+      "byte": 0,
+      "bitpos": 7,
+      "delta": -8
+     },
+     {
+      "bit": 22,
+      "byte": 2,
+      "bitpos": 6,
+      "delta": -16
+     },
+     {
+      "bit": 23,
+      "byte": 2,
+      "bitpos": 7,
+      "delta": 32
+     },
+     {
+      "bit": 60,
+      "byte": 7,
+      "bitpos": 4,
+      "delta": 64
+     }
+    ]
+   },
+   "5": {
+    "kind": "imm",
+    "base": 0,
+    "bits": [
+     {
+      "bit": 20,
+      "byte": 2,
+      "bitpos": 4,
+      "delta": 32
+     },
+     {
+      "bit": 58,
+      "byte": 7,
+      "bitpos": 2,
+      "delta": 16
+     }
+    ]
+   },
+   "1": {
+    "kind": "imm",
+    "base": 4398046511120,
+    "bits": [
+     {
+      "bit": 21,
+      "byte": 2,
+      "bitpos": 5,
+      "delta": 32
+     },
+     {
+      "bit": 61,
+      "byte": 7,
+      "bitpos": 5,
+      "delta": 16777216
+     },
+     {
+      "bit": 62,
+      "byte": 7,
+      "bitpos": 6,
+      "delta": 33554432
+     },
+     {
+      "bit": 63,
+      "byte": 7,
+      "bitpos": 7,
+      "delta": 134217728
+     },
+     {
+      "bit": 67,
+      "byte": 8,
+      "bitpos": 3,
+      "delta": -4398046511104
+     },
+     {
+      "bit": 68,
+      "byte": 8,
+      "bitpos": 4,
+      "delta": -16
+     },
+     {
+      "bit": 83,
+      "byte": 10,
+      "bitpos": 3,
+      "delta": 8796093022208
+     },
+     {
+      "bit": 85,
+      "byte": 10,
+      "bitpos": 5,
+      "delta": 8589934592
+     },
+     {
+      "bit": 86,
+      "byte": 10,
+      "bitpos": 6,
+      "delta": 77309411328
+     },
+     {
+      "bit": 88,
+      "byte": 11,
+      "bitpos": 0,
+      "delta": 146028888064
+     },
+     {
+      "bit": 89,
+      "byte": 11,
+      "bitpos": 1,
+      "delta": 1241245548544
+     },
+     {
+      "bit": 92,
+      "byte": 11,
+      "bitpos": 4,
+      "delta": 13194139533312
+     },
+     {
+      "bit": 93,
+      "byte": 11,
+      "bitpos": 5,
+      "delta": 2147483648
+     },
+     {
+      "bit": 94,
+      "byte": 11,
+      "bitpos": 6,
+      "delta": 117440512
+     },
+     {
+      "bit": 95,
+      "byte": 11,
+      "bitpos": 7,
+      "delta": 184549376
+     },
+     {
+      "bit": 96,
+      "byte": 12,
+      "bitpos": 0,
+      "delta": 64
+     },
+     {
+      "bit": 103,
+      "byte": 12,
+      "bitpos": 7,
+      "delta": 4294967296
+     },
+     {
+      "bit": 107,
+      "byte": 13,
+      "bitpos": 3,
+      "delta": 72576357367808
+     },
+     {
+      "bit": 108,
+      "byte": 13,
+      "bitpos": 4,
+      "delta": 70446053588992
+     },
+     {
+      "bit": 109,
+      "byte": 13,
+      "bitpos": 5,
+      "delta": 141841294950400
+     },
+     {
+      "bit": 110,
+      "byte": 13,
+      "bitpos": 6,
+      "delta": 218103808
+     },
+     {
+      "bit": 111,
+      "byte": 13,
+      "bitpos": 7,
+      "delta": 234881024
+     }
+    ]
+   },
+   "4": {
+    "kind": "reg",
+    "base": "R32",
+    "bits": [
+     {
+      "bit": 25,
+      "byte": 3,
+      "bitpos": 1,
+      "delta": 1
+     },
+     {
+      "bit": 26,
+      "byte": 3,
+      "bitpos": 2,
+      "delta": 2
+     },
+     {
+      "bit": 27,
+      "byte": 3,
+      "bitpos": 3,
+      "delta": 4
+     },
+     {
+      "bit": 28,
+      "byte": 3,
+      "bitpos": 4,
+      "delta": 8
+     },
+     {
+      "bit": 29,
+      "byte": 3,
+      "bitpos": 5,
+      "delta": 16
+     },
+     {
+      "bit": 30,
+      "byte": 3,
+      "bitpos": 6,
+      "delta": -32
+     },
+     {
+      "bit": 31,
+      "byte": 3,
+      "bitpos": 7,
+      "delta": 64
+     }
+    ]
+   },
+   "8": {
+    "kind": "imm",
+    "base": 15,
+    "bits": [
+     {
+      "bit": 40,
+      "byte": 5,
+      "bitpos": 0,
+      "delta": -14
+     },
+     {
+      "bit": 41,
+      "byte": 5,
+      "bitpos": 1,
+      "delta": -13
+     },
+     {
+      "bit": 42,
+      "byte": 5,
+      "bitpos": 2,
+      "delta": -11
+     },
+     {
+      "bit": 43,
+      "byte": 5,
+      "bitpos": 3,
+      "delta": -7
+     }
+    ]
+   },
+   "6": {
+    "kind": "imm",
+    "base": 4096,
+    "bits": [
+     {
+      "bit": 69,
+      "byte": 8,
+      "bitpos": 5,
+      "delta": 1
+     },
+     {
+      "bit": 70,
+      "byte": 8,
+      "bitpos": 6,
+      "delta": 2
+     },
+     {
+      "bit": 71,
+      "byte": 8,
+      "bitpos": 7,
+      "delta": 4
+     },
+     {
+      "bit": 72,
+      "byte": 9,
+      "bitpos": 0,
+      "delta": 8
+     },
+     {
+      "bit": 73,
+      "byte": 9,
+      "bitpos": 1,
+      "delta": 16
+     },
+     {
+      "bit": 74,
+      "byte": 9,
+      "bitpos": 2,
+      "delta": 32
+     },
+     {
+      "bit": 75,
+      "byte": 9,
+      "bitpos": 3,
+      "delta": 64
+     },
+     {
+      "bit": 76,
+      "byte": 9,
+      "bitpos": 4,
+      "delta": 128
+     },
+     {
+      "bit": 120,
+      "byte": 15,
+      "bitpos": 0,
+      "delta": 256
+     },
+     {
+      "bit": 121,
+      "byte": 15,
+      "bitpos": 1,
+      "delta": 512
+     },
+     {
+      "bit": 122,
+      "byte": 15,
+      "bitpos": 2,
+      "delta": 1024
+     },
+     {
+      "bit": 123,
+      "byte": 15,
+      "bitpos": 3,
+      "delta": 2048
+     },
+     {
+      "bit": 124,
+      "byte": 15,
+      "bitpos": 4,
+      "delta": -4096
+     },
+     {
+      "bit": 125,
+      "byte": 15,
+      "bitpos": 5,
+      "delta": 8192
+     },
+     {
+      "bit": 126,
+      "byte": 15,
+      "bitpos": 6,
+      "delta": 16384
+     },
+     {
+      "bit": 127,
+      "byte": 15,
+      "bitpos": 7,
+      "delta": -32768
+     }
+    ]
+   },
+   "7": {
+    "kind": "imm",
+    "base": 4,
+    "bits": [
+     {
+      "bit": 77,
+      "byte": 9,
+      "bitpos": 5,
+      "delta": 4
+     },
+     {
+      "bit": 78,
+      "byte": 9,
+      "bitpos": 6,
+      "delta": 12
+     }
+    ]
+   },
+   "2": {
+    "kind": "imm",
+    "base": 2290,
+    "bits": [
+     {
+      "bit": 91,
+      "byte": 11,
+      "bitpos": 3,
+      "delta": -2048
+     }
+    ]
+   }
+  },
+  "structural": [
+   [
+    0,
+    [
+     684,
+     4
+    ]
+   ],
+   [
+    1,
+    null
+   ],
+   [
+    2,
+    null
+   ],
+   [
+    3,
+    [
+     17221,
+     16
+    ]
+   ],
+   [
+    16,
+    [
+     14763,
+     8
+    ]
+   ],
+   [
+    17,
+    null
+   ],
+   [
+    18,
+    [
+     12682,
+     8
+    ]
+   ],
+   [
+    24,
+    [
+     17260,
+     16
+    ]
+   ],
+   [
+    34,
+    null
+   ],
+   [
+    35,
+    [
+     17256,
+     16
+    ]
+   ],
+   [
+    37,
+    [
+     17258,
+     16
+    ]
+   ],
+   [
+    38,
+    [
+     17258,
+     16
+    ]
+   ],
+   [
+    48,
+    [
+     12710,
+     16
+    ]
+   ],
+   [
+    49,
+    [
+     13325,
+     16
+    ]
+   ],
+   [
+    50,
+    null
+   ],
+   [
+    53,
+    [
+     17248,
+     16
+    ]
+   ],
+   [
+    54,
+    [
+     17239,
+     16
+    ]
+   ],
+   [
+    55,
+    [
+     "operand count",
+     17257,
+     16
+    ]
+   ],
+   [
+    56,
+    null
+   ],
+   [
+    57,
+    [
+     "operand count",
+     17257,
+     16
+    ]
+   ],
+   [
+    59,
+    [
+     17230,
+     16
+    ]
+   ],
+   [
+    64,
+    null
+   ],
+   [
+    65,
+    [
+     17598,
+     16
+    ]
+   ],
+   [
+    66,
+    null
+   ],
+   [
+    79,
+    [
+     17257,
+     10
+    ]
+   ],
+   [
+    80,
+    [
+     17257,
+     12
+    ]
+   ],
+   [
+    81,
+    null
+   ],
+   [
+    84,
+    null
+   ],
+   [
+    87,
+    null
+   ],
+   [
+    90,
+    null
+   ]
+  ],
+  "inert": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   19,
+   32,
+   33,
+   36,
+   39,
+   44,
+   45,
+   46,
+   47,
+   51,
+   52,
+   82,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   104,
+   105,
+   106,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119
+  ]
+ }
+}

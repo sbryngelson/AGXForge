@@ -1,0 +1,194 @@
+{
+ "conclusion": {
+  "eight_bit_half_indexed": 3970,
+  "eight_bit_max_at_all_ones": 127,
+  "eight_bit_register_indexed": 638,
+  "nine_bit_names_r128": 3271,
+  "note": "eight-bit slot fields come in two addressing conventions: half-indexed ones top out at R127, register-indexed ones name R128 directly, so slot width alone does not separate the R126/R127 class from the R128-R143 class",
+  "premise_eight_bit_cannot_reach_128": false
+ },
+ "probes": [
+  {
+   "ambiguous": 1502,
+   "examples": [
+    {
+     "after": "R64",
+     "before": "R6",
+     "field": "0:slot",
+     "name": "andn",
+     "opcode": 393,
+     "register": 64
+    },
+    {
+     "after": "R64",
+     "before": "R5",
+     "field": "0:slot",
+     "name": null,
+     "opcode": 394,
+     "register": 64
+    },
+    {
+     "after": "R128",
+     "before": "R6",
+     "field": "3:slot",
+     "name": null,
+     "opcode": 394,
+     "register": 128
+    },
+    {
+     "after": "R64",
+     "before": "R5",
+     "field": "0:slot",
+     "name": null,
+     "opcode": 395,
+     "register": 64
+    },
+    {
+     "after": "R128L",
+     "before": "R6L",
+     "field": "3:slot",
+     "name": null,
+     "opcode": 395,
+     "register": 128
+    },
+    {
+     "after": "R64",
+     "before": "R0",
+     "field": "0:slot",
+     "name": "andn",
+     "opcode": 396,
+     "register": 64
+    }
+   ],
+   "refused": 1,
+   "registers": {
+    "4": 1,
+    "64": 3970,
+    "128": 638
+   },
+   "samples": 4609,
+   "value": 128,
+   "width": 8
+  },
+  {
+   "ambiguous": 1340,
+   "examples": [
+    {
+     "after": "R127",
+     "before": "R6",
+     "field": "0:slot",
+     "name": "andn",
+     "opcode": 393,
+     "register": 127
+    },
+    {
+     "after": "R127",
+     "before": "R5",
+     "field": "0:slot",
+     "name": null,
+     "opcode": 394,
+     "register": 127
+    },
+    {
+     "after": "R127",
+     "before": "R5",
+     "field": "0:slot",
+     "name": null,
+     "opcode": 395,
+     "register": 127
+    },
+    {
+     "after": "R127",
+     "before": "R0",
+     "field": "0:slot",
+     "name": "andn",
+     "opcode": 396,
+     "register": 127
+    },
+    {
+     "after": "R127",
+     "before": "R0",
+     "field": "2:slot",
+     "name": "andn",
+     "opcode": 396,
+     "register": 127
+    },
+    {
+     "after": "R127",
+     "before": "R1",
+     "field": "0:slot",
+     "name": "andn",
+     "opcode": 397,
+     "register": 127
+    }
+   ],
+   "refused": 880,
+   "registers": {
+    "127": 3913
+   },
+   "samples": 3913,
+   "value": 255,
+   "width": 8
+  },
+  {
+   "ambiguous": 716,
+   "examples": [
+    {
+     "after": "R128L",
+     "before": "R10L",
+     "field": "1:slot",
+     "name": null,
+     "opcode": 392,
+     "register": 128
+    },
+    {
+     "after": "R128L",
+     "before": "R1L",
+     "field": "4:slot",
+     "name": null,
+     "opcode": 398,
+     "register": 128
+    },
+    {
+     "after": "R128L",
+     "before": "R0L",
+     "field": "2:slot",
+     "name": null,
+     "opcode": 399,
+     "register": 128
+    },
+    {
+     "after": "R128L",
+     "before": "R2L",
+     "field": "2:slot",
+     "name": null,
+     "opcode": 400,
+     "register": 128
+    },
+    {
+     "after": "R128L",
+     "before": "R0L",
+     "field": "2:slot",
+     "name": "andn",
+     "opcode": 401,
+     "register": 128
+    },
+    {
+     "after": "R128L",
+     "before": "R1L",
+     "field": "4:slot",
+     "name": "andn",
+     "opcode": 401,
+     "register": 128
+    }
+   ],
+   "refused": 0,
+   "registers": {
+    "128": 3271
+   },
+   "samples": 3271,
+   "value": 256,
+   "width": 9
+  }
+ ]
+}

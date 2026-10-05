@@ -1,0 +1,21 @@
+{
+ "agree": 400,
+ "apple_empty": 0,
+ "bodies": 9556,
+ "disagree": 0,
+ "disputed_class_instructions": {
+  "0x2": 16834,
+  "0x5": 1135,
+  "0x8": 2040,
+  "0x9": 22321,
+  "0xa": 7393,
+  "0xe": 18064
+ },
+ "disputed_total": 67787,
+ "examples": [],
+ "framed_exactly": 9556,
+ "not_consumed": 0,
+ "raised": 0,
+ "sampled": 400,
+ "verdict": "framing agrees with Apple's decoder on every sampled body, over 67787 instructions of the disputed classes"
+}

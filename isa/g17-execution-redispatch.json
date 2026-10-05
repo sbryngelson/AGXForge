@@ -1,0 +1,647 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    0
+   ],
+   [
+    15360
+   ],
+   [
+    16384
+   ],
+   [
+    17408
+   ],
+   [
+    19456
+   ],
+   [
+    14336
+   ],
+   [
+    13312
+   ],
+   [
+    15872
+   ],
+   [
+    48640
+   ],
+   [
+    32768
+   ],
+   [
+    16896
+   ],
+   [
+    11264
+   ],
+   [
+    47104
+   ],
+   [
+    49408
+   ],
+   [
+    46080
+   ],
+   [
+    16640
+   ],
+   [
+    1069547520
+   ],
+   [
+    3217031168
+   ],
+   [
+    1075838976
+   ],
+   [
+    3223322624
+   ],
+   [
+    1056964608
+   ],
+   [
+    3204448256
+   ],
+   [
+    1078984704
+   ],
+   [
+    3226468352
+   ],
+   [
+    180150001
+   ],
+   [
+    1515870810
+   ],
+   [
+    2147483649
+   ],
+   [
+    2147483647
+   ],
+   [
+    28
+   ],
+   [
+    244
+   ],
+   [
+    4294967292
+   ]
+  ],
+  "expect": [
+   4,
+   15364,
+   16388,
+   17412,
+   19460,
+   14340,
+   13316,
+   15876,
+   48644,
+   32772,
+   16900,
+   11268,
+   47108,
+   49412,
+   46084,
+   16644,
+   1069547524,
+   3217031172,
+   1075838980,
+   3223322628,
+   1056964612,
+   3204448260,
+   1078984708,
+   3226468356,
+   180150005,
+   1515870814,
+   2147483653,
+   2147483651,
+   32,
+   248,
+   0
+  ],
+  "note": "MANDATORY POSITIVE CONTROL: op10279 returns src + 4. Void without it."
+ },
+ {
+  "id": "redispatch.compiler.d612",
+  "op": 612,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "note": "Item 3 re-dispatch of g17-execution-compiler.json/d612 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.compiler2.CONTROL.op10279",
+  "op": 10279,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "witness_required": false,
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-compiler2.json/CONTROL.op10279 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.confounds.CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-confounds.json/CONTROL.op10279 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.confounds2.CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-confounds2.json/CONTROL.op10279 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.deadbits3.op3290.dead-bits",
+  "op": 3290,
+  "author": "fieldmap",
+  "witness_required": false,
+  "bytes": "210205100280a0021c0020000010",
+  "cases": [
+   [
+    1069547520,
+    1073741824
+   ],
+   [
+    1077936128,
+    1082130432
+   ],
+   [
+    3221225472,
+    1056964608
+   ],
+   [
+    1048576000,
+    1090519040
+   ]
+  ],
+  "expect": [
+   1077936128,
+   1094713344,
+   3212836864,
+   1073741824
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-deadbits3.json/op3290.dead-bits (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.debtbits.op13488.survivors-cleared",
+  "op": 13488,
+  "author": "fieldmap",
+  "witness_required": false,
+  "bytes": "13000680103804008480",
+  "cases": [
+   [
+    4042322160,
+    4278255360
+   ],
+   [
+    16711935,
+    252645135
+   ],
+   [
+    4294967295,
+    0
+   ],
+   [
+    305419896,
+    2018915346
+   ]
+  ],
+  "expect": [
+   251662080,
+   251662080,
+   0,
+   1749164034
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-debtbits.json/op13488.survivors-cleared (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.debtbits2.op1000.debt-cleared",
+  "op": 1000,
+  "author": "fieldmap",
+  "witness_required": false,
+  "bytes": "310284fa4220a00a02064200",
+  "cases": [
+   [
+    1065353216
+   ],
+   [
+    1073741824
+   ],
+   [
+    1082130432
+   ],
+   [
+    1090519040
+   ]
+  ],
+  "expect": [
+   1065877504,
+   1074003968,
+   1082261504,
+   1090584576
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-debtbits2.json/op1000.debt-cleared (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.delivery.d3658.l10.s1",
+  "op": 3658,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-delivery.json/d3658.l10.s1 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.delta.delta@423",
+  "op": 423,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-delta.json/delta@423 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.exec.CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-exec.json/CONTROL.op10279 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.float.f3658.l10",
+  "op": 3658,
+  "cases": [
+   [
+    1065353216
+   ],
+   [
+    1073741824
+   ],
+   [
+    1082130432
+   ],
+   [
+    1090519040
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-float.json/f3658.l10 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.functions.op11372.icmp",
+  "op": 11372,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    10,
+    20
+   ],
+   [
+    20,
+    10
+   ],
+   [
+    10,
+    10
+   ],
+   [
+    5,
+    5
+   ]
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-functions.json/op11372.icmp (drift class reg) to compare with its retained values.",
+  "function": "(a == b) ? 1 : 0 - the witness's condition code is EQUALITY, and the four cases cover all three orderings: 10<20 and 20>10 both return 0, 10==10 and 5==5 both return 1. Exactly one relation fits all four."
+ },
+ {
+  "id": "redispatch.memops.CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-memops.json/CONTROL.op10279 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.names.CONTROL.op10279",
+  "op": 10279,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "expect": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-names.json/CONTROL.op10279 (drift class reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.sweep.D9749.l10",
+  "op": 9749,
+  "cases": [
+   [
+    4096,
+    4096
+   ],
+   [
+    4097,
+    4096
+   ],
+   [
+    4352,
+    4096
+   ],
+   [
+    8192,
+    4096
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-sweep.json/D9749.l10 (drift class imm+reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.float.f3290.l6",
+  "op": 3290,
+  "cases": [
+   [
+    1065353216,
+    1077936128
+   ],
+   [
+    1073741824,
+    1077936128
+   ],
+   [
+    1082130432,
+    1077936128
+   ],
+   [
+    1090519040,
+    1077936128
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-float.json/f3290.l6 (drift class imm+reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.sweep.D2575.l10",
+  "op": 2575,
+  "cases": [
+   [
+    1065353216
+   ],
+   [
+    1073741824
+   ],
+   [
+    1082130432
+   ],
+   [
+    1090519040
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-sweep.json/D2575.l10 (drift class imm+reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.functions.op10826.madd",
+  "op": 10826,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    3,
+    4,
+    5
+   ],
+   [
+    7,
+    8,
+    9
+   ],
+   [
+    2,
+    2,
+    2
+   ],
+   [
+    10,
+    10,
+    1
+   ]
+  ],
+  "expect": [
+   17,
+   65,
+   6,
+   101
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-functions.json/op10826.madd (drift class imm+reg) to compare with its retained values."
+ },
+ {
+  "id": "redispatch.walked.op13488.nandn",
+  "op": 13488,
+  "author": "fieldmap",
+  "witness_required": false,
+  "cases": [
+   [
+    4042322160,
+    4278255360
+   ],
+   [
+    16711935,
+    252645135
+   ],
+   [
+    4294967295,
+    0
+   ],
+   [
+    305419896,
+    2018915346
+   ]
+  ],
+  "note": "Item 3 re-dispatch of g17-execution-walked.json/op13488.nandn (drift class imm+reg) to compare with its retained values.",
+  "function": "~a & b   (andn2) - one of sixteen candidates fitted to four input pairs"
+ },
+ {
+  "id": "redispatch.sweep.D3807.l10",
+  "op": 3807,
+  "cases": [
+   [
+    4096
+   ],
+   [
+    4097
+   ],
+   [
+    4352
+   ],
+   [
+    8192
+   ]
+  ],
+  "author": "fieldmap",
+  "note": "Item 3 re-dispatch of g17-execution-sweep.json/D3807.l10 (drift class imm+reg) to compare with its retained values."
+ }
+]

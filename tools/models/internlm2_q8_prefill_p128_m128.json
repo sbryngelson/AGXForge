@@ -1,0 +1,40 @@
+{
+ "name": "internlm2_q8_prefill_p128_m128",
+ "bits": 8,
+ "cap": 2048,
+ "qmv": {
+  "qkv": {
+   "ks": 4
+  },
+  "wo_res1": {
+   "ks": 4
+  },
+  "ffn": {
+   "ks": 2
+  },
+  "w2_res2": {
+   "ks": 4
+  },
+  "head": {
+   "x16": true
+  }
+ },
+ "norm": {
+  "out32": true,
+  "seed": false
+ },
+ "final_norm": {
+  "out32": false,
+  "seed": false
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true
+ },
+ "prompt_len": 128,
+ "prefill": {
+  "M": 128,
+  "persistent_w16": true,
+  "attn": "mma"
+ }
+}

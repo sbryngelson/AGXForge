@@ -1,0 +1,130 @@
+{
+ "control": "slot0 is byte-identical to results/g17-tensor-resid-v3/a_small/program.bin",
+ "differing_byte_offsets": [
+  34,
+  36,
+  153764,
+  153766
+ ],
+ "generator": "tools/g17atomicslot.py (arm a_small of tools/g17residency.py, G17_RESID_STRAIGHT=1, launch 256)",
+ "predictions": {
+  "slot0": "arrival max 1, as results/g17-tensor-resid-v3",
+  "slot7": "arrival max == departure max == 256 every round"
+ },
+ "program_sha256": {
+  "slot0": "e85b4f8d92c2db53eae70d652cca1d973a9b3f4216286cd15515de602d20b0a2",
+  "slot7": "e63415f95b0d33a5d16f6cf8b06e77cd9d604c90a66bf29458d5161a220eaf26"
+ },
+ "question": "does cc's uniform atomic (op10094) return land where cc's load-use wait (the slot-7 bit) covers it?",
+ "rows": [
+  {
+   "arm": "slot7",
+   "arrival_range": [
+    1,
+    256
+   ],
+   "arrivals_written": 256,
+   "c_sha256_16": "d759030beaa54ae9",
+   "departure_max": 256,
+   "departure_min": 1,
+   "departures_written": 256,
+   "error": "",
+   "launch": 256,
+   "peak": 256,
+   "round": 1,
+   "spin_written": 8192,
+   "status": 0
+  },
+  {
+   "arm": "slot0",
+   "arrival_range": [
+    1,
+    1
+   ],
+   "arrivals_written": 256,
+   "c_sha256_16": "8949900fa1af21e9",
+   "departure_max": 256,
+   "departure_min": 1,
+   "departures_written": 256,
+   "error": "",
+   "launch": 256,
+   "peak": 1,
+   "round": 1,
+   "spin_written": 8192,
+   "status": 0
+  },
+  {
+   "arm": "slot7",
+   "arrival_range": [
+    1,
+    256
+   ],
+   "arrivals_written": 256,
+   "c_sha256_16": "ad14989e6f484001",
+   "departure_max": 256,
+   "departure_min": 1,
+   "departures_written": 256,
+   "error": "",
+   "launch": 256,
+   "peak": 256,
+   "round": 2,
+   "spin_written": 8192,
+   "status": 0
+  },
+  {
+   "arm": "slot0",
+   "arrival_range": [
+    1,
+    1
+   ],
+   "arrivals_written": 256,
+   "c_sha256_16": "f40c55faa181176b",
+   "departure_max": 256,
+   "departure_min": 1,
+   "departures_written": 256,
+   "error": "",
+   "launch": 256,
+   "peak": 1,
+   "round": 2,
+   "spin_written": 8192,
+   "status": 0
+  },
+  {
+   "arm": "slot7",
+   "arrival_range": [
+    1,
+    256
+   ],
+   "arrivals_written": 256,
+   "c_sha256_16": "c9ae0ab1dd5ab2e7",
+   "departure_max": 256,
+   "departure_min": 1,
+   "departures_written": 256,
+   "error": "",
+   "launch": 256,
+   "peak": 256,
+   "round": 3,
+   "spin_written": 8192,
+   "status": 0
+  },
+  {
+   "arm": "slot0",
+   "arrival_range": [
+    1,
+    1
+   ],
+   "arrivals_written": 256,
+   "c_sha256_16": "c13f9e9d4390ab91",
+   "departure_max": 256,
+   "departure_min": 1,
+   "departures_written": 256,
+   "error": "",
+   "launch": 256,
+   "peak": 1,
+   "round": 3,
+   "spin_written": 8192,
+   "status": 0
+  }
+ ],
+ "verdict": "both predictions held 3 of 3: the stale arrivals were the unwaited slot-0 return, not atomic combining"
+}

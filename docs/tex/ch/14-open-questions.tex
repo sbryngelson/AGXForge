@@ -1,0 +1,115 @@
+\chapter{Open questions}\label{ch:not-known-index}
+
+Each item is stated in full in its chapter, beside the rule it qualifies, under "Not known" and with the safe
+assumptions that apply; the lists below only index them. Items about submission below Metal are in
+\cref{sec:measured-graphs-generalizes} and the "Not known" notes of \cref{ch:submission-below-metal}.
+
+\section{The device, registers, encoding and metadata (chapters 1, 2, 3, 11)}\label{sec:device-registers-encoding}
+
+\begin{itemize}
+\item Whether a released register can read its old value: a sentinel-checked probe of the old-value branch (MM~\mm{25.145}).
+\item What IR0-IR15 hold and whether any executed program names one (Apple's class table; MM~\mm{25.59}).
+\item Whether anything reserves R126/R127 versus the part populating 126 of 128 (MM~\mm{24.2} row H1).
+\item Physical register capacity and allocation granularity per core (MM~\mm{24.2} row H4, MM~\mm{25.20}, MM~\mm{25.49}).
+\item Why this compiler's residency counter reads about twice Apple's at high register counts (MM~\mm{25.121}).
+\item Simultaneous residency count for 1,024-thread threadgroups: fp.m's implied ≥ 10 per core vs the driver's 3 (MM~\mm{25.141.1},
+  MM~\mm{25.141.20}).
+\item Whether the encoding holes of \op{1004} and \op{798} are unreachable in the encoding or only in the field maps (MM~\mm{25.133}, MM~\mm{25.196}).
+\item Release order inside instructions other than the measured ALU forms and the word store (MM~\mm{25.117}, MM~\mm{25.145}).
+\item Which narrow-pool policy gives better occupancy (MM~\mm{25.146}).
+\item Class-7 byte6 = 0xa1 lengths (MM~\mm{25}); \op{11842} width-10 driver; \op{17235}/\op{17244} width-14 sufficient condition (MM~\mm{25.62}).
+\item Meaning of int8-MMA structural bit 71 (MM~\mm{25.71}, row T11).
+\item Why the 36 narrow-accumulator table rows are refused (MM~\mm{25.6}).
+\item \op{12674} residue bit byte1{[}6{]} beyond the rendering split (MM~\mm{25.32}).
+\item Bits 33 and 37 of operand 1 in ALU and load forms (seen in the running example; not explained in the sources read).
+\item An independent decoder derived from per-length field maps with encode-then-compare refusal (MM~\mm{25.209}).
+\item Whether a wrong slot-32 value with correct presence affects any kernel shape beyond those tested (MM~\mm{10}).
+\item The 12 open class-constant bytes (0xC0000000 at 1304, word 1 at 1324, 0x40000004 at 1440) (MM~\mm{25.148}).
+\item Q in the scalar metadata class (\code{agxforge/g17/mdgen.py}).
+\item The main-program rule behind the 70 L3 misses; whether a non-32-bit uniform write occupies one uniform; 442 unread
+  constant-program uniform writes (MM~\mm{25.120}, MM~\mm{25.120.1}).
+\item Whether the register count in the below-Metal USC Registers packet affects residency (MM~\mm{25.143}; \cref{ch:submission-below-metal}).
+\item Slot 44's byte position rule across classes (MM~\mm{25.89}, MM~\mm{25.120}, \code{agxforge/g17/mdgen.py}).
+\end{itemize}
+
+\section{Scalar arithmetic, control flow, special registers and cross-lane
+operations (chapters 4, 5, 6, 8)}\label{sec:scalar-arithmetic-control}
+
+\begin{itemize}
+\item Released-register read: zero or old value; a sentinel-checked probe of the old-value branch is owed (MM~\mm{25.145}).
+\item \op{11375} bit test on operands with high bits set, and field code 0's signedness above $2^{31}$ (\code{ledger/claims.toml}).
+\item \op{10369}/10 mode-SET layout (operand 1 bit $2^{31}$): meaning unknown, unreached from source (MM~\mm{25.73}, MM~\mm{25.76}).
+\item Integer source-modifier value 8 as a signedness bit beyond \op{10239} and \op{16805} (MM~\mm{25.59}, MM~\mm{25.145.1}).
+\item NaN into \op{904} and \op{3818} unmeasured (MM~\mm{25.145.1}).
+\item Negate/abs modifiers on \op{9700} unmeasured (MM~\mm{25.145}).
+\item \op{2570} accuracy not measured; trig-family op (\opn{3946}) function unknown (glossary).
+\item \op{1048}: whether it is the fp32-to-bfloat narrowing is unresolved (glossary).
+\item Load-wait field of \op{798} not located (MM~\mm{25.196}).
+\item Wait and source lifetime of \op{9320} and \op{11179} unmeasured (MM~\mm{25.196}).
+\item MMA-to-ALU interlock (MM~\mm{6}, MM~\mm{25.90}).
+\item Special-register read publishing on slot 7 stores nothing: unexplained (MM~\mm{25.121}).
+\item \code{SR\_PVSIMD} / \code{SR\_TVSIMD} under partial activity; roles of Apple's four-instruction divergent broadcast (MM~\mm{25.144.6}, MM~\mm{25.145.1}).
+\item y and z builtins on multi-axis dispatches never dispatched (MM~\mm{25.145.1}).
+\item Exec auxiliary operand 0 meaning; count 3 and novel exec encodings never executed (\code{isa/g17-exec-mask.txt}).
+\item \op{579} and \op{577} n = 2 admitted on whole-program evidence only (MM~\mm{25.145.2}).
+\item Indirect calls (MM~\mm{25.90}).
+\item Shuffles, broadcasts and votes in a partially active simdgroup (MM~\mm{25.145.1}); \op{14170} with a non-uniform mask (MM~\mm{12}).
+\item Flag numeric value per producing form (\op{10379}, which has no glossary entry, against \op{11313}).
+\item Same-address store order across simdgroups (MM~\mm{25.145.4}; \cref{ch:synchronization}).
+\end{itemize}
+
+\section{Memory and synchronization (chapters 7, 9)}\label{sec:memory-synchronization-chapters}
+
+\begin{itemize}
+\item Out-of-range store behaviour on hardware; other load forms and resource kinds out of range (MM~\mm{17} rule 34, \cref{sec:out-of-range-accesses-observed}).
+\item Negative displacement; misaligned scalar access legality (\code{isa/g17-addressing-rules.json}).
+\item Why Apple's compiler uses the index add, not the displacement, for unsigned \code{tid + k} (\code{isa/g17-addressing-rules.json}).
+\item Displacement units of the \op{17256} (MM~\mm{25.141.18}).
+\item Whether a masked-off load issues its access (no observable; \code{isa/g17-predication.json}).
+\item Meaning of the threadgroup load's sensitive bits byte4{[}3{]}, byte4{[}4{]}, byte6{[}4{]} (\code{isa/g17-execution-tgbits-results.json}).
+\item Hardware behaviour for a threadgroup-memory declaration over 32 KiB, which Metal accepts (MM~\mm{25.147}).
+\item Imageblock with more than one simdgroup or threadgroup; the store's operand-1 bit-4 flag; the read's 0x2000800000 word
+  (MM~\mm{25.145.2}, MM~\mm{25.96}, MM~\mm{25.104.2}).
+\item \op{12352} and \op{13276} address space (MM~\mm{25.144.1}).
+\item Settling dispatch for \op{17229} reading a texture fetch (Apple's tex2d-read) (MM~\mm{25.146}).
+\item Sampled and write texture classes executed (\code{agxforge/g17/texnarrow.py}).
+\item Origin of \op{621}'s cap of four (\code{isa/g17-address-formula.txt}).
+\item MMA-to-ALU result interlock (MM~\mm{6}, MM~\mm{25.90}).
+\item Why a special-register read publishing on slot 7 stores nothing (MM~\mm{25.121}).
+\item Cross-simdgroup winner of different-value same-address stores (MM~\mm{25.145.4}).
+\item Whether an execution-only barrier orders device memory by design (MM~\mm{14}).
+\item Per-lane atomic min/max returns and unsigned long-form returns; atomics on non-rank-0 buffers; 64-bit atomics on hardware
+  (\code{docs/g17-first-dispatch-trials.md}, \code{agxforge/g17/cc.py}).
+\item Acquire/release semantics beyond the fence-count-fence pattern; emulator race check for atomics and \op{14156} (MM~\mm{25.197}).
+\item Function of barrier-token variants 0x400 and 0x60000502 (MM~\mm{25.141.20}).
+\item Residency count for 1,024-thread threadgroups: fp.m's 200 vs the driver's 60 (MM~\mm{25.141.1}, MM~\mm{25.141.20}) - \cref{ch:device-execution-model}.
+\item Overlap and ordering of multiple command records in one below-Metal Submit beyond the self-accumulation shape
+  (\code{docs/g17-first-dispatch-trials.md}).
+\item Barrier behaviour in other partial threadgroup sizes and with inactive lanes (\code{docs/g17-first-dispatch-trials.md}).
+\end{itemize}
+
+\section{The tensor unit and performance (chapters 10, 12)}\label{sec:tensor-unit-performance}
+
+\begin{itemize}
+\item MMA-to-ALU result ordering: interlock or implicit wait not established (MM~\mm{6}, MM~\mm{25.90}).
+\item Destination keep flag: no hardware effect found; what the 758,739-instance population counts is unstated (MM~\mm{0.4}, MM~\mm{25.22}).
+\item Accumulator modifier (operand 10): a multi-bit encoding not excluded (MM~\mm{6}).
+\item 36 narrow-accumulator declarations, \op{5108} through \op{5143}: refused although structurally like admitted forms; reason unexplained (MM~\mm{25.4/F4} "F4, narrowed", MM~\mm{25.13}).
+\item MM~\mm{11}'s "56 MMA forms" not reconciled with the 60 non-\code{\_shifted} declarations (MM~\mm{11}, MM~\mm{25.6}).
+\item Bit-71 int8 MMA variant: executes bit-exact; field meaning and decoder identity unknown (MM~\mm{20}, T11).
+\item Eight decoder-refused bits of \op{5106} that change the result vs six that do not: no encoding property separates them (MM~\mm{25.36}).
+\item Out-of-place accumulation (D a different tuple from C): no execution reported in the sections read (MM~\mm{2}).
+\item int8 fragment byte order within the register pair: not stated (MM~\mm{0.7}).
+\item Fragment shapes other than 16×16×16: not measured (MM~\mm{0.14}).
+\item Whether a release clears or frees per-lane storage (MM~\mm{25.89}, MM~\mm{25.95}).
+\item What the legacy engine shares with fp32 fma ("8 fma per legacy issue" is an exchange rate) (MM~\mm{9}).
+\item Software fp4/fp6 operand unpack not built; fp16-subnormal behaviour of the decode unmeasured (MM~\mm{0.14}).
+\item Cause of the per-core simdgroup staircase inside the core (MM~\mm{25.122}).
+\item Why this compiler's residency counter reads about twice Apple's kernel's (64–69 vs 32–45 per core) (MM~\mm{25.121}).
+\item Physical register capacity per core and allocation granularity (MM~\mm{20}, MM~\mm{25.49}).
+\item Instruction-fetch cost at intermediate occupancy (between 1 and 26 simdgroups per core) (MM~\mm{25.144.12}).
+\item Why Apple-compiled twins of this project's decode kernels are 10–15 percent faster (MM~\mm{25.211}).
+\item Static model: per-simdgroup latency not identifiable; GEMM tile shapes do not extrapolate (MM~\mm{25.144.12}).
+\item The read\_sr-on-slot-7 observation (stored nothing, waited or not) is recorded, not explained (MM~\mm{25.121}).
+\item Another G17 product or OS version: nothing measured (MM~\mm{0.1}, MM~\mm{20}).
+\end{itemize}

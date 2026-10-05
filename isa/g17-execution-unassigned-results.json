@@ -1,0 +1,196 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "CONTROL.roundtrip.unpatched",
+  "op": null,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": null,
+   "found": 13,
+   "cases": 1,
+   "encoded": [],
+   "from_template": false,
+   "opcodes": [
+    447,
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1515852340
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op12364.operand3_0",
+  "op": null,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": null,
+   "found": 13,
+   "cases": 1,
+   "encoded": [],
+   "from_template": false,
+   "opcodes": [
+    447,
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": [
+    [
+     12364,
+     3,
+     0,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "status": "ok",
+  "match": [
+   false
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op12364.operand3_20",
+  "op": null,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": null,
+   "found": 13,
+   "cases": 1,
+   "encoded": [],
+   "from_template": false,
+   "opcodes": [
+    447,
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": [
+    [
+     12364,
+     3,
+     20,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1515852340
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op12364.operand3_60",
+  "op": null,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": null,
+   "found": 13,
+   "cases": 1,
+   "encoded": [],
+   "from_template": false,
+   "opcodes": [
+    447,
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": [
+    [
+     12364,
+     3,
+     60,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1515852340
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ }
+]

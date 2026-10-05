@@ -1,0 +1,1107 @@
+{
+  "status": "measured_not_executed",
+  "gpu_dispatched": false,
+  "witnesses": {
+    "tensor-common": {
+      "object_sha256": "c79433216cec09df2092065b38008ff96793f8710ddd075cf3fc7881c2bff44e",
+      "entry": 64,
+      "prologue_bytes": 64,
+      "main_bytes": 1276,
+      "instruction_count": 128,
+      "metadata_bytes": 488,
+      "forms": [
+        {
+          "opcode": 423,
+          "length": 10,
+          "count": 2
+        },
+        {
+          "opcode": 426,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 458,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 462,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 554,
+          "length": 4,
+          "count": 33
+        },
+        {
+          "opcode": 577,
+          "length": 4,
+          "count": 2
+        },
+        {
+          "opcode": 579,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 582,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 586,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 612,
+          "length": 12,
+          "count": 2
+        },
+        {
+          "opcode": 684,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 5106,
+          "length": 10,
+          "count": 16
+        },
+        {
+          "opcode": 10279,
+          "length": 12,
+          "count": 8
+        },
+        {
+          "opcode": 10282,
+          "length": 12,
+          "count": 9
+        },
+        {
+          "opcode": 10283,
+          "length": 12,
+          "count": 1
+        },
+        {
+          "opcode": 10286,
+          "length": 12,
+          "count": 1
+        },
+        {
+          "opcode": 10369,
+          "length": 6,
+          "count": 2
+        },
+        {
+          "opcode": 11452,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 11842,
+          "length": 8,
+          "count": 1
+        },
+        {
+          "opcode": 12674,
+          "length": 12,
+          "count": 4
+        },
+        {
+          "opcode": 12674,
+          "length": 16,
+          "count": 18
+        },
+        {
+          "opcode": 12675,
+          "length": 12,
+          "count": 4
+        },
+        {
+          "opcode": 12675,
+          "length": 16,
+          "count": 6
+        },
+        {
+          "opcode": 14060,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 17016,
+          "length": 14,
+          "count": 2
+        },
+        {
+          "opcode": 17257,
+          "length": 10,
+          "count": 2
+        },
+        {
+          "opcode": 17257,
+          "length": 16,
+          "count": 6
+        }
+      ],
+      "parsed_bindings": [
+        [
+          1,
+          0,
+          false
+        ],
+        [
+          2,
+          2,
+          false
+        ],
+        [
+          3,
+          4,
+          true
+        ]
+      ]
+    },
+    "tensor-renumbered": {
+      "object_sha256": "ee49503d1507d49284e12ee2676ff06432ddeb05f4e7f442b050cebf29a96c2d",
+      "entry": 64,
+      "prologue_bytes": 64,
+      "main_bytes": 1276,
+      "instruction_count": 128,
+      "metadata_bytes": 488,
+      "forms": [
+        {
+          "opcode": 423,
+          "length": 10,
+          "count": 2
+        },
+        {
+          "opcode": 426,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 458,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 462,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 554,
+          "length": 4,
+          "count": 33
+        },
+        {
+          "opcode": 577,
+          "length": 4,
+          "count": 2
+        },
+        {
+          "opcode": 579,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 582,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 586,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 612,
+          "length": 12,
+          "count": 2
+        },
+        {
+          "opcode": 684,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 5106,
+          "length": 10,
+          "count": 16
+        },
+        {
+          "opcode": 10279,
+          "length": 12,
+          "count": 8
+        },
+        {
+          "opcode": 10282,
+          "length": 12,
+          "count": 9
+        },
+        {
+          "opcode": 10283,
+          "length": 12,
+          "count": 1
+        },
+        {
+          "opcode": 10286,
+          "length": 12,
+          "count": 1
+        },
+        {
+          "opcode": 10369,
+          "length": 6,
+          "count": 2
+        },
+        {
+          "opcode": 11452,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 11842,
+          "length": 8,
+          "count": 1
+        },
+        {
+          "opcode": 12674,
+          "length": 12,
+          "count": 4
+        },
+        {
+          "opcode": 12674,
+          "length": 16,
+          "count": 18
+        },
+        {
+          "opcode": 12675,
+          "length": 12,
+          "count": 4
+        },
+        {
+          "opcode": 12675,
+          "length": 16,
+          "count": 6
+        },
+        {
+          "opcode": 14060,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 17016,
+          "length": 14,
+          "count": 2
+        },
+        {
+          "opcode": 17257,
+          "length": 10,
+          "count": 2
+        },
+        {
+          "opcode": 17257,
+          "length": 16,
+          "count": 6
+        }
+      ],
+      "parsed_bindings": [
+        [
+          2,
+          0,
+          false
+        ],
+        [
+          4,
+          2,
+          false
+        ],
+        [
+          6,
+          4,
+          true
+        ]
+      ]
+    },
+    "tensor-b-stride": {
+      "object_sha256": "233e20fc94be9ea43e44e530d220e3d7dff1de77a9712c03c93d7e00248bc753",
+      "entry": 64,
+      "prologue_bytes": 64,
+      "main_bytes": 1276,
+      "instruction_count": 128,
+      "metadata_bytes": 488,
+      "forms": [
+        {
+          "opcode": 423,
+          "length": 10,
+          "count": 2
+        },
+        {
+          "opcode": 426,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 458,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 462,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 554,
+          "length": 4,
+          "count": 33
+        },
+        {
+          "opcode": 577,
+          "length": 4,
+          "count": 2
+        },
+        {
+          "opcode": 579,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 582,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 586,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 612,
+          "length": 12,
+          "count": 2
+        },
+        {
+          "opcode": 684,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 5106,
+          "length": 10,
+          "count": 16
+        },
+        {
+          "opcode": 10279,
+          "length": 12,
+          "count": 6
+        },
+        {
+          "opcode": 10282,
+          "length": 12,
+          "count": 11
+        },
+        {
+          "opcode": 10283,
+          "length": 12,
+          "count": 1
+        },
+        {
+          "opcode": 10286,
+          "length": 12,
+          "count": 1
+        },
+        {
+          "opcode": 10369,
+          "length": 6,
+          "count": 2
+        },
+        {
+          "opcode": 11452,
+          "length": 10,
+          "count": 1
+        },
+        {
+          "opcode": 11842,
+          "length": 8,
+          "count": 1
+        },
+        {
+          "opcode": 12674,
+          "length": 12,
+          "count": 4
+        },
+        {
+          "opcode": 12674,
+          "length": 16,
+          "count": 18
+        },
+        {
+          "opcode": 12675,
+          "length": 12,
+          "count": 4
+        },
+        {
+          "opcode": 12675,
+          "length": 16,
+          "count": 6
+        },
+        {
+          "opcode": 14060,
+          "length": 4,
+          "count": 1
+        },
+        {
+          "opcode": 17016,
+          "length": 14,
+          "count": 2
+        },
+        {
+          "opcode": 17257,
+          "length": 10,
+          "count": 2
+        },
+        {
+          "opcode": 17257,
+          "length": 16,
+          "count": 6
+        }
+      ],
+      "parsed_bindings": [
+        [
+          1,
+          0,
+          false
+        ],
+        [
+          2,
+          2,
+          false
+        ],
+        [
+          3,
+          4,
+          true
+        ]
+      ]
+    }
+  },
+  "controls": {
+    "renumbered": "Only public binding indices change from 1/2/3 to 2/4/6.",
+    "b_stride": "Only B row stride changes from 32 to 48 elements."
+  },
+  "scope": "Apple-compiled complete tensor programs. Source expresses the retained application; no hardware correctness or repository-owned native tensor image is established.",
+  "differences": {
+    "tensor-renumbered": {
+      "sections": {
+        "__GPU_ARCH_LD_MD,__compute": {
+          "baseline_bytes": 32,
+          "variant_bytes": 32,
+          "equal": true,
+          "differing_offsets": []
+        },
+        "__GPU_LD_MD,__compute": {
+          "baseline_bytes": 216,
+          "variant_bytes": 224,
+          "equal": false,
+          "differing_offsets": null
+        },
+        "__GPU_METADATA,__compute": {
+          "baseline_bytes": 488,
+          "variant_bytes": 488,
+          "equal": false,
+          "differing_offsets": [
+            428,
+            456,
+            480
+          ]
+        },
+        "__GPU_REMARKS_MD,__compute": {
+          "baseline_bytes": 0,
+          "variant_bytes": 0,
+          "equal": true,
+          "differing_offsets": []
+        },
+        "__GPU_STATS_MD,__compute": {
+          "baseline_bytes": 96,
+          "variant_bytes": 96,
+          "equal": false,
+          "differing_offsets": [
+            24,
+            25,
+            26,
+            72,
+            73
+          ]
+        },
+        "__TEXT,__text": {
+          "baseline_bytes": 1340,
+          "variant_bytes": 1340,
+          "equal": true,
+          "differing_offsets": []
+        }
+      },
+      "mac_sequences_equal": true,
+      "changed_main_instructions": []
+    },
+    "tensor-b-stride": {
+      "sections": {
+        "__GPU_ARCH_LD_MD,__compute": {
+          "baseline_bytes": 32,
+          "variant_bytes": 32,
+          "equal": true,
+          "differing_offsets": []
+        },
+        "__GPU_LD_MD,__compute": {
+          "baseline_bytes": 216,
+          "variant_bytes": 224,
+          "equal": false,
+          "differing_offsets": null
+        },
+        "__GPU_METADATA,__compute": {
+          "baseline_bytes": 488,
+          "variant_bytes": 488,
+          "equal": true,
+          "differing_offsets": []
+        },
+        "__GPU_REMARKS_MD,__compute": {
+          "baseline_bytes": 0,
+          "variant_bytes": 0,
+          "equal": true,
+          "differing_offsets": []
+        },
+        "__GPU_STATS_MD,__compute": {
+          "baseline_bytes": 96,
+          "variant_bytes": 96,
+          "equal": false,
+          "differing_offsets": [
+            24,
+            25,
+            26,
+            72,
+            73
+          ]
+        },
+        "__TEXT,__text": {
+          "baseline_bytes": 1340,
+          "variant_bytes": 1340,
+          "equal": false,
+          "differing_offsets": [
+            351,
+            353,
+            354,
+            358,
+            429,
+            473,
+            489,
+            581,
+            597,
+            613,
+            791,
+            793,
+            794,
+            798,
+            891,
+            959,
+            975,
+            1067,
+            1083,
+            1099
+          ]
+        }
+      },
+      "mac_sequences_equal": true,
+      "changed_main_instructions": [
+        {
+          "before": [
+            286,
+            12,
+            10279,
+            [
+              "reg:112",
+              "imm:32",
+              "imm:0",
+              "reg:112",
+              "imm:272"
+            ]
+          ],
+          "after": [
+            286,
+            12,
+            10282,
+            [
+              "reg:112",
+              "imm:32",
+              "reg:112",
+              "imm:16",
+              "reg:112",
+              "imm:272"
+            ]
+          ]
+        },
+        {
+          "before": [
+            350,
+            16,
+            12674,
+            [
+              "reg:2521",
+              "imm:8388608",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:512",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            350,
+            16,
+            12674,
+            [
+              "reg:2521",
+              "imm:8388608",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:768",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            394,
+            16,
+            12674,
+            [
+              "reg:2515",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:1024",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            394,
+            16,
+            12674,
+            [
+              "reg:2515",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:1536",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            410,
+            16,
+            12674,
+            [
+              "reg:2517",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:1536",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            410,
+            16,
+            12674,
+            [
+              "reg:2517",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:2304",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            502,
+            16,
+            12674,
+            [
+              "reg:2501",
+              "imm:4194304",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:544",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            502,
+            16,
+            12674,
+            [
+              "reg:2501",
+              "imm:4194304",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:800",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            518,
+            16,
+            12674,
+            [
+              "reg:2491",
+              "imm:5242880",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:1056",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            518,
+            16,
+            12674,
+            [
+              "reg:2491",
+              "imm:5242880",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:0",
+              "imm:1568",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            534,
+            16,
+            12674,
+            [
+              "reg:2493",
+              "imm:137444196352",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:16",
+              "imm:1568",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            534,
+            16,
+            12674,
+            [
+              "reg:2493",
+              "imm:137444196352",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:112",
+              "imm:16",
+              "imm:2336",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            726,
+            12,
+            10279,
+            [
+              "reg:112",
+              "imm:32",
+              "imm:0",
+              "reg:111",
+              "imm:288"
+            ]
+          ],
+          "after": [
+            726,
+            12,
+            10282,
+            [
+              "reg:112",
+              "imm:32",
+              "reg:111",
+              "imm:32",
+              "reg:111",
+              "imm:288"
+            ]
+          ]
+        },
+        {
+          "before": [
+            812,
+            16,
+            12674,
+            [
+              "reg:2521",
+              "imm:8388608",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:512",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            812,
+            16,
+            12674,
+            [
+              "reg:2521",
+              "imm:8388608",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:768",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            880,
+            16,
+            12674,
+            [
+              "reg:2515",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:1024",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            880,
+            16,
+            12674,
+            [
+              "reg:2515",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:1536",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            896,
+            16,
+            12674,
+            [
+              "reg:2517",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:1536",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            896,
+            16,
+            12674,
+            [
+              "reg:2517",
+              "imm:1048576",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:2304",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            988,
+            16,
+            12674,
+            [
+              "reg:2501",
+              "imm:4194304",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:544",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            988,
+            16,
+            12674,
+            [
+              "reg:2501",
+              "imm:4194304",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:800",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            1004,
+            16,
+            12674,
+            [
+              "reg:2491",
+              "imm:5242880",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:1056",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            1004,
+            16,
+            12674,
+            [
+              "reg:2491",
+              "imm:5242880",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:0",
+              "imm:1568",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        },
+        {
+          "before": [
+            1020,
+            16,
+            12674,
+            [
+              "reg:2493",
+              "imm:137444196352",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:16",
+              "imm:1568",
+              "imm:2",
+              "imm:15"
+            ]
+          ],
+          "after": [
+            1020,
+            16,
+            12674,
+            [
+              "reg:2493",
+              "imm:137444196352",
+              "imm:241",
+              "expr:bin(op0,const(4),8)",
+              "imm:0",
+              "reg:107",
+              "imm:16",
+              "imm:2336",
+              "imm:2",
+              "imm:15"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

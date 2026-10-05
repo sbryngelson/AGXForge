@@ -1,0 +1,40 @@
+# OPCODES ONLY A RAY-TRACING OR EXOTIC-TEXTURE CONSTRUCT EMITS.
+# Found by the fourth probe family. An intersector call, a cube or cube-array sample, a
+# multisample read or an LOD query is the ONLY construct in 890 Metal probes that emits
+# each of these, and none appears anywhere in the 1,795-object corpus.
+# `n` is how many the probe emits per copy of the construct, which is a strong hint at role.
+# The load/store ones are named in tools/g17slice.py; these are the ones deliberately left
+# unnamed, because each is a single attribution to a construct that lowers to a sequence.
+
+op11188  sched 326   ndefs 0  - GPR32tup2 - GPR32 - GPR32 - GPR16 - GP
+          name UNNAMED        emitted by: rt:rt.intersect, rt:rt.intersect_any, rt:rt.intersect_prim
+op584    sched 26    ndefs 0  - IR32 -                                
+          name UNNAMED        emitted by: rt:rt.intersect, rt:rt.intersect_any, rt:rt.intersect_prim
+op11993  sched 335   ndefs 1  GPR32 - - - - - -                       
+          name UNNAMED        emitted by: rt:rt.intersect, rt:rt.intersect_any
+op473    sched 8     ndefs 1  GPR16tup3 - GPR32 - GPR32 - GPR32 -     
+          name UNNAMED        emitted by: rt:tex.cube, rt:tex.cube_array, rt:tex.lod_query
+op500    sched 8     ndefs 1  GPR32 - GPR32 - GPR32 - GPR32 -         
+          name UNNAMED        emitted by: rt:tex.cube, rt:tex.cube_array, rt:tex.lod_query
+op527    sched 8     ndefs 1  GPR32 - GPR32 - GPR32 - GPR32 -         
+          name UNNAMED        emitted by: rt:tex.cube, rt:tex.cube_array, rt:tex.lod_query
+op13808  sched 8     ndefs 0  - - - - - - -                           
+          name UNNAMED        emitted by: rt:tex.ms
+op13820  sched 8     ndefs 0  - - - - GPR16 - - -                     
+          name UNNAMED        emitted by: rt:tex.cube, rt:tex.cube_array, rt:tex.lod_query
+op17507  sched 287   ndefs 0  GPR32 - - - - - -                       
+          name UNNAMED        emitted by: 
+op17513  sched 287   ndefs 0  GPR32tup2 - - - - - -                   
+          name UNNAMED        emitted by: 
+op17514  sched 286   ndefs 0  GPR32tup2 - - GPR32 - GPR32 - - -       
+          name UNNAMED        emitted by: 
+op17525  sched 287   ndefs 0  GPR32tup4 - - - - - -                   
+          name UNNAMED        emitted by: 
+op17526  sched 286   ndefs 0  GPR32tup4 - - GPR32 - GPR32 - - -       
+          name UNNAMED        emitted by: 
+op11899  sched 287   ndefs 0  - - GPR32 - GPR16 - - -                 
+          name UNNAMED        emitted by: 
+op11917  sched 287   ndefs 0  - - GPR32 - GPR16 - - -                 
+          name UNNAMED        emitted by: 
+op14156  sched 3     ndefs 0  - -                                     
+          name UNNAMED        emitted by: 

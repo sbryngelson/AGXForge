@@ -1,0 +1,177 @@
+{
+  "status": "compiled_and_compared",
+  "gpu_dispatched": false,
+  "round": 3,
+  "cases": {
+    "a-rows-18": {
+      "object_sha256": "10a21d7d431fab91ca089111ce5f7379351e5e42402125eebd622e5facff3fd4",
+      "main_sha256": "1bcc53b2a76a363ecfe7743ccb4d4ebcc3ca5bef721c753fb1500ec4480654e1",
+      "main_bytes": 1280,
+      "verdict": "differs",
+      "differing_bytes": 4,
+      "first_differences": [
+        83,
+        84,
+        713,
+        714
+      ]
+    },
+    "a-rows-20": {
+      "object_sha256": "e04402e18bc055bc4bc832b48ff0bf7b053139be6c9d31139741d0c8ae159086",
+      "main_sha256": "79a94a9d3faace09e730b21f2ca58d56093ec95c690b69c0c9cac10ed14d72e3",
+      "main_bytes": 1280,
+      "verdict": "differs",
+      "differing_bytes": 4,
+      "first_differences": [
+        83,
+        84,
+        713,
+        714
+      ]
+    },
+    "a-rows-24": {
+      "object_sha256": "56118e7f460390e8bd392bc0a98f5c147fee7b4ed5db20a60f6e5a4d461e4e23",
+      "main_sha256": "9400b5701540e350278b6eb72169ad288aac0d2c2ae3c885019183ce33dfc212",
+      "main_bytes": 1280,
+      "verdict": "differs",
+      "differing_bytes": 4,
+      "first_differences": [
+        83,
+        84,
+        713,
+        714
+      ]
+    },
+    "a-rows-31": {
+      "object_sha256": "16bd3d0565090c7b955b27429d377422b27d1dad6adc6e4c7b9d7b99d0d295c5",
+      "main_sha256": "cf72ad31b39da6ed3b7fef7f988223346046e35cb01d6ba6570a814ee2d744a8",
+      "main_bytes": 1280,
+      "verdict": "differs",
+      "differing_bytes": 4,
+      "first_differences": [
+        83,
+        84,
+        713,
+        714
+      ]
+    },
+    "a-rows-32": {
+      "object_sha256": "13c24949626118d780203e744c4b0a044ecbadc5f2c4e6a3a2760119042a8fdc",
+      "main_sha256": "759cf32fd8686f359f7b8669eacf7f4611b2026f1940cde5e93f3dd1278b7f74",
+      "main_bytes": 1280,
+      "verdict": "differs",
+      "differing_bytes": 11,
+      "first_differences": [
+        76,
+        78,
+        80,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        713,
+        714
+      ]
+    },
+    "a-rows-33": {
+      "object_sha256": "96fe1f078390806429b4f12d7c2a3d8be377ebccd406909dd9a036cb15f11d6c",
+      "main_sha256": "6c5c6931ba09b5009524f7809419a36696337839212dd20d070115fe3c9dec01",
+      "main_bytes": 1280,
+      "verdict": "differs",
+      "differing_bytes": 4,
+      "first_differences": [
+        83,
+        84,
+        713,
+        714
+      ]
+    },
+    "a-rows-63": {
+      "object_sha256": "9e033537c621835acdcfb4ef468b19440a93163524c1faa9ddfb7fac2e84dfc5",
+      "main_sha256": "bf54373dd8a21f13ac1088cf35c26f99199400ec6fd151c2e7495267d434a083",
+      "main_bytes": 1304,
+      "verdict": "differs",
+      "differing_bytes": 789,
+      "first_differences": [
+        83,
+        84,
+        276,
+        278,
+        280,
+        283,
+        300,
+        302,
+        307,
+        315,
+        327,
+        343
+      ]
+    },
+    "a-rows-64": {
+      "object_sha256": "eae70076a2e1ff9294c7db2c24c329a95bc29cafc428f0f33c74ededc7ad2f97",
+      "main_sha256": "a03ff4bc92854b97b97083489f6738258ed8481f4684779cc514b0c2c6733fd6",
+      "main_bytes": 1306,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "b-rows-6": {
+      "object_sha256": "490b2e31a1d06ea4743f38072eb7d72e1fa34177e51f7f958af09a571d8db44c",
+      "main_sha256": "514997a4acc2da2eb3a04361cf5a716dacba50ec268dcc9f41239d4002e6a6b7",
+      "main_bytes": 1280,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "b-rows-7": {
+      "object_sha256": "50296239b690d9df338e22a9e8982f724746e70a3ea5a0402cb64c187d6e1252",
+      "main_sha256": "f999ae6ba1e8199a25a18c2db2dbac1a2927c10c8d2381446871daff007c19a8",
+      "main_bytes": 1280,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "b-rows-9": {
+      "object_sha256": "7482392cbeeb46b8f74068a111a8da7c95320709cfe82c4db378211de83cbe64",
+      "main_sha256": "2f08f56a1d19b77510f9d590cde2cffad3bd4996474644c18d0ffd22398d1567",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "b-rows-10": {
+      "object_sha256": "558ee1d75f7a8257c6a642274116321165c5b118ae9c23b07671e346c7233bfd",
+      "main_sha256": "9710dff10b9a6170206033737dac952b2d5437a398dd798a509732163cbb2239",
+      "main_bytes": 1280,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "b-rows-12": {
+      "object_sha256": "6f77cf71eb015af37bc86ba2b6fecd0a41e159400160984acb062a83ca1f199b",
+      "main_sha256": "fafe080550ae037dcbee5d8eb3109bab043e026027aec0e3a22ec26025bbbde1",
+      "main_bytes": 1280,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "c-rows-6": {
+      "object_sha256": "969e9b8ea021c066004776eada789c1af0d9475f6c5e50199fb38e2ec78907a2",
+      "main_sha256": "fe91c02d5104a44c41ac003433bc7795811ddf1b22a17ed65bb2f6d5a774466a",
+      "main_bytes": 1266,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "c-rows-7": {
+      "object_sha256": "16d022c71d4eda34b3543ea8cf72b2164ac1cc52185df42b48090794f25a8734",
+      "main_sha256": "f87399ab94366182082d714049016fff2115cff8287a931e3b24d0bc21395bf4",
+      "main_bytes": 1266,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "c-rows-9": {
+      "object_sha256": "b1e4f29c538299edaa8802b6fec68b2287148ccff32fae7a1308d3633a9e341f",
+      "main_sha256": "0c9a78ff7ad5c1c793ff303e632a0a182228276994a6dabbb727cbe7336b5bf3",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-12": {
+      "object_sha256": "d81a257bcc623facb59c33b41a4026d5068c28dddabf498ee158a9bea18f17c4",
+      "main_sha256": "25fbd33093717a9d4eed7f0a4e4f5fc94eb1be85f2cac57968fa52d66a963c07",
+      "main_bytes": 1266,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    }
+  }
+}

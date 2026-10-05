@@ -1,0 +1,1231 @@
+{
+  "status": "validated_measured_half_schedule",
+  "schedule_validation_passed": true,
+  "original_application_fp64_passed": false,
+  "callback_timing": {
+    "scope": "CLOCK_MONOTONIC host intervals; callback delivery includes GPU/driver/queue; waiter interval includes callback signal and wakeup; neither is device execution time",
+    "records": [
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 0,
+        "first_trace_id": 363150312201,
+        "second_trace_id": 363150312202,
+        "submit_start_ns": 483099119182000,
+        "submit_return_ns": 483099121347000,
+        "scheduled_callback_entry_ns": 483099121363000,
+        "completed_callback_entry_ns": 483099121773000,
+        "wait_return_ns": 483099121782000,
+        "submit_to_callback_ns": 2591000,
+        "callback_to_wait_return_ns": 9000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 1,
+        "first_trace_id": 363150312203,
+        "second_trace_id": 363150312204,
+        "submit_start_ns": 483099121987000,
+        "submit_return_ns": 483099122038000,
+        "scheduled_callback_entry_ns": 483099122063000,
+        "completed_callback_entry_ns": 483099122482000,
+        "wait_return_ns": 483099122501000,
+        "submit_to_callback_ns": 495000,
+        "callback_to_wait_return_ns": 19000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 2,
+        "first_trace_id": 363150312205,
+        "second_trace_id": 363150312206,
+        "submit_start_ns": 483099122806000,
+        "submit_return_ns": 483099122863000,
+        "scheduled_callback_entry_ns": 483099122874000,
+        "completed_callback_entry_ns": 483099123252000,
+        "wait_return_ns": 483099123259000,
+        "submit_to_callback_ns": 446000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 3,
+        "first_trace_id": 363150312207,
+        "second_trace_id": 363150312208,
+        "submit_start_ns": 483099123529000,
+        "submit_return_ns": 483099123581000,
+        "scheduled_callback_entry_ns": 483099123588000,
+        "completed_callback_entry_ns": 483099123988000,
+        "wait_return_ns": 483099123997000,
+        "submit_to_callback_ns": 459000,
+        "callback_to_wait_return_ns": 9000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 4,
+        "first_trace_id": 363150312209,
+        "second_trace_id": 363150312210,
+        "submit_start_ns": 483099124209000,
+        "submit_return_ns": 483099124270000,
+        "scheduled_callback_entry_ns": 483099124279000,
+        "completed_callback_entry_ns": 483099124811000,
+        "wait_return_ns": 483099124834000,
+        "submit_to_callback_ns": 602000,
+        "callback_to_wait_return_ns": 23000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 5,
+        "first_trace_id": 363150312211,
+        "second_trace_id": 363150312212,
+        "submit_start_ns": 483099124993000,
+        "submit_return_ns": 483099125058000,
+        "scheduled_callback_entry_ns": 483099125064000,
+        "completed_callback_entry_ns": 483099125454000,
+        "wait_return_ns": 483099125460000,
+        "submit_to_callback_ns": 461000,
+        "callback_to_wait_return_ns": 6000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 1,
+        "stage": 6,
+        "first_trace_id": 363150312213,
+        "second_trace_id": 363150312214,
+        "submit_start_ns": 483099125623000,
+        "submit_return_ns": 483099125663000,
+        "scheduled_callback_entry_ns": 483099125668000,
+        "completed_callback_entry_ns": 483099125994000,
+        "wait_return_ns": 483099126001000,
+        "submit_to_callback_ns": 371000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 0,
+        "first_trace_id": 363150312215,
+        "second_trace_id": 363150312216,
+        "submit_start_ns": 483099137558000,
+        "submit_return_ns": 483099137636000,
+        "scheduled_callback_entry_ns": 483099137667000,
+        "completed_callback_entry_ns": 483099138091000,
+        "wait_return_ns": 483099138100000,
+        "submit_to_callback_ns": 533000,
+        "callback_to_wait_return_ns": 9000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 1,
+        "first_trace_id": 363150312217,
+        "second_trace_id": 363150312218,
+        "submit_start_ns": 483099138177000,
+        "submit_return_ns": 483099138236000,
+        "scheduled_callback_entry_ns": 483099138244000,
+        "completed_callback_entry_ns": 483099138650000,
+        "wait_return_ns": 483099138668000,
+        "submit_to_callback_ns": 473000,
+        "callback_to_wait_return_ns": 18000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 2,
+        "first_trace_id": 363150312219,
+        "second_trace_id": 363150312220,
+        "submit_start_ns": 483099138733000,
+        "submit_return_ns": 483099138775000,
+        "scheduled_callback_entry_ns": 483099138779000,
+        "completed_callback_entry_ns": 483099139239000,
+        "wait_return_ns": 483099139251000,
+        "submit_to_callback_ns": 506000,
+        "callback_to_wait_return_ns": 12000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 3,
+        "first_trace_id": 363150312221,
+        "second_trace_id": 363150312222,
+        "submit_start_ns": 483099139300000,
+        "submit_return_ns": 483099139336000,
+        "scheduled_callback_entry_ns": 483099139342000,
+        "completed_callback_entry_ns": 483099139804000,
+        "wait_return_ns": 483099139814000,
+        "submit_to_callback_ns": 504000,
+        "callback_to_wait_return_ns": 10000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 4,
+        "first_trace_id": 363150312223,
+        "second_trace_id": 363150312224,
+        "submit_start_ns": 483099139860000,
+        "submit_return_ns": 483099139892000,
+        "scheduled_callback_entry_ns": 483099139897000,
+        "completed_callback_entry_ns": 483099140165000,
+        "wait_return_ns": 483099140172000,
+        "submit_to_callback_ns": 305000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 5,
+        "first_trace_id": 363150312225,
+        "second_trace_id": 363150312226,
+        "submit_start_ns": 483099140212000,
+        "submit_return_ns": 483099140258000,
+        "scheduled_callback_entry_ns": 483099140262000,
+        "completed_callback_entry_ns": 483099140388000,
+        "wait_return_ns": 483099140394000,
+        "submit_to_callback_ns": 176000,
+        "callback_to_wait_return_ns": 6000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 2,
+        "stage": 6,
+        "first_trace_id": 363150312227,
+        "second_trace_id": 363150312228,
+        "submit_start_ns": 483099140422000,
+        "submit_return_ns": 483099140455000,
+        "scheduled_callback_entry_ns": 483099140457000,
+        "completed_callback_entry_ns": 483099140599000,
+        "wait_return_ns": 483099140604000,
+        "submit_to_callback_ns": 177000,
+        "callback_to_wait_return_ns": 5000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 0,
+        "first_trace_id": 363150312229,
+        "second_trace_id": 363150312230,
+        "submit_start_ns": 483099142015000,
+        "submit_return_ns": 483099142055000,
+        "scheduled_callback_entry_ns": 483099142063000,
+        "completed_callback_entry_ns": 483099142196000,
+        "wait_return_ns": 483099142206000,
+        "submit_to_callback_ns": 181000,
+        "callback_to_wait_return_ns": 10000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 1,
+        "first_trace_id": 363150312231,
+        "second_trace_id": 363150312232,
+        "submit_start_ns": 483099142274000,
+        "submit_return_ns": 483099142319000,
+        "scheduled_callback_entry_ns": 483099142326000,
+        "completed_callback_entry_ns": 483099142478000,
+        "wait_return_ns": 483099142485000,
+        "submit_to_callback_ns": 204000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 2,
+        "first_trace_id": 363150312233,
+        "second_trace_id": 363150312234,
+        "submit_start_ns": 483099142528000,
+        "submit_return_ns": 483099142564000,
+        "scheduled_callback_entry_ns": 483099142569000,
+        "completed_callback_entry_ns": 483099142706000,
+        "wait_return_ns": 483099142713000,
+        "submit_to_callback_ns": 178000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 3,
+        "first_trace_id": 363150312235,
+        "second_trace_id": 363150312236,
+        "submit_start_ns": 483099142758000,
+        "submit_return_ns": 483099142793000,
+        "scheduled_callback_entry_ns": 483099142824000,
+        "completed_callback_entry_ns": 483099142927000,
+        "wait_return_ns": 483099142935000,
+        "submit_to_callback_ns": 169000,
+        "callback_to_wait_return_ns": 8000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 4,
+        "first_trace_id": 363150312237,
+        "second_trace_id": 363150312238,
+        "submit_start_ns": 483099142973000,
+        "submit_return_ns": 483099143011000,
+        "scheduled_callback_entry_ns": 483099143018000,
+        "completed_callback_entry_ns": 483099143630000,
+        "wait_return_ns": 483099143638000,
+        "submit_to_callback_ns": 657000,
+        "callback_to_wait_return_ns": 8000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 5,
+        "first_trace_id": 363150312239,
+        "second_trace_id": 363150312240,
+        "submit_start_ns": 483099143687000,
+        "submit_return_ns": 483099143731000,
+        "scheduled_callback_entry_ns": 483099143735000,
+        "completed_callback_entry_ns": 483099144176000,
+        "wait_return_ns": 483099144183000,
+        "submit_to_callback_ns": 489000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 3,
+        "stage": 6,
+        "first_trace_id": 363150312241,
+        "second_trace_id": 363150312242,
+        "submit_start_ns": 483099144221000,
+        "submit_return_ns": 483099144259000,
+        "scheduled_callback_entry_ns": 483099144262000,
+        "completed_callback_entry_ns": 483099144757000,
+        "wait_return_ns": 483099144765000,
+        "submit_to_callback_ns": 536000,
+        "callback_to_wait_return_ns": 8000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 0,
+        "first_trace_id": 363150312243,
+        "second_trace_id": 363150312244,
+        "submit_start_ns": 483099146001000,
+        "submit_return_ns": 483099146045000,
+        "scheduled_callback_entry_ns": 483099146054000,
+        "completed_callback_entry_ns": 483099146456000,
+        "wait_return_ns": 483099146463000,
+        "submit_to_callback_ns": 455000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 1,
+        "first_trace_id": 363150312245,
+        "second_trace_id": 363150312246,
+        "submit_start_ns": 483099146532000,
+        "submit_return_ns": 483099146573000,
+        "scheduled_callback_entry_ns": 483099146576000,
+        "completed_callback_entry_ns": 483099147080000,
+        "wait_return_ns": 483099147087000,
+        "submit_to_callback_ns": 548000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 2,
+        "first_trace_id": 363150312247,
+        "second_trace_id": 363150312248,
+        "submit_start_ns": 483099147139000,
+        "submit_return_ns": 483099147176000,
+        "scheduled_callback_entry_ns": 483099147178000,
+        "completed_callback_entry_ns": 483099147683000,
+        "wait_return_ns": 483099147691000,
+        "submit_to_callback_ns": 544000,
+        "callback_to_wait_return_ns": 8000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 3,
+        "first_trace_id": 363150312249,
+        "second_trace_id": 363150312250,
+        "submit_start_ns": 483099147735000,
+        "submit_return_ns": 483099147767000,
+        "scheduled_callback_entry_ns": 483099147769000,
+        "completed_callback_entry_ns": 483099147904000,
+        "wait_return_ns": 483099147910000,
+        "submit_to_callback_ns": 169000,
+        "callback_to_wait_return_ns": 6000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 4,
+        "first_trace_id": 363150312251,
+        "second_trace_id": 363150312252,
+        "submit_start_ns": 483099147947000,
+        "submit_return_ns": 483099147979000,
+        "scheduled_callback_entry_ns": 483099147982000,
+        "completed_callback_entry_ns": 483099148276000,
+        "wait_return_ns": 483099148281000,
+        "submit_to_callback_ns": 329000,
+        "callback_to_wait_return_ns": 5000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 5,
+        "first_trace_id": 363150312253,
+        "second_trace_id": 363150312254,
+        "submit_start_ns": 483099148318000,
+        "submit_return_ns": 483099148352000,
+        "scheduled_callback_entry_ns": 483099148356000,
+        "completed_callback_entry_ns": 483099148453000,
+        "wait_return_ns": 483099148458000,
+        "submit_to_callback_ns": 135000,
+        "callback_to_wait_return_ns": 5000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 4,
+        "stage": 6,
+        "first_trace_id": 363150312255,
+        "second_trace_id": 363150312256,
+        "submit_start_ns": 483099148490000,
+        "submit_return_ns": 483099148519000,
+        "scheduled_callback_entry_ns": 483099148526000,
+        "completed_callback_entry_ns": 483099148666000,
+        "wait_return_ns": 483099148670000,
+        "submit_to_callback_ns": 176000,
+        "callback_to_wait_return_ns": 4000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 0,
+        "first_trace_id": 363150312257,
+        "second_trace_id": 363150312258,
+        "submit_start_ns": 483099150072000,
+        "submit_return_ns": 483099150125000,
+        "scheduled_callback_entry_ns": 483099150135000,
+        "completed_callback_entry_ns": 483099150257000,
+        "wait_return_ns": 483099150266000,
+        "submit_to_callback_ns": 185000,
+        "callback_to_wait_return_ns": 9000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 1,
+        "first_trace_id": 363150312259,
+        "second_trace_id": 363150312260,
+        "submit_start_ns": 483099150323000,
+        "submit_return_ns": 483099150359000,
+        "scheduled_callback_entry_ns": 483099150364000,
+        "completed_callback_entry_ns": 483099150517000,
+        "wait_return_ns": 483099150522000,
+        "submit_to_callback_ns": 194000,
+        "callback_to_wait_return_ns": 5000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 2,
+        "first_trace_id": 363150312261,
+        "second_trace_id": 363150312262,
+        "submit_start_ns": 483099150561000,
+        "submit_return_ns": 483099150599000,
+        "scheduled_callback_entry_ns": 483099150604000,
+        "completed_callback_entry_ns": 483099150725000,
+        "wait_return_ns": 483099150730000,
+        "submit_to_callback_ns": 164000,
+        "callback_to_wait_return_ns": 5000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 3,
+        "first_trace_id": 363150312263,
+        "second_trace_id": 363150312264,
+        "submit_start_ns": 483099150758000,
+        "submit_return_ns": 483099150784000,
+        "scheduled_callback_entry_ns": 483099150787000,
+        "completed_callback_entry_ns": 483099150854000,
+        "wait_return_ns": 483099150861000,
+        "submit_to_callback_ns": 96000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 4,
+        "first_trace_id": 363150312265,
+        "second_trace_id": 363150312266,
+        "submit_start_ns": 483099150884000,
+        "submit_return_ns": 483099150915000,
+        "scheduled_callback_entry_ns": 483099150919000,
+        "completed_callback_entry_ns": 483099151208000,
+        "wait_return_ns": 483099151215000,
+        "submit_to_callback_ns": 324000,
+        "callback_to_wait_return_ns": 7000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 5,
+        "first_trace_id": 363150312267,
+        "second_trace_id": 363150312268,
+        "submit_start_ns": 483099151245000,
+        "submit_return_ns": 483099151274000,
+        "scheduled_callback_entry_ns": 483099151277000,
+        "completed_callback_entry_ns": 483099151402000,
+        "wait_return_ns": 483099151407000,
+        "submit_to_callback_ns": 157000,
+        "callback_to_wait_return_ns": 5000
+      },
+      {
+        "schema": 1,
+        "unit": "ns",
+        "clock": "CLOCK_MONOTONIC",
+        "request": 5,
+        "stage": 6,
+        "first_trace_id": 363150312269,
+        "second_trace_id": 363150312270,
+        "submit_start_ns": 483099151429000,
+        "submit_return_ns": 483099151456000,
+        "scheduled_callback_entry_ns": 483099151459000,
+        "completed_callback_entry_ns": 483099151592000,
+        "wait_return_ns": 483099151598000,
+        "submit_to_callback_ns": 163000,
+        "callback_to_wait_return_ns": 6000
+      }
+    ],
+    "requests": [
+      {
+        "submit_to_callback_ns": 5425000,
+        "callback_to_wait_return_ns": 80000
+      },
+      {
+        "submit_to_callback_ns": 2674000,
+        "callback_to_wait_return_ns": 67000
+      },
+      {
+        "submit_to_callback_ns": 2414000,
+        "callback_to_wait_return_ns": 55000
+      },
+      {
+        "submit_to_callback_ns": 2356000,
+        "callback_to_wait_return_ns": 42000
+      },
+      {
+        "submit_to_callback_ns": 1283000,
+        "callback_to_wait_return_ns": 44000
+      }
+    ],
+    "warm_median_ns": {
+      "submit_to_callback_ns": 2385000.0,
+      "callback_to_wait_return_ns": 49500.0
+    }
+  },
+  "mode": "benchmark",
+  "gpu_dispatched": true,
+  "requests": 5,
+  "submissions": 35,
+  "runs": [
+    {
+      "timing": {
+        "stages": [
+          {
+            "stage": "pack",
+            "submit_call_ns": 2165000,
+            "submit_to_completion_ns": 2600000,
+            "output_readback_bytes": 24576,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "expand",
+            "submit_call_ns": 51000,
+            "submit_to_completion_ns": 514000,
+            "output_readback_bytes": 196608,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "activation",
+            "submit_call_ns": 57000,
+            "submit_to_completion_ns": 453000,
+            "output_readback_bytes": 196608,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "pack_hidden",
+            "submit_call_ns": 52000,
+            "submit_to_completion_ns": 468000,
+            "output_readback_bytes": 98304,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "contract",
+            "submit_call_ns": 61000,
+            "submit_to_completion_ns": 625000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "residual",
+            "submit_call_ns": 65000,
+            "submit_to_completion_ns": 467000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          },
+          {
+            "stage": "layernorm",
+            "submit_call_ns": 40000,
+            "submit_to_completion_ns": 378000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          }
+        ],
+        "client_roundtrip_ns": 7080500,
+        "input_upload_bytes": 49152,
+        "submits": 7,
+        "callbacks": 14
+      },
+      "checks": {
+        "pack": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "expand": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "activation": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.1920928955078125e-07,
+          "max_error_over_budget": 0.004798310034183561,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "pack_hidden": {
+          "passed": false,
+          "failures": 3,
+          "max_abs_error": 6.103515625e-05,
+          "max_error_over_budget": 2.855511136493432,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "contract": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.0639429092407227e-05,
+          "max_error_over_budget": 0.4409678357061275,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "residual": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.0609626770019531e-05,
+          "max_error_over_budget": 0.4564422892960462,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 8.016824722290039e-06,
+          "max_error_over_budget": 0.37754174541534846,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "stagewise_checks": {
+        "pack": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "expand": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 2.1320483938325197e-06,
+          "max_error_over_budget": 0.013001279675673362,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "activation": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 3.9451052735728354e-07,
+          "max_error_over_budget": 0.01285280844927679,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "pack_hidden": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "contract": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 1.5035339714586371e-05,
+          "max_error_over_budget": 0.011853744386761202,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "residual": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 0.0,
+          "max_error_over_budget": 0.0,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        },
+        "layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 5.709006072329714e-07,
+          "max_error_over_budget": 0.008975759049806258,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "input_sha256": "e17c95d5dc98775389e432b76469eafce3d50f53761e7c4ffe3c8cb7ef63eb0e",
+      "iteration": 0,
+      "validation_readbacks": true,
+      "readback_artifact": "results/benchmark-readbacks-1790738956505641000.npz",
+      "readback_sha256": "650ef3e696e29f0f9517e74289de21f460c5ed3069f87fd83b110a4f72b96fe5",
+      "application_fp64": {
+        "passed": false,
+        "failures": 10032,
+        "max_abs_error": 0.0009532997178250957,
+        "max_error_over_budget": 32.25813204702254,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "quantized_fp64": {
+        "passed": true,
+        "failures": 0,
+        "max_abs_error": 1.7780445665416256e-05,
+        "max_error_over_budget": 0.8643172454138358,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "output_sha256": "134b071ce373b41a0accdc34c28e522c824b5440f0f6fbbae30eb1464b4fc8f3"
+    },
+    {
+      "timing": {
+        "stages": [
+          {
+            "stage": "pack",
+            "submit_call_ns": 78000,
+            "submit_to_completion_ns": 542000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "expand",
+            "submit_call_ns": 59000,
+            "submit_to_completion_ns": 491000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "activation",
+            "submit_call_ns": 42000,
+            "submit_to_completion_ns": 518000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "pack_hidden",
+            "submit_call_ns": 36000,
+            "submit_to_completion_ns": 514000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "contract",
+            "submit_call_ns": 32000,
+            "submit_to_completion_ns": 312000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "residual",
+            "submit_call_ns": 46000,
+            "submit_to_completion_ns": 182000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "layernorm",
+            "submit_call_ns": 33000,
+            "submit_to_completion_ns": 182000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          }
+        ],
+        "client_roundtrip_ns": 3279208,
+        "input_upload_bytes": 49152,
+        "submits": 7,
+        "callbacks": 14
+      },
+      "checks": {
+        "layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 8.016824722290039e-06,
+          "max_error_over_budget": 0.37754174541534846,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "stagewise_checks": {},
+      "input_sha256": "b76e6c6289e8c72e4b2e1f43477b326fdb54a26729806c75dc0c70c268e9bd20",
+      "iteration": 1,
+      "validation_readbacks": false,
+      "readback_artifact": "results/benchmark-readbacks-1790738956520190000.npz",
+      "readback_sha256": "07c189972ad712b2768b14d06096fe7ad1c44729772b7dc889e7671e257b4f29",
+      "application_fp64": {
+        "passed": false,
+        "failures": 10032,
+        "max_abs_error": 0.0009532997178250957,
+        "max_error_over_budget": 32.25813204702254,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "quantized_fp64": {
+        "passed": true,
+        "failures": 0,
+        "max_abs_error": 1.7780445665416256e-05,
+        "max_error_over_budget": 0.8643172454138358,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "output_sha256": "9940a04bc9e8d6ae97a4929a6f9755b423ad51fbb64aab9269a9fa52950026dd"
+    },
+    {
+      "timing": {
+        "stages": [
+          {
+            "stage": "pack",
+            "submit_call_ns": 40000,
+            "submit_to_completion_ns": 191000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "expand",
+            "submit_call_ns": 45000,
+            "submit_to_completion_ns": 211000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "activation",
+            "submit_call_ns": 36000,
+            "submit_to_completion_ns": 185000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "pack_hidden",
+            "submit_call_ns": 35000,
+            "submit_to_completion_ns": 177000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "contract",
+            "submit_call_ns": 38000,
+            "submit_to_completion_ns": 665000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "residual",
+            "submit_call_ns": 44000,
+            "submit_to_completion_ns": 496000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "layernorm",
+            "submit_call_ns": 38000,
+            "submit_to_completion_ns": 544000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          }
+        ],
+        "client_roundtrip_ns": 2979750,
+        "input_upload_bytes": 49152,
+        "submits": 7,
+        "callbacks": 14
+      },
+      "checks": {
+        "layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 8.016824722290039e-06,
+          "max_error_over_budget": 0.37754174541534846,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "stagewise_checks": {},
+      "input_sha256": "c492b7e777b367a09daf7df03112a39dab7985a337c7fcecf90b3b0054c306f0",
+      "iteration": 2,
+      "validation_readbacks": false,
+      "readback_artifact": "results/benchmark-readbacks-1790738956524340000.npz",
+      "readback_sha256": "17ca528dbec5729008136168bc11e4106a7c871df237abafedec875c1ec6693d",
+      "application_fp64": {
+        "passed": false,
+        "failures": 10032,
+        "max_abs_error": 0.0009532997178250957,
+        "max_error_over_budget": 32.25813204702254,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "quantized_fp64": {
+        "passed": true,
+        "failures": 0,
+        "max_abs_error": 1.7780445665416256e-05,
+        "max_error_over_budget": 0.8643172454138358,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "output_sha256": "7fa7077f41bacfa5e461c630c260d6bb1ff2b4705f1c90097e72daf6fa61da02"
+    },
+    {
+      "timing": {
+        "stages": [
+          {
+            "stage": "pack",
+            "submit_call_ns": 44000,
+            "submit_to_completion_ns": 462000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "expand",
+            "submit_call_ns": 41000,
+            "submit_to_completion_ns": 555000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "activation",
+            "submit_call_ns": 37000,
+            "submit_to_completion_ns": 552000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "pack_hidden",
+            "submit_call_ns": 32000,
+            "submit_to_completion_ns": 175000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "contract",
+            "submit_call_ns": 32000,
+            "submit_to_completion_ns": 334000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "residual",
+            "submit_call_ns": 34000,
+            "submit_to_completion_ns": 140000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "layernorm",
+            "submit_call_ns": 29000,
+            "submit_to_completion_ns": 180000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          }
+        ],
+        "client_roundtrip_ns": 2922458,
+        "input_upload_bytes": 49152,
+        "submits": 7,
+        "callbacks": 14
+      },
+      "checks": {
+        "layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 8.016824722290039e-06,
+          "max_error_over_budget": 0.37754174541534846,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "stagewise_checks": {},
+      "input_sha256": "1460938b7de29e57dc86c564f77341de65431f4e3f559026475aadb51f1f7198",
+      "iteration": 3,
+      "validation_readbacks": false,
+      "readback_artifact": "results/benchmark-readbacks-1790738956528278000.npz",
+      "readback_sha256": "c1f515e5f23b9f65e089b31969f5be6c377d2076f6eae80169905dfd28697cfd",
+      "application_fp64": {
+        "passed": false,
+        "failures": 10032,
+        "max_abs_error": 0.0009532997178250957,
+        "max_error_over_budget": 32.25813204702254,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "quantized_fp64": {
+        "passed": true,
+        "failures": 0,
+        "max_abs_error": 1.7780445665416256e-05,
+        "max_error_over_budget": 0.8643172454138358,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "output_sha256": "36d08a0c001336ff54473b08a62926d897a03ac078b8e7ffebd3c520dee2df76"
+    },
+    {
+      "timing": {
+        "stages": [
+          {
+            "stage": "pack",
+            "submit_call_ns": 53000,
+            "submit_to_completion_ns": 194000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "expand",
+            "submit_call_ns": 36000,
+            "submit_to_completion_ns": 199000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "activation",
+            "submit_call_ns": 38000,
+            "submit_to_completion_ns": 169000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "pack_hidden",
+            "submit_call_ns": 26000,
+            "submit_to_completion_ns": 103000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "contract",
+            "submit_call_ns": 31000,
+            "submit_to_completion_ns": 331000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "residual",
+            "submit_call_ns": 29000,
+            "submit_to_completion_ns": 162000,
+            "output_readback_bytes": 0,
+            "preservation_flags": 21
+          },
+          {
+            "stage": "layernorm",
+            "submit_call_ns": 27000,
+            "submit_to_completion_ns": 169000,
+            "output_readback_bytes": 49152,
+            "preservation_flags": 63
+          }
+        ],
+        "client_roundtrip_ns": 1758958,
+        "input_upload_bytes": 49152,
+        "submits": 7,
+        "callbacks": 14
+      },
+      "checks": {
+        "layernorm": {
+          "passed": true,
+          "failures": 0,
+          "max_abs_error": 8.016824722290039e-06,
+          "max_error_over_budget": 0.37754174541534846,
+          "error_bound": "2e-5 * (1 + abs(reference))"
+        }
+      },
+      "stagewise_checks": {},
+      "input_sha256": "edf899e3aac665fa330323aac98cc8149e01ed7766a2694359030200b8b530c5",
+      "iteration": 4,
+      "validation_readbacks": false,
+      "readback_artifact": "results/benchmark-readbacks-1790738956531180000.npz",
+      "readback_sha256": "66efb8ab744fd61320874f1246a8b25501775fca4be606846993790715317eed",
+      "application_fp64": {
+        "passed": false,
+        "failures": 10032,
+        "max_abs_error": 0.0009532997178250957,
+        "max_error_over_budget": 32.25813204702254,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "quantized_fp64": {
+        "passed": true,
+        "failures": 0,
+        "max_abs_error": 1.7780445665416256e-05,
+        "max_error_over_budget": 0.8643172454138358,
+        "error_bound": "2e-5 * (1 + abs(reference))"
+      },
+      "output_sha256": "a67ac6233dd4bdbf3beff4cfec5a103e0c0d38af37d25c243d7352c6d734f34d"
+    }
+  ],
+  "failure": null,
+  "distinct_inputs": 5,
+  "warm": {
+    "samples": 4,
+    "median_client_roundtrip_ms": 2.951104,
+    "median_submit_to_completion_sum_ms": 2.4335,
+    "median_host_submit_sum_ms": 0.2625,
+    "tokens_per_second": 10843.399622649693
+  },
+  "weights_and_programs_uploaded_once": true,
+  "diagnostic_submission_count": 7489,
+  "resident_submissions_per_request": 7,
+  "timing_scope": "Host clocks; first request excluded from warm medians; GPU device time not measured",
+  "numerical_scope": "Actual-predecessor stage checks and final model plus quantized FP64 bound are acceptance; intermediate estimated model differences diagnostic; original FP32 application reported separately",
+  "attempted_requests": 5,
+  "native_build_seconds": 3.791063541022595,
+  "driver_prepare_seconds": 0.2201880409847945,
+  "before_recovery": [
+    33
+  ],
+  "after_recovery": [
+    33
+  ],
+  "new_gpu_events": [],
+  "native_returncode": 0,
+  "native_log": "STAGE 1: device=0x104cedff0  type-0x100005 conn=0x230f (open kr=0x0)  dev+0x14=0x1e07\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x1090dc000\n  resv[1] kr=0x0 @0x1094dc000\n  resv[2] kr=0x0 @0x1098dc000\n  resv[3] kr=0x0 @0x109cdc000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x1046e4000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x1046f4000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x104704000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x104724000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x104734000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x104754000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x10a0dc000 size=0x300000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100003a8000 expected=0x100003a8000 host=0x104770000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10000410000 expected=0x10000410000 host=0x1047d4000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10000420000 expected=0x10000420000 host=0x1047dc000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10000430000 expected=0x10000430000 host=0x1047e4000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10000440000 expected=0x10000440000 host=0x1047ec000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10000450000 expected=0x10000450000 host=0x1047f4000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10000460000 expected=0x10000460000 host=0x1047fc000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10000470000 expected=0x10000470000 host=0x104804000 size=0xc000\nORDERED QUEUE create=0x104cf8e50 connection=0x230f prior=0x1e07 notification=0x104cf8ea0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x104814000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x104818000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x548d720307 second=0x548d720308\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":0,\"first_trace_id\":363150312201,\"second_trace_id\":363150312202,\"submit_start_ns\":483099119182000,\"submit_return_ns\":483099121347000,\"scheduled_callback_entry_ns\":483099121363000,\"completed_callback_entry_ns\":483099121773000,\"wait_return_ns\":483099121782000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":1,\"first_trace_id\":363150312203,\"second_trace_id\":363150312204,\"submit_start_ns\":483099121987000,\"submit_return_ns\":483099122038000,\"scheduled_callback_entry_ns\":483099122063000,\"completed_callback_entry_ns\":483099122482000,\"wait_return_ns\":483099122501000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":2,\"first_trace_id\":363150312205,\"second_trace_id\":363150312206,\"submit_start_ns\":483099122806000,\"submit_return_ns\":483099122863000,\"scheduled_callback_entry_ns\":483099122874000,\"completed_callback_entry_ns\":483099123252000,\"wait_return_ns\":483099123259000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":3,\"first_trace_id\":363150312207,\"second_trace_id\":363150312208,\"submit_start_ns\":483099123529000,\"submit_return_ns\":483099123581000,\"scheduled_callback_entry_ns\":483099123588000,\"completed_callback_entry_ns\":483099123988000,\"wait_return_ns\":483099123997000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":4,\"first_trace_id\":363150312209,\"second_trace_id\":363150312210,\"submit_start_ns\":483099124209000,\"submit_return_ns\":483099124270000,\"scheduled_callback_entry_ns\":483099124279000,\"completed_callback_entry_ns\":483099124811000,\"wait_return_ns\":483099124834000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":5,\"first_trace_id\":363150312211,\"second_trace_id\":363150312212,\"submit_start_ns\":483099124993000,\"submit_return_ns\":483099125058000,\"scheduled_callback_entry_ns\":483099125064000,\"completed_callback_entry_ns\":483099125454000,\"wait_return_ns\":483099125460000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":1,\"stage\":6,\"first_trace_id\":363150312213,\"second_trace_id\":363150312214,\"submit_start_ns\":483099125623000,\"submit_return_ns\":483099125663000,\"scheduled_callback_entry_ns\":483099125668000,\"completed_callback_entry_ns\":483099125994000,\"wait_return_ns\":483099126001000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":0,\"first_trace_id\":363150312215,\"second_trace_id\":363150312216,\"submit_start_ns\":483099137558000,\"submit_return_ns\":483099137636000,\"scheduled_callback_entry_ns\":483099137667000,\"completed_callback_entry_ns\":483099138091000,\"wait_return_ns\":483099138100000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":1,\"first_trace_id\":363150312217,\"second_trace_id\":363150312218,\"submit_start_ns\":483099138177000,\"submit_return_ns\":483099138236000,\"scheduled_callback_entry_ns\":483099138244000,\"completed_callback_entry_ns\":483099138650000,\"wait_return_ns\":483099138668000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":2,\"first_trace_id\":363150312219,\"second_trace_id\":363150312220,\"submit_start_ns\":483099138733000,\"submit_return_ns\":483099138775000,\"scheduled_callback_entry_ns\":483099138779000,\"completed_callback_entry_ns\":483099139239000,\"wait_return_ns\":483099139251000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":3,\"first_trace_id\":363150312221,\"second_trace_id\":363150312222,\"submit_start_ns\":483099139300000,\"submit_return_ns\":483099139336000,\"scheduled_callback_entry_ns\":483099139342000,\"completed_callback_entry_ns\":483099139804000,\"wait_return_ns\":483099139814000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":4,\"first_trace_id\":363150312223,\"second_trace_id\":363150312224,\"submit_start_ns\":483099139860000,\"submit_return_ns\":483099139892000,\"scheduled_callback_entry_ns\":483099139897000,\"completed_callback_entry_ns\":483099140165000,\"wait_return_ns\":483099140172000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":5,\"first_trace_id\":363150312225,\"second_trace_id\":363150312226,\"submit_start_ns\":483099140212000,\"submit_return_ns\":483099140258000,\"scheduled_callback_entry_ns\":483099140262000,\"completed_callback_entry_ns\":483099140388000,\"wait_return_ns\":483099140394000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":2,\"stage\":6,\"first_trace_id\":363150312227,\"second_trace_id\":363150312228,\"submit_start_ns\":483099140422000,\"submit_return_ns\":483099140455000,\"scheduled_callback_entry_ns\":483099140457000,\"completed_callback_entry_ns\":483099140599000,\"wait_return_ns\":483099140604000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":0,\"first_trace_id\":363150312229,\"second_trace_id\":363150312230,\"submit_start_ns\":483099142015000,\"submit_return_ns\":483099142055000,\"scheduled_callback_entry_ns\":483099142063000,\"completed_callback_entry_ns\":483099142196000,\"wait_return_ns\":483099142206000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":1,\"first_trace_id\":363150312231,\"second_trace_id\":363150312232,\"submit_start_ns\":483099142274000,\"submit_return_ns\":483099142319000,\"scheduled_callback_entry_ns\":483099142326000,\"completed_callback_entry_ns\":483099142478000,\"wait_return_ns\":483099142485000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":2,\"first_trace_id\":363150312233,\"second_trace_id\":363150312234,\"submit_start_ns\":483099142528000,\"submit_return_ns\":483099142564000,\"scheduled_callback_entry_ns\":483099142569000,\"completed_callback_entry_ns\":483099142706000,\"wait_return_ns\":483099142713000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":3,\"first_trace_id\":363150312235,\"second_trace_id\":363150312236,\"submit_start_ns\":483099142758000,\"submit_return_ns\":483099142793000,\"scheduled_callback_entry_ns\":483099142824000,\"completed_callback_entry_ns\":483099142927000,\"wait_return_ns\":483099142935000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":4,\"first_trace_id\":363150312237,\"second_trace_id\":363150312238,\"submit_start_ns\":483099142973000,\"submit_return_ns\":483099143011000,\"scheduled_callback_entry_ns\":483099143018000,\"completed_callback_entry_ns\":483099143630000,\"wait_return_ns\":483099143638000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":5,\"first_trace_id\":363150312239,\"second_trace_id\":363150312240,\"submit_start_ns\":483099143687000,\"submit_return_ns\":483099143731000,\"scheduled_callback_entry_ns\":483099143735000,\"completed_callback_entry_ns\":483099144176000,\"wait_return_ns\":483099144183000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":3,\"stage\":6,\"first_trace_id\":363150312241,\"second_trace_id\":363150312242,\"submit_start_ns\":483099144221000,\"submit_return_ns\":483099144259000,\"scheduled_callback_entry_ns\":483099144262000,\"completed_callback_entry_ns\":483099144757000,\"wait_return_ns\":483099144765000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":0,\"first_trace_id\":363150312243,\"second_trace_id\":363150312244,\"submit_start_ns\":483099146001000,\"submit_return_ns\":483099146045000,\"scheduled_callback_entry_ns\":483099146054000,\"completed_callback_entry_ns\":483099146456000,\"wait_return_ns\":483099146463000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":1,\"first_trace_id\":363150312245,\"second_trace_id\":363150312246,\"submit_start_ns\":483099146532000,\"submit_return_ns\":483099146573000,\"scheduled_callback_entry_ns\":483099146576000,\"completed_callback_entry_ns\":483099147080000,\"wait_return_ns\":483099147087000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":2,\"first_trace_id\":363150312247,\"second_trace_id\":363150312248,\"submit_start_ns\":483099147139000,\"submit_return_ns\":483099147176000,\"scheduled_callback_entry_ns\":483099147178000,\"completed_callback_entry_ns\":483099147683000,\"wait_return_ns\":483099147691000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":3,\"first_trace_id\":363150312249,\"second_trace_id\":363150312250,\"submit_start_ns\":483099147735000,\"submit_return_ns\":483099147767000,\"scheduled_callback_entry_ns\":483099147769000,\"completed_callback_entry_ns\":483099147904000,\"wait_return_ns\":483099147910000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":4,\"first_trace_id\":363150312251,\"second_trace_id\":363150312252,\"submit_start_ns\":483099147947000,\"submit_return_ns\":483099147979000,\"scheduled_callback_entry_ns\":483099147982000,\"completed_callback_entry_ns\":483099148276000,\"wait_return_ns\":483099148281000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":5,\"first_trace_id\":363150312253,\"second_trace_id\":363150312254,\"submit_start_ns\":483099148318000,\"submit_return_ns\":483099148352000,\"scheduled_callback_entry_ns\":483099148356000,\"completed_callback_entry_ns\":483099148453000,\"wait_return_ns\":483099148458000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":4,\"stage\":6,\"first_trace_id\":363150312255,\"second_trace_id\":363150312256,\"submit_start_ns\":483099148490000,\"submit_return_ns\":483099148519000,\"scheduled_callback_entry_ns\":483099148526000,\"completed_callback_entry_ns\":483099148666000,\"wait_return_ns\":483099148670000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":0,\"first_trace_id\":363150312257,\"second_trace_id\":363150312258,\"submit_start_ns\":483099150072000,\"submit_return_ns\":483099150125000,\"scheduled_callback_entry_ns\":483099150135000,\"completed_callback_entry_ns\":483099150257000,\"wait_return_ns\":483099150266000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":1,\"first_trace_id\":363150312259,\"second_trace_id\":363150312260,\"submit_start_ns\":483099150323000,\"submit_return_ns\":483099150359000,\"scheduled_callback_entry_ns\":483099150364000,\"completed_callback_entry_ns\":483099150517000,\"wait_return_ns\":483099150522000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":2,\"first_trace_id\":363150312261,\"second_trace_id\":363150312262,\"submit_start_ns\":483099150561000,\"submit_return_ns\":483099150599000,\"scheduled_callback_entry_ns\":483099150604000,\"completed_callback_entry_ns\":483099150725000,\"wait_return_ns\":483099150730000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":3,\"first_trace_id\":363150312263,\"second_trace_id\":363150312264,\"submit_start_ns\":483099150758000,\"submit_return_ns\":483099150784000,\"scheduled_callback_entry_ns\":483099150787000,\"completed_callback_entry_ns\":483099150854000,\"wait_return_ns\":483099150861000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":4,\"first_trace_id\":363150312265,\"second_trace_id\":363150312266,\"submit_start_ns\":483099150884000,\"submit_return_ns\":483099150915000,\"scheduled_callback_entry_ns\":483099150919000,\"completed_callback_entry_ns\":483099151208000,\"wait_return_ns\":483099151215000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":5,\"first_trace_id\":363150312267,\"second_trace_id\":363150312268,\"submit_start_ns\":483099151245000,\"submit_return_ns\":483099151274000,\"scheduled_callback_entry_ns\":483099151277000,\"completed_callback_entry_ns\":483099151402000,\"wait_return_ns\":483099151407000}\nWORKLOAD FFN CALLBACK_TIMING {\"schema\":1,\"unit\":\"ns\",\"clock\":\"CLOCK_MONOTONIC\",\"request\":5,\"stage\":6,\"first_trace_id\":363150312269,\"second_trace_id\":363150312270,\"submit_start_ns\":483099151429000,\"submit_return_ns\":483099151456000,\"scheduled_callback_entry_ns\":483099151459000,\"completed_callback_entry_ns\":483099151592000,\"wait_return_ns\":483099151598000}\nWORKLOAD FFN CLOSED: requests=5 Submits=35 result=0; benchmark stages 0..5 omit code/weight/source scans.\n",
+  "native_binary_sha256": "0315d8c25227c5e84603338a32728ad94f86defdcf0da705644286142358e169",
+  "native_source_sha256": "5d3b9019b98937677c3373fb50b747d0ebdc2d727be4c0de2cfe960440e39803",
+  "native_header_sha256": "a3ae95f51025ecf172e585a8bd736e94a3104e4ed00639a87fe23d20e7c80f78",
+  "prediction": {
+    "schema": 1,
+    "gpu_dispatched": false,
+    "workload": "resident_minilm_ffn",
+    "manifest_sha256": "e370a7af45bbcaa0c8d2ae2daa3ba38bb69cb1f330a1389018a021c7016ea803",
+    "schedule_sha256": "28c23882b2b47acc8b4fd21d88d67b3089eec61635cfde040659cd4660a87d17",
+    "native_header_sha256": "a3ae95f51025ecf172e585a8bd736e94a3104e4ed00639a87fe23d20e7c80f78",
+    "native_source_sha256": "5d3b9019b98937677c3373fb50b747d0ebdc2d727be4c0de2cfe960440e39803",
+    "scheduler_header_sha256": "8a2f1a1c781be417e6752cafbb0defca65e4ea4c53a9a2f4a04f36e21df4908e",
+    "submissions_per_request": 7,
+    "reference_contract": {
+      "submissions": 7,
+      "stages": [
+        "pack",
+        "expand",
+        "activation",
+        "pack_hidden",
+        "contract",
+        "residual",
+        "layernorm"
+      ],
+      "readonly": [
+        "source",
+        "expand_weight",
+        "expand_bias",
+        "contract_weight",
+        "contract_bias",
+        "gamma",
+        "beta"
+      ],
+      "guards": "128 bytes before and after each resident allocation payload; unchanged after every execution",
+      "output_shape": [
+        32,
+        384
+      ],
+      "output_dtype": "float32",
+      "correctness": "Original application FP64 AND explicitly quantized schedule reported separately; bound is never widened to hide half quantization",
+      "repeat": "At least three different source inputs; parameters/code immutable; reset all writable output payloads to a sentinel before execution"
+    },
+    "model_output_sha256": "0061cbd80cffea92e8bf8ef8b9ad3a890fc6ffd0820feed13f50a5ae928a8fb4",
+    "source_sha256": "e17c95d5dc98775389e432b76469eafce3d50f53761e7c4ffe3c8cb7ef63eb0e",
+    "source_variants": {
+      "rule": "np.roll(source, iteration, axis=0), iteration=0..15; independent rows",
+      "sha256": [
+        "e17c95d5dc98775389e432b76469eafce3d50f53761e7c4ffe3c8cb7ef63eb0e",
+        "b76e6c6289e8c72e4b2e1f43477b326fdb54a26729806c75dc0c70c268e9bd20",
+        "c492b7e777b367a09daf7df03112a39dab7985a337c7fcecf90b3b0054c306f0",
+        "1460938b7de29e57dc86c564f77341de65431f4e3f559026475aadb51f1f7198",
+        "edf899e3aac665fa330323aac98cc8149e01ed7766a2694359030200b8b530c5",
+        "7053fb9662a5f023bd0f02df29caf0df8df6faf002be4a5d4ec91106b60bb36e",
+        "d64d361d28eab10479acd50aaea4d789c0f1a57dc0da5f42e24311e1bd6db09f",
+        "a7e8def0eade85a31ed3af6b3ed0bf7d2fd7530cb3aa0619f8cc07056f65b4f3",
+        "d6234b392294e5649c8464f1b114565ccafea786bf053330d40b9e889618e804",
+        "19a394a79c0bdfc025af9b3b23446cee07cf21eb6c1a3086e1dfd838afcd96f2",
+        "98d983d282519c89a16baf9ec30adfc253a126c5e264568ede147c4db70b12c6",
+        "403b6f914dea74f6671ffa3403d44313722e83550d8e767d1e4119f532c63df8",
+        "e5df76efbaccf89eff95c766f466b67e7b2c0445dac3f40c1f004bb0876e3183",
+        "3664087d29fa7ac684a09234c7c3b6d5450d25f6b173e2348995e713f77f82b1",
+        "c245d0c3786c750792e35bc323743cf19f47ab962671af3ad0069172d74cb59c",
+        "4f180877fb82353220d51a8ff16af146a6d0a0a4b7851454e93dfa874e376b6d"
+      ]
+    }
+  }
+}

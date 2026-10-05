@@ -1,0 +1,184 @@
+{
+  "status": "predicted_not_compiled",
+  "gpu_dispatched": false,
+  "round": 4,
+  "cases": {
+    "b-rows-11": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 352,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "b-multiply",
+      "sha256": "d6b19cf034fa88df1b67c66e1299f90893bb19a4825cfd160df1b66bc4ca0902",
+      "bytes": 1280,
+      "generated": [
+        "other+46",
+        "other+83"
+      ],
+      "source_sha256": "a0aff1bbad4ccf2f81a9f21327d3649276f90dd81a8645f2c30834f12b58e74e"
+    },
+    "b-rows-13": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 416,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "b-multiply",
+      "sha256": "9f0cadb92274045b8612fb622f8d0b9a6bdaafe0785efc519582c490c5402bb9",
+      "bytes": 1280,
+      "generated": [
+        "other+46",
+        "other+83"
+      ],
+      "source_sha256": "e57bc32d1eb333da66452e15aadde4c763b01413923214d576c5305e13e28cad"
+    },
+    "b-rows-14": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 448,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "b-multiply",
+      "sha256": "94cb5892591d75a6ab6bb6c17c0e4884a56cf48094e9861ee4dcea73846f9f76",
+      "bytes": 1280,
+      "generated": [
+        "other+46",
+        "other+83"
+      ],
+      "source_sha256": "000c18f14dcc95372e9aa72568c31dc82edfb55ee43f83c32ba60ae59ad77f48"
+    },
+    "b-rows-15": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 480,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "b-multiply",
+      "sha256": "9fe4d0ec070690f8e752c7806bfcc7d042553a2797d1307ac83de3ecc5eb7777",
+      "bytes": 1280,
+      "generated": [
+        "other+46",
+        "other+83"
+      ],
+      "source_sha256": "334a892ac1dee5ed5eb3ff4e74f8cc103205f46ae5b057087539205cfdca6e65"
+    },
+    "c-rows-10": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 640
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "482a3f0c0c379fec493451ef0e77ccf3624caa6371f01e2b4fab305ad5d213a5",
+      "bytes": 1266,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "f74c913121638fa89d5bd94809fba6b7ce79e30808a49c64ee1eb34f480e0646"
+    },
+    "c-rows-11": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 704
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "c7cb6629e17fc78768ced845d253202094948f81fc4b81e7ac27ee72a98ca0f6",
+      "bytes": 1266,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "21f2976a080bf0b45275384da6f5926a7dadb85625b2ce1212f94a7e3c82a98f"
+    },
+    "c-rows-13": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 832
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "f88cc1938c68ebb96d47ad39d0855d3667968b4e6eb83b3528506cae9f780c11",
+      "bytes": 1266,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "5376f12644e30d52efe0e6b2eeb0d77a681f2631d7aa99d2322df6008ae4fa04"
+    },
+    "c-rows-14": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 896
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "0e9d4d805856463c685b5960e1b4a84b107460af60d56cedf8581a912c7d52d8",
+      "bytes": 1266,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "7764d55858a4c733567be5110a262b4daf5c1531573be891a212cb8cecc3cde2"
+    },
+    "c-rows-15": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 960
+      },
+      "predicted": "program",
+      "family": "c-multiply",
+      "sha256": "bd1a140dcf378582ca22611316ebbb137b052d75c9acfe9b6f5b08b36f3bddbd",
+      "bytes": 1266,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "4ee45e94d4a1cf3f07e5ad9519a1c7c5efcf452aa051176a028bb57691822c23"
+    },
+    "a5-c6": {
+      "strides": {
+        "strideA": 160,
+        "strideB": 64,
+        "strideC": 384
+      },
+      "predicted": "refused",
+      "reason": "strideC of 384 bytes needs Apple's multiply for C, and no witness combines it with another A or B stride ({'strideA': 160, 'strideB': 64, 'strideC': 384})",
+      "source_sha256": "24feacc8e7d26c4bdc8d5bc7528ae57008ae743cc4c0fc37fe16d03377b0e670"
+    },
+    "b3-c7": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 96,
+        "strideC": 448
+      },
+      "predicted": "refused",
+      "reason": "strideC of 448 bytes needs Apple's multiply for C, and no witness combines it with another A or B stride ({'strideA': 128, 'strideB': 96, 'strideC': 448})",
+      "source_sha256": "90bb93fa7a843a7770201a989ab9b84a77ac43e234ee79f1f61168507d937e41"
+    },
+    "a8-b4": {
+      "strides": {
+        "strideA": 256,
+        "strideB": 128,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "shift",
+      "sha256": "2c2650861f6a5ac411469ff199aa908a6f597a46f885025e2ff206c712436aae",
+      "bytes": 1276,
+      "generated": [
+        "setup+10",
+        "setup+47",
+        "address+85"
+      ],
+      "source_sha256": "a00bc8b2f1aea9f3d16ad67030fc31be07b545019cf24637fa46281d79b6aad8"
+    }
+  },
+  "rule": "g17tensorlower.family_of + advance_bytes: power-of-two rows -> op10279 with the scale table; 1+2^k rows -> op10282 r + (r<<k); other A row counts -> the multiply program with byte 9 of op10822/op10823 = stride/8; else refused"
+}

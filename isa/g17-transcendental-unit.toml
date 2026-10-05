@@ -1,0 +1,66 @@
+title = "The transcendental unit's operation is a three-bit code at byte6[2:0]"
+date = "2026-09-05"
+
+[the_table]
+text = """
+Swept through Apple's decoder from one sqrt encoding, holding everything else fixed:
+
+    0  rint      op3770
+    1  recip     op3658
+    2  rsqrt     op3978    RETRACTED as sqrt - see below
+    3  rsqrt     op3850
+    4  log2
+    5  exp2
+    6  trig      op3946
+    7  does not decode
+
+CROSS-CHECKED against what Apple's compiler emits, which is the control that makes this a fact
+about the ISA rather than about the decoder: exp2 carries byte6 = a5, log2 a4, sqrt a2, rsqrt a3,
+and the sine primitive a6. Five of five.
+"""
+
+[code_2_is_not_sqrt]
+text = """
+RETRACTED 2026-09-05. The encode session EXECUTED op3978 on three inputs and it returns the
+RECIPROCAL square root: 2.75 gives 0.60302269, 16 gives 0.25, 0.25 gives 2.
+
+So the multiply that follows it in Apple's sqrt lowering is not a rounding step, it is the
+algorithm - sqrt(x) = x * rsqrt(x) - and SQRT IS NOT AN INSTRUCTION on this machine. The line in
+the table below that reads "sqrt ONE instruction" was wrong for the same reason the name was.
+
+Codes 2 and 3 both return 1/sqrt on 2.75 and what separates them is not established.
+
+Third time this shape has appeared: op9986 named clz when it computes msb, op10822 named multiply,
+now this. Isolation names what Apple SELECTS for a source construct, and that is the instruction's
+meaning only when the lowering is one instruction long.
+"""
+
+[code_6_is_not_sin]
+text = """
+It is the one instruction common to sin, cos, sinpi, cospi, fast::sin, fast::cos and precise::sin.
+The sin lowering is twelve instructions and this is one of them; what distinguishes sine from
+cosine is later, op9710 against op9711. So code 6 is named `trig` and not `sin`, and what it
+computes on its own is not established.
+
+sin and cos share their entire lowering except those two instructions:
+    ffma x4, fadd, cvt.h, select.cc x2, TRIG, fmul, then op9710 (sin) or op9711 (cos), then op9701
+"""
+
+[what_is_one_instruction_and_what_is_not]
+text = """
+Worth stating plainly, because a backend needs to know which of these it can emit directly:
+
+    exp2, log2, rsqrt, rint, recip           ONE instruction each
+    exp                                      fmul then exp2
+    log                                      log2 then fmul
+    sqrt                                     rsqrt then fmul - x * rsqrt(x)
+    tanh                                     6 instructions
+    sinpi, cospi                             10
+    sin, cos, fast::sin, fast::cos           12
+    atan                                     14
+    asin                                     21
+    precise::sin                             52, with real branches and exec-mask changes
+
+fast:: and precise:: are not different instructions for sine: fast::sin and sin produce the
+IDENTICAL twelve-instruction sequence, and precise::sin is a different algorithm with branching.
+"""

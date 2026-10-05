@@ -1,0 +1,151 @@
+[
+  {
+    "id": "CONTROL.op10279",
+    "op": 10279,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        4096
+      ],
+      [
+        4097
+      ],
+      [
+        4352
+      ],
+      [
+        8192
+      ]
+    ],
+    "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+    ],
+    "note": "MANDATORY POSITIVE CONTROL: op10279 returns src + 4. The batch is void without it."
+  },
+  {
+    "id": "r612.range",
+    "op": 612,
+    "author": "fieldmap",
+    "witness_required": false,
+    "cases": [
+      [
+        0
+      ],
+      [
+        13
+      ],
+      [
+        14
+      ],
+      [
+        15
+      ],
+      [
+        16
+      ]
+    ],
+    "expect": [
+      15,
+      7,
+      3,
+      1,
+      0
+    ],
+    "note": "op612 AT THE ENCODING I ALREADY DISPATCHED, WITH INPUTS THAT ARE IN RANGE. Batch efce2b47 gave 0 for all four of its inputs and I recorded op612 as not determined and named it unreachable. It was neither: my decode reads R0L <- 0, R16, 16, 0, 16, so operand 3 is ALREADY the 16 the peer lane says marks a register source, and operands 4 and 5 are lo=0 and hi=16. Every input I chose (180150001, 3212836864, 255, 2147527629) is far above 16, and under a range predicate the correct answer to all four IS zero. The constant output was the right answer to a question asked entirely outside the domain. PREDICTION, from the peer lane's PUBLISHED reading at PEER_PIN (their section 32): bit j of the destination, j in 0..3, is set iff lo <= src + j < hi, unsigned. Their five published examples recompute exactly under it (src 29/30/31/32 at hi=32 give 7/3/1/0; src 6 at lo=8 gives 0b1100), which is a check on my transcription of their rule and not evidence for it."
+  },
+  {
+    "id": "r612.hi8",
+    "op": 612,
+    "author": "fieldmap",
+    "witness_required": false,
+    "imms": {
+      "5": 8
+    },
+    "cases": [
+      [
+        0
+      ],
+      [
+        5
+      ],
+      [
+        6
+      ],
+      [
+        7
+      ],
+      [
+        8
+      ]
+    ],
+    "expect": [
+      15,
+      7,
+      3,
+      1,
+      0
+    ],
+    "note": "THE UPPER BOUND IS AN OPERAND, OR THE ANSWER IS A FUNCTION OF src ALONE. Operand 5 moved from 16 to 8 and the inputs moved down with it. If hi is read, the edge follows: 15, 7, 3, 1, 0. If hi is NOT read and the rule is whatever fits r612.range, all five of these inputs sit below the fixed edge of 16 and this record returns 15, 15, 15, 15, 15. The two vectors disagree in four of five places."
+  },
+  {
+    "id": "r612.lo8",
+    "op": 612,
+    "author": "fieldmap",
+    "witness_required": false,
+    "imms": {
+      "4": 8,
+      "5": 32
+    },
+    "cases": [
+      [
+        6
+      ],
+      [
+        8
+      ],
+      [
+        5
+      ],
+      [
+        30
+      ],
+      [
+        32
+      ]
+    ],
+    "expect": [
+      12,
+      15,
+      8,
+      3,
+      0
+    ],
+    "note": "THE CASE NO SHIFT CAN PRODUCE, WHICH IS WHY IT IS HERE. r612.range's vector is equally well explained by a saturating shift with no lower bound at all - 0xF >> max(0, src - 12) gives 15, 7, 3, 1, 0 on exactly those inputs - so that record alone cannot tell a two-sided range predicate from a one-sided shift, and believing it would be trusting an absorbing fit. With lo=8, src=5 predicts 0b1000: a HIGH bit set with all three below it CLEAR, because only j=3 brings 5 up to 8. Every shift-shaped and mask-shaped rule yields contiguous low bits and cannot produce 8 here. src=6 predicts 0b1100, which is the peer lane's own published example reproduced on this repository's instrument rather than read off their page. WHAT WOULD REFUTE THE RULE AND IS NOT COVERED: a lower bound that is compared against src rather than src+j (which would give 0 at src=5 and src=6 alike), and any dependence on the destination register class, which this record holds fixed."
+  },
+  {
+    "id": "r612.marker0",
+    "op": 612,
+    "author": "fieldmap",
+    "witness_required": false,
+    "imms": {
+      "3": 0
+    },
+    "cases": [
+      [
+        13
+      ],
+      [
+        0
+      ]
+    ],
+    "expect": [
+      0,
+      0
+    ],
+    "note": "THE PEER LANE'S MARKER CLAIM, WHICH MY OWN RECORDS CANNOT SPEAK TO BECAUSE EVERY ONE OF THEM CARRIES 16 THERE. They report that operand 3 = 16 marks a register source and 0 turns it into an expression form whose result is 0 regardless of src. Clearing it must therefore give 0 for both inputs, where the surviving rule from r612.range gives 15 and 7. A pass here is a second lane's claim reproduced; a failure is a refutation of a published sentence of theirs and gets recorded as one, the way sext16 and op408's mask hole were."
+  }
+]

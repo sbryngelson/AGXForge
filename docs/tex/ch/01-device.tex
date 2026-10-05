@@ -1,0 +1,269 @@
+\chapter{Device and execution model}\label{ch:device-execution-model}
+
+All measurements were made on one Apple M5 Pro GPU (G17, the 20-core H17s) under the software listed in
+\cref{sec:measured-part-software}. Later chapters assume the execution model set out here. Mechanisms are in \crefrange{ch:register-file}{ch:kernel-metadata-image} and measured costs in \cref{ch:performance}.
+
+These terms are used throughout the document:
+
+\begin{itemize}
+\item \emph{Lane}: one thread's slot in a simdgroup. \emph{Simdgroup}: 32 lanes that issue one instruction stream together under an
+  execution mask (\cref{ch:control-flow-execution}). \emph{Threadgroup}: one or more simdgroups that share threadgroup memory and can meet at a
+  threadgroup barrier (\cref{sec:barriers-fences}). \emph{Grid}: all threadgroups of one dispatch.
+\item \emph{Core}: one of the 20 GPU cores. Per-core figures divide a GPU-wide count by 20.
+\item \emph{Resident}: a threadgroup (or simdgroup) is resident while it holds a core's resources, from launch until it ends.
+  \emph{Residency} or \emph{occupancy}: how many are resident at once.
+\item \emph{Registers used}: the highest 32-bit register a program names, plus one. \emph{Declared register count}: the value in
+  per-kernel metadata slot 0 (\cref{sec:gpu-metadata-slots}).
+\item \emph{Warm} and \emph{cold} refer to the GPU's performance state (\cref{sec:clocks-performance-states}).
+\item "MM x" cites the project's machine model, \code{docs/g17-tensorops-machine-model.md}.
+\end{itemize}
+
+\section{Platform versions}\label{sec:measured-part-software}
+
+The measurements were taken on one machine and one toolchain, on the platform in \cref{tab:measured-platform} (MM~\mm{22}, MM~\mm{25.66},
+MM~\mm{25.91}). The below-Metal evidence (\cref{ch:submission-below-metal}) records the OS build, 25G83; the Metal-path
+evidence files do not, so for those measurements the build is the stated platform rather than a per-file record.
+On 2026-10-02 the machine was updated to macOS 27.0.1 (build 26A434). Nothing in this reference was re-measured on that
+build; \code{tools/g17platform.py --check} reports the change, and the table gives the platform the figures were taken on.
+The update renumbered Apple's decoder; the tools translate back to the numbering used here (\cref{sec:decoder-renumbering}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.65\hsize}X>{\hsize=1.40\hsize}XX@{}}
+\caption{The measured platform: machine, OS, driver and toolchain versions, with how each was read.}\label{tab:measured-platform}\\
+\toprule
+Component & Value & How read \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Component & Value & How read \\
+\midrule
+\endhead
+Machine & \code{Mac17,8}, Apple M5 Pro & \code{sysctl hw.model} \\*
+GPU & "Apple M5 Pro", 20 cores, Metal 4; Apple's internal
+names H17s, \code{applegpu\_g17s} & \code{system\_profiler}; the core count is the
+campaign's own record (below) \\*
+macOS & 26.6.2, build 25G83; Darwin 25.6.0 & \code{sw\_vers}, \code{uname} \\*
+GPU user driver & \code{AGXMetalG17X.bundle} 353.14 & MM~\mm{25.141.20} \\*
+Metal compiler & metal 32023.921 (metalfe-32023.921.6), target air64-apple-darwin25.6.0,
+against an OS-side GPU compiler at 32023.886 & \code{xcrun metal --version}; MM~\mm{22} \\*
+Xcode / SDK & Xcode 27.0 (27A266a), macOS SDK 27.0 & \code{xcodebuild -version} \\*
+Host compiler & Apple clang 21.0.0 (clang-2100.3.34.2) & \code{clang --version} \\*
+Apple's AGX3 decoder & inside
+\code{GPUCompiler.framework/Versions/32023/Libraries/libLLVM.dylib} & \cref{sec:decoder} \\*
+\bottomrule
+\end{xltabular}
+
+\code{sysctl -n hw.ncpu} returns 18, the CPU core count, which the project has mistaken for the GPU core count before. The GPU core count is not
+readable through sysctl and is carried as the campaign's own record; a platform pin that confused the two would put a
+wrong divisor under every per-core figure (MM~\mm{25.66}). \code{tools/g17platform.py --check} compares the running machine with
+this record and names each field that differs, with what it bears on: the compiler version on lowering, scheduling
+and every "Apple's compiler emits" statement; the OS build on driver behaviour and loader variants; the part on
+everything (MM~\mm{25.66}).
+
+Results on this part do not establish results on any other part,
+OS build or compiler: another G17 product (a different core count, a different populated register file, other
+loader variants) is a different population, and no row of the project's ledger claims otherwise (MM~\mm{0.1}, MM~\mm{25.66}
+row T9, MM~\mm{25.119}). MM~\mm{25.119} groups results by how likely
+they are to change on another part, OS build or compiler:
+
+\begin{itemize}
+\item \emph{Properties of the toolchain}, which follow Apple's compiler rather than the silicon and are the likeliest to move:
+  which source forms reach the tensor unit, metadata layout classes, the constant-program laws, which opcodes Apple's
+  compiler selects, spill counts (MM~\mm{25.119}).
+\item \emph{Properties of the core count and clock}: residency counts, speeds, power (MM~\mm{25.119}).
+\item \emph{Encodings and arithmetic}, the least likely to move within this generation: field maps, the register namespace,
+  the tensor unit's reduction arithmetic, which "has held across every G17 measurement in this repository" (MM~\mm{25.119}).
+  Several conventions are conserved from Apple's earlier G13 generation and its public reconstruction in Mesa: the
+  length-bit cluster in the encoding (\cref{sec:framing}) and the command-stream layout below Metal, which decodes field for
+  field against Mesa's G13 description (\cref{ch:submission-below-metal}). Mesa's model was used only to suggest hypotheses and is not evidence for G17.
+\item Apple's decoder admits the same ten tensor MMA opcodes when told the CPU is g17s, g17g or g18, and decodes the same
+  bytes as unrelated instructions for g17, g16 and g15 targets (MM~\mm{2}). This is a property of Apple's decoder tables
+  and is no evidence about other silicon.
+\end{itemize}
+
+The portable parts of the project's own work (byte-identity pins, static checks, the metadata determinant over the
+committed corpus) rerun anywhere on the CPU; the platform facts each carry a named re-measurement instrument
+(MM~\mm{25.119}).
+
+\section{Threads, simdgroups, threadgroups and grids}\label{sec:threads-simdgroups-threadgroups}
+
+\begin{itemize}
+\item SIMD width is 32 (measured; \code{threadExecutionWidth} is the driver constant 32 for every pipeline, MM~\mm{25.141.20},
+  MM~\mm{25.147}). A tensor fragment is a per-lane register tuple across those 32 lanes (\cref{ch:tensor-unit}).
+\item A threadgroup holds at most 1,024 threads. \code{maxTotalThreadsPerThreadgroup} is a field of the compiler's reply that
+  the driver copies; 0 or absent becomes 1,024 (driver, read statically, MM~\mm{25.141.20}). It read 1,024 for every pipeline
+  tested, from 4 to 512 live scalars per thread and 64 to 32,768 bytes of threadgroup memory (measured, MM~\mm{25.47}), so it
+  does not vary with register use.
+\item Registers are per lane and never cross simdgroups. Every hand-off between simdgroups goes through memory and a
+  barrier (\cref{sec:barriers-fences}); cross-lane movement inside a simdgroup is \cref{ch:cross-lane-operations}.
+\item Threadgroup memory is limited to 32,768 bytes per threadgroup, a hard limit enforced by Apple's GPU compiler on this toolchain (48, 60
+  and 64 KiB refused; 96 KiB drops the compiler connection; MM~\mm{7}, MM~\mm{0.1}). Metal's pipeline creation does not check the
+  declared size: a container declaring 1 MiB builds and reports 1,048,576 back (MM~\mm{25.147}; \cref{sec:object-library-archive}).
+\item Position registers (lane index, simdgroup index, threadgroup and grid positions) are special registers read by
+  instruction; \cref{ch:special-registers} is the table.
+\item Grids are dispatched in threadgroup order, and the driver prepares fast-division constants to split a linear
+  threadgroup index into three dimensions (MM~\mm{25.141.20}). The ordering consequence is \cref{sec:forward-progress-in-order}.
+\end{itemize}
+
+\section{Core resource model}\label{sec:core-logical-resource}
+
+The model in \cref{tab:core-resources} is a \emph{logical} account of measured concurrency: which streams run side by side without slowing each
+other, and which contend. It is not a floorplan and does not locate or count physical units (MM~\mm{0.2}).
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.65\hsize}X>{\hsize=1.59\hsize}X>{\hsize=0.75\hsize}X@{}}
+\caption{Logical resources of one core and their measured concurrency behaviour.}\label{tab:core-resources}\\
+\toprule
+Resource & Measured behaviour & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Resource & Measured behaviour & Source \\
+\midrule
+\endhead
+Four SIMD issue slots per core & One, two or four simdgroups each running a dependent tensor MMA chain
+take 32.8, 32.4 and 32.8~µs; eight take 57.5, sixteen 112.6, thirty-two
+224.3: flat to four, linear beyond & measured, MM~\mm{8} \\*
+Tensor unit, one slot per SIMD & 16 × 16 × 16 per issue, 1,024 flop per cycle per core at saturation;
+about 5.5 simdgroups per core saturate it & measured, MM~\mm{8}; \cref{ch:tensor-unit} \\*
+fp32 / integer ALU & about 4.1 × $10^{12}$ fp32 adds per second machine-wide, consistent with
+128 fp32 lanes per core at about 1.6~GHz; no dual issue between
+fp32 and int32 (ffma + iadd mixed 3.61~ns per op against 3.64 predicted
+for one shared port and 2.09 for dual issue) & measured, MM~\mm{0.15} \\*
+Legacy simdgroup-matrix engine & overlaps the tensor unit completely at 16 and 32 simdgroups per core;
+its fp32-accumulate forms contend with fp32 FMA (overlap 0.37 or less),
+its half-accumulate form mostly does not (0.66–0.95) & measured, MM~\mm{9}; \cref{sec:legacy-simdgroup-matrix-engine} \\*
+Per-simdgroup scoreboard & eight slots ordering late values (loads, special-register reads,
+atomics) against their consumers & measured, MM~\mm{6}; \cref{sec:scoreboard} \\*
+Load/store path & per-lane addresses; no hidden tile-layout unit & measured, MM~\mm{23.2}; \cref{ch:memory} \\*
+\bottomrule
+\end{xltabular}
+
+"Contends" and "overlaps" in this table are exchange rates measured at stated
+occupancies; what physically is shared was not identified ("about 8 fma of budget per legacy issue" is a rate, not a
+mechanism; MM~\mm{9}). Partial overlap at one or two simdgroups per core is the in-order issue of a single
+simdgroup, not a shared unit (MM~\mm{9}). Performance figures are in \cref{ch:performance}.
+
+\section{Residency and occupancy rules}\label{sec:residency-occupancy-rules}
+
+These are the rules a compiler or runtime may rely on; the measured residency counts, the per-core staircase and what
+registers and spills cost are in \cref{sec:registers-spills-occupancy,sec:residency-occupancy-measurements}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item Residency follows the registers a program uses, not the count it declares (measured, MM~\mm{25.115}). The same bytes
+  declaring 19 and declaring 125 reach the same peak every time (1,814–1,896 resident at 2,048 launched simdgroups); only
+  using more registers lowers the peak. The declared count (metadata slot 0) is inert for residency between 19 and
+  125, and inert for execution: code using R0–R123 runs correctly declaring 124, 127, 128, 160 or 224 (MM~\mm{10}).
+  Below Metal the count travels to the hardware in a launch-state packet (\cref{sec:gpu-metadata-slots}, \cref{ch:submission-below-metal}); whether that
+  packet's value affects residency was not isolated.
+\item The driver caps threadgroups per core at \code{min(3072 / threads\_per\_threadgroup, 96)} (static read of the driver,
+  MM~\mm{25.141.20}): 3,072 threads per core, 96 simdgroups of 32. Nothing in that path reads the register count; any
+  register-dependent limit sits below the driver or in the compiler's reply. The measured peak at 19 registers,
+  95.0 simdgroups per core (MM~\mm{25.121}), sits at this cap.
+\item Register pressure lowers residency, by a kernel-dependent amount. Two probes disagree by about a factor of two
+  at high register counts (about 64 against about 32 simdgroups per core near 125 registers; the counts and their
+  kernels are \cref{sec:residency-occupancy-measurements}), and which kernel property the difference follows is open (MM~\mm{25.121}). A scheduler must use
+  the count measured for its own kernel family.
+\item The per-core threadgroup-memory budget is 57,344 bytes (56 KiB) (measured, MM~\mm{25.49}): two threadgroups of
+  28,672 bytes fit on a core, one of 28,688 does, and the 16-byte step costs 25 percent. With the 32 KiB per-threadgroup
+  limit, at most one threadgroup above 28 KiB is resident per core.
+\item For 1,024-thread threadgroups, no residency count may be assumed. The forward-progress probe ran 200 threadgroups of
+  1,024 threads, one producer last, with no consumer starving (17–21~µs); had fewer than 200 been co-resident, the
+  earliest consumers would have spun to the 200,000-poll cap before the last-dispatched producer ran (MM~\mm{25.141.1}).
+  That implies at least 10 per core. The driver formula gives 3 per core (60 GPU-wide) (MM~\mm{25.141.20}). The two numbers
+  have not been reconciled, and the 800-threadgroup row (480 of 799 at the cap) does not give a simultaneous count,
+  because waves can reach the cap one after another. Do not size a spin-waiting grid of 1,024-thread groups from
+  either number (\cref{sec:forward-progress-in-order}).
+\end{enumerate}
+
+\textbf{Not known.} The physical register capacity per core and its allocation granularity. Residency is not one fixed
+pool divided by per-simdgroup demand (a fixed-pool model under-predicts the measured count about fourfold at 126
+registers; \cref{sec:residency-occupancy-measurements}, MM~\mm{24.2} row H4, MM~\mm{25.49}), and whether that means a larger file than any published part or
+registers that are not all physically resident is not separable with these instruments (MM~\mm{25.20}). Metal's public API
+has no occupancy counter on this part (MM~\mm{25.48}; \cref{sec:dispatch-encoder-command-buffer}).
+
+\section{Forward progress}\label{sec:forward-progress-in-order}
+
+The probe is one dispatch (\code{tools/g17gpuprobes/fp.m}): consumers spin, capped at 200,000 polls, until an atomic count
+reaches the number of producers placed at the end of the grid (MM~\mm{25.141.1}). \Cref{tab:forward-progress-probe} gives its results.
+
+\begin{xltabular}{\linewidth}{@{}XlX@{}}
+\caption{Forward-progress probe results by grid shape, with consumers capped at 200,000 polls (MM~\mm{25.141.1}).}\label{tab:forward-progress-probe}\\
+\toprule
+Grid (threadgroups × threads) & Producers & Consumers at the cap \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Grid (threadgroups × threads) & Producers & Consumers at the cap \\
+\midrule
+\endhead
+64 to 1,200 × 32 & 1, the last & 0 (none waited more than 94 polls) \\*
+2,000 × 32 & 1 & 1,688 of 1,999 \\*
+20,000 × 32 & 1 & 18,350 of 19,999 \\*
+20 to 200 × 1,024 & 1 & 0 \\*
+800 × 1,024 & 1 & 480 of 799 \\*
+\bottomrule
+\end{xltabular}
+
+These are observations of one probe family in the tested configurations, not a scheduling guarantee. Below, each is
+used only to restrict what code may assume.
+
+\begin{itemize}
+\item Among resident threadgroups, no starvation was observed. Up to 1,200 single-simdgroup threadgroups and up to 200
+  of 1,024 threads, every consumer saw its producer within the cap (at most 94 polls in the 32-thread rows).
+\item Past residency, waiters starved. With 2,000 threadgroups the first resident wave (about 1,690, about 84 per core at
+  that register count) spun to its cap before the producer, dispatched last, ran, and the threadgroups that
+  succeeded were the high-numbered ones. That fits in-order dispatch of threadgroups with no preemption of a
+  spinning one in these runs (MM~\mm{25.141.1}); no run tested whether preemption can occur under other
+  conditions, so code must not rely on preemption to make progress.
+\item In the persistent-kernel runs (16 phases, totals exact), grid barriers among resident threadgroups all completed
+  without reaching the cap, and a barrier cost more than a dispatch boundary at every measured shape (MM~\mm{25.141.1};
+  costs in \cref{ch:performance}). A grid that waits on itself has to be sized to resident capacity at its own
+  register and threadgroup-memory use, measured for that kernel (\cref{sec:residency-occupancy-rules}).
+\end{itemize}
+
+The following may not be assumed:
+
+\begin{itemize}
+\item that a threadgroup waiting on another threadgroup will see it run, unless both are resident; a spin-wait on a
+  producer that is not resident may wait indefinitely. In the probes, polls were capped, and waiters beyond residency
+  spun to the cap without seeing their producer run (MM~\mm{25.141.1}; MM~\mm{17} rule 40, MM~\mm{0.15});
+\item that "in order" means anything finer than dispatch order of threadgroups: completion order, and ordering of memory
+  effects between threadgroups, are separate questions answered in \cref{sec:ordering-across-lanes} (visibility needs a device fence on both
+  sides; ordering comes from an atomic);
+\item that a timeout protects the machine. Killing the host process does not cancel a kernel: an unbounded loop kept the GPU
+  at 100 percent with nothing dispatching until a reboot (MM~\mm{25.116}), and an unbounded data-driven trip count once
+  rebooted the machine (MM~\mm{25.90}). Loops in this project's compiler are capped so that termination is provable
+  (\cref{sec:loops-loop-variable-rule}, \cref{ch:control-flow-execution}).
+\end{itemize}
+
+Within those configurations, the measurements support a persistent kernel that sizes its grid to resident capacity at
+its own register and threadgroup-memory use and pulls work from an atomic queue; any other hand-off between
+threadgroups goes through a dispatch boundary (MM~\mm{17} rule 40).
+
+\section{Clock states and timing}\label{sec:clocks-performance-states}
+
+Timing on this GPU follows the rules below; the measurements are in \cref{sec:clocks-power-gpu}.
+
+\begin{itemize}
+\item The top clock is about 1.62~GHz: 1,620~MHz read from \code{powermetrics} at 100 percent residency in the top bin;
+  1.63~GHz is implied by the saturated tensor issue rate of 32 cycles per MMA (measured, MM~\mm{8}, MM~\mm{20}).
+\item A run shorter than about 1.5~ms runs at whatever frequency the GPU is
+  idling at, and a longer one speeds up partway (MM~\mm{25.121}); a cold GPU ran the same kernel about 4 to 4.8 times slower
+  than after sustained load (MM~\mm{22}, MM~\mm{25.115}). Timings need a saturating warm-up in the same process (the project uses
+  4,096 threadgroups of 256) and a reference dispatch to detect a clock change.
+\item The governor reacts to command-buffer shape. Metal System Trace records the GPU performance state (Minimum,
+  Medium, Maximum) per interval; a workload issuing seven short command buffers per step spent 27–78 percent of its time
+  in Medium, while one long command buffer per step stayed at Maximum (two recordings, direction reproduced, size not;
+  MM~\mm{0.15}).
+\item In-run variation was 0.4–1.3 percent, but the same configuration in two
+  processes differed by 9–13 percent; compare arms interleaved in one process (MM~\mm{16}, MM~\mm{25.126}; further figures at the start of \cref{ch:performance}).
+\item Several results published earlier in the project were artefacts of the idle clock (a
+  residency "shortfall", a "bimodal" issue rate); each is corrected where it is used (MM~\mm{25.115}, MM~\mm{25.122}).
+\end{itemize}
+
+\textbf{Evidence.} MM~\mm{0.1}, MM~\mm{0.2}, MM~\mm{0.15}, MM~\mm{2}, MM~\mm{7}, MM~\mm{8}, MM~\mm{9}, MM~\mm{10}, MM~\mm{16}, MM~\mm{17} (rule 40), \mm{20}, \mm{22}, \mm{24.2} (row H4),
+\mm{25.20}, \mm{25.47}, \mm{25.48}, \mm{25.49}, \mm{25.66}, \mm{25.90}, \mm{25.91}, \mm{25.115}, \mm{25.116}, \mm{25.119}, \mm{25.121},
+\mm{25.122}, \mm{25.126}, \mm{25.141.1}, \mm{25.141.20}, \mm{25.147}.

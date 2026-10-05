@@ -1,0 +1,183 @@
+{
+ "access": [
+  {
+   "access_bytes": 4,
+   "codes": {
+    "12682": {
+     "4": 2
+    },
+    "17229": {
+     "4": 1
+    }
+   },
+   "status": "ok",
+   "tag": "float"
+  },
+  {
+   "access_bytes": 8,
+   "codes": {
+    "12691": {
+     "8": 2
+    }
+   },
+   "status": "ok",
+   "tag": "int2"
+  },
+  {
+   "access_bytes": 8,
+   "codes": {
+    "12691": {
+     "8": 2
+    }
+   },
+   "status": "ok",
+   "tag": "float2"
+  },
+  {
+   "access_bytes": 16,
+   "codes": {
+    "12709": {
+     "16": 2
+    },
+    "17256": {
+     "16": 1
+    }
+   },
+   "status": "ok",
+   "tag": "float4"
+  },
+  {
+   "access_bytes": 16,
+   "codes": {
+    "12709": {
+     "16": 2
+    },
+    "17256": {
+     "16": 1
+    }
+   },
+   "status": "ok",
+   "tag": "int4"
+  },
+  {
+   "access_bytes": 16,
+   "codes": {
+    "12709": {
+     "16": 2
+    },
+    "17256": {
+     "16": 1
+    }
+   },
+   "status": "ok",
+   "tag": "long2"
+  }
+ ],
+ "conclusion": {
+  "access_rule_holds": true,
+  "field": "element or access width in bytes",
+  "tensor_rule_holds": true,
+  "widths_witnessed": [
+   1,
+   2,
+   4,
+   8,
+   16
+  ]
+ },
+ "operand_index": 8,
+ "tensor": [
+  {
+   "load_codes": {
+    "12656": {
+     "1": 22
+    },
+    "12657": {
+     "1": 10
+    }
+   },
+   "operand_bytes": 1,
+   "operands": [
+    "int8_t",
+    "int8_t",
+    "int32_t"
+   ],
+   "status": "ok",
+   "store_codes": {
+    "17229": {
+     "4": 16
+    }
+   },
+   "tag": "int8"
+  },
+  {
+   "load_codes": {
+    "12656": {
+     "1": 22
+    },
+    "12657": {
+     "1": 10
+    }
+   },
+   "operand_bytes": 1,
+   "operands": [
+    "uint8_t",
+    "uint8_t",
+    "int32_t"
+   ],
+   "status": "ok",
+   "store_codes": {
+    "17229": {
+     "4": 16
+    }
+   },
+   "tag": "uint8"
+  },
+  {
+   "load_codes": {
+    "12674": {
+     "2": 22
+    },
+    "12675": {
+     "2": 10
+    }
+   },
+   "operand_bytes": 2,
+   "operands": [
+    "half",
+    "half",
+    "float"
+   ],
+   "status": "ok",
+   "store_codes": {
+    "17229": {
+     "4": 16
+    }
+   },
+   "tag": "half"
+  },
+  {
+   "load_codes": {
+    "12692": {
+     "4": 44
+    },
+    "12693": {
+     "4": 20
+    }
+   },
+   "operand_bytes": 4,
+   "operands": [
+    "float",
+    "float",
+    "float"
+   ],
+   "status": "ok",
+   "store_codes": {
+    "17229": {
+     "4": 16
+    }
+   },
+   "tag": "float"
+  }
+ ]
+}

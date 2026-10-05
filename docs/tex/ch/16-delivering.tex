@@ -1,0 +1,79 @@
+\chapter{Delivery and validation}\label{ch:delivering}
+
+A compiled program is packaged into an image that Metal loads, and its result is accepted only after a ladder of
+checks. Model graphs are then assembled from these programs.
+
+\section{Image and validation ladder}\label{ch:image-result-validated}
+
+\code{scanlink.author} writes every byte of the image: the Mach-O object, the metadata, the library and the binary
+archive (MM~\mm{25.147}, MM~\mm{25.148}). The metadata holds the register count, the system registers, the
+bindings and the tensor-unit enable. The census of every byte of 421 delivered archives, the 148 constants Apple's
+loader requires and what Metal checks are in \cref{sec:object-library-archive}.
+
+Validation is a ladder with the cheapest check first (\cref{tab:validation-ladder}; MM~\mm{23.6}).
+
+\begin{xltabular}{\linewidth}{@{}l>{\hsize=1.34\hsize}X>{\hsize=0.66\hsize}X@{}}
+\caption{The validation ladder in the order its checks run, with the tool that performs each.}\label{tab:validation-ladder}\\
+\toprule
+Step & Check & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Step & Check & Where \\
+\midrule
+\endhead
+1 & every instruction decodes back to what was asked for & the encoders \\*
+2 & the whole body decodes, with one final \op{684}, no
+R126+ operand and no read after release & \code{agxforge/g17/verify.py}, \code{releasecheck.py} \\*
+3 & the contract and metadata agree with the code & \code{scanlink.author} \\*
+4 & the CPU emulator runs the program from its bytes against a reference,
+with the race check & \code{tools/g17emu.py} \\*
+5 & one hardware dispatch per kernel, its output sentinel-filled, compared
+with the reference & \code{tools/g17deliver.py} \\*
+6 & Apple's compiler builds the same source, and the outputs
+are compared with a control input that must differ & \code{tools/g17sourceexec.py} \\*
+\bottomrule
+\end{xltabular}
+
+Steps 4 to 6 in more detail:
+
+\begin{itemize}
+\item Step 5 is exact, with one named exception. No CPU reference reproduces \op{1272}, so kernels that
+  use it are checked against an enclosure with a wrong-base control. These are the decode and prefill attention in
+  their \code{hw\_exp2} forms, and the fast SwiGLU (MM~\mm{25.144.5}, MM~\mm{25.183}). One input set is checked per kernel, not
+  every input.
+\item The emulator decodes the bytes, not the IR, so it reproduces the hardware from the program itself (MM~\mm{25.195},
+  MM~\mm{25.197}).
+
+  \begin{itemize}
+  \item On shipped model graphs it is byte-identical to the GPU after every dispatch: one decode position of the
+  batched graph (316 dispatches), one of single-stream decode (172), and the 1,024-token prefill through layers
+  0 and 1.
+  \item On Apple's own census programs it matches Apple's GPU output in 53 cases, with 0 differing and 45 refused by
+  name.
+  \item Its "wp" tier also admits semantics that only whole programs verified on hardware.
+  \end{itemize}
+\item Step 6 uses Apple's compiler only for comparison. Comparing outputs on the same source catches places where
+  this compiler's reading of the language differs from Apple's. The cast in \cref{ch:selection-allocation-general} was found that way.
+\end{itemize}
+
+\section{Model graphs}\label{ch:model-graphs}
+
+A model is compiled kernel by kernel and then assembled into a static graph (MM~\mm{25.138}, MM~\mm{25.141.15}):
+
+\begin{itemize}
+\item \code{tools/g17deliver.py build} compiles every kernel kind a model needs, authors each bundle, and dispatches it once.
+  It writes the delivery index only if every check passes.
+\item \code{tools/g17q4graph.py build} turns the model's weights and a config into \code{graph.json}, which holds:
+
+  \begin{itemize}
+  \item named arenas, one buffer each with guards, and their initial contents;
+  \item the ordered dispatch list, with each binding's arena and offset;
+  \item any per-token host writes.
+  \end{itemize}
+\item \code{tools/g17prefillgraph.py} adds the prefill section, which processes the prompt in M-row chunks before decoding
+  starts (MM~\mm{25.142.10}).
+\item A config selects each kernel's variant, so one model has many graphs (\code{tools/models/*.json}). They differ in their
+  kernels, not in their structure.
+\end{itemize}

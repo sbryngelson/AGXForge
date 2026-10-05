@@ -1,0 +1,410 @@
+{
+  "format": "g17-native-inference-guard-runtime-v1",
+  "passed": true,
+  "gpu_dispatched": true,
+  "samples": [
+    {
+      "mode": "baseline",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 276347792,
+          "submit_call_ns": 36158000,
+          "submit_to_completion_ns": 200183000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 195697583,
+          "submit_call_ns": 18095000,
+          "submit_to_completion_ns": 122931000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 216024958,
+          "submit_call_ns": 22349000,
+          "submit_to_completion_ns": 131962000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 231124958,
+          "submit_call_ns": 22222000,
+          "submit_to_completion_ns": 146806000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 263211375,
+          "submit_call_ns": 22239000,
+          "submit_to_completion_ns": 178510000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 265845292,
+          "submit_call_ns": 24409000,
+          "submit_to_completion_ns": 181680000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        }
+      ],
+      "decode_tokens_per_second": 4.097493368368322,
+      "first_token_seconds": 0.472045375,
+      "model_roundtrip_ns": 1448251958,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "driver_prepare_seconds": 0.38282070797868073,
+      "native_build_seconds": 2.5112526249722578,
+      "binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x1050fda80  type-0x100005 conn=0x240b (open kr=0x0)  dev+0x14=0xc13\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x1094ec000\n  resv[1] kr=0x0 @0x1098ec000\n  resv[2] kr=0x0 @0x109cec000\n  resv[3] kr=0x0 @0x10a0ec000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x104974000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x104984000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x104994000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x1049b4000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x1049c4000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x1049e4000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x10a4ec000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x104a00000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x104a64000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x104a6c000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x104a74000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x104a7c000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x104a84000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x104a8c000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x104a94000 size=0xc000\nORDERED QUEUE create=0x1051041a0 connection=0x240b prior=0xc13 notification=0x1051041f0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x104aa4000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x104aa8000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5cfbb9e290 second=0x5cfbb9e291\nDECODER CLOSED: requests=6 Submits=5160 valid=41 result=0.\nDECODER PEAK RSS BYTES: 2158002176.\n"
+    },
+    {
+      "mode": "optimized",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 273887709,
+          "submit_call_ns": 67421000,
+          "submit_to_completion_ns": 224633000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 179760917,
+          "submit_call_ns": 17896000,
+          "submit_to_completion_ns": 133516000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 171470833,
+          "submit_call_ns": 20572000,
+          "submit_to_completion_ns": 131453000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 167240542,
+          "submit_call_ns": 12949000,
+          "submit_to_completion_ns": 126930000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 201553500,
+          "submit_call_ns": 17989000,
+          "submit_to_completion_ns": 160882000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 211355958,
+          "submit_call_ns": 21714000,
+          "submit_to_completion_ns": 170484000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        }
+      ],
+      "decode_tokens_per_second": 5.321832264859535,
+      "first_token_seconds": 0.453648626,
+      "model_roundtrip_ns": 1205269459,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "driver_prepare_seconds": 0.596719333960209,
+      "native_build_seconds": 2.2059058340382762,
+      "binary_sha256": "d9754b86127c82f50e171a97fc698d561c487813d616e3cf6f239534aff7efbb",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x104bd6000  type-0x100005 conn=0x2607 (open kr=0x0)  dev+0x14=0x1c07\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x108fc4000\n  resv[1] kr=0x0 @0x1093c4000\n  resv[2] kr=0x0 @0x1097c4000\n  resv[3] kr=0x0 @0x109bc4000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x1043c0000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x1043d0000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x1043e0000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x104400000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x104410000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x104430000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x109fc4000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x10444c000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x1044b0000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x1044b8000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x1044c0000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x1044c8000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x1044d0000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x1044d8000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x1044e0000 size=0xc000\nORDERED QUEUE create=0x104bdcb40 connection=0x2607 prior=0x1c07 notification=0x104be3af0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x1044f0000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x1044f4000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5cfdb9fa2b second=0x5cfdb9fa2c\nDECODER CLOSED: requests=6 Submits=5160 valid=41 result=0.\nDECODER PEAK RSS BYTES: 2156756992.\n"
+    },
+    {
+      "mode": "optimized",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 237591542,
+          "submit_call_ns": 34190000,
+          "submit_to_completion_ns": 192014000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 168310333,
+          "submit_call_ns": 17773000,
+          "submit_to_completion_ns": 121651000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 174945208,
+          "submit_call_ns": 21178000,
+          "submit_to_completion_ns": 131842000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 178070166,
+          "submit_call_ns": 14336000,
+          "submit_to_completion_ns": 133517000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 207847042,
+          "submit_call_ns": 21328000,
+          "submit_to_completion_ns": 165777000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 215671750,
+          "submit_call_ns": 21313000,
+          "submit_to_completion_ns": 173132000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        }
+      ],
+      "decode_tokens_per_second": 5.1510933776479835,
+      "first_token_seconds": 0.405901875,
+      "model_roundtrip_ns": 1182436041,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "driver_prepare_seconds": 0.33218791597755626,
+      "native_build_seconds": 2.2875037500052713,
+      "binary_sha256": "d9754b86127c82f50e171a97fc698d561c487813d616e3cf6f239534aff7efbb",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x10268a000  type-0x100005 conn=0x2307 (open kr=0x0)  dev+0x14=0x1e13\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x107054000\n  resv[1] kr=0x0 @0x107454000\n  resv[2] kr=0x0 @0x107854000\n  resv[3] kr=0x0 @0x107c54000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x108058000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x108068000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x108078000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x108098000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x1080a8000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x1080c8000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x125e04000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x1080e4000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x108148000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x108150000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x108158000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x108160000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x108168000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x108170000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x108178000 size=0xc000\nORDERED QUEUE create=0x102690b40 connection=0x2307 prior=0x1e13 notification=0x102697af0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x108188000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x10818c000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5cffba1006 second=0x5cffba1007\nDECODER CLOSED: requests=6 Submits=5160 valid=41 result=0.\nDECODER PEAK RSS BYTES: 2157985792.\n"
+    },
+    {
+      "mode": "baseline",
+      "frames": [
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 262021875,
+          "submit_call_ns": 21092000,
+          "submit_to_completion_ns": 172085000,
+          "output_sha256": "4bed961daa2baa5c4244197bde5951d4f0885edd0823051cf9f1bb61ad739d71",
+          "cache_valid": 32
+        },
+        {
+          "mode": "prefill",
+          "submissions": 748,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 19447808,
+          "client_roundtrip_ns": 225918875,
+          "submit_call_ns": 20782000,
+          "submit_to_completion_ns": 135916000,
+          "output_sha256": "8a9b9014a847318df97cef3ac2e85b20f500fdad28d98e0cb5276c71fc712a29",
+          "cache_valid": 37
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 225782209,
+          "submit_call_ns": 24641000,
+          "submit_to_completion_ns": 133568000,
+          "output_sha256": "83c369c57fa5a293f5fe7d64059228b097a5984675e341220a6c46703abde817",
+          "cache_valid": 38
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 251165667,
+          "submit_call_ns": 24883000,
+          "submit_to_completion_ns": 164125000,
+          "output_sha256": "386e298226084b93844dd6e65f9d5081ef8155aadc8bd455b254e8782ce3c299",
+          "cache_valid": 39
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 269230459,
+          "submit_call_ns": 23377000,
+          "submit_to_completion_ns": 184273000,
+          "output_sha256": "3a232f94fa09aa7739d5d01933a97495c769f7960b6795619cbc69f583b9ab81",
+          "cache_valid": 40
+        },
+        {
+          "mode": "decode",
+          "submissions": 916,
+          "intermediate_readback_bytes": 0,
+          "logit_readback_bytes": 607744,
+          "client_roundtrip_ns": 271916833,
+          "submit_call_ns": 24233000,
+          "submit_to_completion_ns": 186405000,
+          "output_sha256": "bbf7030c4898bff8b1cf14b9591a5a1d852c3de17b49bc39c867e3f34c17c778",
+          "cache_valid": 41
+        }
+      ],
+      "decode_tokens_per_second": 3.9289057896795754,
+      "first_token_seconds": 0.48794075,
+      "model_roundtrip_ns": 1506035918,
+      "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+      "driver_prepare_seconds": 0.3121403750265017,
+      "native_build_seconds": 3.4315533329499885,
+      "binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+      "before_recovery": [
+        33
+      ],
+      "after_recovery": [
+        33
+      ],
+      "new_events": [],
+      "native_log": "STAGE 1: device=0x1010bda80  type-0x100005 conn=0x280f (open kr=0x0)  dev+0x14=0xa0b\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x1054ac000\n  resv[1] kr=0x0 @0x1058ac000\n  resv[2] kr=0x0 @0x105cac000\n  resv[3] kr=0x0 @0x1060ac000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x100ad0000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x100ae0000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x100af0000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x100b10000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x100b20000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x100b40000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x1064ac000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x100b5c000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x100bc0000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x100bc8000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x100bd0000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x100f34000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x100f3c000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x100f44000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x1464ac000 size=0xc000\nORDERED QUEUE create=0x1010c41a0 connection=0x280f prior=0xa0b notification=0x1010c41f0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x100f50000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x1464b8000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5d01ba2578 second=0x5d01ba2579\nDECODER CLOSED: requests=6 Submits=5160 valid=41 result=0.\nDECODER PEAK RSS BYTES: 2158051328.\n"
+    }
+  ],
+  "paired_ratios": [
+    {
+      "decode_speedup": 1.2988019226444194,
+      "model_roundtrip_speedup": 1.201600146079865
+    },
+    {
+      "decode_speedup": 1.311075819425053,
+      "model_roundtrip_speedup": 1.2736722036367631
+    }
+  ],
+  "decode_steps": 4,
+  "prompt_token_ids": [
+    151644,
+    8948,
+    198,
+    2610,
+    525,
+    1207,
+    16948,
+    11,
+    3465,
+    553,
+    54364,
+    14817,
+    13,
+    1446,
+    525,
+    264,
+    10950,
+    17847,
+    13,
+    151645,
+    198,
+    151644,
+    872,
+    198,
+    840,
+    20772,
+    3170,
+    279,
+    12884,
+    374,
+    6303,
+    13,
+    151645,
+    198,
+    151644,
+    77091,
+    198
+  ],
+  "captured_vectors_compared": 24,
+  "generation_receipt_sha256": "8a92a4910d5aea7a887e586b7ae059c1689a5c6a58d1f5732cf48a11ea42540d",
+  "source_sha256": "30a1eacd7a8a5b2e6990b9db0f6d2576f50921805c10c59d39921d1edcc64194",
+  "scope": "Four bounded native processes in ABBA order. Same baseline bundle, model programs, checkpoint, tokens, full readonly checks and stage-by-stage guarded readback. Only the CPU lifetime-guard checker differs. Private source copies, not workspace mutation. Every output must match retained native vectors exactly; no independent numerical bound is changed. Two short pairs, not a broad timing distribution.",
+  "baseline_guard_sha256": "bdfd61c1662eb3d9f7199ae0877a4b5cd6193d61aefce4314adae91cadccb2b6",
+  "candidate_guard_sha256": "96cbcf3eb5ee13b56daa4e866a30cb4e37119e1f66545226f0579a6abc82a578",
+  "baseline_source_commit": "f6d72ac9f",
+  "comparison_source_sha256": "06775ee168ae76ff214b974ed72242d751b928d3116ab5ca466d8dbe9989493f",
+  "preregistration_sha256": "557f6b78634422aed67c09dd4feda849cd1c3729e1380b726954d244b87e9479"
+}

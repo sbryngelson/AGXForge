@@ -1,0 +1,309 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "reread.reread_word_14.lifetime16",
+  "op": 17235,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17235,
+   "found": 9,
+   "cases": 3,
+   "encoded": [
+    "6f040300010410a3010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559,
+   1
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "reread.reread_word_14.lifetime0",
+  "op": 17235,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17235,
+   "found": 9,
+   "cases": 3,
+   "encoded": [
+    "6f040300010400a3010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": [
+    [
+     17235,
+     1,
+     0,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559,
+   324478057
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "reread.reread_word_14.lifetime32",
+  "op": 17235,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17235,
+   "found": 9,
+   "cases": 3,
+   "encoded": [
+    "6f042300010400a3010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": [
+    [
+     17235,
+     1,
+     32,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559,
+   324478057
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "reread.reread_half_14.lifetime16",
+  "op": 17199,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17199,
+   "found": 11,
+   "cases": 3,
+   "encoded": [
+    "77040300010410b2010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10280,
+    10288,
+    11842,
+    12682,
+    14059,
+    17199,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735940609,
+   3735928559,
+   1
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "reread.reread_half_14.lifetime0",
+  "op": 17199,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17199,
+   "found": 11,
+   "cases": 3,
+   "encoded": [
+    "77040300010400b2010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10280,
+    10288,
+    11842,
+    12682,
+    14059,
+    17199,
+    17244
+   ],
+   "patched": [
+    [
+     17199,
+     1,
+     0,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735940609,
+   3735928559,
+   60930
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "reread.reread_half_14.lifetime32",
+  "op": 17199,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17199,
+   "found": 11,
+   "cases": 3,
+   "encoded": [
+    "77042300010400b2010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10280,
+    10288,
+    11842,
+    12682,
+    14059,
+    17199,
+    17244
+   ],
+   "patched": [
+    [
+     17199,
+     1,
+     32,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735940609,
+   3735928559,
+   60930
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

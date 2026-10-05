@@ -1,0 +1,231 @@
+{
+  "status": "predicted_not_compiled",
+  "gpu_dispatched": false,
+  "round": 3,
+  "cases": {
+    "a-rows-18": {
+      "strides": {
+        "strideA": 576,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "26c3ab1a5c6c0e1aa63132dac56e28848e430d53867e30ead9a3bc4444ac83f3",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "15fccbc030881a797e9180af4455d7333ab880e6ece25ac5854e7d407cf4295d"
+    },
+    "a-rows-20": {
+      "strides": {
+        "strideA": 640,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "978294bf80d08c5811c9fe2016f23cc8b51da8da28f82566d497c0d0f1ff7807",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "4508e6c2588d9660ce252943eeff6390f9a8498db9199daeb6ce06a24fa80b12"
+    },
+    "a-rows-24": {
+      "strides": {
+        "strideA": 768,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "1fc58254ed8563bec6682453c9eb5b96f1b1494bf897302408d188d25d388b7b",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "5a641987282939041f8fedfa688a148074a468c60797004a104baca88e879d47"
+    },
+    "a-rows-31": {
+      "strides": {
+        "strideA": 992,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "8642446481dc5002dd62f5eb699afde96005b0332868378936971af06d6c1050",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "079aa9c67e7134a1a969577428b1e52d155df057f74d2eda1f144b7a4239be06"
+    },
+    "a-rows-32": {
+      "strides": {
+        "strideA": 1024,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "d3855df786cde0153dfb90417ca8e23ef7ca152adc195144bf07d3f0bb809199",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "c7218f2758afee1c90d86a48665360316ce5469e1412c4a8380d034864018b7c"
+    },
+    "a-rows-33": {
+      "strides": {
+        "strideA": 1056,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "08bb665cf20eb6631b60906dc481586f00ca854d38e6e6d2e75414b40bb2ccf9",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "f68cf5fb197423bd6729d55d7ccff16faa2742e8ed285911acaaacfc9ae83c61"
+    },
+    "a-rows-63": {
+      "strides": {
+        "strideA": 2016,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "fde4b8db7f59c1459e6a5c633d0d59c0702d907f748480f34ae3b733daaebf04",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "f534d75f851a05ae4912afd76dfcc4e0d2af11367bfdd4bdfb2198af001d6478"
+    },
+    "a-rows-64": {
+      "strides": {
+        "strideA": 2048,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideA of 2048 bytes: the multiply immediate (stride / 8) does not fit its byte",
+      "source_sha256": "7314facc4c611967e95cab5ef4c2aba430c147d0cf685d27bc6a84e9a4122c2c"
+    },
+    "b-rows-6": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 192,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideB of 192 bytes = 6 x 32: not a row count Apple's compiler confirmed ([2, 3, 4, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "ccb5aaa0ceace71efa05fe0ddb28d075d9868357682644cbb8991085a93d887d"
+    },
+    "b-rows-7": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 224,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideB of 224 bytes = 7 x 32: not a row count Apple's compiler confirmed ([2, 3, 4, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "ba8392ad55ced5c1d2b5ef4d4627c9eba72dc04a92043f6f2fa4a9f54cc08daa"
+    },
+    "b-rows-9": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 288,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "shift",
+      "sha256": "2f08f56a1d19b77510f9d590cde2cffad3bd4996474644c18d0ffd22398d1567",
+      "bytes": 1276,
+      "generated": [
+        "setup+47",
+        "address+85"
+      ],
+      "source_sha256": "bfecd506c673e7cfb78f2429b26e0395746afe38f79cb36b0ba0aee138be5886"
+    },
+    "b-rows-10": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 320,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideB of 320 bytes = 10 x 32: not a row count Apple's compiler confirmed ([2, 3, 4, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "2f3130d652fdd35eeb0d407bdb70929e34d7cb48f3de78651e016d549a220290"
+    },
+    "b-rows-12": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 384,
+        "strideC": 128
+      },
+      "predicted": "refused",
+      "reason": "strideB of 384 bytes = 12 x 32: not a row count Apple's compiler confirmed ([2, 3, 4, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "67ebf534ebce8a673e0f9197667acac0857db3fcf999425e4ab196c36409b1f5"
+    },
+    "c-rows-6": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 384
+      },
+      "predicted": "refused",
+      "reason": "strideC of 384 bytes = 6 x 64: not a row count Apple's compiler confirmed ([2, 3, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "6ec3d96f9f0f6cddb78d8e8c002af74ceb086b4bd55940401cccafb5bd928318"
+    },
+    "c-rows-7": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 448
+      },
+      "predicted": "refused",
+      "reason": "strideC of 448 bytes = 7 x 64: not a row count Apple's compiler confirmed ([2, 3, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "d347c121b7e2e318d3b63dc71d67a5792a187fc44b66d984b3a8b8a08f01ca64"
+    },
+    "c-rows-9": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 576
+      },
+      "predicted": "program",
+      "family": "shift",
+      "sha256": "0c9a78ff7ad5c1c793ff303e632a0a182228276994a6dabbb727cbe7336b5bf3",
+      "bytes": 1276,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "ece52f30fadfb185ea33c92425a456536dab4333ccd9f5b2ecfb67c1753cec41"
+    },
+    "c-rows-12": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 768
+      },
+      "predicted": "refused",
+      "reason": "strideC of 768 bytes = 12 x 64: not a row count Apple's compiler confirmed ([2, 3, 5, 8, 16]); the multiply program Apple emits for A at 6, 7 and 12 rows is not generated here",
+      "source_sha256": "78dce1877d45cd4879d8f8ee504edddc5094ff657cad1a4ad4dfba9753fbf08c"
+    }
+  },
+  "rule": "g17tensorlower.family_of + advance_bytes: power-of-two rows -> op10279 with the scale table; 1+2^k rows -> op10282 r + (r<<k); other A row counts -> the multiply program with byte 9 of op10822/op10823 = stride/8; else refused"
+}

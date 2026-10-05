@@ -1,0 +1,99 @@
+{
+  "status": "compiled_and_compared",
+  "gpu_dispatched": false,
+  "round": 4,
+  "cases": {
+    "b-rows-11": {
+      "object_sha256": "a4280ae599592bb7b2d835ddf8949d3b7e8f23cb11adf85d8ec66fabe53f463c",
+      "main_sha256": "d6b19cf034fa88df1b67c66e1299f90893bb19a4825cfd160df1b66bc4ca0902",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "b-rows-13": {
+      "object_sha256": "9e9d43fda256b07bfe449f0709381e937241c0302512c0895271ca26115554f1",
+      "main_sha256": "9f0cadb92274045b8612fb622f8d0b9a6bdaafe0785efc519582c490c5402bb9",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "b-rows-14": {
+      "object_sha256": "770e295351c1672e46b9b1557acbb04089d5741f20d1baef970fd7422d183fab",
+      "main_sha256": "94cb5892591d75a6ab6bb6c17c0e4884a56cf48094e9861ee4dcea73846f9f76",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "b-rows-15": {
+      "object_sha256": "9c17d80d8e94d7387b3b1379b7a4ea827bbaae06cccbf49fb8d5cdce7aea7388",
+      "main_sha256": "9fe4d0ec070690f8e752c7806bfcc7d042553a2797d1307ac83de3ecc5eb7777",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-10": {
+      "object_sha256": "467e623db2db342451981d8cc2da86d073baab9cc32e1245b86f23029865349b",
+      "main_sha256": "482a3f0c0c379fec493451ef0e77ccf3624caa6371f01e2b4fab305ad5d213a5",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-11": {
+      "object_sha256": "444b1c9762e7df387a6746c0bea948f3511b6c1697813fbfd50c10dfe13110bb",
+      "main_sha256": "c7cb6629e17fc78768ced845d253202094948f81fc4b81e7ac27ee72a98ca0f6",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-13": {
+      "object_sha256": "b7cfbf52c389edec542451caf4b10dedf51d0f9bc9c5aad01bee8739b7830aa6",
+      "main_sha256": "f88cc1938c68ebb96d47ad39d0855d3667968b4e6eb83b3528506cae9f780c11",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-14": {
+      "object_sha256": "cd3451cafa9ecd5f505fad8037cd04157de4ed1c004e40d0d3fa47de775099f4",
+      "main_sha256": "0e9d4d805856463c685b5960e1b4a84b107460af60d56cedf8581a912c7d52d8",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "c-rows-15": {
+      "object_sha256": "19b53ec8e91705c37dd69faadb9981814e62f51a6e854c8c5630a47b4e29a36e",
+      "main_sha256": "bd1a140dcf378582ca22611316ebbb137b052d75c9acfe9b6f5b08b36f3bddbd",
+      "main_bytes": 1266,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "a5-c6": {
+      "object_sha256": "4c5f3cfa219401d27e97a154231da4ec00b9752f4e70b4a11671325a8aeb70fc",
+      "main_sha256": "e88ce924798cc1928075b2db34d0942da4557fd4da0fbefe2a378580e1a09032",
+      "main_bytes": 1266,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "b3-c7": {
+      "object_sha256": "ca16b2673e6221dfa870a3050f1cbfe57efe3a90c566b0f24f60d3dced87bf06",
+      "main_sha256": "415762f1929734424831c6739edeeffaa1077a7da54ebef7476756ff17b2212b",
+      "main_bytes": 1266,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "a8-b4": {
+      "object_sha256": "0bb93e2a27a8ff23d174906dedc64b40446601ddfbd3fcb1e8de70d44a4c684e",
+      "main_sha256": "2c2650861f6a5ac411469ff199aa908a6f597a46f885025e2ff206c712436aae",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    }
+  }
+}

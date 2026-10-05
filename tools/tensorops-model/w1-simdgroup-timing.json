@@ -1,0 +1,282 @@
+{
+ "conclusion": {
+  "effect_exceeds_spread": true,
+  "fastest_simdgroup_count": 16,
+  "thirty_two_is_faster": false,
+  "thirty_two_ratio_to_sixteen": {
+   "fused": 1.864,
+   "three": 1.458,
+   "two": 1.523
+  }
+ },
+ "fixed": {
+  "Hh": 8192,
+  "d": 2048,
+  "epi": "norm",
+  "fmt": "bf16",
+  "mt": 2,
+  "ntg": 20,
+  "sets": 4,
+  "share": "dev"
+ },
+ "note": "SETS=3 as recorded is no longer runnable: the driver asserts a power of two",
+ "points": [
+  {
+   "best_ms": {
+    "fused": 7.316,
+    "three": 6.044,
+    "two": 5.772
+   },
+   "nsg": 8,
+   "runs": [
+    {
+     "instr": {
+      "fused": [
+       9840
+      ],
+      "three": [
+       368,
+       518,
+       4372
+      ],
+      "two": [
+       690,
+       4372
+      ]
+     },
+     "ms": {
+      "fused": 7.316,
+      "three": 6.047,
+      "two": 5.781
+     },
+     "spills": {
+      "fused": [
+       1970
+      ],
+      "three": [
+       5,
+       0,
+       744
+      ],
+      "two": [
+       0,
+       744
+      ]
+     }
+    },
+    {
+     "instr": {
+      "fused": [
+       9840
+      ],
+      "three": [
+       368,
+       518,
+       4372
+      ],
+      "two": [
+       690,
+       4372
+      ]
+     },
+     "ms": {
+      "fused": 7.337,
+      "three": 6.044,
+      "two": 5.772
+     },
+     "spills": {
+      "fused": [
+       1970
+      ],
+      "three": [
+       5,
+       0,
+       744
+      ],
+      "two": [
+       0,
+       744
+      ]
+     }
+    }
+   ],
+   "spread_ms": {
+    "fused": 0.020999999999999908,
+    "three": 0.0030000000000001137,
+    "two": 0.008999999999999453
+   }
+  },
+  {
+   "best_ms": {
+    "fused": 7.916,
+    "three": 3.103,
+    "two": 2.856
+   },
+   "nsg": 16,
+   "runs": [
+    {
+     "instr": {
+      "fused": [
+       8224
+      ],
+      "three": [
+       368,
+       518,
+       2207
+      ],
+      "two": [
+       690,
+       2207
+      ]
+     },
+     "ms": {
+      "fused": 7.916,
+      "three": 3.103,
+      "two": 2.856
+     },
+     "spills": {
+      "fused": [
+       1642
+      ],
+      "three": [
+       5,
+       0,
+       318
+      ],
+      "two": [
+       0,
+       318
+      ]
+     }
+    },
+    {
+     "instr": {
+      "fused": [
+       8224
+      ],
+      "three": [
+       368,
+       518,
+       2207
+      ],
+      "two": [
+       690,
+       2207
+      ]
+     },
+     "ms": {
+      "fused": 7.923,
+      "three": 3.112,
+      "two": 2.864
+     },
+     "spills": {
+      "fused": [
+       1642
+      ],
+      "three": [
+       5,
+       0,
+       318
+      ],
+      "two": [
+       0,
+       318
+      ]
+     }
+    }
+   ],
+   "spread_ms": {
+    "fused": 0.006999999999999673,
+    "three": 0.008999999999999897,
+    "two": 0.008000000000000007
+   }
+  },
+  {
+   "best_ms": {
+    "fused": 14.755,
+    "three": 4.524,
+    "two": 4.351
+   },
+   "nsg": 32,
+   "runs": [
+    {
+     "instr": {
+      "fused": [
+       8958
+      ],
+      "three": [
+       368,
+       518,
+       1110
+      ],
+      "two": [
+       690,
+       1110
+      ]
+     },
+     "ms": {
+      "fused": 14.755,
+      "three": 4.524,
+      "two": 4.375
+     },
+     "spills": {
+      "fused": [
+       1647
+      ],
+      "three": [
+       5,
+       0,
+       93
+      ],
+      "two": [
+       0,
+       93
+      ]
+     }
+    },
+    {
+     "instr": {
+      "fused": [
+       8958
+      ],
+      "three": [
+       368,
+       518,
+       1110
+      ],
+      "two": [
+       690,
+       1110
+      ]
+     },
+     "ms": {
+      "fused": 14.768,
+      "three": 4.593,
+      "two": 4.351
+     },
+     "spills": {
+      "fused": [
+       1647
+      ],
+      "three": [
+       5,
+       0,
+       93
+      ],
+      "two": [
+       0,
+       93
+      ]
+     }
+    }
+   ],
+   "spread_ms": {
+    "fused": 0.0129999999999999,
+    "three": 0.06899999999999995,
+    "two": 0.02400000000000002
+   }
+  }
+ ],
+ "question": "is 32 simdgroups faster for bf16",
+ "repeats": 2
+}

@@ -1,0 +1,328 @@
+[
+ {
+  "id": "CONTROL.op586",
+  "op": 586,
+  "length": 8,
+  "bytes": "030007124ea08402",
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [
+     [
+      1,
+      1
+     ],
+     [
+      3,
+      3
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      6,
+      0
+     ]
+    ],
+    "base": 9,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   [
+    0
+   ]
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "control_identity": 7,
+  "note": "POSITIVE CONTROL: op586 mov reading the register that holds identity 7. If this record does not free identity 7, the instrument is not running and every other record in the batch is void."
+ },
+ {
+  "id": "u12682.5",
+  "op": 12682,
+  "length": 14,
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   []
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "allow": [
+   12682
+  ],
+  "bytes": "7f000300000200c0410080000000",
+  "predict": 5,
+  "note": "op12682 load operand 0 authored to physical register 7, holding identity 5; it is the load DESTINATION, so a delivered load OVERWRITES that identity. Inputs marked 0xC0FFEE00|index so a delivered load is not confused with a release.",
+  "expect_written": 5,
+  "mark_inputs": true
+ },
+ {
+  "id": "u12682.11",
+  "op": 12682,
+  "length": 14,
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   []
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "allow": [
+   12682
+  ],
+  "bytes": "df000300000200c0410080000000",
+  "predict": 11,
+  "note": "op12682 load operand 0 authored to physical register 13, holding identity 11; it is the load DESTINATION, so a delivered load OVERWRITES that identity. Inputs marked 0xC0FFEE00|index so a delivered load is not confused with a release.",
+  "expect_written": 11,
+  "mark_inputs": true
+ },
+ {
+  "id": "u12682.17",
+  "op": 12682,
+  "length": 14,
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   []
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "allow": [
+   12682
+  ],
+  "bytes": "3f004300000200c0410080000000",
+  "predict": 17,
+  "note": "op12682 load operand 0 authored to physical register 19, holding identity 17; it is the load DESTINATION, so a delivered load OVERWRITES that identity. Inputs marked 0xC0FFEE00|index so a delivered load is not confused with a release.",
+  "expect_written": 17,
+  "mark_inputs": true
+ },
+ {
+  "id": "u12646.5",
+  "op": 12646,
+  "length": 14,
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   []
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "allow": [
+   12646
+  ],
+  "bytes": "7700030000020080c10080000000",
+  "predict": 5,
+  "note": "op12646 load operand 0 authored to physical register 7, holding identity 5; it is the load DESTINATION, so a delivered load OVERWRITES that identity. Inputs marked 0xC0FFEE00|index so a delivered load is not confused with a release.",
+  "expect_written": 5,
+  "mark_inputs": true
+ },
+ {
+  "id": "u12646.11",
+  "op": 12646,
+  "length": 14,
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   []
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "allow": [
+   12646
+  ],
+  "bytes": "d700030000020080c10080000000",
+  "predict": 11,
+  "note": "op12646 load operand 0 authored to physical register 13, holding identity 11; it is the load DESTINATION, so a delivered load OVERWRITES that identity. Inputs marked 0xC0FFEE00|index so a delivered load is not confused with a release.",
+  "expect_written": 11,
+  "mark_inputs": true
+ },
+ {
+  "id": "u12646.17",
+  "op": 12646,
+  "length": 14,
+  "author": "caller",
+  "witness_required": false,
+  "srcs": [
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   },
+   {
+    "map": [],
+    "base": 0,
+    "slope": 0
+   }
+  ],
+  "cases": [
+   []
+  ],
+  "preload": {
+   "n": 24,
+   "slot": 16
+  },
+  "pool": 110,
+  "allow": [
+   12646
+  ],
+  "bytes": "3700430000020080c10080000000",
+  "predict": 17,
+  "note": "op12646 load operand 0 authored to physical register 19, holding identity 17; it is the load DESTINATION, so a delivered load OVERWRITES that identity. Inputs marked 0xC0FFEE00|index so a delivered load is not confused with a release.",
+  "expect_written": 17,
+  "mark_inputs": true
+ }
+]

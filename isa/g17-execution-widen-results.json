@@ -1,0 +1,74 @@
+[
+ {
+  "id": "add@10282",
+  "op": 10282,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10282,
+   "found": 3,
+   "cases": 3,
+   "encoded": [
+    "2f00049a2900a302a8842400",
+    "2f00049a2900a30aa8842400",
+    "2f00049a2900a312a8842400"
+   ],
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   13,
+   1,
+   810710166
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   false,
+   false
+  ],
+  "runs": 3
+ },
+ {
+  "id": "add@10286",
+  "op": 10286,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10286,
+   "found": 3,
+   "cases": 3,
+   "encoded": [
+    "2700049a2900a302a0042100",
+    "2700049a2900a30aa0042100",
+    "2700049a2900a312a0042100"
+   ],
+   "opcodes": [
+    684,
+    10286,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   8,
+   65536,
+   25991
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   false,
+   true
+  ],
+  "runs": 3
+ }
+]

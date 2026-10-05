@@ -1,0 +1,4646 @@
+{
+  "format": "g17-native-qwen-policy-divergence-diagnostic-v1",
+  "passed": true,
+  "gpu_dispatched": true,
+  "diagnostic_reproduced": true,
+  "production_quality_passed": false,
+  "quality": {
+    "policy_max_absolute_error": 0.09711515355414058,
+    "policy_passed": false,
+    "max_budget_fraction": 2.8470991322439216,
+    "failed_logit_elements": 10658,
+    "native_top1": 872,
+    "policy_top1": 872
+  },
+  "stages_exact_against_retained_failure": 748,
+  "packs": [
+    {
+      "stage": "layer.0.q.pack",
+      "source": "layer.0.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 0,
+      "elements": 28672,
+      "last_row_differing_half_elements": 0,
+      "source_max_absolute_error": 1.5645603146374754e-07,
+      "last_row_source_max_absolute_error": 9.948139512161447e-08
+    },
+    {
+      "stage": "layer.0.k.pack",
+      "source": "layer.0.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 0,
+      "elements": 28672,
+      "last_row_differing_half_elements": 0,
+      "source_max_absolute_error": 1.5645603146374754e-07,
+      "last_row_source_max_absolute_error": 9.948139512161447e-08
+    },
+    {
+      "stage": "layer.0.v.pack",
+      "source": "layer.0.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 0,
+      "elements": 28672,
+      "last_row_differing_half_elements": 0,
+      "source_max_absolute_error": 1.5645603146374754e-07,
+      "last_row_source_max_absolute_error": 9.948139512161447e-08
+    },
+    {
+      "stage": "layer.0.attention_output.pack",
+      "source": "layer.0.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 1114,
+      "elements": 28672,
+      "last_row_differing_half_elements": 31,
+      "source_max_absolute_error": 3.799817573896247e-06,
+      "last_row_source_max_absolute_error": 1.6851104273490902e-06,
+      "first_rounding_packet": "first-rounding-divergence.npz"
+    },
+    {
+      "stage": "layer.0.gate.pack",
+      "source": "layer.0.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 2752,
+      "elements": 28672,
+      "last_row_differing_half_elements": 190,
+      "source_max_absolute_error": 0.0006662266895718361,
+      "last_row_source_max_absolute_error": 0.0003162199311849828
+    },
+    {
+      "stage": "layer.0.up.pack",
+      "source": "layer.0.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 2752,
+      "elements": 28672,
+      "last_row_differing_half_elements": 190,
+      "source_max_absolute_error": 0.0006662266895718361,
+      "last_row_source_max_absolute_error": 0.0003162199311849828
+    },
+    {
+      "stage": "layer.0.down.pack",
+      "source": "layer.0.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 59237,
+      "elements": 155648,
+      "last_row_differing_half_elements": 2485,
+      "source_max_absolute_error": 0.000594080053457624,
+      "last_row_source_max_absolute_error": 0.000594080053457624
+    },
+    {
+      "stage": "layer.1.q.pack",
+      "source": "layer.1.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 10200,
+      "elements": 28672,
+      "last_row_differing_half_elements": 383,
+      "source_max_absolute_error": 0.0013000766179103174,
+      "last_row_source_max_absolute_error": 0.0005913018950897686
+    },
+    {
+      "stage": "layer.1.k.pack",
+      "source": "layer.1.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 10200,
+      "elements": 28672,
+      "last_row_differing_half_elements": 383,
+      "source_max_absolute_error": 0.0013000766179103174,
+      "last_row_source_max_absolute_error": 0.0005913018950897686
+    },
+    {
+      "stage": "layer.1.v.pack",
+      "source": "layer.1.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 10200,
+      "elements": 28672,
+      "last_row_differing_half_elements": 383,
+      "source_max_absolute_error": 0.0013000766179103174,
+      "last_row_source_max_absolute_error": 0.0005913018950897686
+    },
+    {
+      "stage": "layer.1.attention_output.pack",
+      "source": "layer.1.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 14147,
+      "elements": 28672,
+      "last_row_differing_half_elements": 460,
+      "source_max_absolute_error": 0.00026734077640605536,
+      "last_row_source_max_absolute_error": 0.00017098250727796624
+    },
+    {
+      "stage": "layer.1.gate.pack",
+      "source": "layer.1.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 12214,
+      "elements": 28672,
+      "last_row_differing_half_elements": 429,
+      "source_max_absolute_error": 0.0011192831214525967,
+      "last_row_source_max_absolute_error": 0.0005577034592796348
+    },
+    {
+      "stage": "layer.1.up.pack",
+      "source": "layer.1.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 12214,
+      "elements": 28672,
+      "last_row_differing_half_elements": 429,
+      "source_max_absolute_error": 0.0011192831214525967,
+      "last_row_source_max_absolute_error": 0.0005577034592796348
+    },
+    {
+      "stage": "layer.1.down.pack",
+      "source": "layer.1.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 102455,
+      "elements": 155648,
+      "last_row_differing_half_elements": 3329,
+      "source_max_absolute_error": 0.0012439562911110702,
+      "last_row_source_max_absolute_error": 0.0012439562911110702
+    },
+    {
+      "stage": "layer.2.q.pack",
+      "source": "layer.2.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 14834,
+      "elements": 28672,
+      "last_row_differing_half_elements": 516,
+      "source_max_absolute_error": 0.001956150501664311,
+      "last_row_source_max_absolute_error": 0.0014854617959976224
+    },
+    {
+      "stage": "layer.2.k.pack",
+      "source": "layer.2.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 14834,
+      "elements": 28672,
+      "last_row_differing_half_elements": 516,
+      "source_max_absolute_error": 0.001956150501664311,
+      "last_row_source_max_absolute_error": 0.0014854617959976224
+    },
+    {
+      "stage": "layer.2.v.pack",
+      "source": "layer.2.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 14834,
+      "elements": 28672,
+      "last_row_differing_half_elements": 516,
+      "source_max_absolute_error": 0.001956150501664311,
+      "last_row_source_max_absolute_error": 0.0014854617959976224
+    },
+    {
+      "stage": "layer.2.attention_output.pack",
+      "source": "layer.2.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 17226,
+      "elements": 28672,
+      "last_row_differing_half_elements": 607,
+      "source_max_absolute_error": 0.0006680498536042745,
+      "last_row_source_max_absolute_error": 0.0006545004108986785
+    },
+    {
+      "stage": "layer.2.gate.pack",
+      "source": "layer.2.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 14934,
+      "elements": 28672,
+      "last_row_differing_half_elements": 502,
+      "source_max_absolute_error": 0.0017333567277209028,
+      "last_row_source_max_absolute_error": 0.0012191696095669169
+    },
+    {
+      "stage": "layer.2.up.pack",
+      "source": "layer.2.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 14934,
+      "elements": 28672,
+      "last_row_differing_half_elements": 502,
+      "source_max_absolute_error": 0.0017333567277209028,
+      "last_row_source_max_absolute_error": 0.0012191696095669169
+    },
+    {
+      "stage": "layer.2.down.pack",
+      "source": "layer.2.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 110184,
+      "elements": 155648,
+      "last_row_differing_half_elements": 3438,
+      "source_max_absolute_error": 0.2566671226898052,
+      "last_row_source_max_absolute_error": 0.0034431345532277557
+    },
+    {
+      "stage": "layer.3.q.pack",
+      "source": "layer.3.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 16618,
+      "elements": 28672,
+      "last_row_differing_half_elements": 559,
+      "source_max_absolute_error": 0.004047296613945761,
+      "last_row_source_max_absolute_error": 0.004047296613945761
+    },
+    {
+      "stage": "layer.3.k.pack",
+      "source": "layer.3.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 16618,
+      "elements": 28672,
+      "last_row_differing_half_elements": 559,
+      "source_max_absolute_error": 0.004047296613945761,
+      "last_row_source_max_absolute_error": 0.004047296613945761
+    },
+    {
+      "stage": "layer.3.v.pack",
+      "source": "layer.3.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 16618,
+      "elements": 28672,
+      "last_row_differing_half_elements": 559,
+      "source_max_absolute_error": 0.004047296613945761,
+      "last_row_source_max_absolute_error": 0.004047296613945761
+    },
+    {
+      "stage": "layer.3.attention_output.pack",
+      "source": "layer.3.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19855,
+      "elements": 28672,
+      "last_row_differing_half_elements": 608,
+      "source_max_absolute_error": 0.0012735760668016738,
+      "last_row_source_max_absolute_error": 0.0010004597376314095
+    },
+    {
+      "stage": "layer.3.gate.pack",
+      "source": "layer.3.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 16846,
+      "elements": 28672,
+      "last_row_differing_half_elements": 556,
+      "source_max_absolute_error": 0.010499733199520411,
+      "last_row_source_max_absolute_error": 0.003385717663037191
+    },
+    {
+      "stage": "layer.3.up.pack",
+      "source": "layer.3.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 16846,
+      "elements": 28672,
+      "last_row_differing_half_elements": 556,
+      "source_max_absolute_error": 0.010499733199520411,
+      "last_row_source_max_absolute_error": 0.003385717663037191
+    },
+    {
+      "stage": "layer.3.down.pack",
+      "source": "layer.3.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 113786,
+      "elements": 155648,
+      "last_row_differing_half_elements": 3631,
+      "source_max_absolute_error": 0.008564932881540699,
+      "last_row_source_max_absolute_error": 0.0023019657514653513
+    },
+    {
+      "stage": "layer.4.q.pack",
+      "source": "layer.4.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 18288,
+      "elements": 28672,
+      "last_row_differing_half_elements": 625,
+      "source_max_absolute_error": 0.0067559640844638835,
+      "last_row_source_max_absolute_error": 0.0067559640844638835
+    },
+    {
+      "stage": "layer.4.k.pack",
+      "source": "layer.4.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 18288,
+      "elements": 28672,
+      "last_row_differing_half_elements": 625,
+      "source_max_absolute_error": 0.0067559640844638835,
+      "last_row_source_max_absolute_error": 0.0067559640844638835
+    },
+    {
+      "stage": "layer.4.v.pack",
+      "source": "layer.4.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 18288,
+      "elements": 28672,
+      "last_row_differing_half_elements": 625,
+      "source_max_absolute_error": 0.0067559640844638835,
+      "last_row_source_max_absolute_error": 0.0067559640844638835
+    },
+    {
+      "stage": "layer.4.attention_output.pack",
+      "source": "layer.4.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19687,
+      "elements": 28672,
+      "last_row_differing_half_elements": 616,
+      "source_max_absolute_error": 0.0013553328595117264,
+      "last_row_source_max_absolute_error": 0.0009560337503149163
+    },
+    {
+      "stage": "layer.4.gate.pack",
+      "source": "layer.4.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 18472,
+      "elements": 28672,
+      "last_row_differing_half_elements": 608,
+      "source_max_absolute_error": 0.003378588080133138,
+      "last_row_source_max_absolute_error": 0.0021733636603964435
+    },
+    {
+      "stage": "layer.4.up.pack",
+      "source": "layer.4.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 18472,
+      "elements": 28672,
+      "last_row_differing_half_elements": 608,
+      "source_max_absolute_error": 0.003378588080133138,
+      "last_row_source_max_absolute_error": 0.0021733636603964435
+    },
+    {
+      "stage": "layer.4.down.pack",
+      "source": "layer.4.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 117721,
+      "elements": 155648,
+      "last_row_differing_half_elements": 3851,
+      "source_max_absolute_error": 0.0035633399051118175,
+      "last_row_source_max_absolute_error": 0.001840868889356695
+    },
+    {
+      "stage": "layer.5.q.pack",
+      "source": "layer.5.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19116,
+      "elements": 28672,
+      "last_row_differing_half_elements": 639,
+      "source_max_absolute_error": 0.007001430236163841,
+      "last_row_source_max_absolute_error": 0.005358778339044967
+    },
+    {
+      "stage": "layer.5.k.pack",
+      "source": "layer.5.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19116,
+      "elements": 28672,
+      "last_row_differing_half_elements": 639,
+      "source_max_absolute_error": 0.007001430236163841,
+      "last_row_source_max_absolute_error": 0.005358778339044967
+    },
+    {
+      "stage": "layer.5.v.pack",
+      "source": "layer.5.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19116,
+      "elements": 28672,
+      "last_row_differing_half_elements": 639,
+      "source_max_absolute_error": 0.007001430236163841,
+      "last_row_source_max_absolute_error": 0.005358778339044967
+    },
+    {
+      "stage": "layer.5.attention_output.pack",
+      "source": "layer.5.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21171,
+      "elements": 28672,
+      "last_row_differing_half_elements": 664,
+      "source_max_absolute_error": 0.002095473560221217,
+      "last_row_source_max_absolute_error": 0.0007331873622831719
+    },
+    {
+      "stage": "layer.5.gate.pack",
+      "source": "layer.5.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19431,
+      "elements": 28672,
+      "last_row_differing_half_elements": 637,
+      "source_max_absolute_error": 0.004423285958035983,
+      "last_row_source_max_absolute_error": 0.0030762268734649822
+    },
+    {
+      "stage": "layer.5.up.pack",
+      "source": "layer.5.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19431,
+      "elements": 28672,
+      "last_row_differing_half_elements": 637,
+      "source_max_absolute_error": 0.004423285958035983,
+      "last_row_source_max_absolute_error": 0.0030762268734649822
+    },
+    {
+      "stage": "layer.5.down.pack",
+      "source": "layer.5.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 117506,
+      "elements": 155648,
+      "last_row_differing_half_elements": 3778,
+      "source_max_absolute_error": 0.007402245461276991,
+      "last_row_source_max_absolute_error": 0.0022145198066623184
+    },
+    {
+      "stage": "layer.6.q.pack",
+      "source": "layer.6.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19907,
+      "elements": 28672,
+      "last_row_differing_half_elements": 663,
+      "source_max_absolute_error": 0.006211653753982915,
+      "last_row_source_max_absolute_error": 0.006211653753982915
+    },
+    {
+      "stage": "layer.6.k.pack",
+      "source": "layer.6.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19907,
+      "elements": 28672,
+      "last_row_differing_half_elements": 663,
+      "source_max_absolute_error": 0.006211653753982915,
+      "last_row_source_max_absolute_error": 0.006211653753982915
+    },
+    {
+      "stage": "layer.6.v.pack",
+      "source": "layer.6.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19907,
+      "elements": 28672,
+      "last_row_differing_half_elements": 663,
+      "source_max_absolute_error": 0.006211653753982915,
+      "last_row_source_max_absolute_error": 0.006211653753982915
+    },
+    {
+      "stage": "layer.6.attention_output.pack",
+      "source": "layer.6.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19828,
+      "elements": 28672,
+      "last_row_differing_half_elements": 604,
+      "source_max_absolute_error": 0.002639813407544718,
+      "last_row_source_max_absolute_error": 0.0009477405502393843
+    },
+    {
+      "stage": "layer.6.gate.pack",
+      "source": "layer.6.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19881,
+      "elements": 28672,
+      "last_row_differing_half_elements": 663,
+      "source_max_absolute_error": 0.004124782256865522,
+      "last_row_source_max_absolute_error": 0.0037681408997777277
+    },
+    {
+      "stage": "layer.6.up.pack",
+      "source": "layer.6.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 19881,
+      "elements": 28672,
+      "last_row_differing_half_elements": 663,
+      "source_max_absolute_error": 0.004124782256865522,
+      "last_row_source_max_absolute_error": 0.0037681408997777277
+    },
+    {
+      "stage": "layer.6.down.pack",
+      "source": "layer.6.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 121851,
+      "elements": 155648,
+      "last_row_differing_half_elements": 3893,
+      "source_max_absolute_error": 0.004814621268891539,
+      "last_row_source_max_absolute_error": 0.003397768188617034
+    },
+    {
+      "stage": "layer.7.q.pack",
+      "source": "layer.7.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20430,
+      "elements": 28672,
+      "last_row_differing_half_elements": 667,
+      "source_max_absolute_error": 0.006599384464366587,
+      "last_row_source_max_absolute_error": 0.006403568878369015
+    },
+    {
+      "stage": "layer.7.k.pack",
+      "source": "layer.7.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20430,
+      "elements": 28672,
+      "last_row_differing_half_elements": 667,
+      "source_max_absolute_error": 0.006599384464366587,
+      "last_row_source_max_absolute_error": 0.006403568878369015
+    },
+    {
+      "stage": "layer.7.v.pack",
+      "source": "layer.7.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20430,
+      "elements": 28672,
+      "last_row_differing_half_elements": 667,
+      "source_max_absolute_error": 0.006599384464366587,
+      "last_row_source_max_absolute_error": 0.006403568878369015
+    },
+    {
+      "stage": "layer.7.attention_output.pack",
+      "source": "layer.7.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22371,
+      "elements": 28672,
+      "last_row_differing_half_elements": 711,
+      "source_max_absolute_error": 0.002749452280708997,
+      "last_row_source_max_absolute_error": 0.002477194497450874
+    },
+    {
+      "stage": "layer.7.gate.pack",
+      "source": "layer.7.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20477,
+      "elements": 28672,
+      "last_row_differing_half_elements": 691,
+      "source_max_absolute_error": 0.004409043336154772,
+      "last_row_source_max_absolute_error": 0.004137637313293752
+    },
+    {
+      "stage": "layer.7.up.pack",
+      "source": "layer.7.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20477,
+      "elements": 28672,
+      "last_row_differing_half_elements": 691,
+      "source_max_absolute_error": 0.004409043336154772,
+      "last_row_source_max_absolute_error": 0.004137637313293752
+    },
+    {
+      "stage": "layer.7.down.pack",
+      "source": "layer.7.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 124755,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4114,
+      "source_max_absolute_error": 0.003884278446446565,
+      "last_row_source_max_absolute_error": 0.0026414599526454197
+    },
+    {
+      "stage": "layer.8.q.pack",
+      "source": "layer.8.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20737,
+      "elements": 28672,
+      "last_row_differing_half_elements": 679,
+      "source_max_absolute_error": 0.010643193461496558,
+      "last_row_source_max_absolute_error": 0.007993069476654235
+    },
+    {
+      "stage": "layer.8.k.pack",
+      "source": "layer.8.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20737,
+      "elements": 28672,
+      "last_row_differing_half_elements": 679,
+      "source_max_absolute_error": 0.010643193461496558,
+      "last_row_source_max_absolute_error": 0.007993069476654235
+    },
+    {
+      "stage": "layer.8.v.pack",
+      "source": "layer.8.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20737,
+      "elements": 28672,
+      "last_row_differing_half_elements": 679,
+      "source_max_absolute_error": 0.010643193461496558,
+      "last_row_source_max_absolute_error": 0.007993069476654235
+    },
+    {
+      "stage": "layer.8.attention_output.pack",
+      "source": "layer.8.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21427,
+      "elements": 28672,
+      "last_row_differing_half_elements": 681,
+      "source_max_absolute_error": 0.0021208112514499167,
+      "last_row_source_max_absolute_error": 0.0013035132499641389
+    },
+    {
+      "stage": "layer.8.gate.pack",
+      "source": "layer.8.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20957,
+      "elements": 28672,
+      "last_row_differing_half_elements": 696,
+      "source_max_absolute_error": 0.004295743993059542,
+      "last_row_source_max_absolute_error": 0.004295743993059542
+    },
+    {
+      "stage": "layer.8.up.pack",
+      "source": "layer.8.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 20957,
+      "elements": 28672,
+      "last_row_differing_half_elements": 696,
+      "source_max_absolute_error": 0.004295743993059542,
+      "last_row_source_max_absolute_error": 0.004295743993059542
+    },
+    {
+      "stage": "layer.8.down.pack",
+      "source": "layer.8.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 126775,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4185,
+      "source_max_absolute_error": 0.00497855578839923,
+      "last_row_source_max_absolute_error": 0.002019799342159345
+    },
+    {
+      "stage": "layer.9.q.pack",
+      "source": "layer.9.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21215,
+      "elements": 28672,
+      "last_row_differing_half_elements": 700,
+      "source_max_absolute_error": 0.015948732623382256,
+      "last_row_source_max_absolute_error": 0.010144455452330448
+    },
+    {
+      "stage": "layer.9.k.pack",
+      "source": "layer.9.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21215,
+      "elements": 28672,
+      "last_row_differing_half_elements": 700,
+      "source_max_absolute_error": 0.015948732623382256,
+      "last_row_source_max_absolute_error": 0.010144455452330448
+    },
+    {
+      "stage": "layer.9.v.pack",
+      "source": "layer.9.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21215,
+      "elements": 28672,
+      "last_row_differing_half_elements": 700,
+      "source_max_absolute_error": 0.015948732623382256,
+      "last_row_source_max_absolute_error": 0.010144455452330448
+    },
+    {
+      "stage": "layer.9.attention_output.pack",
+      "source": "layer.9.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23553,
+      "elements": 28672,
+      "last_row_differing_half_elements": 758,
+      "source_max_absolute_error": 0.005654601819483185,
+      "last_row_source_max_absolute_error": 0.0030894326217117095
+    },
+    {
+      "stage": "layer.9.gate.pack",
+      "source": "layer.9.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21421,
+      "elements": 28672,
+      "last_row_differing_half_elements": 709,
+      "source_max_absolute_error": 0.005443599303758484,
+      "last_row_source_max_absolute_error": 0.00389254732265365
+    },
+    {
+      "stage": "layer.9.up.pack",
+      "source": "layer.9.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21421,
+      "elements": 28672,
+      "last_row_differing_half_elements": 709,
+      "source_max_absolute_error": 0.005443599303758484,
+      "last_row_source_max_absolute_error": 0.00389254732265365
+    },
+    {
+      "stage": "layer.9.down.pack",
+      "source": "layer.9.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 129669,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4289,
+      "source_max_absolute_error": 0.006335094736088287,
+      "last_row_source_max_absolute_error": 0.0022799178151455823
+    },
+    {
+      "stage": "layer.10.q.pack",
+      "source": "layer.10.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21628,
+      "elements": 28672,
+      "last_row_differing_half_elements": 716,
+      "source_max_absolute_error": 0.021498369685907903,
+      "last_row_source_max_absolute_error": 0.009285877214502136
+    },
+    {
+      "stage": "layer.10.k.pack",
+      "source": "layer.10.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21628,
+      "elements": 28672,
+      "last_row_differing_half_elements": 716,
+      "source_max_absolute_error": 0.021498369685907903,
+      "last_row_source_max_absolute_error": 0.009285877214502136
+    },
+    {
+      "stage": "layer.10.v.pack",
+      "source": "layer.10.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21628,
+      "elements": 28672,
+      "last_row_differing_half_elements": 716,
+      "source_max_absolute_error": 0.021498369685907903,
+      "last_row_source_max_absolute_error": 0.009285877214502136
+    },
+    {
+      "stage": "layer.10.attention_output.pack",
+      "source": "layer.10.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23296,
+      "elements": 28672,
+      "last_row_differing_half_elements": 762,
+      "source_max_absolute_error": 0.003817185835366388,
+      "last_row_source_max_absolute_error": 0.0019481512702781423
+    },
+    {
+      "stage": "layer.10.gate.pack",
+      "source": "layer.10.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21848,
+      "elements": 28672,
+      "last_row_differing_half_elements": 722,
+      "source_max_absolute_error": 0.005486488596349481,
+      "last_row_source_max_absolute_error": 0.0034396469440137745
+    },
+    {
+      "stage": "layer.10.up.pack",
+      "source": "layer.10.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21848,
+      "elements": 28672,
+      "last_row_differing_half_elements": 722,
+      "source_max_absolute_error": 0.005486488596349481,
+      "last_row_source_max_absolute_error": 0.0034396469440137745
+    },
+    {
+      "stage": "layer.10.down.pack",
+      "source": "layer.10.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 131324,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4333,
+      "source_max_absolute_error": 0.00721510608678777,
+      "last_row_source_max_absolute_error": 0.0021505848482623775
+    },
+    {
+      "stage": "layer.11.q.pack",
+      "source": "layer.11.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21880,
+      "elements": 28672,
+      "last_row_differing_half_elements": 714,
+      "source_max_absolute_error": 0.018838940326020293,
+      "last_row_source_max_absolute_error": 0.011438935348245582
+    },
+    {
+      "stage": "layer.11.k.pack",
+      "source": "layer.11.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21880,
+      "elements": 28672,
+      "last_row_differing_half_elements": 714,
+      "source_max_absolute_error": 0.018838940326020293,
+      "last_row_source_max_absolute_error": 0.011438935348245582
+    },
+    {
+      "stage": "layer.11.v.pack",
+      "source": "layer.11.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21880,
+      "elements": 28672,
+      "last_row_differing_half_elements": 714,
+      "source_max_absolute_error": 0.018838940326020293,
+      "last_row_source_max_absolute_error": 0.011438935348245582
+    },
+    {
+      "stage": "layer.11.attention_output.pack",
+      "source": "layer.11.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23849,
+      "elements": 28672,
+      "last_row_differing_half_elements": 766,
+      "source_max_absolute_error": 0.007446497224307791,
+      "last_row_source_max_absolute_error": 0.0029472261510036235
+    },
+    {
+      "stage": "layer.11.gate.pack",
+      "source": "layer.11.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21991,
+      "elements": 28672,
+      "last_row_differing_half_elements": 728,
+      "source_max_absolute_error": 0.006257918879066571,
+      "last_row_source_max_absolute_error": 0.005957975509867097
+    },
+    {
+      "stage": "layer.11.up.pack",
+      "source": "layer.11.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 21991,
+      "elements": 28672,
+      "last_row_differing_half_elements": 728,
+      "source_max_absolute_error": 0.006257918879066571,
+      "last_row_source_max_absolute_error": 0.005957975509867097
+    },
+    {
+      "stage": "layer.11.down.pack",
+      "source": "layer.11.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 132654,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4361,
+      "source_max_absolute_error": 0.004847581038511364,
+      "last_row_source_max_absolute_error": 0.004847581038511364
+    },
+    {
+      "stage": "layer.12.q.pack",
+      "source": "layer.12.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22319,
+      "elements": 28672,
+      "last_row_differing_half_elements": 731,
+      "source_max_absolute_error": 0.014551851678408667,
+      "last_row_source_max_absolute_error": 0.01006339013373303
+    },
+    {
+      "stage": "layer.12.k.pack",
+      "source": "layer.12.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22319,
+      "elements": 28672,
+      "last_row_differing_half_elements": 731,
+      "source_max_absolute_error": 0.014551851678408667,
+      "last_row_source_max_absolute_error": 0.01006339013373303
+    },
+    {
+      "stage": "layer.12.v.pack",
+      "source": "layer.12.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22319,
+      "elements": 28672,
+      "last_row_differing_half_elements": 731,
+      "source_max_absolute_error": 0.014551851678408667,
+      "last_row_source_max_absolute_error": 0.01006339013373303
+    },
+    {
+      "stage": "layer.12.attention_output.pack",
+      "source": "layer.12.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22572,
+      "elements": 28672,
+      "last_row_differing_half_elements": 764,
+      "source_max_absolute_error": 0.003922300180703164,
+      "last_row_source_max_absolute_error": 0.001930223215585225
+    },
+    {
+      "stage": "layer.12.gate.pack",
+      "source": "layer.12.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22321,
+      "elements": 28672,
+      "last_row_differing_half_elements": 742,
+      "source_max_absolute_error": 0.005908868518622157,
+      "last_row_source_max_absolute_error": 0.004778864686423551
+    },
+    {
+      "stage": "layer.12.up.pack",
+      "source": "layer.12.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22321,
+      "elements": 28672,
+      "last_row_differing_half_elements": 742,
+      "source_max_absolute_error": 0.005908868518622157,
+      "last_row_source_max_absolute_error": 0.004778864686423551
+    },
+    {
+      "stage": "layer.12.down.pack",
+      "source": "layer.12.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 132280,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4368,
+      "source_max_absolute_error": 0.00386483249584052,
+      "last_row_source_max_absolute_error": 0.0021707320739454694
+    },
+    {
+      "stage": "layer.13.q.pack",
+      "source": "layer.13.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22273,
+      "elements": 28672,
+      "last_row_differing_half_elements": 735,
+      "source_max_absolute_error": 0.025339480075142973,
+      "last_row_source_max_absolute_error": 0.010222098757786124
+    },
+    {
+      "stage": "layer.13.k.pack",
+      "source": "layer.13.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22273,
+      "elements": 28672,
+      "last_row_differing_half_elements": 735,
+      "source_max_absolute_error": 0.025339480075142973,
+      "last_row_source_max_absolute_error": 0.010222098757786124
+    },
+    {
+      "stage": "layer.13.v.pack",
+      "source": "layer.13.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22273,
+      "elements": 28672,
+      "last_row_differing_half_elements": 735,
+      "source_max_absolute_error": 0.025339480075142973,
+      "last_row_source_max_absolute_error": 0.010222098757786124
+    },
+    {
+      "stage": "layer.13.attention_output.pack",
+      "source": "layer.13.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 24018,
+      "elements": 28672,
+      "last_row_differing_half_elements": 710,
+      "source_max_absolute_error": 0.003898377081475446,
+      "last_row_source_max_absolute_error": 0.0031037462658047854
+    },
+    {
+      "stage": "layer.13.gate.pack",
+      "source": "layer.13.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22434,
+      "elements": 28672,
+      "last_row_differing_half_elements": 752,
+      "source_max_absolute_error": 0.0066917884700887775,
+      "last_row_source_max_absolute_error": 0.004932830004818589
+    },
+    {
+      "stage": "layer.13.up.pack",
+      "source": "layer.13.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22434,
+      "elements": 28672,
+      "last_row_differing_half_elements": 752,
+      "source_max_absolute_error": 0.0066917884700887775,
+      "last_row_source_max_absolute_error": 0.004932830004818589
+    },
+    {
+      "stage": "layer.13.down.pack",
+      "source": "layer.13.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 132602,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4321,
+      "source_max_absolute_error": 0.004172753423420711,
+      "last_row_source_max_absolute_error": 0.002886234013741107
+    },
+    {
+      "stage": "layer.14.q.pack",
+      "source": "layer.14.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22339,
+      "elements": 28672,
+      "last_row_differing_half_elements": 740,
+      "source_max_absolute_error": 0.02070218306792171,
+      "last_row_source_max_absolute_error": 0.009706690041916488
+    },
+    {
+      "stage": "layer.14.k.pack",
+      "source": "layer.14.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22339,
+      "elements": 28672,
+      "last_row_differing_half_elements": 740,
+      "source_max_absolute_error": 0.02070218306792171,
+      "last_row_source_max_absolute_error": 0.009706690041916488
+    },
+    {
+      "stage": "layer.14.v.pack",
+      "source": "layer.14.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22339,
+      "elements": 28672,
+      "last_row_differing_half_elements": 740,
+      "source_max_absolute_error": 0.02070218306792171,
+      "last_row_source_max_absolute_error": 0.009706690041916488
+    },
+    {
+      "stage": "layer.14.attention_output.pack",
+      "source": "layer.14.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23176,
+      "elements": 28672,
+      "last_row_differing_half_elements": 743,
+      "source_max_absolute_error": 0.005230958169611943,
+      "last_row_source_max_absolute_error": 0.003043616840465571
+    },
+    {
+      "stage": "layer.14.gate.pack",
+      "source": "layer.14.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22541,
+      "elements": 28672,
+      "last_row_differing_half_elements": 724,
+      "source_max_absolute_error": 0.005621117677126697,
+      "last_row_source_max_absolute_error": 0.003828625429940058
+    },
+    {
+      "stage": "layer.14.up.pack",
+      "source": "layer.14.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22541,
+      "elements": 28672,
+      "last_row_differing_half_elements": 724,
+      "source_max_absolute_error": 0.005621117677126697,
+      "last_row_source_max_absolute_error": 0.003828625429940058
+    },
+    {
+      "stage": "layer.14.down.pack",
+      "source": "layer.14.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 131677,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4268,
+      "source_max_absolute_error": 0.00697275410557463,
+      "last_row_source_max_absolute_error": 0.003306051324135917
+    },
+    {
+      "stage": "layer.15.q.pack",
+      "source": "layer.15.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22409,
+      "elements": 28672,
+      "last_row_differing_half_elements": 721,
+      "source_max_absolute_error": 0.016688585119412735,
+      "last_row_source_max_absolute_error": 0.006153464743229087
+    },
+    {
+      "stage": "layer.15.k.pack",
+      "source": "layer.15.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22409,
+      "elements": 28672,
+      "last_row_differing_half_elements": 721,
+      "source_max_absolute_error": 0.016688585119412735,
+      "last_row_source_max_absolute_error": 0.006153464743229087
+    },
+    {
+      "stage": "layer.15.v.pack",
+      "source": "layer.15.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22409,
+      "elements": 28672,
+      "last_row_differing_half_elements": 721,
+      "source_max_absolute_error": 0.016688585119412735,
+      "last_row_source_max_absolute_error": 0.006153464743229087
+    },
+    {
+      "stage": "layer.15.attention_output.pack",
+      "source": "layer.15.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23203,
+      "elements": 28672,
+      "last_row_differing_half_elements": 713,
+      "source_max_absolute_error": 0.00635199513581397,
+      "last_row_source_max_absolute_error": 0.004222535713045872
+    },
+    {
+      "stage": "layer.15.gate.pack",
+      "source": "layer.15.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22468,
+      "elements": 28672,
+      "last_row_differing_half_elements": 719,
+      "source_max_absolute_error": 0.007122325683945663,
+      "last_row_source_max_absolute_error": 0.004544380590366659
+    },
+    {
+      "stage": "layer.15.up.pack",
+      "source": "layer.15.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22468,
+      "elements": 28672,
+      "last_row_differing_half_elements": 719,
+      "source_max_absolute_error": 0.007122325683945663,
+      "last_row_source_max_absolute_error": 0.004544380590366659
+    },
+    {
+      "stage": "layer.15.down.pack",
+      "source": "layer.15.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 130434,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4236,
+      "source_max_absolute_error": 0.007712226949125434,
+      "last_row_source_max_absolute_error": 0.005474479573350122
+    },
+    {
+      "stage": "layer.16.q.pack",
+      "source": "layer.16.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22533,
+      "elements": 28672,
+      "last_row_differing_half_elements": 756,
+      "source_max_absolute_error": 0.016975725818294762,
+      "last_row_source_max_absolute_error": 0.008270774441609952
+    },
+    {
+      "stage": "layer.16.k.pack",
+      "source": "layer.16.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22533,
+      "elements": 28672,
+      "last_row_differing_half_elements": 756,
+      "source_max_absolute_error": 0.016975725818294762,
+      "last_row_source_max_absolute_error": 0.008270774441609952
+    },
+    {
+      "stage": "layer.16.v.pack",
+      "source": "layer.16.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22533,
+      "elements": 28672,
+      "last_row_differing_half_elements": 756,
+      "source_max_absolute_error": 0.016975725818294762,
+      "last_row_source_max_absolute_error": 0.008270774441609952
+    },
+    {
+      "stage": "layer.16.attention_output.pack",
+      "source": "layer.16.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22653,
+      "elements": 28672,
+      "last_row_differing_half_elements": 843,
+      "source_max_absolute_error": 0.014907300073420782,
+      "last_row_source_max_absolute_error": 0.014907300073420782
+    },
+    {
+      "stage": "layer.16.gate.pack",
+      "source": "layer.16.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22765,
+      "elements": 28672,
+      "last_row_differing_half_elements": 825,
+      "source_max_absolute_error": 0.012563402804131485,
+      "last_row_source_max_absolute_error": 0.012187071908583813
+    },
+    {
+      "stage": "layer.16.up.pack",
+      "source": "layer.16.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22765,
+      "elements": 28672,
+      "last_row_differing_half_elements": 825,
+      "source_max_absolute_error": 0.012563402804131485,
+      "last_row_source_max_absolute_error": 0.012187071908583813
+    },
+    {
+      "stage": "layer.16.down.pack",
+      "source": "layer.16.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 130536,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4559,
+      "source_max_absolute_error": 0.018009035372441584,
+      "last_row_source_max_absolute_error": 0.018009035372441584
+    },
+    {
+      "stage": "layer.17.q.pack",
+      "source": "layer.17.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22836,
+      "elements": 28672,
+      "last_row_differing_half_elements": 837,
+      "source_max_absolute_error": 0.020008486748047005,
+      "last_row_source_max_absolute_error": 0.017354832603130532
+    },
+    {
+      "stage": "layer.17.k.pack",
+      "source": "layer.17.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22836,
+      "elements": 28672,
+      "last_row_differing_half_elements": 837,
+      "source_max_absolute_error": 0.020008486748047005,
+      "last_row_source_max_absolute_error": 0.017354832603130532
+    },
+    {
+      "stage": "layer.17.v.pack",
+      "source": "layer.17.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22836,
+      "elements": 28672,
+      "last_row_differing_half_elements": 837,
+      "source_max_absolute_error": 0.020008486748047005,
+      "last_row_source_max_absolute_error": 0.017354832603130532
+    },
+    {
+      "stage": "layer.17.attention_output.pack",
+      "source": "layer.17.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23414,
+      "elements": 28672,
+      "last_row_differing_half_elements": 814,
+      "source_max_absolute_error": 0.005409631114765112,
+      "last_row_source_max_absolute_error": 0.005409631114765112
+    },
+    {
+      "stage": "layer.17.gate.pack",
+      "source": "layer.17.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22862,
+      "elements": 28672,
+      "last_row_differing_half_elements": 824,
+      "source_max_absolute_error": 0.023173609889131086,
+      "last_row_source_max_absolute_error": 0.023173609889131086
+    },
+    {
+      "stage": "layer.17.up.pack",
+      "source": "layer.17.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22862,
+      "elements": 28672,
+      "last_row_differing_half_elements": 824,
+      "source_max_absolute_error": 0.023173609889131086,
+      "last_row_source_max_absolute_error": 0.023173609889131086
+    },
+    {
+      "stage": "layer.17.down.pack",
+      "source": "layer.17.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 129575,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4605,
+      "source_max_absolute_error": 0.047089086397241964,
+      "last_row_source_max_absolute_error": 0.047089086397241964
+    },
+    {
+      "stage": "layer.18.q.pack",
+      "source": "layer.18.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22954,
+      "elements": 28672,
+      "last_row_differing_half_elements": 833,
+      "source_max_absolute_error": 0.025418926715494727,
+      "last_row_source_max_absolute_error": 0.025418926715494727
+    },
+    {
+      "stage": "layer.18.k.pack",
+      "source": "layer.18.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22954,
+      "elements": 28672,
+      "last_row_differing_half_elements": 833,
+      "source_max_absolute_error": 0.025418926715494727,
+      "last_row_source_max_absolute_error": 0.025418926715494727
+    },
+    {
+      "stage": "layer.18.v.pack",
+      "source": "layer.18.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22954,
+      "elements": 28672,
+      "last_row_differing_half_elements": 833,
+      "source_max_absolute_error": 0.025418926715494727,
+      "last_row_source_max_absolute_error": 0.025418926715494727
+    },
+    {
+      "stage": "layer.18.attention_output.pack",
+      "source": "layer.18.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 24584,
+      "elements": 28672,
+      "last_row_differing_half_elements": 828,
+      "source_max_absolute_error": 0.006326040260276944,
+      "last_row_source_max_absolute_error": 0.006326040260276944
+    },
+    {
+      "stage": "layer.18.gate.pack",
+      "source": "layer.18.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22967,
+      "elements": 28672,
+      "last_row_differing_half_elements": 831,
+      "source_max_absolute_error": 0.022468286336964072,
+      "last_row_source_max_absolute_error": 0.022468286336964072
+    },
+    {
+      "stage": "layer.18.up.pack",
+      "source": "layer.18.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 22967,
+      "elements": 28672,
+      "last_row_differing_half_elements": 831,
+      "source_max_absolute_error": 0.022468286336964072,
+      "last_row_source_max_absolute_error": 0.022468286336964072
+    },
+    {
+      "stage": "layer.18.down.pack",
+      "source": "layer.18.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 131824,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4635,
+      "source_max_absolute_error": 0.014333305607050484,
+      "last_row_source_max_absolute_error": 0.01113195831943714
+    },
+    {
+      "stage": "layer.19.q.pack",
+      "source": "layer.19.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23068,
+      "elements": 28672,
+      "last_row_differing_half_elements": 839,
+      "source_max_absolute_error": 0.03535363161675864,
+      "last_row_source_max_absolute_error": 0.03535363161675864
+    },
+    {
+      "stage": "layer.19.k.pack",
+      "source": "layer.19.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23068,
+      "elements": 28672,
+      "last_row_differing_half_elements": 839,
+      "source_max_absolute_error": 0.03535363161675864,
+      "last_row_source_max_absolute_error": 0.03535363161675864
+    },
+    {
+      "stage": "layer.19.v.pack",
+      "source": "layer.19.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23068,
+      "elements": 28672,
+      "last_row_differing_half_elements": 839,
+      "source_max_absolute_error": 0.03535363161675864,
+      "last_row_source_max_absolute_error": 0.03535363161675864
+    },
+    {
+      "stage": "layer.19.attention_output.pack",
+      "source": "layer.19.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23678,
+      "elements": 28672,
+      "last_row_differing_half_elements": 802,
+      "source_max_absolute_error": 0.00619317117994167,
+      "last_row_source_max_absolute_error": 0.00619317117994167
+    },
+    {
+      "stage": "layer.19.gate.pack",
+      "source": "layer.19.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23038,
+      "elements": 28672,
+      "last_row_differing_half_elements": 833,
+      "source_max_absolute_error": 0.030024147897016018,
+      "last_row_source_max_absolute_error": 0.030024147897016018
+    },
+    {
+      "stage": "layer.19.up.pack",
+      "source": "layer.19.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23038,
+      "elements": 28672,
+      "last_row_differing_half_elements": 833,
+      "source_max_absolute_error": 0.030024147897016018,
+      "last_row_source_max_absolute_error": 0.030024147897016018
+    },
+    {
+      "stage": "layer.19.down.pack",
+      "source": "layer.19.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 130810,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4626,
+      "source_max_absolute_error": 0.03156328409095699,
+      "last_row_source_max_absolute_error": 0.03156328409095699
+    },
+    {
+      "stage": "layer.20.q.pack",
+      "source": "layer.20.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23246,
+      "elements": 28672,
+      "last_row_differing_half_elements": 837,
+      "source_max_absolute_error": 0.031198527092173745,
+      "last_row_source_max_absolute_error": 0.031198527092173745
+    },
+    {
+      "stage": "layer.20.k.pack",
+      "source": "layer.20.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23246,
+      "elements": 28672,
+      "last_row_differing_half_elements": 837,
+      "source_max_absolute_error": 0.031198527092173745,
+      "last_row_source_max_absolute_error": 0.031198527092173745
+    },
+    {
+      "stage": "layer.20.v.pack",
+      "source": "layer.20.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23246,
+      "elements": 28672,
+      "last_row_differing_half_elements": 837,
+      "source_max_absolute_error": 0.031198527092173745,
+      "last_row_source_max_absolute_error": 0.031198527092173745
+    },
+    {
+      "stage": "layer.20.attention_output.pack",
+      "source": "layer.20.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23445,
+      "elements": 28672,
+      "last_row_differing_half_elements": 811,
+      "source_max_absolute_error": 0.006241857972059339,
+      "last_row_source_max_absolute_error": 0.005951883536563507
+    },
+    {
+      "stage": "layer.20.gate.pack",
+      "source": "layer.20.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23159,
+      "elements": 28672,
+      "last_row_differing_half_elements": 832,
+      "source_max_absolute_error": 0.035712497113140285,
+      "last_row_source_max_absolute_error": 0.035712497113140285
+    },
+    {
+      "stage": "layer.20.up.pack",
+      "source": "layer.20.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23159,
+      "elements": 28672,
+      "last_row_differing_half_elements": 832,
+      "source_max_absolute_error": 0.035712497113140285,
+      "last_row_source_max_absolute_error": 0.035712497113140285
+    },
+    {
+      "stage": "layer.20.down.pack",
+      "source": "layer.20.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 130064,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4626,
+      "source_max_absolute_error": 0.02961427329091082,
+      "last_row_source_max_absolute_error": 0.02961427329091082
+    },
+    {
+      "stage": "layer.21.q.pack",
+      "source": "layer.21.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23204,
+      "elements": 28672,
+      "last_row_differing_half_elements": 842,
+      "source_max_absolute_error": 0.04125967745118597,
+      "last_row_source_max_absolute_error": 0.04125967745118597
+    },
+    {
+      "stage": "layer.21.k.pack",
+      "source": "layer.21.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23204,
+      "elements": 28672,
+      "last_row_differing_half_elements": 842,
+      "source_max_absolute_error": 0.04125967745118597,
+      "last_row_source_max_absolute_error": 0.04125967745118597
+    },
+    {
+      "stage": "layer.21.v.pack",
+      "source": "layer.21.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23204,
+      "elements": 28672,
+      "last_row_differing_half_elements": 842,
+      "source_max_absolute_error": 0.04125967745118597,
+      "last_row_source_max_absolute_error": 0.04125967745118597
+    },
+    {
+      "stage": "layer.21.attention_output.pack",
+      "source": "layer.21.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23107,
+      "elements": 28672,
+      "last_row_differing_half_elements": 834,
+      "source_max_absolute_error": 0.012944598416012365,
+      "last_row_source_max_absolute_error": 0.012944598416012365
+    },
+    {
+      "stage": "layer.21.gate.pack",
+      "source": "layer.21.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23311,
+      "elements": 28672,
+      "last_row_differing_half_elements": 868,
+      "source_max_absolute_error": 0.03157305059148652,
+      "last_row_source_max_absolute_error": 0.03157305059148652
+    },
+    {
+      "stage": "layer.21.up.pack",
+      "source": "layer.21.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23311,
+      "elements": 28672,
+      "last_row_differing_half_elements": 868,
+      "source_max_absolute_error": 0.03157305059148652,
+      "last_row_source_max_absolute_error": 0.03157305059148652
+    },
+    {
+      "stage": "layer.21.down.pack",
+      "source": "layer.21.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 129664,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4673,
+      "source_max_absolute_error": 0.6154240229056995,
+      "last_row_source_max_absolute_error": 0.04368437066112396
+    },
+    {
+      "stage": "layer.22.q.pack",
+      "source": "layer.22.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23631,
+      "elements": 28672,
+      "last_row_differing_half_elements": 848,
+      "source_max_absolute_error": 0.0342949352331301,
+      "last_row_source_max_absolute_error": 0.0342949352331301
+    },
+    {
+      "stage": "layer.22.k.pack",
+      "source": "layer.22.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23631,
+      "elements": 28672,
+      "last_row_differing_half_elements": 848,
+      "source_max_absolute_error": 0.0342949352331301,
+      "last_row_source_max_absolute_error": 0.0342949352331301
+    },
+    {
+      "stage": "layer.22.v.pack",
+      "source": "layer.22.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23631,
+      "elements": 28672,
+      "last_row_differing_half_elements": 848,
+      "source_max_absolute_error": 0.0342949352331301,
+      "last_row_source_max_absolute_error": 0.0342949352331301
+    },
+    {
+      "stage": "layer.22.attention_output.pack",
+      "source": "layer.22.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 25931,
+      "elements": 28672,
+      "last_row_differing_half_elements": 855,
+      "source_max_absolute_error": 0.018354806742622354,
+      "last_row_source_max_absolute_error": 0.018354806742622354
+    },
+    {
+      "stage": "layer.22.gate.pack",
+      "source": "layer.22.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23656,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.04107164396612384,
+      "last_row_source_max_absolute_error": 0.04107164396612384
+    },
+    {
+      "stage": "layer.22.up.pack",
+      "source": "layer.22.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23656,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.04107164396612384,
+      "last_row_source_max_absolute_error": 0.04107164396612384
+    },
+    {
+      "stage": "layer.22.down.pack",
+      "source": "layer.22.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 135719,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4684,
+      "source_max_absolute_error": 0.06070008413318817,
+      "last_row_source_max_absolute_error": 0.06070008413318817
+    },
+    {
+      "stage": "layer.23.q.pack",
+      "source": "layer.23.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23677,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.05339782289509376,
+      "last_row_source_max_absolute_error": 0.05339782289509376
+    },
+    {
+      "stage": "layer.23.k.pack",
+      "source": "layer.23.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23677,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.05339782289509376,
+      "last_row_source_max_absolute_error": 0.05339782289509376
+    },
+    {
+      "stage": "layer.23.v.pack",
+      "source": "layer.23.attention_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23677,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.05339782289509376,
+      "last_row_source_max_absolute_error": 0.05339782289509376
+    },
+    {
+      "stage": "layer.23.attention_output.pack",
+      "source": "layer.23.attention",
+      "native_rounding_exact": true,
+      "differing_half_elements": 24246,
+      "elements": 28672,
+      "last_row_differing_half_elements": 827,
+      "source_max_absolute_error": 0.013652535699629764,
+      "last_row_source_max_absolute_error": 0.013652535699629764
+    },
+    {
+      "stage": "layer.23.gate.pack",
+      "source": "layer.23.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23851,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.06844062114132754,
+      "last_row_source_max_absolute_error": 0.04146421605967576
+    },
+    {
+      "stage": "layer.23.up.pack",
+      "source": "layer.23.ffn_norm",
+      "native_rounding_exact": true,
+      "differing_half_elements": 23851,
+      "elements": 28672,
+      "last_row_differing_half_elements": 852,
+      "source_max_absolute_error": 0.06844062114132754,
+      "last_row_source_max_absolute_error": 0.04146421605967576
+    },
+    {
+      "stage": "layer.23.down.pack",
+      "source": "layer.23.gated_hidden",
+      "native_rounding_exact": true,
+      "differing_half_elements": 133637,
+      "elements": 155648,
+      "last_row_differing_half_elements": 4634,
+      "source_max_absolute_error": 0.06924867089451325,
+      "last_row_source_max_absolute_error": 0.06908734836613739
+    }
+  ],
+  "policy_node_differences": [
+    {
+      "stage": "embedding.word.gather",
+      "tensor": "embedding.word",
+      "max_absolute_error": 0.0,
+      "last_row_max_absolute_error": 0.0
+    },
+    {
+      "stage": "layer.0.attention_norm.rms",
+      "tensor": "layer.0.attention_norm",
+      "max_absolute_error": 1.5645603146374754e-07,
+      "last_row_max_absolute_error": 9.948139512161447e-08
+    },
+    {
+      "stage": "layer.0.q.bias",
+      "tensor": "layer.0.q",
+      "max_absolute_error": 3.896634552802425e-06,
+      "last_row_max_absolute_error": 2.0673151084338315e-06
+    },
+    {
+      "stage": "layer.0.k.bias",
+      "tensor": "layer.0.k",
+      "max_absolute_error": 6.990324891376076e-06,
+      "last_row_max_absolute_error": 4.209304506730405e-06
+    },
+    {
+      "stage": "layer.0.v.bias",
+      "tensor": "layer.0.v",
+      "max_absolute_error": 2.8190697776153684e-08,
+      "last_row_max_absolute_error": 1.6236299416050315e-08
+    },
+    {
+      "stage": "layer.0.rope_q.rotary",
+      "tensor": "layer.0.rope_q",
+      "max_absolute_error": 9.913678709949636e-06,
+      "last_row_max_absolute_error": 2.46749730159479e-06
+    },
+    {
+      "stage": "layer.0.rope_k.rotary",
+      "tensor": "layer.0.rope_k",
+      "max_absolute_error": 1.2218129398888777e-05,
+      "last_row_max_absolute_error": 5.6038338840380675e-06
+    },
+    {
+      "stage": "layer.0.cache_update.append_k",
+      "tensor": "layer.0.cache_k",
+      "max_absolute_error": 1.2218129398888777e-05,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.0.cache_update.append_v",
+      "tensor": "layer.0.cache_v",
+      "max_absolute_error": 2.8190697776153684e-08,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.0.attention.mask",
+      "tensor": "layer.0.attention.scores",
+      "max_absolute_error": 0.0003459305637534271,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.0.attention.softmax",
+      "tensor": "layer.0.attention.probabilities",
+      "max_absolute_error": 4.970447224911245e-05,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.0.attention.context",
+      "tensor": "layer.0.attention",
+      "max_absolute_error": 3.799817573896247e-06,
+      "last_row_max_absolute_error": 1.6851104273490902e-06
+    },
+    {
+      "stage": "layer.0.attention_output.gemm",
+      "tensor": "layer.0.attention_output",
+      "max_absolute_error": 2.6207663722743746e-05,
+      "last_row_max_absolute_error": 2.509887167434499e-06
+    },
+    {
+      "stage": "layer.0.attention_residual.add",
+      "tensor": "layer.0.attention_residual",
+      "max_absolute_error": 2.6207663722743746e-05,
+      "last_row_max_absolute_error": 2.509887167434499e-06
+    },
+    {
+      "stage": "layer.0.ffn_norm.rms",
+      "tensor": "layer.0.ffn_norm",
+      "max_absolute_error": 0.0006662266895718361,
+      "last_row_max_absolute_error": 0.0003162199311849828
+    },
+    {
+      "stage": "layer.0.gate.gemm",
+      "tensor": "layer.0.gate",
+      "max_absolute_error": 0.0013149956648703665,
+      "last_row_max_absolute_error": 0.000678696611430496
+    },
+    {
+      "stage": "layer.0.up.gemm",
+      "tensor": "layer.0.up",
+      "max_absolute_error": 0.0006464899051934481,
+      "last_row_max_absolute_error": 0.0003149903977828217
+    },
+    {
+      "stage": "layer.0.silu.silu",
+      "tensor": "layer.0.silu",
+      "max_absolute_error": 0.00029903089912380887,
+      "last_row_max_absolute_error": 0.00029903089912380887
+    },
+    {
+      "stage": "layer.0.gated_hidden.multiply",
+      "tensor": "layer.0.gated_hidden",
+      "max_absolute_error": 0.000594080053457624,
+      "last_row_max_absolute_error": 0.000594080053457624
+    },
+    {
+      "stage": "layer.0.down.gemm",
+      "tensor": "layer.0.down",
+      "max_absolute_error": 0.00036509015581032145,
+      "last_row_max_absolute_error": 0.0002769483872668843
+    },
+    {
+      "stage": "layer.0.ffn_residual.add",
+      "tensor": "layer.0.ffn_residual",
+      "max_absolute_error": 0.0003655265361430793,
+      "last_row_max_absolute_error": 0.0002781553708643969
+    },
+    {
+      "stage": "layer.1.attention_norm.rms",
+      "tensor": "layer.1.attention_norm",
+      "max_absolute_error": 0.0013000766179103174,
+      "last_row_max_absolute_error": 0.0005913018950897686
+    },
+    {
+      "stage": "layer.1.q.bias",
+      "tensor": "layer.1.q",
+      "max_absolute_error": 0.001324289885815233,
+      "last_row_max_absolute_error": 0.001324289885815233
+    },
+    {
+      "stage": "layer.1.k.bias",
+      "tensor": "layer.1.k",
+      "max_absolute_error": 0.0014628024655394256,
+      "last_row_max_absolute_error": 0.0005892308545298874
+    },
+    {
+      "stage": "layer.1.v.bias",
+      "tensor": "layer.1.v",
+      "max_absolute_error": 0.0002603528591862414,
+      "last_row_max_absolute_error": 0.0002282721525261877
+    },
+    {
+      "stage": "layer.1.rope_q.rotary",
+      "tensor": "layer.1.rope_q",
+      "max_absolute_error": 0.001489455175137877,
+      "last_row_max_absolute_error": 0.001489455175137877
+    },
+    {
+      "stage": "layer.1.rope_k.rotary",
+      "tensor": "layer.1.rope_k",
+      "max_absolute_error": 0.0014632693064626778,
+      "last_row_max_absolute_error": 0.0006101139963372582
+    },
+    {
+      "stage": "layer.1.cache_update.append_k",
+      "tensor": "layer.1.cache_k",
+      "max_absolute_error": 0.0014632693064626778,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.1.cache_update.append_v",
+      "tensor": "layer.1.cache_v",
+      "max_absolute_error": 0.0002603528591862414,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.1.attention.mask",
+      "tensor": "layer.1.attention.scores",
+      "max_absolute_error": 0.037221940857989466,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.1.attention.softmax",
+      "tensor": "layer.1.attention.probabilities",
+      "max_absolute_error": 0.00029480824955696594,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.1.attention.context",
+      "tensor": "layer.1.attention",
+      "max_absolute_error": 0.00026734077640605536,
+      "last_row_max_absolute_error": 0.00017098250727796624
+    },
+    {
+      "stage": "layer.1.attention_output.gemm",
+      "tensor": "layer.1.attention_output",
+      "max_absolute_error": 0.0001618278563455533,
+      "last_row_max_absolute_error": 0.00010763134014268871
+    },
+    {
+      "stage": "layer.1.attention_residual.add",
+      "tensor": "layer.1.attention_residual",
+      "max_absolute_error": 0.00031139217080067283,
+      "last_row_max_absolute_error": 0.00031139217080067283
+    },
+    {
+      "stage": "layer.1.ffn_norm.rms",
+      "tensor": "layer.1.ffn_norm",
+      "max_absolute_error": 0.0011192831214525967,
+      "last_row_max_absolute_error": 0.0005577034592796348
+    },
+    {
+      "stage": "layer.1.gate.gemm",
+      "tensor": "layer.1.gate",
+      "max_absolute_error": 0.001587099875905551,
+      "last_row_max_absolute_error": 0.0009370435254822951
+    },
+    {
+      "stage": "layer.1.up.gemm",
+      "tensor": "layer.1.up",
+      "max_absolute_error": 0.001519744200322748,
+      "last_row_max_absolute_error": 0.0005582783996942453
+    },
+    {
+      "stage": "layer.1.silu.silu",
+      "tensor": "layer.1.silu",
+      "max_absolute_error": 0.0008003156700245317,
+      "last_row_max_absolute_error": 0.0007227464786987436
+    },
+    {
+      "stage": "layer.1.gated_hidden.multiply",
+      "tensor": "layer.1.gated_hidden",
+      "max_absolute_error": 0.0012439562911110702,
+      "last_row_max_absolute_error": 0.0012439562911110702
+    },
+    {
+      "stage": "layer.1.down.gemm",
+      "tensor": "layer.1.down",
+      "max_absolute_error": 0.00068643459235318,
+      "last_row_max_absolute_error": 0.0005721320867451141
+    },
+    {
+      "stage": "layer.1.ffn_residual.add",
+      "tensor": "layer.1.ffn_residual",
+      "max_absolute_error": 0.0007197747343923311,
+      "last_row_max_absolute_error": 0.00037924798169797214
+    },
+    {
+      "stage": "layer.2.attention_norm.rms",
+      "tensor": "layer.2.attention_norm",
+      "max_absolute_error": 0.001956150501664311,
+      "last_row_max_absolute_error": 0.0014854617959976224
+    },
+    {
+      "stage": "layer.2.q.bias",
+      "tensor": "layer.2.q",
+      "max_absolute_error": 0.0021778640511911362,
+      "last_row_max_absolute_error": 0.0021778640511911362
+    },
+    {
+      "stage": "layer.2.k.bias",
+      "tensor": "layer.2.k",
+      "max_absolute_error": 0.0018443225635564886,
+      "last_row_max_absolute_error": 0.001438344712369144
+    },
+    {
+      "stage": "layer.2.v.bias",
+      "tensor": "layer.2.v",
+      "max_absolute_error": 0.00044546941234102633,
+      "last_row_max_absolute_error": 0.0004212897620163858
+    },
+    {
+      "stage": "layer.2.rope_q.rotary",
+      "tensor": "layer.2.rope_q",
+      "max_absolute_error": 0.0021220938190200656,
+      "last_row_max_absolute_error": 0.0021220938190200656
+    },
+    {
+      "stage": "layer.2.rope_k.rotary",
+      "tensor": "layer.2.rope_k",
+      "max_absolute_error": 0.0017685708907460018,
+      "last_row_max_absolute_error": 0.0014376286289952134
+    },
+    {
+      "stage": "layer.2.cache_update.append_k",
+      "tensor": "layer.2.cache_k",
+      "max_absolute_error": 0.0017685708907460018,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.2.cache_update.append_v",
+      "tensor": "layer.2.cache_v",
+      "max_absolute_error": 0.00044546941234102633,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.2.attention.mask",
+      "tensor": "layer.2.attention.scores",
+      "max_absolute_error": 0.014546813579990214,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.2.attention.softmax",
+      "tensor": "layer.2.attention.probabilities",
+      "max_absolute_error": 0.0005061099421389548,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.2.attention.context",
+      "tensor": "layer.2.attention",
+      "max_absolute_error": 0.0006680498536042745,
+      "last_row_max_absolute_error": 0.0006545004108986785
+    },
+    {
+      "stage": "layer.2.attention_output.gemm",
+      "tensor": "layer.2.attention_output",
+      "max_absolute_error": 0.0007998380897333845,
+      "last_row_max_absolute_error": 0.00023315573162108194
+    },
+    {
+      "stage": "layer.2.attention_residual.add",
+      "tensor": "layer.2.attention_residual",
+      "max_absolute_error": 0.0012378151701852858,
+      "last_row_max_absolute_error": 0.0004375652530939078
+    },
+    {
+      "stage": "layer.2.ffn_norm.rms",
+      "tensor": "layer.2.ffn_norm",
+      "max_absolute_error": 0.0017333567277209028,
+      "last_row_max_absolute_error": 0.0012191696095669169
+    },
+    {
+      "stage": "layer.2.gate.gemm",
+      "tensor": "layer.2.gate",
+      "max_absolute_error": 0.00534303123367863,
+      "last_row_max_absolute_error": 0.0024172666289814515
+    },
+    {
+      "stage": "layer.2.up.gemm",
+      "tensor": "layer.2.up",
+      "max_absolute_error": 0.0051720774581554,
+      "last_row_max_absolute_error": 0.0013117601374688093
+    },
+    {
+      "stage": "layer.2.silu.silu",
+      "tensor": "layer.2.silu",
+      "max_absolute_error": 0.0021966854031845173,
+      "last_row_max_absolute_error": 0.001848912027501426
+    },
+    {
+      "stage": "layer.2.gated_hidden.multiply",
+      "tensor": "layer.2.gated_hidden",
+      "max_absolute_error": 0.2566671226898052,
+      "last_row_max_absolute_error": 0.0034431345532277557
+    },
+    {
+      "stage": "layer.2.down.gemm",
+      "tensor": "layer.2.down",
+      "max_absolute_error": 0.4453103277428454,
+      "last_row_max_absolute_error": 0.0005259035791596034
+    },
+    {
+      "stage": "layer.2.ffn_residual.add",
+      "tensor": "layer.2.ffn_residual",
+      "max_absolute_error": 0.44499647518387064,
+      "last_row_max_absolute_error": 0.0006178779900096742
+    },
+    {
+      "stage": "layer.3.attention_norm.rms",
+      "tensor": "layer.3.attention_norm",
+      "max_absolute_error": 0.004047296613945761,
+      "last_row_max_absolute_error": 0.004047296613945761
+    },
+    {
+      "stage": "layer.3.q.bias",
+      "tensor": "layer.3.q",
+      "max_absolute_error": 0.0022021454424248077,
+      "last_row_max_absolute_error": 0.002044379376457073
+    },
+    {
+      "stage": "layer.3.k.bias",
+      "tensor": "layer.3.k",
+      "max_absolute_error": 0.002610058698337525,
+      "last_row_max_absolute_error": 0.0014507377636618912
+    },
+    {
+      "stage": "layer.3.v.bias",
+      "tensor": "layer.3.v",
+      "max_absolute_error": 0.0007270974892890081,
+      "last_row_max_absolute_error": 0.0005732039353461005
+    },
+    {
+      "stage": "layer.3.rope_q.rotary",
+      "tensor": "layer.3.rope_q",
+      "max_absolute_error": 0.00220122884018549,
+      "last_row_max_absolute_error": 0.0020442737734516214
+    },
+    {
+      "stage": "layer.3.rope_k.rotary",
+      "tensor": "layer.3.rope_k",
+      "max_absolute_error": 0.002610344632085315,
+      "last_row_max_absolute_error": 0.0012520534305244801
+    },
+    {
+      "stage": "layer.3.cache_update.append_k",
+      "tensor": "layer.3.cache_k",
+      "max_absolute_error": 0.002610344632085315,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.3.cache_update.append_v",
+      "tensor": "layer.3.cache_v",
+      "max_absolute_error": 0.0007270974892890081,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.3.attention.mask",
+      "tensor": "layer.3.attention.scores",
+      "max_absolute_error": 0.007614465794706149,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.3.attention.softmax",
+      "tensor": "layer.3.attention.probabilities",
+      "max_absolute_error": 0.0004267213142203907,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.3.attention.context",
+      "tensor": "layer.3.attention",
+      "max_absolute_error": 0.0012735760668016738,
+      "last_row_max_absolute_error": 0.0010004597376314095
+    },
+    {
+      "stage": "layer.3.attention_output.gemm",
+      "tensor": "layer.3.attention_output",
+      "max_absolute_error": 0.00047595446221748716,
+      "last_row_max_absolute_error": 0.0002641902810864849
+    },
+    {
+      "stage": "layer.3.attention_residual.add",
+      "tensor": "layer.3.attention_residual",
+      "max_absolute_error": 0.44502465232335453,
+      "last_row_max_absolute_error": 0.0006170411633661388
+    },
+    {
+      "stage": "layer.3.ffn_norm.rms",
+      "tensor": "layer.3.ffn_norm",
+      "max_absolute_error": 0.010499733199520411,
+      "last_row_max_absolute_error": 0.003385717663037191
+    },
+    {
+      "stage": "layer.3.gate.gemm",
+      "tensor": "layer.3.gate",
+      "max_absolute_error": 0.002385101397521794,
+      "last_row_max_absolute_error": 0.0022509817499667406
+    },
+    {
+      "stage": "layer.3.up.gemm",
+      "tensor": "layer.3.up",
+      "max_absolute_error": 0.0026129497855436057,
+      "last_row_max_absolute_error": 0.0013494537761289394
+    },
+    {
+      "stage": "layer.3.silu.silu",
+      "tensor": "layer.3.silu",
+      "max_absolute_error": 0.001884650250403741,
+      "last_row_max_absolute_error": 0.001884650250403741
+    },
+    {
+      "stage": "layer.3.gated_hidden.multiply",
+      "tensor": "layer.3.gated_hidden",
+      "max_absolute_error": 0.008564932881540699,
+      "last_row_max_absolute_error": 0.0023019657514653513
+    },
+    {
+      "stage": "layer.3.down.gemm",
+      "tensor": "layer.3.down",
+      "max_absolute_error": 0.0016733353020299546,
+      "last_row_max_absolute_error": 0.0009341064435375301
+    },
+    {
+      "stage": "layer.3.ffn_residual.add",
+      "tensor": "layer.3.ffn_residual",
+      "max_absolute_error": 0.44487304814401796,
+      "last_row_max_absolute_error": 0.0011606941739046306
+    },
+    {
+      "stage": "layer.4.attention_norm.rms",
+      "tensor": "layer.4.attention_norm",
+      "max_absolute_error": 0.0067559640844638835,
+      "last_row_max_absolute_error": 0.0067559640844638835
+    },
+    {
+      "stage": "layer.4.q.bias",
+      "tensor": "layer.4.q",
+      "max_absolute_error": 0.002510490652639419,
+      "last_row_max_absolute_error": 0.001614276843611151
+    },
+    {
+      "stage": "layer.4.k.bias",
+      "tensor": "layer.4.k",
+      "max_absolute_error": 0.003643037343863398,
+      "last_row_max_absolute_error": 0.0023569244949612767
+    },
+    {
+      "stage": "layer.4.v.bias",
+      "tensor": "layer.4.v",
+      "max_absolute_error": 0.0015334125491790473,
+      "last_row_max_absolute_error": 0.0014068953169044107
+    },
+    {
+      "stage": "layer.4.rope_q.rotary",
+      "tensor": "layer.4.rope_q",
+      "max_absolute_error": 0.002510453170567639,
+      "last_row_max_absolute_error": 0.001812396188541232
+    },
+    {
+      "stage": "layer.4.rope_k.rotary",
+      "tensor": "layer.4.rope_k",
+      "max_absolute_error": 0.0036432271605182365,
+      "last_row_max_absolute_error": 0.002357337625381817
+    },
+    {
+      "stage": "layer.4.cache_update.append_k",
+      "tensor": "layer.4.cache_k",
+      "max_absolute_error": 0.0036432271605182365,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.4.cache_update.append_v",
+      "tensor": "layer.4.cache_v",
+      "max_absolute_error": 0.0015334125491790473,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.4.attention.mask",
+      "tensor": "layer.4.attention.scores",
+      "max_absolute_error": 0.007152572545723324,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.4.attention.softmax",
+      "tensor": "layer.4.attention.probabilities",
+      "max_absolute_error": 0.0005545578523916683,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.4.attention.context",
+      "tensor": "layer.4.attention",
+      "max_absolute_error": 0.0013553328595117264,
+      "last_row_max_absolute_error": 0.0009560337503149163
+    },
+    {
+      "stage": "layer.4.attention_output.gemm",
+      "tensor": "layer.4.attention_output",
+      "max_absolute_error": 0.000844305341161089,
+      "last_row_max_absolute_error": 0.00047605437066522427
+    },
+    {
+      "stage": "layer.4.attention_residual.add",
+      "tensor": "layer.4.attention_residual",
+      "max_absolute_error": 0.4448240920826265,
+      "last_row_max_absolute_error": 0.0010923039230874565
+    },
+    {
+      "stage": "layer.4.ffn_norm.rms",
+      "tensor": "layer.4.ffn_norm",
+      "max_absolute_error": 0.003378588080133138,
+      "last_row_max_absolute_error": 0.0021733636603964435
+    },
+    {
+      "stage": "layer.4.gate.gemm",
+      "tensor": "layer.4.gate",
+      "max_absolute_error": 0.0036891749514325056,
+      "last_row_max_absolute_error": 0.00241825521516148
+    },
+    {
+      "stage": "layer.4.up.gemm",
+      "tensor": "layer.4.up",
+      "max_absolute_error": 0.002103786733641755,
+      "last_row_max_absolute_error": 0.001941946175065823
+    },
+    {
+      "stage": "layer.4.silu.silu",
+      "tensor": "layer.4.silu",
+      "max_absolute_error": 0.00270674666862325,
+      "last_row_max_absolute_error": 0.002505342280312073
+    },
+    {
+      "stage": "layer.4.gated_hidden.multiply",
+      "tensor": "layer.4.gated_hidden",
+      "max_absolute_error": 0.0035633399051118175,
+      "last_row_max_absolute_error": 0.001840868889356695
+    },
+    {
+      "stage": "layer.4.down.gemm",
+      "tensor": "layer.4.down",
+      "max_absolute_error": 0.0011634669945124188,
+      "last_row_max_absolute_error": 0.0004676559785821155
+    },
+    {
+      "stage": "layer.4.ffn_residual.add",
+      "tensor": "layer.4.ffn_residual",
+      "max_absolute_error": 0.44493029537170514,
+      "last_row_max_absolute_error": 0.000796952331711509
+    },
+    {
+      "stage": "layer.5.attention_norm.rms",
+      "tensor": "layer.5.attention_norm",
+      "max_absolute_error": 0.007001430236163841,
+      "last_row_max_absolute_error": 0.005358778339044967
+    },
+    {
+      "stage": "layer.5.q.bias",
+      "tensor": "layer.5.q",
+      "max_absolute_error": 0.003088969737291336,
+      "last_row_max_absolute_error": 0.0022610497835557908
+    },
+    {
+      "stage": "layer.5.k.bias",
+      "tensor": "layer.5.k",
+      "max_absolute_error": 0.0027806626458186656,
+      "last_row_max_absolute_error": 0.0018192045863543171
+    },
+    {
+      "stage": "layer.5.v.bias",
+      "tensor": "layer.5.v",
+      "max_absolute_error": 0.0016662105917930603,
+      "last_row_max_absolute_error": 0.000924392401429941
+    },
+    {
+      "stage": "layer.5.rope_q.rotary",
+      "tensor": "layer.5.rope_q",
+      "max_absolute_error": 0.003088929830841969,
+      "last_row_max_absolute_error": 0.002261212102213861
+    },
+    {
+      "stage": "layer.5.rope_k.rotary",
+      "tensor": "layer.5.rope_k",
+      "max_absolute_error": 0.0027807806374766653,
+      "last_row_max_absolute_error": 0.0018190882146082998
+    },
+    {
+      "stage": "layer.5.cache_update.append_k",
+      "tensor": "layer.5.cache_k",
+      "max_absolute_error": 0.0027807806374766653,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.5.cache_update.append_v",
+      "tensor": "layer.5.cache_v",
+      "max_absolute_error": 0.0016662105917930603,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.5.attention.mask",
+      "tensor": "layer.5.attention.scores",
+      "max_absolute_error": 0.006299984124435554,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.5.attention.softmax",
+      "tensor": "layer.5.attention.probabilities",
+      "max_absolute_error": 0.0011636984395971273,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.5.attention.context",
+      "tensor": "layer.5.attention",
+      "max_absolute_error": 0.002095473560221217,
+      "last_row_max_absolute_error": 0.0007331873622831719
+    },
+    {
+      "stage": "layer.5.attention_output.gemm",
+      "tensor": "layer.5.attention_output",
+      "max_absolute_error": 0.0014878812435199507,
+      "last_row_max_absolute_error": 0.0005735193553846329
+    },
+    {
+      "stage": "layer.5.attention_residual.add",
+      "tensor": "layer.5.attention_residual",
+      "max_absolute_error": 0.4448688381426109,
+      "last_row_max_absolute_error": 0.0008470246898468758
+    },
+    {
+      "stage": "layer.5.ffn_norm.rms",
+      "tensor": "layer.5.ffn_norm",
+      "max_absolute_error": 0.004423285958035983,
+      "last_row_max_absolute_error": 0.0030762268734649822
+    },
+    {
+      "stage": "layer.5.gate.gemm",
+      "tensor": "layer.5.gate",
+      "max_absolute_error": 0.005546668521219544,
+      "last_row_max_absolute_error": 0.0026257763092871755
+    },
+    {
+      "stage": "layer.5.up.gemm",
+      "tensor": "layer.5.up",
+      "max_absolute_error": 0.002013073186390102,
+      "last_row_max_absolute_error": 0.001469733819249086
+    },
+    {
+      "stage": "layer.5.silu.silu",
+      "tensor": "layer.5.silu",
+      "max_absolute_error": 0.005654688084044457,
+      "last_row_max_absolute_error": 0.0014343583966366369
+    },
+    {
+      "stage": "layer.5.gated_hidden.multiply",
+      "tensor": "layer.5.gated_hidden",
+      "max_absolute_error": 0.007402245461276991,
+      "last_row_max_absolute_error": 0.0022145198066623184
+    },
+    {
+      "stage": "layer.5.down.gemm",
+      "tensor": "layer.5.down",
+      "max_absolute_error": 0.002088348515087546,
+      "last_row_max_absolute_error": 0.00047629464188503334
+    },
+    {
+      "stage": "layer.5.ffn_residual.add",
+      "tensor": "layer.5.ffn_residual",
+      "max_absolute_error": 0.44489609316724454,
+      "last_row_max_absolute_error": 0.0011074717540395795
+    },
+    {
+      "stage": "layer.6.attention_norm.rms",
+      "tensor": "layer.6.attention_norm",
+      "max_absolute_error": 0.006211653753982915,
+      "last_row_max_absolute_error": 0.006211653753982915
+    },
+    {
+      "stage": "layer.6.q.bias",
+      "tensor": "layer.6.q",
+      "max_absolute_error": 0.004040627623908222,
+      "last_row_max_absolute_error": 0.004040627623908222
+    },
+    {
+      "stage": "layer.6.k.bias",
+      "tensor": "layer.6.k",
+      "max_absolute_error": 0.0034331289934925735,
+      "last_row_max_absolute_error": 0.00299200665904209
+    },
+    {
+      "stage": "layer.6.v.bias",
+      "tensor": "layer.6.v",
+      "max_absolute_error": 0.0015791226894634747,
+      "last_row_max_absolute_error": 0.0008575818210374564
+    },
+    {
+      "stage": "layer.6.rope_q.rotary",
+      "tensor": "layer.6.rope_q",
+      "max_absolute_error": 0.0040402503705747606,
+      "last_row_max_absolute_error": 0.0040402503705747606
+    },
+    {
+      "stage": "layer.6.rope_k.rotary",
+      "tensor": "layer.6.rope_k",
+      "max_absolute_error": 0.0034330087908402973,
+      "last_row_max_absolute_error": 0.0029915963657076716
+    },
+    {
+      "stage": "layer.6.cache_update.append_k",
+      "tensor": "layer.6.cache_k",
+      "max_absolute_error": 0.0034330087908402973,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.6.cache_update.append_v",
+      "tensor": "layer.6.cache_v",
+      "max_absolute_error": 0.0015791226894634747,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.6.attention.mask",
+      "tensor": "layer.6.attention.scores",
+      "max_absolute_error": 0.005475880688786461,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.6.attention.softmax",
+      "tensor": "layer.6.attention.probabilities",
+      "max_absolute_error": 0.0008974435260759028,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.6.attention.context",
+      "tensor": "layer.6.attention",
+      "max_absolute_error": 0.002639813407544718,
+      "last_row_max_absolute_error": 0.0009477405502393843
+    },
+    {
+      "stage": "layer.6.attention_output.gemm",
+      "tensor": "layer.6.attention_output",
+      "max_absolute_error": 0.0010015235748142004,
+      "last_row_max_absolute_error": 0.0003450351287028752
+    },
+    {
+      "stage": "layer.6.attention_residual.add",
+      "tensor": "layer.6.attention_residual",
+      "max_absolute_error": 0.44484843764576,
+      "last_row_max_absolute_error": 0.0011454806617621216
+    },
+    {
+      "stage": "layer.6.ffn_norm.rms",
+      "tensor": "layer.6.ffn_norm",
+      "max_absolute_error": 0.004124782256865522,
+      "last_row_max_absolute_error": 0.0037681408997777277
+    },
+    {
+      "stage": "layer.6.gate.gemm",
+      "tensor": "layer.6.gate",
+      "max_absolute_error": 0.0029147539171390235,
+      "last_row_max_absolute_error": 0.0021848450778634287
+    },
+    {
+      "stage": "layer.6.up.gemm",
+      "tensor": "layer.6.up",
+      "max_absolute_error": 0.00259130356789683,
+      "last_row_max_absolute_error": 0.0017718140734359622
+    },
+    {
+      "stage": "layer.6.silu.silu",
+      "tensor": "layer.6.silu",
+      "max_absolute_error": 0.003000862243507818,
+      "last_row_max_absolute_error": 0.0012555146785137583
+    },
+    {
+      "stage": "layer.6.gated_hidden.multiply",
+      "tensor": "layer.6.gated_hidden",
+      "max_absolute_error": 0.004814621268891539,
+      "last_row_max_absolute_error": 0.003397768188617034
+    },
+    {
+      "stage": "layer.6.down.gemm",
+      "tensor": "layer.6.down",
+      "max_absolute_error": 0.0020090319303562865,
+      "last_row_max_absolute_error": 0.00088387642381349
+    },
+    {
+      "stage": "layer.6.ffn_residual.add",
+      "tensor": "layer.6.ffn_residual",
+      "max_absolute_error": 0.44490371385404615,
+      "last_row_max_absolute_error": 0.0018300923178458106
+    },
+    {
+      "stage": "layer.7.attention_norm.rms",
+      "tensor": "layer.7.attention_norm",
+      "max_absolute_error": 0.006599384464366587,
+      "last_row_max_absolute_error": 0.006403568878369015
+    },
+    {
+      "stage": "layer.7.q.bias",
+      "tensor": "layer.7.q",
+      "max_absolute_error": 0.0033566316415090114,
+      "last_row_max_absolute_error": 0.0033566316415090114
+    },
+    {
+      "stage": "layer.7.k.bias",
+      "tensor": "layer.7.k",
+      "max_absolute_error": 0.0029218664130894467,
+      "last_row_max_absolute_error": 0.002349206421058625
+    },
+    {
+      "stage": "layer.7.v.bias",
+      "tensor": "layer.7.v",
+      "max_absolute_error": 0.0017688934913167031,
+      "last_row_max_absolute_error": 0.0015276677731890231
+    },
+    {
+      "stage": "layer.7.rope_q.rotary",
+      "tensor": "layer.7.rope_q",
+      "max_absolute_error": 0.0030836696894382953,
+      "last_row_max_absolute_error": 0.0028782291597935217
+    },
+    {
+      "stage": "layer.7.rope_k.rotary",
+      "tensor": "layer.7.rope_k",
+      "max_absolute_error": 0.002921362156451446,
+      "last_row_max_absolute_error": 0.0019618519111139765
+    },
+    {
+      "stage": "layer.7.cache_update.append_k",
+      "tensor": "layer.7.cache_k",
+      "max_absolute_error": 0.002921362156451446,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.7.cache_update.append_v",
+      "tensor": "layer.7.cache_v",
+      "max_absolute_error": 0.0017688934913167031,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.7.attention.mask",
+      "tensor": "layer.7.attention.scores",
+      "max_absolute_error": 0.012225052005323533,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.7.attention.softmax",
+      "tensor": "layer.7.attention.probabilities",
+      "max_absolute_error": 0.0008496771374278678,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.7.attention.context",
+      "tensor": "layer.7.attention",
+      "max_absolute_error": 0.002749452280708997,
+      "last_row_max_absolute_error": 0.002477194497450874
+    },
+    {
+      "stage": "layer.7.attention_output.gemm",
+      "tensor": "layer.7.attention_output",
+      "max_absolute_error": 0.0013097805458528455,
+      "last_row_max_absolute_error": 0.0013097805458528455
+    },
+    {
+      "stage": "layer.7.attention_residual.add",
+      "tensor": "layer.7.attention_residual",
+      "max_absolute_error": 0.4449009951379139,
+      "last_row_max_absolute_error": 0.0021385121345645075
+    },
+    {
+      "stage": "layer.7.ffn_norm.rms",
+      "tensor": "layer.7.ffn_norm",
+      "max_absolute_error": 0.004409043336154772,
+      "last_row_max_absolute_error": 0.004137637313293752
+    },
+    {
+      "stage": "layer.7.gate.gemm",
+      "tensor": "layer.7.gate",
+      "max_absolute_error": 0.004376061871880665,
+      "last_row_max_absolute_error": 0.004376061871880665
+    },
+    {
+      "stage": "layer.7.up.gemm",
+      "tensor": "layer.7.up",
+      "max_absolute_error": 0.004012398581835441,
+      "last_row_max_absolute_error": 0.002984087561344495
+    },
+    {
+      "stage": "layer.7.silu.silu",
+      "tensor": "layer.7.silu",
+      "max_absolute_error": 0.004799750756979471,
+      "last_row_max_absolute_error": 0.004799750756979471
+    },
+    {
+      "stage": "layer.7.gated_hidden.multiply",
+      "tensor": "layer.7.gated_hidden",
+      "max_absolute_error": 0.003884278446446565,
+      "last_row_max_absolute_error": 0.0026414599526454197
+    },
+    {
+      "stage": "layer.7.down.gemm",
+      "tensor": "layer.7.down",
+      "max_absolute_error": 0.003341639697737264,
+      "last_row_max_absolute_error": 0.003341639697737264
+    },
+    {
+      "stage": "layer.7.ffn_residual.add",
+      "tensor": "layer.7.ffn_residual",
+      "max_absolute_error": 0.4449553324784574,
+      "last_row_max_absolute_error": 0.0012789069622840543
+    },
+    {
+      "stage": "layer.8.attention_norm.rms",
+      "tensor": "layer.8.attention_norm",
+      "max_absolute_error": 0.010643193461496558,
+      "last_row_max_absolute_error": 0.007993069476654235
+    },
+    {
+      "stage": "layer.8.q.bias",
+      "tensor": "layer.8.q",
+      "max_absolute_error": 0.02177502930862829,
+      "last_row_max_absolute_error": 0.021774402412120253
+    },
+    {
+      "stage": "layer.8.k.bias",
+      "tensor": "layer.8.k",
+      "max_absolute_error": 0.0044144392013549805,
+      "last_row_max_absolute_error": 0.0022090996499173343
+    },
+    {
+      "stage": "layer.8.v.bias",
+      "tensor": "layer.8.v",
+      "max_absolute_error": 0.002120815042871982,
+      "last_row_max_absolute_error": 0.0011279531681793742
+    },
+    {
+      "stage": "layer.8.rope_q.rotary",
+      "tensor": "layer.8.rope_q",
+      "max_absolute_error": 0.0217746206314402,
+      "last_row_max_absolute_error": 0.02177389182374556
+    },
+    {
+      "stage": "layer.8.rope_k.rotary",
+      "tensor": "layer.8.rope_k",
+      "max_absolute_error": 0.004412698829426631,
+      "last_row_max_absolute_error": 0.002205677757260105
+    },
+    {
+      "stage": "layer.8.cache_update.append_k",
+      "tensor": "layer.8.cache_k",
+      "max_absolute_error": 0.004412698829426631,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.8.cache_update.append_v",
+      "tensor": "layer.8.cache_v",
+      "max_absolute_error": 0.002120815042871982,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.8.attention.mask",
+      "tensor": "layer.8.attention.scores",
+      "max_absolute_error": 1.159450480288445,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.8.attention.softmax",
+      "tensor": "layer.8.attention.probabilities",
+      "max_absolute_error": 0.0006731730837309935,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.8.attention.context",
+      "tensor": "layer.8.attention",
+      "max_absolute_error": 0.0021208112514499167,
+      "last_row_max_absolute_error": 0.0013035132499641389
+    },
+    {
+      "stage": "layer.8.attention_output.gemm",
+      "tensor": "layer.8.attention_output",
+      "max_absolute_error": 0.0019732110522454605,
+      "last_row_max_absolute_error": 0.0017430779407732189
+    },
+    {
+      "stage": "layer.8.attention_residual.add",
+      "tensor": "layer.8.attention_residual",
+      "max_absolute_error": 0.44502402925445494,
+      "last_row_max_absolute_error": 0.002946250207429557
+    },
+    {
+      "stage": "layer.8.ffn_norm.rms",
+      "tensor": "layer.8.ffn_norm",
+      "max_absolute_error": 0.004295743993059542,
+      "last_row_max_absolute_error": 0.004295743993059542
+    },
+    {
+      "stage": "layer.8.gate.gemm",
+      "tensor": "layer.8.gate",
+      "max_absolute_error": 0.003948967693759187,
+      "last_row_max_absolute_error": 0.003948967693759187
+    },
+    {
+      "stage": "layer.8.up.gemm",
+      "tensor": "layer.8.up",
+      "max_absolute_error": 0.0025444760867685545,
+      "last_row_max_absolute_error": 0.0019132664401695365
+    },
+    {
+      "stage": "layer.8.silu.silu",
+      "tensor": "layer.8.silu",
+      "max_absolute_error": 0.0035071623624420845,
+      "last_row_max_absolute_error": 0.0019285721415018275
+    },
+    {
+      "stage": "layer.8.gated_hidden.multiply",
+      "tensor": "layer.8.gated_hidden",
+      "max_absolute_error": 0.00497855578839923,
+      "last_row_max_absolute_error": 0.002019799342159345
+    },
+    {
+      "stage": "layer.8.down.gemm",
+      "tensor": "layer.8.down",
+      "max_absolute_error": 0.003510763716121801,
+      "last_row_max_absolute_error": 0.0024543968257830784
+    },
+    {
+      "stage": "layer.8.ffn_residual.add",
+      "tensor": "layer.8.ffn_residual",
+      "max_absolute_error": 0.4450285402595,
+      "last_row_max_absolute_error": 0.005400706637857411
+    },
+    {
+      "stage": "layer.9.attention_norm.rms",
+      "tensor": "layer.9.attention_norm",
+      "max_absolute_error": 0.015948732623382256,
+      "last_row_max_absolute_error": 0.010144455452330448
+    },
+    {
+      "stage": "layer.9.q.bias",
+      "tensor": "layer.9.q",
+      "max_absolute_error": 0.005981490481644869,
+      "last_row_max_absolute_error": 0.0059058548649773
+    },
+    {
+      "stage": "layer.9.k.bias",
+      "tensor": "layer.9.k",
+      "max_absolute_error": 0.007934924477012828,
+      "last_row_max_absolute_error": 0.007934924477012828
+    },
+    {
+      "stage": "layer.9.v.bias",
+      "tensor": "layer.9.v",
+      "max_absolute_error": 0.0042087664660357405,
+      "last_row_max_absolute_error": 0.0012172143324278295
+    },
+    {
+      "stage": "layer.9.rope_q.rotary",
+      "tensor": "layer.9.rope_q",
+      "max_absolute_error": 0.005981554298157832,
+      "last_row_max_absolute_error": 0.005906666025499163
+    },
+    {
+      "stage": "layer.9.rope_k.rotary",
+      "tensor": "layer.9.rope_k",
+      "max_absolute_error": 0.007935155853952658,
+      "last_row_max_absolute_error": 0.007935155853952658
+    },
+    {
+      "stage": "layer.9.cache_update.append_k",
+      "tensor": "layer.9.cache_k",
+      "max_absolute_error": 0.007935155853952658,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.9.cache_update.append_v",
+      "tensor": "layer.9.cache_v",
+      "max_absolute_error": 0.0042087664660357405,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.9.attention.mask",
+      "tensor": "layer.9.attention.scores",
+      "max_absolute_error": 0.02245247752269819,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.9.attention.softmax",
+      "tensor": "layer.9.attention.probabilities",
+      "max_absolute_error": 0.0014138313598885954,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.9.attention.context",
+      "tensor": "layer.9.attention",
+      "max_absolute_error": 0.005654601819483185,
+      "last_row_max_absolute_error": 0.0030894326217117095
+    },
+    {
+      "stage": "layer.9.attention_output.gemm",
+      "tensor": "layer.9.attention_output",
+      "max_absolute_error": 0.0013531156291719526,
+      "last_row_max_absolute_error": 0.0012181967622382217
+    },
+    {
+      "stage": "layer.9.attention_residual.add",
+      "tensor": "layer.9.attention_residual",
+      "max_absolute_error": 0.445011460174328,
+      "last_row_max_absolute_error": 0.005857133117871172
+    },
+    {
+      "stage": "layer.9.ffn_norm.rms",
+      "tensor": "layer.9.ffn_norm",
+      "max_absolute_error": 0.005443599303758484,
+      "last_row_max_absolute_error": 0.00389254732265365
+    },
+    {
+      "stage": "layer.9.gate.gemm",
+      "tensor": "layer.9.gate",
+      "max_absolute_error": 0.005289815155265387,
+      "last_row_max_absolute_error": 0.005289815155265387
+    },
+    {
+      "stage": "layer.9.up.gemm",
+      "tensor": "layer.9.up",
+      "max_absolute_error": 0.005135694484010855,
+      "last_row_max_absolute_error": 0.00311852357663156
+    },
+    {
+      "stage": "layer.9.silu.silu",
+      "tensor": "layer.9.silu",
+      "max_absolute_error": 0.003289487362944099,
+      "last_row_max_absolute_error": 0.0023525447405378097
+    },
+    {
+      "stage": "layer.9.gated_hidden.multiply",
+      "tensor": "layer.9.gated_hidden",
+      "max_absolute_error": 0.006335094736088287,
+      "last_row_max_absolute_error": 0.0022799178151455823
+    },
+    {
+      "stage": "layer.9.down.gemm",
+      "tensor": "layer.9.down",
+      "max_absolute_error": 0.0023002789973247673,
+      "last_row_max_absolute_error": 0.0009611537045657315
+    },
+    {
+      "stage": "layer.9.ffn_residual.add",
+      "tensor": "layer.9.ffn_residual",
+      "max_absolute_error": 0.4449685507424874,
+      "last_row_max_absolute_error": 0.006818227217792128
+    },
+    {
+      "stage": "layer.10.attention_norm.rms",
+      "tensor": "layer.10.attention_norm",
+      "max_absolute_error": 0.021498369685907903,
+      "last_row_max_absolute_error": 0.009285877214502136
+    },
+    {
+      "stage": "layer.10.q.bias",
+      "tensor": "layer.10.q",
+      "max_absolute_error": 0.0065326014591846615,
+      "last_row_max_absolute_error": 0.0047067576088011265
+    },
+    {
+      "stage": "layer.10.k.bias",
+      "tensor": "layer.10.k",
+      "max_absolute_error": 0.006839158362708986,
+      "last_row_max_absolute_error": 0.0036544907779898494
+    },
+    {
+      "stage": "layer.10.v.bias",
+      "tensor": "layer.10.v",
+      "max_absolute_error": 0.004057283571455628,
+      "last_row_max_absolute_error": 0.002089098416035995
+    },
+    {
+      "stage": "layer.10.rope_q.rotary",
+      "tensor": "layer.10.rope_q",
+      "max_absolute_error": 0.006532467118166352,
+      "last_row_max_absolute_error": 0.0047065808553981014
+    },
+    {
+      "stage": "layer.10.rope_k.rotary",
+      "tensor": "layer.10.rope_k",
+      "max_absolute_error": 0.006839197768992555,
+      "last_row_max_absolute_error": 0.0036543192788816015
+    },
+    {
+      "stage": "layer.10.cache_update.append_k",
+      "tensor": "layer.10.cache_k",
+      "max_absolute_error": 0.006839197768992555,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.10.cache_update.append_v",
+      "tensor": "layer.10.cache_v",
+      "max_absolute_error": 0.004057283571455628,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.10.attention.mask",
+      "tensor": "layer.10.attention.scores",
+      "max_absolute_error": 0.009352892106631039,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.10.attention.softmax",
+      "tensor": "layer.10.attention.probabilities",
+      "max_absolute_error": 0.0013383240207401337,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.10.attention.context",
+      "tensor": "layer.10.attention",
+      "max_absolute_error": 0.003817185835366388,
+      "last_row_max_absolute_error": 0.0019481512702781423
+    },
+    {
+      "stage": "layer.10.attention_output.gemm",
+      "tensor": "layer.10.attention_output",
+      "max_absolute_error": 0.002915749755629804,
+      "last_row_max_absolute_error": 0.0005428131116786972
+    },
+    {
+      "stage": "layer.10.attention_residual.add",
+      "tensor": "layer.10.attention_residual",
+      "max_absolute_error": 0.44499029209373475,
+      "last_row_max_absolute_error": 0.006451536547302794
+    },
+    {
+      "stage": "layer.10.ffn_norm.rms",
+      "tensor": "layer.10.ffn_norm",
+      "max_absolute_error": 0.005486488596349481,
+      "last_row_max_absolute_error": 0.0034396469440137745
+    },
+    {
+      "stage": "layer.10.gate.gemm",
+      "tensor": "layer.10.gate",
+      "max_absolute_error": 0.004722487356048077,
+      "last_row_max_absolute_error": 0.004409639979712665
+    },
+    {
+      "stage": "layer.10.up.gemm",
+      "tensor": "layer.10.up",
+      "max_absolute_error": 0.004600808904797304,
+      "last_row_max_absolute_error": 0.002959373094199691
+    },
+    {
+      "stage": "layer.10.silu.silu",
+      "tensor": "layer.10.silu",
+      "max_absolute_error": 0.00516084290990948,
+      "last_row_max_absolute_error": 0.001731908888333189
+    },
+    {
+      "stage": "layer.10.gated_hidden.multiply",
+      "tensor": "layer.10.gated_hidden",
+      "max_absolute_error": 0.00721510608678777,
+      "last_row_max_absolute_error": 0.0021505848482623775
+    },
+    {
+      "stage": "layer.10.down.gemm",
+      "tensor": "layer.10.down",
+      "max_absolute_error": 0.0038341590948220983,
+      "last_row_max_absolute_error": 0.0014838177598903712
+    },
+    {
+      "stage": "layer.10.ffn_residual.add",
+      "tensor": "layer.10.ffn_residual",
+      "max_absolute_error": 0.4449750979997589,
+      "last_row_max_absolute_error": 0.0049676591827676475
+    },
+    {
+      "stage": "layer.11.attention_norm.rms",
+      "tensor": "layer.11.attention_norm",
+      "max_absolute_error": 0.018838940326020293,
+      "last_row_max_absolute_error": 0.011438935348245582
+    },
+    {
+      "stage": "layer.11.q.bias",
+      "tensor": "layer.11.q",
+      "max_absolute_error": 0.007582152378745377,
+      "last_row_max_absolute_error": 0.007083759999659378
+    },
+    {
+      "stage": "layer.11.k.bias",
+      "tensor": "layer.11.k",
+      "max_absolute_error": 0.008053145225858316,
+      "last_row_max_absolute_error": 0.004802236311661545
+    },
+    {
+      "stage": "layer.11.v.bias",
+      "tensor": "layer.11.v",
+      "max_absolute_error": 0.003740259042388061,
+      "last_row_max_absolute_error": 0.0023524974094470963
+    },
+    {
+      "stage": "layer.11.rope_q.rotary",
+      "tensor": "layer.11.rope_q",
+      "max_absolute_error": 0.007582081832326892,
+      "last_row_max_absolute_error": 0.0070837252395197225
+    },
+    {
+      "stage": "layer.11.rope_k.rotary",
+      "tensor": "layer.11.rope_k",
+      "max_absolute_error": 0.008053021468377608,
+      "last_row_max_absolute_error": 0.004802211498743603
+    },
+    {
+      "stage": "layer.11.cache_update.append_k",
+      "tensor": "layer.11.cache_k",
+      "max_absolute_error": 0.008053021468377608,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.11.cache_update.append_v",
+      "tensor": "layer.11.cache_v",
+      "max_absolute_error": 0.003740259042388061,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.11.attention.mask",
+      "tensor": "layer.11.attention.scores",
+      "max_absolute_error": 0.01971359739163603,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.11.attention.softmax",
+      "tensor": "layer.11.attention.probabilities",
+      "max_absolute_error": 0.0017997334712143154,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.11.attention.context",
+      "tensor": "layer.11.attention",
+      "max_absolute_error": 0.007446497224307791,
+      "last_row_max_absolute_error": 0.0029472261510036235
+    },
+    {
+      "stage": "layer.11.attention_output.gemm",
+      "tensor": "layer.11.attention_output",
+      "max_absolute_error": 0.0021336544559744652,
+      "last_row_max_absolute_error": 0.0021336544559744652
+    },
+    {
+      "stage": "layer.11.attention_residual.add",
+      "tensor": "layer.11.attention_residual",
+      "max_absolute_error": 0.4449433198135466,
+      "last_row_max_absolute_error": 0.004027108955853009
+    },
+    {
+      "stage": "layer.11.ffn_norm.rms",
+      "tensor": "layer.11.ffn_norm",
+      "max_absolute_error": 0.006257918879066571,
+      "last_row_max_absolute_error": 0.005957975509867097
+    },
+    {
+      "stage": "layer.11.gate.gemm",
+      "tensor": "layer.11.gate",
+      "max_absolute_error": 0.0051373189489822835,
+      "last_row_max_absolute_error": 0.003827809210633859
+    },
+    {
+      "stage": "layer.11.up.gemm",
+      "tensor": "layer.11.up",
+      "max_absolute_error": 0.004882642300799489,
+      "last_row_max_absolute_error": 0.004882642300799489
+    },
+    {
+      "stage": "layer.11.silu.silu",
+      "tensor": "layer.11.silu",
+      "max_absolute_error": 0.003785784632036382,
+      "last_row_max_absolute_error": 0.002666873260924074
+    },
+    {
+      "stage": "layer.11.gated_hidden.multiply",
+      "tensor": "layer.11.gated_hidden",
+      "max_absolute_error": 0.004847581038511364,
+      "last_row_max_absolute_error": 0.004847581038511364
+    },
+    {
+      "stage": "layer.11.down.gemm",
+      "tensor": "layer.11.down",
+      "max_absolute_error": 0.003312373259177548,
+      "last_row_max_absolute_error": 0.001985116417017707
+    },
+    {
+      "stage": "layer.11.ffn_residual.add",
+      "tensor": "layer.11.ffn_residual",
+      "max_absolute_error": 0.44487374577556693,
+      "last_row_max_absolute_error": 0.005938598541689544
+    },
+    {
+      "stage": "layer.12.attention_norm.rms",
+      "tensor": "layer.12.attention_norm",
+      "max_absolute_error": 0.014551851678408667,
+      "last_row_max_absolute_error": 0.01006339013373303
+    },
+    {
+      "stage": "layer.12.q.bias",
+      "tensor": "layer.12.q",
+      "max_absolute_error": 0.009130327496677637,
+      "last_row_max_absolute_error": 0.004595759033691138
+    },
+    {
+      "stage": "layer.12.k.bias",
+      "tensor": "layer.12.k",
+      "max_absolute_error": 0.005171700824575964,
+      "last_row_max_absolute_error": 0.004790454826434143
+    },
+    {
+      "stage": "layer.12.v.bias",
+      "tensor": "layer.12.v",
+      "max_absolute_error": 0.004258763196048676,
+      "last_row_max_absolute_error": 0.002540085515647661
+    },
+    {
+      "stage": "layer.12.rope_q.rotary",
+      "tensor": "layer.12.rope_q",
+      "max_absolute_error": 0.009130329158158479,
+      "last_row_max_absolute_error": 0.0045960483825233656
+    },
+    {
+      "stage": "layer.12.rope_k.rotary",
+      "tensor": "layer.12.rope_k",
+      "max_absolute_error": 0.005171832105224983,
+      "last_row_max_absolute_error": 0.004790573721528801
+    },
+    {
+      "stage": "layer.12.cache_update.append_k",
+      "tensor": "layer.12.cache_k",
+      "max_absolute_error": 0.005171832105224983,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.12.cache_update.append_v",
+      "tensor": "layer.12.cache_v",
+      "max_absolute_error": 0.004258763196048676,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.12.attention.mask",
+      "tensor": "layer.12.attention.scores",
+      "max_absolute_error": 0.007737940288043088,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.12.attention.softmax",
+      "tensor": "layer.12.attention.probabilities",
+      "max_absolute_error": 0.0010612116293795548,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.12.attention.context",
+      "tensor": "layer.12.attention",
+      "max_absolute_error": 0.003922300180703164,
+      "last_row_max_absolute_error": 0.001930223215585225
+    },
+    {
+      "stage": "layer.12.attention_output.gemm",
+      "tensor": "layer.12.attention_output",
+      "max_absolute_error": 0.0013967359845992178,
+      "last_row_max_absolute_error": 0.000685537165736605
+    },
+    {
+      "stage": "layer.12.attention_residual.add",
+      "tensor": "layer.12.attention_residual",
+      "max_absolute_error": 0.4448862649910552,
+      "last_row_max_absolute_error": 0.00644014133038695
+    },
+    {
+      "stage": "layer.12.ffn_norm.rms",
+      "tensor": "layer.12.ffn_norm",
+      "max_absolute_error": 0.005908868518622157,
+      "last_row_max_absolute_error": 0.004778864686423551
+    },
+    {
+      "stage": "layer.12.gate.gemm",
+      "tensor": "layer.12.gate",
+      "max_absolute_error": 0.006399062904165476,
+      "last_row_max_absolute_error": 0.00400744762737304
+    },
+    {
+      "stage": "layer.12.up.gemm",
+      "tensor": "layer.12.up",
+      "max_absolute_error": 0.004749938667373499,
+      "last_row_max_absolute_error": 0.0037896632275078446
+    },
+    {
+      "stage": "layer.12.silu.silu",
+      "tensor": "layer.12.silu",
+      "max_absolute_error": 0.004843398890772566,
+      "last_row_max_absolute_error": 0.002609777194062135
+    },
+    {
+      "stage": "layer.12.gated_hidden.multiply",
+      "tensor": "layer.12.gated_hidden",
+      "max_absolute_error": 0.00386483249584052,
+      "last_row_max_absolute_error": 0.0021707320739454694
+    },
+    {
+      "stage": "layer.12.down.gemm",
+      "tensor": "layer.12.down",
+      "max_absolute_error": 0.002744618276210531,
+      "last_row_max_absolute_error": 0.0012370644710699708
+    },
+    {
+      "stage": "layer.12.ffn_residual.add",
+      "tensor": "layer.12.ffn_residual",
+      "max_absolute_error": 0.44483418774643724,
+      "last_row_max_absolute_error": 0.005616513510432242
+    },
+    {
+      "stage": "layer.13.attention_norm.rms",
+      "tensor": "layer.13.attention_norm",
+      "max_absolute_error": 0.025339480075142973,
+      "last_row_max_absolute_error": 0.010222098757786124
+    },
+    {
+      "stage": "layer.13.q.bias",
+      "tensor": "layer.13.q",
+      "max_absolute_error": 0.009732202888699248,
+      "last_row_max_absolute_error": 0.005208748611039482
+    },
+    {
+      "stage": "layer.13.k.bias",
+      "tensor": "layer.13.k",
+      "max_absolute_error": 0.007140606045140885,
+      "last_row_max_absolute_error": 0.004371650589746423
+    },
+    {
+      "stage": "layer.13.v.bias",
+      "tensor": "layer.13.v",
+      "max_absolute_error": 0.004108542547328398,
+      "last_row_max_absolute_error": 0.0022342863303492777
+    },
+    {
+      "stage": "layer.13.rope_q.rotary",
+      "tensor": "layer.13.rope_q",
+      "max_absolute_error": 0.009732222605642438,
+      "last_row_max_absolute_error": 0.005217129110042684
+    },
+    {
+      "stage": "layer.13.rope_k.rotary",
+      "tensor": "layer.13.rope_k",
+      "max_absolute_error": 0.007144760960374974,
+      "last_row_max_absolute_error": 0.00437162094030516
+    },
+    {
+      "stage": "layer.13.cache_update.append_k",
+      "tensor": "layer.13.cache_k",
+      "max_absolute_error": 0.007144760960374974,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.13.cache_update.append_v",
+      "tensor": "layer.13.cache_v",
+      "max_absolute_error": 0.004108542547328398,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.13.attention.mask",
+      "tensor": "layer.13.attention.scores",
+      "max_absolute_error": 0.013004760426450268,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.13.attention.softmax",
+      "tensor": "layer.13.attention.probabilities",
+      "max_absolute_error": 0.0017675931107480336,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.13.attention.context",
+      "tensor": "layer.13.attention",
+      "max_absolute_error": 0.003898377081475446,
+      "last_row_max_absolute_error": 0.0031037462658047854
+    },
+    {
+      "stage": "layer.13.attention_output.gemm",
+      "tensor": "layer.13.attention_output",
+      "max_absolute_error": 0.001560668766614981,
+      "last_row_max_absolute_error": 0.001560668766614981
+    },
+    {
+      "stage": "layer.13.attention_residual.add",
+      "tensor": "layer.13.attention_residual",
+      "max_absolute_error": 0.4448293465188726,
+      "last_row_max_absolute_error": 0.004055844743817261
+    },
+    {
+      "stage": "layer.13.ffn_norm.rms",
+      "tensor": "layer.13.ffn_norm",
+      "max_absolute_error": 0.0066917884700887775,
+      "last_row_max_absolute_error": 0.004932830004818589
+    },
+    {
+      "stage": "layer.13.gate.gemm",
+      "tensor": "layer.13.gate",
+      "max_absolute_error": 0.0050865598386735655,
+      "last_row_max_absolute_error": 0.004194149747490883
+    },
+    {
+      "stage": "layer.13.up.gemm",
+      "tensor": "layer.13.up",
+      "max_absolute_error": 0.007520903833210468,
+      "last_row_max_absolute_error": 0.004550087149254978
+    },
+    {
+      "stage": "layer.13.silu.silu",
+      "tensor": "layer.13.silu",
+      "max_absolute_error": 0.004308716472003926,
+      "last_row_max_absolute_error": 0.004279537525810229
+    },
+    {
+      "stage": "layer.13.gated_hidden.multiply",
+      "tensor": "layer.13.gated_hidden",
+      "max_absolute_error": 0.004172753423420711,
+      "last_row_max_absolute_error": 0.002886234013741107
+    },
+    {
+      "stage": "layer.13.down.gemm",
+      "tensor": "layer.13.down",
+      "max_absolute_error": 0.002757888711130363,
+      "last_row_max_absolute_error": 0.0013618548341582937
+    },
+    {
+      "stage": "layer.13.ffn_residual.add",
+      "tensor": "layer.13.ffn_residual",
+      "max_absolute_error": 0.4447445497398803,
+      "last_row_max_absolute_error": 0.004313354970264527
+    },
+    {
+      "stage": "layer.14.attention_norm.rms",
+      "tensor": "layer.14.attention_norm",
+      "max_absolute_error": 0.02070218306792171,
+      "last_row_max_absolute_error": 0.009706690041916488
+    },
+    {
+      "stage": "layer.14.q.bias",
+      "tensor": "layer.14.q",
+      "max_absolute_error": 0.007540429447544739,
+      "last_row_max_absolute_error": 0.007540429447544739
+    },
+    {
+      "stage": "layer.14.k.bias",
+      "tensor": "layer.14.k",
+      "max_absolute_error": 0.006073900149203837,
+      "last_row_max_absolute_error": 0.004189695704553742
+    },
+    {
+      "stage": "layer.14.v.bias",
+      "tensor": "layer.14.v",
+      "max_absolute_error": 0.004027136514196172,
+      "last_row_max_absolute_error": 0.0032962894765660167
+    },
+    {
+      "stage": "layer.14.rope_q.rotary",
+      "tensor": "layer.14.rope_q",
+      "max_absolute_error": 0.006577405089334576,
+      "last_row_max_absolute_error": 0.0063681571239655455
+    },
+    {
+      "stage": "layer.14.rope_k.rotary",
+      "tensor": "layer.14.rope_k",
+      "max_absolute_error": 0.00607374533262961,
+      "last_row_max_absolute_error": 0.004189621829329582
+    },
+    {
+      "stage": "layer.14.cache_update.append_k",
+      "tensor": "layer.14.cache_k",
+      "max_absolute_error": 0.00607374533262961,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.14.cache_update.append_v",
+      "tensor": "layer.14.cache_v",
+      "max_absolute_error": 0.004027136514196172,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.14.attention.mask",
+      "tensor": "layer.14.attention.scores",
+      "max_absolute_error": 0.014344948923261214,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.14.attention.softmax",
+      "tensor": "layer.14.attention.probabilities",
+      "max_absolute_error": 0.0016791195268719972,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.14.attention.context",
+      "tensor": "layer.14.attention",
+      "max_absolute_error": 0.005230958169611943,
+      "last_row_max_absolute_error": 0.003043616840465571
+    },
+    {
+      "stage": "layer.14.attention_output.gemm",
+      "tensor": "layer.14.attention_output",
+      "max_absolute_error": 0.003793716310610762,
+      "last_row_max_absolute_error": 0.0011546016321517527
+    },
+    {
+      "stage": "layer.14.attention_residual.add",
+      "tensor": "layer.14.attention_residual",
+      "max_absolute_error": 0.44479006193250825,
+      "last_row_max_absolute_error": 0.003158783140435162
+    },
+    {
+      "stage": "layer.14.ffn_norm.rms",
+      "tensor": "layer.14.ffn_norm",
+      "max_absolute_error": 0.005621117677126697,
+      "last_row_max_absolute_error": 0.003828625429940058
+    },
+    {
+      "stage": "layer.14.gate.gemm",
+      "tensor": "layer.14.gate",
+      "max_absolute_error": 0.006488826766144484,
+      "last_row_max_absolute_error": 0.0031580799259245396
+    },
+    {
+      "stage": "layer.14.up.gemm",
+      "tensor": "layer.14.up",
+      "max_absolute_error": 0.005268522868391301,
+      "last_row_max_absolute_error": 0.002779317946988158
+    },
+    {
+      "stage": "layer.14.silu.silu",
+      "tensor": "layer.14.silu",
+      "max_absolute_error": 0.0044876953166563816,
+      "last_row_max_absolute_error": 0.0019218126197659835
+    },
+    {
+      "stage": "layer.14.gated_hidden.multiply",
+      "tensor": "layer.14.gated_hidden",
+      "max_absolute_error": 0.00697275410557463,
+      "last_row_max_absolute_error": 0.003306051324135917
+    },
+    {
+      "stage": "layer.14.down.gemm",
+      "tensor": "layer.14.down",
+      "max_absolute_error": 0.0021692498230549973,
+      "last_row_max_absolute_error": 0.0011790059845679934
+    },
+    {
+      "stage": "layer.14.ffn_residual.add",
+      "tensor": "layer.14.ffn_residual",
+      "max_absolute_error": 0.4448069850113825,
+      "last_row_max_absolute_error": 0.002100656962966241
+    },
+    {
+      "stage": "layer.15.attention_norm.rms",
+      "tensor": "layer.15.attention_norm",
+      "max_absolute_error": 0.016688585119412735,
+      "last_row_max_absolute_error": 0.006153464743229087
+    },
+    {
+      "stage": "layer.15.q.bias",
+      "tensor": "layer.15.q",
+      "max_absolute_error": 0.008360113919479772,
+      "last_row_max_absolute_error": 0.004562671179883182
+    },
+    {
+      "stage": "layer.15.k.bias",
+      "tensor": "layer.15.k",
+      "max_absolute_error": 0.005844935403729323,
+      "last_row_max_absolute_error": 0.003484421584289521
+    },
+    {
+      "stage": "layer.15.v.bias",
+      "tensor": "layer.15.v",
+      "max_absolute_error": 0.004006556235253811,
+      "last_row_max_absolute_error": 0.0027394490025471896
+    },
+    {
+      "stage": "layer.15.rope_q.rotary",
+      "tensor": "layer.15.rope_q",
+      "max_absolute_error": 0.00836025959284914,
+      "last_row_max_absolute_error": 0.004571273140572485
+    },
+    {
+      "stage": "layer.15.rope_k.rotary",
+      "tensor": "layer.15.rope_k",
+      "max_absolute_error": 0.005845049254104118,
+      "last_row_max_absolute_error": 0.0034841404932768327
+    },
+    {
+      "stage": "layer.15.cache_update.append_k",
+      "tensor": "layer.15.cache_k",
+      "max_absolute_error": 0.005845049254104118,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.15.cache_update.append_v",
+      "tensor": "layer.15.cache_v",
+      "max_absolute_error": 0.004006556235253811,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.15.attention.mask",
+      "tensor": "layer.15.attention.scores",
+      "max_absolute_error": 0.015562462076240458,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.15.attention.softmax",
+      "tensor": "layer.15.attention.probabilities",
+      "max_absolute_error": 0.0024269499755782964,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.15.attention.context",
+      "tensor": "layer.15.attention",
+      "max_absolute_error": 0.00635199513581397,
+      "last_row_max_absolute_error": 0.004222535713045872
+    },
+    {
+      "stage": "layer.15.attention_output.gemm",
+      "tensor": "layer.15.attention_output",
+      "max_absolute_error": 0.00224074261586793,
+      "last_row_max_absolute_error": 0.0017864779292722233
+    },
+    {
+      "stage": "layer.15.attention_residual.add",
+      "tensor": "layer.15.attention_residual",
+      "max_absolute_error": 0.444866677527898,
+      "last_row_max_absolute_error": 0.002408906814025613
+    },
+    {
+      "stage": "layer.15.ffn_norm.rms",
+      "tensor": "layer.15.ffn_norm",
+      "max_absolute_error": 0.007122325683945663,
+      "last_row_max_absolute_error": 0.004544380590366659
+    },
+    {
+      "stage": "layer.15.gate.gemm",
+      "tensor": "layer.15.gate",
+      "max_absolute_error": 0.007046738523058593,
+      "last_row_max_absolute_error": 0.006767198443412781
+    },
+    {
+      "stage": "layer.15.up.gemm",
+      "tensor": "layer.15.up",
+      "max_absolute_error": 0.006252290681004524,
+      "last_row_max_absolute_error": 0.005697160542695201
+    },
+    {
+      "stage": "layer.15.silu.silu",
+      "tensor": "layer.15.silu",
+      "max_absolute_error": 0.006681762793900092,
+      "last_row_max_absolute_error": 0.0044058416276289425
+    },
+    {
+      "stage": "layer.15.gated_hidden.multiply",
+      "tensor": "layer.15.gated_hidden",
+      "max_absolute_error": 0.007712226949125434,
+      "last_row_max_absolute_error": 0.005474479573350122
+    },
+    {
+      "stage": "layer.15.down.gemm",
+      "tensor": "layer.15.down",
+      "max_absolute_error": 0.006010518664140818,
+      "last_row_max_absolute_error": 0.0016238243458701618
+    },
+    {
+      "stage": "layer.15.ffn_residual.add",
+      "tensor": "layer.15.ffn_residual",
+      "max_absolute_error": 0.4448026153609135,
+      "last_row_max_absolute_error": 0.0026020821635484026
+    },
+    {
+      "stage": "layer.16.attention_norm.rms",
+      "tensor": "layer.16.attention_norm",
+      "max_absolute_error": 0.016975725818294762,
+      "last_row_max_absolute_error": 0.008270774441609952
+    },
+    {
+      "stage": "layer.16.q.bias",
+      "tensor": "layer.16.q",
+      "max_absolute_error": 0.012359339620161336,
+      "last_row_max_absolute_error": 0.006377751444233581
+    },
+    {
+      "stage": "layer.16.k.bias",
+      "tensor": "layer.16.k",
+      "max_absolute_error": 0.008814809494651854,
+      "last_row_max_absolute_error": 0.006994726056291256
+    },
+    {
+      "stage": "layer.16.v.bias",
+      "tensor": "layer.16.v",
+      "max_absolute_error": 0.002703590254895971,
+      "last_row_max_absolute_error": 0.0016038162575569004
+    },
+    {
+      "stage": "layer.16.rope_q.rotary",
+      "tensor": "layer.16.rope_q",
+      "max_absolute_error": 0.01235925419419659,
+      "last_row_max_absolute_error": 0.006378878315191794
+    },
+    {
+      "stage": "layer.16.rope_k.rotary",
+      "tensor": "layer.16.rope_k",
+      "max_absolute_error": 0.008814624307037944,
+      "last_row_max_absolute_error": 0.006994600192842704
+    },
+    {
+      "stage": "layer.16.cache_update.append_k",
+      "tensor": "layer.16.cache_k",
+      "max_absolute_error": 0.008814624307037944,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.16.cache_update.append_v",
+      "tensor": "layer.16.cache_v",
+      "max_absolute_error": 0.002703590254895971,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.16.attention.mask",
+      "tensor": "layer.16.attention.scores",
+      "max_absolute_error": 0.01982424253880488,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.16.attention.softmax",
+      "tensor": "layer.16.attention.probabilities",
+      "max_absolute_error": 0.0037305373095024574,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.16.attention.context",
+      "tensor": "layer.16.attention",
+      "max_absolute_error": 0.014907300073420782,
+      "last_row_max_absolute_error": 0.014907300073420782
+    },
+    {
+      "stage": "layer.16.attention_output.gemm",
+      "tensor": "layer.16.attention_output",
+      "max_absolute_error": 0.008932015767641133,
+      "last_row_max_absolute_error": 0.008932015767641133
+    },
+    {
+      "stage": "layer.16.attention_residual.add",
+      "tensor": "layer.16.attention_residual",
+      "max_absolute_error": 0.44479408472807336,
+      "last_row_max_absolute_error": 0.008849373582165754
+    },
+    {
+      "stage": "layer.16.ffn_norm.rms",
+      "tensor": "layer.16.ffn_norm",
+      "max_absolute_error": 0.012563402804131485,
+      "last_row_max_absolute_error": 0.012187071908583813
+    },
+    {
+      "stage": "layer.16.gate.gemm",
+      "tensor": "layer.16.gate",
+      "max_absolute_error": 0.015092289890162647,
+      "last_row_max_absolute_error": 0.015092289890162647
+    },
+    {
+      "stage": "layer.16.up.gemm",
+      "tensor": "layer.16.up",
+      "max_absolute_error": 0.00944778713164851,
+      "last_row_max_absolute_error": 0.00944778713164851
+    },
+    {
+      "stage": "layer.16.silu.silu",
+      "tensor": "layer.16.silu",
+      "max_absolute_error": 0.015590628415991459,
+      "last_row_max_absolute_error": 0.015590628415991459
+    },
+    {
+      "stage": "layer.16.gated_hidden.multiply",
+      "tensor": "layer.16.gated_hidden",
+      "max_absolute_error": 0.018009035372441584,
+      "last_row_max_absolute_error": 0.018009035372441584
+    },
+    {
+      "stage": "layer.16.down.gemm",
+      "tensor": "layer.16.down",
+      "max_absolute_error": 0.00911465563603997,
+      "last_row_max_absolute_error": 0.0072830084900488146
+    },
+    {
+      "stage": "layer.16.ffn_residual.add",
+      "tensor": "layer.16.ffn_residual",
+      "max_absolute_error": 0.44478976124128167,
+      "last_row_max_absolute_error": 0.00871319439522722
+    },
+    {
+      "stage": "layer.17.attention_norm.rms",
+      "tensor": "layer.17.attention_norm",
+      "max_absolute_error": 0.020008486748047005,
+      "last_row_max_absolute_error": 0.017354832603130532
+    },
+    {
+      "stage": "layer.17.q.bias",
+      "tensor": "layer.17.q",
+      "max_absolute_error": 0.013459953108394984,
+      "last_row_max_absolute_error": 0.013459953108394984
+    },
+    {
+      "stage": "layer.17.k.bias",
+      "tensor": "layer.17.k",
+      "max_absolute_error": 0.005170011369045824,
+      "last_row_max_absolute_error": 0.005161074062925763
+    },
+    {
+      "stage": "layer.17.v.bias",
+      "tensor": "layer.17.v",
+      "max_absolute_error": 0.004156611610596883,
+      "last_row_max_absolute_error": 0.003829823253909126
+    },
+    {
+      "stage": "layer.17.rope_q.rotary",
+      "tensor": "layer.17.rope_q",
+      "max_absolute_error": 0.01345810675011716,
+      "last_row_max_absolute_error": 0.01345810675011716
+    },
+    {
+      "stage": "layer.17.rope_k.rotary",
+      "tensor": "layer.17.rope_k",
+      "max_absolute_error": 0.005170716237651085,
+      "last_row_max_absolute_error": 0.005163377616975495
+    },
+    {
+      "stage": "layer.17.cache_update.append_k",
+      "tensor": "layer.17.cache_k",
+      "max_absolute_error": 0.005170716237651085,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.17.cache_update.append_v",
+      "tensor": "layer.17.cache_v",
+      "max_absolute_error": 0.004156611610596883,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.17.attention.mask",
+      "tensor": "layer.17.attention.scores",
+      "max_absolute_error": 0.01882755499853339,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.17.attention.softmax",
+      "tensor": "layer.17.attention.probabilities",
+      "max_absolute_error": 0.0029702830087823817,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.17.attention.context",
+      "tensor": "layer.17.attention",
+      "max_absolute_error": 0.005409631114765112,
+      "last_row_max_absolute_error": 0.005409631114765112
+    },
+    {
+      "stage": "layer.17.attention_output.gemm",
+      "tensor": "layer.17.attention_output",
+      "max_absolute_error": 0.005666770859534154,
+      "last_row_max_absolute_error": 0.005666770859534154
+    },
+    {
+      "stage": "layer.17.attention_residual.add",
+      "tensor": "layer.17.attention_residual",
+      "max_absolute_error": 0.4448052732295764,
+      "last_row_max_absolute_error": 0.010722239365549058
+    },
+    {
+      "stage": "layer.17.ffn_norm.rms",
+      "tensor": "layer.17.ffn_norm",
+      "max_absolute_error": 0.023173609889131086,
+      "last_row_max_absolute_error": 0.023173609889131086
+    },
+    {
+      "stage": "layer.17.gate.gemm",
+      "tensor": "layer.17.gate",
+      "max_absolute_error": 0.0235702724330622,
+      "last_row_max_absolute_error": 0.0235702724330622
+    },
+    {
+      "stage": "layer.17.up.gemm",
+      "tensor": "layer.17.up",
+      "max_absolute_error": 0.015261431821272708,
+      "last_row_max_absolute_error": 0.015261431821272708
+    },
+    {
+      "stage": "layer.17.silu.silu",
+      "tensor": "layer.17.silu",
+      "max_absolute_error": 0.01626567610221552,
+      "last_row_max_absolute_error": 0.01626567610221552
+    },
+    {
+      "stage": "layer.17.gated_hidden.multiply",
+      "tensor": "layer.17.gated_hidden",
+      "max_absolute_error": 0.047089086397241964,
+      "last_row_max_absolute_error": 0.047089086397241964
+    },
+    {
+      "stage": "layer.17.down.gemm",
+      "tensor": "layer.17.down",
+      "max_absolute_error": 0.006148374108306598,
+      "last_row_max_absolute_error": 0.00473054612029955
+    },
+    {
+      "stage": "layer.17.ffn_residual.add",
+      "tensor": "layer.17.ffn_residual",
+      "max_absolute_error": 0.44474607478559847,
+      "last_row_max_absolute_error": 0.010279927651765774
+    },
+    {
+      "stage": "layer.18.attention_norm.rms",
+      "tensor": "layer.18.attention_norm",
+      "max_absolute_error": 0.025418926715494727,
+      "last_row_max_absolute_error": 0.025418926715494727
+    },
+    {
+      "stage": "layer.18.q.bias",
+      "tensor": "layer.18.q",
+      "max_absolute_error": 0.014675142439045885,
+      "last_row_max_absolute_error": 0.014675142439045885
+    },
+    {
+      "stage": "layer.18.k.bias",
+      "tensor": "layer.18.k",
+      "max_absolute_error": 0.019065310516452882,
+      "last_row_max_absolute_error": 0.019065310516452882
+    },
+    {
+      "stage": "layer.18.v.bias",
+      "tensor": "layer.18.v",
+      "max_absolute_error": 0.008813457052838203,
+      "last_row_max_absolute_error": 0.008813457052838203
+    },
+    {
+      "stage": "layer.18.rope_q.rotary",
+      "tensor": "layer.18.rope_q",
+      "max_absolute_error": 0.014674736435924984,
+      "last_row_max_absolute_error": 0.014674736435924984
+    },
+    {
+      "stage": "layer.18.rope_k.rotary",
+      "tensor": "layer.18.rope_k",
+      "max_absolute_error": 0.01824490432363035,
+      "last_row_max_absolute_error": 0.01824490432363035
+    },
+    {
+      "stage": "layer.18.cache_update.append_k",
+      "tensor": "layer.18.cache_k",
+      "max_absolute_error": 0.01824490432363035,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.18.cache_update.append_v",
+      "tensor": "layer.18.cache_v",
+      "max_absolute_error": 0.008813457052838203,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.18.attention.mask",
+      "tensor": "layer.18.attention.scores",
+      "max_absolute_error": 0.020152617654040306,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.18.attention.softmax",
+      "tensor": "layer.18.attention.probabilities",
+      "max_absolute_error": 0.0015790230276436223,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.18.attention.context",
+      "tensor": "layer.18.attention",
+      "max_absolute_error": 0.006326040260276944,
+      "last_row_max_absolute_error": 0.006326040260276944
+    },
+    {
+      "stage": "layer.18.attention_output.gemm",
+      "tensor": "layer.18.attention_output",
+      "max_absolute_error": 0.0038642564904876053,
+      "last_row_max_absolute_error": 0.0013771835089073647
+    },
+    {
+      "stage": "layer.18.attention_residual.add",
+      "tensor": "layer.18.attention_residual",
+      "max_absolute_error": 0.44474712612145595,
+      "last_row_max_absolute_error": 0.01012241891822896
+    },
+    {
+      "stage": "layer.18.ffn_norm.rms",
+      "tensor": "layer.18.ffn_norm",
+      "max_absolute_error": 0.022468286336964072,
+      "last_row_max_absolute_error": 0.022468286336964072
+    },
+    {
+      "stage": "layer.18.gate.gemm",
+      "tensor": "layer.18.gate",
+      "max_absolute_error": 0.01749422203283757,
+      "last_row_max_absolute_error": 0.01749422203283757
+    },
+    {
+      "stage": "layer.18.up.gemm",
+      "tensor": "layer.18.up",
+      "max_absolute_error": 0.011949698988246382,
+      "last_row_max_absolute_error": 0.011949698988246382
+    },
+    {
+      "stage": "layer.18.silu.silu",
+      "tensor": "layer.18.silu",
+      "max_absolute_error": 0.013201840245913532,
+      "last_row_max_absolute_error": 0.013201840245913532
+    },
+    {
+      "stage": "layer.18.gated_hidden.multiply",
+      "tensor": "layer.18.gated_hidden",
+      "max_absolute_error": 0.014333305607050484,
+      "last_row_max_absolute_error": 0.01113195831943714
+    },
+    {
+      "stage": "layer.18.down.gemm",
+      "tensor": "layer.18.down",
+      "max_absolute_error": 0.008265094129455974,
+      "last_row_max_absolute_error": 0.0031158094841430284
+    },
+    {
+      "stage": "layer.18.ffn_residual.add",
+      "tensor": "layer.18.ffn_residual",
+      "max_absolute_error": 0.444789290360859,
+      "last_row_max_absolute_error": 0.010530232004782647
+    },
+    {
+      "stage": "layer.19.attention_norm.rms",
+      "tensor": "layer.19.attention_norm",
+      "max_absolute_error": 0.03535363161675864,
+      "last_row_max_absolute_error": 0.03535363161675864
+    },
+    {
+      "stage": "layer.19.q.bias",
+      "tensor": "layer.19.q",
+      "max_absolute_error": 0.013214623846579343,
+      "last_row_max_absolute_error": 0.013214623846579343
+    },
+    {
+      "stage": "layer.19.k.bias",
+      "tensor": "layer.19.k",
+      "max_absolute_error": 0.008967727640992962,
+      "last_row_max_absolute_error": 0.008967727640992962
+    },
+    {
+      "stage": "layer.19.v.bias",
+      "tensor": "layer.19.v",
+      "max_absolute_error": 0.006787578167859465,
+      "last_row_max_absolute_error": 0.006787578167859465
+    },
+    {
+      "stage": "layer.19.rope_q.rotary",
+      "tensor": "layer.19.rope_q",
+      "max_absolute_error": 0.013217791716040761,
+      "last_row_max_absolute_error": 0.013217791716040761
+    },
+    {
+      "stage": "layer.19.rope_k.rotary",
+      "tensor": "layer.19.rope_k",
+      "max_absolute_error": 0.008968867663295077,
+      "last_row_max_absolute_error": 0.008968867663295077
+    },
+    {
+      "stage": "layer.19.cache_update.append_k",
+      "tensor": "layer.19.cache_k",
+      "max_absolute_error": 0.008968867663295077,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.19.cache_update.append_v",
+      "tensor": "layer.19.cache_v",
+      "max_absolute_error": 0.006787578167859465,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.19.attention.mask",
+      "tensor": "layer.19.attention.scores",
+      "max_absolute_error": 0.017447885007713104,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.19.attention.softmax",
+      "tensor": "layer.19.attention.probabilities",
+      "max_absolute_error": 0.001955782106497883,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.19.attention.context",
+      "tensor": "layer.19.attention",
+      "max_absolute_error": 0.00619317117994167,
+      "last_row_max_absolute_error": 0.00619317117994167
+    },
+    {
+      "stage": "layer.19.attention_output.gemm",
+      "tensor": "layer.19.attention_output",
+      "max_absolute_error": 0.0027951049560215324,
+      "last_row_max_absolute_error": 0.0026046044258691836
+    },
+    {
+      "stage": "layer.19.attention_residual.add",
+      "tensor": "layer.19.attention_residual",
+      "max_absolute_error": 0.4447862630640884,
+      "last_row_max_absolute_error": 0.009910168275780507
+    },
+    {
+      "stage": "layer.19.ffn_norm.rms",
+      "tensor": "layer.19.ffn_norm",
+      "max_absolute_error": 0.030024147897016018,
+      "last_row_max_absolute_error": 0.030024147897016018
+    },
+    {
+      "stage": "layer.19.gate.gemm",
+      "tensor": "layer.19.gate",
+      "max_absolute_error": 0.014081247471040115,
+      "last_row_max_absolute_error": 0.014081247471040115
+    },
+    {
+      "stage": "layer.19.up.gemm",
+      "tensor": "layer.19.up",
+      "max_absolute_error": 0.014631916841608472,
+      "last_row_max_absolute_error": 0.014631916841608472
+    },
+    {
+      "stage": "layer.19.silu.silu",
+      "tensor": "layer.19.silu",
+      "max_absolute_error": 0.012881466011033793,
+      "last_row_max_absolute_error": 0.012881466011033793
+    },
+    {
+      "stage": "layer.19.gated_hidden.multiply",
+      "tensor": "layer.19.gated_hidden",
+      "max_absolute_error": 0.03156328409095699,
+      "last_row_max_absolute_error": 0.03156328409095699
+    },
+    {
+      "stage": "layer.19.down.gemm",
+      "tensor": "layer.19.down",
+      "max_absolute_error": 0.011417304392125516,
+      "last_row_max_absolute_error": 0.011417304392125516
+    },
+    {
+      "stage": "layer.19.ffn_residual.add",
+      "tensor": "layer.19.ffn_residual",
+      "max_absolute_error": 0.4434089710948683,
+      "last_row_max_absolute_error": 0.012033593204989756
+    },
+    {
+      "stage": "layer.20.attention_norm.rms",
+      "tensor": "layer.20.attention_norm",
+      "max_absolute_error": 0.031198527092173745,
+      "last_row_max_absolute_error": 0.031198527092173745
+    },
+    {
+      "stage": "layer.20.q.bias",
+      "tensor": "layer.20.q",
+      "max_absolute_error": 0.015458928828593343,
+      "last_row_max_absolute_error": 0.015458928828593343
+    },
+    {
+      "stage": "layer.20.k.bias",
+      "tensor": "layer.20.k",
+      "max_absolute_error": 0.007960473121784162,
+      "last_row_max_absolute_error": 0.007831864335457794
+    },
+    {
+      "stage": "layer.20.v.bias",
+      "tensor": "layer.20.v",
+      "max_absolute_error": 0.010227835104160476,
+      "last_row_max_absolute_error": 0.005692605787771754
+    },
+    {
+      "stage": "layer.20.rope_q.rotary",
+      "tensor": "layer.20.rope_q",
+      "max_absolute_error": 0.015457444389356922,
+      "last_row_max_absolute_error": 0.015457444389356922
+    },
+    {
+      "stage": "layer.20.rope_k.rotary",
+      "tensor": "layer.20.rope_k",
+      "max_absolute_error": 0.00796002165657761,
+      "last_row_max_absolute_error": 0.00783259628703803
+    },
+    {
+      "stage": "layer.20.cache_update.append_k",
+      "tensor": "layer.20.cache_k",
+      "max_absolute_error": 0.00796002165657761,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.20.cache_update.append_v",
+      "tensor": "layer.20.cache_v",
+      "max_absolute_error": 0.010227835104160476,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.20.attention.mask",
+      "tensor": "layer.20.attention.scores",
+      "max_absolute_error": 0.021288222396792733,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.20.attention.softmax",
+      "tensor": "layer.20.attention.probabilities",
+      "max_absolute_error": 0.0021765756503768774,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.20.attention.context",
+      "tensor": "layer.20.attention",
+      "max_absolute_error": 0.006241857972059339,
+      "last_row_max_absolute_error": 0.005951883536563507
+    },
+    {
+      "stage": "layer.20.attention_output.gemm",
+      "tensor": "layer.20.attention_output",
+      "max_absolute_error": 0.0030579417943954468,
+      "last_row_max_absolute_error": 0.0030579417943954468
+    },
+    {
+      "stage": "layer.20.attention_residual.add",
+      "tensor": "layer.20.attention_residual",
+      "max_absolute_error": 0.4434735757413364,
+      "last_row_max_absolute_error": 0.013768643638115918
+    },
+    {
+      "stage": "layer.20.ffn_norm.rms",
+      "tensor": "layer.20.ffn_norm",
+      "max_absolute_error": 0.035712497113140285,
+      "last_row_max_absolute_error": 0.035712497113140285
+    },
+    {
+      "stage": "layer.20.gate.gemm",
+      "tensor": "layer.20.gate",
+      "max_absolute_error": 0.021284198679495603,
+      "last_row_max_absolute_error": 0.021284198679495603
+    },
+    {
+      "stage": "layer.20.up.gemm",
+      "tensor": "layer.20.up",
+      "max_absolute_error": 0.012885718650068156,
+      "last_row_max_absolute_error": 0.012885718650068156
+    },
+    {
+      "stage": "layer.20.silu.silu",
+      "tensor": "layer.20.silu",
+      "max_absolute_error": 0.02232135669747648,
+      "last_row_max_absolute_error": 0.02232135669747648
+    },
+    {
+      "stage": "layer.20.gated_hidden.multiply",
+      "tensor": "layer.20.gated_hidden",
+      "max_absolute_error": 0.02961427329091082,
+      "last_row_max_absolute_error": 0.02961427329091082
+    },
+    {
+      "stage": "layer.20.down.gemm",
+      "tensor": "layer.20.down",
+      "max_absolute_error": 0.018962639979463347,
+      "last_row_max_absolute_error": 0.013478518587305643
+    },
+    {
+      "stage": "layer.20.ffn_residual.add",
+      "tensor": "layer.20.ffn_residual",
+      "max_absolute_error": 0.4434985629732182,
+      "last_row_max_absolute_error": 0.022538141656440303
+    },
+    {
+      "stage": "layer.21.attention_norm.rms",
+      "tensor": "layer.21.attention_norm",
+      "max_absolute_error": 0.04125967745118597,
+      "last_row_max_absolute_error": 0.04125967745118597
+    },
+    {
+      "stage": "layer.21.q.bias",
+      "tensor": "layer.21.q",
+      "max_absolute_error": 0.011672222753986716,
+      "last_row_max_absolute_error": 0.011672222753986716
+    },
+    {
+      "stage": "layer.21.k.bias",
+      "tensor": "layer.21.k",
+      "max_absolute_error": 0.01010707940440625,
+      "last_row_max_absolute_error": 0.008492051449138671
+    },
+    {
+      "stage": "layer.21.v.bias",
+      "tensor": "layer.21.v",
+      "max_absolute_error": 0.01235382561571896,
+      "last_row_max_absolute_error": 0.0080904602073133
+    },
+    {
+      "stage": "layer.21.rope_q.rotary",
+      "tensor": "layer.21.rope_q",
+      "max_absolute_error": 0.011671095232424822,
+      "last_row_max_absolute_error": 0.011671095232424822
+    },
+    {
+      "stage": "layer.21.rope_k.rotary",
+      "tensor": "layer.21.rope_k",
+      "max_absolute_error": 0.010106568514902783,
+      "last_row_max_absolute_error": 0.008491631017869317
+    },
+    {
+      "stage": "layer.21.cache_update.append_k",
+      "tensor": "layer.21.cache_k",
+      "max_absolute_error": 0.010106568514902783,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.21.cache_update.append_v",
+      "tensor": "layer.21.cache_v",
+      "max_absolute_error": 0.01235382561571896,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.21.attention.mask",
+      "tensor": "layer.21.attention.scores",
+      "max_absolute_error": 0.022134976868876333,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.21.attention.softmax",
+      "tensor": "layer.21.attention.probabilities",
+      "max_absolute_error": 0.0029619762755422885,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.21.attention.context",
+      "tensor": "layer.21.attention",
+      "max_absolute_error": 0.012944598416012365,
+      "last_row_max_absolute_error": 0.012944598416012365
+    },
+    {
+      "stage": "layer.21.attention_output.gemm",
+      "tensor": "layer.21.attention_output",
+      "max_absolute_error": 0.010159102155739674,
+      "last_row_max_absolute_error": 0.0055504944757558405
+    },
+    {
+      "stage": "layer.21.attention_residual.add",
+      "tensor": "layer.21.attention_residual",
+      "max_absolute_error": 0.4435544569814738,
+      "last_row_max_absolute_error": 0.022541468166053846
+    },
+    {
+      "stage": "layer.21.ffn_norm.rms",
+      "tensor": "layer.21.ffn_norm",
+      "max_absolute_error": 0.03157305059148652,
+      "last_row_max_absolute_error": 0.03157305059148652
+    },
+    {
+      "stage": "layer.21.gate.gemm",
+      "tensor": "layer.21.gate",
+      "max_absolute_error": 0.03796606417745352,
+      "last_row_max_absolute_error": 0.022660124086542055
+    },
+    {
+      "stage": "layer.21.up.gemm",
+      "tensor": "layer.21.up",
+      "max_absolute_error": 0.05539806839078665,
+      "last_row_max_absolute_error": 0.019675017392728478
+    },
+    {
+      "stage": "layer.21.silu.silu",
+      "tensor": "layer.21.silu",
+      "max_absolute_error": 0.017770941901425585,
+      "last_row_max_absolute_error": 0.017770941901425585
+    },
+    {
+      "stage": "layer.21.gated_hidden.multiply",
+      "tensor": "layer.21.gated_hidden",
+      "max_absolute_error": 0.6154240229056995,
+      "last_row_max_absolute_error": 0.04368437066112396
+    },
+    {
+      "stage": "layer.21.down.gemm",
+      "tensor": "layer.21.down",
+      "max_absolute_error": 0.2983641557291321,
+      "last_row_max_absolute_error": 0.011158420777064748
+    },
+    {
+      "stage": "layer.21.ffn_residual.add",
+      "tensor": "layer.21.ffn_residual",
+      "max_absolute_error": 0.14519030125234167,
+      "last_row_max_absolute_error": 0.02871312101567014
+    },
+    {
+      "stage": "layer.22.attention_norm.rms",
+      "tensor": "layer.22.attention_norm",
+      "max_absolute_error": 0.0342949352331301,
+      "last_row_max_absolute_error": 0.0342949352331301
+    },
+    {
+      "stage": "layer.22.q.bias",
+      "tensor": "layer.22.q",
+      "max_absolute_error": 0.013581320003140718,
+      "last_row_max_absolute_error": 0.013581320003140718
+    },
+    {
+      "stage": "layer.22.k.bias",
+      "tensor": "layer.22.k",
+      "max_absolute_error": 0.009669798018876463,
+      "last_row_max_absolute_error": 0.006985783169511706
+    },
+    {
+      "stage": "layer.22.v.bias",
+      "tensor": "layer.22.v",
+      "max_absolute_error": 0.012223896570503712,
+      "last_row_max_absolute_error": 0.012223896570503712
+    },
+    {
+      "stage": "layer.22.rope_q.rotary",
+      "tensor": "layer.22.rope_q",
+      "max_absolute_error": 0.013595642196591928,
+      "last_row_max_absolute_error": 0.013595642196591928
+    },
+    {
+      "stage": "layer.22.rope_k.rotary",
+      "tensor": "layer.22.rope_k",
+      "max_absolute_error": 0.009670891809506754,
+      "last_row_max_absolute_error": 0.006991407078887235
+    },
+    {
+      "stage": "layer.22.cache_update.append_k",
+      "tensor": "layer.22.cache_k",
+      "max_absolute_error": 0.009670891809506754,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.22.cache_update.append_v",
+      "tensor": "layer.22.cache_v",
+      "max_absolute_error": 0.012223896570503712,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.22.attention.mask",
+      "tensor": "layer.22.attention.scores",
+      "max_absolute_error": 0.027416590868800217,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.22.attention.softmax",
+      "tensor": "layer.22.attention.probabilities",
+      "max_absolute_error": 0.003640280160059517,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.22.attention.context",
+      "tensor": "layer.22.attention",
+      "max_absolute_error": 0.018354806742622354,
+      "last_row_max_absolute_error": 0.018354806742622354
+    },
+    {
+      "stage": "layer.22.attention_output.gemm",
+      "tensor": "layer.22.attention_output",
+      "max_absolute_error": 0.011852771467601997,
+      "last_row_max_absolute_error": 0.011852771467601997
+    },
+    {
+      "stage": "layer.22.attention_residual.add",
+      "tensor": "layer.22.attention_residual",
+      "max_absolute_error": 0.14306738086747828,
+      "last_row_max_absolute_error": 0.0309791512504205
+    },
+    {
+      "stage": "layer.22.ffn_norm.rms",
+      "tensor": "layer.22.ffn_norm",
+      "max_absolute_error": 0.04107164396612384,
+      "last_row_max_absolute_error": 0.04107164396612384
+    },
+    {
+      "stage": "layer.22.gate.gemm",
+      "tensor": "layer.22.gate",
+      "max_absolute_error": 0.03486763569526374,
+      "last_row_max_absolute_error": 0.03486763569526374
+    },
+    {
+      "stage": "layer.22.up.gemm",
+      "tensor": "layer.22.up",
+      "max_absolute_error": 0.03629383281804621,
+      "last_row_max_absolute_error": 0.03629383281804621
+    },
+    {
+      "stage": "layer.22.silu.silu",
+      "tensor": "layer.22.silu",
+      "max_absolute_error": 0.038304509150573374,
+      "last_row_max_absolute_error": 0.038304509150573374
+    },
+    {
+      "stage": "layer.22.gated_hidden.multiply",
+      "tensor": "layer.22.gated_hidden",
+      "max_absolute_error": 0.06070008413318817,
+      "last_row_max_absolute_error": 0.06070008413318817
+    },
+    {
+      "stage": "layer.22.down.gemm",
+      "tensor": "layer.22.down",
+      "max_absolute_error": 0.0521764190475551,
+      "last_row_max_absolute_error": 0.022211794302279486
+    },
+    {
+      "stage": "layer.22.ffn_residual.add",
+      "tensor": "layer.22.ffn_residual",
+      "max_absolute_error": 0.09089096181992318,
+      "last_row_max_absolute_error": 0.03348094061510665
+    },
+    {
+      "stage": "layer.23.attention_norm.rms",
+      "tensor": "layer.23.attention_norm",
+      "max_absolute_error": 0.05339782289509376,
+      "last_row_max_absolute_error": 0.05339782289509376
+    },
+    {
+      "stage": "layer.23.q.bias",
+      "tensor": "layer.23.q",
+      "max_absolute_error": 0.01923120132414624,
+      "last_row_max_absolute_error": 0.01923120132414624
+    },
+    {
+      "stage": "layer.23.k.bias",
+      "tensor": "layer.23.k",
+      "max_absolute_error": 0.008166796324076131,
+      "last_row_max_absolute_error": 0.00668105119257234
+    },
+    {
+      "stage": "layer.23.v.bias",
+      "tensor": "layer.23.v",
+      "max_absolute_error": 0.013668841449543834,
+      "last_row_max_absolute_error": 0.013668841449543834
+    },
+    {
+      "stage": "layer.23.rope_q.rotary",
+      "tensor": "layer.23.rope_q",
+      "max_absolute_error": 0.01923080146283418,
+      "last_row_max_absolute_error": 0.01923080146283418
+    },
+    {
+      "stage": "layer.23.rope_k.rotary",
+      "tensor": "layer.23.rope_k",
+      "max_absolute_error": 0.0081668240187307,
+      "last_row_max_absolute_error": 0.006681546489660906
+    },
+    {
+      "stage": "layer.23.cache_update.append_k",
+      "tensor": "layer.23.cache_k",
+      "max_absolute_error": 0.0081668240187307,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.23.cache_update.append_v",
+      "tensor": "layer.23.cache_v",
+      "max_absolute_error": 0.013668841449543834,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.23.attention.mask",
+      "tensor": "layer.23.attention.scores",
+      "max_absolute_error": 0.026523989294131134,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.23.attention.softmax",
+      "tensor": "layer.23.attention.probabilities",
+      "max_absolute_error": 0.0017027765927374316,
+      "last_row_max_absolute_error": null
+    },
+    {
+      "stage": "layer.23.attention.context",
+      "tensor": "layer.23.attention",
+      "max_absolute_error": 0.013652535699629764,
+      "last_row_max_absolute_error": 0.013652535699629764
+    },
+    {
+      "stage": "layer.23.attention_output.gemm",
+      "tensor": "layer.23.attention_output",
+      "max_absolute_error": 0.03587951167719439,
+      "last_row_max_absolute_error": 0.03587951167719439
+    },
+    {
+      "stage": "layer.23.attention_residual.add",
+      "tensor": "layer.23.attention_residual",
+      "max_absolute_error": 0.09082533501054968,
+      "last_row_max_absolute_error": 0.04175068322913944
+    },
+    {
+      "stage": "layer.23.ffn_norm.rms",
+      "tensor": "layer.23.ffn_norm",
+      "max_absolute_error": 0.06844062114132754,
+      "last_row_max_absolute_error": 0.04146421605967576
+    },
+    {
+      "stage": "layer.23.gate.gemm",
+      "tensor": "layer.23.gate",
+      "max_absolute_error": 0.023182025310234167,
+      "last_row_max_absolute_error": 0.023182025310234167
+    },
+    {
+      "stage": "layer.23.up.gemm",
+      "tensor": "layer.23.up",
+      "max_absolute_error": 0.027101323823444545,
+      "last_row_max_absolute_error": 0.023617080500116572
+    },
+    {
+      "stage": "layer.23.silu.silu",
+      "tensor": "layer.23.silu",
+      "max_absolute_error": 0.022761310681354896,
+      "last_row_max_absolute_error": 0.022761310681354896
+    },
+    {
+      "stage": "layer.23.gated_hidden.multiply",
+      "tensor": "layer.23.gated_hidden",
+      "max_absolute_error": 0.06924867089451325,
+      "last_row_max_absolute_error": 0.06908734836613739
+    },
+    {
+      "stage": "layer.23.down.gemm",
+      "tensor": "layer.23.down",
+      "max_absolute_error": 0.053123267740431857,
+      "last_row_max_absolute_error": 0.04799402919525164
+    },
+    {
+      "stage": "layer.23.ffn_residual.add",
+      "tensor": "layer.23.ffn_residual",
+      "max_absolute_error": 0.05653957346817151,
+      "last_row_max_absolute_error": 0.038001748527875634
+    },
+    {
+      "stage": "final_norm.rms",
+      "tensor": "final_norm",
+      "max_absolute_error": 0.3769467179933894,
+      "last_row_max_absolute_error": 0.3769467179933894
+    },
+    {
+      "stage": "logits.logits",
+      "tensor": "logits",
+      "max_absolute_error": 0.09711515355414058,
+      "last_row_max_absolute_error": 0.09711515355414058
+    }
+  ],
+  "first_pack_difference": {
+    "stage": "layer.0.attention_output.pack",
+    "source": "layer.0.attention",
+    "native_rounding_exact": true,
+    "differing_half_elements": 1114,
+    "elements": 28672,
+    "last_row_differing_half_elements": 31,
+    "source_max_absolute_error": 3.799817573896247e-06,
+    "last_row_source_max_absolute_error": 1.6851104273490902e-06,
+    "first_rounding_packet": "first-rounding-divergence.npz"
+  },
+  "first_last_row_pack_difference": {
+    "stage": "layer.0.attention_output.pack",
+    "source": "layer.0.attention",
+    "native_rounding_exact": true,
+    "differing_half_elements": 1114,
+    "elements": 28672,
+    "last_row_differing_half_elements": 31,
+    "source_max_absolute_error": 3.799817573896247e-06,
+    "last_row_source_max_absolute_error": 1.6851104273490902e-06,
+    "first_rounding_packet": "first-rounding-divergence.npz"
+  },
+  "retained_receipt_sha256": "fb6f912f3fc6560ff7d447670e6f26cf366a915db050f83d9c8c15c2ac08a4cb",
+  "independent_reference_sha256": "32c19cfa09970f2e947be97ab42030759631e0dfe4f7a95ae8bc1bd8f493af68",
+  "native_binary_sha256": "2692e220ba9196e13fa7373f103278c808f344bc2c8f446aa3780177577b8118",
+  "bundle_manifest_sha256": "99ee02bbe2938b45af4283c67fc81892de730476a12ec530bb1bb66f0619d4b1",
+  "new_events": [],
+  "before_recovery": [
+    33
+  ],
+  "after_recovery": [
+    33
+  ],
+  "native_returncode": 0,
+  "native_log": "STAGE 1: device=0x105131a80  type-0x100005 conn=0x2407 (open kr=0x0)  dev+0x14=0x1c0f\nSTAGE 1.4: mach_vm_map 4MB pipeline reservations\n  resv[0] kr=0x0 @0x109520000\n  resv[1] kr=0x0 @0x109920000\n  resv[2] kr=0x0 @0x109d20000\n  resv[3] kr=0x0 @0x10a120000\nSTAGE 1.5: preamble on the 0x100005 connection\n  sel-2 kr=0x0\n  sel-0 kr=0x0\n  sel-5 kr=0x0\n  sel-258 kr=0x0\n  sel-256 kr=0x0\nSTAGE 2: sel-261 context kr=0x0\nORDERED index=0 kind=0 kr=0x0 bytes=88 aperture=0x10000000000 expected=0x10000000000 host=0x1049b4000 size=0x10000\nORDERED index=1 kind=0 kr=0x0 bytes=88 aperture=0x10000018000 expected=0x10000018000 host=0x1049c4000 size=0x10000\nORDERED index=2 kind=0 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x1049d4000 size=0x20000\nORDERED index=3 kind=1 kr=0x0 bytes=88 aperture=0x10000030000 expected=0x10000030000 host=0x0 size=0x20000\nORDERED index=4 kind=1 kr=0x0 bytes=88 aperture=0x10000030200 expected=0x10000030200 host=0x0 size=0x20000\nORDERED index=5 kind=1 kr=0x0 bytes=88 aperture=0x10000030400 expected=0x10000030400 host=0x0 size=0x20000\nORDERED index=6 kind=1 kr=0x0 bytes=88 aperture=0x10000030500 expected=0x10000030500 host=0x0 size=0x20000\nORDERED index=7 kind=1 kr=0x0 bytes=88 aperture=0x10000030700 expected=0x10000030700 host=0x0 size=0x20000\nORDERED index=8 kind=1 kr=0x0 bytes=88 aperture=0x10000030800 expected=0x10000030800 host=0x0 size=0x20000\nORDERED index=9 kind=1 kr=0x0 bytes=88 aperture=0x10000030900 expected=0x10000030900 host=0x0 size=0x20000\nORDERED index=10 kind=1 kr=0x0 bytes=88 aperture=0x10000031900 expected=0x10000031900 host=0x0 size=0x20000\nORDERED index=11 kind=1 kr=0x0 bytes=88 aperture=0x10000031a00 expected=0x10000031a00 host=0x0 size=0x20000\nORDERED index=12 kind=1 kr=0x0 bytes=88 aperture=0x10000031b00 expected=0x10000031b00 host=0x0 size=0x20000\nORDERED index=13 kind=1 kr=0x0 bytes=88 aperture=0x10000031c00 expected=0x10000031c00 host=0x0 size=0x20000\nORDERED index=14 kind=1 kr=0x0 bytes=88 aperture=0x10000032c00 expected=0x10000032c00 host=0x0 size=0x20000\nORDERED index=15 kind=2 kr=0x0 bytes=88 aperture=0x0 expected=0x0 host=0x1049f4000 size=0x10000\nORDERED index=16 kind=1 kr=0x0 bytes=88 aperture=0x10000032d00 expected=0x10000032d00 host=0x0 size=0x20000\nORDERED index=17 kind=0 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x104a04000 size=0x20000\nORDERED index=18 kind=1 kr=0x0 bytes=88 aperture=0x10000058000 expected=0x10000058000 host=0x0 size=0x20000\nORDERED index=19 kind=0 kr=0x0 bytes=88 aperture=0x10000080000 expected=0x10000080000 host=0x104a24000 size=0x1c000\nORDERED index=20 kind=0 kr=0x0 bytes=88 aperture=0x100000a0000 expected=0x100000a0000 host=0x300000000 size=0x40000000\nORDERED index=21 kind=0 kr=0x0 bytes=88 aperture=0x100400a8000 expected=0x100400a8000 host=0x104a40000 size=0x64000\nORDERED index=22 kind=0 kr=0x0 bytes=88 aperture=0x10040110000 expected=0x10040110000 host=0x104aa4000 size=0x8000\nORDERED index=23 kind=0 kr=0x0 bytes=88 aperture=0x10040120000 expected=0x10040120000 host=0x104aac000 size=0x8000\nORDERED index=24 kind=0 kr=0x0 bytes=88 aperture=0x10040130000 expected=0x10040130000 host=0x104ab4000 size=0x8000\nORDERED index=25 kind=0 kr=0x0 bytes=88 aperture=0x10040140000 expected=0x10040140000 host=0x104abc000 size=0x8000\nORDERED index=26 kind=0 kr=0x0 bytes=88 aperture=0x10040150000 expected=0x10040150000 host=0x104ac4000 size=0x8000\nORDERED index=27 kind=0 kr=0x0 bytes=88 aperture=0x10040160000 expected=0x10040160000 host=0x104acc000 size=0x8000\nORDERED index=28 kind=0 kr=0x0 bytes=88 aperture=0x10040170000 expected=0x10040170000 host=0x104ad4000 size=0xc000\nORDERED QUEUE create=0x1051381a0 connection=0x2407 prior=0x1c0f notification=0x1051381f0\nORDERED QUEUE sel-6 kr=0x0 bytes=16\nORDERED QUEUE sel-14#0 kr=0x0 bytes=16 cpu=0x104ae4000 size=0x4000 id=1\nORDERED QUEUE sel-14#1 kr=0x0 bytes=16 cpu=0x104ae8000 size=0x4000 id=2\nORDERED QUEUE trace IDs first=0x5c88822f67 second=0x5c88822f68\nDECODER CLOSED: requests=1 Submits=748 valid=32 result=0.\nDECODER PEAK RSS BYTES: 2158002176.\n",
+  "source_sha256": "1040313645ef9c801ff9eceefa3b5016da86d17b4cecbeb061ffe9849164f404",
+  "files": {
+    "first-rounding-divergence.npz": {
+      "bytes": 477864,
+      "sha256": "46f15ac2fdcc53fadacf965deaa0de103802fbdb3d9cdec49924a0d884dfc366"
+    },
+    "native-logits.npy": {
+      "bytes": 607872,
+      "sha256": "0af94e5339bb2e413861f6aac83a7c1adb726b91fc94590f3fafe48710051388"
+    }
+  },
+  "scope": "One retained greeting prefix of 32 tokens. Diagnostic exact-reproduction success is distinct from numerical acceptance failure. Native packs must equal half rounding of native source; FP64-policy packs round their own ideal predecessors. No numerical bound lifted and no production model/code changed."
+}

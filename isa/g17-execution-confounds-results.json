@@ -1,0 +1,207 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op10279.operand2_zero",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700041a2500a30220812100",
+    "2700041a2500a30220812100",
+    "2700041a2500a30220812100",
+    "2700041a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096,
+   4097,
+   4352,
+   8192
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op10279.operand2_eight",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700045a2500a30220812100",
+    "2700045a2500a30220812100",
+    "2700045a2500a30220812100",
+    "2700045a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4104,
+   4105,
+   4360,
+   8200
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op11375.operand2_zero",
+  "op": 11375,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11375,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0200472a0700ac028a81a0000408",
+    "0200472a0700ac028a81a0000408",
+    "0200472a0700ac028a81a0000408",
+    "0200472a0700ac028a81a0000408"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11375,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   286331153,
+   1145324612,
+   1717986918
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op11375.operand2_one",
+  "op": 11375,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11375,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0200072a0700ac028a81a0000408",
+    "0200072a0700ac028a81a0000408",
+    "0200072a0700ac028a81a0000408",
+    "0200072a0700ac028a81a0000408"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11375,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   572662306,
+   572662306,
+   858993459,
+   1431655765
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   false,
+   false,
+   false
+  ],
+  "runs": 3
+ }
+]

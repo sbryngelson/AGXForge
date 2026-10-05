@@ -1,0 +1,36 @@
+{
+  "format": "g17-native-encoder-cold-replay-differential-v1",
+  "passed": true,
+  "source_commit": "90f164396d68e30b5127bdf0333d7bbf4908c25c",
+  "fresh_detached_checkout": true,
+  "initial_results_directory_present": false,
+  "original_working_directory": "/var/folders/87/3bdx8kv90w303c5vnp4h6sk80000gn/T/g17-encoder-cold-yjnlhsmj",
+  "external_model_inputs": "Pinned raw checkpoint and tokenizer only, existing read-only files. No prepared model, bundle or prebuilt repository binary reused. OS caches not purged.",
+  "regenerated_manifests": [
+    {
+      "regenerated": "results/minilm-prepared/manifest.json",
+      "retained": "results/g17-native-inference-encoder-prepared-v1/manifest.json",
+      "byte_identical_observed_before_cleanup": true,
+      "sha256": "ecf562cf84ff2a8168ead891894c4884b03f15b13f19f4a944a68c1b87275e79"
+    },
+    {
+      "regenerated": "results/minilm-bundle/manifest.json",
+      "retained": "results/g17-native-encoder-bundle-v1/manifest.json",
+      "byte_identical_observed_before_cleanup": true,
+      "sha256": "8e54ff796c767a7137f4f6c4a8f9df8dae2f931f82d38733b66e4072a69fd292"
+    }
+  ],
+  "exact_final_embeddings": 4,
+  "elements_per_embedding": 384,
+  "repeat_exact": true,
+  "ranking_exact": true,
+  "raw_receipt_sha256": "d6d5beb360044bdf4cf140404af26d6b69f54eaec4456824493b2ef75ca23371",
+  "comparison_receipt": "evidence/g17-native-sentence-retrieval.json",
+  "native_exit_evidence": "INFERENCE CLOSED: requests=4 Submits=680 result=0.",
+  "new_events": [],
+  "graph_initializations": 1,
+  "parameter_uploads": 1,
+  "program_uploads": 1,
+  "intermediate_readback_bytes": 0,
+  "export_note": "Raw retrieval and preparation-check receipts were exported before temporary checkout removal. First differential writer assumed a nonexistent native_returncode receipt field and raised KeyError after its embedding/manifest assertions. This completed record uses the native close log instead; no GPU rerun or altered result."
+}

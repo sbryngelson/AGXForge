@@ -1,0 +1,138 @@
+\chapter{Cross-lane operations}\label{ch:cross-lane-operations}
+
+Cross-lane instructions move a value between the 32 lanes of one simdgroup without memory: a shuffle
+reads another lane's register, a broadcast reads one lane's register into every lane, and the native reductions combine all
+32 (or 4) lanes in one instruction. Registers never cross a simdgroup; combining across simdgroups goes through
+threadgroup memory.
+
+An out-of-range lane mask returns 0.0; it does not wrap to another lane. The native sums use a fixed adjacent-lane tree
+that rounds at every step (measured for fp32 and half, \cref{sec:native-reductions}), so their results can be predicted bit for bit and differ
+from a correctly rounded sum. Cross-lane instructions consume late values like any other instruction and read a loaded
+value too early unless they wait. All three behaviours were measured after an earlier model had predicted otherwise. The one
+established result with inactive lanes is that a broadcast from an inactive lane 0 returned 0 (\cref{sec:broadcast-inactive-lanes}).
+
+Opcodes and symbols:
+
+\begin{itemize}
+\item \op{14169} and \op{14170}: Metal \code{simd\_shuffle\_xor}, the
+  32-lane forms. \op{13944} and \op{13945}: the 4-lane forms.
+\item \op{14157} reads a constant lane; \op{14158} reads the
+  lane named in a register.
+\item \op{16842} and \op{16858}: Metal \code{simd\_sum} and \code{simd\_max} on float. Apple's \code{quad\_sum}
+  compiles to \op{13857}/10 (no glossary entry); \op{13856} is reachable from source but absent from the
+  corpus (MM~\mm{25.82}).
+\item \op{14208} writes the mask of active lanes. \code{SR\_PVSIMD} and \code{SR\_TVSIMD}, the vote registers, are
+  in \cref{ch:special-registers}.
+\item "L" is a lane index 0–31; "in{[}L{]}" is lane L's source value.
+\end{itemize}
+
+\section{Shuffle-xor mask range}\label{sec:shuffle-xor-bounded-masks}
+
+For an immediate mask m below 32, \op{14169} gives every lane L the value in{[}L \^{} m{]}, 32 of 32
+lanes for each mask. For m of 32 or more every lane receives 0.0, so the mask is neither reduced modulo 32 nor ignored. \op{13944} is bounded the same way to four lanes and returns 0.0 for any mask of 4
+or more (measured, MM~\mm{12}, MM~\mm{17} rule 25). The glossary still tags these forms "compiled"; MM~\mm{12} is the measurement.
+
+With a runtime mask the two widths differ. \op{13945} follows each lane's own mask exactly. \op{14170} does not, so its mask must be lane-uniform (measured, MM~\mm{12}); what it computes
+for a non-uniform mask is not known. The SIMD runtime form appears nowhere in Apple's 5,010,028-instruction corpus, although Apple's compiler emits it for a
+variable \code{simd\_shuffle\_xor} at /10 (MM~\mm{25.73}, MM~\mm{25.82}).
+
+The immediate-mask shuffle-xor has also been executed below Metal (measured, \code{docs/g17-first-dispatch-trials.md}, "SIMD
+cross-lane shuffle below Metal"). A 52-byte program authored by this compiler loads A{[}lane{]}, applies the immediate-mask shuffle-xor with mask 1 and stores C{[}lane{]},
+with a waiting copy between the load and the shuffle. Under two input profiles with byte-identical code (normal fp32 patterns 0x3f800000 + 256 × lane,
+and the small words 11 × lane + 5, which are fp32 subnormals), all 64 words came back as the bit pattern of lane L \^{} 1.
+The subnormal patterns crossed lanes unchanged, so the shuffle does not apply the fp32 ALU's flush (\cref{sec:fp32-arithmetic});
+no arithmetic rule is inferred from this.
+
+\section{Late operands}\label{sec:cross-lane-operations-consumers}
+
+\code{simd\_shuffle\_xor} and \code{simd\_broadcast} reading a loaded value directly read it before it arrived (measured, MM~\mm{25.90}).
+In a two- and four-simdgroup combine that should have been exact, each arm returned one wrong value, a max below every
+simdgroup's own max; the first butterfly step's shuffle had read a load that had not landed. A waiting copy before the
+first shuffle made all four arms exact, and this compiler now inserts that copy. The rule is that of any late operand (\cref{sec:scoreboard}).
+
+\section{Broadcast and inactive lanes}\label{sec:broadcast-inactive-lanes}
+
+\op{14157} reads lane 0's value; it is measured only with every lane active, so lane 0
+and "the first active lane" are not separated there (measured, MM~\mm{25.145.1}). A predicated region separates them: with lane 0 inactive
+(first active lane 1), every active lane received 0, and \code{fma(x, x, broadcast(x))} returned exactly a*b on 11 of 11
+mismatched lanes (measured, MM~\mm{25.144.6}). The constant-lane broadcast implements \code{simd\_broadcast(x, 0)}, not
+\code{simd\_broadcast\_first}.
+
+Apple's compiler lowers a divergent \code{simd\_broadcast\_first} as four instructions (decoded; the roles are inferred, not measured
+one by one, MM~\mm{25.144.6}): a \op{14060} of register 38 (\code{SR\_PVSIMD}, \cref{ch:special-registers}), \op{14214} over it (unconfirmed: likely selecting the first active lane), \op{9989} turning
+that into a lane index, and \op{14158} from that lane. This compiler does not lower that
+sequence: it refuses a broadcast inside a predicated region and keeps the constant-lane broadcast for uniform code.
+
+Two lifetime facts are specific to cross-lane forms (\emph{this compiler}; the release rules are \cref{ch:register-file}'s):
+
+\begin{itemize}
+\item The constant-lane broadcast's source lifetime is operand 3. A template that left it at release made
+  \code{y = broadcast(x); z = fma(x, x, y)} read a released x, and those lanes stored 0 on hardware (MM~\mm{25.144.6}).
+\item In the release checker, the value a shuffle fetches from its source lane (operand 2 of the register-lane shuffle) is
+  another lane's register, not a read of this lane's (\code{agxforge/g17/releasecheck.py}).
+\end{itemize}
+
+Shuffles and broadcasts may be assumed to work with every lane of the simdgroup active. No shuffle or vote in a
+partially active simdgroup is established, and the emulator refuses them (MM~\mm{25.145.1}).
+
+\section{Native reductions}\label{sec:native-reductions}
+
+\code{simd\_sum}, \code{quad\_sum} and their product forms are a balanced adjacent-lane binary tree, every operation rounded to the
+element type, exchanging over lane bits 0 to 4 in order; in half precision nothing accumulates at higher precision
+(measured, MM~\mm{12}). For fp32, \op{16842} was tested on 64 rounding-sensitive 32-lane vectors with values spread
+over ±$2^{20}$: it matches the adjacent pairwise tree, which is the xor butterfly in mask order 1, 2, 4, 8, 16, on 64 of 64. It
+is neither the order this project's own butterfly used (1, 8, 2, 4, 16) nor exact-then-rounded (measured, MM~\mm{25.141.16}). \op{16858} is exact on 32 lanes against an order-free reference (MM~\mm{25.90}).
+
+\textbf{Worked example: 2048 and thirty-one ones in half} (measured result, MM~\mm{12}; the arithmetic below reproduces it). Lane 0
+holds 2048.0 and every other lane 1.0. Half has spacing 2 in {[}2048, 4096). \Cref{tab:half-sum-tree} follows lane 0's partial
+sum up the tree.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.59\hsize}X>{\hsize=1.20\hsize}Xl>{\hsize=1.21\hsize}X@{}}
+\caption{Lane 0's partial sum at each level of the half \code{simd\_sum} tree for 2048 plus thirty-one ones, against the
+exact sum.}\label{tab:half-sum-tree}\\
+\toprule
+Tree level (lane bit) & Lane-0 partial & Exact & Note \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Tree level (lane bit) & Lane-0 partial & Exact & Note \\
+\midrule
+\endhead
+0 & 2048 + 1 = 2049 → \textbf{2048} & 2049 & a tie; RNE keeps the even significand \\*
+1 & 2048 + 2 = 2050 & 2051 & other partials are now 2 \\*
+2 & 2050 + 4 = 2054 & 2055 &  \\*
+3 & 2054 + 8 = 2062 & 2063 &  \\*
+4 & 2062 + 16 = \textbf{2078} & 2079 & \code{simd\_sum} returns 2078.0 \\*
+\bottomrule
+\end{xltabular}
+
+\code{quad\_sum} stops after lane bit 1 and returns 2050.0. A correctly rounded sum would give 2080 and 2052 (2079 and 2051 are
+ties that round to even). The 1 lost at the first level is not recovered, because every later partial is computed and
+rounded in half. A sequential sum, a wider accumulator and a correctly rounded sum each give a result different from the tree's on this input.
+
+Reductions across simdgroups go through threadgroup memory: each simdgroup writes its value to threadgroup word sg, one
+threadgroup barrier follows, and every lane folds words 0 to S-1 in ascending order, so the result does not depend on arrival
+order. The combine is exact at S = 2 (sum and max, 64 of 64 lanes) and S = 4 (128 of 128); a rival with no exchange matches 0 lanes for sum
+(measured, MM~\mm{25.90}). The barrier's semantics are \cref{ch:synchronization}'s.
+
+The library tile reductions (\code{reduce\_rows}, \code{reduce\_columns} on tensor fragments) use a per-lane sequential chain and then a
+butterfly over the reduction axis's lane bits, with identities and NaN handling of their own (\cref{sec:reductions}).
+
+\section{Other cross-lane forms}\label{sec:other-cross-lane-forms}
+
+\begin{itemize}
+\item \op{14208} writes the mask of active lanes (measured, glossary).
+\item \op{1062} is a cross-lane \code{dfdx} with saturation; its records ran one lane, so its function is
+  unconfirmed (MM~\mm{25.90}).
+\end{itemize}
+
+\textbf{Safe assumptions.} The shuffle-xor mask bounds (\cref{sec:shuffle-xor-bounded-masks}), shuffles and broadcasts with
+every lane active, and the native-sum trees of \cref{sec:native-reductions}, each within the inputs it was measured on.
+
+\textbf{Not known.} Shuffles, broadcasts and votes under partial activity; the behaviour of the SIMD runtime-mask
+shuffle-xor with a non-uniform mask; the roles of the four instructions in Apple's divergent broadcast; the reduction tree for half \code{simd\_sum} products and
+int types beyond the stated measurements; cross-lane latency (\cref{ch:performance} has no measurement of it).
+
+\textbf{Evidence.} MM~\mm{12}, MM~\mm{17} rule 25, MM~\mm{25.73}, MM~\mm{25.82}, MM~\mm{25.90}, MM~\mm{25.141.16}, MM~\mm{25.144.6}, MM~\mm{25.145.1};
+\code{docs/g17-first-dispatch-trials.md}, \code{agxforge/g17/releasecheck.py}.

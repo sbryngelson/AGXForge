@@ -1,0 +1,6044 @@
+{
+ "means": "The adoption check section 25.88 requires. Each non-control pair differs only at the invisible bits whose emitted value adoption would change; the prediction, committed before dispatch, is that both arms return the same values. `ADOPTION-WOULD-MISCOMPILE` marks a pair that did not.",
+ "controls_ok": true,
+ "dispatched_pairs": 24,
+ "not_dispatched": [
+  {
+   "id": "ctl.knowngood.op9700.l6",
+   "why": "assembler: ctl.knowngood.op9700.l6.A: asked [0, 16, 17, 18, 19], Apple reads [0, 18, 18]"
+  },
+  {
+   "id": "ctl.knowngood.op10372.l10",
+   "why": "assembler: ctl.knowngood.op10372.l10.A did not build: AsmError: line 0: op10372 operand 0 has no encoding for 111; it takes [74, 75, 76, 77, 78, 79] | fieldmap: ctl.knowngood.op10372.l10.A: {'ok': False, 'want': 10372, 'found': 0, 'cases': 4, 'encoded': [], 'operands': None, 'from_template': False, 'opcodes': [684, 10374, 11842, 17244]}"
+  },
+  {
+   "id": "ctl.knowngood.op424.l10",
+   "why": "assembler: ctl.knowngood.op424.l10.A did not build: ValueError: op424@10 operand 2 has no plain register field at this width | fieldmap: the instruction differs by 00000000000000000000, not the adopted mask 00000000000004000000"
+  },
+  {
+   "id": "ctl.knowngood.op11365.l8",
+   "why": "assembler: ctl.knowngood.op11365.l8.A did not build: ValueError: op11365@8 operand 3 has no plain register field at this width"
+  },
+  {
+   "id": "ctl.knowngood.op9700.l14",
+   "why": "assembler: ctl.knowngood.op9700.l14.A did not build: ValueError: op9700@14 operand 3 has no plain register field at this width | fieldmap: the instruction differs by 0000000000000000000000000000, not the adopted mask 0000000000000000000010000000"
+  },
+  {
+   "id": "ctl.knowngood.op9701.l16",
+   "why": "assembler: ctl.knowngood.op9701.l16.A: asked [0, 16, 17, 18], Apple reads [0, 16, 18] | fieldmap: the instruction differs by 00000000000000000000000000000000, not the adopted mask 00000000000000000000100000000000"
+  },
+  {
+   "id": "ctl.knowngood.op9710.l14",
+   "why": "assembler: ctl.knowngood.op9710.l14.A did not build: ValueError: op9710@14 operand 0 has no plain register field at this width | fieldmap: ctl.knowngood.op9710.l14.A: {'ok': False, 'want': 9710, 'found': 0, 'cases': 4, 'encoded': [], 'operands': None, 'from_template': False, 'opcodes': [684, 9709, 11842, 17244]}"
+  },
+  {
+   "id": "adopt.op445.l10",
+   "why": "the safety gate refuses op445: MayStore - it may touch memory, so it is not dispatched and its verdicts stay unadopted"
+  },
+  {
+   "id": "adopt.op9328.l10",
+   "why": "the safety gate refuses op9328: MayStore - it may touch memory, so it is not dispatched and its verdicts stay unadopted"
+  },
+  {
+   "id": "adopt.op9700.l8",
+   "why": "assembler: adopt.op9700.l8.A did not build: ValueError: op9700@8 operand 3 has no plain register field at this width"
+  },
+  {
+   "id": "adopt.op9710.l8",
+   "why": "assembler: adopt.op9710.l8.A did not build: ValueError: op9710@8 operand 0 has no plain register field at this width"
+  },
+  {
+   "id": "adopt.op9808.l8",
+   "why": "assembler: adopt.op9808.l8.A: asked [0, 16, 17], Apple reads [17, 16, 17]"
+  },
+  {
+   "id": "adopt.op10022.l12",
+   "why": "the safety gate refuses op10022: MayLoad/MayStore/atomic - it may touch memory, so it is not dispatched and its verdicts stay unadopted"
+  },
+  {
+   "id": "adopt.op10090.l10",
+   "why": "the safety gate refuses op10090: MayLoad/MayStore/atomic - it may touch memory, so it is not dispatched and its verdicts stay unadopted"
+  },
+  {
+   "id": "adopt.op11375.l8",
+   "why": "assembler: adopt.op11375.l8.A did not build: ValueError: op11375@8 operand 7 has no plain register field at this width"
+  },
+  {
+   "id": "adopt.op11393.l10",
+   "why": "assembler: adopt.op11393.l10.A: asked [0, 16, 17], Apple reads [0, 16, 81]"
+  },
+  {
+   "id": "adopt.op11769.l12",
+   "why": "the safety gate refuses op11769: MayLoad/MayStore/atomic - it may touch memory, so it is not dispatched and its verdicts stay unadopted"
+  },
+  {
+   "id": "adopt.op13511.l10",
+   "why": "assembler: adopt.op13511.l10.A did not build: Unsupported: op13511 takes 0 register destinations and 1 sources; the IR gave 1 and 1 | fieldmap: adopt.op13511.l10.A did not build: Unsupported: op13511 takes 0 register destinations and 1 sources; the IR gave 1 and 1"
+  }
+ ],
+ "rows": [
+  {
+   "id": "ctl.op10279.mandatory",
+   "control": true,
+   "op": 10279,
+   "length": null,
+   "author": null,
+   "predict": "values 4100, 4101, 4356, 8196 (src + 4)",
+   "adopted_bits": null,
+   "bits": null,
+   "records": [
+    {
+     "id": "ctl.op10279.mandatory",
+     "op": 10279,
+     "author": "fieldmap",
+     "witness_required": false,
+     "cases": [
+      [
+       4096
+      ],
+      [
+       4097
+      ],
+      [
+       4352
+      ],
+      [
+       8192
+      ]
+     ],
+     "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.op10279.mandatory",
+     "op": 10279,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 10279,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       684,
+       10279,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c432b885a3f020e19bf57b37325383db9c3df925babf50b0452491231566867c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4100,
+      4101,
+      4356,
+      8196
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "verdict": "as-predicted",
+   "values": [
+    4100,
+    4101,
+    4356,
+    8196
+   ]
+  },
+  {
+   "id": "ctl.null.op10279",
+   "control": true,
+   "op": 10279,
+   "length": null,
+   "author": null,
+   "predict": "agree",
+   "adopted_bits": [],
+   "bits": null,
+   "records": [
+    {
+     "id": "ctl.null.op10279.A",
+     "op": 10279,
+     "author": "fieldmap",
+     "witness_required": false,
+     "cases": [
+      [
+       4096
+      ],
+      [
+       4097
+      ],
+      [
+       4352
+      ],
+      [
+       8192
+      ]
+     ],
+     "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+     ]
+    },
+    {
+     "id": "ctl.null.op10279.B",
+     "op": 10279,
+     "author": "fieldmap",
+     "witness_required": false,
+     "cases": [
+      [
+       4096
+      ],
+      [
+       4097
+      ],
+      [
+       4352
+      ],
+      [
+       8192
+      ]
+     ],
+     "expect": [
+      4100,
+      4101,
+      4356,
+      8196
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.null.op10279.A",
+     "op": 10279,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 10279,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       684,
+       10279,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c432b885a3f020e19bf57b37325383db9c3df925babf50b0452491231566867c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4100,
+      4101,
+      4356,
+      8196
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    },
+    {
+     "id": "ctl.null.op10279.B",
+     "op": 10279,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 10279,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100",
+       "2700043a2500a30220882100"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       684,
+       10279,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c432b885a3f020e19bf57b37325383db9c3df925babf50b0452491231566867c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      4100,
+      4101,
+      4356,
+      8196
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     4100,
+     4101,
+     4356,
+     8196
+    ],
+    "B": [
+     4100,
+     4101,
+     4356,
+     8196
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "ctl.positive.op612",
+   "control": true,
+   "op": 612,
+   "length": null,
+   "author": null,
+   "predict": "differ",
+   "adopted_bits": null,
+   "bits": null,
+   "records": [
+    {
+     "id": "ctl.positive.op612.A",
+     "op": 612,
+     "author": "fieldmap",
+     "witness_required": false,
+     "imms": {
+      "4": 16,
+      "5": 8
+     },
+     "cases": [
+      [
+       21
+      ],
+      [
+       24
+      ],
+      [
+       16
+      ],
+      [
+       13
+      ]
+     ],
+     "expect": [
+      7,
+      0,
+      15,
+      8
+     ]
+    },
+    {
+     "id": "ctl.positive.op612.B",
+     "op": 612,
+     "author": "fieldmap",
+     "witness_required": false,
+     "imms": {
+      "4": 0,
+      "5": 8
+     },
+     "cases": [
+      [
+       21
+      ],
+      [
+       24
+      ],
+      [
+       16
+      ],
+      [
+       13
+      ]
+     ],
+     "expect": [
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.positive.op612.A",
+     "op": 612,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 612,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270000422120a1020c041c18",
+       "270000422120a1020c041c18",
+       "270000422120a1020c041c18",
+       "270000422120a1020c041c18"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       612,
+       684,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c38cc84e3ed5e1f91296e69d4cdfe6c88f05142a6f810312cc895ef9d6f59628"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      7,
+      0,
+      15,
+      8
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    },
+    {
+     "id": "ctl.positive.op612.B",
+     "op": 612,
+     "length": null,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 612,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270000422120a1020c001c18",
+       "270000422120a1020c001c18",
+       "270000422120a1020c001c18",
+       "270000422120a1020c001c18"
+      ],
+      "operands": null,
+      "from_template": false,
+      "opcodes": [
+       612,
+       684,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "3fe0afa13364224e62eb2057655140952bc14a4d03d5967aef3485146140f202"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "match": [
+      true,
+      true,
+      true,
+      true
+     ],
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     7,
+     0,
+     15,
+     8
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": false,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "ctl.knowngood.op9832.l6",
+   "control": true,
+   "op": 9832,
+   "length": 6,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "2.2"
+   ],
+   "bits": null,
+   "records": [
+    {
+     "id": "ctl.knowngood.op9832.l6.A",
+     "op": 9832,
+     "length": 6,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "b2162c1e0000",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757,
+       1065369088
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088,
+       1073758720
+      ]
+     ]
+    },
+    {
+     "id": "ctl.knowngood.op9832.l6.B",
+     "op": 9832,
+     "length": 6,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "b216281e0000",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757,
+       1065369088
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088,
+       1073758720
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "ctl.knowngood.op9832.l6.A",
+     "op": 9832,
+     "length": 6,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9832,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02243c260000",
+       "02243c260000",
+       "02243c260000",
+       "02243c260000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9832,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "a5dc1ecb245e6f5dae1892f85da600715e7846fc98937bc0ad955b4e4dbb0c0b"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      17664,
+      5,
+      15872,
+      16896
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "ctl.knowngood.op9832.l6.B",
+     "op": 9832,
+     "length": 6,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9832,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "022438260000",
+       "022438260000",
+       "022438260000",
+       "022438260000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9832,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "01a249cb59cc5af5378635d9770daf129860219de216f75a1acb1d7bccea96b1"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      17664,
+      5,
+      15872,
+      16896
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     17664,
+     5,
+     15872,
+     16896
+    ],
+    "B": [
+     17664,
+     5,
+     15872,
+     16896
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op727.l14",
+   "control": false,
+   "op": 727,
+   "length": 14,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1",
+    "9.7"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ],
+    [
+     "9.7",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op727.l14.A",
+     "op": 727,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f8300022a20a200000658000204",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op727.l14.B",
+     "op": 727,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "2f8300022a20a202008658000204",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op727.l14.A",
+     "op": 727,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 727,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f8200422a20a200000658002004",
+       "2f8200422a20a200000658002004",
+       "2f8200422a20a200000658002004",
+       "2f8200422a20a200000658002004"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       727,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "c068ea5938c53611e0a0bd4c6ef9095187c2f29349ebca32ae6761ff448ff7ef"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      63,
+      64,
+      64,
+      1472
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op727.l14.B",
+     "op": 727,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 727,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2f8200422a20a202008658002004",
+       "2f8200422a20a202008658002004",
+       "2f8200422a20a202008658002004",
+       "2f8200422a20a202008658002004"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       727,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "d655cb1f8e0d71ddf23a686e3cee9eaa867fe8fddcca4d9d805c9bf9fef0f6e4"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      63,
+      64,
+      64,
+      1472
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     63,
+     64,
+     64,
+     1472
+    ],
+    "B": [
+     63,
+     64,
+     64,
+     1472
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op3293.l14",
+   "control": false,
+   "op": 3293,
+   "length": 14,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op3293.l14.A",
+     "op": 3293,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "298205102a80a000900710000010",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op3293.l14.B",
+     "op": 3293,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "298205102a80a002900710000010",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op3293.l14.A",
+     "op": 3293,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 3293,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "298005102a80a000900810000210",
+       "298005102a80a000900810000210",
+       "298005102a80a000900810000210",
+       "298005102a80a000900810000210"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       3293,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "48c16575a58c0cf1aeae8ed32026576d243901a4b7f19b6dfd543a31ec801cba"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1107312128,
+      1166033408,
+      3173008640,
+      2147483648
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op3293.l14.B",
+     "op": 3293,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 3293,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "298005102a80a002900810000210",
+       "298005102a80a002900810000210",
+       "298005102a80a002900810000210",
+       "298005102a80a002900810000210"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       3293,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "42c1a66b1ce7b4d68fefda78707dcce625c9bd6c8dfbba5532abd459451f2ad4"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1107312128,
+      1166033408,
+      3173008640,
+      2147483648
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1107312128,
+     1166033408,
+     3173008640,
+     2147483648
+    ],
+    "B": [
+     1107312128,
+     1166033408,
+     3173008640,
+     2147483648
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op5072.l10",
+   "control": false,
+   "op": 5072,
+   "length": 10,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     1,
+     0
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op5072.l10.A",
+     "op": 5072,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "0a832381060000020000",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op5072.l10.B",
+     "op": 5072,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "0a832381060000000000",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op5072.l10.A",
+     "op": 5072,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 5072,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "ca213b23060000020000",
+       "ca213b23060000020000",
+       "ca213b23060000020000",
+       "ca213b23060000020000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       5072,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "1bceed5a7c0b12b32ce5e0b03f591dbc84f575def79d9e1134abfa0dfa069a10"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op5072.l10.B",
+     "op": 5072,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 5072,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "ca213b23060000000000",
+       "ca213b23060000000000",
+       "ca213b23060000000000",
+       "ca213b23060000000000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       5072,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "754972f8f156e9ed00728f03ddd429a93c27ad1a9ea5f6ddfc5fa163e26f02e7"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": false,
+   "verdict": "agree-but-uninformative"
+  },
+  {
+   "id": "adopt.op9748.l10",
+   "control": false,
+   "op": 9748,
+   "length": 10,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "3.0"
+   ],
+   "bits": [
+    [
+     "3.0",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op9748.l10.A",
+     "op": 9748,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "62140780268080020002",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op9748.l10.B",
+     "op": 9748,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "62140781268080020002",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op9748.l10.A",
+     "op": 9748,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9748,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02200f80268080020022",
+       "02200f80268080020022",
+       "02200f80268080020022",
+       "02200f80268080020022"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9748,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "84e17af02991f7b19dc2362726815ddd06053919eef2a779c6922a92d8bd46d9"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op9748.l10.B",
+     "op": 9748,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9748,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02200f81268080020022",
+       "02200f81268080020022",
+       "02200f81268080020022",
+       "02200f81268080020022"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9748,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "8b3734b17bc518d73a2c70313e8fd2705f5baa8c885e439beafc47981f91db6f"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": false,
+   "verdict": "agree-but-uninformative"
+  },
+  {
+   "id": "adopt.op9749.l10",
+   "control": false,
+   "op": 9749,
+   "length": 10,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "3.0"
+   ],
+   "bits": [
+    [
+     "3.0",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op9749.l10.A",
+     "op": 9749,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "52140780068280022080",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op9749.l10.B",
+     "op": 9749,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "52140781068280022080",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op9749.l10.A",
+     "op": 9749,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9749,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02200f8006a280022080",
+       "02200f8006a280022080",
+       "02200f8006a280022080",
+       "02200f8006a280022080"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9749,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "352b3f5c134ba48f7c9a7fb64c40a62e2fd04cf2979fb6b1ba57640ec7d6b7c4"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1073758720,
+      1084245248,
+      3221273600,
+      458757
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op9749.l10.B",
+     "op": 9749,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 9749,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02200f8106a280022080",
+       "02200f8106a280022080",
+       "02200f8106a280022080",
+       "02200f8106a280022080"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       9749,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "b2bc8339b6f3b2153319faaf40c9799e9e6e44a59274260c080e0f3601a2a4e1"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1073758720,
+      1084245248,
+      3221273600,
+      458757
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1073758720,
+     1084245248,
+     3221273600,
+     458757
+    ],
+    "B": [
+     1073758720,
+     1084245248,
+     3221273600,
+     458757
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op11063.l14",
+   "control": false,
+   "op": 11063,
+   "length": 14,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11063.l14.A",
+     "op": 11063,
+     "length": 14,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "2700043a2900a008388402140600",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11063.l14.B",
+     "op": 11063,
+     "length": 14,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "2700043a2900a00a388402140600",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11063.l14.A",
+     "op": 11063,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11063,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700041a2980a000a88862540400",
+       "2700041a2980a000a88862540400",
+       "2700041a2980a000a88862540400",
+       "2700041a2980a000a88862540400"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11063,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "86a5ae3dd6404cd7c400204c9c57db15e831decb0217becce9d5319913afd9f0"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11063.l14.B",
+     "op": 11063,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11063,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700041a2980a002a88862540400",
+       "2700041a2980a002a88862540400",
+       "2700041a2980a002a88862540400",
+       "2700041a2980a002a88862540400"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11063,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "92a30592fefd9bf28ee86448290e12816d8121ecd4076d618abf3e7cfeb7d09c"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": false,
+   "verdict": "agree-but-uninformative"
+  },
+  {
+   "id": "adopt.op11322.l10",
+   "control": false,
+   "op": 11322,
+   "length": 10,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "8.1"
+   ],
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11322.l10.A",
+     "op": 11322,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "1a4a13fe860896022280",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11322.l10.B",
+     "op": 11322,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "1a4a13fe860896022080",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11322.l10.A",
+     "op": 11322,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11322,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "da201bfe862296022280",
+       "da201bfe862296022280",
+       "da201bfe862296022280",
+       "da201bfe862296022280"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11322,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "215dc537e6cb4e6ea0bcba22ac2242381ec87c2d441e955db22f5d8cb82fea97"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11322.l10.B",
+     "op": 11322,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11322,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "da201bfe862296022080",
+       "da201bfe862296022080",
+       "da201bfe862296022080",
+       "da201bfe862296022080"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11322,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "b0bd1d5eb0138820e8ee85b3ed98515efd69ced171d7c6ed656e899ef95258f8"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": false,
+   "verdict": "agree-but-uninformative"
+  },
+  {
+   "id": "adopt.op11392.l10",
+   "control": false,
+   "op": 11392,
+   "length": 10,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "8.1"
+   ],
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11392.l10.A",
+     "op": 11392,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "4208af80268007022280",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11392.l10.B",
+     "op": 11392,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "4208af80268007022080",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11392.l10.A",
+     "op": 11392,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11392,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02202f80268007022280",
+       "02202f80268007022280",
+       "02202f80268007022280",
+       "02202f80268007022280"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11392,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "d936bbdc71ce3b7aedc240d7b7415a6944f29473b94c44b62152eb3e5a4aa95b"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11392.l10.B",
+     "op": 11392,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11392,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02202f80268007022080",
+       "02202f80268007022080",
+       "02202f80268007022080",
+       "02202f80268007022080"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11392,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "691466229a12a5de98e7e65ebb17b1a7278c58032a930a2fb897d71bcb973c2e"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "B": [
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": false,
+   "verdict": "agree-but-uninformative"
+  },
+  {
+   "id": "adopt.op11392.l14",
+   "control": false,
+   "op": 11392,
+   "length": 14,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11392.l14.A",
+     "op": 11392,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "3200070a2f00a4000300464c2f15",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11392.l14.B",
+     "op": 11392,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "3200070a2f00a4020300464c2f15",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11392.l14.A",
+     "op": 11392,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11392,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2200070a2f80a4000300464c2f15",
+       "2200070a2f80a4000300464c2f15",
+       "2200070a2f80a4000300464c2f15",
+       "2200070a2f80a4000300464c2f15"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11392,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "f250cfe74597e12950cd47d6b2dbb8e02440ea2c8d98e8337e5fe22ea7462381"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      255,
+      255,
+      255,
+      255
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11392.l14.B",
+     "op": 11392,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11392,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2200070a2f80a4020300464c2f15",
+       "2200070a2f80a4020300464c2f15",
+       "2200070a2f80a4020300464c2f15",
+       "2200070a2f80a4020300464c2f15"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11392,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "3e91e33c82355a8d76532c1a70e747858124b6aa35b6b32d24f19cd9faf1d812"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      255,
+      255,
+      255,
+      255
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     255,
+     255,
+     255,
+     255
+    ],
+    "B": [
+     255,
+     255,
+     255,
+     255
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": false,
+   "verdict": "agree-but-uninformative"
+  },
+  {
+   "id": "adopt.op11456.l14",
+   "control": false,
+   "op": 11456,
+   "length": 14,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11456.l14.A",
+     "op": 11456,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "a200452b4b00ac00230002080008",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11456.l14.B",
+     "op": 11456,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "a200452b4b00ac02230002080008",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11456.l14.A",
+     "op": 11456,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11456,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2200450a4b80ac0021000a080008",
+       "2200450a4b80ac0021000a080008",
+       "2200450a4b80ac0021000a080008",
+       "2200450a4b80ac0021000a080008"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11456,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "82d411db1bd15e2f532c5f738850c74437e5b4b62d15a5ba2faadb7318fedd8e"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      16896,
+      17664,
+      48128,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11456.l14.B",
+     "op": 11456,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11456,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2200450a4b80ac0221000a080008",
+       "2200450a4b80ac0221000a080008",
+       "2200450a4b80ac0221000a080008",
+       "2200450a4b80ac0221000a080008"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11456,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "50c61aef95299c89addc1ff079d8a694bb114751914b4a157f8817dac20f3c98"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      16896,
+      17664,
+      48128,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     16896,
+     17664,
+     48128,
+     0
+    ],
+    "B": [
+     16896,
+     17664,
+     48128,
+     0
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op11482.l14",
+   "control": false,
+   "op": 11482,
+   "length": 14,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "11.6"
+   ],
+   "bits": [
+    [
+     "11.6",
+     1,
+     0
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11482.l14.A",
+     "op": 11482,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "228045eb4b00a5028100425c0108",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11482.l14.B",
+     "op": 11482,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "228045eb4b00a5028100421c0108",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11482.l14.A",
+     "op": 11482,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11482,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2280450a4b80a4028100425c0108",
+       "2280450a4b80a4028100425c0108",
+       "2280450a4b80a4028100425c0108",
+       "2280450a4b80a4028100425c0108"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11482,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "e77944060ac64a78a2910d5812d756afd85083eabd7cca482b5c95bcc73b0f76"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1,
+      1,
+      1,
+      0
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11482.l14.B",
+     "op": 11482,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11482,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2280450a4b80a4028100421c0108",
+       "2280450a4b80a4028100421c0108",
+       "2280450a4b80a4028100421c0108",
+       "2280450a4b80a4028100421c0108"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11482,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "abed26a273239316be498fa042f11aca1b72e2086183878cc1e6d61bf65ababf"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1,
+     1,
+     1,
+     0
+    ],
+    "B": [
+     1,
+     1,
+     1,
+     1
+    ]
+   },
+   "outputs_agree": false,
+   "output_varies_across_cases": true,
+   "verdict": "ADOPTION-WOULD-MISCOMPILE"
+  },
+  {
+   "id": "adopt.op11483.l10",
+   "control": false,
+   "op": 11483,
+   "length": 10,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "8.1"
+   ],
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11483.l10.A",
+     "op": 11483,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "32000d80268007028204",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11483.l10.B",
+     "op": 11483,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "32000d80268007028004",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11483.l10.A",
+     "op": 11483,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11483,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02200d80268007028222",
+       "02200d80268007028222",
+       "02200d80268007028222",
+       "02200d80268007028222"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11483,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "25f1ce837621a2b8659983e44946a80427a911b24658d8ca82d48836dd81e74d"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      16896,
+      17664,
+      48128,
+      5
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11483.l10.B",
+     "op": 11483,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11483,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02200d80268007028022",
+       "02200d80268007028022",
+       "02200d80268007028022",
+       "02200d80268007028022"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11483,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "6b054053eaba3d426fc7667842dbe4fcbad86ec3156c2dd4ad38c32371acc780"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      16896,
+      17664,
+      48128,
+      5
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     16896,
+     17664,
+     48128,
+     5
+    ],
+    "B": [
+     16896,
+     17664,
+     48128,
+     5
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op11487.l10",
+   "control": false,
+   "op": 11487,
+   "length": 10,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "8.1"
+   ],
+   "bits": [
+    [
+     "8.1",
+     1,
+     0
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11487.l10.A",
+     "op": 11487,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "1a242d80860297028200",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11487.l10.B",
+     "op": 11487,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "1a242d80860297028000",
+     "cases": [
+      [
+       1065369088,
+       1073758720,
+       1084245248
+      ],
+      [
+       1073758720,
+       1084245248,
+       3221273600
+      ],
+      [
+       1084245248,
+       3221273600,
+       458757
+      ],
+      [
+       3221273600,
+       458757,
+       1065369088
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11487.l10.A",
+     "op": 11487,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11487,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02202d80862297028224",
+       "02202d80862297028224",
+       "02202d80862297028224",
+       "02202d80862297028224"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11487,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "050e16386dfc9babef76bb2919c3b4df8fae4cca007864a345384b19a7487fb7"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      17664,
+      48128,
+      5,
+      15872
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11487.l10.B",
+     "op": 11487,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11487,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "02202d80862297028024",
+       "02202d80862297028024",
+       "02202d80862297028024",
+       "02202d80862297028024"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11487,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "2ee18b149bd604d4d2787c42844b452a74a0b8d885839401554380bbcaa91e96"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      17664,
+      48128,
+      5,
+      15872
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     17664,
+     48128,
+     5,
+     15872
+    ],
+    "B": [
+     17664,
+     48128,
+     5,
+     15872
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op11655.l12",
+   "control": false,
+   "op": 11655,
+   "length": 12,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op11655.l12.A",
+     "op": 11655,
+     "length": 12,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "a78204422100aa0048000a00",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op11655.l12.B",
+     "op": 11655,
+     "length": 12,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "a78204422100aa0248000a00",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op11655.l12.A",
+     "op": 11655,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11655,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270004422500aa0048000a00",
+       "270004422500aa0048000a00",
+       "270004422500aa0048000a00",
+       "270004422500aa0048000a00"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11655,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "ae52f1fe4f828db8dac95bedb402c83ad5f5272c0e4409ee7510dc79b402c25f"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1065369087,
+      1073758719,
+      1084245247,
+      3221273599
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op11655.l12.B",
+     "op": 11655,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 11655,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270004422500aa0248000a00",
+       "270004422500aa0248000a00",
+       "270004422500aa0248000a00",
+       "270004422500aa0248000a00"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11655,
+       11842,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "90412b4059cd77df5abb274c8ec003d82157b240c2c9547cf05db98db2b2ef54"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1065369087,
+      1073758719,
+      1084245247,
+      3221273599
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1065369087,
+     1073758719,
+     1084245247,
+     3221273599
+    ],
+    "B": [
+     1065369087,
+     1073758719,
+     1084245247,
+     3221273599
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op14393.l14",
+   "control": false,
+   "op": 14393,
+   "length": 14,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "11.2",
+    "7.1"
+   ],
+   "bits": [
+    [
+     "11.2",
+     0,
+     1
+    ],
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op14393.l14.A",
+     "op": 14393,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "3702001a2e00a000680300300000",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op14393.l14.B",
+     "op": 14393,
+     "length": 14,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "3702001a2e00a002680300340000",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op14393.l14.A",
+     "op": 14393,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 14393,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700001a2e80a000a80800300000",
+       "2700001a2e80a000a80800300000",
+       "2700001a2e80a000a80800300000",
+       "2700001a2e80a000a80800300000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       14393,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "cd4a9f440b37fe9ada2208acc47ab012ab121c0e3efa2fc820d90d8db0bf5206"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1065369088,
+      1073758720,
+      1084245248,
+      1540096
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op14393.l14.B",
+     "op": 14393,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 14393,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700001a2e80a002a80800340000",
+       "2700001a2e80a002a80800340000",
+       "2700001a2e80a002a80800340000",
+       "2700001a2e80a002a80800340000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       14393,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "6672bae83aa6bb40c9508686fe7cbae65521d21dd4d634e2baf703b8c8038802"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1065369088,
+      1073758720,
+      1084245248,
+      1540096
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1065369088,
+     1073758720,
+     1084245248,
+     1540096
+    ],
+    "B": [
+     1065369088,
+     1073758720,
+     1084245248,
+     1540096
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op16817.l12",
+   "control": false,
+   "op": 16817,
+   "length": 12,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1",
+    "9.7"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ],
+    [
+     "9.7",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op16817.l12.A",
+     "op": 16817,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "370300392e00a30830024000",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op16817.l12.B",
+     "op": 16817,
+     "length": 12,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "370300392e00a30a30824000",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op16817.l12.A",
+     "op": 16817,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16817,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270000182e80a30030024000",
+       "270000182e80a30030024000",
+       "270000182e80a30030024000",
+       "270000182e80a30030024000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16817,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "317a35490c52fcea24b94ad719b9a6d064314c4abdf5405913916c67b6fdd298"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      62,
+      66,
+      69,
+      65468
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op16817.l12.B",
+     "op": 16817,
+     "length": 12,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 16817,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "270000182e80a30230824000",
+       "270000182e80a30230824000",
+       "270000182e80a30230824000",
+       "270000182e80a30230824000"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ],
+        [
+         0,
+         16
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       16817,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "82a9011c7cc37391a2d2fa15e00c6b4073a43a6d181f75dd125c25536fa6f821"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      62,
+      66,
+      69,
+      65468
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     62,
+     66,
+     69,
+     65468
+    ],
+    "B": [
+     62,
+     66,
+     69,
+     65468
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op17015.l14",
+   "control": false,
+   "op": 17015,
+   "length": 14,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "11.2",
+    "7.1"
+   ],
+   "bits": [
+    [
+     "11.2",
+     0,
+     1
+    ],
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op17015.l14.A",
+     "op": 17015,
+     "length": 14,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "2700001a2e00a100d80a00300000",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op17015.l14.B",
+     "op": 17015,
+     "length": 14,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "2700001a2e00a102d80a00340000",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op17015.l14.A",
+     "op": 17015,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17015,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700001a2e80a100980820300000",
+       "2700001a2e80a100980820300000",
+       "2700001a2e80a100980820300000",
+       "2700001a2e80a100980820300000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17015,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "fed34b78f5bff1a34f0c1289fe00900449664547be5ac93a30ecdc40a8722cb0"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1065369088,
+      1073758720,
+      1084245248,
+      3221273600
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op17015.l14.B",
+     "op": 17015,
+     "length": 14,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17015,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "2700001a2e80a102980820340000",
+       "2700001a2e80a102980820340000",
+       "2700001a2e80a102980820340000",
+       "2700001a2e80a102980820340000"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17015,
+       17244
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "ac167ee9cd6d640b7492f155bbabf54c68859bfed15af493ded8c236ddd66535"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1065369088,
+      1073758720,
+      1084245248,
+      3221273600
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1065369088,
+     1073758720,
+     1084245248,
+     3221273600
+    ],
+    "B": [
+     1065369088,
+     1073758720,
+     1084245248,
+     3221273600
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op17774.l10",
+   "control": false,
+   "op": 17774,
+   "length": 10,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op17774.l10.A",
+     "op": 17774,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "230106003af8a4180483",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op17774.l10.B",
+     "op": 17774,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "230106003af8a41a0483",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op17774.l10.A",
+     "op": 17774,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17774,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "230006083a38a4008488",
+       "230006083a38a4008488",
+       "230006083a38a4008488",
+       "230006083a38a4008488"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17244,
+       17774
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "76e0533ab49ff143ebe9ed375fc59dc6d7e0b823fcd709125071113dda81e2e0"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1073773568,
+      1084229376,
+      3221289216,
+      506885
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op17774.l10.B",
+     "op": 17774,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17774,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "230006083a38a4028488",
+       "230006083a38a4028488",
+       "230006083a38a4028488",
+       "230006083a38a4028488"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17244,
+       17774
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "fdee59672655d944573e230448d999ffbd3fe9d3e59fd033bbde5758ba056631"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      1073773568,
+      1084229376,
+      3221289216,
+      506885
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     1073773568,
+     1084229376,
+     3221289216,
+     506885
+    ],
+    "B": [
+     1073773568,
+     1084229376,
+     3221289216,
+     506885
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op17775.l10",
+   "control": false,
+   "op": 17775,
+   "length": 10,
+   "author": "assembler",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op17775.l10.A",
+     "op": 17775,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "230106003a38a4000400",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op17775.l10.B",
+     "op": 17775,
+     "length": 10,
+     "author": "assembler",
+     "witness_required": false,
+     "bytes": "230106003a38a4020400",
+     "cases": [
+      [
+       1065369088,
+       1073758720
+      ],
+      [
+       1073758720,
+       1084245248
+      ],
+      [
+       1084245248,
+       3221273600
+      ],
+      [
+       3221273600,
+       458757
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op17775.l10.A",
+     "op": 17775,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17775,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "230006083a38a4008408",
+       "230006083a38a4008408",
+       "230006083a38a4008408",
+       "230006083a38a4008408"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17244,
+       17775
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "43cd3991cf5b02a6a37fce6044ce4fcf751d0191bafe108663ea5638af12daf1"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      31744,
+      1792,
+      63744,
+      48133
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op17775.l10.B",
+     "op": 17775,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17775,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "230006083a38a4028408",
+       "230006083a38a4028408",
+       "230006083a38a4028408",
+       "230006083a38a4028408"
+      ],
+      "operands": {
+       "asked": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ],
+       "apple_reads": [
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ],
+        [
+         0,
+         16,
+         17
+        ]
+       ]
+      },
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17244,
+       17775
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "dfc91fa6f080d70786b1f1a49d43c2c1c705ceae6cace0030843ccdb38918524"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      31744,
+      1792,
+      63744,
+      48133
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     31744,
+     1792,
+     63744,
+     48133
+    ],
+    "B": [
+     31744,
+     1792,
+     63744,
+     48133
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  },
+  {
+   "id": "adopt.op17782.l10",
+   "control": false,
+   "op": 17782,
+   "length": 10,
+   "author": "fieldmap",
+   "predict": "agree",
+   "adopted_bits": [
+    "7.1",
+    "9.7"
+   ],
+   "bits": [
+    [
+     "7.1",
+     0,
+     1
+    ],
+    [
+     "9.7",
+     0,
+     1
+    ]
+   ],
+   "records": [
+    {
+     "id": "adopt.op17782.l10.A",
+     "op": 17782,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "330206003ae8a3184400",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    },
+    {
+     "id": "adopt.op17782.l10.B",
+     "op": 17782,
+     "length": 10,
+     "author": "fieldmap",
+     "witness_required": false,
+     "bytes": "330206003ae8a31a4480",
+     "cases": [
+      [
+       1065369088
+      ],
+      [
+       1073758720
+      ],
+      [
+       1084245248
+      ],
+      [
+       3221273600
+      ]
+     ]
+    }
+   ],
+   "oracle": [
+    {
+     "id": "adopt.op17782.l10.A",
+     "op": 17782,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17782,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "230006083a28a3004400",
+       "230006083a28a3004400",
+       "230006083a28a3004400",
+       "230006083a28a3004400"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17244,
+       17782
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "8c7a65ef2f151a7a5ef401fbacddd63af6060c155022a0b486283e7b66790b28"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      15873,
+      16897,
+      17665,
+      48129
+     ],
+     "status": "ok",
+     "runs": 3
+    },
+    {
+     "id": "adopt.op17782.l10.B",
+     "op": 17782,
+     "length": 10,
+     "nsrc": 1,
+     "decoded": {
+      "ok": true,
+      "want": 17782,
+      "found": 4,
+      "cases": 4,
+      "encoded": [
+       "230006083a28a3024480",
+       "230006083a28a3024480",
+       "230006083a28a3024480",
+       "230006083a28a3024480"
+      ],
+      "operands": null,
+      "from_template": true,
+      "opcodes": [
+       684,
+       11842,
+       17244,
+       17782
+      ]
+     },
+     "bindings": {
+      "image_declares": [
+       0,
+       1,
+       2
+      ],
+      "harness_binds": [
+       {
+        "index": 0,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 1,
+        "bytes": 8192,
+        "fill": "zero"
+       },
+       {
+        "index": 2,
+        "bytes": 16384,
+        "fill": "0xDEADBEEF"
+       }
+      ],
+      "image_sha256": "218fbd9402213e0943788493011166ad64eb2c96a0561e3f557c986ed4ea0ebe"
+     },
+     "cb_status": 0,
+     "finished": true,
+     "values": [
+      15873,
+      16897,
+      17665,
+      48129
+     ],
+     "status": "ok",
+     "runs": 3
+    }
+   ],
+   "values": {
+    "A": [
+     15873,
+     16897,
+     17665,
+     48129
+    ],
+    "B": [
+     15873,
+     16897,
+     17665,
+     48129
+    ]
+   },
+   "outputs_agree": true,
+   "output_varies_across_cases": true,
+   "verdict": "as-predicted"
+  }
+ ]
+}

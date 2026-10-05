@@ -1,0 +1,424 @@
+\chapter{Scalar arithmetic}\label{ch:scalar-arithmetic}
+
+Beside the tensor unit, every G17 lane runs an ordinary scalar ALU: integer arithmetic on 32-bit
+registers and 16-bit halves, fp32 and fp16 arithmetic, conversions, compares that write flags or select values, and five
+single-instruction special functions. A compiler targeting this machine must reproduce the ALU bit for bit, because a
+tensor kernel's address arithmetic, quantization and epilogues all run here.
+
+Apple does not document this ALU. Many of its forms were first named from Apple's decoder
+tables and compiler output, and a later audit of those names against execution corrected 7 of 100 uniquely fitted forms
+(MM~\mm{25.90}). Each semantic below was measured on inputs chosen so that the rival readings give different answers.
+Several results bear directly on code generation. The integer condition codes are a structured field, and one code
+that every source called "equal" is a bit test (\cref{sec:compares-flags-selects}). The machine has three subnormal
+policies, one per execution path, so a value can change when it passes from one path to the next; and both fused
+multiply-adds, fp32 and fp16, round once, proven on inputs where once and twice differ
+(\cref{sec:fp32-arithmetic,sec:fp16-arithmetic}). On positive normal inputs the hardware reciprocal
+square root is an exact, tabulable function with a scaling law, while hardware exp2 is deterministic but has no compact
+description; the difference determines how kernels that use them are checked (\cref{sec:special-function-instructions}).
+
+The full per-opcode table, with lengths and standing, is \cref{app:b}.
+
+Conventions:
+
+\begin{itemize}
+\item Opcodes are cited as glossary name then number, "\op{10282}"; "/N" is the encoded length in bytes, and a
+  semantic belongs to the (opcode, length) forms that ran. Forms Apple's compiler emits that have no glossary entry are
+  given a label and marked "(no glossary entry)".
+\item Rn is general register n (R0–R125 usable, \cref{ch:register-file}); RnL and RnH are its 16-bit halves. a32 and a16 are 32- and
+  16-bit sources; zext16 and sext16 are zero and sign extension of a half; K8 is an 8-bit float-coded immediate
+  (\code{isa/g17-float-immediate.toml}).
+\item Each register source carries a \textbf{modifier operand} (\cref{sec:operand-modifiers}): negate (2) and absolute value (4) act on values and
+  are used here; release (16) and keep (32) govern lifetime (MM~\mm{6}).
+\item FTZ: subnormal inputs and results flushed to zero. RNE: round to nearest, ties to even. A canonical NaN is the single
+  pattern a form returns for every NaN input.
+\end{itemize}
+
+Many forms below can release a source. Treat a later read of a released register as "zero or the
+old value", and read one only where both outcomes agree (MM~\mm{25.95}, MM~\mm{25.145}, MM~\mm{25.145.4}, \code{agxforge/g17/releasecheck.py};
+the rule and its evidence are \cref{sec:release-does}).
+
+\section{Integer arithmetic}\label{sec:integer-arithmetic}
+
+Integer results are the low 32 bits of the exact result unless a form says otherwise. The families are conventional.
+Their edge cases below were each measured on an input where the candidate readings disagree (\cref{app:b}
+lists every form and its source).
+
+\subsection*{Add, subtract and saturating forms}
+
+\op{10282}, \op{10279} with an 8-bit immediate,
+\op{11667} and \op{11666} wrap. The forms that mix widths zero-extend, and
+each was separated from sign extension by an input with the half's top bit set:
+
+\begin{itemize}
+\item \op{10283}: d = a32 + zext16(b) (MM~\mm{25.145.1});
+\item \op{10285}: d32 = zext16(a) + b32. Its census operands were special-register values below $2^{15}$,
+  where zero and sign extension agree, so a lane kernel with a full-width operand was needed (MM~\mm{25.195});
+\item \op{10286} widens: 0xFFFF + 1 = 65536, refuting a 16-bit wrap;
+\item \op{10289} does wrap at 16 bits, d16 = a16 + imm (4,096 lanes; "immediate + 1" refuted,
+  MM~\mm{25.195}).
+\end{itemize}
+
+\op{10239} and \op{11624} clamp; the receipt that fixed them chose unsigned
+saturation over signed saturation and wrapping on 32 lanes (MM~\mm{25.145}). Their signedness is not an opcode: in the corpus,
+the saturating add carries source modifier 16 (32 for a high-half source) in every unsigned kernel and 24 (40) in every signed one
+(MM~\mm{25.59}), and \op{16805} executed only with modifier 24 (MM~\mm{25.145.1}). Reading
+the value 8 as a signedness bit fits both; that it is a general integer-modifier rule is \emph{open}.
+
+\subsection*{Multiply}
+
+\op{10825} and \op{10826} keep the low 32 bits. Around them sits a
+family of immediate and half-width variants (\cref{app:b}) whose decoder names were repeatedly wrong: the three subtracting
+forms (\op{11059}, \op{11060}, \op{11063}) carry the map name \code{madd}, and three 64-bit product forms carry \code{mulhi} though they compute full products
+(glossary). \op{10838} computes sext16(a) * zext16(b) + c32, 60 of 60 over seven
+records (MM~\mm{25.59}). There is no integer divide: \code{A[t] / (B[t] | 1)} lowers to a reciprocal sequence through \op{3658} that touches fourteen forms (Apple's compiler emits, MM~\mm{25.80}).
+
+\subsection*{Logic, shifts and bit operations}
+
+\begin{itemize}
+\item \op{14392} uses the amount's low 7 bits and gives 0 when the amount is 32 or more, not
+  a shift modulo 32 (measured, glossary).
+\item \op{9986} returns 0xFFFFFFFF for an input of 0 (the rival readings, 0 and a leading-zero
+  count, were refuted); clz is derived from it (receipt fit, MM~\mm{25.145}).
+\item The arithmetic shift right immediate sign-fills; the other right shifts, by register and by immediate, are logical.
+\item The 4-byte register forms release their sources. \op{424}/4, \op{13575}/4 and \op{17771}/4 have no lifetime bit and always release both sources; all three matched Apple's compiler element for
+  element on disjoint operands (measured, MM~\mm{24.8} row T4, MM~\mm{25.77}). A source needed again requires the /10 form or a
+  copy.
+\item \op{428} has a uniform mask. Authored with a register as its mask, it returned zero on
+  every lane, because its second operand is a uniform halfword of the kernel's constant pool and not a
+  register; the pool sits after the binding pointers (uniform K is pool halfword K - 4 × buffers). Zeroing or
+  swapping that pool fails all 2,048 outputs of a q4 quantized matrix-vector chain (whole-program, MM~\mm{25.139.1},
+  MM~\mm{25.141.17}, MM~\mm{25.145}). The pool format is \cref{ch:kernel-metadata-image}'s. Extracting a half from a register takes \op{426} instead, which reads one half with its source kept and is exact for L and H (MM~\mm{25.139.1}).
+\end{itemize}
+
+\subsection*{Moves and immediates}
+
+\op{586} and \op{590} copy a register or one half.
+\op{554} has run only with immediate 0 (1,228 of 1,231 corpus uses are 0), and \op{555} is claimed only for 0 (MM~\mm{25.145.1}, MM~\mm{25.184}). \op{11842}, 10 bytes, carries a full 32-bit immediate. \op{13574} reaches
+R64 and above and can carry a load wait, so OR with 0 is the register copy into the upper file (measured,
+glossary). Immediate size selects the form (Apple's compiler emits, every probe executed, \code{isa/g17-comparison-semantics.json}):
+a select keeps both-immediate arms 0..255 in an immediate-arm select (\op{11373}, no glossary entry) and moves 256 and above,
+and every negative value, to \op{11375}; a compare against an immediate holds 0..256
+in \op{11365} and moves 257 and above to the four-register form.
+
+\section{Compares, flags and selects}\label{sec:compares-flags-selects}
+
+A comparison and its select are one instruction (Apple's compiler emits). \code{a < b ? x : y} on int emits a single \op{11372}/14 or a four-register select, and no separate compare
+(\code{isa/g17-comparison-semantics.json}). Compares that must survive as predicates write a flag register: \op{10369}, "the flag compare" below, is the loop-exit compare, /10 for a \code{uint} counter and /6 for an \code{int} one (MM~\mm{25.73}).
+The flag registers FLAG0-FLAG14 are an allocatable class (\cref{ch:register-file}).
+
+\subsection*{Integer condition field}\label{sub:integer-condition-field}
+
+The decoder prints an integer condition as a number from 8 to 15. Authoring \op{11313} at
+each printed code and reading the flag on four operand pairs fixed the decode (measured, \code{isa/g17-condition-codes.toml}):
+
+\begin{lstlisting}
+printed cc = 8 | (signed << 2) | (gt << 1) | lt        equality: lt = gt = 0
+\end{lstlisting}
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}lXllll@{}}
+\caption{Integer condition codes by printed number, with the result of 32-bit compare, OR-chained into a flag on four operand pairs.}\label{tab:integer-condition-codes}\\
+\toprule
+printed & relation & (10,20) & (20,10) & (10,10) & (−5,3) \\
+\midrule
+\endfirsthead
+\tablecontinued{6}
+\toprule
+printed & relation & (10,20) & (20,10) & (10,10) & (−5,3) \\
+\midrule
+\endhead
+8 & unsigned equal & false & false & true & false \\*
+9 & unsigned less & true & false & false & false \\*
+10 & unsigned greater & false & true & false & true \\*
+12 & signed equal & false & false & true & false \\*
+13 & signed less & true & false & false & true \\*
+14 & signed greater & false & true & false & false \\*
+15 & predicted "not equal"; measured otherwise & false & false & true & true \\*
+\bottomrule
+\end{xltabular}
+
+In \cref{tab:integer-condition-codes}, signed and unsigned order disagree on the pair (−5, 3), so that column identifies bit 2 as signedness rather than a
+correlated bit. The decode predicted that codes 11 and 15 mean not-equal (lt or gt), but code 15 is true on
+(10,10) and (−5,3) only, which is the bit test described below.
+
+An encoder writes a field code, not the printed number. For the immediate-arm compare-select the field
+codes are 0 equal, 1 unsigned less-than and 5 signed less-than (printed = 8 \textbar{} field), and field 4 behaves as 0, as the
+decode predicts. Every code returns exactly 0 or 1, so the remaining seven relations derive by swapping operands and by
+complementing with one XOR: ten relations at four orderings, 40 of 40 (measured, \code{ledger/notes.toml}
+{[}g17-all-ten-relations-from-three-codes{]}).
+
+\subsection*{Select field code 1}\label{sub:field-code-1}
+
+\op{11375} computes d = (a cc b) ? x : y with two field codes. Code 0 is a > b. Code
+1 was recorded as a == b, from witness pairs (1,2), (2,1), (1,1) and (5,5), and shipped in this compiler as
+\code{CSEL\_CC['eq']}. Those four pairs cannot tell equality from a bit test: the unequal pairs share no bit and the equal pairs
+are nonzero, so both readings give the same answers. The error was found when a switch, lowered to a chain of selects that
+tested a 0/1 compare value against 0, chose the wrong arm on every lane. The discriminating run (measured, MM~\mm{25.90};
+\code{ledger/claims.toml} {[}g17-csel-code-one-is-a-bit-test{]}): x = 0..31 on 32 lanes,
+
+\begin{itemize}
+\item against 16: selected exactly x ≥ 16, in both operand orders (symmetric, so not an order relation);
+\item against 0: never selected (equality would select lane 0);
+\item against 5: selected exactly the 24 lanes with x \& 5 != 0 (equality gives one lane, ≥ gives 27).
+\end{itemize}
+
+Field code 1 therefore computes (a \& b) != 0. \emph{Correction:} the \code{a == b} reading (MM~\mm{25.90}'s "Was" column) is wrong; cc now names
+code 1 \code{test} and refuses a select that asks for \code{eq}.
+
+The four-register select's field codes 0 and 1 print as 14 and 15; \code{tools/g17emu.py} uses
+the printed numbers and the ledger the field numbers. The printed-15 truth row of \cref{tab:integer-condition-codes} (false, false, true,
+true) is exactly the bit test: 10 \& 20 = 0, 20 \& 10 = 0, 10 \& 10 = 10, and −5 \& 3 = 3. g17emu reads printed 14 as a > b
+and refuses inputs at or above $2^{31}$, matching the ledger's open signedness for code 0. Field 1 (printed 15) can be
+relied on as the bit test, never equality. \emph{Open:} the bit test on operands with high bits set (the
+test used x < 32), and code 0's signedness above $2^{31}$. \op{11507} is plain
+equality; on separating cases it fits a == b alone (MM~\mm{25.90}).
+
+\subsection*{Flags, chains and immediates}\label{sub:flags-chains-immediates}
+
+\begin{itemize}
+\item \code{\&\&} and \code{||} chain through flag-reading compares: \op{11310}
+  flag = (x cc K) ? c16 : 0, and the OR-chained compare flag = (x cc y) ? T : flag\_in (measured, glossary; more chain forms in \cref{app:b}).
+\item \code{if (x == 0)} and \code{if (x != 0)} compile to the same flag compare with printed code 12 and differ only in the exec form's
+  invert bit (decoder, \code{isa/g17-exec-mask.txt}, \cref{sec:execution-mask-family}).
+\item Apple's compiler never emits ≥ or ≤ against an immediate: \code{x >= K} becomes \code{x > K-1} and \code{x <= K} becomes \code{x < K+1}
+  (\code{isa/g17-scalar-isa.toml}).
+\item A flag's numeric value is form-specific. Read back through \op{14099} after one compare form
+  (\op{10379}, no glossary entry), a flag read 1 for true and 2 for false (\code{ledger/notes.toml}); the authored OR-chained
+  compare read 2 for true and 1 for false (\code{isa/g17-condition-codes.toml}). Both are measured on their own forms. Use a flag only
+  as a predicate.
+\item The flag compare's /10 form has a second operand layout selected by operand 1's $2^{31}$ bit (1,421 vendor instances against 19,260); no
+  source shape reaches it and its meaning is \emph{open} (MM~\mm{25.73}, MM~\mm{25.76}).
+\end{itemize}
+
+\subsection*{Floating-point compares}\label{sub:floating-point-compares}
+
+Every ordered relation is false when either operand is NaN, != is true on NaN, and −0 equals +0, for float, half and
+bfloat (measured, \code{isa/g17-comparison-semantics.json}). \op{9700} is the four-register float
+select; its codes are 0 ==, 1 \textless, 2 \textgreater, 4 !=, 5 ≥, 6 ≤, and Apple's compiler writes 3 for \code{min(float, float)} and 7 for
+\code{max} (\code{agxforge/g17/cc.py}). For 3 and 7 the hardware tests a first: a NaN a selects y, then a NaN b selects x, and with
+both NaN it returns y. A model that tested b first disagreed with the receipts on lanes 7 and 23 (measured, MM~\mm{25.145}). \code{llvm.maxnum(x, 0)} returns 0 for NaN x, so relu(NaN) = 0 (MM~\mm{6}).
+
+\section{fp32 arithmetic}\label{sec:fp32-arithmetic}
+
+\op{998}, \op{3290} and \op{2190} are RNE. There is no subtract instruction: \code{a - b} is the add with the negate modifier on b, exact since negation is exact
+(Apple's compile, MM~\mm{25.180}). Literal operands select different forms (\op{2192}; \op{2198}; \op{2200}; \op{1006}), and \code{a * 3.5f} selects a form distinct from \code{a * b} (MM~\mm{25.73}).
+
+Two fp32 FMA forms were tested for single rounding, on inputs where fused and unfused evaluation round differently.
+
+\begin{itemize}
+\item The fp32 fused multiply-add: 0 of 16 rounding-witness lanes double-rounded (MM~\mm{25.90}). Its four-byte form needs the
+  accumulator and destination in one register.
+\item The literal-addend FMA, from Apple's \code{fma(a[i], b[i], 1.0f)} over 4,096 lanes whose draws put the +1 inside
+  the product's discarded bits: on the 3,186 lanes where once and twice differ, the fused model matches all and the
+  unfused model misses all (measured, MM~\mm{25.184}, \code{isa/g17-rounding-results.json}).
+\end{itemize}
+
+Subnormals are handled three ways. The fp32 ALU flushes subnormal inputs and results to zero (fadd, fmul, the immediate fma
+forms, the reciprocal); the tensor unit's fp16, bf16 and fp32-accumulator paths flush nothing; and the measured half ALU
+forms keep half subnormals (\cref{sec:fp16-arithmetic}). An MMA can produce a subnormal that the next fp32 ALU
+instruction to read it flushes to zero (measured, MM~\mm{5}, MM~\mm{17} rule 22). The flush keeps the sign. A GELU epilogue that passed within its
+bound at M16 to M64 failed in 57 of 65,536 elements at M512, all with x near −52, where 1/(1 + 2\^{}t) is about 3.6e-39;
+the GPU returned −0, and with FTZ in the reference every arm passed (measured, MM~\mm{25.109}).
+
+fp32 NaN results are the canonical 0x7fc00000 (g17emu EVIDENCE; MM~\mm{5}). \op{904}
+is encoded as sat(a + K) with K = ±0 and maps −0 to +0, values above 1 to 1 and negatives to 0 (32 lanes); NaN into it is
+unmeasured. \emph{Correction:} the map's "fsat" is \op{1062}, a cross-lane form (\cref{sec:other-cross-lane-forms});
+saturate is the form above (MM~\mm{25.90}). \op{3818} keeps the sign of a zero result (−0.3 → −0), and \op{3770} is Metal \code{rint}.
+
+\code{air.dot.vNf32} is an fp32 multiply of lane 0 then one fma per lane, left to right; a
+pairwise order differs from Apple's on 66 of 256 random lanes, while an fp64 model of Apple's chain agrees on all (MM~\mm{25.180}).
+Under default fast math \code{x != x} folds to false, so a NaN guard must be \code{isnan(x)} or
+\code{(as\_type<uint>(x) \& 0x7fffffff) > 0x7f800000} (measured, MM~\mm{25.50}).
+
+\section{fp16 arithmetic}\label{sec:fp16-arithmetic}
+
+The measured half forms run on 16-bit halves of the general registers, keep subnormals, and return the half canonical
+NaN 0x7e00.
+
+\op{798} (\code{ffma.f16.l12}, 12 bytes) computes binary16 a * b + c rounded once (measured,
+MM~\mm{25.196}).
+
+\begin{itemize}
+\item Operands: destination 0; sources 2, 4 and 6; their lifetimes 3, 5 and 7. A source is a low half (register id 425 + n)
+  or a high half (281 + n) of word register n; Apple's own \code{fma(half, half, half)} reads a high half (r283). Authoring
+  Apple's operands reproduces Apple's bytes, \hash{3800060a2320a40245018000}.
+\item The test: 196,608 triples in three cases (the whole finite binary16 range by bit pattern, and two cancelling cases with
+  24,000 subnormal results each). 0 differ from binary16(a * b + c) computed exactly; the multiply-then-add control
+  differs on 6,246 to 54,951 per case; with both addends taken from the two halves of one packed word, 0 of 196,608
+  differ.
+\item Encoding holes (decoder): the low-half destination cannot author r18, r19, r26, r27, r50, r51, r58 or r59, operand 4
+  cannot author r17L and operand 6 cannot author r18L. The load-wait field is not located.
+\end{itemize}
+
+\textbf{Worked example: exact 4-bit dequantization in two fp16 fmas} (\emph{this compiler}; executed bit-exact on hardware,
+MM~\mm{25.196}). Integer code packs a 4-bit weight q into a half's mantissa under the bits of 1024.0h, so the half's value is
+h = 1024 + 2\^{}k q (k = 0, 4 or 6, masks 0x000F00F0 and 0x03C000F0). One fp16 fma recovers q exactly as h * 2\^{}-k - $2^{10-k}$:
+every intermediate is a small integer, so the single rounding is exact. A second fp16 fma, fma16(q, s, b), applies the
+scale and bias with one rounding and writes the weight straight into the half A fragment of a tensor tile. On a sample
+of 29,360,128 real weights the result equals the old fp32-then-fp16 dequant on every weight (the fp32 sum of a bf16
+product and bias is already exact), so the model's logits do not move; the projection gets 10 to 12 percent faster because
+the dequant leaves the fp32 pipe (128 fp16 fmas per trip, none of the integer-to-float, fp32 fma or widening forms).
+
+The mixed-width forms below are all measured.
+
+\begin{itemize}
+\item \op{776}: half(a + K8). A NaN input returns 0x7e00, not its payload (104 and 90 NaN lanes);
+  subnormals are kept (a flushing model misses 965 lanes of an \code{h + 1/64} kernel built to reach subnormal results);
+  rounding once and through fp32 are the same function on all 65,536 halves and every positive immediate, checked
+  exhaustively on the CPU, so this form needs no rounding test (MM~\mm{25.195}).
+\item \op{1014}: half(a32 + b32), one rounding, overflow to inf, NaN → 0x7e00, a tiny negative → −0.
+  \op{1015} keeps half subnormals. \op{3306}: a width receipt's
+  0x3e00 rules out a bf16 result (MM~\mm{25.145.1}).
+\item Apple's compiler selects the fp16 fma (/12) for \code{fma} on half and a different form (\op{862}/10, no glossary entry) for \code{a * b}
+  (MM~\mm{25.73}).
+\end{itemize}
+
+\section{Conversions}\label{sec:conversions}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.69\hsize}XX>{\hsize=1.41\hsize}X>{\hsize=0.86\hsize}X@{}}
+\caption{Rounding and edge behaviour of the measured conversions.}\label{tab:conversions}\\
+\toprule
+Conversion & Form & Rounding and edges & Standing \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Conversion & Form & Rounding and edges & Standing \\
+\midrule
+\endhead
+fp32 → half & \op{1016} & IEEE RNE; zero mismatches over 1,510,400 fp32 patterns, subnormal
+results included; NaN → 0x7e00 & measured (MM~\mm{6}) \\*
+fp32 → bfloat & \op{1048} is the candidate & RNE except that an fp32 subnormal input returns a zero with its sign
+(5,879 of 5,912 subnormal patterns); NaN → 0x7fc0;
+denormal enable and fast-math off change nothing & function measured (MM~\mm{6}, MM~\mm{17} rule 21); instruction identity
+unresolved \\*
+half → fp32 & \op{1004} & exact & measured \\*
+int32/uint32 → fp32 & \op{11179}/10 & RNE; operand 2: 4 unsigned, 5 signed & measured against 8 rivals (MM~\mm{25.90}) \\*
+int16/uint16 → fp32 & \op{11180} & exact; code 2 unsigned, 3 signed & measured (MM~\mm{25.195}) \\*
+uint32 → half & \op{11182} & RNE; past half's range +inf, not 65504 (2,992
+lanes) & measured (MM~\mm{25.184}) \\*
+fp32 → int32/uint32 & \op{9320}/10 & mode operand 1: truncate toward zero, saturate, NaN → 0 & measured (MM~\mm{25.186}) \\*
+fp32/half/bf16 → fp8 & \op{13618} & RNE, no saturation, every NaN → canonical NaN, over all
+$2^{32}$ fp32 patterns & measured \\*
+\bottomrule
+\end{xltabular}
+
+Remaining conversions (16-bit integer to half, half to integer, uniform-destination forms, fp8 unpack) are in \cref{app:b}.
+
+Apple's float-to-int casts \code{(uint)x} and \code{(int)x} are \op{9320} with code 4 or 5 and mode
+operand 1; the instruction bytes are \hash{2f00001a2200ae02b003} and \hash{2f00001a2200ae027001}. Over 4,096 lanes each, drawn to
+cover fractions of both signs, ties, negatives, values past $2^{31}$ and $2^{32}$, NaN, +-inf and ±0: for \code{(uint)x},
+truncate-and-saturate matches every lane, RNE-and-saturate misses 326 and truncate-and-wrap misses 1,974; for \code{(int)x},
+truncate-and-saturate matches every lane and RNE-and-saturate misses 653 (measured, MM~\mm{25.186}). On \code{(uint)(-5.5)}, which
+Metal leaves undefined, the instruction gives 0; this compiler now emits it in place of its own earlier decomposition
+(\cref{app:a}).
+
+Because the conversion saturates, it maps NaN to 0, +Inf to 2,147,483,647 and −Inf to −2,147,483,648 on its own, and the
+usual "safe" \code{maxnum}/\code{minnum} clamp placed before it changes the NaN result: it sends NaN to the clamp's lower bound (−127 for an
+int8 quantizer) (measured, MM~\mm{25.50}, MM~\mm{17} rule 17).
+
+Signedness codes are per form: 4/5 on the 32-bit integer-to-fp32 and fp32-to-integer conversions, 2/3 on the 16-bit
+integer-to-fp32 conversion. On the integer-to-float forms operand 2 is signedness: an unsigned code converts a negative
+int32 to a value near $2^{32}$ (MM~\mm{25.90}). Canonical NaNs by destination: fp32 0x7fc00000, half 0x7e00, bfloat 0x7fc0.
+
+\section{Special-function instructions}\label{sec:special-function-instructions}
+
+\op{3850}, \op{1272} and \op{2570} are what Apple's compiler selects for \code{rsqrt},
+\code{exp2} and \code{log2}, each at 10 bytes (MM~\mm{25.73}); \op{3658} and \op{3978} complete the
+set. sqrt-safe rsqrt returns 1.0 at 0 where the seed returns +inf, so \code{fast\_sqrt}'s \code{x * rsqrt(x)} gives 0 at 0 where the
+seed would give NaN (MM~\mm{6}). A \op{3946} is emitted by \code{cos}, \code{sin} and \code{cospi}.
+
+Each special function was dispatched with a sentinel over every output, compared with the correctly
+rounded value, and run twice (\cref{tab:special-functions}). The columns come from three different input populations, so percentages should not be
+compared across columns.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.66\hsize}X>{\hsize=0.72\hsize}X>{\hsize=1.33\hsize}X>{\hsize=1.28\hsize}X@{}}
+\caption{Accuracy and structure of the special-function instructions. Each column uses its own input population.}\label{tab:special-functions}\\
+\toprule
+Function & 1,024-input probe (MM~\mm{25.136.3}) & Dense or full measurement & Structure \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Function & 1,024-input probe (MM~\mm{25.136.3}) & Dense or full measurement & Structure \\
+\midrule
+\endhead
+\op{3850} & 974 correctly rounded, 39 one ulp high, 11 low & all 3 × $2^{24}$ inputs of three exponent bands: correctly rounded on
+16,051,395 of 16,777,216 (parity, mantissa) keys, +1 ulp on 628,246, −1
+ulp on 97,575; at most 0.82 ulp (MM~\mm{25.141.16}) & exact function: seed(x * 4\^{}k) == seed(x) * 2\^{}-k bit for
+bit, 16,777,216 of 16,777,216 at k = −8 and k = +5; \opn{3850}(0) = +inf \\*
+\op{3658} & 931 exact, 91 high, 2 low &  & within one ulp; a subnormal result flushes to signed zero (MM
+\mm{25.109}) \\*
+\op{1272} & 632 exact, 387 high, 5 low & 496,131 inputs on t in {[}-127, 1{]}: 64.2 percent exact, 35.6 percent
++1 ulp, 0.17 percent −1 ulp; within 1.03e-7 relative over t in {[}-30,
+0{]} (MM~\mm{25.144.2}) & deterministic (0 of 496,131 differ across dispatches); no
+compact law \\*
+\op{2570} &  &  & Apple's compiler emits it; accuracy not measured \\*
+\bottomrule
+\end{xltabular}
+
+The rsqrt result came from sweeping whole bands of $2^{24}$ inputs at three
+exponents (E = 127, 111 and 137) and testing the law seed(x * 4\^{}k) == seed(x) * 2\^{}-k across them. It held on every input
+at both shifts, so one table over (exponent parity, mantissa) reproduces the instruction everywhere on positive normals; the table
+is \code{isa/g17-rsqrt-seed.npz} and reproduces all 3 × $2^{24}$ hardware values. The same method does not work for hardware exp2. The
+analogous law exp2hw(t + n) == exp2hw(t) * 2\^{}n holds on only 88 percent of inputs at n = 1 and 4 percent at n = 40,
+because the fp32 add that forms t + n re-rounds the fraction and the instruction depends on its full input. The best constant-bias model,
+f32(exp2(t) + 0.36 ulp), matches 97.1 percent, and a dense table would need about $10^{9}$ entries (MM~\mm{25.144.2}).
+
+Kernels that use rsqrt and reciprocal are checked differently from kernels that use exp2.
+
+\begin{itemize}
+\item rsqrt and reciprocal are made correctly rounded on the GPU by an exact integer midpoint test. For a candidate a, the
+  midpoint to its successor is (2 Ma + 1) $2^{Ea - 151}$; 1/sqrt(x) lies below it exactly when
+  Mx (2 Ma + 1)\^{}2 > $2^{452 - Ex - 2 Ea}$, and 1/g exactly when Mg (2 Ma + 1) > $2^{301 - Eg - Ea}$. The products are formed in
+  15-bit limbs with \op{10825}; a tie is impossible because 2 Ma + 1 is odd and at least $2^{24}$; and
+  y0 - 1 + {[}f above mid(y0 - 1, y0){]} + {[}f above mid(y0, y0 + 1){]} is correctly rounded whenever the seed is within one ulp.
+  On the probe the corrected values equal the correctly rounded ones on 1,024 of 1,024 (measured, MM~\mm{25.136}). Scope:
+  positive normal inputs with a normal result; a seed two ulps off is not repaired. Alternatively, the seed alone is
+  reproducible from its table.
+\item exp2 has neither route, since no cheap exact test decides 2\^{}t against a midpoint, and no compact model reproduces hardware
+  exp2. A kernel that uses hardware exp2 (attention softmax, GELU) is checked against an \emph{enclosure}: each output must
+  lie inside the interval a reference derives when exp2 and reciprocal may each be −1, 0 or +1 ulp off (MM~\mm{25.109},
+  MM~\mm{25.114}, MM~\mm{25.144.2}), and is never claimed bit-exact. Where bit-exactness is required this compiler uses \code{exp2\_soft},
+  a fixed RNE sequence (clamp to {[}-125, 125{]}, split off rint(t), a degree-7 Taylor polynomial in Horner form, the integer
+  part added to the exponent field), within one ulp of 2\^{}t and exact on 90.6 percent of 800,000 inputs (MM~\mm{25.136}). For
+  replay the emulator reads hardware exp2 and hardware reciprocal from sparse tables of the inputs real programs feed them and refuses any
+  other input (MM~\mm{25.145.4}).
+\end{itemize}
+
+Library functions have these measured edges (MM~\mm{6}): \code{air.fast\_tanh(t)} returns NaN for t ≥ 44.364; \code{air.fast\_divide} and \code{air.erf} do not
+lower on this toolchain.
+
+\section{Scalar dependences and issue}\label{sec:dependences-issue-scalar}
+
+Which producers need a wait, and what an unwaited consumer reads, are \cref{sec:scoreboard}'s: ordinary ALU to ALU is interlocked
+(52 of 52 adjacent pairs, MM~\mm{25.90}), late values (loads, atomic returns and the other memory producers) are not, and
+whether an ALU consumer of an MMA result is interlocked is \emph{open} (MM~\mm{6}).
+
+\begin{itemize}
+\item Without the wait, scalar consumers read the old contents: a compare read the register's previous value
+  (\code{isa/g17-scalar-isa.toml}), the six-byte fp32 fma got 0 of 32 lanes right (MM~\mm{25.90}), and an indirect load differing in
+  one wait bit got 1 of 32 lanes right without it and 32 of 32 with it (MM~\mm{25.145}).
+\item Some forms cannot carry the wait. On \op{11372} the load-wait position
+  of the other forms is an opcode bit; on \op{798} the field is not located. \emph{This compiler} routes
+  such an operand through one waited copy, \op{10279} with 0 (\code{agxforge/g17/cc.py}, MM~\mm{25.196}).
+\item A load whose result is never read is still in flight. Reusing its destination while the load was outstanding let it land late and
+  overwrite the new value (rows 2 and 9 of 16 failed); a register an outstanding load will fill must not be written
+  (measured, MM~\mm{25.114}).
+\item Special-register reads publish a slot but need no wait in the measured form (\cref{sec:read-latency-whether}).
+\item Issue intervals, latency classes and the absence of fp32/int32 dual issue are \cref{ch:performance}'s.
+\end{itemize}
+
+\textbf{Safe assumptions.} The numerics above hold for the forms and lengths named, within each measurement's stated
+domain. For a released register nothing holds beyond "zero or the old value".
+
+\textbf{Not known.} NaN into saturate or truncate; negate and abs on the float select; the bit test with high-bit operands;
+the mode-SET layout of \op{10369}; hardware log2's accuracy; the trig op's
+function; the integer-modifier signedness bit beyond two opcodes; half results where rounding once and through fp32 differ
+on forms other than \op{776} and \op{11182}.
+
+\textbf{Evidence.} MM~\mm{5}, MM~\mm{6}, MM~\mm{17} (rules 17, 21, 22), MM~\mm{24.8} (row T4), MM~\mm{25.50}, MM~\mm{25.59}, MM~\mm{25.73}, MM~\mm{25.76}, MM~\mm{25.77},
+MM~\mm{25.80}, MM~\mm{25.90}, MM~\mm{25.95}, MM~\mm{25.109}, MM~\mm{25.114}, MM~\mm{25.136}, MM~\mm{25.139.1}, MM~\mm{25.141.16}, MM~\mm{25.141.17}, MM~\mm{25.144.2},
+MM~\mm{25.145}, MM~\mm{25.145.1}, MM~\mm{25.145.4}, MM~\mm{25.180}, MM~\mm{25.184}, MM~\mm{25.186}, MM~\mm{25.192}, MM~\mm{25.195}, MM~\mm{25.196};
+\code{isa/g17-condition-codes.toml}, \code{isa/g17-comparison-semantics.json}, \code{isa/g17-scalar-isa.toml}, \code{ledger/notes.toml},
+\code{ledger/claims.toml}, \code{tools/g17emu.py}, \code{agxforge/g17/cc.py}.

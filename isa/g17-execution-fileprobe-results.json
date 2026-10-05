@@ -1,0 +1,526 @@
+[
+ {
+  "id": "g.13588.3",
+  "op": 13588,
+  "length": 4,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 13588,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "030a1c08"
+   ],
+   "opcodes": [
+    684,
+    11842,
+    13588,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   12
+  ],
+  "identities": [
+   1,
+   2,
+   0,
+   0,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   2,
+   3
+  ],
+  "written": []
+ },
+ {
+  "id": "g.13588.11",
+  "op": 13588,
+  "length": 4,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 13588,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "031a1c08"
+   ],
+   "opcodes": [
+    684,
+    11842,
+    13588,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   2052
+  ],
+  "identities": [
+   1,
+   2,
+   0,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   0,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   2,
+   11
+  ],
+  "written": []
+ },
+ {
+  "id": "g.11463.3",
+  "op": 11463,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11463,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "528f254b21810402"
+   ],
+   "opcodes": [
+    684,
+    11463,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 3 read back as 0x00000001, which is neither its identity 1<<3 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "g.11463.11",
+  "op": 11463,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11463,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "d28f254b21810402"
+   ],
+   "opcodes": [
+    684,
+    11463,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "status": "identity-corrupt",
+  "why": "register 11 read back as 0x00000001, which is neither its identity 1<<11 nor zero; the program did something this cannot describe"
+ },
+ {
+  "id": "g.11364.3",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "020b0f82820414022080"
+   ],
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   0,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   3
+  ],
+  "written": []
+ },
+ {
+  "id": "g.11364.11",
+  "op": 11364,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11364,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "021b0f82820414022080"
+   ],
+   "opcodes": [
+    684,
+    11364,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1
+  ],
+  "identities": [
+   0,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   0,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   0,
+   11
+  ],
+  "written": []
+ },
+ {
+  "id": "g.11507.3",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "020c1d0e81050d00"
+   ],
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "g.11507.11",
+  "op": 11507,
+  "length": 8,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 11507,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "020c1d0e810d0d00"
+   ],
+   "opcodes": [
+    684,
+    11507,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   0,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [
+   5
+  ],
+  "written": []
+ },
+ {
+  "id": "g.10370.3",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0a02a3b24300840a8a8a"
+   ],
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ },
+ {
+  "id": "g.10370.11",
+  "op": 10370,
+  "length": 10,
+  "nsrc": 4,
+  "decoded": {
+   "ok": true,
+   "want": 10370,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "0a02a3b04300840a8a8a"
+   ],
+   "opcodes": [
+    684,
+    10370,
+    11842,
+    17244,
+    17262
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0
+  ],
+  "identities": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512,
+   1024,
+   2048,
+   4096,
+   8192,
+   16384,
+   32768,
+   65536,
+   131072,
+   262144,
+   524288,
+   1048576,
+   2097152,
+   4194304,
+   8388608
+  ],
+  "status": "ok",
+  "runs": 3,
+  "freed": [],
+  "written": []
+ }
+]

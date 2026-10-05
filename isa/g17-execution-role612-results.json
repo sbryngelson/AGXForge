@@ -1,0 +1,113 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "h612.role",
+  "op": 612,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270000422120a10214001c18",
+    "270000422120a10214001c18",
+    "270000422120a10214001c18",
+    "270000422120a10214001c18"
+   ],
+   "from_template": false,
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "h408.maskhole",
+  "op": 408,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 408,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230006083a20a3020404",
+    "230006083a20a3020404",
+    "230006083a20a3020404",
+    "230006083a20a3020404"
+   ],
+   "from_template": false,
+   "opcodes": [
+    408,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   57057,
+   0,
+   239,
+   43981
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

@@ -1,0 +1,107 @@
+{
+ "note": "Apple's opcode for each form this backend emits, keyed by the form, its length, and only those fields that select the opcode. Harvested once so that G17Program.abi() can name its own instructions without forking the vendor's disassembler. A key this table does not carry is an error at ABI time, not a fallback.",
+ "opcodes": {
+  "acc.ffma.f16|12": 798,
+  "alu.12|12|op=3|mode=0|src1_w=1|srcb_w=1|dest_w=1": 10282,
+  "alu.12|12|op=3|mode=1|src1_w=0|srcb_w=1|dest_w=0": 10289,
+  "alu.12|12|op=3|mode=1|src1_w=0|srcb_w=1|dest_w=1": 10280,
+  "alu.12|12|op=3|mode=1|src1_w=1|srcb_w=1|dest_w=0": 10288,
+  "alu.12|12|op=3|mode=1|src1_w=1|srcb_w=1|dest_w=1": 10279,
+  "atomic.add.10|10|aop=0": 10090,
+  "atomic.add.10|10|aop=1": 10090,
+  "atomic.add.12|12|aop=0": 10090,
+  "atomic.tg.uniform.12|12": 11765,
+  "atomic.uniform.10|10": 10094,
+  "barrier|6": 447,
+  "branch.cond.back|10": 458,
+  "branch.cond.fwd|10": 462,
+  "cmp.6|6": 10369,
+  "cvt.f16.f32|12": 1004,
+  "cvt.f2i|10": 9320,
+  "cvt.f32.f16|12": 1016,
+  "end|4": 684,
+  "exec.mask|4": 582,
+  "exec.restore|4": 577,
+  "ffma.f16|12": 798,
+  "load.10|10|half=1": 12646,
+  "load.14|14|half=0|narrow=0|hi16=0": 12682,
+  "load.14|14|half=1|narrow=0|hi16=0": 12646,
+  "load.14|14|half=1|narrow=0|hi16=1": 12646,
+  "load.8|8": 12682,
+  "load.ib.32|14": 12151,
+  "load.vec2.14|14": 12691,
+  "load.vec3.14|14": 12700,
+  "load.vec4.14|14": 12709,
+  "load.vec4.8|8": 12709,
+  "mov.4|4": 586,
+  "mov.half.4|4": 590,
+  "mov.word.4|4": 586,
+  "movimm.2|2": 11842,
+  "movimm.8|8": 11842,
+  "movimm16.zero.4|4": 555,
+  "publish.coord.x|4": 592,
+  "publish.coord.y|4": 592,
+  "read_sr.4|4|half=0": 14060,
+  "read_sr.4|4|half=1": 14060,
+  "read_sr.4|4|half=None": 14059,
+  "simd.broadcast.10|10": 14157,
+  "store.14|14|half=None|n=2": 17244,
+  "store.14|14|half=None|n=3": 17253,
+  "store.14|14|half=None|n=4": 17262,
+  "store.8|8|half=None|n=2": 17244,
+  "store.8|8|half=None|n=3": 17253,
+  "store.8|8|half=None|n=4": 17262,
+  "store.elem1.10|10": 17235,
+  "store.elem1.14|14": 17235,
+  "store.elem1.8|8": 17235,
+  "store.half.14|14": 17193,
+  "store.half1.10|10": 17199,
+  "store.half1.14|14": 17199,
+  "store.half1.8|8": 17199,
+  "store.halfvec.14|14|n=2": 17208,
+  "store.halfvec.14|14|n=3": 17217,
+  "store.halfvec.14|14|n=4": 17226,
+  "store.ib.32|14": 13075,
+  "store.vec4.8|8": 17256,
+  "texture.read.32|8": 15813
+ },
+ "selectors": {
+  "alu.12": [
+   "op",
+   "mode",
+   "src1_w",
+   "srcb_w",
+   "dest_w"
+  ],
+  "atomic.add.10": [
+   "aop"
+  ],
+  "atomic.add.12": [
+   "aop"
+  ],
+  "load.10": [
+   "half"
+  ],
+  "load.14": [
+   "half",
+   "narrow",
+   "hi16"
+  ],
+  "load.8": [],
+  "read_sr.4": [
+   "half"
+  ],
+  "store.14": [
+   "half",
+   "n"
+  ],
+  "store.8": [
+   "half",
+   "n"
+  ],
+  "store.halfvec.14": [
+   "n"
+  ]
+ },
+ "source": "tools/g17formops.py --refresh"
+}

@@ -1,0 +1,232 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "cf.barrier.op447",
+  "op": 447,
+  "length": 6,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 447,
+   "found": 13,
+   "cases": 1,
+   "encoded": [
+    "275100060000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    447,
+    684,
+    11842,
+    12364,
+    13288,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1515852340
+  ],
+  "status": "ok",
+  "match": [
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "cf.exec.op577",
+  "op": 577,
+  "length": 4,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 577,
+   "found": 12,
+   "cases": 2,
+   "encoded": [
+    "3e03400e"
+   ],
+   "from_template": false,
+   "opcodes": [
+    577,
+    582,
+    684,
+    10369,
+    11842,
+    14059,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735928559,
+   286326784
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "cf.exec.op582",
+  "op": 582,
+  "length": 4,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 582,
+   "found": 12,
+   "cases": 2,
+   "encoded": [
+    "1e00000e"
+   ],
+   "from_template": false,
+   "opcodes": [
+    577,
+    582,
+    684,
+    10369,
+    11842,
+    14059,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735928559,
+   286326784
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "cf.loop.op458",
+  "op": 458,
+  "length": 10,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 458,
+   "found": 13,
+   "cases": 2,
+   "encoded": [
+    "de1ffb1e1f00ffc7ff7f"
+   ],
+   "from_template": false,
+   "opcodes": [
+    458,
+    577,
+    582,
+    684,
+    10279,
+    10369,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "cf.end.op684",
+  "op": 684,
+  "length": 4,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 684,
+   "found": 6,
+   "cases": 2,
+   "encoded": [
+    "0e000000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

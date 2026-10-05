@@ -1,0 +1,247 @@
+{
+ "generator": "tools/g17immaddrprobe.py",
+ "grid": [
+  [
+   1,
+   1,
+   1
+  ],
+  [
+   1,
+   1,
+   1
+  ]
+ ],
+ "per_form": {
+  "op12688": {
+   "controls_separating": {
+    "load_low_byte": 5,
+    "load_reversed": 3,
+    "store_first_only": 3
+   },
+   "sources_agreeing": 5
+  },
+  "op12715": {
+   "controls_separating": {
+    "load_low_byte": 6,
+    "load_reversed": 6,
+    "store_first_only": 6
+   },
+   "sources_agreeing": 6
+  },
+  "op17244": {
+   "controls_separating": {
+    "load_low_byte": 1,
+    "load_reversed": 1,
+    "store_first_only": 2
+   },
+   "sources_agreeing": 2
+  },
+  "op17262": {
+   "controls_separating": {
+    "load_low_byte": 6,
+    "load_reversed": 6,
+    "store_first_only": 8
+   },
+   "sources_agreeing": 8
+  }
+ },
+ "rows": [
+  {
+   "code_sha256": "9330a5cf7d15887d5e112ffd0b88eeb8b68d8b8816946f5e7ff788e0db28fddc",
+   "controls": {
+    "load_low_byte": "MATCHES the GPU",
+    "load_reversed": "MATCHES the GPU",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    17262
+   ],
+   "gpu_outputs_sha256": "23b8489b9c7783c7f3b9deff19872978af51fc342dd6c82ec7bec63949eb9760",
+   "gpu_wrote_bytes": 131,
+   "inputs_sha256": "f63cf100045b22a05cf28abd6ea13a4447e24722808ff1f197c7568e9557a9ae",
+   "source_sha256": "b0a2e81876055e1f8bce496e8cbac0c6e757cdad8f0f45b03f4d9669ea59968e",
+   "status": "ok",
+   "tag": "gap32-33"
+  },
+  {
+   "code_sha256": "319e83c99222f627a9f6201bf4e04c65040f4e31e088c6d7a5e02a0ee2c03480",
+   "controls": {
+    "load_low_byte": "MATCHES the GPU",
+    "load_reversed": "MATCHES the GPU",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    17244,
+    17262
+   ],
+   "gpu_outputs_sha256": "ebd7fffa220fabfab199cca4f1a11d0fed7a71d43f2e65da5d1b789f567eeb74",
+   "gpu_wrote_bytes": 24,
+   "inputs_sha256": "7b2bf2b403bfe0b7385c1a37a2d256a3fbf0d81506b92a89ce3e1d86bd59c058",
+   "source_sha256": "cc76e6f16fb7067c6a6f563983aa659faae9caf385952da899603c713fd1e57a",
+   "status": "ok",
+   "tag": "gap32c-6-0"
+  },
+  {
+   "code_sha256": "7e40481855ba9e145039f113990055ed71246aed5c298999f41e148c9855962b",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "MATCHES the GPU",
+    "store_first_only": "MATCHES the GPU"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12688
+   ],
+   "gpu_outputs_sha256": "10ce679d0b3d9990bca3e1ff44b36dea6d954df4a4c94020b709e468237b0aaa",
+   "gpu_wrote_bytes": 8,
+   "inputs_sha256": "48a91bbb5c2065c224b6d84a81925c7163dacb652bf12da7511afc8ab3637961",
+   "source_sha256": "719b5486ff79da07aba3eb7d90e4627441c71fdd7b3315a91f88ee4697704d6f",
+   "status": "ok",
+   "tag": "syn-s09b3736f39"
+  },
+  {
+   "code_sha256": "49cafe66ced60673d34b32cdb6d1d0747b932bf6dd143362028ec4efa7a2cbbe",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "differs",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12688,
+    12715,
+    17244,
+    17262
+   ],
+   "gpu_outputs_sha256": "edb2e5bc0314b0f7843270956f95e485fbafa1c9de0170e0d9270e4fc237f2e8",
+   "gpu_wrote_bytes": 28,
+   "inputs_sha256": "d457eeb47b1963db751c96f4a4214347770b47760b1caa678b6419f6a0ef9d27",
+   "source_sha256": "132cf5a57d898c89f5616040efa2e474367ed0583dd4ecd711b69cee01be50a0",
+   "status": "ok",
+   "tag": "syn-s341b2cf313"
+  },
+  {
+   "code_sha256": "a7b2adbe8963291c81103dce7ce1d813757ae86ad4b3297c6d274c5ba1da0bb0",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "differs",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12715,
+    17262
+   ],
+   "gpu_outputs_sha256": "091c162a8947e997fe947cc3c3aab902943211aad04b97a9750dd61651364376",
+   "gpu_wrote_bytes": 20,
+   "inputs_sha256": "db959a8780a051d363720fc32f3c118acf283f34589f6aa4feb2fc049e0304b3",
+   "source_sha256": "61032a307ec3f6bdd63133f64c77ccbb2ff577b49a16dd31e8b0fd321ae292d8",
+   "status": "ok",
+   "tag": "syn-s61bc1da675"
+  },
+  {
+   "code_sha256": "78d3ff40ad1fb96c39718d097c7cae0b76f2d63467b7bb5bd553dedb66736c98",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "differs",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12688,
+    12715,
+    17262
+   ],
+   "gpu_outputs_sha256": "00266d59a7caabfead198c03c9be45010fb1de1db065774fea7e1c2c7dffd50d",
+   "gpu_wrote_bytes": 23,
+   "inputs_sha256": "e7d85c78c04ee99ddcb357d9f7fc3a57034ec6de0a0a275e4fabfa14c5f48041",
+   "source_sha256": "099fcba259f1bbafa8690de4a6fb3a3dec1dbe4404c716f12130fa192ad7b59a",
+   "status": "ok",
+   "tag": "syn-s78642ccc6a"
+  },
+  {
+   "code_sha256": "7540e6757fa5f770172ec65e03a238cd2813f8839bc8d6f8cfbe3767931cf8b9",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "differs",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12715,
+    17262
+   ],
+   "gpu_outputs_sha256": "da0bc8897e6edcc9f77c5bf276bb7e3f65de8e77f06344a927c2359bf423a476",
+   "gpu_wrote_bytes": 55,
+   "inputs_sha256": "d41465422673af7f45b6c5777b7b2abb827b4be33382ae2f36f40c388e30aeac",
+   "source_sha256": "7991c8edd9ce493b4cc9e1d29f9d7e56c635811a97638b9a7ca667e66e29811a",
+   "status": "ok",
+   "tag": "syn-sf1cc51860e"
+  },
+  {
+   "code_sha256": "d6fbfc94474af7d1884836188d4d89d97fba3bc191bc490589b12790e2004a58",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "MATCHES the GPU",
+    "store_first_only": "MATCHES the GPU"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12688
+   ],
+   "gpu_outputs_sha256": "c69ecd7d8888b34e45bc53c716162ece25d9d10d1f399996130fba058cbe435a",
+   "gpu_wrote_bytes": 8,
+   "inputs_sha256": "10989e670b9fb25bbd019d83337b76de8bcb0c4892d62775f2002c93559acb7a",
+   "source_sha256": "195cf7ede770d52957a036d43a1b026dcab1753465826e887ba1728903440ab1",
+   "status": "ok",
+   "tag": "syn-sf503732f5e"
+  },
+  {
+   "code_sha256": "1dabe688a0ad550f4db9c5c4f817480e8a43ca226adb38b9a43ceb8039b4e7cb",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "differs",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12715,
+    17262
+   ],
+   "gpu_outputs_sha256": "7fa1f6c3770b4e916e5db3d1fb7ef20ac80e69ae537d137ec618c00c771bac52",
+   "gpu_wrote_bytes": 19,
+   "inputs_sha256": "4c49cbfd43e45250125003384c1c9f4bd82b4b8215ecc611634c6c20084d7745",
+   "source_sha256": "713ec06c0d66165fb70113f92f6b290704fbc6ba865950a30f44ff19eb885d8a",
+   "status": "ok",
+   "tag": "syn-sf887c90853"
+  },
+  {
+   "code_sha256": "b71b413a329fbc5f871ea8583c38d18d2c962ba32e1da4dbe99a173c457b3ad1",
+   "controls": {
+    "load_low_byte": "differs",
+    "load_reversed": "differs",
+    "store_first_only": "differs"
+   },
+   "emulated_equals_gpu": true,
+   "forms": [
+    12688,
+    12715,
+    17262
+   ],
+   "gpu_outputs_sha256": "4989d6995ae84ced0b55ff33fe4546f8821c2e51639783c08ba48d299283d14f",
+   "gpu_wrote_bytes": 24,
+   "inputs_sha256": "9d744d0d1c4abb2e3557d801a6820843d77a2e3e3f0c8fdea3227543c58cbfcc",
+   "source_sha256": "e3b4122dba22d0e2b847ccb3bb536a6ae2ec9ec53d8df9642c24a282217d84e3",
+   "status": "ok",
+   "tag": "syn-sfbb623ecab"
+  }
+ ],
+ "summary": {
+  "agree": 10,
+  "dispatched": 10,
+  "sources": 10
+ }
+}

@@ -1,0 +1,778 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D1016.l6",
+  "op": 1016,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 1016,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "290004482a30a00284064200",
+    "290004482a30a00284064200",
+    "290004482a30a00284064200",
+    "290004482a30a00284064200"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    1016,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15360,
+   16384,
+   17408,
+   18432
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.delivery.d10282.l12.s2",
+  "op": 10282,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10282,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2f00041a2980a302a8882400",
+    "2f00041a2980a302a8882400",
+    "2f00041a2980a302a8882400",
+    "2f00041a2980a302a8882400"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   12288,
+   12289,
+   12290,
+   12544
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D10282.l12",
+  "op": 10282,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10282,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2f00041a2980a302a8882400",
+    "2f00041a2980a302a8882400",
+    "2f00041a2980a302a8882400",
+    "2f00041a2980a302a8882400"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   12288,
+   12289,
+   12544,
+   16384
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.delivery.d10793.l12.s2",
+  "op": 10793,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10793,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004422900a902a8880030",
+    "270004422900a902a8880030",
+    "270004422900a902a8880030",
+    "270004422900a902a8880030"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10793,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   16781312,
+   17825792
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D10793.l12",
+  "op": 10793,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10793,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004422900a902a8880030",
+    "270004422900a902a8880030",
+    "270004422900a902a8880030",
+    "270004422900a902a8880030"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10793,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   17825792,
+   33554432
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.delivery.d10825.l14.s2",
+  "op": 10825,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10825,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700041a2180a102a88820000102",
+    "2700041a2180a102a88820000102",
+    "2700041a2180a102a88820000102",
+    "2700041a2180a102a88820000102"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10825,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   16781312,
+   17825792
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D10825.l14",
+  "op": 10825,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10825,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700041a2180a102a88820000102",
+    "2700041a2180a102a88820000102",
+    "2700041a2180a102a88820000102",
+    "2700041a2180a102a88820000102"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10825,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   17825792,
+   33554432
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D10828.l14",
+  "op": 10828,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10828,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700041a2980a102a80800000102",
+    "2700041a2980a102a80800000102",
+    "2700041a2980a102a80800000102",
+    "2700041a2980a102a80800000102"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10828,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   17825792,
+   33554432
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D10834.l14",
+  "op": 10834,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10834,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2f00041a2180a102a08820000102",
+    "2f00041a2180a102a08820000102",
+    "2f00041a2180a102a08820000102",
+    "2f00041a2180a102a08820000102"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10834,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   17825792,
+   33554432
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D10837.l14",
+  "op": 10837,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10837,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700041a2980a102a00800000102",
+    "2700041a2980a102a00800000102",
+    "2700041a2980a102a00800000102",
+    "2700041a2980a102a00800000102"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10837,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   17825792,
+   33554432
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D11190.l8",
+  "op": 11190,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 11190,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2300261a2988a802",
+    "2300261a2988a802",
+    "2300261a2988a802",
+    "2300261a2988a802"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11190,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4294963199,
+   4294963198,
+   4294962943,
+   4294959103
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D13460.l10",
+  "op": 13460,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13460,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230006883338a4028488",
+    "230006883338a4028488",
+    "230006883338a4028488",
+    "230006883338a4028488"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    13460,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4294963199,
+   4294963199,
+   4294963199,
+   4294967295
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D13521.l10",
+  "op": 13521,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13521,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230006883130a4028488",
+    "230006883130a4028488",
+    "230006883130a4028488",
+    "230006883130a4028488"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    13521,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4294963199,
+   4294963198,
+   4294962943,
+   4294955007
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D13548.l10",
+  "op": 13548,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 13548,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230007883330a4028488",
+    "230007883330a4028488",
+    "230007883330a4028488",
+    "230007883330a4028488"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    13548,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4294967295,
+   4294967295,
+   4294967295,
+   4294963199
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D17744.l10",
+  "op": 17744,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17744,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230007883130a4028488",
+    "230007883130a4028488",
+    "230007883130a4028488",
+    "230007883130a4028488"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17744
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4294967295,
+   4294967294,
+   4294967039,
+   4294955007
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.float.f3658.l10",
+  "op": 3658,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3658,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004182aa0a1023000",
+    "270004182aa0a1023000",
+    "270004182aa0a1023000",
+    "270004182aa0a1023000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3658,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065353216,
+   1056964608,
+   1048576000,
+   1040187392
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D3658.l10",
+  "op": 3658,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3658,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004182aa0a1023000",
+    "270004182aa0a1023000",
+    "270004182aa0a1023000",
+    "270004182aa0a1023000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3658,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065353216,
+   1056964608,
+   1048576000,
+   1040187392
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D397.l10",
+  "op": 397,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 397,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230006883a30a4028488",
+    "230006883a30a4028488",
+    "230006883a30a4028488",
+    "230006883a30a4028488"
+   ],
+   "from_template": false,
+   "opcodes": [
+    397,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   1,
+   256,
+   8192
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D465.l10",
+  "op": 465,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 465,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270000883230aa020400",
+    "270000883230aa020400",
+    "270000883230aa020400",
+    "270000883230aa020400"
+   ],
+   "from_template": false,
+   "opcodes": [
+    465,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1,
+   2,
+   2,
+   1
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D469.l10",
+  "op": 469,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 469,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270000083220aa020400",
+    "270000083220aa020400",
+    "270000083220aa020400",
+    "270000083220aa020400"
+   ],
+   "from_template": false,
+   "opcodes": [
+    469,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1,
+   2,
+   2,
+   1
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "regate.sweep.D9986.l10",
+  "op": 9986,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9986,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700001a2a80ab022800",
+    "2700001a2a80ab022800",
+    "2700001a2a80ab022800",
+    "2700001a2a80ab022800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9986,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   12,
+   12,
+   12,
+   13
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

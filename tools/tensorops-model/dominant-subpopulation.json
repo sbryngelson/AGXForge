@@ -1,0 +1,264 @@
+{
+ "fma-pressure": {
+  "length": 8,
+  "opcode": 2190,
+  "reached": true,
+  "runs": [
+   {
+    "examples": [],
+    "high_none": 0,
+    "n": 8,
+    "operand1_values": [],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 71,
+      "operand1": 32,
+      "raw": "29053e0f01fe0215"
+     }
+    ],
+    "high_none": 1,
+    "n": 40,
+    "operand1_values": [
+     32
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 83,
+      "operand1": 32,
+      "raw": "b9173e2741900215"
+     },
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 80,
+      "operand1": 32,
+      "raw": "89113e21418a0215"
+     },
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 77,
+      "operand1": 32,
+      "raw": "590b3e1b41840215"
+     }
+    ],
+    "high_none": 4,
+    "n": 72,
+    "operand1_values": [
+     32
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 83,
+      "operand1": 32,
+      "raw": "b9173e2741900215"
+     },
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 80,
+      "operand1": 32,
+      "raw": "89113e21418a0215"
+     },
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 77,
+      "operand1": 32,
+      "raw": "590b3e1b41840215"
+     }
+    ],
+    "high_none": 4,
+    "n": 96,
+    "operand1_values": [
+     32
+    ],
+    "status": "ok"
+   }
+  ],
+  "target_operand1": 32
+ },
+ "mul-two": {
+  "length": 6,
+  "opcode": 3290,
+  "reached": true,
+  "runs": [
+   {
+    "examples": [
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 1,
+    "n": 8,
+    "operand1_values": [
+     0
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 1,
+    "n": 40,
+    "operand1_values": [
+     0
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 73,
+      "operand1": 32,
+      "raw": "89133d110015"
+     },
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 2,
+    "n": 72,
+    "operand1_values": [
+     0,
+     32
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": true,
+      "has_expr": false,
+      "max_gpr": 91,
+      "operand1": 32,
+      "raw": "a9377d350015"
+     },
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 2,
+    "n": 96,
+    "operand1_values": [
+     0,
+     32
+    ],
+    "status": "ok"
+   }
+  ],
+  "target_operand1": 32
+ },
+ "mul-uniform": {
+  "length": 6,
+  "opcode": 3290,
+  "reached": true,
+  "runs": [
+   {
+    "examples": [
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 1,
+    "n": 8,
+    "operand1_values": [
+     0
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 1,
+    "n": 40,
+    "operand1_values": [
+     0
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 1,
+    "n": 72,
+    "operand1_values": [
+     0
+    ],
+    "status": "ok"
+   },
+   {
+    "examples": [
+     {
+      "above_r63": false,
+      "has_expr": true,
+      "max_gpr": 0,
+      "operand1": 0,
+      "raw": "09010d0d0002"
+     }
+    ],
+    "high_none": 1,
+    "n": 96,
+    "operand1_values": [
+     0
+    ],
+    "status": "ok"
+   }
+  ],
+  "target_operand1": 0
+ }
+}

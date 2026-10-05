@@ -1,0 +1,399 @@
+\chapter{Corrections to earlier interpretations}\label{app:a}
+
+Many readings in the project record were later corrected, and the chapters give the current account. The tables below
+list earlier readings that still appear elsewhere in the repository, each with where it was made and where it was
+corrected, so that a stale statement can be recognized. Where an old reading is likely to be met, the chapter also
+carries a short "Correction" note.
+
+\section{The device, registers, encoding and metadata (chapters 1, 2, 3, 11)}\label{sec:device-registers-encoding-2}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.29\hsize}X>{\hsize=0.77\hsize}X>{\hsize=1.26\hsize}X>{\hsize=0.69\hsize}X@{}}
+\caption{Corrected readings about the device, registers, encoding and metadata.}\label{tab:corr-device-encoding}\\
+\toprule
+Old reading & Where & Current reading & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading & Where & Current reading & Where \\
+\midrule
+\endhead
+R126 and R127 read zero and drop writes & recon section 134 (MM~\mm{19}) & Instructions naming R126–R143 are squashed whole; a zero-filled buffer
+hid it & MM~\mm{10}, MM~\mm{19}, MM~\mm{25.18} \\
+A released register reads zero & MM~\mm{0.15}, MM~\mm{17} rule 37 & 0 in every controlled run; not established as a rule; read only where 0
+and the old value agree & MM~\mm{25.95}, MM~\mm{25.145}, MM~\mm{25.147} \\
+Releases take effect at the end of the instruction (as a general rule) & MM~\mm{25.145} & True of measured ALU forms; the word store reads its value after its
+index's release & MM~\mm{25.117} \\
+\op{798} holes at registers 2 and 3 mod 8 & digest (not MM) & R18, R19, R26, R27, R50, R51, R58, R59 low halves & MM~\mm{25.196} \\
+\op{1004} holes are d = 14, 15 & MM~\mm{25.136.6} & R14, R15, R30, R31, R46, R47, R62+ & MM~\mm{25.133}, \code{agxforge/g17/cc.py} \\
+The register file is 32 (ALU destination five bits; memory fields four
+bits) & early \code{agxforge/g17/cc.py} field map & R0–R125 measured; fields re-measured at seven and eight bits & \code{agxforge/g17/cc.py} (hireg sweep), MM~\mm{10} \\
+IRGPR32 is "a file no instruction writes" & MM~\mm{25.72} / row T4 & its users write ordinary Rn; the class is R0–R143 plus IR0-IR15 & MM~\mm{25.59}, Apple's class table \\
+16 bytes need both byte10 bits 7 and 0 (class 7) & \code{docs/agx-isa-status.md} & True for its population; \code{\_WIDE7\_EXT} rule 12 + 4 × byte10{[}0{]}
+for byte6 in \{0x60, 0x68, 0x70, 0x78\}; neither general & MM~\mm{25}, corpus spans \\
+"Our decode agrees with Apple's framing 400/400" as
+independent evidence & MM~\mm{25.63} & That decode calls Apple's decoder & MM~\mm{25.209} \\
+D1 975, D2 690; only \op{5106}/\op{5107}
+admitted & \code{docs/g17-isa-cartography.md} & D1 7,549 (\val{d1} with the 26A434 decoder), D2 \val{d2}; ten MMA opcodes admitted & \code{docs/g17-isa-reference.md}, MM~\mm{2} \\
+Store "consumer token" with a wait counter & recon sections 15, 22–24 (MM~\mm{19}) & bits 5:4 of the source register number & MM~\mm{19} \\
+MMA high bits are a result ring & recon section 14 (MM~\mm{19}) & eight-bit wait mask over load slots & MM~\mm{6}, MM~\mm{19} \\
+Tensor load slot is operand 1 bits 20–27 & MM~\mm{6} (and chapter 9.1's table) & bits 20–23 slot + 1; bits 24–31 the load's wait mask & \code{agxforge/g17/memenc.py}, decoder flips \\
+Slot 31 and the variable record describe register spill & MM~\mm{25.113} & They describe the constant program & MM~\mm{25.120} \\
+The constant program's uniforms: "6 + number of writes",
+"1 + highest \op{592} uniform" & MM~\mm{25.120} rounds 2, 3b & L3: 1 + max(K // 2) over every writer & MM~\mm{25.120} \\
+76 inert class constants (list itemising 92 bytes) & ledger \code{g17-class-constants-are-mostly-inert} & 76 inert; the descriptor tail is not one of the 148 & MM~\mm{25.148} \\
+LC\_TABLE (0x31) & project tooling & LC\_NOTE & MM~\mm{25.148} \\
+\code{manifest.register\_count} is the program's & delivered manifests & 222 of 247 carry a template's value; read the container & MM~\mm{25.147} \\
+The encoder may accept bytes whose field arithmetic reaches zero
+residual & campaign encoder & must decode back; it once rounded an odd register silently & MM~\mm{2}, MM~\mm{23.3} \\
+\bottomrule
+\end{xltabular}
+
+\section{Scalar arithmetic, control flow, special registers and cross-lane
+operations (chapters 4, 5, 6, 8)}\label{sec:scalar-arithmetic-control-2}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.31\hsize}X>{\hsize=0.75\hsize}X>{\hsize=1.21\hsize}X>{\hsize=0.72\hsize}X@{}}
+\caption{Corrected readings about scalar arithmetic, control flow, special registers and cross-lane operations.}\label{tab:corr-scalar-control}\\
+\toprule
+Old reading & Section & Current reading & Section \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading & Section & Current reading & Section \\
+\midrule
+\endhead
+\op{11375} field code 1 is a ==
+b (cc \code{CSEL\_CC['eq']}) & MM~\mm{25.90} "Was" column & (a \& b) != 0, a bit test; printed code 15 & MM~\mm{25.90}; \code{ledger/claims.toml} \\
+\op{1062} is fsat & MM~\mm{25.90} "Was" column & \opn{1062} is cross-lane dfdx.fine.sat; fp32 saturate is \opn{904} & MM~\mm{25.90} \\
+\op{11179}/10 operand 2 inherited as 4
+(unsigned) for every int-to-float & MM~\mm{25.90} "Was" column & operand 2 is signedness, 4 unsigned, 5 signed & MM~\mm{25.90} \\
+A read\_sr's first consumer must wait (read\_sr is a
+late value) & MM~\mm{6}, MM~\mm{0.8}, MM~\mm{25.90} & slot-0 reads are readable at distance 0; Apple's wait is
+a free policy & MM~\mm{25.117}, MM~\mm{25.121} \\
+A store cannot take a special register as its source (the value "has not
+arrived") & ledger 2026–09-08, MM~\mm{25.117} first claim & the failure was the aliased store release of \op{17229} operand 6 & MM~\mm{25.117} \\
+0x82 = quadgroup\_index\_in\_threadgroup, 0x98 =
+simdgroups\_per\_threadgroup & \code{isa/g17-scalar-isa.toml} & 0x82 = \code{SR\_SIMD\_ELEM} (lane), 0x98 = \code{SR\_TG\_X\_SIZE}; the builtins are
+computed from them & MM~\mm{0.8}, \code{agxforge/g17/mdgen.py} \\
+\code{SR\_SIMD\_GRP} has no generalized slot-29 entry & MM~\mm{0.8} & entry 53 & MM~\mm{25.93}, \code{agxforge/g17/mdgen.py} \\
+A released register reads zero & MM~\mm{0.15}, MM~\mm{17} rule 37 & zero in every controlled measurement; checker assumes zero or old value & MM~\mm{25.95}, MM~\mm{25.145} \\
+The branch is a 4-byte word with a 12-bit displacement & \code{isa/g17-scalar-isa.toml} & 10-byte branch; the 4-byte reading is its first four bytes & \code{agxforge/g17/cf.py}, \code{isa/g17-exec-mask.txt} \\
+Codes 11 and 15 mean not-equal & \code{isa/g17-condition-codes.toml} (prediction) & 15 is the bit-test pattern; 11 unseen & same file (measured row) \\
+(uint)x lowers as a 34-instruction decomposition (gave 5 for −5.5) & MM~\mm{25.186} & one \op{9320}, mode 1 (gives 0) & MM~\mm{25.186}, MM~\mm{25.196} \\
+\op{14060} might zero-extend into the
+high half & MM~\mm{25.145} & it writes only its half & MM~\mm{25.145.4} \\
+\bottomrule
+\end{xltabular}
+
+\section{Memory and synchronization (chapters 7, 9)}\label{sec:memory-synchronization-chapters-2}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.26\hsize}X>{\hsize=0.81\hsize}X>{\hsize=1.24\hsize}X>{\hsize=0.69\hsize}X@{}}
+\caption{Corrected readings about memory and synchronization.}\label{tab:corr-memory-sync}\\
+\toprule
+Old reading & Where & Current reading & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading & Where & Current reading & Where \\
+\midrule
+\endhead
+The device load carries no displacement field; address = base + (index +
+displacement) × sizeof & \code{isa/g17-addressing-rules.json} & Displacement field exists, in bytes, unscaled; the element-count add
+applies to unsigned \code{tid + k}; the (index + displacement) × element
+law is the immediate-address family's & \code{isa/g17-address-formula.txt}, MM~\mm{25.141.18}, MM~\mm{25.177} \\
+Imageblock store operand 1 bit 31 selects shared / coordinate-addressed
+storage & MM~\mm{25.89} (round 9), MM~\mm{25.104.3} rounds 8–9, MM~\mm{25.145.2},
+\code{tools/g17emu.py} comments & Bits 24–31 are the wait mask; bit 31 waits on slot 7 & MM~\mm{25.96}, MM~\mm{25.104} \\
+Cross-threadgroup hand-off requires a dispatch boundary & MM~\mm{0.14} & Fence-count-fence works inside one dispatch; waiting patterns need
+residency & MM~\mm{25.140.5}, MM~\mm{25.141.1} \\
+A threadgroup barrier with mem\_device orders device memory across
+threadgroups & cc's \code{barrier("device")} use, MM~\mm{25.140.5} & It does not; \op{14156} on both sides & MM~\mm{25.140.5} \\
+\code{435/10} is "array", \code{447/6} is "threadgroup atomic" & MM~\mm{25.75} & \op{435}; \op{447} & glossary, MM~\mm{25.192} \\
+\op{10094}'s
+return fills slot 7 & glossary & Fill slot is operand 1 bits 20–23; Apple uses 0/1, this compiler 7 & MM~\mm{25.115} \\
+Simultaneous uniform atomics combine and return a pre-combine value & MM~\mm{25.115} (struck) & Consumer waited on the wrong slot & MM~\mm{25.115} \\
+\op{10094} operand 6 is a source
+lifetime ("16 writes nothing") & ledger \code{g17-the-uniform-atomic-needed-one-lifetime-bit} & Operand 6 is the byte offset & MM~\mm{25.140.3} \\
+\op{10090} has eight unassigned raw
+operation codes & \code{isa/g17-atomic-semantics.json} & Retracted; codes depend on the form's field placement & \code{isa/g17-atomic-family.toml} \\
+\op{621} = (0xFFFFFFFF
+>{}> src) \& 0xF, saturating at 32 & \code{isa/g17-address-formula.txt} (first fit) & mask of min(max(W - src, 0), 4) ones, W = operand 5 & same file, resolved section \\
+Vector displacement is in units of eight bytes & \code{asm.encode\_vec4} & Bytes, for loads & MM~\mm{25.141.18} \\
+The 8-byte \op{17229} has no wait bit & \code{agxforge/g17/cc.py} & Apple's 8-byte \opn{17229} carries operand-1 wait bits;
+this compiler's encoder does not write them & \code{isa/g17-wait-mask-census.json}, MM~\mm{25.146} \\
+Only the accelerator's own reads have faulted & MM~\mm{17} rule 34 & Through Metal; below Metal, launch-state errors fault & \code{docs/g17-first-dispatch-trials.md} \\
+A "three-bit store limit" on wait masks & an earlier recon section, recalled in MM~\mm{6} & Encoder-table artifact; \op{17256} uses all eight
+bits & MM~\mm{6} \\
+Load-to-use about 121~ns & MM~\mm{25.97} & L1 at idle clock; 30.5~ns warm (numbers in ch 12) & MM~\mm{25.121} \\
+\bottomrule
+\end{xltabular}
+
+\section{The tensor unit and performance (chapters 10, 12)}\label{sec:tensor-unit-performance-2}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.32\hsize}X>{\hsize=0.75\hsize}X>{\hsize=1.32\hsize}X>{\hsize=0.61\hsize}X@{}}
+\caption{Corrected readings about the tensor unit and performance.}\label{tab:corr-tensor-performance}\\
+\toprule
+Old reading & Section & Current reading & Section \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading & Section & Current reading & Section \\
+\midrule
+\endhead
+An fp32 value above 464 gives the (positive) canonical NaN in e4m3fn & MM~\mm{0.11} & An fp8 overflow keeps its sign (0xff / 0xfc for negatives); only NaN
+inputs become positive canonical NaN & MM~\mm{25.105}, MM~\mm{25.105.1} \\
+Hot loops: about 26 KiB, roughly 2,800 instructions & MM~\mm{0.1}, MM~\mm{7} & The step is at a 16 KiB loop body (15,971 fast); no cost at 26–64
+simdgroups per core & MM~\mm{19}, MM~\mm{25.144.12} \\
+Instruction-footprint cliff at (16,066, 17,158{]} whole-kernel bytes & recon 156 via MM~\mm{19} & The variable is the loop body, bracketing 16 KiB & MM~\mm{19} \\
+Hardware counters: timestamps only (read as "no counters exist") & MM~\mm{0.15}, MM~\mm{25.48}, MM~\mm{25.141.6} & True of Metal's public API;
+Instruments' limiter template records 89 counters & MM~\mm{25.144.4} \\
+Limiter counters not reachable without Apple's GUI or
+entitlement ("M4 status") & MM~\mm{25.144.4} (earlier bullet) & Reachable via \code{xctrace} with the GUI-saved template & MM~\mm{25.144.4} (later recording) \\
+Power was not measured & MM~\mm{20} & GPU-rail power measured on both engines & MM~\mm{25.56}, MM~\mm{25.60} \\
+H5 (destination keep flag) open & MM~\mm{20} & Set implies the next MMA writes the same tuple; hardware-inert & MM~\mm{6}, MM~\mm{25.22} \\
+Saturation with transposes, chains, high registers not run & MM~\mm{20} & Saturation holds under transpose; clips once per issue in a chain & MM~\mm{25.42}, MM~\mm{25.89} \\
+fp32 operand subnormals flush to zero & recon 5 via MM~\mm{19}; \code{tensorops\_model.py} line 12 docstring & Low 13 bits cleared only; subnormals kept & MM~\mm{5}, MM~\mm{19} \\
+\op{5100} / \op{5101} never compiler-emitted & recon 27, 104 via MM~\mm{19} & Emitted under \code{relaxed\_precision} & MM~\mm{19}, MM~\mm{17} rule 29 \\
+Destination layout is a property of the opcode & recon 100 via MM~\mm{19} & One map; \code{pos\_b(k,c) = pos(rotl1(k), c)}; the difference is the
+producing kernel's row labeling & MM~\mm{3}, MM~\mm{19} \\
+The hardware performs the matrix-to-fragment transposition & MM~\mm{19} & No tile-layout unit; ALU address arithmetic makes the layout & MM~\mm{7}, MM~\mm{19} \\
+MMA high flag bits are an eight-slot result ring & recon 14 via MM~\mm{19} & An 8-bit wait mask over eight load slots & MM~\mm{6}, MM~\mm{19} \\
+Two MMA hazards (stored result to register consumer; back-to-back MMAs) & recon 112 via MM~\mm{19} & Host dispatch-scoping (\code{dim}) artifact & MM~\mm{19}, MM~\mm{17} rule 5 \\
+\code{matmul2d} allows one \code{run()} per kernel; chain must cross a
+kernel boundary & recon 108, 121 via MM~\mm{19} & Slice offsets misread; single-kernel chain works & MM~\mm{19} \\
+Feed relabelings are instruction properties & MM~\mm{0.10}, MM~\mm{13}, MM~\mm{17} rules 9–11 (unscoped text) & Only for kernels that pack A and D canonically; under this
+compiler's B-row packing the feeds read the logical operand (\cref{sec:coordinate-systems}) & MM~\mm{25.103} \\
+Two reduction axes follow different orders & recon 120 via MM~\mm{19} & One rule: per-lane chain then butterfly over the axis lane bits & MM~\mm{12}, MM~\mm{19} \\
+Reduction sums run descending & recon 19 via MM~\mm{19} & Direction belongs to the compiled object (fast-math) & MM~\mm{12}, MM~\mm{19} \\
+Legacy MMA and tensor unit share one issue slot & recon 31 via MM~\mm{19} & Complete overlap at saturation; partial overlap is in-order issue & MM~\mm{9}, MM~\mm{19} \\
+Legacy MMA overlaps fp32 fma 81–86 percent & MM~\mm{19} (first version of recon 152) & True of \op{838} only; class-118 forms
+0.37 or less & MM~\mm{9}, MM~\mm{19} \\
+Occupancy is slot-limited, not register-limited (20–116 registers) & recon 167 via MM~\mm{19} & Direct counter: 44.6 → 32.1 simdgroups per core over
+22–126 registers (Apple-compiled kernel) & MM~\mm{19}, MM~\mm{25.49} \\
+Legacy bimodality: two-state 9/8 rate; 79.4~ns quantum & recon 158, 164 via MM~\mm{19} & Per-core staircase; bimodality only in boundary windows & MM~\mm{25.122} \\
+Tensor-load element code 4 "means 32-bit" withdrawn & MM~\mm{25.5/R7} "R7 narrowed" & Element field = width in bytes; 4 = fp32 & MM~\mm{25.37} \\
+\op{612}: second immediate is an absolute
+bound & MM~\mm{19} & It is a width & MM~\mm{7}, MM~\mm{19} \\
+\op{435} and \op{437} are
+shifts & (glossary history) & 16-bit ANDs & MM~\mm{25.28} / glossary \\
+Software-pipelining gain ≥ 1.2× preregistered & MM~\mm{25.97} & 1.08× at 8 simdgroups, 0.99× at 12.8 per core & MM~\mm{25.97}, MM~\mm{25.107} \\
+Apple M512 58.6~µs; ratios 1.17×, 2.1–4.5× & MM~\mm{25.98} & 106.6~µs; 1.06–1.07× at equal geometry / M512 & MM~\mm{25.107} \\
+WS/TP crossover about 64 tokens & MM~\mm{16} (model) & fp8 48, bf16 64 on the retained harness & MM~\mm{25.126} \\
+L1 load latency about 121~ns & MM~\mm{25.97} & 30.5~ns at a warm clock & MM~\mm{25.121} \\
+Residency used-125: \textasciitilde43.6 per core, then
+\textasciitilde58; S = 1,024 shortfall & MM~\mm{25.115} (v3-v5) & Warm: 1,024/1,024; this compiler's counter 64–68 per
+core at 125 & MM~\mm{25.115}, MM~\mm{25.121} \\
+\code{ac\_bench} per-op figures in milliseconds & MM~\mm{25.55} & Seconds & MM~\mm{25.56} \\
+Prefill GEMMs at 60–69 percent of peak & MM~\mm{25.155} & 80–89 percent in graph with a closure-checked profile & MM~\mm{25.160} \\
+Constant-drain fusion model (6.54~µs per pipeline change) & MM~\mm{25.142.4} (preregistration) & Refuted; removing a change saved 0.6–2.5~µs & MM~\mm{25.142.4} \\
+mlx-lm baseline via bench loop (1.18–1.26×) & MM~\mm{25.153}-25.181 & \code{generate\_step} baseline: 1.14–1.22× & MM~\mm{25.190} \\
+\bottomrule
+\end{xltabular}
+
+\section{Superseded counts and wordings}\label{sec:accounting-moved-chapters}
+
+The chapters no longer carry the reconciliation detail collected here: counts that changed between measurements,
+inventories that differ between sources, and wordings that were later replaced. Each row gives where the earlier
+statement was made and where it was settled.
+
+\subsection*{The device, registers, encoding and metadata}\label{sub:device-registers-encoding}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.32\hsize}X>{\hsize=0.67\hsize}X>{\hsize=1.24\hsize}X>{\hsize=0.77\hsize}X@{}}
+\caption{Superseded counts and wordings about the device, registers, encoding and metadata.}\label{tab:acct-device-encoding}\\
+\toprule
+Old reading or accounting & Where & Current reading & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading or accounting & Where & Current reading & Where \\
+\midrule
+\endhead
+"Everything was measured on macOS 26.6.2 (25G83)" / "every figure \dots{}
+one OS build" & \cref{sec:part-software}; earlier 
+\cref{sec:measured-part-software} & 25G83 is the stated platform and is recorded by the below-Metal records;
+the evidence files of the Metal-path measurements do not record an OS
+build & \cref{sec:measured-part-software}, MM~\mm{25.91} \\
+"A spinning threadgroup is never preempted"; "a grid barrier among
+resident threadgroups is sound" & earlier \cref{sec:forward-progress-in-order}; MM~\mm{25.141.1}
+wording & observations of one probe family in the tested configurations;
+restrictions: do not depend on preemption; size waiting grids to
+measured residency & \cref{sec:forward-progress-in-order}, MM~\mm{25.141.1} \\
+A released register "reads zero" (MM~\mm{0.15}), "every later read
+returns zero" (MM~\mm{6}, MM~\mm{17} rule 37), every release observed
+read exactly 0 (MM~\mm{25.95}), against "zero or its old value, observed
+both ways" (MM~\mm{25.145}), "observed only sometimes" (MM
+\mm{25.145.4}), "returns 0 - sometimes, not always"
+(\code{agxforge/g17/releasecheck.py}) & MM~\mm{0.15}, MM~\mm{6}, MM~\mm{17}, MM~\mm{25.95}, MM~\mm{25.145}, MM~\mm{25.145.4} & every controlled probe read zero; readback not established in general;
+read a released register only where zero and the old value give the same
+answer & \cref{sec:release-does} \\
+\code{IR*} is "a distinct 16-register file"
+(\code{agxforge/g17/registerdomain.py}) against the 160-member decoder
+class IRGPR32 & \code{agxforge/g17/registerdomain.py}, MM~\mm{25.59} & the two agree. IR32 is the 16-register IR file; IRGPR32 is R0–R143
+followed by IR0-IR15, and corpus users write only its general members & \cref{sec:register-classes} \\
+\op{798} holes are "registers 2 and 3 mod 8"
+(R34, R35, R42, R43 are not holes); \op{1004}
+holes only d = 14 and 15 ("r119/r120" in decoder ids) & MM~\mm{25.136.6} & the listed sets: the fma's eight low-half destinations
+and two sources; the widening's R14, R15, R30, R31, R46,
+R47, R62 and above & \cref{sec:encoding-holes}, MM~\mm{25.133}, MM~\mm{25.196} \\
+Instructions are "2 to 16 bytes" & \cref{sec:has-been-recovered}; the 216-opcode census
+(\code{isa/g17-opcodes.toml}) & 2 to 22 bytes, even: Apple's corpora show every even
+length 2–16 plus 18 and 22 (\op{10909} at 18, \op{14661} at 22), no 20; the decoder-admitted universe shows
+4–16, 18, 22 & \cref{sec:framing} \\
+"Apple's table declares 17,779" (MM~\mm{24.8} row T1,
+\code{docs/g17-isa-cartography.md}, \code{tools/g17admit.py}) against
+"17,796" (\code{docs/agx3-oracle.md}, \code{agxforge/g17/model.py}) & those sources & both hold for the 25G83 build, which has 17,796 table entries, 17,779 declaring at least one operand,
+17 declaring none (\code{isa/g17-agx3meta-instrs.txt}) & \cref{sec:opcode-identity-counts} \\
+D2 690, then 1,107 when per-form evidence was generated, then 1,118
+through hardware checks of drifting bits & MM~\mm{25.87}, MM~\mm{25.58} & D2 = \val{d2} of D1 7,549 (\val{d1} with the 26A434 decoder) & \cref{sec:opcode-identity-counts} \\
+D1 975, D2 690, and only \op{5106} and \op{5107}
+admitted & \code{docs/g17-isa-cartography.md} & D1 7,549 (\val{d1} with the 26A434 decoder), D2 \val{d2}; ten tensor MMA opcodes admitted & \cref{sec:opcode-identity-counts,sec:admission-decodes-executes} \\
+The project framer's first check walked 112,952
+instructions where Apple's decoder finds 85,806 & \code{docs/agx3-oracle.md} section 10 & the framer agrees with Apple on 1,725 of 22,187 constant programs and
+misframes 200 of 200 current programs; Apple's decoder
+is the ground truth & \cref{sec:framing}, MM~\mm{25.88}, MM~\mm{25.209} \\
+Encoder held-out re-authoring 28.2 percent (before seven fixes) & MM~\mm{25.88} & 80.8 percent & \cref{sec:field-maps}, MM~\mm{25.88} \\
+\Op{12674} fill-slot field is operand 1 bits
+20–27 & MM~\mm{6} & bits 20–23 fill slot (slot + 1), bits 24–31 the load's
+own wait mask & \cref{sec:scoreboard-publish-wait} \\
+Constant-program binding reads at "halfwords 8 + K and 10 + K" (K the
+halfword offset, MM~\mm{25.179}) against "8 + 4k and 10 + 4k for the
+k-th buffer" (MM~\mm{25.59}) & MM~\mm{25.179}, MM~\mm{25.59} & the same rule with K = 4k & \cref{sec:constant-program-record} \\
+Constant-program metadata read as a register-spill description & MM~\mm{25.113} & it describes the constant program & \cref{sec:constant-program-record}, MM~\mm{25.120} \\
+The "76 inert" list itemised 92 bytes & MM~\mm{25.148} (ledger) & 76 inert bytes; the descriptor tail (392, 16) is separate and not one of
+the 148 class constants & \cref{sec:object-library-archive}, MM~\mm{25.148} \\
+"The image is ours" census covering one novel kernel & MM~\mm{25.148} (ledger) & the 421-archive delivered-image census, every byte assigned & \cref{sec:object-library-archive}, MM~\mm{25.148} \\
+\bottomrule
+\end{xltabular}
+
+\subsection*{Scalar arithmetic, control flow, special registers, memory, cross-lane
+and synchronization}\label{sub:scalar-arithmetic-control}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.10\hsize}X>{\hsize=0.63\hsize}X>{\hsize=1.44\hsize}X>{\hsize=0.83\hsize}X@{}}
+\caption{Superseded counts and wordings about scalar arithmetic, control flow, special registers, memory, cross-lane operations and synchronization.}\label{tab:acct-scalar-memory}\\
+\toprule
+Old reading or accounting & Where & Current reading & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading or accounting & Where & Current reading & Where \\
+\midrule
+\endhead
+"fsat" names \op{1062}; "saturate returns
+0" & early map; the anomaly came from a record that ran one lane & \opn{1062} is a cross-lane \code{dfdx} with saturation (function
+unconfirmed); saturate is \op{904}, sat(a + K) & MM~\mm{25.90}; \cref{sec:fp32-arithmetic,sec:other-cross-lane-forms} \\
+Printed integer condition code 15 is "something other than lt/gt/signed" & \code{isa/g17-condition-codes.toml} notes & it is the bit test (a \& b) != 0, field code 1 of \op{11375} & MM~\mm{25.90}; \cref{sec:compares-flags-selects} \\
+\code{(uint)x} lowered as a 34-instruction decomposition that decoded
+the float's bits; \code{(uint)(-5.5)} gave 5 & this compiler, before MM~\mm{25.186} & \op{9320}, truncate and saturate, gives 0;
+Metal leaves the case undefined and each emulation matched its own
+program's GPU output (a compiler difference, not a
+hardware error) & MM~\mm{25.186}; \cref{sec:conversions} \\
+Integer-to-float conversion code 4 for every source (inherited from an
+unsigned witness; a negative int32 became a value near $2^{32}$) & \code{agxforge/g17/cc.py} before MM~\mm{25.90} & operand 2 is signedness: 4 unsigned, 5 signed (2/3 on the 16-bit form) & MM~\mm{25.90}, MM~\mm{25.195}; \cref{sec:conversions} \\
+The join was called \code{exec.restore} & early \code{isa/g17-scalar-isa.toml} & \op{577} with count 1 & \code{agxforge/g17/cf.py}; \cref{sec:execution-mask-family} \\
+A 4-byte backward branch \code{de 6f f3 1e} with a 12-bit displacement
+whose sign is word bit 28 & \code{isa/g17-scalar-isa.toml} & the first four bytes of the 10-byte \op{458}: kind 2 with b2.4 and b2.0 set; d1-d10 are the 10-byte
+map's weights 2 to $2^{10}$ in bytes 0–2; the "sign" b3.4
+is the $2^{14}$ weight, reading as a sign only because a small negative
+displacement sign-extends through it & \code{agxforge/g17/cf.py}; \cref{sec:execution-mask-family} \\
+Byte 0x82 of the 4-byte special-register read is
+\code{quadgroup\_index\_in\_threadgroup}; 0x98 is
+\code{simdgroups\_per\_threadgroup} (from kernels said to differ only in
+that byte) & early \code{isa/g17-scalar-isa.toml} & the toml recorded registers the builtins' kernels read;
+0x82 is the lane index (\code{SR\_SIMD\_ELEM}), 0x98 threads-per-threadgroup x & MM~\mm{0.8}, \code{isa/g17-special-register-numbers.txt},
+\code{agxforge/g17/mdgen.py}; \cref{sec:special-registers} \\
+\code{SR\_SIMD\_GRP} "not generalized", no slot-29 entry & MM~\mm{0.8} table & entry 53 is exactly the SR133 read added by the multi-simdgroup compile
+(\code{execution\_simdgroups} sweep); single-builtin compiles carry
+{[}53{]}; entry 152 → 4 added later & MM~\mm{25.93}, MM~\mm{25.149.1}; 
+\cref{sec:slot-29-metadata-numbering} \\
+A store reading a special-register value directly stores what has not
+arrived (ledger, 2026–09-08); every read is a late value needing a wait & ledger; MM~\mm{6}, MM~\mm{0.8}, MM~\mm{25.90} & the failing stores named one register as value and index with the index
+slot releasing it; a slot-0 read needs no wait (latency probe
+2026–09-24, 90 of 90 rows reproduced) & MM~\mm{25.117}, MM~\mm{25.121}; \cref{sec:read-latency-whether} \\
+The BIF0 read page fault came from the tensor-probe configuration the
+rule names & MM~\mm{17} rule 34 before its 2026–09-23 correction & that configuration was a different process (pid 76676), which hung the
+GPU for about 320 s and is known to hang, not to fault; the fault came
+from a \code{regprobe\_multi} kernel whose configuration was never
+recorded (corrected from another lane's reading of the
+crash report and system log) & MM~\mm{17} rule 34; \cref{sec:out-of-range-accesses-observed} \\
+The 8-byte \op{17229} "has no byte9 and no wait
+bit" & \code{agxforge/g17/cc.py} & the encoding carries wait bits: 15 corpus instances match their pending
+slots, and Apple's \code{tex2d-read} carries 0x1000010
+on one; the statement describes this compiler's encoder
+only & \code{isa/g17-wait-mask-census.json}, MM~\mm{25.146}; 
+\cref{sec:scoreboard} \\
+"Eight raw operation codes of \op{10090} unassigned by any Metal intrinsic" & \code{isa/g17-atomic-semantics.json} & read off one witness's field placement; retracted; the
+fourth operation bit of the 12-byte form is byte11{[}4{]}, and
+unassigned codes must be counted per form & \code{isa/g17-atomic-family.toml}; \cref{sec:atomics} \\
+\bottomrule
+\end{xltabular}
+
+\subsection*{The tensor unit, performance and submission}\label{sub:tensor-unit-performance}
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=1.31\hsize}X>{\hsize=0.59\hsize}X>{\hsize=1.33\hsize}X>{\hsize=0.77\hsize}X@{}}
+\caption{Superseded counts and wordings about the tensor unit, performance and submission.}\label{tab:acct-tensor-submission}\\
+\toprule
+Old reading or accounting & Where & Current reading & Where \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Old reading or accounting & Where & Current reading & Where \\
+\midrule
+\endhead
+Two declaration counts for the tensor family: 132 opcodes in scheduling
+classes 170–175, against 535 declarations in opcode ranges 5090–5618 and
+10384–10389 (18 forms with an 8-word destination, 5090–5107, 8 admitted;
+36 with a 4-word destination, 5108–5143; 6 integer forms, 10384–10389, 2
+admitted; 475 \code{\_shifted} forms, 5144–5618) & MM~\mm{2}, MM~\mm{0.3}; MM~\mm{25.6}, MM~\mm{25.4/F4} "F4, narrowed" & The two counts use different bases and do not conflict. The 132 counts by
+scheduling class; the 535 counts by opcode range and includes every \code{\_shifted} declaration.
+Ten forms are decoder-admitted in either accounting & \cref{sec:instruction-family} \\
+"None of the 56 MMA forms the decoder tables declare" has a scale
+operand & MM~\mm{11} & The statement stands. How the 56 relates to the 60 non-\code{\_shifted} declarations
+(18 + 36 + 6) is not stated in the sources & \cref{sec:instruction-family} \\
+Destination keep-flag rule quoted over three populations: 2,192 MMAs in
+140 programs (1,093 flagged); 540,396 flag-set instances with 155,963
+converse counterexamples; 758,739 "instances" & MM~\mm{25.22}; MM~\mm{6}; MM~\mm{0.4} & All three agree on the one-way rule (set implies the next MMA reuses the
+tuple) with zero counterexamples. The 758,739 population is not defined
+by its source and is not 540,396 + 155,963 (696,359) & \cref{sec:modifiers-keep-flag} \\
+"Whether release clears or frees storage is open"; "a released register
+reads 0 afterwards" & MM~\mm{25.89}; earlier text of \cref{sec:modifiers-keep-flag} & A release acts per lane under the execution mask; a released register
+read zero in every controlled run, but what it reads is not established
+in general; nothing reclaimed it within the measured bound & \cref{sec:release-does} (MM~\mm{25.95}, MM~\mm{25.145}) \\
+\op{5100} and \op{5101} "are never
+compiler-emitted" (from recon sections 27 and 104) & MM~\mm{19} & Emitted under \code{relaxed\_precision} & \cref{sec:it-reached} (MM~\mm{17} rule 29) \\
+Element code 4 does not mean a 32-bit access (the withdrawal of "code 4
+means 32-bit") & MM~\mm{25.5/R7} "R7 narrowed" & The element code is the access width in bytes; code 4 is emitted by fp32
+accesses (two witnesses) & \cref{sec:tensor-memory-path} (MM~\mm{25.37}) \\
+\op{435} and \op{437} read as
+shifts & earlier opcode notes & They are ANDs (\opn{435} executed over 4,096 lanes, MM~\mm{25.192}) & \cref{sec:quantized-formats} (MM~\mm{24.5}) \\
+Apple \code{matmul2d} at M512 took 58.6~µs (round one); this compiler
+1.17× behind, unrolled 2.1–4.5× & MM~\mm{25.98} & Round one did not reproduce; interleaved medians give 106.6~µs for Apple
+at M512, the K loop 1.07× behind & \cref{sec:measured-bottlenecks-studied} (MM~\mm{25.107}) \\
+Residency of a used-125 program: about 43.6 per core (v3), then about 58
+per core (v4), and a shortfall at S = 1,024 (v5) & MM~\mm{25.115} & v3 ran beside an orphaned kernel; the v5 shortfall was a cold-clock
+effect. Warm, 64–69 per core from 49 to 125 registers, 95.0 at 19 & \cref{sec:residency-occupancy-measurements} (MM~\mm{25.121}) \\
+Instruction-fetch step as a whole-kernel size bracket (16,066, 17,158{]}
+bytes & recon section 156; MM~\mm{19} & The variable is the loop body: 15,971 bytes fast, 17,247 slow,
+bracketing 16 KiB & \cref{sec:memory-bandwidth-footprint} (MM~\mm{19}) \\
+GPU performance counters "not reachable without Apple's
+GUI or entitlement" (the "M4 status" paragraph) & MM~\mm{25.144.4} & 89 counters are recorded by \code{xctrace} with the GUI-saved
+"Performance Limiters" template, later in the same section;
+Metal's public API still offers timestamps only & \cref{sec:dispatch-encoder-command-buffer} \\
+"Power was not measured" & MM~\mm{20} "Hardware identity" & Measured on the GPU rail; MM~\mm{20}'s own later
+paragraph says so & \cref{sec:clocks-power-gpu} (MM~\mm{25.56}, MM~\mm{25.60}) \\
+Below Metal, "three command buffers make one selector-7 call", a
+persistent command stream with no MMIO doorbell & MM~\mm{0.15}; earlier text of 
+\cref{sec:dispatch-encoder-command-buffer} & Selectors 7, 16 and 28 are called in queue creation; each Submit enters
+the kernel through \code{IOConnectTrap4} (one record) or
+\code{IOConnectCallMethod} selector 0x1d (several records) & \cref{sec:opening-device-contexts,sec:submit-record-call} \\
+Submit kicks the GPU only through shared-memory writes, with no
+per-dispatch kernel call; a candidate store at Submit+0x11c & MM~\mm{25.143}; README row 6a & Each Submit enters the kernel through the trap or the method call; the
+store at Submit+0x11c is an output-argument write & \cref{sec:submit-record-call} \\
+The \code{FinalizeShmemHeader} ready bit is the doorbell & README row 3 & Disproved by a live control; see the Submit path above & \cref{sec:submit-record-call} \\
+\bottomrule
+\end{xltabular}

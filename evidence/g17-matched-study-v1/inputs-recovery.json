@@ -1,0 +1,64 @@
+{
+ "format": "g17-matched-study-inputs-recovery-v1",
+ "section": "MM 25.211",
+ "date": "2026-10-04",
+ "purpose": "what of the study's historical inputs can be recovered from retained material, and what cannot",
+ "gpu_dispatched": false,
+ "shared_history": {
+  "status": "retained",
+  "where": "decode-shared-history.json: shared_tokens (128 ids)",
+  "note": "the forced-history graphs are rebuilt from it by tools/g17forcehistory.py"
+ },
+ "forced_history_graphs": {
+  "status": "not retained",
+  "searched": [
+   "results/ (the research checkout's extracted evidence and local outputs)",
+   "/private/tmp",
+   "git history of every branch (file names containing forced, prompt or ids)"
+  ],
+  "found": "no graph_forced.json, graph_twin_all_forced.json or forced R_init.bin",
+  "remedy": "tools/g17forcehistory.py writes them from any graph and the retained shared_tokens; tested on the CPU (test/test_g17forcehistory.py), not yet run against a rebuilt study graph on the GPU"
+ },
+ "prompt_ids_1792": {
+  "status": "not recoverable from retained material",
+  "description_retained": "decode.json: '1,024 and 1,792: section 25.141 of this document under a summarize instruction, InternLM2 chat template'",
+  "why_not_reconstructed": "the exact instruction wording, the revision of section 25.141 used and the point the text was cut are not recorded, so a reconstruction would be a new prompt, not the original",
+  "searched": [
+   "tools/models/*.json (only internlm2_q4_spec_code.json carries prompt_ids: the 196-token prompt)",
+   "every evidence/**/*.json for prompt_ids of 1,000+ entries (found: 1,024-token prompts of other studies, not this one)",
+   "git history (no prompt-id file for this study)",
+   "results/g17-model-internlm2/ (no graph built from the spec-code config)"
+  ]
+ },
+ "checkpoint": {
+  "status": "identity not recorded by the study's receipts",
+  "model_id_in_code": "internlm/internlm2_5-1_8b-chat (tools/g17realmodel.py), read from ~/models/internlm2_5-1_8b-chat and its mlx_lm.convert -q copy ~/models/internlm2_5-1_8b-chat-mlx-q4",
+  "candidates_on_the_measuring_machine": {
+   "internlm2_5-1_8b-chat/model.safetensors": {
+    "bytes": 3778239283,
+    "sha256": "a089022dbb69bec7d7a2a0b0718732b9149cd9001b29cef2650f281b5b1aacf2",
+    "modified": "2026-09-26"
+   },
+   "internlm2_5-1_8b-chat/config.json": {
+    "sha256": "4ed848513c49f092150062a4ad5133171d70ad84d422fc72f5fea1fa0f0f8a4f"
+   },
+   "internlm2_5-1_8b-chat/tokenizer.json": {
+    "sha256": "c349e1ebf01497a73130f67e186ab123fe946fe1056ae66f9239c268f2309fd9"
+   },
+   "internlm2_5-1_8b-chat-mlx-q4/model.safetensors": {
+    "bytes": 1062814777,
+    "sha256": "51fddc2eadbca536329733104b2f437376ea6e2dd340c92d13c66feac2bd5163",
+    "modified": "2026-09-25"
+   },
+   "internlm2_5-1_8b-chat-mlx-q4/config.json": {
+    "sha256": "3047651eaafcca09f53f53ef41f226b06fa63f64835b3e696d6e98afd6c16b5d"
+   }
+  },
+  "assessment": "both copies predate the study (2026-09-30) and were not modified after it, so they are the likely inputs; the receipts record no hash, so this is not established. The full-precision copy was saved through mlx (its README carries mlx tags), so its hash does not identify a Hugging Face revision."
+ },
+ "tokenizer": {
+  "finding": "transformers 5.16's AutoTokenizer (InternLM2TokenizerFast, trust_remote_code) splits this checkpoint's words into single characters; tokenizers.Tokenizer on the same tokenizer.json gives word pieces and round-trips evidence/g17-q8-decode-v1/q8-decode-1k.json's 1,024 prompt ids exactly",
+  "consequence": "tools/g17promptids.py uses the raw tokenizer; a new prompt must not be tokenized through AutoTokenizer in this environment"
+ },
+ "conclusion": "The recorded comparison can be inspected; exact reproduction of its historical inputs is incomplete (the 1,792-token prompt ids are not recoverable, the checkpoint identity is likely but not recorded). A new comparison with explicitly identified inputs is fully specified (examples/README.md, workflow 3)."
+}

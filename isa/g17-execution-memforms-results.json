@@ -1,0 +1,425 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "operands": null,
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.range2_8",
+  "op": 17244,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17244,
+   "found": 7,
+   "cases": 3,
+   "encoded": [
+    "4f040300210c1034"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   286326784,
+   286326785,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.range2_14",
+  "op": 17244,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17244,
+   "found": 7,
+   "cases": 3,
+   "encoded": [
+    "4f040300210c10ad010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   286326784,
+   286326785,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.range3_8",
+  "op": 17253,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17253,
+   "found": 8,
+   "cases": 4,
+   "encoded": [
+    "4f040300410c1034"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17253
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   286326784,
+   286326785,
+   286326786,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.range3_14",
+  "op": 17253,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17253,
+   "found": 8,
+   "cases": 4,
+   "encoded": [
+    "4f040300410c10ad010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17253
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   286326784,
+   286326785,
+   286326786,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.range4_8",
+  "op": 17262,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17262,
+   "found": 9,
+   "cases": 5,
+   "encoded": [
+    "4f040300610c1034"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17262
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   286326784,
+   286326785,
+   286326786,
+   286326787,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.range4_14",
+  "op": 17262,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17262,
+   "found": 9,
+   "cases": 5,
+   "encoded": [
+    "4f040300610c10ad010000000001"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17262
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   286326784,
+   286326785,
+   286326786,
+   286326787,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.indexed_word",
+  "op": 17229,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17229,
+   "found": 7,
+   "cases": 2,
+   "encoded": [
+    "0f04430801061040"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    14059,
+    17229,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   324478056,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.indexed_half",
+  "op": 17193,
+  "length": 14,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 17193,
+   "found": 8,
+   "cases": 2,
+   "encoded": [
+    "7704030801061080810000000000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10288,
+    11842,
+    12682,
+    14059,
+    17193,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735940609,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.load_word_8",
+  "op": 12682,
+  "length": 8,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 12682,
+   "found": 7,
+   "cases": 2,
+   "encoded": [
+    "7f00030818221040"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    12682,
+    14059,
+    17235,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3237998080,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "mem.load_half_10",
+  "op": 12646,
+  "length": 10,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 12646,
+   "found": 8,
+   "cases": 2,
+   "encoded": [
+    "77000308180210808000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    1004,
+    11842,
+    12646,
+    14059,
+    17229,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3317694464,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

@@ -1,0 +1,51 @@
+{
+  "status": "compiled_and_compared",
+  "gpu_dispatched": false,
+  "round": 6,
+  "cases": {
+    "k160": {
+      "object_sha256": "86bb1d88ea2a8df42fd0d41defb892d40ee381c85e0f7f7497e3bbb1089f7f7b",
+      "main_sha256": "bc8bf7fe6fe52f8ab171be2c9f505f4054e682970613c564ed0b29145d08bcbe",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "k224": {
+      "object_sha256": "02c85d1824fdfc628e5087bfa2638ec227d8f3bb3717b481b78bd0d170304350",
+      "main_sha256": "85ba00a99d5d926bd74150ad85f1a1c8a8c911b1e20cbb6be418c9b64f8252f4",
+      "main_bytes": 1280,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "k128-a16": {
+      "object_sha256": "bd5d044bb1eaf3c861f7df31dc06a83ed7eddc604af90c81983de603bf61ef30",
+      "main_sha256": "1903357c6b4a9fd0e6147bcfa7fa36e97c3252adc2f4adec20a8aea22f231645",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "k128-b3": {
+      "object_sha256": "d5b463180ef93812785625768a9d307add95c6a98d109b30b7a9b39517d36657",
+      "main_sha256": "8472ac39e51fc14f4c05edae8fd6d69d071b53afd73ea1fb64336cebbf7128ed",
+      "main_bytes": 1276,
+      "verdict": "byte-identical",
+      "differing_bytes": 0,
+      "first_differences": []
+    },
+    "k96-c3": {
+      "object_sha256": "3309bb0ec0c81e81bb6ec686c1c30585f6516ea8b877b6adf32a87b0f170d9e8",
+      "main_sha256": "4205f713fcc213ae0ceb2e5c50f561c5d6914df1b762251e15cfabfcccbee370",
+      "main_bytes": 1280,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    },
+    "k192-b4": {
+      "object_sha256": "c32b2e876bfd3c29c5f52cf5b3692a682761c6a9fd581baf27f71261151ed334",
+      "main_sha256": "1ff5af1393f24c1fcde42b2c072947408a026e22bdc2918018cfea234d0b3f20",
+      "main_bytes": 1280,
+      "verdict": "refused by the compiler; Apple's program retained for the record"
+    }
+  }
+}

@@ -1,0 +1,296 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "quad.shuffle.op14011.uniformindex",
+  "op": 14011,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14011,
+   "found": 3,
+   "cases": 3,
+   "encoded": [
+    "3706211a2880a00a0888",
+    "3706211a2880a00a0888",
+    "3706211a2880a00a0888"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14011,
+    14059,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096,
+   4098,
+   4099
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.shuffle.op14158.uniformindex",
+  "op": 14158,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14158,
+   "found": 3,
+   "cases": 3,
+   "encoded": [
+    "3706211a2880a80a0888",
+    "3706211a2880a80a0888",
+    "3706211a2880a80a0888"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    14158,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096,
+   4101,
+   4127
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.shuffle.op14164.uniformindex",
+  "op": 14164,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14164,
+   "found": 3,
+   "cases": 3,
+   "encoded": [
+    "370621182880a80a0088",
+    "370621182880a80a0088",
+    "370621182880a80a0088"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    14164,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096,
+   4101,
+   4127
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "simd.shuffle_rotate_down.op14235.uniformindex",
+  "op": 14235,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14235,
+   "found": 3,
+   "cases": 3,
+   "encoded": [
+    "3f02211a2880ad0a70002810",
+    "3f02211a2880ad0a70002810",
+    "3f02211a2880ad0a70002810"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    14235,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4097,
+   4097,
+   4097
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   true,
+   false
+  ],
+  "runs": 3
+ },
+ {
+  "id": "quad.shuffle_down1.op14022.whichlanewins",
+  "op": 14022,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14022,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f02211a2880a3027800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14022,
+    14059,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4097
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "simd.shuffle_down.op14283.whichlanewins",
+  "op": 14283,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14283,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3702211a2880ab023801"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    14283,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "simd.shuffle_xor1.op14175.whichlanewins",
+  "op": 14175,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14175,
+   "found": 1,
+   "cases": 1,
+   "encoded": [
+    "3f0221182880a9027000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    14059,
+    14175,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4097
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

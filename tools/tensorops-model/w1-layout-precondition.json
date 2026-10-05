@@ -1,0 +1,70 @@
+{
+ "allocation": 85938176,
+ "assert_fits_accepts_correct_allocation": true,
+ "assert_fits_refuses_one_byte_less": true,
+ "built_kernels": false,
+ "configuration": {
+  "Hh": 8192,
+  "d": 2048,
+  "epi": "norm",
+  "fmt": "bf16",
+  "mt": 2,
+  "nsg": 32,
+  "ntg": 20,
+  "sets": 3,
+  "share": "dev"
+ },
+ "cut_out_bytes": 84545536,
+ "dispatched": false,
+ "fused_out_bytes": 85938176,
+ "harness": "/Users/spencer/Downloads/triad-b16rule/results/g17-tensorops-recon-v1",
+ "kernels": [
+  {
+   "out_bytes": 85938176,
+   "part": "all",
+   "share": "dev",
+   "variant": "fused"
+  },
+  {
+   "out_bytes": 84545536,
+   "part": "p12",
+   "share": "none",
+   "variant": "two"
+  },
+  {
+   "out_bytes": 84545536,
+   "part": "p3",
+   "share": "none",
+   "variant": "two"
+  },
+  {
+   "out_bytes": 84545536,
+   "part": "p1",
+   "share": "none",
+   "variant": "three"
+  },
+  {
+   "out_bytes": 84545536,
+   "part": "p2",
+   "share": "none",
+   "variant": "three"
+  },
+  {
+   "out_bytes": 84545536,
+   "part": "p3",
+   "share": "none",
+   "variant": "three"
+  }
+ ],
+ "omitted_region_by_sets": {
+  "1": 1392640,
+  "2": 1392640,
+  "3": 1392640,
+  "4": 1392640,
+  "8": 1392640
+ },
+ "omitted_region_bytes": 1392640,
+ "omitted_region_independent_of_sets": true,
+ "overflow": 0,
+ "precondition_met": true
+}

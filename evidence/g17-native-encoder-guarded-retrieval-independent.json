@@ -1,0 +1,114 @@
+{
+  "format": "g17-native-retrieval-independent-check-v1",
+  "passed": true,
+  "gpu_dispatched": false,
+  "checkpoint": {
+    "format": "g17-checkpoint-payload-verification-v1",
+    "repository": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "bytes": 90868376,
+    "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "weight_payload_verified": true,
+    "gpu_admitted": false
+  },
+  "checks": [
+    {
+      "text": "A dog is running through the grass.",
+      "token_ids": [
+        101,
+        1037,
+        3899,
+        2003,
+        2770,
+        2083,
+        1996,
+        5568,
+        1012,
+        102
+      ],
+      "passed": true,
+      "framework_graph_max_error": 5.3290705182007514e-14,
+      "original_model_quality": {
+        "max_abs": 0.00012421161543435186,
+        "cosine": 0.9999997785965786
+      },
+      "half_policy_max_error": 8.211262464100869e-05,
+      "half_policy_max_budget_fraction": 0.40919981909014275
+    },
+    {
+      "text": "A puppy runs across a green field.",
+      "token_ids": [
+        101,
+        1037,
+        17022,
+        3216,
+        2408,
+        1037,
+        2665,
+        2492,
+        1012,
+        102
+      ],
+      "passed": true,
+      "framework_graph_max_error": 2.2537527399890678e-14,
+      "original_model_quality": {
+        "max_abs": 9.24098101571652e-05,
+        "cosine": 0.9999998374359329
+      },
+      "half_policy_max_error": 6.524448987375517e-05,
+      "half_policy_max_budget_fraction": 0.31690231703869587
+    },
+    {
+      "text": "The spacecraft entered orbit around Mars.",
+      "token_ids": [
+        101,
+        1996,
+        12076,
+        3133,
+        8753,
+        2105,
+        7733,
+        1012,
+        102
+      ],
+      "passed": true,
+      "framework_graph_max_error": 4.440892098500626e-15,
+      "original_model_quality": {
+        "max_abs": 0.00012907550487950038,
+        "cosine": 0.9999998137791025
+      },
+      "half_policy_max_error": 5.280367993642024e-05,
+      "half_policy_max_budget_fraction": 0.2597261967031494
+    },
+    {
+      "text": "A dog is running through the grass.",
+      "token_ids": [
+        101,
+        1037,
+        3899,
+        2003,
+        2770,
+        2083,
+        1996,
+        5568,
+        1012,
+        102
+      ],
+      "passed": true,
+      "framework_graph_max_error": 5.3290705182007514e-14,
+      "original_model_quality": {
+        "max_abs": 0.00012421161543435186,
+        "cosine": 0.9999997785965786
+      },
+      "half_policy_max_error": 8.211262464100869e-05,
+      "half_policy_max_budget_fraction": 0.40919981909014275
+    }
+  ],
+  "repeat_exact": true,
+  "ranking_exact": true,
+  "retrieval_sha256": "08c5f4b5b70b2a25f8169fef00f98a22bd145721bb812a786b0834424962cd10",
+  "contract_sha256": "a226a16458bb9067ea1b2cf64cc8c0edf0695218778f3f235954d949c83ba0ef",
+  "source_sha256": "968b0691f24961f3c79b6b6e025fbb3b25cf3e4603554c0d3596361374faede3",
+  "graph_reference_sha256": "b42a88950ac6f3a5dd0432139a89ea5544bc99eb67a0436499c7909d04c940d5",
+  "scope": "Every captured FP32 embedding hash and token sequence checked; independent original-checkpoint eager FP64 BertModel plus original FP64 graph control and half-transport FP64 graph. Original preregistered max-absolute/cosine and half-policy bounds unchanged. CPU-only validation, not a production fallback."
+}

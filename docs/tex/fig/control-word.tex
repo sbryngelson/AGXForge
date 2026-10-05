@@ -1,0 +1,15 @@
+% Figure 3.1: the scoreboard fields of operand 1 (MM 6, MM 0.8).
+\begin{figure}[htb]
+\centering
+\begin{bytefield}[bitwidth=1.15em, bitheight=6ex, endianness=big]{32}
+  \bitheader[lsb=0]{0,19,20,23,24,31} \\
+  \bitbox{8}{\small wait mask\\[-2pt]{\scriptsize bit $24 + s$ waits on slot $s$}}%
+  \bitbox{4}{\small fill\\[-2pt]{\scriptsize slot + 1}}%
+  \bitbox{20}[bgcolor=codebg]{\small form-specific fields}
+\end{bytefield}
+\caption{Scoreboard fields in operand 1, for the forms that carry them there. A producer of a late value writes the
+slot it fills as slot + 1 in bits 20--23 (0 means none); a consumer sets bit $24 + s$ for each slot $s$ it waits on.
+The \op{12682} of the running example carries \code{0x01800000}, so it waits on slot 0 and fills
+slot 7. Other forms place the same fields elsewhere (\cref{tab:wait-fields}).}
+\label{fig:control-word}
+\end{figure}

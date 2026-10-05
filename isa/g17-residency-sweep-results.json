@@ -1,0 +1,743 @@
+{
+ "arms": {
+  "k1": {
+   "function": "resid_k1",
+   "k": 1,
+   "program_sha256": "e63415f95b0d33a5d16f6cf8b06e77cd9d604c90a66bf29458d5161a220eaf26",
+   "registers": 19
+  },
+  "k108": {
+   "function": "resid_k108",
+   "k": 108,
+   "program_sha256": "724139ad7956a4855880c96c6b5729fb35023e84558192f45b0a9c4c039908b7",
+   "registers": 125
+  },
+  "k16": {
+   "function": "resid_k16",
+   "k": 16,
+   "program_sha256": "8d3a46f53e6afef344931573dcd03ebd5c0cf95ec3a0feb5b61017f1508189b4",
+   "registers": 33
+  },
+  "k32": {
+   "function": "resid_k32",
+   "k": 32,
+   "program_sha256": "09b1b2c4a9aa371ae21ab2ce666c733da1b7eb9dc662317c0803b2b8cea43416",
+   "registers": 49
+  },
+  "k48": {
+   "function": "resid_k48",
+   "k": 48,
+   "program_sha256": "97f78aae15857f7bae2811e17b8f784b096eab8b57f9572093a6925db67c2bab",
+   "registers": 65
+  },
+  "k64": {
+   "function": "resid_k64",
+   "k": 64,
+   "program_sha256": "cf3c37b91c03b79d5cd9f58df41f4c91b42f4506a4f567f8edfd1444f849f4be",
+   "registers": 81
+  },
+  "k80": {
+   "function": "resid_k80",
+   "k": 80,
+   "program_sha256": "f5c323d9da5c48b1f323cb98cbc4c83c50b03b29cf2dddde0ee48f11dc4a6723",
+   "registers": 97
+  },
+  "k96": {
+   "function": "resid_k96",
+   "k": 96,
+   "program_sha256": "1fc6cb1c6c6b8dccc11d2cd66b2cbb07283733dd5577cc889fa48a1f19d95104",
+   "registers": 113
+  }
+ },
+ "cores": 20,
+ "generator": "tools/g17residsweep.py --run",
+ "launch": 4096,
+ "rows": [
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "2c7fc0563253ba4e",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 1,
+   "launch": 4096,
+   "peak": 1900,
+   "registers": 19,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1423
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "fef2d95874cc59de",
+   "departure_max": 1423,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 16,
+   "launch": 4096,
+   "peak": 1423,
+   "registers": 33,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1371
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "a6dfd821f06ef4dd",
+   "departure_max": 1371,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 32,
+   "launch": 4096,
+   "peak": 1371,
+   "registers": 49,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1372
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "2f82accec5839478",
+   "departure_max": 1372,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 48,
+   "launch": 4096,
+   "peak": 1372,
+   "registers": 65,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1291
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "e02d83b529b96ecc",
+   "departure_max": 1291,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 64,
+   "launch": 4096,
+   "peak": 1291,
+   "registers": 81,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1324
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "23df7fc12fbbbcff",
+   "departure_max": 1324,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 80,
+   "launch": 4096,
+   "peak": 1324,
+   "registers": 97,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1387
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "36e4cc869fb5867c",
+   "departure_max": 1387,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 96,
+   "launch": 4096,
+   "peak": 1387,
+   "registers": 113,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1360
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "b6938bf74bb36dd2",
+   "departure_max": 1360,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 108,
+   "launch": 4096,
+   "peak": 1360,
+   "registers": 125,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1282
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "6e8c30786dea6e52",
+   "departure_max": 1282,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 108,
+   "launch": 4096,
+   "peak": 1282,
+   "registers": 125,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1366
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "51c672fdc34eb24c",
+   "departure_max": 1366,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 96,
+   "launch": 4096,
+   "peak": 1366,
+   "registers": 113,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1283
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "8319fcb3581b5455",
+   "departure_max": 1283,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 80,
+   "launch": 4096,
+   "peak": 1283,
+   "registers": 97,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1322
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "3ad52b60592b619c",
+   "departure_max": 1322,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 64,
+   "launch": 4096,
+   "peak": 1322,
+   "registers": 81,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1315
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "4f4f6fc9cc37c3e9",
+   "departure_max": 1315,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 48,
+   "launch": 4096,
+   "peak": 1315,
+   "registers": 65,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1335
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "4ad2502c68c911eb",
+   "departure_max": 1335,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 32,
+   "launch": 4096,
+   "peak": 1335,
+   "registers": 49,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1471
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "61bf0e805d6ea55f",
+   "departure_max": 1471,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 16,
+   "launch": 4096,
+   "peak": 1471,
+   "registers": 33,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "6f398e41296b3f6f",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 1,
+   "launch": 4096,
+   "peak": 1900,
+   "registers": 19,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "988726564393981d",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 1,
+   "launch": 4096,
+   "peak": 1900,
+   "registers": 19,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1470
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "74c7f745e40e7d6a",
+   "departure_max": 1470,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 16,
+   "launch": 4096,
+   "peak": 1470,
+   "registers": 33,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1344
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "27c0e0bb0a554c26",
+   "departure_max": 1344,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 32,
+   "launch": 4096,
+   "peak": 1344,
+   "registers": 49,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1338
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "0143614ca47c4d02",
+   "departure_max": 1338,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 48,
+   "launch": 4096,
+   "peak": 1338,
+   "registers": 65,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1295
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "84111fa93b534d21",
+   "departure_max": 1295,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 64,
+   "launch": 4096,
+   "peak": 1295,
+   "registers": 81,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1315
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "e91e4f4fae7b6fb9",
+   "departure_max": 1315,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 80,
+   "launch": 4096,
+   "peak": 1315,
+   "registers": 97,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1370
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "9d493016a4b7959a",
+   "departure_max": 1370,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 96,
+   "launch": 4096,
+   "peak": 1370,
+   "registers": 113,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1357
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "b941ca4663a4edcf",
+   "departure_max": 1357,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 108,
+   "launch": 4096,
+   "peak": 1357,
+   "registers": 125,
+   "round": 3,
+   "spin_written": 131072,
+   "status": 0
+  }
+ ],
+ "saturation": [
+  {
+   "arrival_range": [
+    1,
+    1024
+   ],
+   "arrivals_written": 1024,
+   "c_sha256_16": "1b2a268ce418a6eb",
+   "departure_max": 1024,
+   "departure_min": 1,
+   "departures_written": 1024,
+   "error": "",
+   "k": 1,
+   "launch": 1024,
+   "peak": 1024,
+   "registers": 19,
+   "round": 1,
+   "spin_written": 32768,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 2048,
+   "c_sha256_16": "5d3446b70d52eec9",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 2048,
+   "error": "",
+   "k": 1,
+   "launch": 2048,
+   "peak": 1900,
+   "registers": 19,
+   "round": 1,
+   "spin_written": 65536,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "35b571d548cfa93c",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 1,
+   "launch": 4096,
+   "peak": 1900,
+   "registers": 19,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1024
+   ],
+   "arrivals_written": 1024,
+   "c_sha256_16": "8120f3a0c101cdba",
+   "departure_max": 1024,
+   "departure_min": 1,
+   "departures_written": 1024,
+   "error": "",
+   "k": 108,
+   "launch": 1024,
+   "peak": 1024,
+   "registers": 125,
+   "round": 1,
+   "spin_written": 32768,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1311
+   ],
+   "arrivals_written": 2048,
+   "c_sha256_16": "8be5a2f0d23522bf",
+   "departure_max": 1311,
+   "departure_min": 1,
+   "departures_written": 2048,
+   "error": "",
+   "k": 108,
+   "launch": 2048,
+   "peak": 1311,
+   "registers": 125,
+   "round": 1,
+   "spin_written": 65536,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1285
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "c9651ec8a1834284",
+   "departure_max": 1285,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 108,
+   "launch": 4096,
+   "peak": 1285,
+   "registers": 125,
+   "round": 1,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1024
+   ],
+   "arrivals_written": 1024,
+   "c_sha256_16": "a46d06adf1d9e540",
+   "departure_max": 1024,
+   "departure_min": 1,
+   "departures_written": 1024,
+   "error": "",
+   "k": 1,
+   "launch": 1024,
+   "peak": 1024,
+   "registers": 19,
+   "round": 2,
+   "spin_written": 32768,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 2048,
+   "c_sha256_16": "07c38c6e3f934c09",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 2048,
+   "error": "",
+   "k": 1,
+   "launch": 2048,
+   "peak": 1900,
+   "registers": 19,
+   "round": 2,
+   "spin_written": 65536,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1900
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "d2927cbc6b20725d",
+   "departure_max": 1900,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 1,
+   "launch": 4096,
+   "peak": 1900,
+   "registers": 19,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1024
+   ],
+   "arrivals_written": 1024,
+   "c_sha256_16": "3d838b26f74befe6",
+   "departure_max": 1024,
+   "departure_min": 1,
+   "departures_written": 1024,
+   "error": "",
+   "k": 108,
+   "launch": 1024,
+   "peak": 1024,
+   "registers": 125,
+   "round": 2,
+   "spin_written": 32768,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1400
+   ],
+   "arrivals_written": 2048,
+   "c_sha256_16": "5c475cbaeb5b16b7",
+   "departure_max": 1400,
+   "departure_min": 1,
+   "departures_written": 2048,
+   "error": "",
+   "k": 108,
+   "launch": 2048,
+   "peak": 1400,
+   "registers": 125,
+   "round": 2,
+   "spin_written": 65536,
+   "status": 0
+  },
+  {
+   "arrival_range": [
+    1,
+    1359
+   ],
+   "arrivals_written": 4096,
+   "c_sha256_16": "2844bbb1287b1f86",
+   "departure_max": 1359,
+   "departure_min": 1,
+   "departures_written": 4096,
+   "error": "",
+   "k": 108,
+   "launch": 4096,
+   "peak": 1359,
+   "registers": 125,
+   "round": 2,
+   "spin_written": 131072,
+   "status": 0
+  }
+ ]
+}

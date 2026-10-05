@@ -1,0 +1,1198 @@
+{
+ "conclusion": {
+  "builds_all_four_modes": true,
+  "dispatch_run": false,
+  "no_vendor_instance_saturates": true,
+  "patch_decodes_valid_same_length": true,
+  "remaining": "clip reference values, and the dispatch",
+  "transpose_flags_confirmed": true
+ },
+ "modes": [
+  {
+   "instances": 16,
+   "instructions": [
+    {
+     "byte8": 64,
+     "bytes": "af0005812a08a122401c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 624,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0278:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "a7040589a208a1224016",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 634,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0282:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "a708058a2a0aa102401c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 644,
+     "saturating_already": false,
+     "saturation_bit_at": "0x028c:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "a7100592a20aa1024016",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 654,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0296:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "272025812a08a1224014",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 664,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02a0:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "27402589a208a1224002",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 674,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02aa:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "2700a58a2a0aa1024014",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 684,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02b4:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "2700a592a20aa1024002",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 694,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02be:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "af000583aa08a1224016",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1110,
+     "saturating_already": false,
+     "saturation_bit_at": "0x045e:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "a70405892208a1224014",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1120,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0468:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "a7080592aa0aa1024016",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1130,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0472:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "a7100508220aa1024014",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1140,
+     "saturating_already": false,
+     "saturation_bit_at": "0x047c:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "27202583aa08a1224002",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1150,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0486:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "274025892208a1224000",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1160,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0490:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "2700a592aa0aa1024002",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1170,
+     "saturating_already": false,
+     "saturation_bit_at": "0x049a:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    },
+    {
+     "byte8": 64,
+     "bytes": "2700a508220aa1024000",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1180,
+     "saturating_already": false,
+     "saturation_bit_at": "0x04a4:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": false
+    }
+   ],
+   "status": "ok",
+   "transpose_left": 0,
+   "transpose_right": 0
+  },
+  {
+   "instances": 16,
+   "instructions": [
+    {
+     "byte8": 72,
+     "bytes": "af0005812a08a122481c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 588,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0254:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "a7040589a208a1224816",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 598,
+     "saturating_already": false,
+     "saturation_bit_at": "0x025e:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "a708058a2a0aa102481c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 608,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0268:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "a7100592a20aa1024816",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 618,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0272:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "272025812a08a1224814",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 628,
+     "saturating_already": false,
+     "saturation_bit_at": "0x027c:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "27402589a208a1224802",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 638,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0286:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "2700a58a2a0aa1024814",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 648,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0290:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "2700a592a20aa1024802",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 658,
+     "saturating_already": false,
+     "saturation_bit_at": "0x029a:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "af000583aa08a1224816",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1028,
+     "saturating_already": false,
+     "saturation_bit_at": "0x040c:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "a70405892208a1224814",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1038,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0416:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "a7080592aa0aa1024816",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1048,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0420:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "a7100508220aa1024814",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1058,
+     "saturating_already": false,
+     "saturation_bit_at": "0x042a:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "27202583aa08a1224802",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1068,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0434:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "274025892208a1224800",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1078,
+     "saturating_already": false,
+     "saturation_bit_at": "0x043e:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "2700a592aa0aa1024802",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1088,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0448:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    },
+    {
+     "byte8": 72,
+     "bytes": "2700a508220aa1024800",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1098,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0452:4",
+     "size": 10,
+     "transpose_left": false,
+     "transpose_right": true
+    }
+   ],
+   "status": "ok",
+   "transpose_left": 0,
+   "transpose_right": 1
+  },
+  {
+   "instances": 16,
+   "instructions": [
+    {
+     "byte8": 68,
+     "bytes": "af0005812a08a122441c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 588,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0254:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "a7040589a208a1224416",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 598,
+     "saturating_already": false,
+     "saturation_bit_at": "0x025e:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "a708058a2a0aa102441c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 608,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0268:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "a7100592a20aa1024416",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 618,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0272:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "272025812a08a1224414",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 628,
+     "saturating_already": false,
+     "saturation_bit_at": "0x027c:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "27402589a208a1224402",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 638,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0286:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "2700a58a2a0aa1024414",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 648,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0290:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "2700a592a20aa1024402",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 658,
+     "saturating_already": false,
+     "saturation_bit_at": "0x029a:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "af000583aa08a1224416",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1014,
+     "saturating_already": false,
+     "saturation_bit_at": "0x03fe:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "a70405892208a1224414",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1024,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0408:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "a7080592aa0aa1024416",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1034,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0412:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "a7100508220aa1024414",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1044,
+     "saturating_already": false,
+     "saturation_bit_at": "0x041c:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "27202583aa08a1224402",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1054,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0426:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "274025892208a1224400",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1064,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0430:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "2700a592aa0aa1024402",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1074,
+     "saturating_already": false,
+     "saturation_bit_at": "0x043a:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    },
+    {
+     "byte8": 68,
+     "bytes": "2700a508220aa1024400",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1084,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0444:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": false
+    }
+   ],
+   "status": "ok",
+   "transpose_left": 1,
+   "transpose_right": 0
+  },
+  {
+   "instances": 16,
+   "instructions": [
+    {
+     "byte8": 76,
+     "bytes": "af0005812a08a1224c1c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 628,
+     "saturating_already": false,
+     "saturation_bit_at": "0x027c:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "a7040589a208a1224c16",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 638,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0286:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "a708058a2a0aa1024c1c",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 648,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0290:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "a7100592a20aa1024c16",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 658,
+     "saturating_already": false,
+     "saturation_bit_at": "0x029a:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "272025812a08a1224c14",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 668,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02a4:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "27402589a208a1224c02",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 678,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02ae:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "2700a58a2a0aa1024c14",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 688,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02b8:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "2700a592a20aa1024c02",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 698,
+     "saturating_already": false,
+     "saturation_bit_at": "0x02c2:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "af000583aa08a1224c16",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1114,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0462:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "a70405892208a1224c14",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1124,
+     "saturating_already": false,
+     "saturation_bit_at": "0x046c:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "a7080592aa0aa1024c16",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1134,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0476:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "a7100508220aa1024c14",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1144,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0480:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "27202583aa08a1224c02",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1154,
+     "saturating_already": false,
+     "saturation_bit_at": "0x048a:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "274025892208a1224c00",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1164,
+     "saturating_already": false,
+     "saturation_bit_at": "0x0494:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "2700a592aa0aa1024c02",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1174,
+     "saturating_already": false,
+     "saturation_bit_at": "0x049e:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    },
+    {
+     "byte8": 76,
+     "bytes": "2700a508220aa1024c00",
+     "decodes_patched": [
+      10384,
+      10
+     ],
+     "decodes_unpatched": [
+      10384,
+      10
+     ],
+     "offset": 1184,
+     "saturating_already": false,
+     "saturation_bit_at": "0x04a8:4",
+     "size": 10,
+     "transpose_left": true,
+     "transpose_right": true
+    }
+   ],
+   "status": "ok",
+   "transpose_left": 1,
+   "transpose_right": 1
+  }
+ ],
+ "saturation_bit": "byte8 bit 4",
+ "transpose_encoding": "byte8 bit 2 = transpose_left, byte8 bit 3 = transpose_right"
+}

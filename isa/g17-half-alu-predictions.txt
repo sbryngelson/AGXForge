@@ -1,0 +1,44 @@
+# PREDICTIONS RECORDED BEFORE THE PROBES WERE BUILT.
+#
+# The point of writing these down first is that the 794-name fsat retraction happened because
+# every rule was scored against a table that already contained the error. A prediction made before
+# the measurement cannot be fitted to the measurement.
+#
+# THE STRUCTURE. Scheduling classes 438 and 439 hold 24 opcodes in FOUR blocks of eight:
+#
+#     766 767 768 . 770 771 772 .      774 775 776 . 778 779 780 .
+#     854 855 856 . 858 859 860 .      862 863 864 . 866 867 868 .
+#
+# Within a block the offsets are operand forms (register/immediate, operand order, nops 5/6/7);
+# the block is the function. Three blocks have a probe-reached member:
+#
+#     block 766   op767 <- saturate                                     (an add-immediate form)
+#     block 774   op774 <- fadd, fsub, fdim, fract, distance            EVERY ONE AN ADDITION
+#     block 862   op862 <- fmul, dot, length, normalize, distance       EVERY ONE A MULTIPLY
+#     block 854   nothing reached by any probe
+#
+# op774 and op862 are both currently named `fadd.f16`, have identical operand signatures, and are
+# selected by disjoint sets of constructs that share addition and multiplication respectively. So
+# the class-wide name is falsified: class 438 is the two-source f16 ALU, and the OPCODE picks the
+# operation.
+#
+# PREDICTIONS.
+#
+# P1  saturate(h * h) emits op854, because 862 - 854 = 8 = 774 - 766, and block 766 is the
+#     saturating counterpart of block 774. If instead it emits op862 plus a separate clamp, the
+#     "+8 is saturation" reading is wrong and blocks 766 and 854 are something else.
+# P2  saturate(h + h) emits op766 or another member of block 766.
+# P3  (half)(f32 * f32) emits op3306. op3306 has signature GPR16 <- GPR32, GPR32 and appears once
+#     in every half transcendental, always consuming a transcendental-unit result and a constant.
+#     If this holds, op3306 is a multiply of two f32 values rounding to f16, and its scheduling
+#     class 49 - 192 opcodes, nothing named - is a mixed-precision arithmetic block, NOT a
+#     transcendental function.
+# P4  (half)(f32 * f32 + f32) emits op2254, whose signature is GPR16 <- GPR32, GPR32, GPR32 and
+#     which appears in acos.h, asin.h and atan.h. If this holds, class 79 is the fused
+#     multiply-add of the same block.
+# P5  (float)(f32 * f32) still emits fmul (op3290, class 56) - the control. If P3 holds and P5
+#     fails, the difference is not the destination width.
+#
+# WHAT WOULD FALSIFY THE WHOLE READING: if (half)(f32*f32) emits op3290 followed by a separate
+# convert, then op3306 is not a multiply-and-round and the 464 unnamed opcodes in classes 49, 50,
+# 52 and 79 remain what they were - a shared lowering step with no name this project can justify.

@@ -1,0 +1,22 @@
+{
+ "generated_by": "tools/g17sixpipe.py run",
+ "gpu_dispatched": false,
+ "device": "Apple M5 Pro",
+ "phase": "create_pipelines",
+ "corrected": {
+  "returncode": 0,
+  "function": "six",
+  "created": true,
+  "lib_sha256": "f57f14c81cc36dd74a2d8e5a7a7c7bde1b59081ae729c1a13c05374f819b10fc",
+  "arc_sha256": "828286271fcd97fc4ec75f4c2d5e94c9e81428c549193970bc881724a289ebb8",
+  "stdout": "device: Apple M5 Pro\nfunctions: 1\nOK six maxT=1024\ncreate_pipelines: passed (0 failure(s))"
+ },
+ "crashed": {
+  "returncode": -11,
+  "created": false,
+  "segfault": true,
+  "lib_sha256": "f6ca11374738cc05ee7978386d8a3a411fb140a8afe474b4fbbdc99868757372",
+  "arc_sha256": "a8b7c863e1714d2ee9862de2e362538a8b9879044d419772a50bd5f9d7336109"
+ },
+ "means": "the corrected six-buffer metadata (byte-identical to Apple's) creates a compute pipeline; the retained crashed metadata reproduces the -11 SIGSEGV at create_pipelines. The fix is causal: only the four inherited pointer bytes differ."
+}

@@ -1,0 +1,395 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3299.imm_0x10_restated",
+  "op": 3299,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3299,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "099135208000",
+    "099135208000",
+    "099135208000",
+    "099135208000",
+    "099135208000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3299,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1048576000,
+   1056964608,
+   1065353216,
+   1082130432,
+   1040187392
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3299.imm_0x31",
+  "op": 3299,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3299,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "09b135208800",
+    "09b135208800",
+    "09b135208800",
+    "09b135208800",
+    "09b135208800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3299,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065877504,
+   1074266112,
+   1082654720,
+   1099431936,
+   1057488896
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3299.imm_0x21",
+  "op": 3299,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3299,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "09a135208800",
+    "09a135208800",
+    "09a135208800",
+    "09a135208800",
+    "09a135208800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3299,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1057488896,
+   1065877504,
+   1074266112,
+   1091043328,
+   1049100288
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3298.imm_0x31",
+  "op": 3298,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3298,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "09b135218800",
+    "09b135218800",
+    "09b135218800",
+    "09b135218800",
+    "09b135218800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3298,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1065877504,
+   1074266112,
+   1082654720,
+   1099431936,
+   1057488896
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op3314.imm_0x31",
+  "op": 3314,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 3314,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "01b135218800",
+    "01b135218800",
+    "01b135218800",
+    "01b135218800",
+    "01b135218800"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    3314,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   15424,
+   16448,
+   17472,
+   19520,
+   14400
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op697.k27_restated",
+  "op": 697,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 697,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "2702004222a0a202c4865c002008",
+    "2702004222a0a202c4865c002008",
+    "2702004222a0a202c4865c002008",
+    "2702004222a0a202c4865c002008",
+    "2702004222a0a202c4865c002008"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    697,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3684127490,
+   32,
+   1048592,
+   127,
+   740161
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op697.k4",
+  "op": 697,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 697,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "2702004222a0a20204815c002008",
+    "2702004222a0a20204815c002008",
+    "2702004222a0a20204815c002008",
+    "2702004222a0a20204815c002008",
+    "2702004222a0a20204815c002008"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    697,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   2166572391,
+   268435456,
+   134217728,
+   1073741823,
+   2695613935
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "op14403.k5",
+  "op": 14403,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 14403,
+   "found": 5,
+   "cases": 5,
+   "encoded": [
+    "2702001a2e80a002708140440000",
+    "2702001a2e80a002708140440000",
+    "2702001a2e80a002708140440000",
+    "2702001a2e80a002708140440000",
+    "2702001a2e80a002708140440000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    11842,
+    14403,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1528600,
+   47,
+   1048577,
+   127,
+   740177
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ }
+]

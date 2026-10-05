@@ -1,0 +1,75 @@
+{
+ "name": "qwen3_8b_q4_spec",
+ "arch": "qwen3",
+ "bits": 4,
+ "cap": 2048,
+ "qmv": {
+  "qkv": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "wo_res1": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "ffn": {
+   "ks": 2,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "w2_res2": {
+   "ks": 4,
+   "lean": true,
+   "ptr": true,
+   "chain": true
+  },
+  "head": {
+   "xvec": true
+  }
+ },
+ "norm": {
+  "out32": true,
+  "seed": false
+ },
+ "final_norm": {
+  "out32": true,
+  "seed": false
+ },
+ "attn": {
+  "widebf": true,
+  "attn32": true,
+  "kvvec": true,
+  "hwexp2": true,
+  "qknorm": true
+ },
+ "gen": {},
+ "model": "qwen3-8b",
+ "notes": "Qwen3-8B q4 greedy speculative decoding (MM 25.203's verify step at 8B): prompt-lookup drafts, 16 rows verified through the qsm route at Qwen3-8B's split-K (qkv and w1/w3 unsplit: 192 and 384 n groups). Root: g17deliver build --bits 4 --arch qwen3_8b --cap 2048 --kinds qmv,norm,head,attn,gen,norm_batch,qsm_h16,qsm_prefill,psum_occ16,prefill_attn --attn-variants kvvec+hwexp2,kvvec+hwexp2+qknorm, then g17qwen3 --model qwen3-8b rows 16",
+ "spec": {
+  "ngram": 3,
+  "min_ngram": 2,
+  "max_draft": 15,
+  "qsm": {
+   "qkv": 1,
+   "wo": 8,
+   "w1": 1,
+   "w2": 8
+  }
+ },
+ "prefill": {
+  "M": 128,
+  "attn": "scalar",
+  "gemm_M": 16,
+  "qsm": {
+   "qkv": 1,
+   "wo": 8,
+   "w1": 1,
+   "w2": 8
+  }
+ }
+}

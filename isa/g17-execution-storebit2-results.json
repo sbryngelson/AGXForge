@@ -1,0 +1,147 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100",
+    "2700043a2500a30220812100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "prog.indexed_store_lane.intact",
+  "op": null,
+  "length": null,
+  "nsrc": 1,
+  "proves": [
+   17229
+  ],
+  "decoded": {
+   "ok": true,
+   "want": null,
+   "found": 8,
+   "cases": 8,
+   "encoded": [],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    14059,
+    17229,
+    17244
+   ],
+   "patched": []
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   11,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "runs": 3
+ },
+ {
+  "id": "prog.indexed_store_lane.op17229_byte1bit2_clear",
+  "op": null,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": null,
+   "found": 8,
+   "cases": 8,
+   "encoded": [],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    14059,
+    17229,
+    17244
+   ],
+   "patched": [
+    [
+     17229,
+     "b1[2]",
+     0,
+     1
+    ]
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559,
+   3735928559
+  ],
+  "status": "ok",
+  "match": [
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false,
+   false
+  ],
+  "runs": 3
+ }
+]

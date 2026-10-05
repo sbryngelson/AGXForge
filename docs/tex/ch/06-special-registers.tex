@@ -1,0 +1,226 @@
+\chapter{Special registers}\label{ch:special-registers}
+
+Lane index, simdgroup index, threadgroup position and grid position come from special registers, read with
+\op{14059} into a 32-bit register or with \op{14060} into one half.
+Every kernel reads at least one; the tensor path reads the lane index to generate fragment addresses.
+
+Three separate numberings identify a special register:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item the \textbf{hardware number} in the read instruction's source field, a lookup that Apple's compiler tables do not contain and
+  whose field and values depend on the encoded length (\cref{sec:special-registers});
+\item the \textbf{register id} Apple's decoder prints (an LLVM register id with a proposed \code{SR\_*} name), numbered
+  differently from the hardware field (\cref{sec:special-registers});
+\item the \textbf{slot-29 entry} in the kernel's metadata, which declares the registers a kernel reads in a third,
+  non-monotone numbering (\cref{sec:slot-29-metadata-numbering}).
+\end{enumerate}
+
+Metal builtins do not map one-to-one onto registers: several are computed from a register the kernel reads, so "the
+kernel for builtin B reads register R" does not mean R is B (\cref{sec:special-registers}). Whether a read must be waited on is
+\cref{sec:read-latency-whether}.
+
+"SR130" means the special register whose 4-byte read form carries byte 0x82 (130 decimal) in its
+source field; MM writes registers this way. "Number" is that byte with bit 7 removed (0x82 \& 0x7f = 2). A "builtin" is a
+Metal attribute such as \code{[[thread\_index\_in\_simdgroup]]}.
+
+\section{Register numbers and builtins}\label{sec:special-registers}
+
+The read instruction's source field holds a hardware number. The operand is declared as a special-register
+class, but its value fits no base-plus-index rule in any of the project's encoding domains. It was recovered as a lookup by
+requiring each field bit to be constant across all instances that print the same register and to differ across registers,
+then checking the result is a bijection (decoder, \code{isa/g17-special-register-numbers.txt}). The numbering is the
+hardware's own: threads-per-threadgroup x, y, z are consecutive numbers 24, 25, 26, while their LLVM
+ids are 55, 57, 59. Field position and numbering depend on the form:
+
+\begin{itemize}
+\item 4-byte form (1,116 corpus instances): byte 1 bits 0–6; byte 1 bit 7 is set in every witness and is not part of the
+  number;
+\item 8-byte form (154 instances): byte 1 bits 0–1 and byte 3 bits 3–6, with a different numbering (lane index is 30, not 2).
+  The 8-byte form is \op{14060} (Apple's compiler emits it at /8, MM~\mm{25.73}); Apple's decoder
+  reports its byte 1 as the register, so an 8-byte read of the simdgroup index prints 131, not 133 (\code{agxforge/g17/mdgen.py}).
+  Key an 8-byte read by the decoder's register name, not by byte 1.
+\end{itemize}
+
+Only registers on the observed list may be emitted; nothing predicts the number of a register the corpus never read
+(\emph{this compiler}, \code{agxforge/g17/cc.py}).
+
+\Cref{tab:special-registers} is the reference list of special registers. Builtin is the Metal attribute whose one-builtin compile reads the register (compile-witnessed,
+\code{isa/g17-special-registers.json}); the \code{SR\_*} names are proposed from Apple's library vocabulary and are not themselves
+witnessed. "Corpus reads" counts decoded reads over 679 objects and the read form used, 32-bit or 16-bit (decoder,
+\code{isa/g17-special-registers.toml}). Apple's corpus defines 200 special registers (66 named \code{SR\_*}) and reads 26 of them,
+counting flags.
+
+\widetable
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.84\hsize}X>{\hsize=0.62\hsize}XX>{\hsize=1.40\hsize}X>{\hsize=0.74\hsize}X>{\hsize=1.45\hsize}X>{\hsize=0.90\hsize}X@{}}
+\caption{Special registers by 4-byte read byte, with their numbers, decoder id, builtin, corpus reads and standing.}\label{tab:special-registers}\\
+\toprule
+4-byte byte (SR) & Number (4-byte / 8-byte) & Register id, proposed name & Builtin and meaning & Corpus reads & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{7}
+\toprule
+4-byte byte (SR) & Number (4-byte / 8-byte) & Register id, proposed name & Builtin and meaning & Corpus reads & Standing & Source \\
+\midrule
+\endhead
+0x82 (130) & 2 / 30 & 45, \code{SR\_SIMD\_ELEM} & \code{thread\_index\_in\_simdgroup}: lane index 0–31 (also what
+\code{thread\_index\_in\_quadgroup} compiles to read) & 183, 16-bit & measured: drives tensor address generation in every executed tensor
+kernel & MM~\mm{0.8} \\
+0x85 (133) & 5 / 31 & 46, \code{SR\_SIMD\_GRP} & \code{simdgroup\_index\_in\_threadgroup} & 4, 16-bit & measured: tile ownership in executed multi-simdgroup kernels; this
+compiler masks it \& 3 for up to four simdgroups & MM~\mm{0.8}, MM~\mm{25.93}, \code{agxforge/g17/cc.py} \\
+0x94 (148) & 20 / 23 & 37, \code{SR\_PVQUAD} & not witnessed as a builtin & 0 & decoder only & numbers file \\
+0x95 (149) & 21 / 24 & 38, \code{SR\_PVSIMD} & lanes before this one; equals the lane index with every lane active & 15, 16-bit & measured with every lane active only & MM~\mm{25.145.1} \\
+0x96 (150) & 22 / - & 65, \code{SR\_TVQUAD} & not witnessed & 0 & decoder only & numbers file \\
+0x97 (151) & 23 / 41 & 66, \code{SR\_TVSIMD} & active lanes in all; 32 with every lane active & 15, 16-bit & measured with every lane active only & MM~\mm{25.145.1} \\
+0x98–0x9a (152–154) & 24–26 / 35–37 & 55, 57, 59, \code{SR\_TG\_X/Y/Z\_SIZE} & \code{threads\_per\_threadgroup} .x .y .z & x 3, y 4, z 3, 16-bit & x: whole-program (sources reading 152 match Apple's GPU
+output); y, z compile-witnessed & MM~\mm{25.149.1}, \code{agxforge/g17/mdgen.py} \\
+0x9c–0x9e (156–158) & – & 54, 56, 58, \code{SR\_TG\_X/Y/Z} & \code{threadgroup\_position\_in\_grid} .x .y .z & x 543, y 3, z 4, 32-bit & x measured (every tensor body reads it); y, z values compile-witnessed & MM~\mm{0.8}, MM~\mm{25.145.1} \\
+0xa0–0xa2 (160–162) & – & 61, 62, 63, \code{SR\_TP\_IN\_GRID\_X/Y/Z} & \code{thread\_position\_in\_grid} .x .y .z & x 73, y 32, z 34, 32-bit & x measured; y, z values compile-witnessed & MM~\mm{0.8}, MM~\mm{25.145.1} \\
+0xa4–0xa6 (164–166) & 36, 37, - / 16–18 & 26, 27, 28, \code{SR\_LOCAL\_X/Y/Z} & \code{thread\_position\_in\_threadgroup} .x .y .z & x 1, z 1, 16-bit & x measured; y, z values compile-witnessed & MM~\mm{0.8}, \code{agxforge/g17/cc.py} \\
+0xa7 (167) & 39 / 15 & 25, \code{SR\_LIN\_ID} & \code{thread\_index\_in\_threadgroup} & 13, 16-bit & compile-witnessed & json, numbers file \\
+0xa8, 0xaa (168, 170) & 40, 42 / 32–34 & 51, 52, 53, \code{SR\_TG\_DISP\_X/Y/Z\_SIZE} & 51 is \code{threadgroups\_per\_grid.x}; y and z have no witnessed
+builtin & 3 each, 16-bit & compile-witnessed (x only) & json, \code{tools/g17emu.py} \\
+0xac, 0xad (172, 173) & 44, 45 / - & 23, 24, \code{SR\_LIBXDIM/YDIM} & unknown & – & decoder only & numbers file \\
+0xea (234) & 106 / - & 71, \code{SR\_VRID\_SET} & unknown & – & decoder only & numbers file \\
+\bottomrule
+\end{xltabular}
+
+"Values compile-witnessed" means the register number and builtin are witnessed by compilation, but no dispatch with more
+than one threadgroup or thread along that axis has run on hardware; on an axis of extent 1 every reading agrees (MM~\mm{25.145.1}).
+
+No register holds \code{quadgroup\_index\_in\_threadgroup} or \code{simdgroups\_per\_threadgroup}; both are
+computed. The first reads \code{SR\_SIMD\_ELEM} and \code{SR\_SIMD\_GRP} (slot 29 carries {[}52, 53, 80{]} with its store's grid position,
+\code{agxforge/g17/mdgen.py}), and the second expands to the whole threads-per-threadgroup vector, because it is computed from it
+(\code{isa/g17-class-bytes.txt}, \code{tools/g17synth.py}). So a one-builtin compile lists the registers its builtin is
+computed from, and that list alone does not identify any of them. \emph{Correction:} the early \code{isa/g17-scalar-isa.toml} names bytes 0x82
+and 0x98 after these two builtins; they are the lane index, measured by every executed tensor kernel that generates
+fragment addresses from it, and threads-per-threadgroup x (MM~\mm{0.8}, \code{isa/g17-special-register-numbers.txt},
+\code{agxforge/g17/cc.py}; \cref{app:a}).
+
+\textbf{Not known.} What \code{SR\_PVSIMD} holds when lanes are inactive. Measured with every lane active, \code{SR\_PVSIMD} reads "lanes before
+this one" (the lane index) and \code{SR\_TVSIMD} reads 32; a vote kernel built on them matches Apple's \code{simd\_prefix\_exclusive\_sum(1)}
+(MM~\mm{25.145.1}). Separately, Apple's divergent \code{simd\_broadcast\_first} reads register 38 (\code{SR\_PVSIMD}) with the 16-bit read as
+the first of four instructions, and MM~\mm{25.144.6} describes it there as "the active-lane mask"; that role is inferred from the decoded
+sequence, not measured. With any lane inactive, a count of active lanes before this one and a mask are different values;
+neither reading may be assumed under partial activity, only the full-mask values. This compiler's metadata
+author refuses 149 and 151 in any case, because they have no measured slot-29 entry (MM~\mm{25.115.1}).
+
+The 16-bit read writes only the half it names. With y = 7t +
+0xABCD0000 live, the read wrote y's low half with the lane index and y then read 0xABCD0000 \textbar{} lane, three runs identical: the
+read does not zero-extend (measured, MM~\mm{25.145.4}, \code{isa/g17-execution-halfwrite-results.json}). The probe was
+run for a delivered 2,048-row attention kernel that wrote a register's low half with the 16-bit read, then shifted the
+whole register; it could be bit-exact on hardware only if the stale high half read as zero, either through zero-extension
+or because a released half reads zero. With zero-extension ruled out, that kernel depended on its released
+high half reading 0, which it did in every run but which is not a rule (\cref{sec:release-does}). The
+compiler now shifts only the low half (\op{17016}) (MM~\mm{25.145}, MM~\mm{25.145.1}).
+
+Two further constraints apply when emitting reads:
+
+\begin{itemize}
+\item The 4-byte read's destination field is four bits (r0-r15), so read destinations compete for the narrow register pool
+  (decoder and this compiler, MM~\mm{25.110}; \cref{ch:register-file}).
+\item Reading threadgroup position, thread position in threadgroup, \code{SR\_PVSIMD}, \code{SR\_TVSIMD}, \code{SR\_SIMD\_ELEM} or \code{SR\_SIMD\_GRP} clears the
+  per-kernel "every thread independent" metadata flag (Apple's compiler emits, 47 one-variable probes, \code{agxforge/g17/cc.py});
+  \cref{ch:kernel-metadata-image}.
+\end{itemize}
+
+\section{Slot-29 metadata numbering}\label{sec:slot-29-metadata-numbering}
+
+The kernel's metadata (per-kernel slot 29) lists the special registers the kernel reads, but in its own numbering. It is a
+separate namespace from the hardware numbers above (MM~\mm{0.8}); the metadata format is \cref{ch:kernel-metadata-image}'s. \Cref{tab:slot-29-entries} gives the known entries.
+
+\begin{xltabular}{\linewidth}{@{}Xl>{\hsize=1.26\hsize}X>{\hsize=0.69\hsize}X@{}}
+\caption{Slot-29 metadata entries for the special registers.}\label{tab:slot-29-entries}\\
+\toprule
+Register (4-byte byte) & Slot-29 entry & Standing & Source \\
+\midrule
+\endfirsthead
+\tablecontinued{4}
+\toprule
+Register (4-byte byte) & Slot-29 entry & Standing & Source \\
+\midrule
+\endhead
+\code{SR\_SIMD\_ELEM} (130) & 52 & measured for the active tensor form: 1,039 exact (130, 156) objects all
+carry {[}0, 52{]} & MM~\mm{0.8}, \code{agxforge/g17/mdgen.py} \\*
+\code{SR\_SIMD\_GRP} (133) & 53 & compiled alone it carries {[}53{]}; with grid position {[}53, 80{]}; the
+multi-simdgroup tensor class (52, 53) & MM~\mm{25.93}, \code{agxforge/g17/mdgen.py} \\*
+threads\_per\_threadgroup.x (152) & 4 & one object reading 152 alone carries {[}4{]}; five sources reading it
+with others agree and match Apple on hardware & MM~\mm{25.149.1}, \code{agxforge/g17/mdgen.py} \\*
+threadgroup\_position\_in\_grid .x .y .z (156–158) & 0, 1, 2 & measured & MM~\mm{0.8} \\*
+thread\_position\_in\_grid .x .y .z (160–162) & 80, 81, 82 & measured & MM~\mm{0.8} \\*
+thread\_position\_in\_threadgroup .x .y .z (164–166) & 48, 49, 50 & measured & MM~\mm{0.8} \\*
+\bottomrule
+\end{xltabular}
+
+\begin{itemize}
+\item The bases are a lookup. 156 → 0, 160 → 80 and 164 → 48 are not monotone in the register number, so \code{entry = register - 80}, which fits the middle row, is refuted by both others. Only the axis increment within a base is arithmetic.
+\item The SR130 entry depends on the read form. Decoder forms whose first printed register byte is also 130 but whose full
+  identity (byte 1, width, byte 3) differs map differently, so no universal 130 → 52 rule exists (MM~\mm{0.8}).
+\item For 43 sources the slot-29 law predicted the vector in Apple's own compile exactly in
+  37, and the other 6 named 152 or a five-register set, which the later entries cover (MM~\mm{25.149.1}).
+\item \emph{Correction:} MM~\mm{0.8}'s table lists \code{SR\_SIMD\_GRP} as "not generalized", with no slot-29 entry; the entry is 53 (MM~\mm{25.93},
+  \code{agxforge/g17/mdgen.py}; \cref{app:a}).
+\end{itemize}
+
+\section{Read latency and waits}\label{sec:read-latency-whether}
+
+A special-register read publishes a scoreboard slot (slot semantics: \cref{sec:scoreboard}; field positions: 
+\cref{sec:scoreboard-publish-wait}), and Apple's compiler waits on it, but a read that publishes on slot 0 is readable by the next instruction with no wait (measured, MM~\mm{25.117}, MM~\mm{25.121}). Apple's
+wait is a scheduling choice, and its measured cost is within run-to-run spread.
+
+An early ledger entry recorded that a store reading a special-register value
+directly stored 0, and attributed it to the store taking a value that had not yet arrived. This compiler then waited before such stores, and
+MM~\mm{6}, MM~\mm{0.8} and MM~\mm{25.90} list the read among late values for that reason. A latency probe later tested that explanation against others (\code{tools/g17srlatency.py}, every arm at one threadgroup and at 8,192 groups, three rounds, predictions committed;
+\code{isa/g17-execution-sr-latency-results.json}, 90 of 90 rows reproduced); \cref{tab:sr-latency-arms} gives the arms.
+
+\begin{xltabular}{\linewidth}{@{}>{\hsize=0.58\hsize}X>{\hsize=1.42\hsize}Xl@{}}
+\caption{Arms of the special-register latency probe and what each store wrote.}\label{tab:sr-latency-arms}\\
+\toprule
+Arm & Store & Stored \\
+\midrule
+\endfirsthead
+\tablecontinued{3}
+\toprule
+Arm & Store & Stored \\
+\midrule
+\endhead
+d0 to d4 & \code{C[t] = t} straight off the read, 0 to 4 independent instructions
+between & 0 \\*
+d0\_wait & d0 with the store waiting on the read's slot & 0 \\*
+sr5 & read writes R5; store value R5, index R4 (distance 0) & t \\*
+same\_release & \code{O[u] = u} with u from an ALU, value and index both R16 (no special
+register at all) & 0 \\*
+same\_op6\_cleared & that store with only the index's lifetime 16
+→ 0 & u \\*
+\bottomrule
+\end{xltabular}
+
+Neither distance nor a wait fixed the failing arms, and distance 0 worked once the value and the index were different
+registers. Every failing arm used one register as both the store's value and its index, with the index slot releasing it:
+operand 6 = 16 on \op{17229} clears the register before the value is read. The defect was this aliased release
+(\cref{ch:register-file}), which breaks any value stored at its own index, whether or not it came from a special register.
+
+Apple's compiler waits uniformly (measured, MM~\mm{25.121}), after all 27 special registers it reads and
+at every distance, including 218 first consumers four or more instructions later; 3,496 of 3,497 first consumers at distance 1
+wait, and 8,808 of 8,825 first consumers over 6,594 programs (MM~\mm{25.144.8}). A chain of 4,000 reads with
+every consumer waiting ran 1.092~ms against 1.096 unwaited at the full grid and 0.1528 against 0.1521~ms at one simdgroup,
+inside run-to-run spread, every lane right. The waited encoding is operand 1 bit 24 (byte 1 bit 2) of \op{10279} and \op{10282}. Delivered programs from this compiler read special registers unwaited 6,604 times and are
+bit-exact on hardware (MM~\mm{25.145}).
+
+\leadhead{Safe assumptions.}
+
+\begin{itemize}
+\item A slot-0 special-register read can be consumed at distance 0 without a wait. The evidence covers \op{14059} values consumed by stores and adds, and both read forms in delivered programs.
+\item Another fill slot cannot be assumed to behave the same. The same 4,000-read program with each read publishing on slot 7
+  (operand 1 bits 20–23 = 8) stored nothing, waited or not. The read uses the fill slot it is given, and for this read
+  slot 7 does not behave like slot 0 (measured, unexplained, MM~\mm{25.121}).
+\item A wait on a slot-0 read is harmless if a scheduler prefers uniformity.
+\end{itemize}
+
+\emph{Correction:} "a read\_sr fills a scoreboard slot like a load, so its first consumer must wait on it" (MM~\mm{6}, MM~\mm{0.8},
+MM~\mm{25.90}) is superseded for slot-0 reads by MM~\mm{25.117} and MM~\mm{25.121}.
+
+\textbf{Evidence.} MM~\mm{0.8}, MM~\mm{6}, MM~\mm{25.73}, MM~\mm{25.90}, MM~\mm{25.93}, MM~\mm{25.110}, MM~\mm{25.115.1}, MM~\mm{25.117}, MM~\mm{25.121}, MM~\mm{25.144.8},
+MM~\mm{25.144.6}, MM~\mm{25.145}, MM~\mm{25.145.1}, MM~\mm{25.145.4}, MM~\mm{25.149.1}; \code{isa/g17-special-register-numbers.txt},
+\code{isa/g17-special-registers.toml}, \code{isa/g17-special-registers.json}, \code{isa/g17-scalar-isa.toml}, \code{isa/g17-class-bytes.txt},
+\code{agxforge/g17/cc.py}, \code{agxforge/g17/mdgen.py}, \code{tools/g17emu.py}, \code{tools/g17synth.py}.

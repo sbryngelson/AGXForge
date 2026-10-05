@@ -1,0 +1,28 @@
+{
+ "op": "op1272",
+ "mnemonic": "exp2",
+ "deterministic": true,
+ "determinism_bitdiff": 0,
+ "ulp_vs_correctly_rounded": {
+  "-1": 868,
+  "0": 318635,
+  "+1": 176628
+ },
+ "exact_frac_vs_rn": 0.64224,
+ "ge_true_frac": 0.8487,
+ "shift_law_exact": {
+  "1": "52564/60000",
+  "2": "41454/60000",
+  "5": "17706/60000",
+  "10": "8768/60000",
+  "40": "2145/60000"
+ },
+ "best_closed_form": {
+  "model": "f32(exp2(t) + a*ulp), RNE",
+  "a_ulp": 0.36,
+  "match": 0.97131
+ },
+ "max_rel_err_true": 1.0253081196297558e-07,
+ "mean_rel_err_true": 3.27590809607912e-08,
+ "finding": "op1272 is a DETERMINISTIC function within [-1,+1] ulp of correctly-rounded exp2, biased high (>= true 84.9%), but NOT a compactly capturable exact function: the exponent-shift law op1272(t+n)==op1272(t)*2^n FAILS (88% at n=1, 4% at n=40), so there is no reduced interval to table (unlike op3850's 4^k law), and the best constant-bias closed form matches only 97%. A bit-exact CPU reference would need the exact internal polynomial and its rounding. For a reference, use an ENCLOSURE: op1272 is within 1 ulp of true exp2, the accuracy class MLX's attention uses."
+}

@@ -1,0 +1,230 @@
+{
+  "format": "g17-native-qwen-reference-v1",
+  "gpu_dispatched": false,
+  "cases": [
+    {
+      "prompt": "Explain why the sky is blue.",
+      "tokens": 37,
+      "token_ids": [
+        151644,
+        8948,
+        198,
+        2610,
+        525,
+        1207,
+        16948,
+        11,
+        3465,
+        553,
+        54364,
+        14817,
+        13,
+        1446,
+        525,
+        264,
+        10950,
+        17847,
+        13,
+        151645,
+        198,
+        151644,
+        872,
+        198,
+        840,
+        20772,
+        3170,
+        279,
+        12884,
+        374,
+        6303,
+        13,
+        151645,
+        198,
+        151644,
+        77091,
+        198
+      ],
+      "prefill": [
+        {
+          "start": 0,
+          "valid_tokens": 32,
+          "logits_max_abs_error": 0.01328542632176255,
+          "original_top1": 151645,
+          "half_top1": 151645
+        },
+        {
+          "start": 32,
+          "valid_tokens": 5,
+          "logits_max_abs_error": 0.01318322230580049,
+          "original_top1": 785,
+          "half_top1": 785
+        }
+      ],
+      "decode": [
+        {
+          "input_token": 785,
+          "position": 37,
+          "logits_max_abs_error": 0.006744525004068205,
+          "original_top1": 12884,
+          "half_top1": 12884
+        },
+        {
+          "input_token": 12884,
+          "position": 38,
+          "logits_max_abs_error": 0.007633552200479343,
+          "original_top1": 374,
+          "half_top1": 374
+        }
+      ]
+    },
+    {
+      "prompt": "Write a short greeting.",
+      "tokens": 34,
+      "token_ids": [
+        151644,
+        8948,
+        198,
+        2610,
+        525,
+        1207,
+        16948,
+        11,
+        3465,
+        553,
+        54364,
+        14817,
+        13,
+        1446,
+        525,
+        264,
+        10950,
+        17847,
+        13,
+        151645,
+        198,
+        151644,
+        872,
+        198,
+        7985,
+        264,
+        2805,
+        42113,
+        13,
+        151645,
+        198,
+        151644,
+        77091,
+        198
+      ],
+      "prefill": [
+        {
+          "start": 0,
+          "valid_tokens": 32,
+          "logits_max_abs_error": 0.07020573032285427,
+          "original_top1": 872,
+          "half_top1": 872
+        },
+        {
+          "start": 32,
+          "valid_tokens": 2,
+          "logits_max_abs_error": 0.010605118641970002,
+          "original_top1": 9707,
+          "half_top1": 9707
+        }
+      ],
+      "decode": [
+        {
+          "input_token": 9707,
+          "position": 34,
+          "logits_max_abs_error": 0.01439010790230677,
+          "original_top1": 0,
+          "half_top1": 0
+        },
+        {
+          "input_token": 0,
+          "position": 35,
+          "logits_max_abs_error": 0.014716640986426555,
+          "original_top1": 2585,
+          "half_top1": 2585
+        }
+      ]
+    }
+  ],
+  "scope": "independent FP64 graph and explicit half-projection policy; no native execution",
+  "source_sha256": "c2ec2826edb6226d1b909105058b43bf2cd15c7386ce159e28bff0fc8db7ecbb",
+  "checkpoint": {
+    "format": "g17-checkpoint-payload-verification-v1",
+    "repository": "Qwen/Qwen2.5-0.5B-Instruct",
+    "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "bytes": 988097824,
+    "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+    "weight_payload_verified": true,
+    "gpu_admitted": false
+  },
+  "files": {
+    "case-1-half_projection_fp64-decode-1.npz": {
+      "bytes": 20677216,
+      "sha256": "8bde34c333c0ca95b43c672a7018b037e7d1ea8489e74a08f4c8719d2ef6acd9"
+    },
+    "case-0-original_fp64-prefill-1.npz": {
+      "bytes": 267550552,
+      "sha256": "91b589274667198ebc4fa0e9f8fe64c494959d6e461bd89200a35b39f25d344a"
+    },
+    "case-0-original_fp64-prefill-0.npz": {
+      "bytes": 267550552,
+      "sha256": "bbc07f974b0982a220907ea87a83771a833e6b0708814dcd40d2aa1d12bae040"
+    },
+    "case-1-half_projection_fp64-decode-0.npz": {
+      "bytes": 20677216,
+      "sha256": "457fa78a2ef4d8ec4120255a230509462cfddc25a10644cd9e6a862b016a5928"
+    },
+    "case-1-original_fp64-decode-0.npz": {
+      "bytes": 20677216,
+      "sha256": "b6f9d0e98a905710d9969e3c12e280800b719bfc86e2b180f61c48a06a49da37"
+    },
+    "case-1-half_projection_fp64-prefill-1.npz": {
+      "bytes": 267550552,
+      "sha256": "03747f7974c27cf26dfb853e5dfc3146f917cd0d8bf1f1f014d4115b472b055c"
+    },
+    "case-1-half_projection_fp64-prefill-0.npz": {
+      "bytes": 267550552,
+      "sha256": "32c19cfa09970f2e947be97ab42030759631e0dfe4f7a95ae8bc1bd8f493af68"
+    },
+    "case-1-original_fp64-decode-1.npz": {
+      "bytes": 20677216,
+      "sha256": "a48b192ebb54be56147571e56c8265038e2b8d617f495a7aef79086556902159"
+    },
+    "case-0-half_projection_fp64-decode-1.npz": {
+      "bytes": 20677216,
+      "sha256": "06324a4a759c1c20df602a29b0efbd32d4417dbf77db977efdc4d93c3f74461c"
+    },
+    "case-0-half_projection_fp64-decode-0.npz": {
+      "bytes": 20677216,
+      "sha256": "88a99012f0a9bb0ce3a65781fd6eead96fefe6407d61c0f4cd07050533403cd0"
+    },
+    "case-1-original_fp64-prefill-1.npz": {
+      "bytes": 267550552,
+      "sha256": "0c39ac1853669fc52e008d3df1560349f40617485d6d55da988b0f2713b9c151"
+    },
+    "case-0-half_projection_fp64-prefill-1.npz": {
+      "bytes": 267550552,
+      "sha256": "6a459b4e53b6db619ac2147886d1954521cb21aaf9135c8c52c1457161fd0298"
+    },
+    "case-0-half_projection_fp64-prefill-0.npz": {
+      "bytes": 267550552,
+      "sha256": "cc7ff1b12b65e71e634311b1260d0ed27d0fb05f4e134663331339ad428ad668"
+    },
+    "case-1-original_fp64-prefill-0.npz": {
+      "bytes": 267550552,
+      "sha256": "69a0f8b165c4d6ee0e82b3171eb08bb81bd80bc04d5748374bb6f93e6e117a35"
+    },
+    "case-0-original_fp64-decode-0.npz": {
+      "bytes": 20677216,
+      "sha256": "1ee61e948a71c8a896a1fab44d29979c94f58a61a0b1d04f65aa31577e628a46"
+    },
+    "case-0-original_fp64-decode-1.npz": {
+      "bytes": 20677216,
+      "sha256": "1c1d8bcb0bb738c43cde09efcb274235d1502980b0817f7cea0347eb3f4f9fe0"
+    }
+  }
+}

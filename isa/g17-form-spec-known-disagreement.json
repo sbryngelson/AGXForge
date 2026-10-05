@@ -1,0 +1,42 @@
+{
+ "by_class": {
+  "forced": [
+   8221,
+   8701
+  ],
+  "invisible": [
+   14022,
+   14027
+  ],
+  "mode": [
+   1283,
+   1305
+  ],
+  "opcode": [
+   11913,
+   12069
+  ],
+  "operand": [
+   45648,
+   45962
+  ]
+ },
+ "confusion": {
+  "forced->invisible": 65,
+  "forced->opcode": 170,
+  "forced->operand": 245,
+  "invisible->forced": 5,
+  "mode->forced": 21,
+  "mode->opcode": 1,
+  "opcode->forced": 156,
+  "operand->forced": 306,
+  "operand->opcode": 8
+ },
+ "forms": 984,
+ "forms_reproduced_exactly": 508,
+ "generator": "tools/g17formspecgen.py --pin",
+ "operand_first_moved_agrees": [
+  45648,
+  45648
+ ]
+}

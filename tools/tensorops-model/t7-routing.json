@@ -1,0 +1,181 @@
+{
+ "enumerated_claim_checks": {
+  "csel_predicate_provenance.forms_promoted_to_the_csel_column": {
+   "examples": {
+    "11372/10": 30,
+    "11382/10": 152,
+    "11462/14": 3090,
+    "11471/10": 119,
+    "11492/14": 8,
+    "11501/10": 1
+   },
+   "total": 10,
+   "witnessed": 6
+  },
+  "d2_exclusion_basis.undetermined_in_apples_whole_corpus.absent_from_apples_corpus": {
+   "examples": {
+    "11460/8": 15,
+    "9328/10": 1918,
+    "9704/8": 542
+   },
+   "total": 3,
+   "witnessed": 3
+  },
+  "d3_verified_class_provenance.forms_whose_evidence_cannot_be_named_here": {
+   "examples": {
+    "1022/6": 43,
+    "10298/12": 5905,
+    "10299/12": 165,
+    "1030/6": 2297,
+    "10306/12": 1092,
+    "10307/12": 170
+   },
+   "total": 50,
+   "witnessed": 38
+  },
+  "forms.populations.d2_encoded": {
+   "examples": {
+    "396/10": 385,
+    "397/10": 10871,
+    "408/10": 3670,
+    "410/10": 12,
+    "424/4": 1484,
+    "437/10": 14993
+   },
+   "total": 690,
+   "witnessed": 510
+  },
+  "forms.populations.dispatched": {
+   "examples": {
+    "396/10": 385,
+    "397/10": 10871,
+    "408/10": 3670,
+    "410/10": 12,
+    "423/10": 5484,
+    "424/10": 16934
+   },
+   "total": 466,
+   "witnessed": 348
+  },
+  "forms.populations.encoded_never_dispatched": {
+   "examples": {
+    "424/4": 1484,
+    "441/10": 443,
+    "442/10": 527,
+    "443/10": 2,
+    "444/10": 73,
+    "446/10": 51
+   },
+   "total": 391,
+   "witnessed": 290
+  },
+  "forms.populations.executed_unchecked": {
+   "examples": {
+    "396/10": 385,
+    "408/10": 3670,
+    "423/10": 5484,
+    "425/10": 1834,
+    "426/10": 1934,
+    "428/10": 997
+   },
+   "total": 425,
+   "witnessed": 312
+  },
+  "forms.populations.executed_with_no_LOCAL_semantic_column": {
+   "examples": {
+    "1002/4": 257,
+    "425/10": 1834,
+    "698/14": 913,
+    "782/10": 343,
+    "904/12": 5,
+    "999/12": 595
+   },
+   "total": 212,
+   "witnessed": 146
+  },
+  "forms.populations.executed_with_no_semantic_column": {
+   "examples": {
+    "1002/4": 257,
+    "425/10": 1834,
+    "698/14": 913,
+    "782/10": 343,
+    "904/12": 5,
+    "999/12": 595
+   },
+   "total": 208,
+   "witnessed": 144
+  },
+  "named_unknowns.tier1_enumerable.forms_absent_from_apples_corpus_entirely.forms": {
+   "examples": {
+    "11460/8": 15,
+    "9328/10": 1918,
+    "9704/8": 542
+   },
+   "total": 3,
+   "witnessed": 3
+  },
+  "named_unknowns.tier1_enumerable.forms_whose_undetermined_bits_no_corpus_can_settle.forms": {
+   "examples": {
+    "10022/12": 132,
+    "10090/10": 148,
+    "11063/14": 308,
+    "11392/14": 555,
+    "11456/14": 11,
+    "11460/8": 15
+   },
+   "total": 34,
+   "witnessed": 32
+  },
+  "promoted_claim_provenance.forms_incomplete": {
+   "examples": {
+    "1022/6": 43,
+    "10298/12": 5905,
+    "10299/12": 165,
+    "1030/6": 2297,
+    "10306/12": 1092,
+    "10307/12": 170
+   },
+   "total": 50,
+   "witnessed": 38
+  }
+ },
+ "never_dispatched": 391,
+ "never_dispatched_by_subtraction": 224,
+ "never_dispatched_from": "the artifact's enumerated encoded_never_dispatched population",
+ "published_lists": {
+  "csel_predicate_provenance.forms_promoted_to_the_csel_column": 10,
+  "d2_exclusion_basis.undetermined_in_apples_whole_corpus.absent_from_apples_corpus": 3,
+  "d3_verified_class_provenance.forms_whose_evidence_cannot_be_named_here": 50,
+  "forms.populations.d2_encoded": 690,
+  "forms.populations.dispatched": 466,
+  "forms.populations.encoded_never_dispatched": 391,
+  "forms.populations.executed_unchecked": 425,
+  "forms.populations.executed_with_no_LOCAL_semantic_column": 212,
+  "forms.populations.executed_with_no_semantic_column": 208,
+  "named_unknowns.tier1_enumerable.forms_absent_from_apples_corpus_entirely.forms": 3,
+  "named_unknowns.tier1_enumerable.forms_whose_undetermined_bits_no_corpus_can_settle.forms": 34,
+  "promoted_claim_provenance.forms_incomplete": 50
+ },
+ "totals": {
+  "d1_structural": 7548,
+  "d2_encoded": 690,
+  "d3_any": 334,
+  "d3_control_probe": 2,
+  "d3_csel_predicate": 10,
+  "d3_equivalence_class": 6,
+  "d3_family_law": 63,
+  "d3_fitted_by_elimination": 62,
+  "d3_lane_probe": 16,
+  "d3_ledger_executed": 23,
+  "d3_memory_probe": 20,
+  "d3_peer_reported": 5,
+  "d3_probed_here": 27,
+  "d3_semantics_checked": 89,
+  "d3_transcendental": 16,
+  "dispatched": 466,
+  "executed_unchecked": 425,
+  "executed_unchecked_with_other_evidence": 217,
+  "executed_with_no_LOCAL_semantic_column": 212,
+  "executed_with_no_semantic_column": 208
+ }
+}

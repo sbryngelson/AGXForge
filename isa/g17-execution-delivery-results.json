@@ -1,0 +1,926 @@
+[
+ {
+  "id": "d10279.l12.s1",
+  "op": 10279,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220852100",
+    "2700043a2500a30a20852100",
+    "2700043a2500a31220852100",
+    "2700043a2500a31a20852100"
+   ],
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10282.l12.s2",
+  "op": 10282,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10282,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2f0004ba2900a302a8852400",
+    "2f0004ba2900a30aa8852400",
+    "2f0004ba2900a312a8852400",
+    "2f0004ba2900a31aa8852400"
+   ],
+   "opcodes": [
+    684,
+    10282,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   12288,
+   12289,
+   12290,
+   12544
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d586.l4.s1",
+  "op": 586,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 586,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "0300072a4ea08402",
+    "0300072a4ea0840a",
+    "0300072a4ea08412",
+    "0300072a4ea0841a"
+   ],
+   "opcodes": [
+    586,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096,
+   4097,
+   4352,
+   8192
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d3290.l4.s2",
+  "op": 3290,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 3290,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "290005b02280a0029c0520000010",
+    "290005b02280a00a9c0520000010",
+    "290005b02280a0129c0520000010",
+    "290005b02280a01a9c0520000010"
+   ],
+   "opcodes": [
+    684,
+    3290,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d11179.l10.s1",
+  "op": 11179,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 11179,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270000922a80af022800",
+    "270000922a80af0a2800",
+    "270000922a80af122800",
+    "270000922a80af1a2800"
+   ],
+   "opcodes": [
+    684,
+    11179,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1166016512,
+   1166018560,
+   1166540800,
+   1174405120
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d998.l6.s2",
+  "op": 998,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 998,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2900049a2220a00216081a00",
+    "2900049a2220a00a16081a00",
+    "2900049a2220a01216081a00",
+    "2900049a2220a01a16081a00"
+   ],
+   "opcodes": [
+    684,
+    998,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d9320.l10.s1",
+  "op": 9320,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 9320,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270000ba2200ae02b003",
+    "270000ba2200ae0ab003",
+    "270000ba2200ae12b003",
+    "270000ba2200ae1ab003"
+   ],
+   "opcodes": [
+    684,
+    9320,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d423.l10.s1",
+  "op": 423,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 423,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "230007823870a3028480",
+    "230007823870a30a8480",
+    "230007823870a3128480",
+    "230007823870a31a8480"
+   ],
+   "opcodes": [
+    423,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d11462.l10.s2",
+  "op": 11462,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 11462,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "220005aa2700ac028085641c0018",
+    "220005aa2700ac0a8085641c0018",
+    "220005aa2700ac128085641c0018",
+    "220005aa2700ac1a8085641c0018"
+   ],
+   "opcodes": [
+    684,
+    11462,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d11667.l12.s2",
+  "op": 11667,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 11667,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004ba2500a20288852100",
+    "270004ba2500a20a88852100",
+    "270004ba2500a21288852100",
+    "270004ba2500a21a88852100"
+   ],
+   "opcodes": [
+    684,
+    11667,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   1,
+   4294967295,
+   256
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d17013.l14.s1",
+  "op": 17013,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 17013,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270000ba2e00a102f88000340000",
+    "270000ba2e00a10af88000340000",
+    "270000ba2e00a112f88000340000",
+    "270000ba2e00a11af88000340000"
+   ],
+   "opcodes": [
+    684,
+    11842,
+    17013,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   512,
+   512,
+   544,
+   1024
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10825.l14.s2",
+  "op": 10825,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10825,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004ba2100a102a88520000102",
+    "270004ba2100a10aa88520000102",
+    "270004ba2100a112a88520000102",
+    "270004ba2100a11aa88520000102"
+   ],
+   "opcodes": [
+    684,
+    10825,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   16781312,
+   17825792
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d17771.l4.s2",
+  "op": 17771,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 17771,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2b0006823a78a4028485",
+    "2b0006823a78a40a8485",
+    "2b0006823a78a4128485",
+    "2b0006823a78a41a8485"
+   ],
+   "opcodes": [
+    684,
+    11842,
+    17244,
+    17771
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   1,
+   1,
+   256
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d998.l4.s2",
+  "op": 998,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 998,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2900049a2220a00216081a00",
+    "2900049a2220a00a16081a00",
+    "2900049a2220a01216081a00",
+    "2900049a2220a01a16081a00"
+   ],
+   "opcodes": [
+    684,
+    998,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d3658.l10.s1",
+  "op": 3658,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 3658,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004b82a20a1023000",
+    "270004b82a20a10a3000",
+    "270004b82a20a1123000",
+    "270004b82a20a11a3000"
+   ],
+   "opcodes": [
+    684,
+    3658,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   2139095040,
+   2139095040,
+   2139095040,
+   2139095040
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d11664.l12.s1",
+  "op": 11664,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 11664,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270324fa2d00a20200852100",
+    "270324fa2d00a20a00852100",
+    "270324fa2d00a21200852100",
+    "270324fa2d00a21a00852100"
+   ],
+   "opcodes": [
+    684,
+    11664,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4294963231,
+   4294963230,
+   4294962975,
+   4294959135
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d17016.l14.s1",
+  "op": 17016,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 17016,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270400ba2e00a102b08000340000",
+    "270400ba2e00a10ab08000340000",
+    "270400ba2e00a112b08000340000",
+    "270400ba2e00a11ab08000340000"
+   ],
+   "opcodes": [
+    684,
+    11842,
+    17016,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1024,
+   1024,
+   1088,
+   2048
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d14060.l4.s1",
+  "op": 14060,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 14060,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "248081402800a01a",
+    "248081402800a012",
+    "248081402800a00a",
+    "248081402800a002"
+   ],
+   "opcodes": [
+    684,
+    11842,
+    14060,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d3290.l6.s2",
+  "op": 3290,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 3290,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "290005b02280a0029c0520000010",
+    "290005b02280a00a9c0520000010",
+    "290005b02280a0129c0520000010",
+    "290005b02280a01a9c0520000010"
+   ],
+   "opcodes": [
+    684,
+    3290,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10369.l6.s1",
+  "op": 10369,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10369,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "aa00ab062380a50ac200",
+    "aa002b062380a50ac200",
+    "2a00ab062380a50ac200",
+    "2a002b062380a50ac200"
+   ],
+   "opcodes": [
+    684,
+    10369,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d612.l12.s1",
+  "op": 612,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 612,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700002a2120a10214001c18",
+    "2700002a2120a10a14001c18",
+    "2700002a2120a11214001c18",
+    "2700002a2120a11a14001c18"
+   ],
+   "opcodes": [
+    612,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d590.l4.s1",
+  "op": 590,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 590,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2300072a4620a002",
+    "2300072a4620a00a",
+    "2300072a4620a012",
+    "2300072a4620a01a"
+   ],
+   "opcodes": [
+    590,
+    684,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4096,
+   4097,
+   4352,
+   8192
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10283.l12.s2",
+  "op": 10283,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10283,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004ba2900a302a8052100",
+    "270004ba2900a30aa8052100",
+    "270004ba2900a312a8052100",
+    "270004ba2900a31aa8052100"
+   ],
+   "opcodes": [
+    684,
+    10283,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   8192,
+   8193,
+   8193,
+   8448
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d11668.l12.s2",
+  "op": 11668,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 11668,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004ba2d00a20288052100",
+    "270004ba2d00a20a88052100",
+    "270004ba2d00a21288052100",
+    "270004ba2d00a21a88052100"
+   ],
+   "opcodes": [
+    684,
+    11668,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   1,
+   4294967295,
+   256
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d11666.l12.s1",
+  "op": 11666,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 11666,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004ba2d00a202c8030b00",
+    "270004ba2d00a20ac8030b00",
+    "270004ba2d00a212c8030b00",
+    "270004ba2d00a21ac8030b00"
+   ],
+   "opcodes": [
+    684,
+    11666,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4081,
+   4082,
+   4337,
+   8177
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d999.l6.s2",
+  "op": 999,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 999,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2100049a4220a00216084a00",
+    "2100049a4220a00a16084a00",
+    "2100049a4220a01216084a00",
+    "2100049a4220a01a16084a00"
+   ],
+   "opcodes": [
+    684,
+    999,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   973078528,
+   973078528,
+   973086720,
+   973078528
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10793.l12.s2",
+  "op": 10793,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10793,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "270004922900a902a8850030",
+    "270004922900a90aa8850030",
+    "270004922900a912a8850030",
+    "270004922900a91aa8850030"
+   ],
+   "opcodes": [
+    684,
+    10793,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   16777216,
+   16781312,
+   16781312,
+   17825792
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "d10822.l14.s1",
+  "op": 10822,
+  "length": null,
+  "decoded": {
+   "ok": true,
+   "want": 10822,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2f0004ba2100a10268030a000502",
+    "2f0004ba2100a10a68030a000502",
+    "2f0004ba2100a11268030a000502",
+    "2f0004ba2100a11a68030a000502"
+   ],
+   "opcodes": [
+    684,
+    10822,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   53252,
+   53265,
+   56580,
+   106500
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

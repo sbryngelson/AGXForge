@@ -1,0 +1,134 @@
+{
+  "status": "predicted_not_compiled",
+  "gpu_dispatched": false,
+  "round": 2,
+  "cases": {
+    "a-rows-10": {
+      "strides": {
+        "strideA": 320,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "4bc2cb3e1361794221dfcd62243c4a25e27ee5f73024a0169e31c3d9320b4436",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "d3fc9d5a0d9950947e9efeaaef1e30c1b6f5c8ca207996aec26541073101d067"
+    },
+    "a-rows-11": {
+      "strides": {
+        "strideA": 352,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "fc63ff08b6ee693c6a9439a20868f0c97e261c45239466c93f07af4a1a34e293",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "9f9167269e1c954dc97b479165a754dd8aedf88e759ef097f6e51321f6031eda"
+    },
+    "a-rows-13": {
+      "strides": {
+        "strideA": 416,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "7a9fb10557467cf1e6f95ffb5ac0cdc4d930d4696a280272d732d944cef72a8e",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "26fa97cc844cfa6c23c5baab0b2161a3741024e41c5a78c2bcbaca3e83a44ed0"
+    },
+    "a-rows-14": {
+      "strides": {
+        "strideA": 448,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "374217719ae121a91e5cb181c9742b4af3ba613e7200a541a0fa5709a9c032c4",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "848748dac21809136d52b727b3a5e08ed6cfaf9d82bb79b8dcd262241deae3a6"
+    },
+    "a-rows-15": {
+      "strides": {
+        "strideA": 480,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "multiply",
+      "sha256": "f7f13c24e8a85ea9fb0c6b2a1a7d8afc97a77fa80aa764e568518c8396e98239",
+      "bytes": 1280,
+      "generated": [
+        "other+7",
+        "other+83"
+      ],
+      "source_sha256": "08faf76cba67787bb7a0cd63122b7b76d740c42249244a69842fd59e69e7b056"
+    },
+    "a-rows-17": {
+      "strides": {
+        "strideA": 544,
+        "strideB": 64,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "shift",
+      "sha256": "810bf3dab55f30970d1c9fc92bad1e92983132ae9a83814924f84ecde99307b8",
+      "bytes": 1276,
+      "generated": [
+        "setup+10"
+      ],
+      "source_sha256": "eb5fde78f14a5b40236eee9abb17d2d2ffbec223ee13e4a779802325a39b0672"
+    },
+    "b-rows-16": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 512,
+        "strideC": 128
+      },
+      "predicted": "program",
+      "family": "shift",
+      "sha256": "f58ae0cd152c9b328f8511e7cdc238277c7908a215c731d1d5a0d63f6c5a37af",
+      "bytes": 1276,
+      "generated": [
+        "setup+47",
+        "address+85"
+      ],
+      "source_sha256": "e71e34f9a5a5cf74af8acfcdc7ccf7760a1355ba3c3610377941490ba7caa095"
+    },
+    "c-rows-16": {
+      "strides": {
+        "strideA": 128,
+        "strideB": 64,
+        "strideC": 1024
+      },
+      "predicted": "program",
+      "family": "shift",
+      "sha256": "adf9137ffc073fac2114e982f0dedabd444752359bdc5fe246edc4a194506a94",
+      "bytes": 1276,
+      "generated": [
+        "address+116"
+      ],
+      "source_sha256": "65339aa144c0411f32b3604cbbe6d4bc6236632a144d8b22d7bc75aec5592ff7"
+    }
+  },
+  "rule": "g17tensorlower.family_of + advance_bytes: power-of-two rows -> op10279 with the scale table; 1+2^k rows -> op10282 r + (r<<k); other A row counts -> the multiply program with byte 9 of op10822/op10823 = stride/8; else refused"
+}

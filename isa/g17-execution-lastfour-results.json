@@ -1,0 +1,113 @@
+[
+ {
+  "id": "CONTROL.op10279",
+  "op": 10279,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 10279,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100",
+    "2700043a2500a30220882100"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    10279,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   4100,
+   4101,
+   4356,
+   8196
+  ],
+  "status": "ok",
+  "match": [
+   true,
+   true,
+   true,
+   true
+  ],
+  "runs": 3
+ },
+ {
+  "id": "u1028.role",
+  "op": 1028,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 1028,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "290004482a30a00284064000",
+    "290004482a30a00284064000",
+    "290004482a30a00284064000",
+    "290004482a30a00284064000"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    1028,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   64512,
+   0,
+   0,
+   32768
+  ],
+  "status": "ok",
+  "runs": 3
+ },
+ {
+  "id": "u9837.role",
+  "op": 9837,
+  "length": null,
+  "nsrc": 1,
+  "decoded": {
+   "ok": true,
+   "want": 9837,
+   "found": 4,
+   "cases": 4,
+   "encoded": [
+    "02202d80268003022087",
+    "02202d80268003022087",
+    "02202d80268003022087",
+    "02202d80268003022087"
+   ],
+   "from_template": false,
+   "opcodes": [
+    684,
+    9837,
+    11842,
+    17244
+   ]
+  },
+  "cb_status": 0,
+  "finished": true,
+  "values": [
+   0,
+   0,
+   7,
+   0
+  ],
+  "status": "ok",
+  "runs": 3
+ }
+]

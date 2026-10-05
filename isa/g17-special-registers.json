@@ -1,0 +1,70 @@
+{
+ "how": "the builtin is witnessed by compiling a kernel that reads it and nothing else; the SR_ name is proposed from libapplegpu-nt.dylib's vocabulary and is NOT witnessed - the address order of those strings is refuted, see the ledger",
+ "registers": {
+  "25": {
+   "builtin": "thread_index_in_threadgroup",
+   "proposed_name": "SR_LIN_ID"
+  },
+  "26": {
+   "builtin": "thread_position_in_threadgroup.x",
+   "proposed_name": "SR_LOCAL_X"
+  },
+  "27": {
+   "builtin": "thread_position_in_threadgroup.y",
+   "proposed_name": "SR_LOCAL_Y"
+  },
+  "28": {
+   "builtin": "thread_position_in_threadgroup.z",
+   "proposed_name": "SR_LOCAL_Z"
+  },
+  "45": {
+   "builtin": "thread_index_in_simdgroup / in_quadgroup",
+   "proposed_name": "SR_SIMD_ELEM or SR_QUAD_ELEM"
+  },
+  "46": {
+   "builtin": "simdgroup_index_in_threadgroup",
+   "proposed_name": "SR_SIMD_GRP"
+  },
+  "51": {
+   "builtin": "threadgroups_per_grid.x",
+   "proposed_name": null
+  },
+  "54": {
+   "builtin": "threadgroup_position_in_grid.x",
+   "proposed_name": "SR_TG_X"
+  },
+  "55": {
+   "builtin": "threads_per_threadgroup.x",
+   "proposed_name": "SR_TG_X_SIZE"
+  },
+  "56": {
+   "builtin": "threadgroup_position_in_grid.y",
+   "proposed_name": "SR_TG_Y"
+  },
+  "57": {
+   "builtin": "threads_per_threadgroup.y",
+   "proposed_name": "SR_TG_Y_SIZE"
+  },
+  "58": {
+   "builtin": "threadgroup_position_in_grid.z",
+   "proposed_name": "SR_TG_Z"
+  },
+  "59": {
+   "builtin": "threads_per_threadgroup.z",
+   "proposed_name": "SR_TG_Z_SIZE"
+  },
+  "61": {
+   "builtin": "thread_position_in_grid.x",
+   "proposed_name": "SR_TP_IN_GRID_X"
+  },
+  "62": {
+   "builtin": "thread_position_in_grid.y",
+   "proposed_name": "SR_TP_IN_GRID_Y"
+  },
+  "63": {
+   "builtin": "thread_position_in_grid.z",
+   "proposed_name": "SR_TP_IN_GRID_Z"
+  }
+ },
+ "witnessed_by": "tools/g17sr.py, compile only, nothing dispatched"
+}
