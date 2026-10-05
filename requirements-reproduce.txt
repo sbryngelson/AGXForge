@@ -4,5 +4,5 @@
 mlx-lm==0.31.3          # workflow 3: the mlx-lm arm of the decode study (brings mlx)
 transformers==5.16.1    # workflow 4: tokenizers and the independent FP64 checks
 tokenizers==0.23.1
-torch==2.12.0
+torch==2.13.0
 safetensors==0.8.0
